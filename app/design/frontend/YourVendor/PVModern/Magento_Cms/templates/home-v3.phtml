@@ -1,0 +1,78 @@
+\
+<?php
+$om = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $om->get(\Magento\Store\Model\StoreManagerInterface::class);
+$categoryCollectionFactory = $om->get(\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory::class);
+$productCollectionFactory = $om->get(\Magento\Catalog\Model\ResourceModel\Product\CollectionFactory::class);
+$stockRegistry = $om->get(\Magento\CatalogInventory\Api\StockRegistryInterface::class);
+$imageHelper = $om->get(\Magento\Catalog\Helper\Image::class);
+$priceHelper = $om->get(\Magento\Framework\Pricing\Helper\Data::class);
+$cartHelper = $om->get(\Magento\Checkout\Helper\Cart::class);
+$store = $storeManager->getStore();
+$rootCategoryId = (int)$store->getRootCategoryId();
+$categoryCollection = $categoryCollectionFactory->create();
+$categoryCollection->addAttributeToSelect(['name','url_key'])->addAttributeToFilter('is_active',1)->addFieldToFilter('parent_id',$rootCategoryId)->setOrder('position','ASC');
+$categories=[]; foreach($categoryCollection as $category){ $categories[]=['id'=>(int)$category->getId(),'name'=>(string)$category->getName(),'slug'=>strtolower((string)$category->getUrlKey() ?: preg_replace('/[^a-z0-9]+/i','-',(string)$category->getName()))]; }
+$productCollection=$productCollectionFactory->create();
+$productCollection->addStoreFilter($store)->addAttributeToSelect(['name','small_image','price','special_price','short_description','description','sku','created_at'])->addMinimalPrice()->addFinalPrice()->addTaxPercents()->addUrlRewrite()->addAttributeToFilter('status',1)->addAttributeToFilter('visibility',['in'=>[2,3,4]])->setPageSize(12)->setOrder('created_at','DESC');
+$fallbackImages=[
+'https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=900&q=80',
+'https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80',
+'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=900&q=80',
+'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=900&q=80'];
+$products=[]; $fallbackIndex=0;
+foreach($productCollection as $product){
+  try{$stockItem=$stockRegistry->getStockItem((int)$product->getId()); $qty=$stockItem?(int)max(0,floor((float)$stockItem->getQty())):0; $isInStock=$stockItem?(bool)$stockItem->getIsInStock():false;}catch(\Throwable $e){$qty=0;$isInStock=false;}
+  try{$imageUrl=$imageHelper->init($product,'product_page_image_medium')->getUrl();}catch(\Throwable $e){$imageUrl=$fallbackImages[$fallbackIndex%count($fallbackImages)];}
+  if(!$imageUrl || strpos($imageUrl,'placeholder')!==false){$imageUrl=$fallbackImages[$fallbackIndex%count($fallbackImages)];}
+  $fallbackIndex++;
+  $categoryNames=[]; foreach((array)$product->getCategoryIds() as $cid){ foreach($categories as $catItem){ if((int)$catItem['id']===(int)$cid){$categoryNames[]=$catItem['name'];}}}
+  $finalPrice=(float)$product->getFinalPrice();
+  $desc=trim(strip_tags((string)$product->getShortDescription())); if($desc===''){$desc=trim(strip_tags((string)$product->getDescription()));} $desc=mb_substr($desc,0,220);
+  $productType=(string)$product->getTypeId(); $canAddDirectly=$product->isSaleable() && $productType==='simple';
+  preg_match('/^([A-Za-z0-9]+)/',(string)$product->getName(),$m);
+  $products[]=['id'=>(int)$product->getId(),'name'=>(string)$product->getName(),'sku'=>(string)$product->getSku(),'url'=>(string)$product->getProductUrl(),'image'=>(string)$imageUrl,'price'=>round($finalPrice,2),'price_formatted'=>$priceHelper->currency($finalPrice,true,false),'description'=>$desc,'categories'=>$categoryNames,'category_label'=>count($categoryNames)?$categoryNames[0]:'General','brand'=>$m?strtoupper($m[1]):'MIXIII','qty'=>$qty,'availability'=>!$isInStock?'Out of stock':($qty<=5?'Low stock':'In stock'),'is_new'=>true,'is_featured'=>true,'add_url'=>$canAddDirectly?$cartHelper->getAddUrl($product):'','can_add'=>$canAddDirectly];
+}
+if(!count($products)){
+ $products=[['id'=>0,'name'=>'RTX 5090 Founders Edition','sku'=>'RTX-5090-FE','url'=>'#','image'=>$fallbackImages[0],'price'=>1999.00,'price_formatted'=>'$1,999.00','description'=>'Top-tier GPU placeholder product shown because your catalog is currently empty.','categories'=>['GPU'],'category_label'=>'GPU','brand'=>'NVIDIA','qty'=>199,'availability'=>'In stock','is_new'=>true,'is_featured'=>true,'add_url'=>'#','can_add'=>false],
+ ['id'=>0,'name'=>'MacBook Pro M5 Max','sku'=>'MBP-M5-MAX','url'=>'#','image'=>$fallbackImages[1],'price'=>3499.00,'price_formatted'=>'$3,499.00','description'=>'Premium laptop placeholder while waiting for real admin products.','categories'=>['Laptop'],'category_label'=>'Laptop','brand'=>'APPLE','qty'=>19,'availability'=>'In stock','is_new'=>true,'is_featured'=>true,'add_url'=>'#','can_add'=>false],
+ ['id'=>0,'name'=>'Ryzen 9 9950X3D','sku'=>'RYZEN-9950X3D','url'=>'#','image'=>$fallbackImages[2],'price'=>749.00,'price_formatted'=>'$749.00','description'=>'High-end CPU placeholder for the premium showcase.','categories'=>['CPU'],'category_label'=>'CPU','brand'=>'AMD','qty'=>8,'availability'=>'Low stock','is_new'=>true,'is_featured'=>true,'add_url'=>'#','can_add'=>false]];
+}
+$heroProducts=array_slice($products,0,min(3,count($products))); $recentProducts=array_slice($products,0,min(8,count($products))); $selected=$products[0];
+$initialInStock=0; $initialLowStock=0; $maxPrice=0;
+foreach($products as $prod){ if($prod['availability']==='In stock'){$initialInStock++;} elseif($prod['availability']==='Low stock'){$initialLowStock++;} if((float)$prod['price']>$maxPrice){$maxPrice=(float)$prod['price'];}}
+?>
+<div class="pv41-shell" id="pv41-app" data-in-stock="<?= (int)$initialInStock ?>" data-low-stock="<?= (int)$initialLowStock ?>" data-search="" data-category="All" data-availability="All" data-sort="Price: High to Low" data-min-price="0" data-max-price="<?= (float)$maxPrice ?>" data-active-tab="GPU">
+<script type="application/json" id="pv41-products-data"><?= /* @noEscape */ json_encode($products, JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT) ?></script>
+<section class="pv41-hero"><div class="pv41-container"><div class="pv41-hero__grid"><div class="pv41-hero__content">
+<div class="pv41-trusted"><span class="pv41-star">★</span><span>Trusted by 50,000+ developers</span></div>
+<h1 class="pv41-hero__title">Premium Hardware <br>for <span>Power Users</span></h1>
+<p class="pv41-hero__desc">From custom-built PCs to Apple’s finest silicon. Discover top-tier components curated for developers, creators, and enthusiasts.</p>
+<div class="pv41-hero__actions"><a href="<?= $block->escapeUrl($block->getUrl('catalogsearch/result')) ?>" class="pv41-btn pv41-btn--primary">Shop Collection →</a><a href="<?= $block->escapeUrl($block->getUrl('contact')) ?>" class="pv41-btn pv41-btn--secondary">Build Custom PC</a></div>
+<div class="pv41-stats"><div class="pv41-stat"><strong>50K+</strong><span>Happy Customers</span></div><div class="pv41-stat"><strong>4.9/5</strong><span>Rating</span></div><div class="pv41-stat"><strong>24/7</strong><span>Support</span></div></div>
+</div><div class="pv41-hero__showcase"><div class="pv41-showcase-grid"><?php foreach($heroProducts as $heroProduct): ?><article class="pv41-mini-card"><div class="pv41-mini-card__media"><img src="<?= $block->escapeUrl($heroProduct['image']) ?>" alt="<?= $block->escapeHtmlAttr($heroProduct['name']) ?>"></div><div class="pv41-mini-card__body"><span class="pv41-mini-card__meta"><?= $block->escapeHtml($heroProduct['category_label']) ?></span><h3><?= $block->escapeHtml($heroProduct['name']) ?></h3><p class="pv41-price"><?= $block->escapeHtml($heroProduct['price_formatted']) ?></p></div></article><?php endforeach; ?></div></div></div></div></section>
+
+<section class="pv41-filter-wrap"><div class="pv41-container">
+<div class="pv41-filter-card"><div class="pv41-filter-head"><span>Product Category</span></div><div class="pv41-filter-row">
+<div class="pv41-field pv41-field--highlight pv41-field--select"><select id="pv41-category"><option value="All">All</option><?php foreach($categories as $category): ?><option value="<?= $block->escapeHtmlAttr($category['name']) ?>"><?= $block->escapeHtml($category['name']) ?></option><?php endforeach; ?><option value="GPU">GPU</option><option value="CPU">CPU</option><option value="Laptop">Laptop</option><option value="Desktop">Desktop</option><option value="Deals">Deals</option></select><span class="pv41-chevron">⌄</span></div>
+<div class="pv41-field pv41-field--search"><span class="pv41-search-icon">⌕</span><input type="text" id="pv41-search" placeholder="Search this collection"></div>
+<div class="pv41-field pv41-field--price-group"><input type="number" id="pv41-min-price" placeholder="Min" value="0"><span class="pv41-price-sep">—</span><input type="number" id="pv41-max-price" placeholder="Max" value="<?= (float)$maxPrice ?>"></div>
+<div class="pv41-field pv41-field--select"><select id="pv41-availability"><option value="All">All availability</option><option value="In stock">In stock</option><option value="Low stock">Low stock</option><option value="Out of stock">Out of stock</option></select><span class="pv41-chevron">⌄</span></div>
+<div class="pv41-field pv41-field--select"><select id="pv41-sort"><option>Price: High to Low</option><option>Price: Low to High</option><option>Name: A to Z</option><option>Newest</option></select><span class="pv41-chevron">⌄</span></div>
+<div class="pv41-view-actions"><button type="button" class="pv41-icon-btn is-active" aria-label="Single view">≣</button><button type="button" class="pv41-icon-btn" aria-label="Compact view">◫</button></div></div>
+<div class="pv41-filter-meta"><span>Showing <strong id="pv41-showing-count">1</strong> products</span><span>|</span><span><i class="dot dot--green"></i> <strong id="pv41-in-stock"><?= (int)$initialInStock ?></strong> in stock</span><span><i class="dot dot--yellow"></i> <strong id="pv41-low-stock"><?= (int)$initialLowStock ?></strong> low stock</span><span>Range up to <strong id="pv41-range"><?= $block->escapeHtml($priceHelper->currency($maxPrice,true,false)) ?></strong></span></div></div>
+
+<div class="pv41-detail-layout"><div class="pv41-left-card">
+<div class="pv41-badges"><span class="pv41-badge pv41-badge--new">NEW</span><span class="pv41-badge pv41-badge--featured">FEATURED</span></div>
+<div class="pv41-left-card__media"><img id="pv41-card-image" src="<?= $block->escapeUrl($selected['image']) ?>" alt="<?= $block->escapeHtmlAttr($selected['name']) ?>"></div>
+<div class="pv41-left-card__body"><div class="pv41-left-card__topline"><span class="pv41-left-card__cat" id="pv41-card-category"><?= $block->escapeHtml($selected['category_label']) ?></span><span class="pv41-left-card__brand" id="pv41-card-brand"><?= $block->escapeHtml($selected['brand']) ?></span></div>
+<h3 class="pv41-left-card__title" id="pv41-card-title"><?= $block->escapeHtml($selected['name']) ?></h3>
+<div class="pv41-left-card__price pv41-price" id="pv41-card-price"><?= $block->escapeHtml($selected['price_formatted']) ?></div>
+<div class="pv41-stock-row"><span class="pv41-stock-pill pv41-stock-pill--ok" id="pv41-stock-pill">In stock: <strong id="pv41-card-stock"><?= (int)$selected['qty'] ?></strong></span></div>
+<div class="pv41-action-stack"><form id="pv41-add-form" action="<?= $block->escapeUrl($selected['add_url'] ?: '#') ?>" method="post" class="pv41-add-form"><input type="hidden" name="product" id="pv41-add-product" value="<?= (int)$selected['id'] ?>"><input type="hidden" name="qty" value="1"><input type="hidden" name="form_key" value="<?= $block->escapeHtmlAttr($block->getFormKey()) ?>"><button type="submit" class="pv41-btn pv41-btn--secondary pv41-btn--full" id="pv41-add-cart" <?= $selected['can_add'] ? '' : 'disabled="disabled"' ?>><span class="label"><?= $selected['can_add'] ? 'Add to Cart' : 'Choose Options' ?></span></button></form>
+<button type="button" class="pv41-btn pv41-btn--primary pv41-btn--full" id="pv41-buy-now"><span class="label">Buy Now</span><span class="spinner" aria-hidden="true"></span></button></div></div></div>
+<div class="pv41-right-placeholder"><div class="pv41-right-placeholder__inner"><h4 id="pv41-detail-title"><?= $block->escapeHtml($selected['name']) ?></h4><p id="pv41-detail-desc"><?= $block->escapeHtml($selected['description']) ?></p><div class="pv41-detail-specs"><div class="pv41-detail-spec"><span>SKU</span><strong id="pv41-detail-sku"><?= $block->escapeHtml($selected['sku']) ?></strong></div><div class="pv41-detail-spec"><span>Availability</span><strong id="pv41-detail-availability"><?= $block->escapeHtml($selected['availability']) ?></strong></div><div class="pv41-detail-spec"><span>Category</span><strong id="pv41-detail-category"><?= $block->escapeHtml($selected['category_label']) ?></strong></div><div class="pv41-detail-spec"><span>Price</span><strong id="pv41-detail-price"><?= $block->escapeHtml($selected['price_formatted']) ?></strong></div></div><div class="pv41-detail-link"><a id="pv41-detail-url" href="<?= $block->escapeUrl($selected['url']) ?>">View Full Product →</a></div></div></div></div>
+
+<div class="pv41-stay-updated"><h2>Stay Updated</h2><p>Latest additions from the store, centered and easy to scan.</p></div>
+<div class="pv41-recent-slider"><div class="pv41-recent-track"><?php foreach($recentProducts as $recent): ?><article class="pv41-recent-card" data-product-id="<?= (int)$recent['id'] ?>"><img src="<?= $block->escapeUrl($recent['image']) ?>" alt="<?= $block->escapeHtmlAttr($recent['name']) ?>"><h3><?= $block->escapeHtml($recent['name']) ?></h3><p class="pv41-price"><?= $block->escapeHtml($recent['price_formatted']) ?></p></article><?php endforeach; ?></div></div>
+</div></section></div>

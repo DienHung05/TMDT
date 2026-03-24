@@ -1,0 +1,26 @@
+<?php /** @var \Magento\Framework\View\Element\Template $block */ ?>
+<header class="pv41-header" id="pv41-header">
+    <div class="pv41-container pv41-header__row">
+        <a href="<?= $block->escapeUrl($block->getUrl()) ?>" class="pv41-brand">
+            <span class="pv41-brand__icon">◖</span>
+            <span class="pv41-brand__text"><strong>MixiiiStore</strong><small>Premium Hardware</small></span>
+        </a>
+        <div class="pv41-header__search">
+            <span class="pv41-search-icon">⌕</span>
+            <input type="text" id="pv41-header-search" placeholder="Search for products...">
+        </div>
+        <nav class="pv41-nav" id="pv41-main-nav">
+            <button type="button" class="pv41-nav__item is-active" data-tab="GPU">GPU</button>
+            <button type="button" class="pv41-nav__item" data-tab="CPU">CPU</button>
+            <button type="button" class="pv41-nav__item" data-tab="Laptop">Laptop</button>
+            <button type="button" class="pv41-nav__item" data-tab="Desktop">Desktop</button>
+            <button type="button" class="pv41-nav__item pv41-nav__item--deals" data-tab="Deals">Deals</button>
+            <span class="pv41-nav__underline" id="pv41-nav-underline"></span>
+        </nav>
+        <div class="pv41-header__icons">
+            <a href="<?= $block->escapeUrl($block->getUrl('wishlist')) ?>" class="pv41-header__icon pv41-header__icon--plain" aria-label="Wishlist">♡</a>
+            <a href="<?= $block->escapeUrl($block->getUrl('customer/account')) ?>" class="pv41-header__icon pv41-header__icon--plain" aria-label="Account">◌</a>
+            <a href="<?= $block->escapeUrl($block->getUrl('checkout/cart')) ?>" class="pv41-header__icon pv41-header__icon--cart" aria-label="Cart"><span class="cart-symbol">🛒</span><span class="pv41-cart-count">0</span></a>
+        </div>
+    </div>
+</header>
