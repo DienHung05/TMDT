@@ -72,3 +72,9 @@ atlassian*
 /generated/*
 !/generated/.htaccess
 .DS_Store
+
+/README.md
+/SECURITY.md
+/LICENSE.txt
+/LICENSE_AFL.txt
+/CHANGELOG.md
