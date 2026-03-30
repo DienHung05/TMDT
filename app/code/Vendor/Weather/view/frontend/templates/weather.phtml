@@ -1,0 +1,10 @@
+<?php
+/** @var \Vendor\Weather\Block\Weather $block */
+$data = $block->getWeatherData();
+?>
+
+<h2>Weather in <?= $data['name'] ?></h2>
+
+<p>Temperature: <?= $data['main']['temp'] ?> °C</p>
+<p>Weather: <?= $data['weather'][0]['description'] ?></p>
+<p>Humidity: <?= $data['main']['humidity'] ?>%</p>

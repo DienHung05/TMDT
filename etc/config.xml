@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/config.xsd">
+    <default>
+        <payment>
+            <vnpay>
+                <active>1</active>
+                <title>VNPay</title>
+                <vnp_TmnCode>1GDLWWBH</vnp_TmnCode>
+                <vnp_HashSecret>XY13KAZQ9DQBITTWR15KC0EMH6368CZP</vnp_HashSecret>
+                <vnp_Url>https://sandbox.vnpayment.vn/paymentv2/vpcpay.html</vnp_Url>
+                <order_status>pending</order_status>
+            </vnpay>
+        </payment>
+    </default>
+</config>
