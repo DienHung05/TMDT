@@ -1,0 +1,15 @@
+
+Deploy using quick strategy
+adminhtml/Magento/backend/en_US         0/1708              >--------------------------- 0%     < 1 ms
+[1A[2Kadminhtml/Magento/backend/en_US         141/1708            ==>------------------------- 8%     1 s
+[1A[2Kadminhtml/Magento/backend/en_US         1708/1708           ============================ 100%   1 s                
+frontend/Magento/blank/en_US            1663/1663           ============================ 100%   0                  
+frontend/Magento/luma/en_US             0/1679              >--------------------------- 0%     < 1 ms
+[1A[2K[1A[2K[1A[2Kadminhtml/Magento/backend/en_US         1708/1708           ============================ 100%   1 s                
+frontend/Magento/blank/en_US            1663/1663           ============================ 100%   0                  
+frontend/Magento/luma/en_US             1679/1679           ============================ 100%   < 1 ms
+[1A[2K[1A[2K[1A[2Kadminhtml/Magento/backend/en_US         1708/1708           ============================ 100%   1 s                
+frontend/Magento/blank/en_US            1663/1663           ============================ 100%   0                  
+frontend/Magento/luma/en_US             1679/1679           ============================ 100%   < 1 ms
+
+Execution time: 3.7264809608459
