@@ -1,0 +1,21 @@
+<?php $rates = $block->getRates(); ?>
+
+<h2>Tỷ giá Vietcombank</h2>
+
+<table border="1" cellpadding="5">
+    <tr>
+        <th>Currency</th>
+        <th>Buy</th>
+        <th>Transfer</th>
+        <th>Sell</th>
+    </tr>
+
+    <?php foreach ($rates as $rate): ?>
+        <tr>
+            <td><?= $rate['currency'] ?></td>
+            <td><?= is_numeric($rate['buy']) ? number_format($rate['buy'], 2, '.', ',') : '-' ?></td>
+            <td><?= is_numeric($rate['transfer']) ? number_format($rate['transfer'], 2, '.', ',') : '-' ?></td>
+            <td><?= is_numeric($rate['sell']) ? number_format($rate['sell'], 2, '.', ',') : '-' ?></td>
+        </tr>
+    <?php endforeach; ?>
+</table>
