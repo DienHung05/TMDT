@@ -1,0 +1,3365 @@
+& when (@media-common = true) {
+    body.pvmodern-v3 {
+        background: @pv-bg;
+        color: @pv-text;
+        font-family: 'JetBrains Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    }
+
+    body.pvmodern-v3 .page-wrapper {
+        min-height: 100vh;
+        background:
+            radial-gradient(at 20% 20%, rgba(139, 92, 246, .15) 0px, transparent 50%),
+            radial-gradient(at 80% 10%, rgba(59, 130, 246, .12) 0px, transparent 50%),
+            radial-gradient(at 10% 60%, rgba(236, 72, 153, .10) 0px, transparent 50%),
+            radial-gradient(at 90% 60%, rgba(34, 211, 238, .10) 0px, transparent 50%),
+            radial-gradient(at 50% 90%, rgba(168, 85, 247, .12) 0px, transparent 50%),
+            linear-gradient(to bottom, #f8fafc, #ffffff);
+    }
+
+    body.pvmodern-v3 .page-header,
+    body.pvmodern-v3 .nav-sections,
+    body.pvmodern-v3 .header.content,
+    body.pvmodern-v3 .panel.wrapper,
+    body.pvmodern-v3 .page-footer,
+    body.pvmodern-v3 .copyright,
+    body.pvmodern-v3 .breadcrumbs {
+        display: none;
+    }
+
+    body.pvmodern-v3 .page-main {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 32px 16px 64px;
+    }
+
+    body.pvmodern-v3.cms-index-index .page-main {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    body.pvmodern-v3 .columns,
+    body.pvmodern-v3 .column.main {
+        display: block;
+        width: 100%;
+    }
+
+    body.pvmodern-v3 .column.main {
+        padding-bottom: 0;
+    }
+
+    body.pvmodern-v3 a {
+        text-decoration: none;
+    }
+
+    .pv3-container {
+        width: 100%;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .text-gradient {
+        background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .glass-panel {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.55);
+    }
+
+    .card-shine {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card-shine::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,.6), transparent);
+        transition: left .6s ease;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .card-shine:hover::before {
+        left: 100%;
+    }
+
+    @keyframes pv3-float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-6px); }
+    }
+
+    .pv3-header-shell {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(255, 255, 255, .8);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(255,255,255,.2);
+    }
+
+    .pv3-header-line {
+        height: 4px;
+        background: linear-gradient(to right, #6366f1, #8b5cf6, #ec4899);
+    }
+
+    .pv3-header-main {
+        padding: 12px 0;
+    }
+
+    .pv3-header-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+    }
+
+    .pv3-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 220px;
+    }
+
+    .pv3-brand-mark {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 12px 30px rgba(99, 102, 241, .35);
+    }
+
+    .pv3-brand-mark img {
+        width: 20px;
+        height: 20px;
+        display: block;
+        filter: brightness(0) invert(1);
+    }
+
+    .pv3-brand-status {
+        position: absolute;
+        right: -2px;
+        bottom: -2px;
+        width: 12px;
+        height: 12px;
+        background: #4ade80;
+        border-radius: 999px;
+        border: 2px solid #ffffff;
+    }
+
+    .pv3-brand-copy {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .pv3-brand-copy strong {
+        font-size: 20px;
+        line-height: 1;
+        font-weight: 700;
+        letter-spacing: -.02em;
+    }
+
+    .pv3-brand-copy small {
+        margin-top: 2px;
+        font-size: 9px;
+        letter-spacing: .28em;
+        text-transform: uppercase;
+        color: @pv-slate-400;
+    }
+
+    .pv3-search,
+    .pv3-nav,
+    .pv3-mobile-search,
+    .pv3-mobile-nav {
+        margin: 0;
+    }
+
+    .pv3-search {
+        display: none;
+        flex: 1;
+        max-width: 672px;
+        margin: 0 32px;
+        position: relative;
+    }
+
+    .pv3-search-icon {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: @pv-slate-400;
+        width: 16px;
+        height: 16px;
+        display: inline-flex;
+    }
+
+    .pv3-search-icon svg,
+    .pv3-sort-icon svg,
+    .pv3-chevron svg,
+    .pv3-star-icon svg,
+    .pv3-card-button svg,
+    .pv3-btn svg,
+    .pv3-header-shell svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    .pv3-search input,
+    .pv3-mobile-search input,
+    .pv3-newsletter-form input,
+    .pv3-sort-wrap select {
+        width: 100%;
+        border-radius: 999px;
+        border: 1px solid @pv-slate-200;
+        background: @pv-slate-50;
+        color: @pv-slate-700;
+        box-shadow: 0 1px 2px rgba(15, 23, 42, .03);
+        transition: all .2s ease;
+        outline: 0;
+    }
+
+    .pv3-search input {
+        height: 42px;
+        padding: 0 16px 0 44px;
+        font-size: 14px;
+    }
+
+    .pv3-search input:focus,
+    .pv3-mobile-search input:focus,
+    .pv3-newsletter-form input:focus,
+    .pv3-sort-wrap select:focus {
+        border-color: rgba(99, 102, 241, .35);
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, .12);
+    }
+
+    .pv3-nav {
+        display: none;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .pv3-nav a,
+    .pv3-mobile-nav a {
+        color: @pv-slate-600;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 8px 16px;
+        border-radius: 8px;
+        transition: all .2s ease;
+    }
+
+    .pv3-nav a:hover,
+    .pv3-mobile-nav a:hover {
+        color: @pv-primary;
+        background: #eef2ff;
+    }
+
+    .pv3-nav a.is-deals,
+    .pv3-mobile-nav a.is-deals {
+        color: #e11d48;
+    }
+
+    .pv3-nav a.is-deals:hover,
+    .pv3-mobile-nav a.is-deals:hover {
+        color: #e11d48;
+        background: #fff1f2;
+    }
+
+    .pv3-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .pv3-icon-button,
+    .pv3-menu-toggle {
+        width: 42px;
+        height: 42px;
+        border: 0;
+        border-radius: 12px;
+        background: transparent;
+        color: @pv-slate-500;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: all .2s ease;
+        padding: 0;
+        cursor: pointer;
+    }
+
+    .pv3-icon-button svg,
+    .pv3-menu-toggle svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .pv3-icon-button:hover,
+    .pv3-menu-toggle:hover {
+        background: @pv-slate-100;
+        color: @pv-primary;
+    }
+
+    .pv3-icon-button.is-favorite:hover {
+        color: @pv-rose;
+        background: #fff1f2;
+    }
+
+    .pv3-cart-button {
+        position: relative;
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+        box-shadow: 0 12px 30px rgba(99, 102, 241, .35);
+        transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .pv3-cart-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 16px 38px rgba(99, 102, 241, .45);
+        color: #ffffff;
+    }
+
+    .pv3-cart-button span svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .pv3-cart-button em {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        width: 20px;
+        height: 20px;
+        border-radius: 999px;
+        background: #f43f5e;
+        color: #ffffff;
+        border: 2px solid #ffffff;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .pv3-menu-toggle__close { display: none; }
+    .pv3-menu-toggle.is-open .pv3-menu-toggle__open { display: none; }
+    .pv3-menu-toggle.is-open .pv3-menu-toggle__close { display: inline-flex; }
+
+    .pv3-mobile-menu {
+        border-top: 1px solid @pv-slate-100;
+        background: #ffffff;
+        padding: 16px 0;
+    }
+
+    .pv3-mobile-search {
+        position: relative;
+        margin-bottom: 16px;
+    }
+
+    .pv3-mobile-search .pv3-search-icon {
+        left: 16px;
+    }
+
+    .pv3-mobile-search input {
+        height: 44px;
+        padding: 0 16px 0 44px;
+        font-size: 14px;
+    }
+
+    .pv3-mobile-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .pv3-mobile-nav a {
+        display: block;
+        padding: 12px 16px;
+        border-radius: 12px;
+    }
+
+    .pv3-home {
+        overflow: hidden;
+    }
+
+    .pv3-hero-section {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .pv3-hero-grid {
+        display: grid;
+        gap: 48px;
+        padding-top: 64px;
+        padding-bottom: 64px;
+        align-items: center;
+    }
+
+    .pv3-trusted-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        background: rgba(255,255,255,.8);
+        backdrop-filter: blur(8px);
+        border-radius: 999px;
+        box-shadow: 0 12px 30px rgba(199, 210, 254, .55);
+        margin-bottom: 24px;
+    }
+
+    .pv3-star-icon {
+        width: 16px;
+        height: 16px;
+        color: #f59e0b;
+        display: inline-flex;
+    }
+
+    .pv3-trusted-badge span:last-child {
+        color: @pv-slate-700;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .pv3-hero-copy h1 {
+        margin: 0 0 24px;
+        color: @pv-slate-800;
+        font-size: 40px;
+        line-height: 1.05;
+        font-weight: 700;
+        letter-spacing: -.03em;
+    }
+
+    .pv3-hero-copy p {
+        margin: 0 0 32px;
+        max-width: 640px;
+        color: @pv-slate-500;
+        font-size: 18px;
+        line-height: 1.6;
+    }
+
+    .pv3-hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-bottom: 40px;
+    }
+
+    .pv3-btn {
+        min-height: 48px;
+        padding: 12px 24px;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 16px;
+        font-weight: 700;
+        transition: all .3s ease;
+        border: 0;
+        cursor: pointer;
+    }
+
+    .pv3-btn svg {
+        width: 16px;
+        height: 16px;
+        transition: transform .3s ease;
+    }
+
+    .pv3-btn:hover svg {
+        transform: translateX(4px);
+    }
+
+    .pv3-btn--primary {
+        color: #ffa1a1;
+        background: linear-gradient(135deg, #ffc8ed 0%, #ffc1ea 50%, #ff66a6 100%);
+        box-shadow: 0 18px 40px -12px rgba(99, 102, 241, .5);
+    }
+
+    .pv3-btn--primary:hover {
+        color: #ffffff;
+        background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #9333ea 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 24px 44px -14px rgba(99, 102, 241, .58);
+    }
+
+    .pv3-btn--secondary {
+        background: #ffffff;
+        color: @pv-slate-700;
+        box-shadow: 0 18px 40px -12px rgba(148, 163, 184, .25);
+    }
+
+    .pv3-btn--secondary:hover {
+        color: @pv-slate-700;
+        background: #f8fafc;
+        transform: translateY(-2px);
+        box-shadow: 0 24px 44px -14px rgba(148, 163, 184, .32);
+    }
+
+    .pv3-trust-bar {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+        max-width: 540px;
+        padding-top: 40px;
+        border-top: 1px solid rgba(226, 232, 240, .5);
+    }
+
+    .pv3-trust-bar div {
+        text-align: center;
+        position: relative;
+    }
+
+    .pv3-trust-bar div + div::before {
+        content: '';
+        position: absolute;
+        top: 4px;
+        left: -12px;
+        width: 1px;
+        height: 40px;
+        background: @pv-slate-200;
+    }
+
+    .pv3-trust-bar strong {
+        display: block;
+        font-size: 24px;
+        line-height: 1;
+        margin-bottom: 6px;
+        font-weight: 700;
+    }
+
+    .pv3-trust-bar span {
+        display: block;
+        font-size: 12px;
+        color: @pv-slate-400;
+    }
+
+    .pv3-hero-visual {
+        position: relative;
+    }
+
+    .pv3-hero-visual-bg {
+        position: absolute;
+        inset: 0;
+        border-radius: 24px;
+        filter: blur(48px);
+        background: linear-gradient(135deg, rgba(129, 140, 248, .3) 0%, rgba(216, 180, 254, .3) 100%);
+    }
+
+    .pv3-hero-visual-panel {
+        position: relative;
+        border-radius: 24px;
+        padding: 32px;
+        box-shadow: 0 24px 60px rgba(199, 210, 254, .5);
+    }
+
+    .pv3-hero-visual-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .pv3-hero-visual-grid.is-products {
+        gap: 18px;
+    }
+
+    .pv3-hero-product-card {
+        background: rgba(255, 255, 255, .94);
+        border: 1px solid rgba(226, 232, 240, .86);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 18px 34px rgba(148, 163, 184, .18);
+        transition: transform .28s ease, box-shadow .28s ease;
+        animation: pv3-float 4s ease-in-out infinite;
+    }
+
+    .pv3-hero-product-card:hover {
+        transform: translateY(-4px) scale(1.01);
+        box-shadow: 0 24px 42px rgba(129, 140, 248, .22);
+    }
+
+    .pv3-hero-product-image {
+        display: block;
+        aspect-ratio: 1.15 / 1;
+        overflow: hidden;
+        background: linear-gradient(135deg, rgba(99, 102, 241, .08), rgba(236, 72, 153, .06));
+    }
+
+    .pv3-hero-product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform .35s ease;
+    }
+
+    .pv3-hero-product-card:hover .pv3-hero-product-image img {
+        transform: scale(1.04);
+    }
+
+    .pv3-hero-product-content {
+        padding: 14px 16px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .pv3-hero-product-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        color: @pv-slate-500;
+    }
+
+    .pv3-hero-product-meta em {
+        font-style: normal;
+        color: @pv-slate-400;
+    }
+
+    .pv3-hero-product-content h3 {
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.45;
+        font-weight: 700;
+        color: @pv-slate-800;
+    }
+
+    .pv3-hero-product-content h3 a {
+        color: inherit;
+    }
+
+    .pv3-hero-product-price {
+        font-size: 22px;
+        line-height: 1;
+        font-weight: 800;
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    }
+
+    .pv3-feature-bar {
+        padding: 24px 0;
+        background: rgba(255,255,255,.5);
+        backdrop-filter: blur(4px);
+        border-top: 1px solid rgba(241, 245, 249, .7);
+        border-bottom: 1px solid rgba(241, 245, 249, .7);
+    }
+
+    .pv3-feature-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .pv3-feature-card {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px;
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(148, 163, 184, .12);
+        transition: box-shadow .2s ease;
+    }
+
+    .pv3-feature-card:hover {
+        box-shadow: 0 12px 30px rgba(148, 163, 184, .18);
+    }
+
+    .pv3-feature-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .pv3-feature-icon svg { width: 20px; height: 20px; }
+    .pv3-feature-icon.is-indigo { background: #eef2ff; color: @pv-primary; }
+    .pv3-feature-icon.is-emerald { background: #ecfdf5; color: @pv-emerald; }
+    .pv3-feature-icon.is-amber { background: #fffbeb; color: @pv-amber; }
+    .pv3-feature-icon.is-purple { background: #f5f3ff; color: @pv-purple; }
+
+    .pv3-feature-card strong {
+        display: block;
+        color: @pv-slate-800;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1.2;
+    }
+
+    .pv3-feature-card small {
+        display: block;
+        color: @pv-slate-400;
+        font-size: 12px;
+        line-height: 1.4;
+        margin-top: 2px;
+    }
+
+    .pv3-products-section {
+        padding: 48px 0;
+    }
+
+    .pv3-section-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .pv3-premium-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 16px;
+        border-radius: 999px;
+        background: linear-gradient(to right, #eef2ff, #f5f3ff);
+        color: @pv-primary;
+        margin-bottom: 16px;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .pv3-premium-pill span:first-child {
+        width: 16px;
+        height: 16px;
+        display: inline-flex;
+    }
+
+    .pv3-section-header h2 {
+        margin: 0 0 12px;
+        font-size: 32px;
+        line-height: 1.1;
+        font-weight: 700;
+        color: @pv-slate-800;
+    }
+
+    .pv3-section-header p {
+        margin: 0 auto;
+        max-width: 672px;
+        color: @pv-slate-500;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .pv3-filters-shell {
+        background: #ffffff;
+        padding: 16px;
+        border-radius: 24px;
+        box-shadow: 0 18px 40px rgba(148, 163, 184, .18);
+        margin-bottom: 32px;
+    }
+
+    .pv3-filters-row {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .pv3-filter-pills {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        scrollbar-width: none;
+    }
+
+    .pv3-filter-pills::-webkit-scrollbar { display: none; }
+
+    .pv3-filter-pill {
+        border: 0;
+        padding: 8px 16px;
+        border-radius: 12px;
+        background: @pv-slate-50;
+        color: @pv-slate-600;
+        font-size: 14px;
+        font-weight: 500;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: all .2s ease;
+    }
+
+    .pv3-filter-pill:hover {
+        background: @pv-slate-100;
+        color: @pv-primary;
+    }
+
+    .pv3-filter-pill.is-active {
+        background: linear-gradient(to right, #6366f1, #8b5cf6);
+        color: #ffffff;
+        box-shadow: 0 12px 30px rgba(99, 102, 241, .35);
+    }
+
+    .pv3-sort-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .pv3-sort-wrap {
+        position: relative;
+        min-width: 230px;
+        max-width: 100%;
+    }
+
+    .pv3-sort-icon,
+    .pv3-chevron {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        color: @pv-slate-400;
+        width: 16px;
+        height: 16px;
+        display: inline-flex;
+        pointer-events: none;
+    }
+
+    .pv3-sort-icon { left: 12px; }
+    .pv3-chevron { right: 12px; }
+
+    .pv3-sort-wrap select {
+        height: 40px;
+        padding: 0 36px 0 36px;
+        font-size: 14px;
+        cursor: pointer;
+        background: @pv-slate-50;
+    }
+
+    .pv3-view-toggle {
+        display: flex;
+        align-items: center;
+        padding: 4px;
+        gap: 4px;
+        background: @pv-slate-50;
+        border-radius: 12px;
+    }
+
+    .pv3-view-toggle button {
+        width: 36px;
+        height: 36px;
+        border: 0;
+        background: transparent;
+        color: @pv-slate-400;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all .2s ease;
+    }
+
+    .pv3-view-toggle button svg { width: 16px; height: 16px; }
+
+    .pv3-view-toggle button.is-active {
+        background: #ffffff;
+        color: @pv-primary;
+        box-shadow: 0 4px 12px rgba(15, 23, 42, .08);
+    }
+
+    .pv3-stats-bar {
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px solid @pv-slate-100;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 16px;
+        color: @pv-slate-500;
+        font-size: 14px;
+    }
+
+    .pv3-stats-bar strong { color: @pv-slate-700; }
+
+    .pv3-stats-bar .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        display: inline-block;
+        margin-right: 6px;
+    }
+
+    .pv3-stats-bar .dot.is-green { background: #4ade80; }
+    .pv3-stats-bar .dot.is-amber { background: #fbbf24; }
+
+    .pv3-product-grid {
+        display: grid;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        gap: 24px;
+    }
+
+    .pv3-product-grid.is-list {
+        grid-template-columns: 1fr;
+    }
+
+    .pv3-product-card {
+        position: relative;
+        border-radius: 16px;
+        overflow: hidden;
+        background: #ffffff;
+        box-shadow: 0 18px 40px rgba(148, 163, 184, .18);
+        transition: transform .5s ease, box-shadow .5s ease;
+    }
+
+    .pv3-product-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 30px 60px rgba(129, 140, 248, .28);
+    }
+
+    .pv3-gradient-border {
+        position: absolute;
+        inset: 0;
+        padding: 2px;
+        border-radius: 16px;
+        background: linear-gradient(to right, #6366f1, #8b5cf6, #ec4899);
+        opacity: 0;
+        transition: opacity .3s ease;
+        pointer-events: none;
+    }
+
+    .pv3-gradient-border > div {
+        width: 100%;
+        height: 100%;
+        background: #ffffff;
+        border-radius: 14px;
+    }
+
+    .pv3-product-card:hover .pv3-gradient-border {
+        opacity: 1;
+    }
+
+    .pv3-card-inner {
+        position: relative;
+        z-index: 1;
+    }
+
+    .pv3-product-badges {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .pv3-product-badges .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: .04em;
+        color: #ffffff;
+        box-shadow: 0 10px 24px rgba(15, 23, 42, .18);
+        line-height: 1;
+    }
+
+    .pv3-product-badges .badge svg {
+        width: 12px;
+        height: 12px;
+    }
+
+    .pv3-product-badges .badge.is-new { background: linear-gradient(to right, #6366f1, #8b5cf6); }
+    .pv3-product-badges .badge.is-featured { background: linear-gradient(to right, #f59e0b, #f97316); }
+    .pv3-product-badges .badge.is-sale { background: linear-gradient(to right, #f43f5e, #ec4899); }
+
+    .pv3-product-image-shell {
+        position: relative;
+        height: 208px;
+        background: linear-gradient(to bottom right, @pv-slate-50, @pv-slate-100);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .pv3-product-image-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom right, rgba(99,102,241,.14), rgba(168,85,247,.14));
+        opacity: 0;
+        transition: opacity .5s ease;
+    }
+
+    .pv3-product-card:hover .pv3-product-image-overlay {
+        opacity: 1;
+    }
+
+    .pv3-product-image-shell img {
+        position: relative;
+        z-index: 1;
+        max-width: 200px;
+        max-height: 200px;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        padding: 24px;
+        transition: transform .5s ease;
+    }
+
+    .pv3-product-card:hover .pv3-product-image-shell img {
+        transform: scale(1.08);
+    }
+
+    .pv3-product-content {
+        padding: 20px;
+    }
+
+    .pv3-product-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        gap: 12px;
+    }
+
+    .pv3-product-meta .brand {
+        color: @pv-primary;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+    }
+
+    .pv3-product-meta .category {
+        color: @pv-slate-400;
+        font-size: 10px;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+    }
+
+    .pv3-product-content h3 {
+        margin: 0 0 12px;
+        min-height: 40px;
+        color: @pv-slate-800;
+        font-size: 14px;
+        line-height: 1.4;
+        font-weight: 700;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        transition: color .2s ease;
+    }
+
+    .pv3-product-card:hover .pv3-product-content h3 {
+        color: @pv-primary;
+    }
+
+    .pv3-specs {
+        display: grid;
+        gap: 6px;
+        margin-bottom: 16px;
+    }
+
+    .pv3-specs div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        font-size: 11px;
+        line-height: 1.35;
+    }
+
+    .pv3-specs span {
+        color: @pv-slate-400;
+    }
+
+    .pv3-specs strong {
+        color: @pv-slate-600;
+        font-weight: 500;
+        text-align: right;
+    }
+
+    .pv3-stock-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        font-size: 10px;
+        font-weight: 500;
+        margin-bottom: 16px;
+    }
+
+    .pv3-stock-pill .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+    }
+
+    .pv3-stock-pill.is-in-stock {
+        background: #ecfdf5;
+        border-color: #a7f3d0;
+        color: #059669;
+    }
+    .pv3-stock-pill.is-in-stock .dot { background: #10b981; animation: pv3-pulse 2s infinite; }
+
+    .pv3-stock-pill.is-low-stock {
+        background: #fffbeb;
+        border-color: #fde68a;
+        color: #d97706;
+    }
+    .pv3-stock-pill.is-low-stock .dot { background: #f59e0b; }
+
+    .pv3-stock-pill.is-out-of-stock {
+        background: #fff1f2;
+        border-color: #fecdd3;
+        color: #e11d48;
+    }
+    .pv3-stock-pill.is-out-of-stock .dot { background: #f43f5e; }
+
+    .pv3-stock-pill.is-pre-order {
+        background: #f5f3ff;
+        border-color: #ddd6fe;
+        color: #7c3aed;
+    }
+    .pv3-stock-pill.is-pre-order .dot { background: #8b5cf6; }
+
+    @keyframes pv3-pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: .7; }
+    }
+
+    .pv3-price-row {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        margin-bottom: 16px;
+    }
+
+    .pv3-price-old {
+        color: @pv-slate-400;
+        font-size: 12px;
+        line-height: 1;
+        text-decoration: line-through;
+        margin-bottom: 4px;
+    }
+
+    .pv3-price-current {
+        font-size: 32px;
+        line-height: 1;
+        font-weight: 700;
+    }
+
+    .pv3-card-button {
+        width: 100%;
+        min-height: 48px;
+        border: 0;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 700;
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+        box-shadow: 0 16px 32px -14px rgba(99,102,241,.55);
+        transition: transform .3s ease, box-shadow .3s ease, background .3s ease;
+        cursor: pointer;
+    }
+
+    .pv3-card-button svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .pv3-card-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 36px -14px rgba(99,102,241,.62);
+        background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #9333ea 100%);
+    }
+
+    .pv3-card-button.is-disabled,
+    .pv3-card-button:disabled {
+        background: @pv-slate-100;
+        color: @pv-slate-400;
+        box-shadow: none;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .pv3-product-grid.is-list .pv3-product-card {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+    }
+
+    .pv3-product-grid.is-list .pv3-product-image-shell {
+        height: 100%;
+        min-height: 260px;
+    }
+
+    .pv3-product-grid.is-list .pv3-product-content h3 {
+        min-height: 0;
+        -webkit-line-clamp: unset;
+    }
+
+    .pv3-load-more-wrap {
+        margin-top: 48px;
+        text-align: center;
+    }
+
+    .pv3-newsletter-section {
+        padding: 64px 0;
+        background: linear-gradient(to right, #6366f1, #8b5cf6, #ec4899);
+    }
+
+    .pv3-newsletter-inner {
+        max-width: 768px;
+        text-align: center;
+    }
+
+    .pv3-newsletter-inner h2 {
+        margin: 0 0 16px;
+        color: #ffffff;
+        font-size: 32px;
+        line-height: 1.1;
+        font-weight: 700;
+    }
+
+    .pv3-newsletter-inner p {
+        margin: 0 0 32px;
+        color: rgba(255,255,255,.8);
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .pv3-newsletter-form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-width: 448px;
+        margin: 0 auto;
+    }
+
+    .pv3-newsletter-form input {
+        height: 48px;
+        padding: 0 20px;
+        background: #ffffff;
+        font-size: 14px;
+    }
+
+    .pv3-newsletter-form button {
+        min-height: 48px;
+        padding: 12px 24px;
+        border: 0;
+        border-radius: 12px;
+        background: #ffffff;
+        color: @pv-primary;
+        font-size: 16px;
+        font-weight: 600;
+        transition: background .2s ease, color .2s ease;
+        cursor: pointer;
+    }
+
+    .pv3-newsletter-form button:hover {
+        background: @pv-slate-50;
+    }
+
+    .pv3-footer-shell {
+        background: @pv-slate-900;
+        color: #ffffff;
+        padding: 48px 0 32px;
+    }
+
+    .pv3-footer-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 32px;
+        margin-bottom: 32px;
+    }
+
+    .pv3-footer-grid h3 {
+        margin: 0 0 16px;
+        color: #ffffff;
+        font-size: 14px;
+        line-height: 1.3;
+        font-weight: 600;
+    }
+
+    .pv3-footer-grid ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .pv3-footer-grid li + li {
+        margin-top: 8px;
+    }
+
+    .pv3-footer-grid a,
+    .pv3-footer-grid p,
+    .pv3-footer-bottom span,
+    .pv3-footer-bottom a {
+        color: @pv-slate-400;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .pv3-footer-grid a:hover,
+    .pv3-footer-bottom a:hover {
+        color: #ffffff;
+    }
+
+    .pv3-footer-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+
+    .pv3-footer-logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .pv3-footer-logo img {
+        width: 20px;
+        height: 20px;
+        filter: brightness(0) invert(1);
+    }
+
+    .pv3-footer-brand strong {
+        font-size: 18px;
+        line-height: 1;
+        font-weight: 700;
+        color: #ffffff;
+    }
+
+    .pv3-footer-bottom {
+        padding-top: 32px;
+        border-top: 1px solid rgba(255,255,255,.08);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .pv3-footer-bottom div {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    @media (min-width: 768px) {
+        .pv3-search { display: flex; }
+        .pv3-newsletter-form {
+            flex-direction: row;
+            max-width: 560px;
+        }
+        .pv3-newsletter-form input { flex: 1; }
+        .pv3-newsletter-form button { min-width: 160px; }
+        .pv3-product-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .pv3-footer-bottom {
+            flex-direction: row;
+        }
+        .pv3-hero-copy h1 { font-size: 60px; }
+        .pv3-section-header h2,
+        .pv3-newsletter-inner h2 { font-size: 36px; }
+    }
+
+    @media (min-width: 1024px) {
+        .pv3-nav { display: flex; }
+        .pv3-menu-toggle,
+        .pv3-mobile-menu { display: none !important; }
+        .pv3-hero-grid {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            padding-top: 96px;
+            padding-bottom: 96px;
+        }
+        .pv3-feature-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+        .pv3-filters-row {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .pv3-product-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+        .pv3-footer-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+    }
+
+    @media (min-width: 1280px) {
+        .pv3-product-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 767px) {
+        .pv3-brand-copy strong { font-size: 18px; }
+        .pv3-header-row { gap: 12px; }
+        .pv3-brand { min-width: auto; }
+        .pv3-actions { margin-left: auto; }
+        .pv3-icon-button { display: none; }
+        .pv3-trust-bar {
+            gap: 12px;
+            max-width: 100%;
+        }
+        .pv3-trust-bar strong { font-size: 20px; }
+        .pv3-hero-copy h1 { font-size: 40px; }
+        .pv3-hero-copy p { font-size: 16px; }
+        .pv3-hero-visual-panel { padding: 24px; }
+        .pv3-product-grid.is-list .pv3-product-card { grid-template-columns: 1fr; }
+    }
+}
+
+    .pv3-toolbar-shell {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .pv3-toolbar-left {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .pv3-search-mini {
+        position: relative;
+        display: block;
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .pv3-search-mini__icon {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 16px;
+        color: @pv-slate-400;
+        display: inline-flex;
+        pointer-events: none;
+    }
+
+    .pv3-search-mini__icon svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    .pv3-search-mini input,
+    .pv3-price-fields input {
+        width: 100%;
+        height: 40px;
+        border-radius: 12px;
+        border: 1px solid @pv-slate-200;
+        background: @pv-slate-50;
+        color: @pv-slate-700;
+        font-size: 14px;
+        outline: 0;
+        box-shadow: 0 1px 2px rgba(15, 23, 42, .03);
+        transition: all .2s ease;
+    }
+
+    .pv3-search-mini input {
+        padding: 0 14px 0 42px;
+    }
+
+    .pv3-price-fields {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        width: 100%;
+    }
+
+    .pv3-price-fields label {
+        display: block;
+    }
+
+    .pv3-price-fields span {
+        display: block;
+        margin-bottom: 6px;
+        color: @pv-slate-500;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: .02em;
+    }
+
+    .pv3-price-fields input {
+        padding: 0 12px;
+    }
+
+    .pv3-search-mini input:focus,
+    .pv3-price-fields input:focus {
+        border-color: rgba(99, 102, 241, .35);
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, .12);
+    }
+
+    .pv3-availability-wrap {
+        min-width: 220px;
+    }
+
+    .pv3-price-hint {
+        color: @pv-slate-400;
+    }
+
+    .pv3-product-content h3 a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .pv3-card-form {
+        margin: 0;
+    }
+
+    .pv3-card-button {
+        text-decoration: none;
+    }
+
+    .pv3-load-more-row {
+        margin-top: 48px;
+        text-align: center;
+    }
+
+    .pv3-load-more {
+        min-width: 220px;
+        min-height: 48px;
+        padding: 0 24px;
+        border: 0;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 700;
+        box-shadow: 0 16px 32px -14px rgba(99,102,241,.55);
+        transition: transform .3s ease, box-shadow .3s ease;
+        cursor: pointer;
+    }
+
+    .pv3-load-more:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 36px -14px rgba(99,102,241,.62);
+    }
+
+    .pv3-load-more[hidden] {
+        display: none !important;
+    }
+
+    .pv3-product-card.is-filtered-out {
+        display: none !important;
+    }
+
+    @media (min-width: 768px) {
+        .pv3-toolbar-left {
+            display: grid;
+            grid-template-columns: minmax(240px, 320px) minmax(260px, 340px) minmax(220px, 240px);
+            align-items: end;
+        }
+
+        .pv3-toolbar-shell {
+            flex-direction: row;
+            align-items: end;
+            justify-content: space-between;
+        }
+    }
+
+& when (@media-common = true) {
+    .pv3-brand-copy strong,
+    .pv3-footer-brand strong {
+        letter-spacing: -.02em;
+    }
+
+    .pv3-nav a {
+        position: relative;
+        padding-bottom: 12px;
+    }
+
+    .pv3-nav a::after {
+        content: '';
+        position: absolute;
+        left: 16px;
+        right: 16px;
+        bottom: 6px;
+        height: 2px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #6366f1 0%, #ec4899 100%);
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform .22s ease;
+    }
+
+    .pv3-nav a:hover::after,
+    .pv3-nav a:focus::after,
+    .pv3-nav a.is-active::after {
+        transform: scaleX(1);
+    }
+
+    .pv3-nav a.is-active {
+        color: @pv-primary;
+    }
+
+    .pv3-icon-button {
+        color: @pv-slate-700;
+    }
+
+    .pv3-cart-button span,
+    .pv3-cart-button span svg {
+        color: #ffffff;
+    }
+
+    .pv3-filters-row {
+        gap: 18px;
+    }
+
+    .pv3-filter-select-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        min-width: 220px;
+    }
+
+    .pv3-filter-label {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        color: @pv-slate-500;
+    }
+
+    .pv3-category-wrap {
+        min-width: 240px;
+        max-width: 100%;
+    }
+
+    .pv3-category-wrap select {
+        height: 46px;
+        padding: 0 42px 0 40px;
+        border-radius: 14px;
+        background: #ffffff;
+        border-color: rgba(99, 102, 241, .12);
+        font-weight: 700;
+        color: @pv-slate-700;
+        box-shadow: 0 12px 28px rgba(148, 163, 184, .12);
+    }
+
+    .pv3-toolbar-left {
+        gap: 14px;
+    }
+
+    .pv3-newsletter-section {
+        padding: 72px 0 28px;
+        background: transparent;
+    }
+
+    .pv3-newsletter-inner {
+        margin: 0 auto;
+        max-width: 920px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 44px 28px;
+        border-radius: 28px;
+        text-align: center;
+        background: linear-gradient(135deg, rgba(99, 102, 241, .96) 0%, rgba(139, 92, 246, .96) 52%, rgba(236, 72, 153, .96) 100%);
+        box-shadow: 0 30px 80px rgba(129, 140, 248, .25);
+    }
+
+    .pv3-newsletter-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 14px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, .16);
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+    }
+
+    .pv3-newsletter-inner p {
+        max-width: 620px;
+    }
+
+    .pv3-recent-section {
+        padding: 0 0 80px;
+    }
+
+    .pv3-section-header--center {
+        align-items: center;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .pv3-recent-shell {
+        position: relative;
+        padding: 28px;
+        border-radius: 28px;
+        background: rgba(255, 255, 255, .72);
+        border: 1px solid rgba(226, 232, 240, .9);
+        box-shadow: 0 24px 60px rgba(148, 163, 184, .18);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+    }
+
+    .pv3-recent-toolbar {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 18px;
+    }
+
+    .pv3-recent-copy {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .pv3-recent-copy strong {
+        font-size: 18px;
+        font-weight: 800;
+        color: @pv-slate-800;
+    }
+
+    .pv3-recent-copy span {
+        color: @pv-slate-500;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .pv3-recent-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .pv3-recent-arrow {
+        width: 42px;
+        height: 42px;
+        border: 1px solid rgba(99, 102, 241, .12);
+        border-radius: 14px;
+        background: #ffffff;
+        color: @pv-slate-700;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 12px 28px rgba(148, 163, 184, .12);
+        transition: transform .2s ease, box-shadow .2s ease, color .2s ease;
+        cursor: pointer;
+    }
+
+    .pv3-recent-arrow:hover:not(:disabled) {
+        transform: translateY(-2px);
+        color: @pv-primary;
+        box-shadow: 0 18px 34px rgba(129, 140, 248, .22);
+    }
+
+    .pv3-recent-arrow:disabled {
+        opacity: .45;
+        cursor: not-allowed;
+    }
+
+    .pv3-recent-arrow svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .pv3-recent-slider {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(250px, 300px);
+        gap: 18px;
+        overflow-x: auto;
+        padding-bottom: 6px;
+        scroll-snap-type: x proximity;
+        scrollbar-width: none;
+        scroll-behavior: smooth;
+    }
+
+    .pv3-recent-slider::-webkit-scrollbar {
+        display: none;
+    }
+
+    .pv3-recent-card {
+        scroll-snap-align: start;
+        background: #ffffff;
+        border-radius: 22px;
+        border: 1px solid rgba(226, 232, 240, .92);
+        box-shadow: 0 16px 38px rgba(148, 163, 184, .14);
+        overflow: hidden;
+        transition: transform .28s ease, box-shadow .28s ease;
+    }
+
+    .pv3-recent-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 22px 46px rgba(129, 140, 248, .2);
+    }
+
+    .pv3-recent-image {
+        position: relative;
+        display: block;
+        height: 188px;
+        background: linear-gradient(135deg, rgba(99, 102, 241, .08) 0%, rgba(236, 72, 153, .05) 100%);
+    }
+
+    .pv3-recent-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .pv3-recent-badge {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+        color: #ffffff;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: .08em;
+        box-shadow: 0 10px 22px rgba(99, 102, 241, .26);
+    }
+
+    .pv3-recent-content {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 18px;
+    }
+
+    .pv3-recent-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        color: @pv-slate-500;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: .04em;
+        text-transform: uppercase;
+    }
+
+    .pv3-recent-content h3 {
+        margin: 0;
+        min-height: 56px;
+        font-size: 17px;
+        line-height: 1.45;
+        color: @pv-slate-800;
+    }
+
+    .pv3-recent-content h3 a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .pv3-recent-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .pv3-recent-price {
+        font-size: 24px;
+        font-weight: 800;
+        line-height: 1;
+    }
+
+    .pv3-recent-form {
+        margin: 0;
+    }
+
+    .pv3-recent-button {
+        min-width: 88px;
+        min-height: 40px;
+        padding: 0 16px;
+        border: 0;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+        color: #ffffff;
+        font-size: 13px;
+        font-weight: 800;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        box-shadow: 0 14px 28px rgba(99, 102, 241, .25);
+        transition: transform .2s ease, box-shadow .2s ease;
+        cursor: pointer;
+    }
+
+    .pv3-recent-button:hover {
+        transform: translateY(-2px);
+        color: #ffffff;
+        box-shadow: 0 18px 34px rgba(99, 102, 241, .32);
+    }
+
+    @media (min-width: 768px) {
+        .pv3-recent-toolbar {
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .pv3-newsletter-inner {
+            padding: 52px 40px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .pv3-recent-shell {
+            padding: 22px 18px;
+        }
+
+        .pv3-recent-slider {
+            grid-auto-columns: minmax(238px, 84vw);
+        }
+
+        .pv3-recent-bottom {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .pv3-recent-button {
+            width: 100%;
+        }
+    }
+}
+
+/* ============================================================
+   PVModern v3 – Patch Block
+   All targeted overrides live here to avoid touching existing rules.
+   ============================================================ */
+& when (@media-common = true) {
+
+    /* ── 1. Shop Collection button: white text on gradient ── */
+    .pv3-btn--primary {
+        color: #ffffff;
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+        box-shadow: 0 18px 40px -12px rgba(99, 102, 241, .5);
+    }
+    .pv3-btn--primary:hover {
+        color: #ffffff;
+        background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #9333ea 100%);
+    }
+
+    /* ── 2. Nav: disable pseudo-element underline, use real indicator ── */
+    .pv3-nav {
+        position: relative;
+    }
+    .pv3-nav a::after {
+        display: none;
+    }
+    .pv3-nav a.is-active {
+        color: @pv-primary;
+    }
+    .pv3-nav-indicator {
+        position: absolute;
+        bottom: 6px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #6366f1 0%, #ec4899 100%);
+        pointer-events: none;
+        opacity: 0;
+        transition:
+            left   .32s cubic-bezier(.4, 0, .2, 1),
+            width  .32s cubic-bezier(.4, 0, .2, 1),
+            opacity .2s ease;
+    }
+
+    /* ── 3. Single-row filter bar ── */
+    .pv3-filters-shell {
+        padding: 14px 18px;
+    }
+    .pv3-filter-single-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+    .pv3-fsr-item {
+        display: flex;
+        align-items: stretch;
+    }
+    .pv3-fsr-category { flex: 0 0 auto; min-width: 120px; }
+    .pv3-fsr-search   { flex: 1 1 150px; min-width: 120px; }
+    .pv3-fsr-price    { flex: 0 0 84px; }
+    .pv3-fsr-avail    { flex: 1 1 148px; min-width: 130px; }
+    .pv3-fsr-sort     { flex: 1 1 148px; min-width: 130px; }
+    .pv3-fsr-view     { flex: 0 0 auto; }
+
+    .pv3-fsr-sep {
+        display: flex;
+        align-items: center;
+        color: @pv-slate-400;
+        font-size: 13px;
+        flex-shrink: 0;
+        user-select: none;
+    }
+
+    /* Shared select wrapper */
+    .pv3-fsr-select-wrap {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+    .pv3-fsr-icon,
+    .pv3-fsr-chevron {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        display: inline-flex;
+        pointer-events: none;
+        color: @pv-slate-400;
+    }
+    .pv3-fsr-icon    { left: 9px;  width: 14px; height: 14px; }
+    .pv3-fsr-chevron { right: 7px; width: 13px; height: 13px; }
+    .pv3-fsr-icon svg,
+    .pv3-fsr-chevron svg { width: 100%; height: 100%; }
+
+    .pv3-fsr-select-wrap select {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 100%;
+        height: 40px;
+        border-radius: 10px;
+        border: 1px solid @pv-slate-200;
+        background: @pv-slate-50;
+        color: @pv-slate-700;
+        font-size: 13px;
+        padding: 0 26px 0 30px;
+        cursor: pointer;
+        outline: 0;
+        box-shadow: 0 1px 2px rgba(15,23,42,.03);
+        transition: border-color .2s, box-shadow .2s;
+        font-family: inherit;
+    }
+    .pv3-fsr-select-wrap select:focus {
+        border-color: rgba(99,102,241,.35);
+        box-shadow: 0 0 0 3px rgba(99,102,241,.10);
+    }
+
+    /* Search input */
+    .pv3-fsr-search-label {
+        position: relative;
+        display: block;
+        width: 100%;
+    }
+    .pv3-fsr-search-label input {
+        width: 100%;
+        height: 40px;
+        border-radius: 10px;
+        border: 1px solid @pv-slate-200;
+        background: @pv-slate-50;
+        color: @pv-slate-700;
+        font-size: 13px;
+        padding: 0 12px 0 32px;
+        outline: 0;
+        box-shadow: 0 1px 2px rgba(15,23,42,.03);
+        transition: border-color .2s, box-shadow .2s;
+        font-family: inherit;
+    }
+    .pv3-fsr-search-label input:focus {
+        border-color: rgba(99,102,241,.35);
+        box-shadow: 0 0 0 3px rgba(99,102,241,.10);
+    }
+
+    /* Price inputs */
+    .pv3-fsr-price input {
+        width: 100%;
+        height: 40px;
+        border-radius: 10px;
+        border: 1px solid @pv-slate-200;
+        background: @pv-slate-50;
+        color: @pv-slate-700;
+        font-size: 13px;
+        padding: 0 8px;
+        text-align: center;
+        outline: 0;
+        box-shadow: 0 1px 2px rgba(15,23,42,.03);
+        transition: border-color .2s, box-shadow .2s;
+        font-family: inherit;
+    }
+    .pv3-fsr-price input:focus {
+        border-color: rgba(99,102,241,.35);
+        box-shadow: 0 0 0 3px rgba(99,102,241,.10);
+    }
+
+    /* ── 4. Newsletter: match full width of Recently Added ── */
+    .pv3-newsletter-inner {
+        max-width: 100%;
+        width: 100%;
+    }
+    /* Align padding of container with the recent section */
+    .pv3-newsletter-section .pv3-container {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    /* ── 5. Product grid: always full width (no split detail view) ── */
+    .pv3-product-layout {
+        width: 100%;
+    }
+
+    /* ── 6. Mobile filter bar responsiveness ── */
+    @media (max-width: 767px) {
+        .pv3-fsr-category,
+        .pv3-fsr-search {
+            flex: 1 1 100%;
+        }
+        .pv3-fsr-avail,
+        .pv3-fsr-sort {
+            flex: 1 1 calc(50% - 8px);
+        }
+        .pv3-fsr-price {
+            flex: 0 0 calc(50% - 20px);
+        }
+        .pv3-fsr-sep {
+            display: none;
+        }
+    }
+
+    /* ── 7. PC Builder page styles ── */
+    body.pvmodern-pcbuilder {
+        background: #0f1117;
+        color: #e2e8f0;
+        font-family: 'JetBrains Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, monospace;
+    }
+    body.pvmodern-pcbuilder .page-wrapper {
+        background: #0f1117;
+    }
+    body.pvmodern-pcbuilder .page-header,
+    body.pvmodern-pcbuilder .nav-sections,
+    body.pvmodern-pcbuilder .header.content,
+    body.pvmodern-pcbuilder .panel.wrapper,
+    body.pvmodern-pcbuilder .page-footer,
+    body.pvmodern-pcbuilder .copyright,
+    body.pvmodern-pcbuilder .breadcrumbs {
+        display: none;
+    }
+    body.pvmodern-pcbuilder .page-main,
+    body.pvmodern-pcbuilder .columns,
+    body.pvmodern-pcbuilder .column.main {
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+
+    /* PC Builder – top header bar */
+    .pcb-header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 0 24px;
+        height: 64px;
+        background: rgba(15,17,23,.96);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(99,102,241,.18);
+    }
+    .pcb-header-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        color: #ffffff;
+    }
+    .pcb-header-logo {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .pcb-header-logo svg { width: 18px; height: 18px; color: #fff; }
+    .pcb-header-brand strong {
+        font-size: 18px;
+        font-weight: 800;
+        letter-spacing: -.02em;
+        background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .pcb-header-title {
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+        color: #64748b;
+    }
+    .pcb-header-total {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+    .pcb-total-label {
+        font-size: 13px;
+        color: #64748b;
+    }
+    .pcb-total-value {
+        font-size: 22px;
+        font-weight: 800;
+        background: linear-gradient(135deg, #818cf8, #c084fc);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .pcb-add-all-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px;
+        border-radius: 10px;
+        border: 0;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform .2s, box-shadow .2s;
+        box-shadow: 0 10px 28px rgba(99,102,241,.35);
+        text-decoration: none;
+    }
+    .pcb-add-all-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 34px rgba(99,102,241,.45);
+        color: #ffffff;
+    }
+    .pcb-add-all-btn svg { width: 16px; height: 16px; }
+    .pcb-add-all-btn:disabled {
+        opacity: .5;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    /* PC Builder – main layout */
+    .pcb-main {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        min-height: calc(100vh - 64px);
+    }
+
+    /* PC Builder – left sidebar */
+    .pcb-sidebar {
+        background: #13161f;
+        border-right: 1px solid rgba(255,255,255,.06);
+        padding: 24px 0;
+        position: sticky;
+        top: 64px;
+        height: calc(100vh - 64px);
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(99,102,241,.2) transparent;
+    }
+    .pcb-sidebar-title {
+        padding: 0 20px 16px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: #475569;
+        border-bottom: 1px solid rgba(255,255,255,.06);
+        margin-bottom: 8px;
+    }
+    .pcb-slot {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 20px;
+        cursor: pointer;
+        transition: background .18s;
+        border-left: 3px solid transparent;
+        position: relative;
+    }
+    .pcb-slot:hover {
+        background: rgba(255,255,255,.04);
+    }
+    .pcb-slot.is-active {
+        background: rgba(99,102,241,.12);
+        border-left-color: #6366f1;
+    }
+    .pcb-slot-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: rgba(255,255,255,.06);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: background .18s;
+    }
+    .pcb-slot.is-active .pcb-slot-icon,
+    .pcb-slot.is-selected .pcb-slot-icon {
+        background: rgba(99,102,241,.22);
+    }
+    .pcb-slot-icon svg { width: 18px; height: 18px; color: #94a3b8; }
+    .pcb-slot.is-selected .pcb-slot-icon svg { color: #818cf8; }
+    .pcb-slot-info { flex: 1; min-width: 0; }
+    .pcb-slot-label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: #cbd5e1;
+        line-height: 1.2;
+    }
+    .pcb-slot.is-active .pcb-slot-label { color: #818cf8; }
+    .pcb-slot-sub {
+        display: block;
+        font-size: 11px;
+        color: #475569;
+        line-height: 1.3;
+        margin-top: 3px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 150px;
+    }
+    .pcb-slot.is-selected .pcb-slot-sub { color: #818cf8; }
+    .pcb-slot-check {
+        width: 20px;
+        height: 20px;
+        border-radius: 999px;
+        border: 2px solid rgba(255,255,255,.12);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: all .18s;
+    }
+    .pcb-slot.is-selected .pcb-slot-check {
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        border-color: transparent;
+    }
+    .pcb-slot-check svg { width: 11px; height: 11px; color: #fff; display: none; }
+    .pcb-slot.is-selected .pcb-slot-check svg { display: block; }
+
+    /* PC Builder – product panel */
+    .pcb-panel {
+        padding: 28px;
+        overflow-y: auto;
+        background: #0f1117;
+    }
+    .pcb-panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+    .pcb-panel-title {
+        font-size: 20px;
+        font-weight: 800;
+        color: #f1f5f9;
+        margin: 0;
+    }
+    .pcb-panel-search {
+        position: relative;
+        min-width: 220px;
+    }
+    .pcb-panel-search svg {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 15px;
+        height: 15px;
+        color: #475569;
+    }
+    .pcb-panel-search input {
+        width: 100%;
+        height: 38px;
+        border-radius: 10px;
+        border: 1px solid rgba(255,255,255,.08);
+        background: rgba(255,255,255,.05);
+        color: #e2e8f0;
+        font-size: 13px;
+        padding: 0 12px 0 34px;
+        outline: 0;
+        transition: border-color .2s;
+        font-family: inherit;
+    }
+    .pcb-panel-search input:focus {
+        border-color: rgba(99,102,241,.45);
+    }
+    .pcb-panel-search input::placeholder { color: #475569; }
+
+    /* PC Builder – component type sections in panel */
+    .pcb-component-section { display: none; }
+    .pcb-component-section.is-active { display: block; }
+
+    /* PC Builder – product cards */
+    .pcb-products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+        gap: 16px;
+    }
+    .pcb-product-card {
+        background: #1a1d2a;
+        border: 1px solid rgba(255,255,255,.07);
+        border-radius: 16px;
+        overflow: hidden;
+        transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+        cursor: pointer;
+    }
+    .pcb-product-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba(0,0,0,.4);
+        border-color: rgba(99,102,241,.25);
+    }
+    .pcb-product-card.is-selected {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 1px #6366f1, 0 20px 40px rgba(99,102,241,.25);
+    }
+    .pcb-card-image {
+        height: 160px;
+        background: linear-gradient(135deg, rgba(99,102,241,.08), rgba(168,85,247,.06));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+    }
+    .pcb-card-image img {
+        max-width: 120px;
+        max-height: 120px;
+        object-fit: contain;
+        transition: transform .3s ease;
+    }
+    .pcb-product-card:hover .pcb-card-image img { transform: scale(1.06); }
+    .pcb-card-selected-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(99,102,241,.15);
+        display: none;
+        align-items: center;
+        justify-content: center;
+    }
+    .pcb-product-card.is-selected .pcb-card-selected-overlay { display: flex; }
+    .pcb-card-selected-overlay svg { width: 36px; height: 36px; color: #818cf8; }
+
+    .pcb-card-body { padding: 14px 16px 16px; }
+    .pcb-card-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+    }
+    .pcb-card-brand { color: #818cf8; }
+    .pcb-card-cat   { color: #475569; }
+    .pcb-card-name {
+        font-size: 13px;
+        font-weight: 600;
+        color: #cbd5e1;
+        line-height: 1.45;
+        margin: 0 0 10px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        min-height: 38px;
+    }
+    .pcb-card-price {
+        font-size: 20px;
+        font-weight: 800;
+        background: linear-gradient(135deg, #818cf8, #c084fc);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 12px;
+    }
+    .pcb-card-select-btn {
+        width: 100%;
+        height: 36px;
+        border-radius: 8px;
+        border: 1px solid rgba(99,102,241,.3);
+        background: transparent;
+        color: #818cf8;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all .18s;
+        font-family: inherit;
+    }
+    .pcb-product-card.is-selected .pcb-card-select-btn {
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        border-color: transparent;
+        color: #ffffff;
+    }
+    .pcb-card-select-btn:hover { background: rgba(99,102,241,.15); }
+    .pcb-product-card.is-selected .pcb-card-select-btn:hover {
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    }
+
+    .pcb-empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: #475569;
+    }
+    .pcb-empty-state svg { width: 40px; height: 40px; margin-bottom: 12px; }
+    .pcb-empty-state p { font-size: 14px; margin: 0; }
+
+    /* PC Builder – build summary footer */
+    .pcb-summary-bar {
+        position: fixed;
+        bottom: 0;
+        left: 280px;
+        right: 0;
+        background: rgba(19,22,31,.96);
+        backdrop-filter: blur(16px);
+        border-top: 1px solid rgba(99,102,241,.18);
+        padding: 14px 28px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        z-index: 90;
+    }
+    .pcb-summary-parts {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex: 1;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+    .pcb-summary-parts::-webkit-scrollbar { display: none; }
+    .pcb-summary-part {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        border-radius: 8px;
+        background: rgba(99,102,241,.12);
+        border: 1px solid rgba(99,102,241,.18);
+        white-space: nowrap;
+        font-size: 12px;
+        color: #94a3b8;
+    }
+    .pcb-summary-part strong { color: #c4b5fd; font-weight: 600; }
+    .pcb-summary-part button {
+        background: transparent;
+        border: 0;
+        color: #f43f5e;
+        cursor: pointer;
+        padding: 0;
+        width: 14px;
+        height: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        line-height: 1;
+    }
+    .pcb-summary-total-zone {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex-shrink: 0;
+    }
+    .pcb-summary-total-text {
+        font-size: 12px;
+        color: #64748b;
+    }
+    .pcb-summary-total-price {
+        font-size: 24px;
+        font-weight: 800;
+        background: linear-gradient(135deg, #818cf8, #c084fc);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .pcb-panel { padding-bottom: 90px; } /* space for fixed bar */
+
+    /* PC builder compatible notice */
+    .pcb-compat-note {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 10px;
+        background: rgba(99,102,241,.08);
+        border: 1px solid rgba(99,102,241,.15);
+        color: #94a3b8;
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+    .pcb-compat-note svg { width: 16px; height: 16px; color: #818cf8; flex-shrink: 0; }
+
+    @media (max-width: 1023px) {
+        .pcb-main { grid-template-columns: 1fr; }
+        .pcb-sidebar {
+            position: static;
+            height: auto;
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            padding: 0;
+            border-right: 0;
+            border-bottom: 1px solid rgba(255,255,255,.06);
+        }
+        .pcb-sidebar-title { display: none; }
+        .pcb-slot {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 12px 14px;
+            border-left: 0;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+            gap: 6px;
+        }
+        .pcb-slot.is-active { border-bottom-color: #6366f1; background: rgba(99,102,241,.08); }
+        .pcb-slot-sub { display: none; }
+        .pcb-slot-check { display: none; }
+        .pcb-slot.is-active { border-bottom-color: #6366f1; background: rgba(99,102,241,.08); }
+        .pcb-slot-sub { display: none; }
+        .pcb-slot-check { display: none; }
+        .pcb-slot-label { font-size: 11px; }
+        .pcb-summary-bar { left: 0; }
+    }
+}
+
+/* ============================================================
+   PVModern v3 – Mega Menu, Deals & Legal Patch
+   ============================================================ */
+& when (@media-common = true) {
+
+    /* ── Nav item / mega-menu wiring ── */
+    .pv3-header-main {
+        position: relative; /* mega menus anchor to this */
+    }
+    .pv3-nav {
+        display: flex;
+        align-items: stretch;
+        gap: 0;
+        position: static;
+    }
+    .pv3-nav-item {
+        position: static;
+        display: inline-flex;
+        align-items: stretch;
+    }
+    /* Top-level nav link (all variants) */
+    .pv3-nav a,
+    .pv3-nav-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        padding: 0 14px;
+        min-height: 44px;
+        background: none;
+        border: 0;
+        font-size: 14px;
+        font-weight: 600;
+        color: @pv-slate-700;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: color .18s;
+        cursor: pointer;
+        /* Reset the pseudo underline added by earlier rule */
+        padding-bottom: 12px;
+    }
+    .pv3-nav-caret {
+        display: inline-flex;
+        align-items: center;
+        margin-left: 1px;
+    }
+    .pv3-nav-caret svg {
+        width: 12px;
+        height: 12px;
+        color: @pv-slate-400;
+        transition: transform .22s ease;
+    }
+    .pv3-nav-item:hover .pv3-nav-caret svg {
+        transform: rotate(180deg);
+    }
+    /* Deals accent colour */
+    .pv3-nav-link.is-deals,
+    .pv3-nav a.is-deals {
+        color: #ec4899;
+    }
+
+    /* ── Mega-menu dropdown ── */
+    .pv3-mega-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 300;
+        padding-top: 6px;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(-8px);
+        transition: opacity .22s ease, visibility .22s ease, transform .22s ease;
+    }
+    .pv3-nav-item:hover > .pv3-mega-menu {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+    .pv3-mega-inner {
+        display: flex;
+        gap: 0;
+        max-width: 760px;
+        margin: 0 auto;
+        background: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 28px 64px rgba(15, 23, 42, .16);
+        border: 1px solid rgba(226, 232, 240, .9);
+        overflow: hidden;
+    }
+    .pv3-mega-col {
+        flex: 1;
+        padding: 22px 24px;
+        border-right: 1px solid rgba(226, 232, 240, .8);
+    }
+    .pv3-mega-col:last-child {
+        border-right: 0;
+    }
+    .pv3-mega-col-title {
+        display: block;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: @pv-slate-400;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid @pv-slate-100;
+    }
+    .pv3-mega-col ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .pv3-mega-col li {
+        margin-bottom: 2px;
+    }
+    .pv3-mega-col a {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        font-weight: 500;
+        color: @pv-slate-600;
+        text-decoration: none;
+        padding: 5px 8px;
+        border-radius: 8px;
+        min-height: auto;
+        transition: background .14s, color .14s;
+    }
+    .pv3-mega-col a::before {
+        content: '';
+        display: inline-block;
+        width: 4px;
+        height: 4px;
+        border-radius: 999px;
+        background: @pv-slate-300;
+        flex-shrink: 0;
+        transition: background .14s;
+    }
+    .pv3-mega-col a:hover {
+        background: rgba(99, 102, 241, .07);
+        color: @pv-primary;
+    }
+    .pv3-mega-col a:hover::before {
+        background: @pv-primary;
+    }
+    /* Override the inherited padding-bottom on nav links inside mega menu */
+    .pv3-mega-col a {
+        padding-bottom: 5px;
+    }
+
+    /* Mobile nav simple links */
+    .pv3-mobile-nav a {
+        display: block;
+        padding: 12px 16px;
+        font-size: 15px;
+        font-weight: 600;
+        color: @pv-slate-700;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(226, 232, 240, .6);
+        transition: color .18s;
+    }
+    .pv3-mobile-nav a.is-deals { color: #ec4899; }
+    .pv3-mobile-nav a:hover { color: @pv-primary; }
+    .pv3-mobile-search {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+    .pv3-mobile-search input {
+        width: 100%;
+        height: 44px;
+        border-radius: 12px;
+        border: 1px solid @pv-slate-200;
+        background: @pv-slate-50;
+        padding: 0 16px 0 40px;
+        font-size: 14px;
+        outline: 0;
+    }
+    .pv3-mobile-search .pv3-search-icon {
+        left: 12px;
+    }
+
+    /* ── Deals page ── */
+    .pvd-page {
+        background: @pv-slate-50;
+        min-height: 100vh;
+        padding-bottom: 80px;
+    }
+    .pvd-hero {
+        background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+        padding: 60px 0 50px;
+        position: relative;
+        overflow: hidden;
+    }
+    .pvd-hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse at 70% 50%, rgba(99,102,241,.25) 0%, transparent 70%);
+    }
+    .pvd-hero-inner {
+        position: relative;
+        text-align: center;
+    }
+    .pvd-hero-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 16px;
+        border-radius: 999px;
+        background: rgba(239, 68, 68, .18);
+        border: 1px solid rgba(239, 68, 68, .3);
+        color: #fca5a5;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
+    .pvd-hero h1 {
+        margin: 0 0 12px;
+        font-size: 48px;
+        font-weight: 900;
+        line-height: 1.1;
+        color: #ffffff;
+        letter-spacing: -.02em;
+    }
+    .pvd-hero h1 span {
+        background: linear-gradient(135deg, #f43f5e, #fb923c);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .pvd-hero-sub {
+        color: rgba(255,255,255,.6);
+        font-size: 16px;
+        margin: 0;
+    }
+    .pvd-hero-stats {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        margin-top: 32px;
+    }
+    .pvd-stat {
+        text-align: center;
+    }
+    .pvd-stat strong {
+        display: block;
+        font-size: 28px;
+        font-weight: 900;
+        color: #f43f5e;
+    }
+    .pvd-stat span {
+        font-size: 12px;
+        color: rgba(255,255,255,.5);
+        text-transform: uppercase;
+        letter-spacing: .06em;
+    }
+
+    /* Filter tabs */
+    .pvd-filters {
+        padding: 24px 0;
+        background: #ffffff;
+        border-bottom: 1px solid @pv-slate-200;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+    .pvd-filter-tabs {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        padding: 4px 2px;
+    }
+    .pvd-filter-tabs::-webkit-scrollbar { display: none; }
+    .pvd-filter-tab {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 18px;
+        border-radius: 10px;
+        border: 1px solid @pv-slate-200;
+        background: @pv-slate-50;
+        color: @pv-slate-600;
+        font-size: 13px;
+        font-weight: 600;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: all .18s;
+        text-decoration: none;
+    }
+    .pvd-filter-tab:hover,
+    .pvd-filter-tab.is-active {
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        color: #ffffff;
+        border-color: transparent;
+        box-shadow: 0 8px 20px rgba(99, 102, 241, .3);
+    }
+
+    /* Best Seller Banner */
+    .pvd-banner {
+        position: relative;
+        margin: 32px 0 24px;
+        text-align: center;
+        isolation: isolate;
+    }
+    .pvd-banner-inner {
+        display: inline-flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 40px;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        border-radius: 16px;
+        box-shadow: 0 20px 48px rgba(15,23,42,.32);
+        border: 1px solid rgba(255,255,255,.06);
+    }
+    .pvd-banner-bolt {
+        font-size: 24px;
+    }
+    .pvd-banner-text {
+        font-size: 22px;
+        font-weight: 900;
+        color: #ffffff;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+    }
+    .pvd-banner-text span {
+        background: linear-gradient(135deg, #f43f5e, #fb923c);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Product grid */
+    .pvd-grid-section {
+        padding: 0 0 48px;
+    }
+    .pvd-section-label {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        color: @pv-slate-400;
+        margin-bottom: 16px;
+    }
+    .pvd-products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 16px;
+    }
+    .pvd-card {
+        background: #ffffff;
+        border-radius: 16px;
+        border: 1px solid @pv-slate-100;
+        overflow: hidden;
+        transition: transform .24s ease, box-shadow .24s ease, border-color .24s ease;
+        position: relative;
+    }
+    .pvd-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 44px rgba(15,23,42,.12);
+        border-color: rgba(99,102,241,.2);
+    }
+    .pvd-card.is-bestseller {
+        border-color: rgba(234,179,8,.5);
+    }
+    .pvd-card-badges {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        z-index: 2;
+    }
+    .pvd-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 4px 9px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: .04em;
+    }
+    .pvd-badge--discount {
+        background: #ef4444;
+        color: #ffffff;
+    }
+    .pvd-badge--bestseller {
+        background: linear-gradient(135deg, #eab308, #f59e0b);
+        color: #000000;
+    }
+    .pvd-badge--hot {
+        background: linear-gradient(135deg, #f43f5e, #fb923c);
+        color: #ffffff;
+    }
+    .pvd-card-image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 200px;
+        background: linear-gradient(135deg, rgba(99,102,241,.05), rgba(236,72,153,.04));
+        overflow: hidden;
+        padding: 16px;
+    }
+    .pvd-card-image img {
+        max-width: 100%;
+        max-height: 168px;
+        object-fit: contain;
+        transition: transform .3s ease;
+    }
+    .pvd-card:hover .pvd-card-image img { transform: scale(1.06); }
+    .pvd-card-body { padding: 14px 16px 18px; }
+    .pvd-card-cat {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        color: @pv-primary;
+        margin-bottom: 6px;
+    }
+    .pvd-card-name {
+        font-size: 14px;
+        font-weight: 600;
+        color: @pv-slate-800;
+        line-height: 1.45;
+        margin: 0 0 10px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        overflow: hidden;
+        min-height: 40px;
+    }
+    .pvd-card-name a { color: inherit; text-decoration: none; }
+    .pvd-card-name a:hover { color: @pv-primary; }
+    .pvd-prices {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+    }
+    .pvd-price-special {
+        font-size: 20px;
+        font-weight: 900;
+        color: #ef4444;
+        line-height: 1;
+    }
+    .pvd-price-original {
+        font-size: 13px;
+        color: @pv-slate-400;
+        text-decoration: line-through;
+    }
+    .pvd-card-cta {
+        display: block;
+        width: 100%;
+        height: 38px;
+        border-radius: 10px;
+        border: 0;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        color: #ffffff;
+        font-size: 13px;
+        font-weight: 700;
+        text-align: center;
+        line-height: 38px;
+        text-decoration: none;
+        transition: box-shadow .2s, transform .2s;
+        cursor: pointer;
+    }
+    .pvd-card-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 28px rgba(99, 102, 241, .35);
+        color: #ffffff;
+    }
+    .pvd-empty {
+        text-align: center;
+        padding: 80px 20px;
+        color: @pv-slate-400;
+    }
+    .pvd-empty svg { width: 48px; height: 48px; margin-bottom: 16px; }
+    .pvd-empty p { font-size: 16px; }
+
+    /* No products found – link to admin */
+    .pvd-empty a {
+        color: @pv-primary;
+        text-decoration: underline;
+    }
+
+    @media (min-width: 768px) {
+        .pvd-products-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+    }
+    @media (min-width: 1280px) {
+        .pvd-products-grid {
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+        }
+    }
+
+    /* ── Legal pages ── */
+    .pvl-page {
+        background: @pv-slate-50;
+        min-height: 100vh;
+        padding-bottom: 80px;
+    }
+    .pvl-hero {
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+        padding: 56px 0;
+        text-align: center;
+    }
+    .pvl-hero-kicker {
+        display: inline-block;
+        padding: 4px 14px;
+        border-radius: 999px;
+        background: rgba(255,255,255,.18);
+        color: rgba(255,255,255,.9);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+    }
+    .pvl-hero h1 {
+        margin: 0 0 10px;
+        font-size: 36px;
+        font-weight: 900;
+        color: #ffffff;
+    }
+    .pvl-hero-meta {
+        color: rgba(255,255,255,.7);
+        font-size: 13px;
+    }
+    .pvl-body {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: 40px;
+        padding: 48px 0;
+    }
+    .pvl-toc {
+        position: sticky;
+        top: 80px;
+        height: fit-content;
+    }
+    .pvl-toc-inner {
+        background: #ffffff;
+        border-radius: 16px;
+        border: 1px solid @pv-slate-100;
+        padding: 20px;
+        box-shadow: 0 4px 16px rgba(15,23,42,.06);
+    }
+    .pvl-toc-title {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        color: @pv-slate-400;
+        margin: 0 0 12px;
+    }
+    .pvl-toc-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .pvl-toc-list li + li { margin-top: 6px; }
+    .pvl-toc-list a {
+        display: block;
+        font-size: 13px;
+        color: @pv-slate-600;
+        text-decoration: none;
+        padding: 6px 10px;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: background .14s, color .14s;
+    }
+    .pvl-toc-list a:hover {
+        background: rgba(99,102,241,.08);
+        color: @pv-primary;
+    }
+    .pvl-content {
+        background: #ffffff;
+        border-radius: 20px;
+        border: 1px solid @pv-slate-100;
+        padding: 40px;
+        box-shadow: 0 4px 16px rgba(15,23,42,.06);
+    }
+    .pvl-section {
+        padding-top: 32px;
+        padding-bottom: 32px;
+        border-bottom: 1px solid @pv-slate-100;
+    }
+    .pvl-section:first-child { padding-top: 0; }
+    .pvl-section:last-child { border-bottom: 0; padding-bottom: 0; }
+    .pvl-section h2 {
+        font-size: 20px;
+        font-weight: 800;
+        color: @pv-slate-900;
+        margin: 0 0 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .pvl-section h2 .pvl-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, rgba(99,102,241,.12), rgba(139,92,246,.12));
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    .pvl-section h2 .pvl-icon svg {
+        width: 16px;
+        height: 16px;
+        color: @pv-primary;
+    }
+    .pvl-section p {
+        font-size: 15px;
+        color: @pv-slate-600;
+        line-height: 1.75;
+        margin: 0 0 12px;
+    }
+    .pvl-section ul {
+        margin: 0 0 12px;
+        padding-left: 20px;
+    }
+    .pvl-section li {
+        font-size: 15px;
+        color: @pv-slate-600;
+        line-height: 1.75;
+        margin-bottom: 6px;
+    }
+    .pvl-highlight {
+        padding: 16px 20px;
+        border-radius: 12px;
+        background: rgba(99,102,241,.06);
+        border-left: 3px solid @pv-primary;
+        font-size: 14px;
+        color: @pv-slate-700;
+        line-height: 1.7;
+        margin: 16px 0;
+    }
+    .pvl-contact-card {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 22px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 700;
+        margin-top: 16px;
+        transition: transform .2s, box-shadow .2s;
+    }
+    .pvl-contact-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 16px 32px rgba(99,102,241,.35);
+        color: #ffffff;
+    }
+
+    @media (max-width: 767px) {
+        .pvl-body {
+            grid-template-columns: 1fr;
+        }
+        .pvl-toc {
+            position: static;
+        }
+        .pvd-hero h1 { font-size: 32px; }
+    }
+}

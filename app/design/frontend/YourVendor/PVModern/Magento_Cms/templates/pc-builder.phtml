@@ -1,0 +1,258 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+
+$om = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager          = $om->get(\Magento\Store\Model\StoreManagerInterface::class);
+$productCollectionFactory = $om->get(\Magento\Catalog\Model\ResourceModel\Product\CollectionFactory::class);
+$visibility            = $om->get(\Magento\Catalog\Model\Product\Visibility::class);
+$priceCurrency         = $om->get(\Magento\Framework\Pricing\PriceCurrencyInterface::class);
+$imageHelper           = $om->get(\Magento\Catalog\Helper\Image::class);
+$cartHelper            = $om->get(\Magento\Checkout\Helper\Cart::class);
+$urlEncoder            = $om->get(\Magento\Framework\Url\EncoderInterface::class);
+$formKey               = $om->get(\Magento\Framework\Data\Form\FormKey::class)->getFormKey();
+$stockRegistry         = $om->get(\Magento\CatalogInventory\Api\StockRegistryInterface::class);
+$store                 = $storeManager->getStore();
+
+/* ── Component-type keyword map ── */
+$componentDefs = [
+    'GPU'         => ['gpu','graphics','geforce','rtx','radeon','vga','graphics card','video card'],
+    'CPU'         => ['cpu','processor','ryzen','intel core','core i','xeon','threadripper'],
+    'Motherboard' => ['motherboard','mainboard','mobo'],
+    'RAM'         => ['ram','memory','ddr4','ddr5','dimm'],
+    'Storage'     => ['ssd','nvme','hdd','hard drive','storage','m.2','solid state'],
+    'PSU'         => ['psu','power supply','watt'],
+    'Case'        => ['case','chassis','tower','cabinet'],
+    'Cooling'     => ['cooler','cooling','fan','aio','liquid cool','heatsink'],
+];
+
+$componentIcons = [
+    'GPU'         => '<path d="M2 6h20v12H2z"/><path d="M6 12h4"/><circle cx="16" cy="12" r="2"/><path d="M8 3v3"/><path d="M12 3v3"/><path d="M16 3v3"/>',
+    'CPU'         => '<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 1v3"/><path d="M15 1v3"/><path d="M9 20v3"/><path d="M15 20v3"/><path d="M20 9h3"/><path d="M20 14h3"/><path d="M1 9h3"/><path d="M1 14h3"/>',
+    'Motherboard' => '<rect x="2" y="2" width="20" height="20" rx="2"/><rect x="6" y="6" width="4" height="4"/><rect x="14" y="6" width="4" height="4"/><path d="M6 14h12"/><path d="M10 18h4"/>',
+    'RAM'         => '<rect x="3" y="6" width="18" height="12" rx="1"/><path d="M7 6V4"/><path d="M10 6V4"/><path d="M13 6V4"/><path d="M17 6V4"/>',
+    'Storage'     => '<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="16" cy="12" r="2"/><path d="M6 9h6"/>',
+    'PSU'         => '<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M13 9l-4 6"/><path d="M10 9l4 6"/>',
+    'Case'        => '<rect x="8" y="2" width="12" height="20" rx="2"/><path d="M4 10h4"/><path d="M4 14h4"/>',
+    'Cooling'     => '<circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/>',
+];
+
+$componentEmptyLabels = [
+    'GPU'         => 'Choose a graphics card',
+    'CPU'         => 'Choose a processor',
+    'Motherboard' => 'Choose a motherboard',
+    'RAM'         => 'Choose memory modules',
+    'Storage'     => 'Choose storage drive',
+    'PSU'         => 'Choose a power supply',
+    'Case'        => 'Choose a chassis',
+    'Cooling'     => 'Choose CPU cooler',
+];
+
+/* ── Fetch and categorise products ── */
+$grouped  = array_fill_keys(array_keys($componentDefs), []);
+$placeholder = $block->getViewFileUrl('YourVendor_PVModern::images/placeholder.jpg');
+
+try {
+    $collection = $productCollectionFactory->create();
+    $collection->setStoreId((int) $store->getId())
+        ->addStoreFilter($store)
+        ->addAttributeToSelect(['name','small_image','image','thumbnail','price','special_price','manufacturer','brand','sku'])
+        ->addFinalPrice()
+        ->addUrlRewrite()
+        ->addAttributeToFilter('status', 1)
+        ->setVisibility($visibility->getVisibleInCatalogIds())
+        ->setPageSize(200)
+        ->setCurPage(1);
+    $collection->getSelect()->order('e.entity_id DESC');
+    $collection->load();
+
+    foreach ($collection as $product) {
+        $haystack = strtolower((string) $product->getName() . ' ' . (string) $product->getData('sku'));
+        $placed   = false;
+
+        foreach ($componentDefs as $type => $keywords) {
+            foreach ($keywords as $kw) {
+                if (strpos($haystack, $kw) !== false) {
+                    $imgUrl = (string) $imageHelper->init($product, 'category_page_grid')->getUrl();
+                    if (!$imgUrl) { $imgUrl = $placeholder; }
+
+                    $brand = (string) $product->getData('manufacturer');
+                    if (!$brand) { $brand = (string) $product->getData('brand'); }
+                    if (!$brand) { $brand = 'Generic'; }
+
+                    $finalPrice   = (float) $product->getFinalPrice();
+                    $isInStock    = (bool) $product->isSaleable();
+                    $requiresOpts = false;
+                    try { $requiresOpts = (bool) $product->getTypeInstance()->hasRequiredOptions($product); } catch (\Throwable $e) {}
+                    $canDirectAdd = $isInStock && !$requiresOpts && in_array((string) $product->getTypeId(), ['simple','virtual','downloadable'], true);
+
+                    $grouped[$type][] = [
+                        'id'           => (int) $product->getId(),
+                        'name'         => (string) $product->getName(),
+                        'brand'        => $brand,
+                        'sku'          => (string) $product->getSku(),
+                        'price'        => $finalPrice,
+                        'price_html'   => $priceCurrency->format($finalPrice, false),
+                        'image'        => $imgUrl,
+                        'url'          => (string) $product->getProductUrl(),
+                        'in_stock'     => $isInStock,
+                        'can_direct'   => $canDirectAdd,
+                        'add_to_cart'  => $cartHelper->getAddUrl($product),
+                        'type_id'      => (string) $product->getTypeId(),
+                    ];
+                    $placed = true;
+                    break 2;
+                }
+            }
+        }
+        /* unmatched products go into whichever first slot is empty (spare) */
+    }
+} catch (\Throwable $e) {
+    /* silent fallback – demo data when catalog is empty */
+    $grouped['GPU'][] = ['id'=>1001,'name'=>'NVIDIA GeForce RTX 5090 32GB','brand'=>'NVIDIA','sku'=>'RTX5090','price'=>1999,'price_html'=>'$1,999.00','image'=>$placeholder,'url'=>'#','in_stock'=>true,'can_direct'=>false,'add_to_cart'=>'#','type_id'=>'simple'];
+    $grouped['CPU'][] = ['id'=>1002,'name'=>'AMD Ryzen 9 9950X 16-Core','brand'=>'AMD','sku'=>'R9-9950X','price'=>649,'price_html'=>'$649.00','image'=>$placeholder,'url'=>'#','in_stock'=>true,'can_direct'=>false,'add_to_cart'=>'#','type_id'=>'simple'];
+    $grouped['RAM'][] = ['id'=>1003,'name'=>'Corsair Vengeance 64GB DDR5','brand'=>'Corsair','sku'=>'CMK64GX5','price'=>189,'price_html'=>'$189.00','image'=>$placeholder,'url'=>'#','in_stock'=>true,'can_direct'=>false,'add_to_cart'=>'#','type_id'=>'simple'];
+    $grouped['Storage'][] = ['id'=>1004,'name'=>'Samsung 990 Pro 2TB NVMe','brand'=>'Samsung','sku'=>'MZ-V9P2T0','price'=>169,'price_html'=>'$169.00','image'=>$placeholder,'url'=>'#','in_stock'=>true,'can_direct'=>false,'add_to_cart'=>'#','type_id'=>'simple'];
+    $grouped['PSU'][] = ['id'=>1005,'name'=>'Corsair RM1000x 1000W 80+ Gold','brand'=>'Corsair','sku'=>'CP-9020201','price'=>189,'price_html'=>'$189.00','image'=>$placeholder,'url'=>'#','in_stock'=>true,'can_direct'=>false,'add_to_cart'=>'#','type_id'=>'simple'];
+}
+?>
+<div class="pvmodern-pcbuilder-wrap" data-mage-init='{"pvmodernPcBuilder":{}}'>
+
+    <!-- ══ Own Header ══ -->
+    <header class="pcb-header">
+        <a class="pcb-header-brand" href="<?= $block->escapeUrl($block->getUrl('')) ?>">
+            <span class="pcb-header-logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="4" y="4" width="16" height="16" rx="2"/>
+                    <path d="M9 9h6v6H9z"/>
+                </svg>
+            </span>
+            <strong>MixiiiStore</strong>
+        </a>
+
+        <span class="pcb-header-title">⚡ Custom PC Builder</span>
+
+        <div class="pcb-header-total">
+            <span class="pcb-total-label"><?= $block->escapeHtml(__('Build Total')) ?>:</span>
+            <span class="pcb-total-value" data-total-price>$0.00</span>
+            <button type="button" class="pcb-add-all-btn" data-add-all disabled>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.5 3H5l2.68 11.39a1 1 0 0 0 .97.76h9.72a1 1 0 0 0 .97-.79L21 6H6"/></svg>
+                <?= $block->escapeHtml(__('Add All to Cart')) ?>
+            </button>
+        </div>
+    </header>
+
+    <!-- ══ Main Layout ══ -->
+    <div class="pcb-main">
+
+        <!-- Left sidebar: component slots -->
+        <aside class="pcb-sidebar">
+            <div class="pcb-sidebar-title"><?= $block->escapeHtml(__('Build Components')) ?></div>
+
+            <?php foreach ($componentDefs as $type => $keywords): ?>
+            <div class="pcb-slot" data-slot="<?= $block->escapeHtmlAttr($type) ?>"
+                 data-empty-label="<?= $block->escapeHtmlAttr($componentEmptyLabels[$type] ?? 'Not selected') ?>">
+                <span class="pcb-slot-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <?= /* @noEscape */ ($componentIcons[$type] ?? '<circle cx="12" cy="12" r="8"/>') ?>
+                    </svg>
+                </span>
+                <span class="pcb-slot-info">
+                    <span class="pcb-slot-label"><?= $block->escapeHtml($type) ?></span>
+                    <span class="pcb-slot-sub" data-slot-sub><?= $block->escapeHtml($componentEmptyLabels[$type] ?? 'Not selected') ?></span>
+                </span>
+                <span class="pcb-slot-check">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L20 7"/></svg>
+                </span>
+            </div>
+            <?php endforeach; ?>
+        </aside>
+
+        <!-- Right panel: product browser -->
+        <main class="pcb-panel">
+
+            <div class="pcb-compat-note">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+                <?= $block->escapeHtml(__('Select one item per component slot. Your build is saved automatically in your browser.')) ?>
+            </div>
+
+            <?php foreach ($componentDefs as $type => $keywords): ?>
+            <section class="pcb-component-section" data-section="<?= $block->escapeHtmlAttr($type) ?>">
+
+                <div class="pcb-panel-header">
+                    <h2 class="pcb-panel-title"><?= $block->escapeHtml($type) ?></h2>
+                    <div class="pcb-panel-search">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                        <input type="text" data-panel-search
+                               placeholder="<?= $block->escapeHtmlAttr(__('Search %1...', $type)) ?>" />
+                    </div>
+                </div>
+
+                <?php if (!empty($grouped[$type])): ?>
+                <div class="pcb-products-grid">
+                    <?php foreach ($grouped[$type] as $item): ?>
+                    <article class="pcb-product-card"
+                             data-card="<?= $block->escapeHtmlAttr((string) $item['id']) ?>"
+                             data-name="<?= $block->escapeHtmlAttr($item['name']) ?>"
+                             data-brand="<?= $block->escapeHtmlAttr($item['brand']) ?>"
+                             data-price="<?= $block->escapeHtmlAttr(number_format((float) $item['price'], 2, '.', '')) ?>">
+
+                        <div class="pcb-card-image">
+                            <img src="<?= $block->escapeUrl($item['image']) ?>"
+                                 alt="<?= $block->escapeHtmlAttr($item['name']) ?>"
+                                 loading="lazy" />
+                            <div class="pcb-card-selected-overlay">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>
+                            </div>
+                        </div>
+
+                        <div class="pcb-card-body">
+                            <div class="pcb-card-meta">
+                                <span class="pcb-card-brand"><?= $block->escapeHtml($item['brand']) ?></span>
+                                <span class="pcb-card-cat"><?= $block->escapeHtml($type) ?></span>
+                            </div>
+                            <p class="pcb-card-name"><?= $block->escapeHtml($item['name']) ?></p>
+                            <div class="pcb-card-price"><?= $block->escapeHtml($item['price_html']) ?></div>
+
+                            <?php if ($item['can_direct']): ?>
+                            <form class="pcb-add-form" data-add-form="<?= $block->escapeHtmlAttr($type) ?>"
+                                  action="<?= $block->escapeUrl($item['add_to_cart']) ?>" method="post" style="display:none">
+                                <input type="hidden" name="form_key" value="<?= $block->escapeHtmlAttr($formKey) ?>" />
+                                <input type="hidden" name="product"  value="<?= $block->escapeHtmlAttr((string) $item['id']) ?>" />
+                                <input type="hidden" name="uenc"     value="<?= $block->escapeHtmlAttr($urlEncoder->encode($item['url'])) ?>" />
+                                <input type="hidden" name="qty"      value="1" />
+                            </form>
+                            <?php endif; ?>
+
+                            <button type="button" class="pcb-card-select-btn" data-select-btn>
+                                <?= $block->escapeHtml(__('Select')) ?>
+                            </button>
+                        </div>
+                    </article>
+                    <?php endforeach; ?>
+                </div>
+
+                <?php else: ?>
+                <div class="pcb-empty-state">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+                    <p><?= $block->escapeHtml(__('No %1 products found in your catalog yet. Add products via Magento Admin → Catalog → Products.', $type)) ?></p>
+                </div>
+                <?php endif; ?>
+
+            </section>
+            <?php endforeach; ?>
+
+        </main>
+    </div><!-- /.pcb-main -->
+
+    <!-- ══ Fixed summary bar ══ -->
+    <div class="pcb-summary-bar" data-summary-bar>
+        <div class="pcb-summary-parts" data-summary-list>
+            <span style="color:#475569;font-size:13px;"><?= $block->escapeHtml(__('No components selected yet — click a slot to begin.')) ?></span>
+        </div>
+        <div class="pcb-summary-total-zone">
+            <span class="pcb-summary-total-text"><?= $block->escapeHtml(__('Total')) ?>:</span>
+            <span class="pcb-summary-total-price" data-total-price>$0.00</span>
+        </div>
+    </div>
+
+</div><!-- /.pvmodern-pcbuilder-wrap -->

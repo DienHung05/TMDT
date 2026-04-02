@@ -1,0 +1,707 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+
+$om = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $om->get(\Magento\Store\Model\StoreManagerInterface::class);
+$productCollectionFactory = $om->get(\Magento\Catalog\Model\ResourceModel\Product\CollectionFactory::class);
+$categoryCollectionFactory = $om->get(\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory::class);
+$visibility = $om->get(\Magento\Catalog\Model\Product\Visibility::class);
+$priceCurrency = $om->get(\Magento\Framework\Pricing\PriceCurrencyInterface::class);
+$imageHelper = $om->get(\Magento\Catalog\Helper\Image::class);
+$cartHelper = $om->get(\Magento\Checkout\Helper\Cart::class);
+$urlEncoder = $om->get(\Magento\Framework\Url\EncoderInterface::class);
+$formKey = $om->get(\Magento\Framework\Data\Form\FormKey::class)->getFormKey();
+$stockRegistry = $om->get(\Magento\CatalogInventory\Api\StockRegistryInterface::class);
+$store = $storeManager->getStore();
+
+$normalize = static function ($value) {
+    $value = strtolower(trim((string) $value));
+    $value = preg_replace('/[^a-z0-9]+/', '-', $value);
+    return trim((string) $value, '-');
+};
+
+$getAttrText = static function ($product, $code) {
+    try {
+        $value = $product->getAttributeText($code);
+        if (is_array($value)) {
+            $value = implode(', ', array_filter($value));
+        }
+        if ($value !== null && $value !== false && $value !== '') {
+            return trim((string) $value);
+        }
+    } catch (\Throwable $e) {
+    }
+
+    $value = $product->getData($code);
+    if (is_array($value)) {
+        $value = implode(', ', array_filter($value));
+    }
+
+    return ($value !== null && $value !== false && $value !== '') ? trim((string) $value) : '';
+};
+
+$inferCategory = static function ($name, array $categoryNames, $typeId) {
+    $haystack = strtolower($name . ' ' . implode(' ', $categoryNames) . ' ' . $typeId);
+
+    $map = [
+        'gpu' => ['gpu', 'graphics', 'graphics-card', 'geforce', 'rtx', 'radeon', 'vga'],
+        'cpu' => ['cpu', 'processor', 'ryzen', 'threadripper', 'intel core', 'core i', 'xeon'],
+        'laptop' => ['laptop', 'notebook', 'macbook', 'ultrabook'],
+        'desktop' => ['desktop', 'pc', 'workstation', 'mac studio', 'mac mini', 'tower'],
+    ];
+
+    foreach ($map as $label => $keywords) {
+        foreach ($keywords as $keyword) {
+            if (strpos($haystack, $keyword) !== false) {
+                return strtoupper($label);
+            }
+        }
+    }
+
+    if (!empty($categoryNames)) {
+        return $categoryNames[0];
+    }
+
+    return ucfirst((string) $typeId);
+};
+
+$getFilterSlugs = static function ($name, array $categoryNames, $displayCategory, $typeId) use ($normalize) {
+    $slugs = ['all'];
+    $haystack = strtolower($name . ' ' . implode(' ', $categoryNames) . ' ' . $typeId . ' ' . $displayCategory);
+
+    $map = [
+        'gpu' => ['gpu', 'graphics', 'graphics-card', 'geforce', 'rtx', 'radeon', 'vga'],
+        'cpu' => ['cpu', 'processor', 'ryzen', 'threadripper', 'intel core', 'core i', 'xeon'],
+        'laptop' => ['laptop', 'notebook', 'macbook', 'ultrabook'],
+        'desktop' => ['desktop', 'pc', 'workstation', 'mac studio', 'mac mini', 'tower'],
+    ];
+
+    foreach ($map as $slug => $keywords) {
+        foreach ($keywords as $keyword) {
+            if (strpos($haystack, $keyword) !== false) {
+                $slugs[] = $slug;
+                break;
+            }
+        }
+    }
+
+    $displaySlug = $normalize($displayCategory);
+    if ($displaySlug) {
+        $slugs[] = $displaySlug;
+    }
+
+    foreach ($categoryNames as $categoryName) {
+        $slug = $normalize($categoryName);
+        if ($slug) {
+            $slugs[] = $slug;
+        }
+    }
+
+    return array_values(array_unique($slugs));
+};
+
+$getStockData = static function ($product) use ($stockRegistry, $getAttrText) {
+    $preOrder = $getAttrText($product, 'pre_order') ?: $getAttrText($product, 'preorder');
+    if ($preOrder && !in_array(strtolower($preOrder), ['0', 'no', 'false'], true)) {
+        return ['code' => 'pre_order', 'label' => 'Pre-Order', 'class' => 'is-pre-order', 'order' => 2, 'qty' => null];
+    }
+
+    $qty = null;
+    $isInStock = (bool) $product->isSaleable();
+
+    try {
+        $stockItem = $stockRegistry->getStockItem((int) $product->getId());
+        if ($stockItem) {
+            $qty = $stockItem->getQty() !== null ? (float) $stockItem->getQty() : null;
+            $isInStock = (bool) $stockItem->getIsInStock() && (bool) $product->isSaleable();
+        }
+    } catch (\Throwable $e) {
+    }
+
+    if (!$isInStock) {
+        return ['code' => 'out_of_stock', 'label' => 'Sold Out', 'class' => 'is-out-of-stock', 'order' => 3, 'qty' => 0];
+    }
+
+    if ($qty !== null && $qty > 0 && $qty <= 5) {
+        return ['code' => 'low_stock', 'label' => 'Low Stock', 'class' => 'is-low-stock', 'order' => 1, 'qty' => $qty];
+    }
+
+    return ['code' => 'in_stock', 'label' => 'In Stock', 'class' => 'is-in-stock', 'order' => 0, 'qty' => $qty];
+};
+
+$getSpecs = static function ($product, $displayCategory, $brand) use ($getAttrText) {
+    $specs = [];
+    $specMap = [
+        'graphics_card' => 'GPU',
+        'gpu' => 'GPU',
+        'processor' => 'CPU',
+        'cpu' => 'CPU',
+        'ram' => 'RAM',
+        'memory' => 'Memory',
+        'storage' => 'Storage',
+        'screen_size' => 'Screen',
+        'capacity' => 'Capacity',
+        'color' => 'Color',
+    ];
+
+    foreach ($specMap as $code => $label) {
+        $value = $getAttrText($product, $code);
+        if ($value) {
+            $specs[] = ['label' => $label, 'value' => $value];
+        }
+        if (count($specs) >= 3) {
+            break;
+        }
+    }
+
+    if (count($specs) < 3 && $brand) {
+        $specs[] = ['label' => 'Brand', 'value' => $brand];
+    }
+    if (count($specs) < 3 && $displayCategory) {
+        $specs[] = ['label' => 'Category', 'value' => $displayCategory];
+    }
+    if (count($specs) < 3) {
+        $specs[] = ['label' => 'SKU', 'value' => (string) $product->getSku()];
+    }
+
+    return array_slice($specs, 0, 3);
+};
+
+$features = [
+    ['label' => 'Free Shipping', 'desc' => 'On orders over 500', 'class' => 'is-indigo', 'icon' => 'truck'],
+    ['label' => '3 Year Warranty', 'desc' => 'Extended coverage', 'class' => 'is-emerald', 'icon' => 'shield'],
+    ['label' => 'Same Day Dispatch', 'desc' => 'Order before 2PM', 'class' => 'is-amber', 'icon' => 'zap'],
+    ['label' => 'Expert Support', 'desc' => '24/7 tech assistance', 'class' => 'is-purple', 'icon' => 'cpu'],
+];
+
+$products = [];
+$baseCategoryFilters = [
+    ['slug' => 'all', 'label' => 'All'],
+    ['slug' => 'gpu', 'label' => 'GPU'],
+    ['slug' => 'cpu', 'label' => 'CPU'],
+    ['slug' => 'laptop', 'label' => 'Laptop'],
+    ['slug' => 'desktop', 'label' => 'Desktop'],
+];
+$extraCategoryFilters = [];
+$priceMin = null;
+$priceMax = null;
+
+try {
+    $collection = $productCollectionFactory->create();
+    $collection->setStoreId((int) $store->getId())
+        ->addStoreFilter($store)
+        ->addAttributeToSelect(['name', 'small_image', 'image', 'thumbnail', 'price', 'special_price', 'manufacturer', 'brand', 'short_description', 'sku', 'created_at', 'news_from_date', 'news_to_date'])
+        ->addFinalPrice()
+        ->addMinimalPrice()
+        ->addUrlRewrite()
+        ->addAttributeToFilter('status', 1)
+        ->setVisibility($visibility->getVisibleInCatalogIds())
+        ->setPageSize(24)
+        ->setCurPage(1);
+    $collection->getSelect()->order('e.entity_id DESC');
+    $collection->load();
+
+    $allCategoryIds = [];
+    foreach ($collection as $product) {
+        foreach ((array) $product->getCategoryIds() as $categoryId) {
+            $allCategoryIds[] = (int) $categoryId;
+        }
+    }
+    $allCategoryIds = array_values(array_unique(array_filter($allCategoryIds)));
+
+    $categoryMap = [];
+    if (!empty($allCategoryIds)) {
+        $categoryCollection = $categoryCollectionFactory->create();
+        $categoryCollection->addAttributeToSelect(['name', 'url_key', 'url_path'])
+            ->addAttributeToFilter('entity_id', ['in' => $allCategoryIds]);
+        foreach ($categoryCollection as $category) {
+            $categoryMap[(int) $category->getId()] = [
+                'name' => (string) $category->getName(),
+                'slug' => $normalize($category->getName()),
+                'url' => (string) $category->getUrl(),
+            ];
+        }
+    }
+
+    foreach ($collection as $product) {
+        $categoryNames = [];
+        foreach ((array) $product->getCategoryIds() as $categoryId) {
+            if (!empty($categoryMap[(int) $categoryId]['name'])) {
+                $categoryNames[] = $categoryMap[(int) $categoryId]['name'];
+            }
+        }
+        $categoryNames = array_values(array_unique($categoryNames));
+
+        $brand = $getAttrText($product, 'manufacturer');
+        if (!$brand) {
+            $brand = $getAttrText($product, 'brand');
+        }
+        if (!$brand) {
+            $brand = !empty($categoryNames) ? $categoryNames[0] : 'Hardware';
+        }
+
+        $displayCategory = $inferCategory((string) $product->getName(), $categoryNames, (string) $product->getTypeId());
+        $filterSlugs = $getFilterSlugs((string) $product->getName(), $categoryNames, $displayCategory, (string) $product->getTypeId());
+        foreach ($filterSlugs as $filterSlug) {
+            if (!in_array($filterSlug, array_column($baseCategoryFilters, 'slug'), true) && !isset($extraCategoryFilters[$filterSlug]) && count($extraCategoryFilters) < 6) {
+                $extraCategoryFilters[$filterSlug] = ['slug' => $filterSlug, 'label' => ucwords(str_replace('-', ' ', $filterSlug))];
+            }
+        }
+
+        $stock = $getStockData($product);
+        $finalPrice = (float) $product->getFinalPrice();
+        $regularPrice = (float) $product->getPrice();
+        $priceMin = $priceMin === null ? $finalPrice : min($priceMin, $finalPrice);
+        $priceMax = $priceMax === null ? $finalPrice : max($priceMax, $finalPrice);
+
+        $imageUrl = (string) $imageHelper->init($product, 'category_page_grid')->getUrl();
+        if (!$imageUrl) {
+            $imageUrl = $block->getViewFileUrl('YourVendor_PVModern::images/placeholder.jpg');
+        }
+
+        $requiresOptions = false;
+        try {
+            $requiresOptions = (bool) $product->getTypeInstance()->hasRequiredOptions($product);
+        } catch (\Throwable $e) {
+        }
+        $canDirectAdd = $product->isSaleable() && !$requiresOptions && in_array((string) $product->getTypeId(), ['simple', 'virtual', 'downloadable'], true);
+
+        $createdAt = $product->getCreatedAt() ? strtotime((string) $product->getCreatedAt()) : null;
+        $newsFrom = $product->getData('news_from_date') ? strtotime((string) $product->getData('news_from_date')) : null;
+        $newsTo = $product->getData('news_to_date') ? strtotime((string) $product->getData('news_to_date')) : null;
+        $now = time();
+        $isNew = false;
+        if ($newsFrom && $newsFrom <= $now && (!$newsTo || $newsTo >= $now)) {
+            $isNew = true;
+        } elseif ($createdAt && ($now - $createdAt) <= 30 * 24 * 60 * 60) {
+            $isNew = true;
+        }
+
+        $products[] = [
+            'id' => (int) $product->getId(),
+            'sku' => (string) $product->getSku(),
+            'name' => (string) $product->getName(),
+            'brand' => $brand,
+            'category' => $displayCategory,
+            'category_labels' => $categoryNames,
+            'filter_slugs' => $filterSlugs,
+            'price' => $finalPrice,
+            'price_html' => $priceCurrency->format($finalPrice, false),
+            'original_price' => $regularPrice > $finalPrice ? $regularPrice : null,
+            'original_price_html' => $regularPrice > $finalPrice ? $priceCurrency->format($regularPrice, false) : null,
+            'discount' => $regularPrice > $finalPrice && $regularPrice > 0 ? (int) round((1 - ($finalPrice / $regularPrice)) * 100) : null,
+            'image' => $imageUrl,
+            'url' => (string) $product->getProductUrl(),
+            'stock' => $stock,
+            'specs' => $getSpecs($product, $displayCategory, $brand),
+            'is_new' => $isNew,
+            'is_featured' => $finalPrice >= 1000,
+            'can_direct_add' => $canDirectAdd,
+            'is_saleable' => (bool) $product->isSaleable(),
+            'type_id' => (string) $product->getTypeId(),
+            'add_to_cart_url' => $cartHelper->getAddUrl($product),
+        ];
+    }
+} catch (\Throwable $e) {
+}
+
+if (empty($products)) {
+    $placeholder = $block->getViewFileUrl('YourVendor_PVModern::images/placeholder.jpg');
+    $products = [
+        ['id' => 1, 'sku' => 'DEMO-GPU', 'name' => 'NVIDIA GeForce RTX 5090 Founders Edition', 'brand' => 'NVIDIA', 'category' => 'GPU', 'category_labels' => ['GPU'], 'filter_slugs' => ['all', 'gpu'], 'price' => 1999, 'price_html' => '$1,999', 'original_price' => 2199, 'original_price_html' => '$2,199', 'discount' => 9, 'image' => $placeholder, 'url' => '#', 'stock' => ['code' => 'low_stock', 'label' => 'Low Stock', 'class' => 'is-low-stock', 'order' => 1, 'qty' => 3], 'specs' => [['label' => 'VRAM', 'value' => '32GB GDDR7'], ['label' => 'CUDA', 'value' => '21,760'], ['label' => 'Clock', 'value' => '2.9 GHz']], 'is_new' => true, 'is_featured' => true, 'can_direct_add' => false, 'is_saleable' => true, 'type_id' => 'simple', 'add_to_cart_url' => '#'],
+        ['id' => 2, 'sku' => 'DEMO-CPU', 'name' => 'AMD Ryzen 9 9950X Processor', 'brand' => 'AMD', 'category' => 'CPU', 'category_labels' => ['CPU'], 'filter_slugs' => ['all', 'cpu'], 'price' => 649, 'price_html' => '$649', 'original_price' => null, 'original_price_html' => null, 'discount' => null, 'image' => $placeholder, 'url' => '#', 'stock' => ['code' => 'in_stock', 'label' => 'In Stock', 'class' => 'is-in-stock', 'order' => 0, 'qty' => 45], 'specs' => [['label' => 'Cores', 'value' => '16C/32T'], ['label' => 'Base', 'value' => '4.5 GHz'], ['label' => 'Boost', 'value' => '5.7 GHz']], 'is_new' => true, 'is_featured' => false, 'can_direct_add' => false, 'is_saleable' => true, 'type_id' => 'simple', 'add_to_cart_url' => '#'],
+        ['id' => 3, 'sku' => 'DEMO-LAPTOP', 'name' => 'MacBook Pro 16 M4 Max', 'brand' => 'Apple', 'category' => 'Laptop', 'category_labels' => ['Laptop'], 'filter_slugs' => ['all', 'laptop'], 'price' => 3499, 'price_html' => '$3,499', 'original_price' => null, 'original_price_html' => null, 'discount' => null, 'image' => $placeholder, 'url' => '#', 'stock' => ['code' => 'in_stock', 'label' => 'In Stock', 'class' => 'is-in-stock', 'order' => 0, 'qty' => 9], 'specs' => [['label' => 'Chip', 'value' => 'M4 Max'], ['label' => 'RAM', 'value' => '48GB'], ['label' => 'Storage', 'value' => '1TB SSD']], 'is_new' => false, 'is_featured' => true, 'can_direct_add' => false, 'is_saleable' => true, 'type_id' => 'simple', 'add_to_cart_url' => '#'],
+        ['id' => 4, 'sku' => 'DEMO-DESKTOP', 'name' => 'Apple Mac Studio M4 Ultra', 'brand' => 'Apple', 'category' => 'Desktop', 'category_labels' => ['Desktop'], 'filter_slugs' => ['all', 'desktop'], 'price' => 5999, 'price_html' => '$5,999', 'original_price' => null, 'original_price_html' => null, 'discount' => null, 'image' => $placeholder, 'url' => '#', 'stock' => ['code' => 'pre_order', 'label' => 'Pre-Order', 'class' => 'is-pre-order', 'order' => 2, 'qty' => null], 'specs' => [['label' => 'Chip', 'value' => 'M4 Ultra'], ['label' => 'RAM', 'value' => '192GB'], ['label' => 'GPU', 'value' => '80-core']], 'is_new' => true, 'is_featured' => true, 'can_direct_add' => false, 'is_saleable' => true, 'type_id' => 'simple', 'add_to_cart_url' => '#'],
+    ];
+    $priceMin = 649;
+    $priceMax = 5999;
+}
+
+$extraCategoryFilters = array_values($extraCategoryFilters);
+$filters = array_merge($baseCategoryFilters, $extraCategoryFilters);
+$visibleCount = count($products);
+$inStockCount = count(array_filter($products, static function ($item) {
+    return $item['stock']['code'] === 'in_stock';
+}));
+$lowStockCount = count(array_filter($products, static function ($item) {
+    return $item['stock']['code'] === 'low_stock';
+}));
+$currencyHint = $priceCurrency->format($priceMax ?: 0, false);
+
+$recentProducts = [];
+$recentIds = [];
+foreach ($products as $item) {
+    if (!empty($item['is_new'])) {
+        $recentProducts[] = $item;
+        $recentIds[(int) $item['id']] = true;
+    }
+}
+foreach ($products as $item) {
+    if (count($recentProducts) >= 10) {
+        break;
+    }
+    if (!isset($recentIds[(int) $item['id']])) {
+        $recentProducts[] = $item;
+        $recentIds[(int) $item['id']] = true;
+    }
+}
+$recentProducts = array_slice($recentProducts, 0, 10);
+$heroProducts = $products;
+usort($heroProducts, static function ($a, $b) { return $b['price'] <=> $a['price']; });
+$heroProducts = array_slice($heroProducts, 0, 4);
+?>
+<div class="pv3-home" data-mage-init='{"pvmodernHome":{}}'>
+    <section class="pv3-hero-section">
+        <div class="pv3-container pv3-hero-grid">
+            <div class="pv3-hero-copy">
+                <div class="pv3-trusted-badge">
+                    <span class="pv3-star-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.91 6.26 6.9.83-5.08 4.63 1.34 6.78L12 16.9 5.93 20.5l1.34-6.78L2.19 9.09l6.9-.83L12 2z"/></svg>
+                    </span>
+                    <span>Trusted by 50,000+ developers</span>
+                </div>
+
+                <h1>Premium Hardware for <span class="text-gradient">Power Users</span></h1>
+                <p>From custom-built PCs to Apple&apos;s finest silicon. Discover top-tier components curated for developers, creators, and enthusiasts.</p>
+
+                <div class="pv3-hero-actions">
+                    <a class="pv3-btn pv3-btn--primary" href="#pv3-products">
+                        <span>Shop Collection</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </a>
+                    <a class="pv3-btn pv3-btn--secondary" href="<?= $block->escapeUrl($block->getUrl('pc-builder')) ?>">Build Custom PC</a>
+                </div>
+
+                <div class="pv3-trust-bar">
+                    <div><strong class="text-gradient">50K+</strong><span>Happy Customers</span></div>
+                    <div><strong class="text-gradient">4.9/5</strong><span>Rating</span></div>
+                    <div><strong class="text-gradient">24/7</strong><span>Support</span></div>
+                </div>
+            </div>
+
+            <div class="pv3-hero-visual">
+                <div class="pv3-hero-visual-bg"></div>
+                <div class="pv3-hero-visual-panel glass-panel">
+                    <div class="pv3-hero-visual-grid is-products">
+                        <?php foreach ($heroProducts as $product): ?>
+                            <article class="pv3-hero-product-card">
+                                <a class="pv3-hero-product-image" href="<?= $block->escapeUrl($product['url']) ?>">
+                                    <img src="<?= $block->escapeUrl($product['image']) ?>" alt="<?= $block->escapeHtmlAttr($product['name']) ?>" loading="lazy" />
+                                </a>
+                                <div class="pv3-hero-product-content">
+                                    <div class="pv3-hero-product-meta">
+                                        <span><?= $block->escapeHtml($product['category']) ?></span>
+                                        <?php if (!empty($product['brand'])): ?>
+                                            <em><?= $block->escapeHtml($product['brand']) ?></em>
+                                        <?php endif; ?>
+                                    </div>
+                                    <h3><a href="<?= $block->escapeUrl($product['url']) ?>"><?= $block->escapeHtml($product['name']) ?></a></h3>
+                                    <div class="pv3-hero-product-price text-gradient"><?= $block->escapeHtml($product['price_html']) ?></div>
+                                </div>
+                            </article>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pv3-feature-bar">
+        <div class="pv3-container pv3-feature-grid">
+            <?php foreach ($features as $feature): ?>
+                <article class="pv3-feature-card">
+                    <span class="pv3-feature-icon <?= $block->escapeHtmlAttr($feature['class']) ?>">
+                        <?php if ($feature['icon'] === 'truck'): ?>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h5l3 5v7h-2"/><path d="M2 3h12v13H2z"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/><path d="M14 8h8"/></svg>
+                        <?php elseif ($feature['icon'] === 'shield'): ?>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        <?php elseif ($feature['icon'] === 'zap'): ?>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg>
+                        <?php else: ?>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 1v3"/><path d="M15 1v3"/><path d="M9 20v3"/><path d="M15 20v3"/><path d="M20 9h3"/><path d="M20 14h3"/><path d="M1 9h3"/><path d="M1 14h3"/></svg>
+                        <?php endif; ?>
+                    </span>
+                    <div>
+                        <strong><?= $block->escapeHtml($feature['label']) ?></strong>
+                        <small><?= $block->escapeHtml($feature['desc']) ?></small>
+                    </div>
+                </article>
+            <?php endforeach; ?>
+        </div>
+    </section>
+
+    <section class="pv3-products-section" id="pv3-products">
+        <div class="pv3-container">
+            <div class="pv3-section-header">
+                <span class="pv3-premium-pill">
+                    <span aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 9.5 8.5 4 9l4 4-.9 5.5 4.9-2.8 4.9 2.8L16 13l4-4-5.5-.5z"/></svg>
+                    </span>
+                    Premium Collection
+                </span>
+                <h2>Hardware <span class="text-gradient">Inventory</span></h2>
+                <p>Live Magento admin products are shown here. Use the compact category dropdown, search, price range and availability filters, then add eligible items straight to cart.</p>
+            </div>
+
+            <div class="pv3-filters-shell">
+                <div class="pv3-filter-single-row">
+
+                    <!-- Category -->
+                    <div class="pv3-fsr-item pv3-fsr-category">
+                        <div class="pv3-fsr-select-wrap">
+                            <span class="pv3-fsr-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16"/><path d="M7 12h10"/><path d="M10 18h4"/></svg></span>
+                            <select id="pv3-category-select" data-category-filter>
+                                <?php foreach ($filters as $filter): ?>
+                                    <option value="<?= $block->escapeHtmlAttr($filter['slug']) ?>"><?= $block->escapeHtml($filter['label']) ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <span class="pv3-fsr-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></span>
+                        </div>
+                    </div>
+
+                    <!-- Search -->
+                    <div class="pv3-fsr-item pv3-fsr-search">
+                        <label class="pv3-fsr-search-label">
+                            <span class="pv3-fsr-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
+                            <input type="text" data-product-search placeholder="Search products..." />
+                        </label>
+                    </div>
+
+                    <!-- Min price -->
+                    <div class="pv3-fsr-item pv3-fsr-price">
+                        <input type="number" min="0" step="1" data-price-min placeholder="Min" />
+                    </div>
+                    <span class="pv3-fsr-sep" aria-hidden="true">—</span>
+                    <!-- Max price -->
+                    <div class="pv3-fsr-item pv3-fsr-price">
+                        <input type="number" min="0" step="1" data-price-max placeholder="Max" />
+                    </div>
+
+                    <!-- Availability -->
+                    <div class="pv3-fsr-item pv3-fsr-avail">
+                        <div class="pv3-fsr-select-wrap">
+                            <span class="pv3-fsr-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16"/><path d="M7 12h10"/><path d="M10 18h4"/></svg></span>
+                            <select data-availability>
+                                <option value="all"><?= $block->escapeHtml(__('All availability')) ?></option>
+                                <option value="in_stock"><?= $block->escapeHtml(__('In Stock')) ?></option>
+                                <option value="low_stock"><?= $block->escapeHtml(__('Low Stock')) ?></option>
+                                <option value="out_of_stock"><?= $block->escapeHtml(__('Sold Out')) ?></option>
+                                <option value="pre_order"><?= $block->escapeHtml(__('Pre-Order')) ?></option>
+                            </select>
+                            <span class="pv3-fsr-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></span>
+                        </div>
+                    </div>
+
+                    <!-- Sort -->
+                    <div class="pv3-fsr-item pv3-fsr-sort">
+                        <div class="pv3-fsr-select-wrap">
+                            <span class="pv3-fsr-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M6 12h12"/><path d="M10 18h4"/></svg></span>
+                            <select data-sort>
+                                <option value="price_desc"><?= $block->escapeHtml(__('Price: High to Low')) ?></option>
+                                <option value="price_asc"><?= $block->escapeHtml(__('Price: Low to High')) ?></option>
+                                <option value="name_asc"><?= $block->escapeHtml(__('Name: A–Z')) ?></option>
+                                <option value="stock"><?= $block->escapeHtml(__('Availability')) ?></option>
+                            </select>
+                            <span class="pv3-fsr-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></span>
+                        </div>
+                    </div>
+
+                    <!-- View toggle -->
+                    <div class="pv3-fsr-item pv3-fsr-view">
+                        <div class="pv3-view-toggle">
+                            <button type="button" class="is-active" data-view="grid" aria-label="<?= $block->escapeHtmlAttr(__('Grid view')) ?>">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>
+                            </button>
+                            <button type="button" data-view="list" aria-label="<?= $block->escapeHtmlAttr(__('List view')) ?>">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                </div><!-- /.pv3-filter-single-row -->
+
+                <div class="pv3-stats-bar">
+                    <span>Showing <strong data-stat="count"><?= $block->escapeHtml((string) $visibleCount) ?></strong> products</span>
+                    <span aria-hidden="true">|</span>
+                    <span><i class="dot is-green"></i><span data-stat="instock"><?= $block->escapeHtml((string) $inStockCount) ?></span> in stock</span>
+                    <span><i class="dot is-amber"></i><span data-stat="lowstock"><?= $block->escapeHtml((string) $lowStockCount) ?></span> low stock</span>
+                    <span class="pv3-price-hint">Range up to <?= $block->escapeHtml($currencyHint) ?></span>
+                </div>
+            </div>
+
+            <div class="pv3-product-grid" data-product-grid data-page-size="8">
+                <?php foreach ($products as $product): ?>
+                    <article class="pv3-product-card card-shine"
+                        data-name="<?= $block->escapeHtmlAttr($product['name']) ?>"
+                        data-brand="<?= $block->escapeHtmlAttr($product['brand']) ?>"
+                        data-category="<?= $block->escapeHtmlAttr($product['category']) ?>"
+                        data-categories="<?= $block->escapeHtmlAttr(implode(' ', $product['filter_slugs'])) ?>"
+                        data-price="<?= $block->escapeHtmlAttr(number_format((float) $product['price'], 2, '.', '')) ?>"
+                        data-stock="<?= $block->escapeHtmlAttr($product['stock']['code']) ?>"
+                        data-stock-order="<?= $block->escapeHtmlAttr((string) $product['stock']['order']) ?>">
+                        <div class="pv3-gradient-border"><div></div></div>
+                        <div class="pv3-card-inner">
+                            <div class="pv3-product-badges">
+                                <?php if (!empty($product['is_new'])): ?>
+                                    <span class="badge is-new">
+                                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 9.5 8.5 4 9l4 4-.9 5.5 4.9-2.8 4.9 2.8L16 13l4-4-5.5-.5z"/></svg>
+                                        NEW
+                                    </span>
+                                <?php endif; ?>
+                                <?php if (!empty($product['is_featured'])): ?>
+                                    <span class="badge is-featured">FEATURED</span>
+                                <?php endif; ?>
+                                <?php if (!empty($product['discount'])): ?>
+                                    <span class="badge is-sale">-<?= $block->escapeHtml((string) $product['discount']) ?>%</span>
+                                <?php endif; ?>
+                            </div>
+
+                            <a class="pv3-product-image-shell" href="<?= $block->escapeUrl($product['url']) ?>">
+                                <span class="pv3-product-image-overlay"></span>
+                                <img src="<?= $block->escapeUrl($product['image']) ?>" alt="<?= $block->escapeHtmlAttr($product['name']) ?>" loading="lazy" />
+                            </a>
+
+                            <div class="pv3-product-content">
+                                <div class="pv3-product-meta">
+                                    <span class="brand"><?= $block->escapeHtml($product['brand']) ?></span>
+                                    <span class="category"><?= $block->escapeHtml($product['category']) ?></span>
+                                </div>
+
+                                <h3><a href="<?= $block->escapeUrl($product['url']) ?>"><?= $block->escapeHtml($product['name']) ?></a></h3>
+
+                                <div class="pv3-specs">
+                                    <?php foreach ($product['specs'] as $spec): ?>
+                                        <div>
+                                            <span><?= $block->escapeHtml($spec['label']) ?></span>
+                                            <strong><?= $block->escapeHtml($spec['value']) ?></strong>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+
+                                <div class="pv3-stock-pill <?= $block->escapeHtmlAttr($product['stock']['class']) ?>">
+                                    <i class="dot"></i>
+                                    <span><?= $block->escapeHtml($product['stock']['label']) ?></span>
+                                    <?php if ($product['stock']['qty'] !== null && $product['stock']['qty'] > 0): ?>
+                                        <span class="qty">(<?= $block->escapeHtml((string) (int) $product['stock']['qty']) ?>)</span>
+                                    <?php endif; ?>
+                                </div>
+
+                                <div class="pv3-price-row">
+                                    <div>
+                                        <?php if (!empty($product['original_price_html'])): ?>
+                                            <div class="pv3-price-old"><?= $block->escapeHtml($product['original_price_html']) ?></div>
+                                        <?php endif; ?>
+                                        <div class="pv3-price-current text-gradient"><?= $block->escapeHtml($product['price_html']) ?></div>
+                                    </div>
+                                </div>
+
+                                <?php if ($product['can_direct_add']): ?>
+                                    <form class="pv3-card-form" action="<?= $block->escapeUrl($product['add_to_cart_url']) ?>" method="post">
+                                        <input type="hidden" name="form_key" value="<?= $block->escapeHtmlAttr($formKey) ?>" />
+                                        <input type="hidden" name="product" value="<?= $block->escapeHtmlAttr((string) $product['id']) ?>" />
+                                        <input type="hidden" name="uenc" value="<?= $block->escapeHtmlAttr($urlEncoder->encode($product['url'])) ?>" />
+                                        <input type="hidden" name="qty" value="1" />
+                                        <button type="submit" class="pv3-card-button">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.5 3H5l2.68 11.39a1 1 0 0 0 .97.76h9.72a1 1 0 0 0 .97-.79L21 6H6"/></svg>
+                                            Add to Cart
+                                        </button>
+                                    </form>
+                                <?php elseif ($product['is_saleable']): ?>
+                                    <a class="pv3-card-button" href="<?= $block->escapeUrl($product['url']) ?>">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                                        Choose Options
+                                    </a>
+                                <?php else: ?>
+                                    <button type="button" class="pv3-card-button is-disabled" disabled>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+                                        Sold Out
+                                    </button>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+            </div>
+
+            <div class="pv3-load-more-row">
+                <button type="button" class="pv3-load-more" data-load-more>Load More Products</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="pv3-newsletter-section">
+        <div class="pv3-container">
+            <div class="pv3-newsletter-inner">
+                <span class="pv3-newsletter-kicker">Stay Updated</span>
+                <h2>Stay Updated</h2>
+                <p>Get notified about new arrivals, exclusive deals, restocks, and curated tech drops from MixiiiStore.</p>
+                <form class="pv3-newsletter-form" action="<?= $block->escapeUrl($block->getUrl('newsletter/subscriber/new')) ?>" method="post">
+                    <input type="hidden" name="form_key" value="<?= $block->escapeHtmlAttr($formKey) ?>" />
+                    <input type="email" name="email" placeholder="Enter your email" required />
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="pv3-recent-section" id="pv3-recent">
+        <div class="pv3-container">
+            <div class="pv3-recent-shell">
+                <div class="pv3-section-header pv3-section-header--center">
+                    <span class="pv3-premium-pill">Newest from admin</span>
+                    <h2>Recently <span class="text-gradient">Added</span></h2>
+                    <p>The newest products added from Magento admin appear here in a horizontal slider so customers can browse fresh drops quickly.</p>
+                </div>
+
+                <div class="pv3-recent-toolbar">
+                    <div class="pv3-recent-copy">
+                        <strong>Fresh arrivals</strong>
+                        <span>Scroll or use the arrows to browse the latest products.</span>
+                    </div>
+                    <div class="pv3-recent-controls">
+                        <button type="button" class="pv3-recent-arrow" data-recent-prev aria-label="Previous recent products">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+                        </button>
+                        <button type="button" class="pv3-recent-arrow" data-recent-next aria-label="Next recent products">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="pv3-recent-slider" data-recent-slider>
+                    <?php foreach ($recentProducts as $product): ?>
+                        <article class="pv3-recent-card">
+                            <a class="pv3-recent-image" href="<?= $block->escapeUrl($product['url']) ?>">
+                                <img src="<?= $block->escapeUrl($product['image']) ?>" alt="<?= $block->escapeHtmlAttr($product['name']) ?>" loading="lazy" />
+                                <?php if (!empty($product['is_new'])): ?>
+                                    <span class="pv3-recent-badge">NEW</span>
+                                <?php endif; ?>
+                            </a>
+                            <div class="pv3-recent-content">
+                                <div class="pv3-recent-meta">
+                                    <span><?= $block->escapeHtml($product['brand']) ?></span>
+                                    <span><?= $block->escapeHtml($product['category']) ?></span>
+                                </div>
+                                <h3><a href="<?= $block->escapeUrl($product['url']) ?>"><?= $block->escapeHtml($product['name']) ?></a></h3>
+                                <div class="pv3-recent-bottom">
+                                    <div class="pv3-recent-price text-gradient"><?= $block->escapeHtml($product['price_html']) ?></div>
+                                    <?php if ($product['can_direct_add']): ?>
+                                        <form class="pv3-recent-form" action="<?= $block->escapeUrl($product['add_to_cart_url']) ?>" method="post">
+                                            <input type="hidden" name="form_key" value="<?= $block->escapeHtmlAttr($formKey) ?>" />
+                                            <input type="hidden" name="product" value="<?= $block->escapeHtmlAttr((string) $product['id']) ?>" />
+                                            <input type="hidden" name="uenc" value="<?= $block->escapeHtmlAttr($urlEncoder->encode($product['url'])) ?>" />
+                                            <input type="hidden" name="qty" value="1" />
+                                            <button type="submit" class="pv3-recent-button">Add</button>
+                                        </form>
+                                    <?php else: ?>
+                                        <a class="pv3-recent-button" href="<?= $block->escapeUrl($product['url']) ?>">View</a>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </article>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
