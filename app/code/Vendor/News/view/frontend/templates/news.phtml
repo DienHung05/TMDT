@@ -1,0 +1,94 @@
+<?php
+/**
+ * @var $block \Vendor\News\Block\News
+ */
+$news = $block->getNews();
+?>
+
+<div class="vnexpress-news">
+    <h1 class="page-title">Tin tức mới nhất từ VnExpress</h1>
+
+    <?php if (empty($news)): ?>
+        <div class="message info">
+            <span>Không thể tải tin tức. Vui lòng thử lại sau.</span>
+        </div>
+    <?php else: ?>
+        <ul class="news-list">
+            <?php foreach ($news as $item): ?>
+                <li class="news-item">
+                    <h2 class="news-title">
+                        <a href="<?= $block->escapeUrl($item['link']) ?>" target="_blank" rel="nofollow">
+                            <?= $block->escapeHtml($item['title']) ?>
+                        </a>
+                    </h2>
+                    <div class="news-date">
+                        <?= $block->escapeHtml($block->formatDate($item['pubDate'])) ?>
+                    </div>
+                    <div class="news-description">
+                        <?= $block->escapeHtml(substr(strip_tags($item['description']), 0, 200)) ?>...
+                    </div>
+                    <a href="<?= $block->escapeUrl($item['link']) ?>" class="read-more" target="_blank">
+                        Đọc tiếp →
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+</div>
+
+<style>
+    .vnexpress-news {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    .page-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    .news-list {
+        list-style: none;
+        padding: 0;
+    }
+    .news-item {
+        border-bottom: 1px solid #e5e5e5;
+        padding: 20px 0;
+        margin-bottom: 10px;
+    }
+    .news-title {
+        font-size: 18px;
+        margin: 0 0 10px 0;
+    }
+    .news-title a {
+        color: #1979c3;
+        text-decoration: none;
+    }
+    .news-title a:hover {
+        text-decoration: underline;
+    }
+    .news-date {
+        color: #999;
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+    .news-description {
+        color: #666;
+        line-height: 1.5;
+        margin-bottom: 10px;
+    }
+    .read-more {
+        color: #1979c3;
+        text-decoration: none;
+        font-size: 13px;
+    }
+    .read-more:hover {
+        text-decoration: underline;
+    }
+    .message.info {
+        background: #f0f0f0;
+        padding: 15px;
+        border-left: 4px solid #ff9900;
+        color: #666;
+    }
+</style>
