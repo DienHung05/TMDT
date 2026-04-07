@@ -1,10 +1,19 @@
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
  */
 
 /* eslint max-nested-callbacks: 0 */
 define(['squire', 'ko'], function (Squire, ko) {
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/* eslint max-nested-callbacks: 0 */
+define(['squire'], function (Squire) {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     'use strict';
 
     var injector = new Squire(),
@@ -49,11 +58,18 @@ define(['squire', 'ko'], function (Squire, ko) {
         try {
             injector.clean();
             injector.remove();
+<<<<<<< HEAD
         } catch (e) { // eslint-disable-line no-unused-vars
         }
     });
 
     describe('Magento_Customer/js/view/authentication-popup isActive method', function () {
+=======
+        } catch (e) {}
+    });
+
+    describe('Magento_Customer/js/view/authentication-popup', function () {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         describe('"isActive" method', function () {
             it('Check for return value.', function () {
                 mocks['Magento_Customer/js/customer-data'].get.and.returnValue(function () {
@@ -64,6 +80,7 @@ define(['squire', 'ko'], function (Squire, ko) {
         });
     });
 
+<<<<<<< HEAD
     describe('Magento_Customer/js/view/authentication-popup setModalElement method', function () {
         describe('"setModalElement" method', function () {
             it('skips modal initialization when cart is not initialized', function () {
@@ -107,11 +124,22 @@ define(['squire', 'ko'], function (Squire, ko) {
                     mocks['Magento_Customer/js/model/authentication-popup']
                         .createPopUp
                 ).toHaveBeenCalled();
+=======
+    describe('Magento_Customer/js/view/authentication-popup', function () {
+        describe('"setModalElement" method', function () {
+            it('Check for return value.', function () {
+                expect(obj.setModalElement()).toBeUndefined();
+                expect(mocks['Magento_Customer/js/model/authentication-popup'].createPopUp).toHaveBeenCalled();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             });
         });
     });
 
+<<<<<<< HEAD
     describe('Magento_Customer/js/view/authentication-popup login method', function () {
+=======
+    describe('Magento_Customer/js/view/authentication-popup', function () {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         describe('"login" method', function () {
             it('Check for return value.', function () {
                 var event = {

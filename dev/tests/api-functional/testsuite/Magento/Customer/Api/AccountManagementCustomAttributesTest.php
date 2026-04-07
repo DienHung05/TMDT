@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -75,7 +80,11 @@ class AccountManagementCustomAttributesTest extends WebapiAbstract
             \Magento\Customer\Api\AccountManagementInterface::class
         );
 
+<<<<<<< HEAD
         $this->customerHelper = new CustomerHelper($this->name());
+=======
+        $this->customerHelper = new CustomerHelper();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->dataObjectProcessor = Bootstrap::getObjectManager()->create(
             \Magento\Framework\Reflection\DataObjectProcessor::class

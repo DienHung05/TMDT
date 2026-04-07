@@ -2,8 +2,13 @@
 /**
  * Tests that existing widget.xml files are valid to schema individually and merged.
  *
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Test\Integrity\Modular;
 
@@ -26,7 +31,11 @@ class WidgetConfigFilesTest extends \Magento\TestFramework\TestCase\AbstractConf
      *
      * @return string
      */
+<<<<<<< HEAD
     protected static function _getConfigFilePathGlob()
+=======
+    protected function _getConfigFilePathGlob()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return 'etc/widget.xml';
     }
@@ -36,9 +45,15 @@ class WidgetConfigFilesTest extends \Magento\TestFramework\TestCase\AbstractConf
      *
      * @return string
      */
+<<<<<<< HEAD
     protected static function _getXsdPath()
     {
         return self::$componentRegistrar->getPath(ComponentRegistrar::MODULE, 'Magento_Widget')
+=======
+    protected function _getXsdPath()
+    {
+        return $this->componentRegistrar->getPath(ComponentRegistrar::MODULE, 'Magento_Widget')
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             . '/etc/widget_file.xsd';
     }
 }

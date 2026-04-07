@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Setup\Console\Command;
 
@@ -25,17 +30,28 @@ abstract class AbstractDependenciesCommand extends Command
     /**
      * Input key for directory option
      */
+<<<<<<< HEAD
     public const INPUT_KEY_DIRECTORY = 'directory';
+=======
+    const INPUT_KEY_DIRECTORY = 'directory';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * Input key for output path of report file
      */
+<<<<<<< HEAD
     public const INPUT_KEY_OUTPUT = 'output';
 
     /**
      *
      * Magento object manager.
      * Responsible for creating and managing application objects
+=======
+    const INPUT_KEY_OUTPUT = 'output';
+
+    /**
+     * Object Manager
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @var ObjectManager
      */
@@ -53,7 +69,11 @@ abstract class AbstractDependenciesCommand extends Command
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
+=======
+     * {@inheritdoc}
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     protected function configure()
     {
@@ -87,9 +107,15 @@ abstract class AbstractDependenciesCommand extends Command
     abstract protected function getDefaultOutputFilename();
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
+=======
+     * {@inheritdoc}
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         try {
             /** @var \Magento\Framework\Component\ComponentRegistrar $componentRegistrar */

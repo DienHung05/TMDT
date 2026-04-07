@@ -34,9 +34,13 @@ The library provides the ability to customize all of the following user interfac
 * list of theme variables
 
 # Magento UI library file structure
+<<<<<<< HEAD
 
 Magento UI library is located under `/lib/web/` folder. It and employs:
 
+=======
+Magento UI library is located under `/lib/web/` folder. It and employs:
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 * `css/` folder where the library files are placed
 * `fonts/` folder where default and icon fonts are placed
 * `images/` folder where default images are placed
@@ -137,7 +141,10 @@ Magento UI library is located under `/lib/web/` folder. It and employs:
     └── jquery/ (Library javascript files)
 
 ```
+<<<<<<< HEAD
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 &nbsp;
 
 # Magento UI library naming convention
@@ -186,7 +193,10 @@ Private variables:
     @paddingleft;
     @__font-size;
 ```
+<<<<<<< HEAD
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 &nbsp;
 
 # Less mixins naming
@@ -198,23 +208,33 @@ A mixin name can consist of one or several words, concatenated with one hyphen. 
 #### Examples:
 
 ##### Acceptable:
+<<<<<<< HEAD
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 ```css
     .mixin-name() {}
     .transition() {}
     .mixin() {}
     ._button-gradient() {}
 ```
+<<<<<<< HEAD
 
 ##### Unacceptable:
 
+=======
+##### Unacceptable:
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 ```css
     .mixinName() {}
     .__transition() {}
     .MiXiN() {}
     ._button--gradient() {}
 ```
+<<<<<<< HEAD
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 &nbsp;
 
 # Less Code Standards
@@ -244,7 +264,10 @@ Please verified that you use spaces instead tabs:
 Add space before opening brace and line break after. And line break before closing brace.
 
 ##### Not recommended:
+<<<<<<< HEAD
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 ```css
     .nav{color: @nav__color;}
 ```
@@ -584,7 +607,10 @@ Using class names this way contributes to acceptable levels of understandability
 Write selector name together in single line, don't use concatenation
 
 ##### Not recommended:
+<<<<<<< HEAD
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 ```css
     .product {
         ...
@@ -615,7 +641,10 @@ Generic names are simply a fallback for elements that have no particular or no m
 Using functional or generic names reduces the probability of unnecessary document or template changes.
 
 ##### Not recommended:
+<<<<<<< HEAD
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 ```css
     .foo-1901 {
         ...
@@ -768,7 +797,11 @@ Using shorthand properties is useful for code efficiency and understandability.
     padding-top: 0;
 ```
 
+<<<<<<< HEAD
 ##### Recommended:
+=======
+ ##### Recommended:
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 ```css
     border-top: 0;
@@ -842,7 +875,10 @@ Omit leading "0"s in values, use dot instead
 If variables are local and used only in module scope it should be located in module file, on the top of the file with general comment
 
 Example **_module.less**:
+<<<<<<< HEAD
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 ```css
     ...
 

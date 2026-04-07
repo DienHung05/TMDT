@@ -1,15 +1,26 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\TestFramework;
 
 use Magento\Framework\App\DeploymentConfig;
+<<<<<<< HEAD
 use Magento\Framework\App\Filesystem\DirectoryList as AppDirectoryList;
 use Magento\Framework\App\ObjectManager\ConfigLoader;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Filesystem\DirectoryList;
+=======
+use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\App\ObjectManager\ConfigLoader;
+use Magento\Framework\Exception\LocalizedException;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Filesystem\DriverPool;
 use Magento\Framework\Interception\PluginListInterface;
 use Magento\Framework\ObjectManager\ConfigLoaderInterface;
@@ -56,10 +67,17 @@ class ObjectManagerFactory extends \Magento\Framework\App\ObjectManagerFactory
         ObjectManager::setInstance($objectManager);
         $this->directoryList = $directoryList;
         $objectManager->configure($this->_primaryConfigData);
+<<<<<<< HEAD
         $objectManager->addSharedInstance($this->directoryList, AppDirectoryList::class);
         $objectManager->addSharedInstance(
             $this->directoryList,
             DirectoryList::class
+=======
+        $objectManager->addSharedInstance($this->directoryList, DirectoryList::class);
+        $objectManager->addSharedInstance(
+            $this->directoryList,
+            \Magento\Framework\Filesystem\DirectoryList::class
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
         $deploymentConfig = $this->createDeploymentConfig($directoryList, $this->configFilePool, $arguments);
         $this->factory->setArguments($arguments);

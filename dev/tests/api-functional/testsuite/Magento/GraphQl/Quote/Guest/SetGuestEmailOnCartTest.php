@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -13,7 +18,10 @@ use Magento\Quote\Model\QuoteFactory;
 use Magento\Quote\Model\ResourceModel\Quote as QuoteResource;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for setGuestEmailOnCart mutation
@@ -106,10 +114,18 @@ class SetGuestEmailOnCartTest extends GraphQlAbstract
 
     /**
      * @magentoApiDataFixture Magento/GraphQl/Quote/_files/guest/create_empty_cart.php
+<<<<<<< HEAD
      * @param string $email
      * @param string $exceptionMessage
      */
     #[DataProvider('incorrectEmailDataProvider')]
+=======
+     *
+     * @dataProvider incorrectEmailDataProvider
+     * @param string $email
+     * @param string $exceptionMessage
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSetGuestEmailOnCartWithIncorrectEmail(
         string $email,
         string $exceptionMessage
@@ -124,7 +140,11 @@ class SetGuestEmailOnCartTest extends GraphQlAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function incorrectEmailDataProvider(): array
+=======
+    public function incorrectEmailDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'wrong_email' => ['some', 'Invalid email format'],

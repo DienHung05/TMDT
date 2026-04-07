@@ -1,16 +1,29 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
 namespace Magento\TestFramework\Store;
 
 use Magento\Framework\Interception\InterceptorInterface;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\TestFramework\Store;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\App\Config;
 use Magento\TestFramework\ObjectManager;
 
 /**
  * Integration tests decoration of store manager
+<<<<<<< HEAD
+=======
+ *
+ * @package Magento\TestFramework\Store
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class StoreManager implements \Magento\Store\Model\StoreManagerInterface
 {
@@ -42,7 +55,11 @@ class StoreManager implements \Magento\Store\Model\StoreManagerInterface
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
+=======
+     * {@inheritdoc}
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function setCurrentStore($store)
     {
@@ -51,7 +68,11 @@ class StoreManager implements \Magento\Store\Model\StoreManagerInterface
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
+=======
+     * {@inheritdoc}
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function setIsSingleStoreModeAllowed($value)
     {
@@ -60,7 +81,11 @@ class StoreManager implements \Magento\Store\Model\StoreManagerInterface
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
+=======
+     * {@inheritdoc}
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function hasSingleStore()
     {
@@ -70,7 +95,11 @@ class StoreManager implements \Magento\Store\Model\StoreManagerInterface
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
+=======
+     * {@inheritdoc}
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function isSingleStoreMode()
     {
@@ -80,7 +109,11 @@ class StoreManager implements \Magento\Store\Model\StoreManagerInterface
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
+=======
+     * {@inheritdoc}
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function getStore($storeId = null)
     {
@@ -90,7 +123,11 @@ class StoreManager implements \Magento\Store\Model\StoreManagerInterface
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
+=======
+     * {@inheritdoc}
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function getStores($withDefault = false, $codeKey = false)
     {
@@ -100,7 +137,11 @@ class StoreManager implements \Magento\Store\Model\StoreManagerInterface
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
+=======
+     * {@inheritdoc}
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function getWebsite($websiteId = null)
     {
@@ -110,7 +151,11 @@ class StoreManager implements \Magento\Store\Model\StoreManagerInterface
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
+=======
+     * {@inheritdoc}
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function getWebsites($withDefault = false, $codeKey = false)
     {
@@ -120,17 +165,26 @@ class StoreManager implements \Magento\Store\Model\StoreManagerInterface
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
+=======
+     * {@inheritdoc}
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function reinitStores()
     {
         //In order to restore configFixture values
         $testAppConfig = ObjectManager::getInstance()->get(Config::class);
         $reflection = new \ReflectionClass($testAppConfig);
+<<<<<<< HEAD
         if ($reflection->implementsInterface(InterceptorInterface::class)) {
             $reflection = $reflection->getParentClass();
         }
         $dataProperty = $reflection->getProperty('data');
+=======
+        $dataProperty = $reflection->getProperty('data');
+        $dataProperty->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $savedConfig = $dataProperty->getValue($testAppConfig);
 
         $this->decoratedStoreManager->reinitStores();
@@ -140,7 +194,11 @@ class StoreManager implements \Magento\Store\Model\StoreManagerInterface
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
+=======
+     * {@inheritdoc}
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function getDefaultStoreView()
     {
@@ -150,7 +208,11 @@ class StoreManager implements \Magento\Store\Model\StoreManagerInterface
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
+=======
+     * {@inheritdoc}
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function getGroup($groupId = null)
     {
@@ -160,7 +222,11 @@ class StoreManager implements \Magento\Store\Model\StoreManagerInterface
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
+=======
+     * {@inheritdoc}
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function getGroups($withDefault = false)
     {

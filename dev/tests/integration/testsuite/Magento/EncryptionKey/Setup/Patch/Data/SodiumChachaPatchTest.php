@@ -1,24 +1,38 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
 
 namespace Magento\EncryptionKey\Setup\Patch\Data;
 
+<<<<<<< HEAD
 use Magento\Framework\Config\ConfigOptionsListConstants;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\App\DeploymentConfig;
 use Magento\Framework\Encryption\Encryptor;
 
+<<<<<<< HEAD
 /**
  * Class SodiumChachaPatch library test
  */
 class SodiumChachaPatchTest extends \PHPUnit\Framework\TestCase
 {
     private const PATH_KEY = 'crypt/key';
+=======
+class SodiumChachaPatchTest extends \PHPUnit\Framework\TestCase
+{
+    const PATH_KEY = 'crypt/key';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var ObjectManagerInterface
@@ -41,10 +55,14 @@ class SodiumChachaPatchTest extends \PHPUnit\Framework\TestCase
         $testPath = 'test/config';
         $testValue = 'test';
 
+<<<<<<< HEAD
         $structureMock = $this->createMock(
             // phpstan:ignore "Class Magento\Config\Model\Config\Structure\Proxy not found."
             \Magento\Config\Model\Config\Structure\Proxy::class
         );
+=======
+        $structureMock = $this->createMock(\Magento\Config\Model\Config\Structure\Proxy::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $structureMock->expects($this->once())
             ->method('getFieldPathsByAttribute')
             ->willReturn([$testPath]);
@@ -95,7 +113,11 @@ class SodiumChachaPatchTest extends \PHPUnit\Framework\TestCase
         $handle = @mcrypt_module_open(MCRYPT_RIJNDAEL_256, '', MCRYPT_MODE_CBC, '');
         $initVectorSize = @mcrypt_enc_get_iv_size($handle);
         $initVector = str_repeat("\0", $initVectorSize);
+<<<<<<< HEAD
         @mcrypt_generic_init($handle, $this->getEncryptionKey(), $initVector);
+=======
+        @mcrypt_generic_init($handle, $this->deployConfig->get(static::PATH_KEY), $initVector);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $encrpted = @mcrypt_generic($handle, $data);
 
@@ -105,6 +127,7 @@ class SodiumChachaPatchTest extends \PHPUnit\Framework\TestCase
 
         return '0:' . Encryptor::CIPHER_RIJNDAEL_256 . ':' . base64_encode($encrpted);
     }
+<<<<<<< HEAD
 
     /**
      * Get Encryption key
@@ -120,4 +143,6 @@ class SodiumChachaPatchTest extends \PHPUnit\Framework\TestCase
         base64_decode(substr($key, strlen(ConfigOptionsListConstants::STORE_KEY_ENCODED_RANDOM_STRING_PREFIX))) :
         $key;
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

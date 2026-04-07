@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
  */
@@ -9,6 +10,15 @@ use Magento\Catalog\Api\Data\ProductAttributeMediaGalleryEntryInterfaceFactory;
 use Magento\Catalog\Api\ProductAttributeMediaGalleryManagementInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\Api\Data\ImageContentInterfaceFactory;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+declare(strict_types=1);
+
+use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Catalog\Model\Product;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Workaround\Override\Fixture\Resolver;
 
@@ -19,6 +29,7 @@ $objectManager = Bootstrap::getObjectManager();
 $productRepository = $objectManager->create(ProductRepositoryInterface::class);
 $product = $productRepository->get('simple_product_with_media');
 
+<<<<<<< HEAD
 /** @var ProductAttributeMediaGalleryEntryInterfaceFactory $mediaGalleryEntryFactory */
 $mediaGalleryEntryFactory = $objectManager->get(ProductAttributeMediaGalleryEntryInterfaceFactory::class);
 
@@ -41,3 +52,21 @@ $image->setContent($imageContent);
 /** @var ProductAttributeMediaGalleryManagementInterface $mediaGalleryManagement */
 $mediaGalleryManagement = $objectManager->get(ProductAttributeMediaGalleryManagementInterface::class);
 $mediaGalleryManagement->create('simple_product_with_media', $image);
+=======
+/** @var $product Product */
+$product->setStoreId(0)
+    ->setImage('/m/a/magento_image.jpg')
+    ->setSmallImage('/m/a/magento_image.jpg')
+    ->setThumbnail('/m/a/magento_image.jpg')
+    ->setData('media_gallery', ['images' => [
+        [
+            'file' => '/m/a/magento_image.jpg',
+            'position' => 1,
+            'label' => 'Image Alt Text',
+            'disabled' => 0,
+            'media_type' => 'image'
+        ],
+    ]])
+    ->setCanSaveCustomOptions(true)
+    ->save();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f

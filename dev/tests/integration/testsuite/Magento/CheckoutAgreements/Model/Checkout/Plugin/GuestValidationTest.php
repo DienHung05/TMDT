@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\CheckoutAgreements\Model\Checkout\Plugin;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
@@ -88,9 +96,15 @@ class GuestValidationTest extends \PHPUnit\Framework\TestCase
      * @magentoDataFixture Magento/Catalog/_files/product_simple.php
      * @magentoDbIsolation enabled
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+<<<<<<< HEAD
      * @param string[] $agreementNames
      */
     #[DataProvider('dataProvider')]
+=======
+     * @dataProvider dataProvider
+     * @param string[] $agreementNames
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testBeforeSavePaymentInformationAndPlaceOrder($agreementNames)
     {
         $guestEmail = 'guest@example.com';
@@ -154,7 +168,11 @@ class GuestValidationTest extends \PHPUnit\Framework\TestCase
         }
     }
 
+<<<<<<< HEAD
     public static function dataProvider()
+=======
+    public function dataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [[]],

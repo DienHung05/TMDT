@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Sales\Model\Order;
@@ -9,7 +14,10 @@ namespace Magento\Sales\Model\Order;
 use Magento\Framework\App\State;
 use Magento\Sales\Api\Data\OrderInterfaceFactory;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class ShipmentTest
@@ -17,7 +25,11 @@ use PHPUnit\Framework\Attributes\DataProvider;
  */
 class StatusTest extends \PHPUnit\Framework\TestCase
 {
+<<<<<<< HEAD
     public static function theCorrectLabelIsUsedDependingOnTheAreaProvider(): array
+=======
+    public function theCorrectLabelIsUsedDependingOnTheAreaProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'backend label' => [
@@ -38,8 +50,13 @@ class StatusTest extends \PHPUnit\Framework\TestCase
      * @param $result
      *
      * @magentoDataFixture Magento/Sales/_files/order_status.php
+<<<<<<< HEAD
      */
     #[DataProvider('theCorrectLabelIsUsedDependingOnTheAreaProvider')]
+=======
+     * @dataProvider theCorrectLabelIsUsedDependingOnTheAreaProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testTheCorrectLabelIsUsedDependingOnTheArea($area, $result)
     {
         $objectManager = Bootstrap::getObjectManager();

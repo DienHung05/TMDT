@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2011 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Catalog\Model\Product\Type;
 
+<<<<<<< HEAD
 use Magento\Framework\File\Http;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\Product\Option;
@@ -66,8 +74,14 @@ class AbstractTypeTest extends TestCase
         $serializer = $this->objectManager->get(
             Json::class
         );
+<<<<<<< HEAD
         $this->_model = $this->getMockBuilder(AbstractType::class)
             ->setConstructorArgs([
+=======
+        $this->_model = $this->getMockForAbstractClass(
+            AbstractType::class,
+            [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $catalogProductOption,
                 $this->objectManager->get(Config::class),
                 $catalogProductType,
@@ -78,9 +92,14 @@ class AbstractTypeTest extends TestCase
                 $logger,
                 $this->productRepository,
                 $serializer
+<<<<<<< HEAD
             ])
             ->onlyMethods(['deleteTypeSpecificData'])
             ->getMock();
+=======
+            ]
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     public function testGetRelationInfo()
@@ -377,7 +396,11 @@ class AbstractTypeTest extends TestCase
 
     public function testHasOptions()
     {
+<<<<<<< HEAD
         $this->markTestSkipped('Bug MAGE-2814');
+=======
+        $this->markTestIncomplete('Bug MAGE-2814');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $product = new DataObject();
         $this->assertFalse($this->_model->hasOptions($product));
@@ -527,6 +550,10 @@ class AbstractTypeTest extends TestCase
             AbstractType::class,
             '_prepareOptions'
         );
+<<<<<<< HEAD
+=======
+        $method->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $exceptionIsThrown = false;
         try {
             $method->invoke($this->_model, $buyRequest, $product, 'full');
@@ -659,6 +686,7 @@ class AbstractTypeTest extends TestCase
     /**
      * Create prepared uploader instance for test
      *
+<<<<<<< HEAD
      * @return Http
      * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
@@ -669,6 +697,20 @@ class AbstractTypeTest extends TestCase
         $validators = $refObject->getProperty('validators');
         $validators->setValue($uploader, []);
         $files = $refObject->getProperty('files');
+=======
+     * @return \Zend_File_Transfer_Adapter_Http
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
+     */
+    private function getPreparedUploader(): \Zend_File_Transfer_Adapter_Http
+    {
+        $uploader = new \Zend_File_Transfer_Adapter_Http();
+        $refObject = new \ReflectionObject($uploader);
+        $validators = $refObject->getProperty('_validators');
+        $validators->setAccessible(true);
+        $validators->setValue($uploader, []);
+        $files = $refObject->getProperty('_files');
+        $files->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $filesValues = $files->getValue($uploader);
         foreach (array_keys($filesValues) as $value) {
             $filesValues[$value]['validators'] = [];

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2012 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -23,7 +28,10 @@ use Magento\TestFramework\TestCase\AbstractBackendController;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\Store\Model\Store;
 use Magento\Catalog\Model\ResourceModel\Product as ProductResource;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Catalog\Model\Category as CategoryModel;
 use Magento\Catalog\Model\CategoryFactory as CategoryModelFactory;
 
@@ -96,13 +104,20 @@ class CategoryTest extends AbstractBackendController
      * @magentoDataFixture Magento/Store/_files/core_fixturestore.php
      * @magentoDbIsolation enabled
      * @magentoConfigFixture current_store catalog/frontend/flat_catalog_product 1
+<<<<<<< HEAD
+=======
+     * @dataProvider saveActionDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $inputData
      * @param array $defaultAttributes
      * @param array $attributesSaved
      * @return void
      * @throws NoSuchEntityException
      */
+<<<<<<< HEAD
     #[DataProvider('saveActionDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveAction(array $inputData, array $defaultAttributes, array $attributesSaved = []): void
     {
         $store = $this->storeRepository->get('fixturestore');
@@ -154,6 +169,10 @@ class CategoryTest extends AbstractBackendController
         $categoryId = 3;
         $category = $this->categoryRepository->get($categoryId);
         $newUrlPath = 'test_url_path';
+<<<<<<< HEAD
+=======
+        $defaultUrlPath = $category->getData('url_path');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         // update url_path and check it
         $category->setStoreId(1);
@@ -178,17 +197,28 @@ class CategoryTest extends AbstractBackendController
             MessageInterface::TYPE_SUCCESS
         );
         $category = $this->categoryRepository->get($categoryId);
+<<<<<<< HEAD
         $this->assertEquals($newUrlPath, $category->getData('url_key'));
+=======
+        $this->assertEquals($defaultUrlPath, $category->getData('url_key'));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
      * Test save action from product form page
      *
      * @param array $postData
+<<<<<<< HEAD
      * @magentoDbIsolation enabled
      * @return void
      */
     #[DataProvider('categoryCreatedFromProductCreationPageDataProvider')]
+=======
+     * @dataProvider categoryCreatedFromProductCreationPageDataProvider
+     * @magentoDbIsolation enabled
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveActionFromProductCreationPage(array $postData): void
     {
         $this->getRequest()->setMethod(HttpRequest::METHOD_POST);
@@ -304,7 +334,11 @@ class CategoryTest extends AbstractBackendController
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      * @return array
      */
+<<<<<<< HEAD
     public static function saveActionDataProvider(): array
+=======
+    public function saveActionDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $result = [
             'default values' => [
@@ -503,6 +537,10 @@ class CategoryTest extends AbstractBackendController
      * Test move action.
      *
      * @magentoDataFixture Magento/Catalog/_files/category_tree.php
+<<<<<<< HEAD
+=======
+     * @dataProvider moveActionDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @param int $parentId
      * @param int $childId
@@ -512,7 +550,10 @@ class CategoryTest extends AbstractBackendController
      * @param boolean $error
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('moveActionDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testMoveAction(
         int $parentId,
         int $childId,
@@ -549,7 +590,11 @@ class CategoryTest extends AbstractBackendController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function moveActionDataProvider(): array
+=======
+    public function moveActionDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [400, 401, 'first_url_key', 402, 'second_url_key', false],
@@ -564,10 +609,17 @@ class CategoryTest extends AbstractBackendController
      *
      * @magentoDataFixture Magento/Catalog/_files/products_in_different_stores.php
      * @magentoDbIsolation disabled
+<<<<<<< HEAD
      *
      * @param array $postData
      */
     #[DataProvider('saveActionWithDifferentWebsitesDataProvider')]
+=======
+     * @dataProvider saveActionWithDifferentWebsitesDataProvider
+     *
+     * @param array $postData
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveCategoryWithProductPosition(array $postData): void
     {
         $store = $this->storeRepository->get('fixturestore');
@@ -596,7 +648,11 @@ class CategoryTest extends AbstractBackendController
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      * @return array
      */
+<<<<<<< HEAD
     public static function saveActionWithDifferentWebsitesDataProvider(): array
+=======
+    public function saveActionWithDifferentWebsitesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'default_values' => [
@@ -729,10 +785,14 @@ class CategoryTest extends AbstractBackendController
         //Trying to update the category's design settings without proper permissions.
         //Expected list of sessions messages collected throughout the controller calls.
         $sessionMessages = ['Not allowed to edit the category\'s design attributes'];
+<<<<<<< HEAD
         $this->aclBuilder->getAcl()->deny(
             \Magento\TestFramework\Bootstrap::ADMIN_ROLE_ID,
             'Magento_Catalog::edit_category_design'
         );
+=======
+        $this->aclBuilder->getAcl()->deny(null, 'Magento_Catalog::edit_category_design');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $requestData['custom_layout_update_file'] = 'test-file';
         $this->getRequest()->setMethod(HttpRequest::METHOD_POST);
         $this->getRequest()->setPostValue($requestData);
@@ -747,10 +807,15 @@ class CategoryTest extends AbstractBackendController
         //Trying again with the permissions.
         $requestData['custom_layout_update_file'] = null;
         $requestData['page_layout'] = '2columns-left';
+<<<<<<< HEAD
         $this->aclBuilder->getAcl()->allow(
             \Magento\TestFramework\Bootstrap::ADMIN_ROLE_ID,
             ['Magento_Catalog::categories', 'Magento_Catalog::edit_category_design']
         );
+=======
+        $this->aclBuilder->getAcl()
+            ->allow(null, ['Magento_Catalog::categories', 'Magento_Catalog::edit_category_design']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->getRequest()->setDispatched(false);
         $this->getRequest()->setPostValue($requestData);
         $this->getRequest()->setParam('store', $requestData['store_id']);
@@ -769,10 +834,14 @@ class CategoryTest extends AbstractBackendController
         //Trying to save special value without the permissions.
         $requestData['custom_layout_update_file'] = CategoryModel\Attribute\Backend\LayoutUpdate::VALUE_USE_UPDATE_XML;
         $requestData['description'] = 'test';
+<<<<<<< HEAD
         $this->aclBuilder->getAcl()->deny(
             \Magento\TestFramework\Bootstrap::ADMIN_ROLE_ID,
             ['Magento_Catalog::edit_category_design']
         );
+=======
+        $this->aclBuilder->getAcl()->deny(null, ['Magento_Catalog::edit_category_design']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->getRequest()->setDispatched(false);
         $this->getRequest()->setPostValue($requestData);
         $this->getRequest()->setParam('store', $requestData['store_id']);
@@ -836,10 +905,14 @@ class CategoryTest extends AbstractBackendController
         $uri = 'backend/catalog/category/save';
 
         //Updating the category's design settings without proper permissions.
+<<<<<<< HEAD
         $this->aclBuilder->getAcl()->deny(
             \Magento\TestFramework\Bootstrap::ADMIN_ROLE_ID,
             'Magento_Catalog::edit_category_design'
         );
+=======
+        $this->aclBuilder->getAcl()->deny(null, 'Magento_Catalog::edit_category_design');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->getRequest()->setMethod(HttpRequest::METHOD_POST);
         $this->getRequest()->setPostValue($requestData);
         $this->getRequest()->setParam('store', $requestData['store_id']);

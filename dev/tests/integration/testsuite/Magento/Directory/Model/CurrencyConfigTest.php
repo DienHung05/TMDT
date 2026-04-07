@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Directory\Model;
@@ -14,7 +19,10 @@ use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\App\State;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -59,13 +67,20 @@ class CurrencyConfigTest extends TestCase
     /**
      * Test get currency config for admin, crontab and storefront areas.
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider getConfigCurrenciesDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Store/_files/store.php
      * @magentoDbIsolation disabled
      * @param string $areaCode
      * @param array $expected
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('getConfigCurrenciesDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetConfigCurrencies(string $areaCode, array $expected)
     {
         /** @var State $appState */
@@ -108,28 +123,47 @@ class CurrencyConfigTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function getConfigCurrenciesDataProvider()
     {
         return [
             [
                 Area::AREA_ADMINHTML,  // $areaCode
                 [  // $expected
+=======
+    public function getConfigCurrenciesDataProvider()
+    {
+        return [
+            [
+                'areaCode' => Area::AREA_ADMINHTML,
+                'expected' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'allowed' => ['BDT', 'BNS', 'BTD', 'EUR', 'USD'],
                     'base' => ['BDT', 'USD'],
                     'default' => ['BDT', 'USD'],
                 ],
             ],
             [
+<<<<<<< HEAD
                 Area::AREA_CRONTAB,  // $areaCode
                 [  // $expected
+=======
+                'areaCode' => Area::AREA_CRONTAB,
+                'expected' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'allowed' => ['BDT', 'BNS', 'BTD', 'EUR', 'USD'],
                     'base' => ['BDT', 'USD'],
                     'default' => ['BDT', 'USD'],
                 ],
             ],
             [
+<<<<<<< HEAD
                 Area::AREA_FRONTEND,  // $areaCode
                 [  // $expected
+=======
+                'areaCode' => Area::AREA_FRONTEND,
+                'expected' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'default' => [
                         'allowed' => ['EUR', 'USD'],
                         'base' => ['USD'],

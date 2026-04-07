@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
@@ -33,6 +34,31 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Setup\Console\Command;
+
+use Magento\Framework\App\ObjectManager;
+use Magento\Framework\Filesystem\DriverInterface;
+use Magento\Framework\Filesystem\Io\File;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Magento\Framework\Filesystem;
+use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\App\DeploymentConfig;
+use Magento\Framework\Component\ComponentRegistrar;
+use Magento\Framework\Config\ConfigOptionsListConstants;
+use Magento\Setup\Model\ObjectManagerProvider;
+use Magento\Setup\Module\Di\App\Task\Manager;
+use Magento\Setup\Module\Di\App\Task\OperationFactory;
+use Magento\Setup\Module\Di\App\Task\OperationException;
+use Magento\Setup\Module\Di\App\Task\OperationInterface;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\ProgressBar;
+use Magento\Framework\Console\Cli;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Command to run compile in single-tenant mode
@@ -40,7 +66,12 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class DiCompileCommand extends Command
 {
+<<<<<<< HEAD
     public const NAME = 'setup:di:compile';
+=======
+    /** Command name */
+    const NAME = 'setup:di:compile';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var \Magento\Framework\App\DeploymentConfig
@@ -88,6 +119,11 @@ class DiCompileCommand extends Command
     private $file;
 
     /**
+<<<<<<< HEAD
+=======
+     * Constructor
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param DeploymentConfig $deploymentConfig
      * @param DirectoryList $directoryList
      * @param Manager $taskManager
@@ -96,7 +132,10 @@ class DiCompileCommand extends Command
      * @param DriverInterface $fileDriver
      * @param \Magento\Framework\Component\ComponentRegistrar $componentRegistrar
      * @param File|null $file
+<<<<<<< HEAD
      *
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @throws \Magento\Setup\Exception
      */
     public function __construct(
@@ -107,7 +146,11 @@ class DiCompileCommand extends Command
         Filesystem $filesystem,
         DriverInterface $fileDriver,
         ComponentRegistrar $componentRegistrar,
+<<<<<<< HEAD
         File|null $file = null
+=======
+        File $file = null
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ) {
         $this->deploymentConfig = $deploymentConfig;
         $this->directoryList    = $directoryList;
@@ -152,39 +195,57 @@ class DiCompileCommand extends Command
     /**
      * @inheritdoc
      */
+<<<<<<< HEAD
     protected function execute(InputInterface $input, OutputInterface $output): int
+=======
+    protected function execute(InputInterface $input, OutputInterface $output)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $errors = $this->checkEnvironment();
         if ($errors) {
             foreach ($errors as $line) {
                 $output->writeln($line);
             }
+<<<<<<< HEAD
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             // we must have an exit code higher than zero to indicate something was wrong
             return Cli::RETURN_FAILURE;
         }
 
         $modulePaths = $this->componentRegistrar->getPaths(ComponentRegistrar::MODULE);
+<<<<<<< HEAD
         $moduleStatuses = $this->deploymentConfig->get(ConfigOptionsListConstants::KEY_MODULES);
 
         $modulePathsEnabled = array_filter($modulePaths, function ($path, $module) use ($moduleStatuses) {
             return ($moduleStatuses[$module] ?? 0) === 1;
         }, ARRAY_FILTER_USE_BOTH);
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $libraryPaths = $this->componentRegistrar->getPaths(ComponentRegistrar::LIBRARY);
         $setupPath = $this->directoryList->getPath(DirectoryList::SETUP);
         $generationPath = $this->directoryList->getPath(DirectoryList::GENERATED_CODE);
 
         $this->objectManager->get(\Magento\Framework\App\Cache::class)->clean();
         $compiledPathsList = [
+<<<<<<< HEAD
             'application' => $modulePathsEnabled,
+=======
+            'application' => $modulePaths,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'library' => $libraryPaths,
             'setup' => $setupPath,
             'generated_helpers' => $generationPath
         ];
 
         $this->excludedPathsList = [
+<<<<<<< HEAD
             'application' => $this->getExcludedModulePaths($modulePathsEnabled),
+=======
+            'application' => $this->getExcludedModulePaths($modulePaths),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'framework' => $this->getExcludedLibraryPaths($libraryPaths),
             'setup' => $this->getExcludedSetupPaths($setupPath),
         ];
@@ -222,11 +283,19 @@ class DiCompileCommand extends Command
             $progressBar->display();
 
             $this->taskManager->process(
+<<<<<<< HEAD
                 function (OperationInterface $operation) use ($progressBar): void {
                     $progressBar->setMessage($operation->getName() . '...');
                     $progressBar->display();
                 },
                 function (OperationInterface $operation) use ($progressBar): void {
+=======
+                function (OperationInterface $operation) use ($progressBar) {
+                    $progressBar->setMessage($operation->getName() . '...');
+                    $progressBar->display();
+                },
+                function (OperationInterface $operation) use ($progressBar) {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     $progressBar->advance();
                 }
             );
@@ -239,7 +308,10 @@ class DiCompileCommand extends Command
             // we must have an exit code higher than zero to indicate something was wrong
             return Cli::RETURN_FAILURE;
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         return Cli::RETURN_SUCCESS;
     }
 
@@ -247,7 +319,10 @@ class DiCompileCommand extends Command
      * Build list of module path regexps which should be excluded from compilation
      *
      * @param string[] $modulePaths
+<<<<<<< HEAD
      *
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @return string[]
      */
     private function getExcludedModulePaths(array $modulePaths)
@@ -268,7 +343,10 @@ class DiCompileCommand extends Command
                 $vendorPathsRegExps[] = $vendorDir
                     . '/(?:' . join('|', $vendorModules) . ')';
             }
+<<<<<<< HEAD
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $basePathsRegExps[] = preg_quote($basePath, '#')
                 . '/(?:' . join('|', $vendorPathsRegExps) . ')';
         }
@@ -284,7 +362,10 @@ class DiCompileCommand extends Command
      * Build list of library path regexps which should be excluded from compilation
      *
      * @param string[] $libraryPaths
+<<<<<<< HEAD
      *
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @return string[]
      */
     private function getExcludedLibraryPaths(array $libraryPaths)
@@ -307,7 +388,10 @@ class DiCompileCommand extends Command
      * Get excluded setup application paths
      *
      * @param string $setupPath
+<<<<<<< HEAD
      *
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @return string[]
      */
     private function getExcludedSetupPaths($setupPath)
@@ -321,7 +405,10 @@ class DiCompileCommand extends Command
      * Delete directories by their code from "var" directory
      *
      * @param array $directoryCodeList
+<<<<<<< HEAD
      *
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @return void
      */
     private function cleanupFilesystem($directoryCodeList)
@@ -335,13 +422,17 @@ class DiCompileCommand extends Command
      * Configure Object Manager
      *
      * @param OutputInterface $output
+<<<<<<< HEAD
      *
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @return void
      */
     private function configureObjectManager(OutputInterface $output)
     {
         $this->objectManager->configure(
             [
+<<<<<<< HEAD
                 'preferences' => [ConfigWriterInterface::class => ObjectManager\ConfigWriter\Filesystem::class,
                 ], ModificationChain::class => [
                     'arguments' => [
@@ -371,6 +462,41 @@ class DiCompileCommand extends Command
                         'excludePatterns' => $this->excludedPathsList
                     ]
                 ], Console::class => [
+=======
+                'preferences' => [\Magento\Framework\App\ObjectManager\ConfigWriterInterface::class =>
+                    \Magento\Framework\App\ObjectManager\ConfigWriter\Filesystem::class,
+                ], \Magento\Setup\Module\Di\Compiler\Config\ModificationChain::class => [
+                    'arguments' => [
+                        'modificationsList' => [
+                            'BackslashTrim' => [
+                                'instance' =>
+                                    \Magento\Setup\Module\Di\Compiler\Config\Chain\BackslashTrim::class
+                            ],
+                            'PreferencesResolving' => [
+                                'instance' =>
+                                    \Magento\Setup\Module\Di\Compiler\Config\Chain\PreferencesResolving::class
+                            ],
+                            'InterceptorSubstitution' => [
+                                'instance' =>
+                                    \Magento\Setup\Module\Di\Compiler\Config\Chain\InterceptorSubstitution::class
+                            ],
+                            'InterceptionPreferencesResolving' => [
+                                'instance' => \Magento\Setup\Module\Di\Compiler\Config\Chain\PreferencesResolving::class
+                            ],
+                        ]
+                    ]
+                ], \Magento\Setup\Module\Di\Code\Generator\PluginList::class => [
+                    'arguments' => [
+                        'cache' => [
+                            'instance' => \Magento\Framework\App\Interception\Cache\CompiledConfig::class
+                        ]
+                    ]
+                ], \Magento\Setup\Module\Di\Code\Reader\ClassesScanner::class => [
+                    'arguments' => [
+                        'excludePatterns' => $this->excludedPathsList
+                    ]
+                ], \Magento\Setup\Module\Di\Compiler\Log\Writer\Console::class => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'arguments' => [
                         'output' => $output,
                     ]
@@ -383,7 +509,10 @@ class DiCompileCommand extends Command
      * Returns operations configuration
      *
      * @param array $compiledPathsList
+<<<<<<< HEAD
      *
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @return array
      */
     private function getOperationsConfiguration(
@@ -418,7 +547,10 @@ class DiCompileCommand extends Command
             OperationFactory::AREA_CONFIG_GENERATOR => [
                 $compiledPathsList['application'],
                 $compiledPathsList['library'],
+<<<<<<< HEAD
                 $compiledPathsList['setup'],
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $compiledPathsList['generated_helpers'],
             ],
             OperationFactory::INTERCEPTION_CACHE => [

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2011 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -74,13 +79,21 @@ class BootstrapTest extends \PHPUnit\Framework\TestCase
             ['emulateHttpRequest', 'emulateSession']
         );
         $this->_docBlockBootstrap = $this->getMockBuilder(\Magento\TestFramework\Bootstrap\DocBlock::class)
+<<<<<<< HEAD
             ->onlyMethods(['registerAnnotations'])
+=======
+            ->setMethods(['registerAnnotations'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->setConstructorArgs([__DIR__])
             ->getMock();
         $profilerDriver =
             $this->createPartialMock(\Magento\Framework\Profiler\Driver\Standard::class, ['registerOutput']);
         $this->_profilerBootstrap = $this->getMockBuilder(\Magento\TestFramework\Bootstrap\Profiler::class)
+<<<<<<< HEAD
             ->onlyMethods(['registerFileProfiler', 'registerBambooProfiler'])
+=======
+            ->setMethods(['registerFileProfiler', 'registerBambooProfiler'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->setConstructorArgs([$profilerDriver])
             ->getMock();
 

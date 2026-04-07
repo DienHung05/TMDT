@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -17,7 +22,10 @@ use Magento\Catalog\Model\Product\Option\Value;
 use Magento\Framework\DataObject;
 use Magento\Framework\DataObjectFactory;
 use Magento\TestFramework\Helper\Xpath;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test cases related to check that simple product custom option renders as expected.
@@ -64,11 +72,18 @@ class OptionsTest extends AbstractRenderCustomOptionsTest
      * Check that options from text group(field, area) render as expected.
      *
      * @magentoDataFixture Magento/Catalog/_files/product_without_options_with_stock_data.php
+<<<<<<< HEAD
+=======
+     * @dataProvider renderCustomOptionsFromTextGroupProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $optionData
      * @param array $checkArray
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('renderCustomOptionsFromTextGroupProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRenderCustomOptionsFromTextGroup(array $optionData, array $checkArray): void
     {
         $this->assertTextOptionRenderingOnProduct('simple', $optionData, $checkArray);
@@ -80,7 +95,11 @@ class OptionsTest extends AbstractRenderCustomOptionsTest
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      * @return array
      */
+<<<<<<< HEAD
     public static function renderCustomOptionsFromTextGroupProvider(): array
+=======
+    public function renderCustomOptionsFromTextGroupProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'type_text_required_field' => [
@@ -245,12 +264,19 @@ class OptionsTest extends AbstractRenderCustomOptionsTest
      * Check that options from select group(drop-down, radio buttons, checkbox, multiple select) render as expected.
      *
      * @magentoDataFixture Magento/Catalog/_files/product_without_options_with_stock_data.php
+<<<<<<< HEAD
+=======
+     * @dataProvider renderCustomOptionsFromSelectGroupProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $optionData
      * @param array $optionValueData
      * @param array $checkArray
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('renderCustomOptionsFromSelectGroupProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRenderCustomOptionsFromSelectGroup(
         array $optionData,
         array $optionValueData,
@@ -265,7 +291,11 @@ class OptionsTest extends AbstractRenderCustomOptionsTest
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      * @return array
      */
+<<<<<<< HEAD
     public static function renderCustomOptionsFromSelectGroupProvider(): array
+=======
+    public function renderCustomOptionsFromSelectGroupProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'type_select_required_field' => [

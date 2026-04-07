@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 $objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
@@ -25,6 +30,10 @@ $payment->setTransactionId('trx_capture');
 $payment->setIsTransactionClosed(false);
 $payment->setTransactionAdditionalInfo('capture_key', 'data');
 $payment->setParentTransactionId('trx_auth');
+<<<<<<< HEAD
 $payment->addTransaction(\Magento\Sales\Model\Order\Payment\Transaction::TYPE_AUTH);
+=======
+$payment->addTransaction(\Magento\Sales\Model\Order\Payment\Transaction::TYPE_CAPTURE);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 $order->save();

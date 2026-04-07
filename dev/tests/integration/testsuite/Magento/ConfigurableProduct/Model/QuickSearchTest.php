@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -13,7 +18,10 @@ use Magento\Catalog\Model\Product\Visibility;
 use Magento\TestFramework\Catalog\Model\Layer\QuickSearchByQuery;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -67,11 +75,19 @@ class QuickSearchTest extends TestCase
      * Assert that child product of configurable will be available by search after
      * set to product visibility by catalog and search using mysql search engine.
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider productAvailabilityInSearchByVisibilityDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param int $visibility
      * @param bool $expectedResult
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('productAvailabilityInSearchByVisibilityDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testOneOfChildIsAvailableBySearch(int $visibility, bool $expectedResult): void
     {
         $this->checkThatOnlyConfigurableProductIsAvailableBySearch('Configurable Option');
@@ -85,7 +101,11 @@ class QuickSearchTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function productAvailabilityInSearchByVisibilityDataProvider(): array
+=======
+    public function productAvailabilityInSearchByVisibilityDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'visible_catalog_only' => [

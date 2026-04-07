@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Catalog\Model\ResourceModel\Product\Indexer\Eav;
 
@@ -81,13 +86,21 @@ class SourceTest extends \PHPUnit\Framework\TestCase
         $optionIds = $options->getAllIds();
 
         $connection = $this->productResource->getConnection();
+<<<<<<< HEAD
+=======
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $select = $connection->select()->from($this->productResource->getTable('catalog_product_index_eav'))
             ->where('entity_id = ?', 1)
             ->where('attribute_id = ?', $attr->getId())
             ->where('value IN (?)', $optionIds);
 
         $result = $connection->fetchAll($select);
+<<<<<<< HEAD
         $this->assertCount(0, $result);
+=======
+        $this->assertCount(2, $result);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         /** @var \Magento\Catalog\Model\Product $product1 **/
         $product1 = $productRepository->getById(10);
@@ -115,7 +128,11 @@ class SourceTest extends \PHPUnit\Framework\TestCase
         $statusSelect = clone $select;
         $statusSelect->reset(\Magento\Framework\DB\Select::COLUMNS)
             ->columns(new \Magento\Framework\DB\Sql\Expression('COUNT(*)'));
+<<<<<<< HEAD
         $this->assertEquals(0, $connection->fetchOne($statusSelect));
+=======
+        $this->assertEquals(1, $connection->fetchOne($statusSelect));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**

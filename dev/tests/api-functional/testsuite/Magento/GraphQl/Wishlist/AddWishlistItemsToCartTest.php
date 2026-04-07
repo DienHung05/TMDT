@@ -1,13 +1,19 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2025 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare (strict_types = 1);
 
 namespace Magento\GraphQl\Wishlist;
 
 use Exception;
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Catalog\Test\Fixture\ProductStock as ProductStockFixture;
 use Magento\ConfigurableProduct\Test\Fixture\Attribute as AttributeFixture;
@@ -21,13 +27,20 @@ use Magento\Quote\Test\Fixture\CustomerCart as CartFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorage;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
+=======
+use Magento\Framework\Exception\AuthenticationException;
+use Magento\Integration\Api\CustomerTokenServiceInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
 
 /**
  * Test coverage for add requisition list items to cart
+<<<<<<< HEAD
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class AddWishlistItemsToCartTest extends GraphQlAbstract
 {
@@ -37,15 +50,23 @@ class AddWishlistItemsToCartTest extends GraphQlAbstract
     private $customerTokenService;
 
     /**
+<<<<<<< HEAD
      * @var DataFixtureStorage
      */
     private $fixtures;
 
+=======
+     * Set Up
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     protected function setUp(): void
     {
         $objectManager = Bootstrap::getObjectManager();
         $this->customerTokenService = $objectManager->get(CustomerTokenServiceInterface::class);
+<<<<<<< HEAD
         $this->fixtures = $objectManager->get(DataFixtureStorageManager::class)->getStorage();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -87,11 +108,19 @@ class AddWishlistItemsToCartTest extends GraphQlAbstract
 
         $query = $this->getQuery($wishlistId, $itemId);
         $response = $this->graphQlMutation($query, [], '', $this->getHeaderMap());
+<<<<<<< HEAD
+=======
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertArrayHasKey('addWishlistItemsToCart', $response);
         $wishlistAfterAddingToCart = $response['addWishlistItemsToCart']['wishlist'];
         $userErrors = $response['addWishlistItemsToCart']['add_wishlist_items_to_cart_user_errors'];
         $this->assertEquals($userErrors[0]['message'], 'You need to choose options for your item.');
+<<<<<<< HEAD
         $this->assertEquals($userErrors[0]['code'], 'REQUIRED_PARAMETER_MISSING');
+=======
+        $this->assertEquals($userErrors[0]['code'], 'UNDEFINED');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertEquals($userErrors[0]['wishlistId'], $wishlistId);
         $this->assertEquals($userErrors[0]['wishlistItemId'], $itemId);
         $wishlistItems = $wishlistAfterAddingToCart['items_v2']['items'];
@@ -130,10 +159,14 @@ class AddWishlistItemsToCartTest extends GraphQlAbstract
     public function testAddItemsToCartForInvalidUser(): void
     {
         $this->expectException(Exception::class);
+<<<<<<< HEAD
         $this->expectExceptionMessage(
             "The account sign-in was incorrect or your account is disabled temporarily. " .
             "Please wait and try again later."
         );
+=======
+        $this->expectExceptionMessage("The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.");
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $wishlist = $this->getWishlist();
         $customerWishlist = $wishlist['customer']['wishlists'][0];
@@ -163,7 +196,11 @@ class AddWishlistItemsToCartTest extends GraphQlAbstract
 
         $query = $this->getQuery($wishlistId, $itemId);
 
+<<<<<<< HEAD
         $this->graphQlMutation($query);
+=======
+        $this->graphQlMutation($query, [], '', ['Authorization' => 'Bearer test_token']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -224,6 +261,7 @@ class AddWishlistItemsToCartTest extends GraphQlAbstract
         $query = $this->getQuery($customerWishlist['id'], $itemId);
         $this->graphQlMutation($query, [], '', $this->getHeaderMap());
     }
+<<<<<<< HEAD
 
      /**
       * Add all items from customer's wishlist to cart
@@ -232,6 +270,14 @@ class AddWishlistItemsToCartTest extends GraphQlAbstract
       * @magentoConfigFixture wishlist/general/active 1
       * @magentoApiDataFixture Magento/Wishlist/_files/wishlist_with_simple_product.php
       */
+=======
+     /** Add all items from customer's wishlist to cart
+     *
+     * @magentoApiDataFixture Magento/GraphQl/Catalog/_files/simple_product.php
+     * @magentoConfigFixture wishlist/general/active 1
+     * @magentoApiDataFixture Magento/Wishlist/_files/wishlist_with_simple_product.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddAllWishlistItemsToCart(): void
     {
         $wishlist = $this->getWishlist();
@@ -241,7 +287,11 @@ class AddWishlistItemsToCartTest extends GraphQlAbstract
 
         $sku2 = 'simple_product';
         $quantity2 = 2;
+<<<<<<< HEAD
         $addProductsToWishlistQuery = $this->getAddProductToWishlistQuery($wishlistId, $sku2, $quantity2);
+=======
+        $addProductsToWishlistQuery = $this->addSecondProductToWishlist($wishlistId, $sku2, $quantity2);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->graphQlMutation($addProductsToWishlistQuery, [], '', $this->getHeaderMap());
         $addWishlistToCartQuery = $this->getAddAllItemsToCartQuery($wishlistId);
 
@@ -256,6 +306,7 @@ class AddWishlistItemsToCartTest extends GraphQlAbstract
         $this->assertCount(2, $customerCart['customerCart']['items']);
     }
 
+<<<<<<< HEAD
     #[
         DataFixture(AttributeFixture::class, as: 'attribute'),
         DataFixture(ProductFixture::class, as: 'simple_product'),
@@ -322,6 +373,8 @@ class AddWishlistItemsToCartTest extends GraphQlAbstract
         $this->assertEquals($simpleSku, $customerCart['customerCart']['items'][0]['product']['sku']);
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Authentication header map
      *
@@ -380,6 +433,10 @@ MUTATION;
      * Returns GraphQl mutation string
      *
      * @param string $wishlistId
+<<<<<<< HEAD
+=======
+     * @param string $itemId
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @return string
      */
     private function getAddAllItemsToCartQuery(
@@ -421,6 +478,7 @@ MUTATION;
         return $this->graphQlQuery($this->getCustomerWishlistQuery(), [], '', $this->getHeaderMap($username));
     }
 
+<<<<<<< HEAD
     /**
      * Get customer cart details
      *
@@ -428,6 +486,8 @@ MUTATION;
      * @return array
      * @throws AuthenticationException
      */
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function getCustomerCart(string $username): array
     {
         return $this->graphQlQuery($this->getCustomerCartQuery(), [], '', $this->getHeaderMap($username));
@@ -468,11 +528,19 @@ QUERY;
      * Returns the GraphQl mutation string for products added to wishlist
      *
      * @param string $wishlistId
+<<<<<<< HEAD
      * @param string $sku
      * @param int $quantity
      * @return string
      */
     private function getAddProductToWishlistQuery(
+=======
+     * @param string $sku2
+     * @param int $quantity2
+     * @return string
+     */
+    private function addSecondProductToWishlist(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         string $wishlistId,
         string $sku,
         int $quantity
@@ -529,4 +597,9 @@ MUTATION;
 }
 QUERY;
     }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

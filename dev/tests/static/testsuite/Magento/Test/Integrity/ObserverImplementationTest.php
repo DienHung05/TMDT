@@ -1,12 +1,20 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Test\Integrity;
 
 use Magento\Framework\App\Utility\Files;
+<<<<<<< HEAD
 use Magento\Tax\Observer\GetPriceConfigurationObserver;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * PAY ATTENTION: Current implementation does not support of virtual types
@@ -14,9 +22,15 @@ use Magento\Tax\Observer\GetPriceConfigurationObserver;
 class ObserverImplementationTest extends \PHPUnit\Framework\TestCase
 {
     /**
+<<<<<<< HEAD
      * @var string
      */
     public const OBSERVER_INTERFACE = \Magento\Framework\Event\ObserverInterface::class;
+=======
+     * Observer interface
+     */
+    const OBSERVER_INTERFACE = \Magento\Framework\Event\ObserverInterface::class;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var array
@@ -57,6 +71,7 @@ class ObserverImplementationTest extends \PHPUnit\Framework\TestCase
         $errors = [];
         foreach (self::$observerClasses as $observerClass) {
             $reflection = (new \ReflectionClass($observerClass));
+<<<<<<< HEAD
             $publicMethodsCount = 0;
             $maxCountMethod = $reflection->getConstructor() ? 2 : 1;
             $publicMethods = $reflection->getMethods(\ReflectionMethod::IS_PUBLIC);
@@ -67,6 +82,11 @@ class ObserverImplementationTest extends \PHPUnit\Framework\TestCase
             }
 
             if ($publicMethodsCount > $maxCountMethod) {
+=======
+            $maxCountMethod = $reflection->getConstructor() ? 2 : 1;
+
+            if (count($reflection->getMethods(\ReflectionMethod::IS_PUBLIC)) > $maxCountMethod) {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $errors[] = $observerClass;
             }
         }
@@ -105,7 +125,10 @@ class ObserverImplementationTest extends \PHPUnit\Framework\TestCase
         $blacklistFiles = str_replace('\\', '/', realpath(__DIR__)) . '/_files/blacklist/observers*.txt';
         $blacklistExceptions = [];
         foreach (glob($blacklistFiles) as $fileName) {
+<<<<<<< HEAD
             // phpcs:ignore Magento2.Performance.ForeachArrayMerge
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $blacklistExceptions = array_merge(
                 $blacklistExceptions,
                 file($fileName, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES)

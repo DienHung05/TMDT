@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Persistent\Model;
@@ -60,7 +65,11 @@ class ObserverTest extends \PHPUnit\Framework\TestCase
 
         $this->_checkoutSession = $this->getMockBuilder(
             \Magento\Checkout\Model\Session::class
+<<<<<<< HEAD
         )->disableOriginalConstructor()->onlyMethods([])->getMock();
+=======
+        )->disableOriginalConstructor()->setMethods([])->getMock();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->_observer = $this->_objectManager->create(
             \Magento\Persistent\Model\Observer::class,

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -36,19 +41,37 @@ class MixinManagerTest extends TestCase
         $description = '>o<';
         $mixinList = ['x', 'y', 'z'];
 
+<<<<<<< HEAD
         $xMixinMock = $this->createMock(DescriptionMixinInterface::class);
+=======
+        $xMixinMock = $this->getMockForAbstractClass(
+            DescriptionMixinInterface::class
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $xMixinMock->expects($this->once())
             ->method('apply')
             ->with($description)
             ->willReturn($description . 'x');
 
+<<<<<<< HEAD
         $yMixinMock = $this->createMock(DescriptionMixinInterface::class);
+=======
+        $yMixinMock = $this->getMockForAbstractClass(
+            DescriptionMixinInterface::class
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $yMixinMock->expects($this->once())
             ->method('apply')
             ->with($description . 'x')
             ->willReturn($description . 'xy');
 
+<<<<<<< HEAD
         $zMixinMock = $this->createMock(DescriptionMixinInterface::class);
+=======
+        $zMixinMock = $this->getMockForAbstractClass(
+            DescriptionMixinInterface::class
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $zMixinMock->expects($this->once())
             ->method('apply')
             ->with($description . 'xy')
@@ -57,6 +80,7 @@ class MixinManagerTest extends TestCase
         $this->mixinFactoryMock
             ->expects($this->exactly(count($mixinList)))
             ->method('create')
+<<<<<<< HEAD
             ->willReturnCallback(function ($arg1) use ($mixinList, $xMixinMock, $yMixinMock, $zMixinMock) {
                 if ($arg1 == $mixinList[0]) {
                     return $xMixinMock;
@@ -66,6 +90,20 @@ class MixinManagerTest extends TestCase
                     return $zMixinMock;
                 }
             });
+=======
+            ->withConsecutive(
+                [$mixinList[0]],
+                [$mixinList[1]],
+                [$mixinList[2]]
+            )
+            ->will(
+                $this->onConsecutiveCalls(
+                    $xMixinMock,
+                    $yMixinMock,
+                    $zMixinMock
+                )
+            );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertEquals(
             $description . 'xyz',

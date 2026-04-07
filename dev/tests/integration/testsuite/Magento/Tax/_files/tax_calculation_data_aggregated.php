@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -10,7 +15,10 @@ declare(strict_types=1);
  *
  * @var array
  */
+<<<<<<< HEAD
 global $taxCalculationData;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 $taxCalculationData = [];
 //phpcs:disable Magento2.Security.IncludeFile
 require_once __DIR__ . '/scenarios/excluding_tax_apply_tax_after_discount.php';

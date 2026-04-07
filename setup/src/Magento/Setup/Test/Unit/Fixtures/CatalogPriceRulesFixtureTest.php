@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -21,7 +26,10 @@ use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManager;
 use Magento\Store\Model\Website;
 use PHPUnit\Framework\MockObject\MockObject;
+<<<<<<< HEAD
 use Magento\Framework\TestFramework\Unit\Helper\MockCreationTrait;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -29,8 +37,11 @@ use PHPUnit\Framework\TestCase;
  */
 class CatalogPriceRulesFixtureTest extends TestCase
 {
+<<<<<<< HEAD
     use MockCreationTrait;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @var MockObject|FixtureModel
      */
@@ -69,9 +80,20 @@ class CatalogPriceRulesFixtureTest extends TestCase
             ->willReturn([$websiteMock]);
 
         $contextMock = $this->createMock(Context::class);
+<<<<<<< HEAD
         $abstractDbMock = $this->createPartialMockWithReflection(
             AbstractDb::class,
             ['getAllChildren', '_construct']
+=======
+        $abstractDbMock = $this->getMockForAbstractClass(
+            AbstractDb::class,
+            [$contextMock],
+            '',
+            true,
+            true,
+            true,
+            ['getAllChildren']
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
         $abstractDbMock->expects($this->once())
             ->method('getAllChildren')

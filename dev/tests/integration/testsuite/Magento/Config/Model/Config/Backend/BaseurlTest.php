@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Config\Model\Config\Backend;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Config\Model\Config\Backend;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * @magentoAppArea adminhtml
  */
@@ -16,8 +24,13 @@ class BaseurlTest extends \PHPUnit\Framework\TestCase
      * @param string $path
      * @param string $value
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
      */
     #[DataProvider('validationDataProvider')]
+=======
+     * @dataProvider validationDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testValidation($path, $value)
     {
         /** @var $model \Magento\Config\Model\Config\Backend\Baseurl */
@@ -31,7 +44,11 @@ class BaseurlTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function validationDataProvider()
+=======
+    public function validationDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $basePlaceholder = '{{base_url}}';
         $unsecurePlaceholder = '{{unsecure_base_url}}';
@@ -76,8 +93,13 @@ class BaseurlTest extends \PHPUnit\Framework\TestCase
      * @param string $path
      * @param string $value
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
      */
     #[DataProvider('validationExceptionDataProvider')]
+=======
+     * @dataProvider validationExceptionDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testValidationException($path, $value)
     {
         $this->expectException(\Magento\Framework\Exception\LocalizedException::class);
@@ -92,7 +114,11 @@ class BaseurlTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function validationExceptionDataProvider()
+=======
+    public function validationExceptionDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $baseSuffix = '{{base_url}}test/';
         $unsecurePlaceholder = '{{unsecure_base_url}}';

@@ -1,11 +1,17 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Review\Block;
 
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Framework\App\Area;
 use Magento\Framework\App\Config\Value;
@@ -18,6 +24,13 @@ use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\ObjectManager;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\Framework\App\Area;
+use Magento\Framework\App\Config\Value;
+use Magento\Framework\App\ReinitableConfig;
+use Magento\Framework\App\State;
+use Magento\TestFramework\ObjectManager;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class FormTest extends \PHPUnit\Framework\TestCase
 {
@@ -36,8 +49,13 @@ class FormTest extends \PHPUnit\Framework\TestCase
     /**
      * @magentoDbIsolation enabled
      * @magentoDataFixture Magento/Review/_files/config.php
+<<<<<<< HEAD
      */
     #[DataProvider('getCorrectFlagDataProvider')]
+=======
+     * @dataProvider getCorrectFlagDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetCorrectFlag(
         $path,
         $scope,
@@ -62,14 +80,21 @@ class FormTest extends \PHPUnit\Framework\TestCase
 
         /** @var \Magento\Review\Block\Form $form */
         $form = $this->objectManager->create(\Magento\Review\Block\Form::class);
+<<<<<<< HEAD
         $form->setButtonLockManager(
             $this->objectManager->create(ButtonLockManager::class, ['buttonLockPool' => []])
         );
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $result = $form->getAllowWriteReviewFlag();
         $this->assertEquals($result, $expectedResult);
     }
 
+<<<<<<< HEAD
     public static function getCorrectFlagDataProvider()
+=======
+    public function getCorrectFlagDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -89,6 +114,7 @@ class FormTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+<<<<<<< HEAD
     #[
         AppArea('frontend'),
         DataFixture(ProductFixture::class, as: 'product'),
@@ -108,6 +134,8 @@ class FormTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($product->getSku(), $productInfo->getSku());
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     private function getObjectManager()
     {
         return \Magento\TestFramework\Helper\Bootstrap::getObjectManager();

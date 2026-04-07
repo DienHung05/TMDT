@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Framework\Session\SaveHandler;
 
 use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\Encryption\EncryptorInterface;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class DbTableTest extends \PHPUnit\Framework\TestCase
 {
@@ -41,7 +49,11 @@ class DbTableTest extends \PHPUnit\Framework\TestCase
      *
      * @var array
      */
+<<<<<<< HEAD
     protected static $_sourceData = [
+=======
+    protected $_sourceData = [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         self::SESSION_NEW => ['new key' => 'new value'],
         self::SESSION_EXISTS => ['existing key' => 'existing value'],
     ];
@@ -100,7 +112,11 @@ class DbTableTest extends \PHPUnit\Framework\TestCase
 
         // session stores serialized objects with protected properties
         // we need to test this case to ensure that DB adapter successfully processes "\0" symbols in serialized data
+<<<<<<< HEAD
         foreach (self::$_sourceData as $key => $data) {
+=======
+        foreach ($this->_sourceData as $key => $data) {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $this->_sessionData[$key] = new \Magento\Framework\DataObject($data);
         }
     }
@@ -111,6 +127,10 @@ class DbTableTest extends \PHPUnit\Framework\TestCase
     public function testCheckConnection()
     {
         $method = new \ReflectionMethod(\Magento\Framework\Session\SaveHandler\DbTable::class, 'checkConnection');
+<<<<<<< HEAD
+=======
+        $method->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertNull($method->invoke($this->_model));
     }
 
@@ -188,15 +208,26 @@ class DbTableTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function readEncodedDataProvider()
+=======
+    public function readEncodedDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         // we can't use object data as a fixture because not encoded serialized object
         // might cause DB adapter fatal error, so we have to use array as a fixture
         // phpcs:ignore Magento2.Security.InsecureFunction
+<<<<<<< HEAD
         $sessionData = serialize(self::$_sourceData[self::SESSION_NEW]);
         return [
             'session_encoded' => ['sessionData' => base64_encode($sessionData)],
             'session_not_encoded' => ['sessionData' => $sessionData]
+=======
+        $sessionData = serialize($this->_sourceData[self::SESSION_NEW]);
+        return [
+            'session_encoded' => ['$sessionData' => base64_encode($sessionData)],
+            'session_not_encoded' => ['$sessionData' => $sessionData]
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
     }
 
@@ -205,9 +236,16 @@ class DbTableTest extends \PHPUnit\Framework\TestCase
      *
      * @param string $sessionData
      *
+<<<<<<< HEAD
      * @return void
      */
     #[DataProvider('readEncodedDataProvider')]
+=======
+     * @dataProvider readEncodedDataProvider
+     *
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testReadEncoded($sessionData)
     {
         $sessionRecord = [self::COLUMN_SESSION_ID => $this->_encryptor->hash(self::SESSION_ID), self::COLUMN_SESSION_DATA => $sessionData];
@@ -216,6 +254,10 @@ class DbTableTest extends \PHPUnit\Framework\TestCase
         $sessionData = $this->_model->read(self::SESSION_ID);
         // We have to use unserialize here.
         // phpcs:ignore Magento2.Security.InsecureFunction
+<<<<<<< HEAD
         $this->assertEquals(self::$_sourceData[self::SESSION_NEW], unserialize($sessionData));
+=======
+        $this->assertEquals($this->_sourceData[self::SESSION_NEW], unserialize($sessionData));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

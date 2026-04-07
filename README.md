@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 <p align="center">
 <a href="https://www.codetriage.com/magento/magento2"><img src="https://www.codetriage.com/magento/magento2/badges/users.svg" alt="Open Source Helpers" /></a>
@@ -82,3 +83,6 @@ If you are a new Community member, check out the following channels:
 - [general](https://magentocommeng.slack.com/archives/C4YS78WE6) is an open chat for introductions and Magento 2 questions
 - [github](https://magentocommeng.slack.com/archives/C7KB93M32) is a support channel for GitHub issues, pull requests, and processes
 - [public-backlog](https://magentocommeng.slack.com/archives/CCV3J3RV5) for discussions of the backlog
+=======
+# TMDT
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f

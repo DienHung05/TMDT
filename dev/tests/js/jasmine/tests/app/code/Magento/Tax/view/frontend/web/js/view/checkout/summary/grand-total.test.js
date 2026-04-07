@@ -1,6 +1,11 @@
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /* eslint max-nested-callbacks: 0 */
@@ -39,11 +44,18 @@ define(['squire', 'ko'], function (Squire, ko) {
         try {
             injector.clean();
             injector.remove();
+<<<<<<< HEAD
         } catch (e) { // eslint-disable-line no-unused-vars
         }
     });
 
     describe('Magento_Tax/js/view/checkout/summary/grand-total getGrandTotalExclTax method', function () {
+=======
+        } catch (e) {}
+    });
+
+    describe('Magento_Tax/js/view/checkout/summary/grand-total', function () {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         describe('"getGrandTotalExclTax" method', function () {
             it('Check if totals object empty.', function () {
                 expect(obj.getGrandTotalExclTax()).toBe(0);
@@ -60,7 +72,11 @@ define(['squire', 'ko'], function (Squire, ko) {
             });
         });
     });
+<<<<<<< HEAD
     describe('Magento_Tax/js/view/checkout/summary/grand-total isBaseGrandTotalDisplayNeeded method', function () {
+=======
+    describe('Magento_Tax/js/view/checkout/summary/grand-total', function () {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         describe('"isBaseGrandTotalDisplayNeeded" method', function () {
             it('Check if totals object empty.', function () {
                 expect(obj.isBaseGrandTotalDisplayNeeded()).toBe(false);

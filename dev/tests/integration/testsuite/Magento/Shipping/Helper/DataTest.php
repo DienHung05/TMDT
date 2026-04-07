@@ -1,12 +1,20 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Shipping\Helper;
 
 use Magento\Store\Model\StoreManagerInterface;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class DataTest extends \PHPUnit\Framework\TestCase
 {
@@ -28,8 +36,13 @@ class DataTest extends \PHPUnit\Framework\TestCase
      * @param int $entityId
      * @param string $code
      * @param string $expected
+<<<<<<< HEAD
      */
     #[DataProvider('getTrackingPopupUrlBySalesModelDataProvider')]
+=======
+     * @dataProvider getTrackingPopupUrlBySalesModelDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetTrackingPopupUrlBySalesModel($modelName, $getIdMethod, $entityId, $code, $expected)
     {
         $objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
@@ -66,8 +79,13 @@ class DataTest extends \PHPUnit\Framework\TestCase
      * @param string $expected
      * @magentoAppArea adminhtml
      * @magentoConfigFixture admin_store web/unsecure/base_link_url http://admin.localhost/
+<<<<<<< HEAD
      */
     #[DataProvider('getTrackingPopupUrlBySalesModelDataProvider')]
+=======
+     * @dataProvider getTrackingPopupUrlBySalesModelDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetTrackingPopupUrlBySalesModelFromAdmin($modelName, $getIdMethod, $entityId, $code, $expected)
     {
         $objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
@@ -133,7 +151,11 @@ class DataTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getTrackingPopupUrlBySalesModelDataProvider()
+=======
+    public function getTrackingPopupUrlBySalesModelDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [\Magento\Sales\Model\Order::class,
@@ -146,7 +168,11 @@ class DataTest extends \PHPUnit\Framework\TestCase
                 'setId',
                 42,
                 'abc',
+<<<<<<< HEAD
                 'http://localhost/index.php/shipping/tracking/popup?hash=c2hpcF9pZDo0MjphYmM%7E'
+=======
+                'http://localhost/index.php/shipping/tracking/popup?hash=c2hpcF9pZDo0MjphYmM%2C'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             [\Magento\Sales\Model\Order\Shipment\Track::class,
                 'setEntityId',

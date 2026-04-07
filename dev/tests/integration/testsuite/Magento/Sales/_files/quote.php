@@ -1,9 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+\Magento\TestFramework\Helper\Bootstrap::getInstance()->loadArea('frontend');
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 $storeManager = Magento\TestFramework\Helper\Bootstrap::getObjectManager()
     ->get(\Magento\Store\Model\StoreManagerInterface::class);
 $product = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(\Magento\Catalog\Model\Product::class);
@@ -29,8 +38,11 @@ $product->setTypeId('simple')
     ->setWebsiteIds([$storeManager->getStore()->getWebsiteId()])
     ->save();
 
+<<<<<<< HEAD
 \Magento\TestFramework\Helper\Bootstrap::getInstance()->loadArea('frontend');
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 $productRepository = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()
     ->create(\Magento\Catalog\Api\ProductRepositoryInterface::class);
 $product = $productRepository->get('simple');

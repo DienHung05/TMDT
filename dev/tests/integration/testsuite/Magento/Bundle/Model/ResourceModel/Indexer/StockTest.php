@@ -1,11 +1,17 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Bundle\Model\ResourceModel\Indexer;
 
+<<<<<<< HEAD
 use Magento\Bundle\Test\Fixture\Link as BundleSelectionFixture;
 use Magento\Bundle\Test\Fixture\Option as BundleOptionFixture;
 use Magento\Bundle\Test\Fixture\Product as BundleProductFixture;
@@ -16,6 +22,8 @@ use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class StockTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -25,7 +33,11 @@ class StockTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp(): void
     {
+<<<<<<< HEAD
         $this->processor = Bootstrap::getObjectManager()->get(
+=======
+        $this->processor = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->get(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             \Magento\CatalogInventory\Model\Indexer\Stock\Processor::class
         );
     }
@@ -39,11 +51,19 @@ class StockTest extends \PHPUnit\Framework\TestCase
     {
         $this->processor->reindexAll();
 
+<<<<<<< HEAD
         $categoryFactory = Bootstrap::getObjectManager()->get(
             \Magento\Catalog\Model\CategoryFactory::class
         );
         /** @var \Magento\Catalog\Block\Product\ListProduct $listProduct */
         $listProduct = Bootstrap::getObjectManager()->get(
+=======
+        $categoryFactory = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->get(
+            \Magento\Catalog\Model\CategoryFactory::class
+        );
+        /** @var \Magento\Catalog\Block\Product\ListProduct $listProduct */
+        $listProduct = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->get(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             \Magento\Catalog\Block\Product\ListProduct::class
         );
 
@@ -73,6 +93,7 @@ class StockTest extends \PHPUnit\Framework\TestCase
             $this->assertEquals($expectedResult[$product->getName()], $product->getQty());
         }
     }
+<<<<<<< HEAD
 
     #[
         DataFixture(
@@ -199,4 +220,6 @@ class StockTest extends \PHPUnit\Framework\TestCase
             ],
         ];
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

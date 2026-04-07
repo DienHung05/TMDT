@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
@@ -13,6 +14,14 @@ use Magento\TestFramework\Fixture\AppIsolation;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorage;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Catalog\Helper\Product;
+
+use Magento\Customer\Model\Context;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea frontend
@@ -40,6 +49,7 @@ class ViewTest extends \PHPUnit\Framework\TestCase
      */
     protected $objectManager;
 
+<<<<<<< HEAD
     /**
      * @var DataFixtureStorage
      */
@@ -49,6 +59,12 @@ class ViewTest extends \PHPUnit\Framework\TestCase
     {
         $this->objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
         $this->fixtures = DataFixtureStorageManager::getStorage();
+=======
+    protected function setUp(): void
+    {
+        $this->objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->objectManager->get(\Magento\Framework\App\State::class)->setAreaCode('frontend');
         $this->objectManager->get(\Magento\Framework\App\Http\Context::class)
             ->setValue(Context::CONTEXT_AUTH, false, false);
@@ -113,8 +129,11 @@ class ViewTest extends \PHPUnit\Framework\TestCase
     /**
      * @magentoDataFixture Magento/Catalog/_files/multiple_products.php
      * @magentoAppIsolation enabled
+<<<<<<< HEAD
      * @magentoConfigFixture default_store design/head/title_prefix prefix
      * @magentoConfigFixture default_store design/head/title_suffix suffix
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoAppArea frontend
      */
     public function testPrepareAndRender()
@@ -126,7 +145,10 @@ class ViewTest extends \PHPUnit\Framework\TestCase
         /** @var \Magento\TestFramework\Response $response */
         $response = $this->objectManager->get(\Magento\TestFramework\Response::class);
         $this->page->renderResult($response);
+<<<<<<< HEAD
         $this->assertStringContainsString('prefix meta title suffix', $response->getBody());
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertNotEmpty($response->getBody());
         $this->assertEquals(
             10,
@@ -137,6 +159,7 @@ class ViewTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * Product meta description should be rendered on the product HTML sources as is, without changes or substitutions
      *
      * @return void
@@ -202,6 +225,8 @@ class ViewTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoAppIsolation enabled
      */
     public function testPrepareAndRenderWrongController()

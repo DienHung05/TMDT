@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -433,6 +438,7 @@ class ConditionsToCollectionApplierTest extends \PHPUnit\Framework\TestCase
                     'simple-product-13',
                 ]
             ],
+<<<<<<< HEAD
 
             // test filter by multiple sku and "is not one of" condition
             'variation 23' => [
@@ -449,6 +455,8 @@ class ConditionsToCollectionApplierTest extends \PHPUnit\Framework\TestCase
                     'simple-product-13',
                 ]
             ],
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
     }
 
@@ -1074,6 +1082,7 @@ class ConditionsToCollectionApplierTest extends \PHPUnit\Framework\TestCase
         return $this->getCombineConditionFromArray($conditions);
     }
 
+<<<<<<< HEAD
     private function getConditionsForVariation23()
     {
         $conditions = [
@@ -1093,6 +1102,8 @@ class ConditionsToCollectionApplierTest extends \PHPUnit\Framework\TestCase
         return $this->getCombineConditionFromArray($conditions);
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     private function getCombineConditionFromArray(array $data)
     {
         $combinedCondition = $this->combinedConditionFactory->create();

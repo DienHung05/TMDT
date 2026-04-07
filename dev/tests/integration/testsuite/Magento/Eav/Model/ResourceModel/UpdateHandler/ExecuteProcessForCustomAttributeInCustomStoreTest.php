@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Eav\Model\ResourceModel\UpdateHandler;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\ResourceModel\Eav\Attribute;
 use Magento\Eav\Model\ResourceModel\UpdateHandlerAbstract;
@@ -26,6 +34,10 @@ class ExecuteProcessForCustomAttributeInCustomStoreTest extends UpdateHandlerAbs
      * @magentoDataFixture Magento/Catalog/_files/product_simple.php
      * @magentoDataFixture Magento/Catalog/_files/dropdown_attribute.php
      * @magentoDataFixture Magento/Store/_files/second_store.php
+<<<<<<< HEAD
+=======
+     * @dataProvider getCustomAttributeDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param $code
      * @param $defaultStoreValue
      * @param $snapshotValue
@@ -33,7 +45,10 @@ class ExecuteProcessForCustomAttributeInCustomStoreTest extends UpdateHandlerAbs
      * @param $expected
      * @magentoDbIsolation disabled
      */
+<<<<<<< HEAD
     #[DataProvider('getCustomAttributeDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecuteProcessForCustomAttributeInCustomStore(
         $code,
         $defaultStoreValue,
@@ -105,7 +120,11 @@ class ExecuteProcessForCustomAttributeInCustomStoreTest extends UpdateHandlerAbs
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getCustomAttributeDataProvider()
+=======
+    public function getCustomAttributeDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['dropdown_attribute', 0, '', 1, 1],        //0

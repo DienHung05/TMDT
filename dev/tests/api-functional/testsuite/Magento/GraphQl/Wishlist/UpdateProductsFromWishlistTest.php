@@ -1,13 +1,19 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Wishlist;
 
 use Exception;
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Customer\Test\Fixture\Customer as CustomerFixture;
 use Magento\Framework\Exception\AuthenticationException;
@@ -19,6 +25,12 @@ use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
 use Magento\Wishlist\Test\Fixture\AddProductToWishlist as AddProductToWishlistFixture;
+=======
+use Magento\Framework\Exception\AuthenticationException;
+use Magento\Integration\Api\CustomerTokenServiceInterface;
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\TestFramework\TestCase\GraphQlAbstract;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test coverage for updating a product from wishlist
@@ -31,17 +43,23 @@ class UpdateProductsFromWishlistTest extends GraphQlAbstract
     private $customerTokenService;
 
     /**
+<<<<<<< HEAD
      * @var DataFixtureStorage
      */
     private $fixtures;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Set Up
      */
     protected function setUp(): void
     {
         $objectManager = Bootstrap::getObjectManager();
+<<<<<<< HEAD
         $this->fixtures = $objectManager->get(DataFixtureStorageManager::class)->getStorage();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->customerTokenService = $objectManager->get(CustomerTokenServiceInterface::class);
     }
 
@@ -158,6 +176,7 @@ class UpdateProductsFromWishlistTest extends GraphQlAbstract
         self::assertEquals('simple-1', $itemsInWishlist['product']['sku']);
     }
 
+<<<<<<< HEAD
     #[
       Config('wishlist/general/active', true),
       DataFixture(ProductFixture::class, as: 'product'),
@@ -205,6 +224,8 @@ class UpdateProductsFromWishlistTest extends GraphQlAbstract
         $this->assertEquals('', $wishlistResponseNoDescription['items_v2']['items'][0]['description']);
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Authentication header map
      *

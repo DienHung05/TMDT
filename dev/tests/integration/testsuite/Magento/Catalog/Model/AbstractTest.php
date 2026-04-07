@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Catalog\Model;
 
@@ -10,7 +15,11 @@ class AbstractTest extends \PHPUnit\Framework\TestCase
     /**
      * Stub class name for class under test
      */
+<<<<<<< HEAD
     public const STUB_CLASS = \Magento\Catalog\Model\AbstractModel\ConcreteStub::class;
+=======
+    const STUB_CLASS = 'Magento_Catalog_Model_AbstractModel_Stub';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var \Magento\Catalog\Model\AbstractModel
@@ -27,15 +36,32 @@ class AbstractTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         if (!self::$_isStubClass) {
+<<<<<<< HEAD
+=======
+            $this->getMockForAbstractClass(
+                \Magento\Catalog\Model\AbstractModel\Stub::class,
+                [],
+                self::STUB_CLASS,
+                false
+            );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             self::$_isStubClass = true;
         }
 
         $this->_model = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(self::STUB_CLASS);
 
         $resourceProperty = new \ReflectionProperty(get_class($this->_model), '_resourceName');
+<<<<<<< HEAD
         $resourceProperty->setValue($this->_model, \Magento\Catalog\Model\ResourceModel\Product::class);
 
         $collectionProperty = new \ReflectionProperty(get_class($this->_model), '_collectionName');
+=======
+        $resourceProperty->setAccessible(true);
+        $resourceProperty->setValue($this->_model, \Magento\Catalog\Model\ResourceModel\Product::class);
+
+        $collectionProperty = new \ReflectionProperty(get_class($this->_model), '_collectionName');
+        $collectionProperty->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $collectionProperty->setValue($this->_model, \Magento\Catalog\Model\ResourceModel\Product\Collection::class);
     }
 

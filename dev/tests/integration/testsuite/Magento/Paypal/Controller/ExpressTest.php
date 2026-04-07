@@ -1,15 +1,26 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Paypal\Controller;
 
 use Magento\Checkout\Model\Session;
 use Magento\Framework\Session\Generic as GenericSession;
+<<<<<<< HEAD
 use Magento\Framework\TestFramework\Unit\Helper\MockCreationTrait;
 use Magento\Paypal\Model\Api\Nvp;
 use Magento\Paypal\Model\Api\Type\Factory as ApiFactory;
+=======
+use Magento\Paypal\Model\Api\Nvp;
+use Magento\Paypal\Model\Api\Type\Factory as ApiFactory;
+use Magento\Paypal\Model\Session as PaypalSession;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Quote\Model\Quote;
 use Magento\TestFramework\Helper\Bootstrap;
 
@@ -20,7 +31,10 @@ use Magento\TestFramework\Helper\Bootstrap;
  */
 class ExpressTest extends \Magento\TestFramework\TestCase\AbstractController
 {
+<<<<<<< HEAD
     use MockCreationTrait;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @magentoDataFixture Magento/Sales/_files/quote.php
      * @magentoDataFixture Magento/Paypal/_files/quote_payment.php
@@ -64,6 +78,7 @@ class ExpressTest extends \Magento\TestFramework\TestCase\AbstractController
         )->setQuoteId(
             $order->getQuoteId()
         );
+<<<<<<< HEAD
         /** @var GenericSession $paypalSession */
         $paypalSession = $this->_objectManager->create(
             GenericSession::class,
@@ -71,6 +86,11 @@ class ExpressTest extends \Magento\TestFramework\TestCase\AbstractController
         );
         $paypalSession->setExpressCheckoutToken('token');
         $this->_objectManager->addSharedInstance($paypalSession, 'Magento\Paypal\Model\Session');
+=======
+        /** @var $paypalSession PaypalSession */
+        $paypalSession = $this->_objectManager->get(PaypalSession::class); // @phpstan-ignore-line
+        $paypalSession->setExpressCheckoutToken('token');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->dispatch('paypal/express/cancel');
 
@@ -179,6 +199,7 @@ class ExpressTest extends \Magento\TestFramework\TestCase\AbstractController
             'getExportedBillingAddress'
         ];
 
+<<<<<<< HEAD
         $nvpMock = $this->createPartialMockWithReflection(
             Nvp::class,
             [
@@ -217,6 +238,21 @@ class ExpressTest extends \Magento\TestFramework\TestCase\AbstractController
         $apiFactoryMock = $this->getMockBuilder(ApiFactory::class)
             ->disableOriginalConstructor()
             ->onlyMethods(['create'])
+=======
+        $nvpMock = $this->getMockBuilder(Nvp::class)
+            ->setMethods($nvpMethods)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        foreach ($nvpMethods as $method) {
+            $nvpMock->method($method)
+                ->willReturnSelf();
+        }
+
+        $apiFactoryMock = $this->getMockBuilder(ApiFactory::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['create'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
 
         $apiFactoryMock->method('create')
@@ -225,6 +261,7 @@ class ExpressTest extends \Magento\TestFramework\TestCase\AbstractController
 
         $this->_objectManager->addSharedInstance($apiFactoryMock, ApiFactory::class);
 
+<<<<<<< HEAD
         /** @var GenericSession $paypalSession */
         $paypalSession = $this->_objectManager->create(
             GenericSession::class,
@@ -232,10 +269,39 @@ class ExpressTest extends \Magento\TestFramework\TestCase\AbstractController
         );
         $paypalSession->setExpressCheckoutToken('token');
         $this->_objectManager->addSharedInstance($paypalSession, 'Magento\Paypal\Model\Session');
+=======
+        $sessionMock = $this->getMockBuilder(GenericSession::class)
+            ->setMethods(['getExpressCheckoutToken'])
+            ->setConstructorArgs(
+                [
+                    $this->_objectManager->get(\Magento\Framework\App\Request\Http::class),
+                    $this->_objectManager->get(\Magento\Framework\Session\SidResolverInterface::class),
+                    $this->_objectManager->get(\Magento\Framework\Session\Config\ConfigInterface::class),
+                    $this->_objectManager->get(\Magento\Framework\Session\SaveHandlerInterface::class),
+                    $this->_objectManager->get(\Magento\Framework\Session\ValidatorInterface::class),
+                    $this->_objectManager->get(\Magento\Framework\Session\StorageInterface::class),
+                    $this->_objectManager->get(\Magento\Framework\Stdlib\CookieManagerInterface::class),
+                    $this->_objectManager->get(\Magento\Framework\Stdlib\Cookie\CookieMetadataFactory::class),
+                    $this->_objectManager->get(\Magento\Framework\App\State::class),
+                ]
+            )
+            ->getMock();
+
+        $sessionMock->method('getExpressCheckoutToken')
+            ->willReturn(true);
+
+        // @phpstan-ignore-next-line
+        $this->_objectManager->addSharedInstance($sessionMock, PaypalSession::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->dispatch('paypal/express/returnAction');
         $this->assertRedirect($this->stringContains('checkout/onepage/success'));
 
         $this->_objectManager->removeSharedInstance(ApiFactory::class);
+<<<<<<< HEAD
+=======
+        // @phpstan-ignore-next-line
+        $this->_objectManager->removeSharedInstance(PaypalSession::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

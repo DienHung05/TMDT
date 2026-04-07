@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Setup\Console\Command;
 
@@ -20,6 +25,7 @@ class I18nCollectPhrasesCommand extends Command
     /**#@+
      * Keys and shortcuts for input arguments and options
      */
+<<<<<<< HEAD
     public const INPUT_KEY_DIRECTORY = 'directory';
     public const INPUT_KEY_OUTPUT = 'output';
     public const SHORTCUT_KEY_OUTPUT = 'o';
@@ -34,6 +40,21 @@ class I18nCollectPhrasesCommand extends Command
     protected function configure()
     {
         $this->setName(self::NAME)
+=======
+    const INPUT_KEY_DIRECTORY = 'directory';
+    const INPUT_KEY_OUTPUT = 'output';
+    const SHORTCUT_KEY_OUTPUT = 'o';
+    const INPUT_KEY_MAGENTO = 'magento';
+    const SHORTCUT_KEY_MAGENTO = 'm';
+    /**#@- */
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configure()
+    {
+        $this->setName('i18n:collect-phrases')
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->setDescription('Discovers phrases in the codebase');
         $this->setDefinition([
             new InputArgument(
@@ -58,9 +79,15 @@ class I18nCollectPhrasesCommand extends Command
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
+=======
+     * {@inheritdoc}
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $directory = $input->getArgument(self::INPUT_KEY_DIRECTORY);
         if ($input->getOption(self::INPUT_KEY_MAGENTO)) {

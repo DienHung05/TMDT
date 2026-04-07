@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Framework\DB\DataConverter;
@@ -72,13 +77,24 @@ class DataConverterTest extends TestCase
         $this->objectManager = Bootstrap::getObjectManager();
 
         /** @var InQueryModifier $queryModifier */
+<<<<<<< HEAD
         $this->queryModifierMock = $this->createMock(QueryModifierInterface::class);
+=======
+        $this->queryModifierMock = $this->getMockBuilder(QueryModifierInterface::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['modify'])
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->dataConverter = $this->objectManager->get(SerializedToJson::class);
 
         $this->iteratorMock = $this->getMockBuilder(BatchIterator::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['current', 'valid', 'next'])
+=======
+            ->setMethods(['current', 'valid', 'next'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
 
         $iterationComplete = false;
@@ -99,12 +115,20 @@ class DataConverterTest extends TestCase
 
         $this->queryGeneratorMock = $this->getMockBuilder(Generator::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['generate'])
+=======
+            ->setMethods(['generate'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
 
         $this->selectByRangeMock = $this->getMockBuilder(Select::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods([])
+=======
+            ->setMethods([])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
 
         $this->queryGeneratorMock->expects($this->any())
@@ -118,7 +142,11 @@ class DataConverterTest extends TestCase
 
         $this->adapterMock = $this->getMockBuilder(Mysql::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['fetchPairs', 'fetchAll', 'quoteInto', 'update', 'prepareSqlCondition'])
+=======
+            ->setMethods(['fetchPairs', 'fetchAll', 'quoteInto', 'update', 'prepareSqlCondition'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
 
         $this->adapterMock->expects($this->any())

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -11,11 +16,17 @@ namespace Magento\Test\Helper;
 
 use Magento\Framework\App\Bootstrap;
 use Magento\Framework\App\Filesystem\DirectoryList;
+<<<<<<< HEAD
 use Magento\Framework\TestFramework\Unit\Helper\MockCreationTrait;
 
 class BootstrapTest extends \PHPUnit\Framework\TestCase
 {
     use MockCreationTrait;
+=======
+
+class BootstrapTest extends \PHPUnit\Framework\TestCase
+{
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @var \Magento\TestFramework\Helper\Bootstrap
      */
@@ -49,10 +60,18 @@ class BootstrapTest extends \PHPUnit\Framework\TestCase
             \Magento\TestFramework\Application::class,
             ['getTempDir', 'getInitParams', 'reinitialize', 'run']
         );
+<<<<<<< HEAD
         $this->_bootstrap = $this->createPartialMockWithReflection(
             \Magento\TestFramework\Bootstrap::class,
             ['getDbVendorName', 'getApplication']
         );
+=======
+        $this->_bootstrap = $this->getMockBuilder(\Magento\TestFramework\Bootstrap::class)
+            ->disableOriginalConstructor()
+            ->addMethods(['getDbVendorName'])
+            ->onlyMethods(['getApplication'])
+            ->getMock();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->_bootstrap->expects(
             $this->any()
         )->method(
@@ -89,9 +108,14 @@ class BootstrapTest extends \PHPUnit\Framework\TestCase
     /**
      * @depends testSetInstanceFirstAllowed
      */
+<<<<<<< HEAD
     public function testGetInstanceAllowed(?\Magento\TestFramework\Helper\Bootstrap $expectedInstance = null)
     {
         $expectedInstance = $expectedInstance ?? \Magento\TestFramework\Helper\Bootstrap::getInstance();
+=======
+    public function testGetInstanceAllowed(\Magento\TestFramework\Helper\Bootstrap $expectedInstance)
+    {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertSame($expectedInstance, \Magento\TestFramework\Helper\Bootstrap::getInstance());
     }
 

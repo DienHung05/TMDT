@@ -1,12 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Catalog\Api;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\TestCase\WebapiAbstract;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Helper\CompareArraysRecursively;
@@ -16,9 +25,15 @@ use Magento\TestFramework\Helper\CompareArraysRecursively;
  */
 class CategoryManagementTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     public const RESOURCE_PATH = '/V1/categories';
 
     public const SERVICE_NAME = 'catalogCategoryManagementV1';
+=======
+    const RESOURCE_PATH = '/V1/categories';
+
+    const SERVICE_NAME = 'catalogCategoryManagementV1';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var CompareArraysRecursively
@@ -37,9 +52,15 @@ class CategoryManagementTest extends WebapiAbstract
     /**
      * Tests getTree operation
      *
+<<<<<<< HEAD
      * @magentoApiDataFixture Magento/Catalog/_files/category_tree.php
      */
     #[DataProvider('treeDataProvider')]
+=======
+     * @dataProvider treeDataProvider
+     * @magentoApiDataFixture Magento/Catalog/_files/category_tree.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testTree($rootCategoryId, $depth, $expected)
     {
         $requestData = ['rootCategoryId' => $rootCategoryId, 'depth' => $depth];
@@ -62,7 +83,11 @@ class CategoryManagementTest extends WebapiAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function treeDataProvider(): array
+=======
+    public function treeDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -156,8 +181,13 @@ class CategoryManagementTest extends WebapiAbstract
 
     /**
      * @magentoApiDataFixture Magento/Catalog/_files/category_tree.php
+<<<<<<< HEAD
      */
     #[DataProvider('updateMoveDataProvider')]
+=======
+     * @dataProvider updateMoveDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateMove($categoryId, $parentId, $afterId, $expectedPosition)
     {
         $expectedPath = '1/2/400/' . $categoryId;
@@ -183,7 +213,11 @@ class CategoryManagementTest extends WebapiAbstract
         $this->assertEquals($parentId, $model->getParentId());
     }
 
+<<<<<<< HEAD
     public static function updateMoveDataProvider()
+=======
+    public function updateMoveDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [402, 400, null, 2],

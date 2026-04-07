@@ -9,9 +9,12 @@ parameters:
         - %rootDir%/../../../dev/tests/*/tmp/*
         - %rootDir%/../../../dev/tests/*/_generated/*
         - %rootDir%/../../../pub/*
+<<<<<<< HEAD
         # Test modules loaded at runtime only (FixtureCallStorage, TestModule Controller)
         - %rootDir%/../../../../../../../../api-functional/testsuite/Magento/TestModuleOverrideConfig/MagentoApiDataFixture/*
         - %rootDir%/../../../../../../../../integration/testsuite/Magento/Backend/App/RouterTest.php
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     scanDirectories:
         - %rootDir%/../../../dev/tests/static/framework/tests/unit/testsuite/Magento
         - %rootDir%/../../../dev/tests/integration/framework/tests/unit/testsuite/Magento
@@ -25,10 +28,13 @@ parameters:
     ignoreErrors:
         # Ignore PHPStan\Rules\Classes\UnusedConstructorParametersRule
         - '#Constructor of class [a-zA-Z0-9\\_]+ has an unused parameter#'
+<<<<<<< HEAD
         # Ignore DataFixture attribute class issues
         - '#Attribute class Magento\\TestFramework\\Fixture\\DataFixture is not repeatable#'
         # Ignore Config attribute class issues (Config is IS_REPEATABLE in framework)
         - '#Attribute class Magento\\TestFramework\\Fixture\\Config is not repeatable#'
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         # Ignore setCustomErrorHandler function not found in bootstrap files
         - '#Function setCustomErrorHandler not found#'
         # Ignore 'return statement is missing' error when 'void' is present in return type list
@@ -43,6 +49,7 @@ parameters:
         - '#Constant TESTS_MODULES_PATH not found.#'
         - '#Constant TESTS_INSTALLATION_DB_CONFIG_FILE not found.#'
         - '#Constant T_[A-Z_]+ not found.#'
+<<<<<<< HEAD
         # Ignore Predis\Client - optional dependency for Redis fallback
         - '#Class Predis\\Client not found.#'
         - '#Instantiated class Predis\\Client not found.#'
@@ -55,6 +62,9 @@ parameters:
         # Test module classes in _files (excluded from scan) - loaded at runtime
         - '~FixtureCallStorage not found\.?~'
         - '~TestModule\\Controller\\Adminhtml\\Controller not found\.?~'
+=======
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 services:
     -

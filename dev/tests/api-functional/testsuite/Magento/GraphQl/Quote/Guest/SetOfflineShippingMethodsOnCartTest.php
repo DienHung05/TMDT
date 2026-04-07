@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -10,7 +15,10 @@ namespace Magento\GraphQl\Quote\Guest;
 use Magento\GraphQl\Quote\GetMaskedQuoteIdByReservedOrderId;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for setting offline shipping methods on cart
@@ -47,8 +55,13 @@ class SetOfflineShippingMethodsOnCartTest extends GraphQlAbstract
      * @param string $methodTitle
      * @param array $amount
      * @throws \Magento\Framework\Exception\NoSuchEntityException
+<<<<<<< HEAD
      */
     #[DataProvider('offlineShippingMethodDataProvider')]
+=======
+     * @dataProvider offlineShippingMethodDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSetOfflineShippingMethod(
         string $carrierCode,
         string $methodCode,
@@ -92,7 +105,11 @@ class SetOfflineShippingMethodsOnCartTest extends GraphQlAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function offlineShippingMethodDataProvider(): array
+=======
+    public function offlineShippingMethodDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'flatrate_flatrate' => [
@@ -132,9 +149,15 @@ class SetOfflineShippingMethodsOnCartTest extends GraphQlAbstract
     ): string {
         return <<<QUERY
 mutation {
+<<<<<<< HEAD
   setShippingMethodsOnCart(input:
     {
       cart_id: "$maskedQuoteId",
+=======
+  setShippingMethodsOnCart(input: 
+    {
+      cart_id: "$maskedQuoteId", 
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
       shipping_methods: [{
         carrier_code: "$shippingCarrierCode"
         method_code: "$shippingMethodCode"

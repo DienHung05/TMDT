@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -10,6 +15,7 @@ namespace Magento\GraphQl\Quote;
 use Magento\Catalog\Api\CategoryLinkManagementInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\Product;
+<<<<<<< HEAD
 use Magento\Framework\Exception\AuthenticationException;
 use Magento\GraphQl\GetCustomerAuthenticationHeader;
 use Magento\SalesRule\Api\RuleRepositoryInterface;
@@ -20,12 +26,22 @@ use Magento\Tax\Model\ResourceModel\TaxClass\CollectionFactory as TaxClassCollec
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
 use Magento\SalesRule\Api\Data\DiscountAppliedToInterface as DiscountAppliedTo;
+=======
+use Magento\SalesRule\Model\ResourceModel\Rule\Collection;
+use Magento\SalesRule\Model\Rule;
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\TestFramework\TestCase\GraphQlAbstract;
+use Magento\Tax\Model\ClassModel as TaxClassModel;
+use Magento\Tax\Model\ResourceModel\TaxClass\CollectionFactory as TaxClassCollectionFactory;
+use Magento\SalesRule\Api\RuleRepositoryInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test cases for applying cart promotions to items in cart
  */
 class CartPromotionsTest extends GraphQlAbstract
 {
+<<<<<<< HEAD
     /** @var GetCustomerAuthenticationHeader */
     private $customerAuthenticationHeader;
 
@@ -41,13 +57,18 @@ class CartPromotionsTest extends GraphQlAbstract
             Bootstrap::getObjectManager()->get(GetCustomerAuthenticationHeader::class);
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Test adding single cart rule to multiple products in a cart
      *
      * @magentoApiDataFixture Magento/Catalog/_files/multiple_products.php
      * @magentoApiDataFixture Magento/SalesRule/_files/rules_category.php
      */
+<<<<<<< HEAD
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCartPromotionSingleCartRule()
     {
         $skus =['simple1', 'simple2'];
@@ -110,7 +131,12 @@ class CartPromotionsTest extends GraphQlAbstract
                         'total_item_discount' => ['value' => $productsInCart[$itemIndex]->getSpecialPrice()*$qty*0.5],
                         'discounts' => [
                             0 =>[
+<<<<<<< HEAD
                                 'amount' => ['value' => $productsInCart[$itemIndex]->getSpecialPrice()*$qty*0.5],
+=======
+                                'amount' =>
+                                    ['value' => $productsInCart[$itemIndex]->getSpecialPrice()*$qty*0.5],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                                 'label' => $ruleLabels[0]
                             ]
                         ]
@@ -126,7 +152,10 @@ class CartPromotionsTest extends GraphQlAbstract
      * @magentoApiDataFixture Magento/Catalog/_files/multiple_products.php
      * @magentoApiDataFixture Magento/SalesRule/_files/rules_category.php
      * @magentoApiDataFixture Magento/SalesRule/_files/cart_rule_10_percent_off_qty_more_than_2_items.php
+<<<<<<< HEAD
      * @magentoApiDataFixture Magento/SalesRule/_files/cart_rule_free_shipping.php
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function testCartPromotionsMultipleCartRules()
     {
@@ -157,7 +186,10 @@ class CartPromotionsTest extends GraphQlAbstract
         $qty = 2;
         $cartId = $this->createEmptyCart();
         $this->addMultipleSimpleProductsToCart($cartId, $qty, $skus[0], $skus[1]);
+<<<<<<< HEAD
         $this->setShippingAddressOnCart($cartId);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $query = $this->getCartItemPricesQuery($cartId);
         $response = $this->graphQlMutation($query);
         $this->assertCount(2, $response['cart']['items']);
@@ -170,18 +202,30 @@ class CartPromotionsTest extends GraphQlAbstract
             $lineItemDiscount = $productsInResponse[$itemIndex][0]['prices']['discounts'];
             $expectedTotalDiscountValue = ($productsInCart[$itemIndex]->getSpecialPrice()*$qty*0.5) +
                 ($productsInCart[$itemIndex]->getSpecialPrice()*$qty*0.5*0.1);
+<<<<<<< HEAD
             $this->assertEqualsWithDelta(
                 $productsInCart[$itemIndex]->getSpecialPrice()*$qty*0.5,
                 current($lineItemDiscount)['amount']['value'],
                 self::EPSILON
+=======
+            $this->assertEquals(
+                $productsInCart[$itemIndex]->getSpecialPrice()*$qty*0.5,
+                current($lineItemDiscount)['amount']['value']
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             );
             $this->assertEquals('TestRule_Label', current($lineItemDiscount)['label']);
 
             $lineItemDiscountValue = next($lineItemDiscount)['amount']['value'];
+<<<<<<< HEAD
             $this->assertEqualsWithDelta(
                 round($productsInCart[$itemIndex]->getSpecialPrice()*$qty*0.5)*0.1,
                 $lineItemDiscountValue,
                 self::EPSILON
+=======
+            $this->assertEquals(
+                round($productsInCart[$itemIndex]->getSpecialPrice()*$qty*0.5)*0.1,
+                $lineItemDiscountValue
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             );
             $this->assertEquals('10% off with two items_Label', end($lineItemDiscount)['label']);
             $actualTotalDiscountValue = $lineItemDiscount[0]['amount']['value']+$lineItemDiscount[1]['amount']['value'];
@@ -201,6 +245,7 @@ class CartPromotionsTest extends GraphQlAbstract
                 ]
             );
         }
+<<<<<<< HEAD
         $this->assertEquals(21.98, $response['cart']['prices']['discounts'][0]['amount']['value']);
         $this->assertEquals(
             DiscountAppliedTo::APPLIED_TO_ITEM,
@@ -246,6 +291,10 @@ class CartPromotionsTest extends GraphQlAbstract
             DiscountAppliedTo::APPLIED_TO_SHIPPING,
             $response['cart']['prices']['discounts'][1][DiscountAppliedTo::APPLIED_TO],
         );
+=======
+        $this->assertEquals($response['cart']['prices']['discounts'][0]['amount']['value'], 21.98);
+        $this->assertEquals($response['cart']['prices']['discounts'][1]['amount']['value'], 2.2);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -255,7 +304,10 @@ class CartPromotionsTest extends GraphQlAbstract
      * Tax rate = 7.5%
      * Cart rule to apply 50% for products assigned to a specific category
      *
+<<<<<<< HEAD
      * @magentoConfigFixture default_store tax/calculation/discount_tax 1
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoApiDataFixture Magento/Catalog/_files/multiple_products.php
      * @magentoApiDataFixture Magento/GraphQl/Tax/_files/tax_rule_for_region_1.php
      * @magentoApiDataFixture Magento/GraphQl/Tax/_files/tax_calculation_price_and_cart_display_settings.php
@@ -321,7 +373,12 @@ class CartPromotionsTest extends GraphQlAbstract
                         'total_item_discount' => ['value' => round($rowTotalIncludingTax/2, 2)],
                         'discounts' => [
                             0 =>[
+<<<<<<< HEAD
                                 'amount' => ['value' => round($rowTotalIncludingTax/2, 2)],
+=======
+                                'amount' =>
+                                    ['value' => round($rowTotalIncludingTax/2, 2)],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                                 'label' => 'TestRule_Label'
                             ]
                         ]
@@ -383,7 +440,12 @@ class CartPromotionsTest extends GraphQlAbstract
                         'total_item_discount' => ['value' => round(($rowTotal/$sumOfPricesForBothProducts)*5, 2)],
                         'discounts' => [
                             0 =>[
+<<<<<<< HEAD
                                 'amount' => ['value' => round(($rowTotal/$sumOfPricesForBothProducts)*5, 2)],
+=======
+                                'amount' =>
+                                    ['value' => round(($rowTotal/$sumOfPricesForBothProducts)*5, 2)],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                                 'label' => $ruleLabels[0]
                             ]
                         ]
@@ -489,7 +551,12 @@ class CartPromotionsTest extends GraphQlAbstract
                         'total_item_discount' => ['value' => $rowTotal],
                         'discounts' => [
                             0 =>[
+<<<<<<< HEAD
                                 'amount' => ['value' => $rowTotal],
+=======
+                                'amount' =>
+                                    ['value' => $rowTotal],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                                 'label' => $ruleLabels[0]
                             ]
                         ]
@@ -556,7 +623,10 @@ QUERY;
     prices{
       discounts{
         amount{value}
+<<<<<<< HEAD
         applied_to
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
       }
     }
   }
@@ -585,11 +655,18 @@ QUERY;
      * @param int $sku1
      * @param int $qty
      * @param string $sku2
+<<<<<<< HEAD
      * @return string
      */
     private function addSimpleProductsToCartQuery(string $cartId, int $qty, string $sku1, string $sku2): string
     {
         return <<<QUERY
+=======
+     */
+    private function addMultipleSimpleProductsToCart(string $cartId, int $qty, string $sku1, string $sku2): void
+    {
+        $query = <<<QUERY
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 mutation {
   addSimpleProductsToCart(input: {
     cart_id: "{$cartId}",
@@ -618,6 +695,7 @@ mutation {
       }
 }
 QUERY;
+<<<<<<< HEAD
     }
 
     /**
@@ -629,6 +707,9 @@ QUERY;
     private function addMultipleSimpleProductsToCart(string $cartId, int $qty, string $sku1, string $sku2): void
     {
         $query = $this->addSimpleProductsToCartQuery($cartId, $qty, $sku1, $sku2);
+=======
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $response = $this->graphQlMutation($query);
 
         self::assertArrayHasKey('cart', $response['addSimpleProductsToCart']);
@@ -639,6 +720,7 @@ QUERY;
     }
 
     /**
+<<<<<<< HEAD
      * Executes GraphQL mutation for a default customer
      *
      * @param string $query
@@ -707,6 +789,8 @@ QUERY;
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Set shipping address for the region for which tax rule is set
      *
      * @param string $cartId

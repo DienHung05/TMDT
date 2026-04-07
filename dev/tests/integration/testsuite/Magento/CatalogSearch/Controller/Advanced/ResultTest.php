@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,7 +16,10 @@ use Magento\Catalog\Api\ProductAttributeRepositoryInterface;
 use Magento\Catalog\Model\ResourceModel\Eav\Attribute;
 use Magento\TestFramework\TestCase\AbstractController;
 use Laminas\Stdlib\Parameters;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test cases for catalog advanced search using search engine.
@@ -41,11 +49,18 @@ class ResultTest extends AbstractController
      * @magentoAppArea frontend
      * @magentoDataFixture Magento/CatalogSearch/_files/product_for_search.php
      * @magentoDataFixture Magento/CatalogSearch/_files/full_reindex.php
+<<<<<<< HEAD
+=======
+     * @dataProvider searchStringDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @param array $searchParams
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('searchStringDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecute(array $searchParams): void
     {
         if ('' !== $searchParams['test_searchable_attribute']) {
@@ -142,11 +157,18 @@ class ResultTest extends AbstractController
      * @magentoAppArea frontend
      * @magentoDataFixture Magento/CatalogSearch/_files/product_for_search.php
      * @magentoDataFixture Magento/CatalogSearch/_files/full_reindex.php
+<<<<<<< HEAD
+=======
+     * @dataProvider searchParamsInArrayDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @param array $searchParams
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('searchParamsInArrayDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecuteWithArrayInParam(array $searchParams): void
     {
         $this->getRequest()->setQuery(
@@ -167,6 +189,7 @@ class ResultTest extends AbstractController
     }
 
     /**
+<<<<<<< HEAD
      * Advanced search test by difference product attributes.
      *
      * @magentoAppArea frontend
@@ -203,11 +226,17 @@ class ResultTest extends AbstractController
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Data provider with array in params values
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function searchParamsInArrayDataProvider(): array
+=======
+    public function searchParamsInArrayDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'search_with_from_param_is_array' => [
@@ -278,7 +307,11 @@ class ResultTest extends AbstractController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function searchStringDataProvider(): array
+=======
+    public function searchStringDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'search_product_by_name' => [
@@ -376,6 +409,7 @@ class ResultTest extends AbstractController
 
         return $attribute->getSource()->getOptionId($optionLabel);
     }
+<<<<<<< HEAD
 
     /**
      * Data provider with strings for quick search.
@@ -443,4 +477,6 @@ class ResultTest extends AbstractController
             ],
         ];
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

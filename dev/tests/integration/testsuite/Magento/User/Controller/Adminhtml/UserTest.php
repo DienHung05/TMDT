@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\User\Controller\Adminhtml;
 
 use Magento\Framework\App\Request\Http as HttpRequest;
 use Magento\TestFramework\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea adminhtml
@@ -160,8 +168,13 @@ class UserTest extends \Magento\TestFramework\TestCase\AbstractBackendController
      * @param bool $isPasswordCorrect
      *
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
      */
     #[DataProvider('saveActionPasswordChangeDataProvider')]
+=======
+     * @dataProvider saveActionPasswordChangeDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveActionPasswordChange($postData, $isPasswordCorrect)
     {
         $this->getRequest()->setMethod(HttpRequest::METHOD_POST);
@@ -191,7 +204,11 @@ class UserTest extends \Magento\TestFramework\TestCase\AbstractBackendController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function saveActionPasswordChangeDataProvider()
+=======
+    public function saveActionPasswordChangeDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $password = uniqid('123q');
         $passwordPairs = [

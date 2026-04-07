@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -52,9 +57,14 @@ class GetSpecifiedShippingAddressTest extends GraphQlAbstract
         $response = $this->graphQlQuery($query, [], '', $this->getHeaderMap());
         self::assertArrayHasKey('cart', $response);
         self::assertArrayHasKey('shipping_addresses', $response['cart']);
+<<<<<<< HEAD
         $uid = $response['cart']['shipping_addresses'][0]['uid'];
         $expectedShippingAddressData = [
             'uid' => $uid,
+=======
+
+        $expectedShippingAddressData = [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'firstname' => 'John',
             'lastname' => 'Smith',
             'company' => 'CompanyName',
@@ -161,19 +171,30 @@ class GetSpecifiedShippingAddressTest extends GraphQlAbstract
 {
   cart(cart_id: "$maskedQuoteId") {
     shipping_addresses {
+<<<<<<< HEAD
       uid
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
       firstname
       lastname
       company
       street
       city
+<<<<<<< HEAD
       region
+=======
+      region 
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
       {
         code
         label
       }
       postcode
+<<<<<<< HEAD
       country
+=======
+      country 
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
       {
         code
         label

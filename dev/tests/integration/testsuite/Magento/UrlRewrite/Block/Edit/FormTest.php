@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\UrlRewrite\Block\Edit;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\UrlRewrite\Block\Edit;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * Test for \Magento\UrlRewrite\Block\Edit\FormTest
  * @magentoAppArea adminhtml
@@ -146,10 +154,17 @@ class FormTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Test fields disabled status
+<<<<<<< HEAD
      * @magentoAppIsolation enabled
      * @magentoConfigFixture current_store general/single_store_mode/enabled 0
      */
     #[DataProvider('fieldsStateDataProvider')]
+=======
+     * @dataProvider fieldsStateDataProvider
+     * @magentoAppIsolation enabled
+     * @magentoConfigFixture current_store general/single_store_mode/enabled 0
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testReadonlyFields($urlRewrite, $fields)
     {
         $form = $this->_getFormInstance(['url_rewrite' => $urlRewrite]);
@@ -161,7 +176,11 @@ class FormTest extends \PHPUnit\Framework\TestCase
     /**
      * Data provider for checking fields state
      */
+<<<<<<< HEAD
     public static function fieldsStateDataProvider(): array
+=======
+    public function fieldsStateDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

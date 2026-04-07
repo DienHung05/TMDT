@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -14,21 +19,30 @@ use Magento\Catalog\Model\ResourceModel\Category as CategoryResource;
 use Magento\Catalog\Model\ResourceModel\Category\Collection;
 use Magento\Catalog\Model\ResourceModel\Category\Tree;
 use Magento\Catalog\Model\ResourceModel\Product\Collection as ProductCollection;
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Category as CategoryFixture;
 use Magento\Eav\Model\Entity\Attribute\Exception as AttributeException;
 use Magento\Framework\Exception\LocalizedException;
+=======
+use Magento\Eav\Model\Entity\Attribute\Exception as AttributeException;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Math\Random;
 use Magento\Framework\Url;
 use Magento\Store\Api\StoreRepositoryInterface;
 use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
+<<<<<<< HEAD
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorage;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+use PHPUnit\Framework\TestCase;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test class for \Magento\Catalog\Model\Category.
@@ -64,6 +78,7 @@ class CategoryTest extends TestCase
     private $categoryRepository;
 
     /**
+<<<<<<< HEAD
      * @var DataFixtureStorage
      */
     private $dataFixtureStorage;
@@ -71,6 +86,9 @@ class CategoryTest extends TestCase
     /**
      * @inheritdoc
      * @throws LocalizedException
+=======
+     * @inheritdoc
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     protected function setUp(): void
     {
@@ -81,7 +99,10 @@ class CategoryTest extends TestCase
         $this->_model = $this->objectManager->create(Category::class);
         $this->categoryResource = $this->objectManager->get(CategoryResource::class);
         $this->categoryRepository = $this->objectManager->get(CategoryRepositoryInterface::class);
+<<<<<<< HEAD
         $this->dataFixtureStorage = DataFixtureStorageManager::getStorage();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     public function testGetUrlInstance(): void
@@ -417,9 +438,15 @@ class CategoryTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param array $data
      */
     #[DataProvider('categoryFieldsProvider')]
+=======
+     * @dataProvider categoryFieldsProvider
+     * @param array $data
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCategoryCreateWithDifferentFields(array $data): void
     {
         $requiredData = [
@@ -460,6 +487,7 @@ class CategoryTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function categoryFieldsProvider(): array
     {
         return [
@@ -475,6 +503,21 @@ class CategoryTest extends TestCase
                     'include_in_menu' => '0',
                 ]
             ]
+=======
+    public function categoryFieldsProvider(): array
+    {
+        return [
+            [
+                'enable_fields' => [
+                    'is_active' => '1',
+                    'include_in_menu' => '1',
+                ],
+                'disable_fields' => [
+                    'is_active' => '0',
+                    'include_in_menu' => '0',
+                ],
+            ],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
     }
 
@@ -524,6 +567,7 @@ class CategoryTest extends TestCase
 
         return $collection->getItemByColumnValue('name', $categoryName);
     }
+<<<<<<< HEAD
 
     /**
      * @return void
@@ -541,4 +585,6 @@ class CategoryTest extends TestCase
 
         $this->assertStringEndsWith('new-url.html', $category->getUrl());
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

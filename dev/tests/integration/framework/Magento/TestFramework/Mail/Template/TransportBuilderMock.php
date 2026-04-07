@@ -1,13 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\TestFramework\Mail\Template;
 
 /**
+<<<<<<< HEAD
  * Mock of mail transport builder
+=======
+ * Class TransportBuilderMock
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class TransportBuilderMock extends \Magento\Framework\Mail\Template\TransportBuilder
 {
@@ -17,11 +26,14 @@ class TransportBuilderMock extends \Magento\Framework\Mail\Template\TransportBui
     protected $_sentMessage;
 
     /**
+<<<<<<< HEAD
      * @var callable
      */
     private $onMessageSentCallback;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Reset object state
      *
      * @return $this
@@ -29,7 +41,11 @@ class TransportBuilderMock extends \Magento\Framework\Mail\Template\TransportBui
     protected function reset()
     {
         $this->_sentMessage = $this->message;
+<<<<<<< HEAD
         return parent::reset();
+=======
+        parent::reset();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -52,6 +68,7 @@ class TransportBuilderMock extends \Magento\Framework\Mail\Template\TransportBui
     {
         $this->prepareMessage();
         $this->reset();
+<<<<<<< HEAD
         return $this->objectManager->create(
             \Magento\TestFramework\Mail\TransportInterfaceMock::class,
             [
@@ -78,5 +95,8 @@ class TransportBuilderMock extends \Magento\Framework\Mail\Template\TransportBui
     {
         $this->_sentMessage = null;
         $this->onMessageSentCallback = null;
+=======
+        return new \Magento\TestFramework\Mail\TransportInterfaceMock($this->message);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

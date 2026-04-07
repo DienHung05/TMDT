@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -29,7 +34,10 @@ use Magento\Store\Api\StoreRepositoryInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Entity;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -167,9 +175,15 @@ class ProductTest extends \PHPUnit\Framework\TestCase
      * @param bool $isSalable
      * @magentoAppIsolation enabled
      * @magentoDataFixture Magento/Bundle/_files/product.php
+<<<<<<< HEAD
      * @covers \Magento\Catalog\Model\Product::isSalable
      */
     #[DataProvider('stockConfigDataProvider')]
+=======
+     * @dataProvider stockConfigDataProvider
+     * @covers \Magento\Catalog\Model\Product::isSalable
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testIsSalable(
         float $selectionQty,
         float $qty,
@@ -198,7 +212,11 @@ class ProductTest extends \PHPUnit\Framework\TestCase
                 $productLink->setQty($selectionQty);
             }
         }
+<<<<<<< HEAD
         $bundle = $productRepository->save($bundle);
+=======
+        $productRepository->save($bundle);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertEquals($isSalable, $bundle->isSalable());
     }
@@ -206,7 +224,11 @@ class ProductTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function stockConfigDataProvider(): array
+=======
+    public function stockConfigDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $qtyVars = [0, 10];
         $isInStockVars = [
@@ -232,7 +254,11 @@ class ProductTest extends \PHPUnit\Framework\TestCase
                                 . " isInStock: {$isInStock}"
                                 . " manageStock: {$manageStock}"
                                 . " backorders: {$backorders}";
+<<<<<<< HEAD
                             $isSalable = self::checkIsSalable(
+=======
+                            $isSalable = $this->checkIsSalable(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                                 $selectionQty,
                                 $qty,
                                 $isInStock,
@@ -260,6 +286,10 @@ class ProductTest extends \PHPUnit\Framework\TestCase
     /**
      * @magentoAppIsolation enabled
      * @magentoDataFixture Magento/Bundle/_files/bundle_product_with_dynamic_price.php
+<<<<<<< HEAD
+=======
+     * @dataProvider shouldUpdateBundleStockStatusIfChildProductsStockStatusChangedDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param bool $isOption1Required
      * @param bool $isOption2Required
      * @param array $outOfStockConfig
@@ -269,7 +299,10 @@ class ProductTest extends \PHPUnit\Framework\TestCase
      * @throws \Magento\Framework\Exception\InputException
      * @throws \Magento\Framework\Exception\StateException
      */
+<<<<<<< HEAD
     #[DataProvider('shouldUpdateBundleStockStatusIfChildProductsStockStatusChangedDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testShouldUpdateBundleStockStatusIfChildProductsStockStatusChanged(
         bool $isOption1Required,
         bool $isOption2Required,
@@ -313,18 +346,30 @@ class ProductTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function shouldUpdateBundleStockStatusIfChildProductsStockStatusChangedDataProvider(): array
+=======
+    public function shouldUpdateBundleStockStatusIfChildProductsStockStatusChangedDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'all options are required' => [
                 true,
                 true,
+<<<<<<< HEAD
                 'outOfStockConfig' => [
+=======
+                'out-of-stock' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple1' => [
                         'is_in_stock' => false
                     ],
                 ],
+<<<<<<< HEAD
                 'inStockConfig' => [
+=======
+                'in-stock' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple1' => [
                         'is_in_stock' => true
                     ]
@@ -333,7 +378,11 @@ class ProductTest extends \PHPUnit\Framework\TestCase
             'all options are optional' => [
                 false,
                 false,
+<<<<<<< HEAD
                 'outOfStockConfig' => [
+=======
+                'out-of-stock' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple1' => [
                         'is_in_stock' => false
                     ],
@@ -341,7 +390,11 @@ class ProductTest extends \PHPUnit\Framework\TestCase
                         'is_in_stock' => false
                     ],
                 ],
+<<<<<<< HEAD
                 'inStockConfig' => [
+=======
+                'in-stock' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple1' => [
                         'is_in_stock' => true
                     ]
@@ -394,7 +447,11 @@ class ProductTest extends \PHPUnit\Framework\TestCase
      * @return bool
      * @see \Magento\Bundle\Model\ResourceModel\Selection\Collection::addQuantityFilter
      */
+<<<<<<< HEAD
     private static function checkIsSalable(
+=======
+    private function checkIsSalable(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         float $selectionQty,
         float $qty,
         int $isInStock,

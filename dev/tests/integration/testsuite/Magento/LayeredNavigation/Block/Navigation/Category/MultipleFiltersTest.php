@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -12,7 +17,10 @@ use Magento\Catalog\Model\ResourceModel\Product\Collection;
 use Magento\LayeredNavigation\Block\Navigation\AbstractFiltersTest;
 use Magento\Catalog\Model\Layer\Filter\AbstractFilter;
 use Magento\Store\Model\Store;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Provides tests for multiple custom select filters in navigation block on category page.
@@ -27,12 +35,19 @@ class MultipleFiltersTest extends AbstractFiltersTest
      * @magentoDataFixture Magento/Catalog/_files/product_dropdown_attribute.php
      * @magentoDataFixture Magento/Catalog/_files/configurable_attribute.php
      * @magentoDataFixture Magento/Catalog/_files/category_with_three_products.php
+<<<<<<< HEAD
+=======
+     * @dataProvider getMultipleActiveFiltersDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $products
      * @param array $filters
      * @param array $expectedProducts
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('getMultipleActiveFiltersDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetMultipleActiveFilters(
         array $products,
         array $filters,
@@ -55,11 +70,19 @@ class MultipleFiltersTest extends AbstractFiltersTest
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getMultipleActiveFiltersDataProvider(): array
     {
         return [
             'without_filters' => [
                 'products' => [
+=======
+    public function getMultipleActiveFiltersDataProvider(): array
+    {
+        return [
+            'without_filters' => [
+                'products_data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'test_configurable' => [
                         'simple1000' => 'Option 1',
                         'simple1001' => 'Option 2',
@@ -72,10 +95,17 @@ class MultipleFiltersTest extends AbstractFiltersTest
                     ],
                 ],
                 'filters' => [],
+<<<<<<< HEAD
                 'expectedProducts' => ['simple1000', 'simple1001', 'simple1002'],
             ],
             'applied_first_option_in_both_filters' => [
                 'products' => [
+=======
+                'expected_products' => ['simple1000', 'simple1001', 'simple1002'],
+            ],
+            'applied_first_option_in_both_filters' => [
+                'products_data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'test_configurable' => [
                         'simple1000' => 'Option 1',
                         'simple1001' => 'Option 1',
@@ -88,10 +118,17 @@ class MultipleFiltersTest extends AbstractFiltersTest
                     ],
                 ],
                 'filters' => ['test_configurable' => 'Option 1', 'dropdown_attribute' => 'Option 1'],
+<<<<<<< HEAD
                 'expectedProducts' => ['simple1000', 'simple1001'],
             ],
             'applied_mixed_options_in_filters' => [
                 'products' => [
+=======
+                'expected_products' => ['simple1000', 'simple1001'],
+            ],
+            'applied_mixed_options_in_filters' => [
+                'products_data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'test_configurable' => [
                         'simple1000' => 'Option 1',
                         'simple1001' => 'Option 2',
@@ -104,7 +141,11 @@ class MultipleFiltersTest extends AbstractFiltersTest
                     ],
                 ],
                 'filters' => ['test_configurable' => 'Option 2', 'dropdown_attribute' => 'Option 3'],
+<<<<<<< HEAD
                 'expectedProducts' => ['simple1002'],
+=======
+                'expected_products' => ['simple1002'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

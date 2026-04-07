@@ -1,7 +1,14 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Application configuration object. Used to access configuration when application is initialized and installed.
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\TestFramework\App;
 
@@ -68,7 +75,10 @@ class Config extends \Magento\Framework\App\Config
     ) {
         $result = $this->get('system');
 
+<<<<<<< HEAD
         $originalScope = $scope;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         if ($scope === 'store') {
             $scope = 'stores';
         } elseif ($scope === 'website') {
@@ -76,6 +86,7 @@ class Config extends \Magento\Framework\App\Config
         }
 
         if (empty($scopeCode)) {
+<<<<<<< HEAD
             // Use original scope type for resolver, as it expects 'store'/'website', not 'stores'/'websites'
             try {
                 $scopeCode = $this->getScopeCodeResolver()->resolve($originalScope, $scopeCode);
@@ -83,6 +94,9 @@ class Config extends \Magento\Framework\App\Config
                 // If scope resolver fails (e.g., during app isolation), fallback to default scope code
                 $scopeCode = null;
             }
+=======
+            $scopeCode = $this->getScopeCodeResolver()->resolve($scope, $scopeCode);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
 
         $keys = explode('/', $path);
@@ -104,7 +118,11 @@ class Config extends \Magento\Framework\App\Config
      * @param mixed $value
      * @return void
      */
+<<<<<<< HEAD
     private function updateResult(array $keys, &$result, $value)
+=======
+    private function updateResult(array $keys, & $result, $value)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $key = array_shift($keys);
 

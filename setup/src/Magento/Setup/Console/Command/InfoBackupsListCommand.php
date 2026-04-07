@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Setup\Console\Command;
@@ -21,8 +26,14 @@ use Magento\Framework\App\ObjectManager;
  */
 class InfoBackupsListCommand extends Command
 {
+<<<<<<< HEAD
     public const NAME = 'info:backups:list';
     /**
+=======
+    /**
+     * File
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @var File
      */
     private $file;
@@ -47,7 +58,11 @@ class InfoBackupsListCommand extends Command
     public function __construct(
         DirectoryList $directoryList,
         File $file,
+<<<<<<< HEAD
         ?TableFactory $tableHelperFactory = null
+=======
+        TableFactory $tableHelperFactory = null
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ) {
         $this->directoryList = $directoryList;
         $this->file = $file;
@@ -56,20 +71,34 @@ class InfoBackupsListCommand extends Command
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
      */
     protected function configure()
     {
         $this->setName(self::NAME)
+=======
+     * {@inheritdoc}
+     */
+    protected function configure()
+    {
+        $this->setName('info:backups:list')
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->setDescription('Prints list of available backup files');
 
         parent::configure();
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
+=======
+     * {@inheritdoc}
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $backupsDir = $this->directoryList->getPath(DirectoryList::VAR_DIR)
             . '/' . BackupRollback::DEFAULT_BACKUP_DIRECTORY;

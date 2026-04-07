@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,13 +16,17 @@ use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Exception\AuthenticationException;
 use Magento\Framework\Registry;
+<<<<<<< HEAD
 use Magento\Framework\Stdlib\DateTime;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\GraphQl\GetCustomerAuthenticationHeader;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\ResourceModel\Order\Collection;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\TestFramework\Fixture\DataFixture;
@@ -38,6 +47,11 @@ use Magento\TestFramework\Fixture\Config;
  * Class RetrieveOrdersTest
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+
+/**
+ * Class RetrieveOrdersTest
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class RetrieveOrdersByOrderNumberTest extends GraphQlAbstract
 {
@@ -53,6 +67,7 @@ class RetrieveOrdersByOrderNumberTest extends GraphQlAbstract
     /** @var ProductRepositoryInterface */
     private $productRepository;
 
+<<<<<<< HEAD
     /** @var TimezoneInterface */
     private $timezone;
 
@@ -61,6 +76,8 @@ class RetrieveOrdersByOrderNumberTest extends GraphQlAbstract
      */
     private $fixtures;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     protected function setUp():void
     {
         parent::setUp();
@@ -69,8 +86,11 @@ class RetrieveOrdersByOrderNumberTest extends GraphQlAbstract
         $this->orderRepository = $objectManager->get(OrderRepositoryInterface::class);
         $this->searchCriteriaBuilder = $objectManager->get(SearchCriteriaBuilder::class);
         $this->productRepository = $objectManager->get(ProductRepositoryInterface::class);
+<<<<<<< HEAD
         $this->timezone = $objectManager->get(TimezoneInterface::class);
         $this->fixtures = $objectManager->get(DataFixtureStorageManager::class)->getStorage();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -118,9 +138,12 @@ class RetrieveOrdersByOrderNumberTest extends GraphQlAbstract
         $this->assertEquals($expectedOrderTotal, $actualOrderTotalFromResponse, 'Totals do not match');
     }
 
+<<<<<<< HEAD
     #[
         Config(TaxConfig::XML_PATH_DISPLAY_SALES_PRICE, TaxConfig::DISPLAY_TYPE_INCLUDING_TAX),
     ]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      *  Verify the customer order with tax, discount with shipping tax class set for calculation setting
      *
@@ -182,8 +205,11 @@ class RetrieveOrdersByOrderNumberTest extends GraphQlAbstract
             ]
         ];
         $this->assertResponseFields($customerOrderResponse[0]["payment_methods"], $paymentMethodAssertionMap);
+<<<<<<< HEAD
         $this->assertEquals(10.75, $customerOrderResponse[0]['items'][0]['product_sale_price']['value']);
         $this->assertEquals(7.5, $customerOrderResponse[0]['total']['taxes'][0]['rate']);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         // Asserting discounts on order item level
         $this->assertEquals(4, $customerOrderResponse[0]['items'][0]['discounts'][0]['amount']['value']);
         $this->assertEquals('USD', $customerOrderResponse[0]['items'][0]['discounts'][0]['amount']['currency']);
@@ -439,6 +465,7 @@ QUERY;
     }
 
     /**
+<<<<<<< HEAD
      * @return void
      * @throws AuthenticationException
      */
@@ -529,6 +556,8 @@ QUERY;
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoApiDataFixture Magento/Customer/_files/customer.php
      * @magentoApiDataFixture Magento/GraphQl/Sales/_files/orders_with_customer.php
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
@@ -702,10 +731,17 @@ QUERY;
     /**
      * @param String $orderNumber
      * @throws AuthenticationException
+<<<<<<< HEAD
      * @magentoApiDataFixture Magento/Customer/_files/customer.php
      * @magentoApiDataFixture Magento/GraphQl/Sales/_files/orders_with_customer.php
      */
     #[DataProvider('dataProviderIncorrectOrder')]
+=======
+     * @dataProvider dataProviderIncorrectOrder
+     * @magentoApiDataFixture Magento/Customer/_files/customer.php
+     * @magentoApiDataFixture Magento/GraphQl/Sales/_files/orders_with_customer.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetCustomerNonExistingOrderQuery(string $orderNumber)
     {
         $query =
@@ -806,7 +842,11 @@ QUERY;
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function dataProviderIncorrectOrder(): array
+=======
+    public function dataProviderIncorrectOrder(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'correctFormatNonExistingOrder' => [
@@ -826,10 +866,17 @@ QUERY;
      * @param String $store
      * @param int $expectedCount
      * @throws AuthenticationException
+<<<<<<< HEAD
      * @magentoApiDataFixture Magento/Customer/_files/customer.php
      * @magentoApiDataFixture Magento/GraphQl/Sales/_files/two_orders_with_order_items_two_storeviews.php
      */
     #[DataProvider('dataProviderMultiStores')]
+=======
+     * @dataProvider dataProviderMultiStores
+     * @magentoApiDataFixture Magento/Customer/_files/customer.php
+     * @magentoApiDataFixture Magento/GraphQl/Sales/_files/two_orders_with_order_items_two_storeviews.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetCustomerOrdersTwoStoreViewQuery(string $orderNumber, string $store, int $expectedCount)
     {
         $query =
@@ -896,7 +943,11 @@ QUERY;
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function dataProviderMultiStores(): array
+=======
+    public function dataProviderMultiStores(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'firstStoreFirstOrder' => [
@@ -1350,6 +1401,7 @@ QUERY;
            billing_address {
            ... address
            }
+<<<<<<< HEAD
            items{
              product_name
              product_sku
@@ -1357,6 +1409,9 @@ QUERY;
              product_sale_price {value}
              discounts {amount{value currency} label}
            }
+=======
+           items{product_name product_sku quantity_ordered discounts {amount{value currency} label}}
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
            total {
              base_grand_total{value currency}
              grand_total{value currency}

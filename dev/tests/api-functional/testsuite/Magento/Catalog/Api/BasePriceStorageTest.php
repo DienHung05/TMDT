@@ -1,11 +1,17 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Catalog\Api;
 
+<<<<<<< HEAD
 use Magento\Catalog\Model\ProductRepository;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\WebapiAbstract;
@@ -24,6 +30,19 @@ class BasePriceStorageTest extends WebapiAbstract
     private const SERVICE_NAME = 'catalogBasePriceStorageV1';
     private const SERVICE_VERSION = 'V1';
     private const SIMPLE_PRODUCT_SKU = 'simple';
+=======
+use Magento\TestFramework\TestCase\WebapiAbstract;
+use Magento\Framework\Webapi\Exception as HTTPExceptionCodes;
+
+/**
+ * BasePriceStorage test.
+ */
+class BasePriceStorageTest extends WebapiAbstract
+{
+    const SERVICE_NAME = 'catalogBasePriceStorageV1';
+    const SERVICE_VERSION = 'V1';
+    const SIMPLE_PRODUCT_SKU = 'simple';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var \Magento\TestFramework\ObjectManager
@@ -31,6 +50,7 @@ class BasePriceStorageTest extends WebapiAbstract
     private $objectManager;
 
     /**
+<<<<<<< HEAD
      * @var ProductRepositoryFactory
      */
     private $repositoryFactory;
@@ -41,13 +61,18 @@ class BasePriceStorageTest extends WebapiAbstract
     private $fixtures;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Set up.
      */
     protected function setUp(): void
     {
         $this->objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
+<<<<<<< HEAD
         $this->repositoryFactory = Bootstrap::getObjectManager()->get(ProductRepositoryFactory::class);
         $this->fixtures = $this->objectManager->get(DataFixtureStorageManager::class)->getStorage();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -176,6 +201,7 @@ class BasePriceStorageTest extends WebapiAbstract
 
         $this->assertEquals($expectedResponse, $response);
     }
+<<<<<<< HEAD
 
     /**
      * Test update last updated at method.
@@ -223,4 +249,6 @@ class BasePriceStorageTest extends WebapiAbstract
         $afterProductUpdatedAt = $afterProductRepository->get($productSku)->getUpdatedAt();
         $this->assertTrue(strtotime($afterProductUpdatedAt) >= strtotime($beforeProductUpdatedAt));
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

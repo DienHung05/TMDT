@@ -1,6 +1,11 @@
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 module.exports = function (grunt) {
@@ -13,6 +18,7 @@ module.exports = function (grunt) {
             var config = grunt.config.get(task);
 
             config[target].src = data;
+<<<<<<< HEAD
             // Add parser options to support ES6+ features (spread operators, etc.)
             if (task === 'eslint' && config[target].options) {
                 // Merge overrideConfig if it exists, otherwise create it
@@ -27,6 +33,8 @@ module.exports = function (grunt) {
                     }
                 });
             }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             grunt.config.set(task, config);
         };
 

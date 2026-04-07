@@ -1,11 +1,17 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Customer\Block\Address;
 
+<<<<<<< HEAD
 use Magento\Framework\TestFramework\Unit\Helper\MockCreationTrait;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -16,6 +22,12 @@ use PHPUnit\Framework\Attributes\DataProvider;
 class BookTest extends \PHPUnit\Framework\TestCase
 {
     use MockCreationTrait;
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+
+class BookTest extends \PHPUnit\Framework\TestCase
+{
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @var \Magento\Customer\Block\Address\Book
      */
@@ -28,11 +40,20 @@ class BookTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp(): void
     {
+<<<<<<< HEAD
         $blockMock = $this->createPartialMockWithReflection(
             \Magento\Framework\View\Element\BlockInterface::class,
             ['setTitle', 'toHtml']
         );
 
+=======
+        /** @var \PHPUnit\Framework\MockObject\MockObject $blockMock */
+        $blockMock = $this->getMockBuilder(
+            \Magento\Framework\View\Element\BlockInterface::class
+        )->disableOriginalConstructor()->setMethods(
+            ['setTitle', 'toHtml']
+        )->getMock();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $blockMock->expects($this->any())->method('setTitle');
 
         $this->currentCustomer = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()
@@ -69,9 +90,15 @@ class BookTest extends \PHPUnit\Framework\TestCase
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @magentoDataFixture Magento/Customer/_files/customer_two_addresses.php
      * @magentoDataFixture Magento/Customer/_files/customer_no_address.php
+<<<<<<< HEAD
      * @magentoAppIsolation enabled
      */
     #[DataProvider('hasPrimaryAddressDataProvider')]
+=======
+     * @dataProvider hasPrimaryAddressDataProvider
+     * @magentoAppIsolation enabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testHasPrimaryAddress($customerId, $expected)
     {
         if (!empty($customerId)) {
@@ -80,7 +107,11 @@ class BookTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $this->_block->hasPrimaryAddress());
     }
 
+<<<<<<< HEAD
     public static function hasPrimaryAddressDataProvider()
+=======
+    public function hasPrimaryAddressDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return ['0' => [0, false], '1' => [1, true], '5' => [5, false]];
     }
@@ -104,9 +135,15 @@ class BookTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @magentoDataFixture Magento/Customer/_files/customer_no_address.php
+<<<<<<< HEAD
      * @magentoAppIsolation enabled
      */
     #[DataProvider('getAdditionalAddressesDataProvider')]
+=======
+     * @dataProvider getAdditionalAddressesDataProvider
+     * @magentoAppIsolation enabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetAdditionalAddressesNegative($customerId, $expected)
     {
         if (!empty($customerId)) {
@@ -115,7 +152,11 @@ class BookTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $this->_block->getAdditionalAddresses());
     }
 
+<<<<<<< HEAD
     public static function getAdditionalAddressesDataProvider()
+=======
+    public function getAdditionalAddressesDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return ['0' => [0, false], '5' => [5, false]];
     }
@@ -167,16 +208,26 @@ class BookTest extends \PHPUnit\Framework\TestCase
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @magentoDataFixture Magento/Customer/_files/customer_two_addresses.php
      * @magentoDataFixture Magento/Customer/_files/customer_no_address.php
+<<<<<<< HEAD
      * @magentoAppIsolation enabled
      */
     #[DataProvider('getDefaultBillingDataProvider')]
+=======
+     * @dataProvider getDefaultBillingDataProvider
+     * @magentoAppIsolation enabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetDefaultBilling($customerId, $expected)
     {
         $this->currentCustomer->setCustomerId($customerId);
         $this->assertEquals($expected, $this->_block->getDefaultBilling());
     }
 
+<<<<<<< HEAD
     public static function getDefaultBillingDataProvider()
+=======
+    public function getDefaultBillingDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return ['0' => [0, null], '1' => [1, 1], '5' => [5, null]];
     }
@@ -185,9 +236,15 @@ class BookTest extends \PHPUnit\Framework\TestCase
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @magentoDataFixture Magento/Customer/_files/customer_two_addresses.php
      * @magentoDataFixture Magento/Customer/_files/customer_no_address.php
+<<<<<<< HEAD
      * @magentoAppIsolation enabled
      */
     #[DataProvider('getDefaultShippingDataProvider')]
+=======
+     * @dataProvider getDefaultShippingDataProvider
+     * @magentoAppIsolation enabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetDefaultShipping($customerId, $expected)
     {
         if (!empty($customerId)) {
@@ -196,7 +253,11 @@ class BookTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $this->_block->getDefaultShipping());
     }
 
+<<<<<<< HEAD
     public static function getDefaultShippingDataProvider()
+=======
+    public function getDefaultShippingDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return ['0' => [0, null], '1' => [1, 1], '5' => [5, null]];
     }
@@ -207,6 +268,7 @@ class BookTest extends \PHPUnit\Framework\TestCase
      */
     public function testGetAddressById()
     {
+<<<<<<< HEAD
         $this->assertNull($this->_block->getAddressById(1), 'Should return null when no customer is logged in');
 
         $this->assertNull(
@@ -312,5 +374,9 @@ class BookTest extends \PHPUnit\Framework\TestCase
             $block->getAddressById($otherAddressId),
             'Should return null for address belonging to different customer'
         );
+=======
+        $this->assertInstanceOf(\Magento\Customer\Api\Data\AddressInterface::class, $this->_block->getAddressById(1));
+        $this->assertNull($this->_block->getAddressById(5));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

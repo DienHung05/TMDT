@@ -1,23 +1,39 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2011 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\CatalogSearch\Model\Layer\Filter;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\Depends;
 
 /**
  * Test class for \Magento\CatalogSearch\Model\Layer\Filter\Category.
  *
  * @magentoDbIsolation disabled
+=======
+/**
+ * Test class for \Magento\CatalogSearch\Model\Layer\Filter\Category.
+ *
+ * @magentoDbIsolation enabled
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  * @magentoAppIsolation enabled
  * @magentoDataFixture Magento/Catalog/_files/categories.php
  */
 class CategoryTest extends \PHPUnit\Framework\TestCase
 {
+<<<<<<< HEAD
     private const CURRENT_CATEGORY_FILTER = 'current_category_filter';
+=======
+    const CURRENT_CATEGORY_FILTER = 'current_category_filter';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var \Magento\CatalogSearch\Model\Layer\Filter\Category
@@ -89,7 +105,13 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
         return $this->_model;
     }
 
+<<<<<<< HEAD
     #[Depends('testApply')]
+=======
+    /**
+     * @depends testApply
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetResetValueApplied(\Magento\CatalogSearch\Model\Layer\Filter\Category $modelApplied)
     {
         $this->assertEquals(2, $modelApplied->getResetValue());
@@ -100,6 +122,12 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('Category', $this->_model->getName());
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * @magentoDbIsolation disabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetItems()
     {
         $objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
@@ -134,6 +162,11 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Check that only children category of current category are aggregated
+<<<<<<< HEAD
+=======
+     *
+     * @magentoDbIsolation disabled
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function testCategoryAggregation(): void
     {

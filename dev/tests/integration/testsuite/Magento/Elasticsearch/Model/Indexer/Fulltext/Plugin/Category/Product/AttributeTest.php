@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -22,7 +27,11 @@ use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
 
 /**
+<<<<<<< HEAD
  * Check Search engine indexer mapping when working with attributes.
+=======
+ * Check Elasticsearch indexer mapping when working with attributes.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class AttributeTest extends TestCase
 {
@@ -97,9 +106,16 @@ class AttributeTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * Check Search engine indexer mapping is updated after creating attribute.
      *
      * @return void
+=======
+     * Check Elasticsearch indexer mapping is updated after creating attribute.
+     *
+     * @return void
+     * @magentoConfigFixture default/catalog/search/engine elasticsearch7
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/CatalogSearch/_files/full_reindex.php
      */
     public function testCheckElasticsearchMappingAfterUpdateAttributeToSearchable(): void
@@ -111,7 +127,12 @@ class AttributeTest extends TestCase
                 'index' => false,
             ],
             'dropdown_attribute_value' => [
+<<<<<<< HEAD
                 'type' => 'text'
+=======
+                'type' => 'text',
+                'copy_to' => ['_search'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
 
@@ -129,6 +150,7 @@ class AttributeTest extends TestCase
         $this->assertTrue($this->indexerProcessor->getIndexer()->isInvalid());
 
         $this->assertEquals($mappedAttributesAfter, $this->getMappingProperties());
+<<<<<<< HEAD
 
         $this->indexerProcessor->getIndexer()->reindexAll();
 
@@ -151,6 +173,12 @@ class AttributeTest extends TestCase
 
     /**
      * Retrieve Search engine indexer mapping.
+=======
+    }
+
+    /**
+     * Retrieve Elasticsearch indexer mapping.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @return array
      */
@@ -193,7 +221,11 @@ class AttributeTest extends TestCase
             'used_in_product_listing'       => 1,
             'used_for_sort_by'              => 0,
             'frontend_label'                => ['Drop-Down Attribute'],
+<<<<<<< HEAD
             'backend_type'                  => 'int',
+=======
+            'backend_type'                  => 'varchar',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'option'                        => [
                 'value' => [
                     'option_1' => ['Option 1'],

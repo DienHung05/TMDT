@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Eav\Model\ResourceModel;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\EntityManager\MetadataPool;
 use Magento\TestFramework\Helper\Bootstrap;
 
@@ -44,8 +52,13 @@ class AttributeLoaderTest extends \Magento\TestFramework\Indexer\TestCase
     /**
      * @param string[] $expectedAttributeCodes
      * @param int|null $attributeSetId
+<<<<<<< HEAD
      */
     #[DataProvider('getAttributesDataProvider')]
+=======
+     * @dataProvider getAttributesDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetAttributes($expectedAttributeCodes, $attributeSetId = null)
     {
         $attributes = $this->attributeLoader->getAttributes('Test\Entity\Type', $attributeSetId);
@@ -59,7 +72,11 @@ class AttributeLoaderTest extends \Magento\TestFramework\Indexer\TestCase
         $this->assertEquals($attributes, $attributes2);
     }
 
+<<<<<<< HEAD
     public static function getAttributesDataProvider()
+=======
+    public function getAttributesDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
         $entityType = $objectManager->create(\Magento\Eav\Model\Entity\Type::class)
@@ -93,6 +110,10 @@ class AttributeLoaderTest extends \Magento\TestFramework\Indexer\TestCase
         $reflection = new \ReflectionObject($this);
         foreach ($reflection->getProperties() as $property) {
             if (!$property->isStatic() && 0 !== strpos($property->getDeclaringClass()->getName(), 'PHPUnit')) {
+<<<<<<< HEAD
+=======
+                $property->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $property->setValue($this, null);
             }
         }

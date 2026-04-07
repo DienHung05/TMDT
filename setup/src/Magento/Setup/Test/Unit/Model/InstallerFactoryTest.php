@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -20,8 +25,13 @@ use Magento\Framework\Model\ResourceModel\Db\ObjectRelationProcessor;
 use Magento\Framework\Model\ResourceModel\Db\TransactionManager;
 use Magento\Framework\Module\ModuleList;
 use Magento\Framework\Module\ModuleList\Loader;
+<<<<<<< HEAD
 use Magento\Framework\Setup\ConsoleLoggerInterface;
 use Magento\Framework\Setup\FilePermissions;
+=======
+use Magento\Framework\Setup\FilePermissions;
+use Magento\Framework\Setup\LoggerInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Setup\SampleData\State;
 use Magento\Framework\Setup\SchemaPersistor;
 use Magento\Setup\Model\AdminAccountFactory;
@@ -31,7 +41,10 @@ use Magento\Setup\Model\Installer;
 use Magento\Setup\Model\InstallerFactory;
 use Magento\Setup\Model\ObjectManagerProvider;
 use Magento\Setup\Model\PhpReadinessCheck;
+<<<<<<< HEAD
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager as ObjectManagerHelper;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Setup\Module\ConnectionFactory;
 use Magento\Setup\Module\DataSetupFactory;
 use Magento\Setup\Module\ResourceFactory;
@@ -52,6 +65,7 @@ class InstallerFactoryTest extends TestCase
 
     public function testCreate()
     {
+<<<<<<< HEAD
         // Initialize ObjectManager to avoid "ObjectManager isn't initialized" errors
         $objectManagerHelper = new ObjectManagerHelper($this);
         $objectManagerHelper->prepareObjectManager();
@@ -100,6 +114,48 @@ class InstallerFactoryTest extends TestCase
         } finally {
             restore_error_handler();
         }
+=======
+        $this->objectManagerProviderMock = $this->getMockBuilder(ObjectManagerProvider::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['get'])
+            ->getMock();
+
+        $objectManagerMock = $this->getMockBuilder(ObjectManager::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['get'])
+            ->getMock();
+        $objectManagerMock->expects($this->any())
+            ->method('get')
+            ->willReturnMap(
+                [
+                    [DeclarationInstaller::class, $this->createMock(DeclarationInstaller::class)],
+                    [SchemaPersistor::class, $this->createMock(SchemaPersistor::class)],
+                ]
+            );
+        $this->objectManagerProviderMock->expects($this->any())
+            ->method('get')
+            ->willReturn($objectManagerMock);
+        /** @var ServiceLocatorInterface|MockObject $serviceLocatorMock */
+        $serviceLocatorMock = $this->getMockBuilder(
+            ServiceLocatorInterface::class
+        )->onlyMethods(
+            ['get']
+        )->getMockForAbstractClass();
+        $serviceLocatorMock->expects($this->any())->method('get')
+            ->willReturnMap($this->getReturnValueMap());
+
+        /** @var LoggerInterface|MockObject $log */
+        $log = $this->getMockForAbstractClass(LoggerInterface::class);
+        /** @var ResourceFactory|MockObject $resourceFactoryMock */
+        $resourceFactoryMock = $this->createMock(ResourceFactory::class);
+        $resourceFactoryMock
+            ->expects($this->any())
+            ->method('create')
+            ->willReturn($this->createMock(ResourceConnection::class));
+        $installerFactory = new InstallerFactory($serviceLocatorMock, $resourceFactoryMock);
+        $installer = $installerFactory->create($log);
+        $this->assertInstanceOf(Installer::class, $installer);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**

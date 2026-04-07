@@ -2,6 +2,10 @@ app/code/**/*.js
 app/design/**/*.js
 dev/tests/js/jasmine/tests/**/*.js
 lib/web/css/docs/source/js/dropdown.js
+<<<<<<< HEAD
+=======
+lib/web/extjs/defaults.js
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 lib/web/less/config.less.js
 lib/web/mage/**/*.js
 lib/web/magnifier/**/*.js

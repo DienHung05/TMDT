@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\TestFramework\Bootstrap;
 
 use Magento\TestFramework\Annotation\ApiConfigFixture;
+<<<<<<< HEAD
 use Magento\TestFramework\Annotation\AppArea;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Annotation\ConfigFixture;
 use Magento\TestFramework\Event\Transaction;
 
@@ -29,7 +37,11 @@ class WebapiDocBlock extends \Magento\TestFramework\Bootstrap\DocBlock
     {
         $subscribers = parent::_getSubscribers($application);
         foreach ($subscribers as $key => $subscriber) {
+<<<<<<< HEAD
             if (in_array(get_class($subscriber), [ConfigFixture::class, Transaction::class, AppArea::class])) {
+=======
+            if (get_class($subscriber) === ConfigFixture::class || get_class($subscriber) === Transaction::class) {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 unset($subscribers[$key]);
             }
         }
@@ -42,7 +54,10 @@ class WebapiDocBlock extends \Magento\TestFramework\Bootstrap\DocBlock
             )
         );
         $subscribers[] = new ApiConfigFixture();
+<<<<<<< HEAD
         $subscribers[] = new AppArea($application);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         return $subscribers;
     }

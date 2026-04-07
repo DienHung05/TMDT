@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Test\Integrity\Modular;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Test\Integrity\Modular;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
@@ -32,8 +40,13 @@ class LayoutFilesTest extends \PHPUnit\Framework\TestCase
     /**
      * @param string $area
      * @param string $layoutFile
+<<<<<<< HEAD
      */
     #[DataProvider('layoutArgumentsDataProvider')]
+=======
+     * @dataProvider layoutArgumentsDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testLayoutArguments($area, $layoutFile)
     {
         \Magento\TestFramework\Helper\Bootstrap::getInstance()->loadArea($area);
@@ -58,7 +71,11 @@ class LayoutFilesTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function layoutArgumentsDataProvider()
+=======
+    public function layoutArgumentsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $areas = ['adminhtml', 'frontend', 'email'];
         $data = [];

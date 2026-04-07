@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Customer\Model;
@@ -9,7 +14,10 @@ namespace Magento\Customer\Model;
 use Magento\Customer\Api\AccountManagementInterface;
 use Magento\Customer\Api\AddressRepositoryInterface;
 use Magento\Customer\Api\Data\AddressInterface;
+<<<<<<< HEAD
 use Magento\Framework\App\Config\ScopeConfigInterface;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\State\ExpiredException;
@@ -17,7 +25,10 @@ use Magento\Framework\Reflection\DataObjectProcessor;
 use Magento\Framework\Session\SessionManagerInterface;
 use Magento\Framework\Stdlib\DateTime;
 use Magento\Framework\Url as UrlBuilder;
+<<<<<<< HEAD
 use Magento\Store\Model\ScopeInterface;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 
@@ -323,7 +334,11 @@ class AccountManagementTest extends \PHPUnit\Framework\TestCase
         $this->expectException(\Magento\Framework\Exception\State\ExpiredException::class);
 
         $resetToken = 'lsdj579slkj5987slkj595lkj';
+<<<<<<< HEAD
         $this->setResetPasswordData($resetToken, '1970-01-01 00:00:00');
+=======
+        $this->setResetPasswordData($resetToken, '1970-01-01');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->accountManagement->validateResetPasswordLinkToken(1, $resetToken);
     }
 
@@ -333,7 +348,11 @@ class AccountManagementTest extends \PHPUnit\Framework\TestCase
     public function testValidateResetPasswordLinkTokenInvalid()
     {
         $resetToken = 'lsdj579slkj5987slkj595lkj';
+<<<<<<< HEAD
         $invalidToken = '0';
+=======
+        $invalidToken = 0;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->setResetPasswordData($resetToken, 'Y-m-d H:i:s');
         try {
             $this->accountManagement->validateResetPasswordLinkToken(1, $invalidToken);
@@ -374,7 +393,11 @@ class AccountManagementTest extends \PHPUnit\Framework\TestCase
         $resetToken = 'lsdj579slkj5987slkj595lkj';
         $password = 'new_Password123';
         $email = 'customer@example.com';
+<<<<<<< HEAD
         $this->setResetPasswordData($resetToken, 'Y-m-d H:i:s');
+=======
+        $this->setResetPasswordData($resetToken, 'Y-m-d H:i');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertTrue($this->accountManagement->resetPassword($email, $resetToken, $password));
         $this->accountManagement->resetPassword($email, $resetToken, $password);
     }
@@ -467,7 +490,11 @@ class AccountManagementTest extends \PHPUnit\Framework\TestCase
         $resetToken = 'lsdj579slkj5987slkj595lkj';
         $password = 'new_Password123';
 
+<<<<<<< HEAD
         $this->setResetPasswordData($resetToken, '1970-01-01 00:00:00');
+=======
+        $this->setResetPasswordData($resetToken, '1970-01-01');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         try {
             $this->accountManagement->resetPassword('customer@example.com', $resetToken, $password);
             $this->fail('Expected exception not thrown.');
@@ -483,7 +510,11 @@ class AccountManagementTest extends \PHPUnit\Framework\TestCase
     public function testResetPasswordTokenInvalid()
     {
         $resetToken = 'lsdj579slkj5987slkj595lkj';
+<<<<<<< HEAD
         $invalidToken = '0';
+=======
+        $invalidToken = 0;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $password = 'new_Password123';
 
         $this->setResetPasswordData($resetToken, 'Y-m-d H:i:s');
@@ -606,6 +637,7 @@ class AccountManagementTest extends \PHPUnit\Framework\TestCase
      */
     public function testIsEmailAvailable()
     {
+<<<<<<< HEAD
         $scopeConfig = $this->objectManager->get(ScopeConfigInterface::class);
         $guestLoginConfig = $scopeConfig->getValue(
             AccountManagement::GUEST_CHECKOUT_LOGIN_OPTION_SYS_CONFIG,
@@ -618,6 +650,9 @@ class AccountManagementTest extends \PHPUnit\Framework\TestCase
         } else {
             $this->assertFalse($this->accountManagement->isEmailAvailable('customer@example.com', 1));
         }
+=======
+        $this->assertFalse($this->accountManagement->isEmailAvailable('customer@example.com', 1));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -625,6 +660,7 @@ class AccountManagementTest extends \PHPUnit\Framework\TestCase
      */
     public function testIsEmailAvailableNoWebsiteSpecified()
     {
+<<<<<<< HEAD
         $scopeConfig = $this->objectManager->get(ScopeConfigInterface::class);
         $guestLoginConfig = $scopeConfig->getValue(
             AccountManagement::GUEST_CHECKOUT_LOGIN_OPTION_SYS_CONFIG,
@@ -637,6 +673,9 @@ class AccountManagementTest extends \PHPUnit\Framework\TestCase
         } else {
             $this->assertFalse($this->accountManagement->isEmailAvailable('customer@example.com'));
         }
+=======
+        $this->assertFalse($this->accountManagement->isEmailAvailable('customer@example.com'));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -25,7 +30,10 @@ use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Eav\Model\GetAttributeSetByName;
 use Magento\TestFramework\Fixture\Cache;
 use Magento\TestFramework\Request;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\LoggerInterface;
 use Magento\Catalog\Api\Data\ProductAttributeInterface;
@@ -164,10 +172,17 @@ class ViewTest extends AbstractController
 
     /**
      * @magentoDataFixture Magento/Catalog/_files/second_product_simple.php
+<<<<<<< HEAD
      * @param int $visibility
      * @return void
      */
     #[DataProvider('productVisibilityDataProvider')]
+=======
+     * @dataProvider productVisibilityDataProvider
+     * @param int $visibility
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testProductVisibility(int $visibility): void
     {
         $product = $this->updateProductVisibility('simple2', $visibility);
@@ -179,7 +194,11 @@ class ViewTest extends AbstractController
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function productVisibilityDataProvider(): array
+=======
+    public function productVisibilityDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'catalog_search' => [Visibility::VISIBILITY_BOTH],
@@ -407,7 +426,13 @@ class ViewTest extends AbstractController
      */
     private function setupLoggerMock(): MockObject
     {
+<<<<<<< HEAD
         $logger = $this->createMock(LoggerInterface::class);
+=======
+        $logger = $this->getMockBuilder(LoggerInterface::class)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->_objectManager->addSharedInstance($logger, LoggerInterface::class, true);
 
         return $logger;
@@ -427,6 +452,7 @@ class ViewTest extends AbstractController
 
         return $this->productRepository->save($product);
     }
+<<<<<<< HEAD
 
     /**
      * Test product details block as active on load
@@ -446,4 +472,6 @@ class ViewTest extends AbstractController
             $content
         );
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

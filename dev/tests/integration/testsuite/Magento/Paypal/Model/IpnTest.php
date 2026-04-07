@@ -1,12 +1,20 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Paypal\Model;
 
 use Magento\Framework\Api\SearchCriteriaBuilder;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\Order;
@@ -31,12 +39,19 @@ class IpnTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @param string $currencyCode
+<<<<<<< HEAD
+=======
+     * @dataProvider currencyProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Paypal/_files/order_express.php
      * @magentoConfigFixture current_store payment/paypal_direct/active 1
      * @magentoConfigFixture current_store payment/paypal_express/active 1
      * @magentoConfigFixture current_store paypal/general/merchant_country US
      */
+<<<<<<< HEAD
     #[DataProvider('currencyProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testProcessIpnRequestExpressCurrency($currencyCode)
     {
         $this->_processIpnRequestCurrency($currencyCode);
@@ -82,6 +97,7 @@ class IpnTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * Refund full order amount by Paypal Express IPN message service with concurrent requests.
      *
      * @magentoDataFixture Magento/Paypal/_files/order_express_with_invoice_and_shipping.php
@@ -122,6 +138,8 @@ class IpnTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Partial refund of order amount by Paypal Express IPN message service.
      *
      * @magentoDataFixture Magento/Paypal/_files/order_express_with_invoice_and_shipping.php
@@ -294,11 +312,19 @@ class IpnTest extends \PHPUnit\Framework\TestCase
         $factory = $this->createPartialMock(\Magento\Framework\HTTP\Adapter\CurlFactory::class, ['create']);
         $adapter = $this->createPartialMock(\Magento\Framework\HTTP\Adapter\Curl::class, ['read', 'write']);
 
+<<<<<<< HEAD
         $adapter->expects($this->any())->method('read')->with()->willReturn("\nVERIFIED");
 
         $adapter->expects($this->any())->method('write');
 
         $factory->expects($this->any())->method('create')->with()->willReturn($adapter);
+=======
+        $adapter->expects($this->once())->method('read')->with()->willReturn("\nVERIFIED");
+
+        $adapter->expects($this->once())->method('write');
+
+        $factory->expects($this->once())->method('create')->with()->willReturn($adapter);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         return $factory;
     }
 

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,7 +16,10 @@ use Magento\Framework\ObjectManagerInterface;
 use Magento\Sales\Model\Grid\LastUpdateTimeCache;
 use Magento\Sales\Model\ResourceModel\Provider\UpdatedAtListProvider;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 use Magento\Framework\DB\Adapter\Pdo\Mysql;
 
@@ -40,10 +48,17 @@ class GridTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param array $constructorArgs
      * @param string $orderIdField
      */
     #[DataProvider('gridDataProvider')]
+=======
+     * @dataProvider gridDataProvider
+     * @param array $constructorArgs
+     * @param string $orderIdField
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRefreshBySchedule(array $constructorArgs, string $orderIdField)
     {
         $constructorArgs['orderIdField'] = $constructorArgs['mainTableName'] . '.' . $orderIdField;
@@ -103,7 +118,11 @@ class GridTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function gridDataProvider(): array
+=======
+    public function gridDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Magento\Sales\Model\ResourceModel\Order\Grid' => [
@@ -138,11 +157,18 @@ class GridTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider shipmentGridDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $constructorArgs
      * @param string $orderIdField
      * @param string $orderIdIndex
      */
+<<<<<<< HEAD
     #[DataProvider('shipmentGridDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSalesShipmentGridOrderIdFieldIndex(array $constructorArgs, string $orderIdField, string $orderIdIndex)
     {
         $constructorArgs['orderIdField'] = $constructorArgs['mainTableName'] . '.' . $orderIdField;
@@ -171,7 +197,11 @@ class GridTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function shipmentGridDataProvider(): array
+=======
+    public function shipmentGridDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Magento\Sales\Model\ResourceModel\Grid' => [

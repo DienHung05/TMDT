@@ -1,13 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Catalog\Api;
 
 use Magento\Authorization\Model\Role;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Authorization\Model\RoleFactory;
 use Magento\Authorization\Model\Rules;
 use Magento\Authorization\Model\RulesFactory;
@@ -196,11 +205,19 @@ class CategoryRepositoryTest extends WebapiAbstract
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider deleteSystemOrRootDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param int $categoryId
      * @param string $exceptionMsg
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('deleteSystemOrRootDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDeleteSystemOrRoot(int $categoryId, string $exceptionMsg): void
     {
         $this->expectException(\Exception::class);
@@ -212,6 +229,7 @@ class CategoryRepositoryTest extends WebapiAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function deleteSystemOrRootDataProvider(): array
     {
         return [
@@ -222,6 +240,18 @@ class CategoryRepositoryTest extends WebapiAbstract
             'root_category' => [
                 'categoryId' => 2,
                 'exceptionMsg' => self::buildExceptionMessage(2),
+=======
+    public function deleteSystemOrRootDataProvider(): array
+    {
+        return [
+            'system_category' => [
+                'category_id' => Category::TREE_ROOT_ID,
+                'exception_message' => $this->buildExceptionMessage(Category::TREE_ROOT_ID),
+            ],
+            'root_category' => [
+                'category_id' => 2,
+                'exception_message' => $this->buildExceptionMessage(2),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }
@@ -232,7 +262,11 @@ class CategoryRepositoryTest extends WebapiAbstract
      * @param int $categoryId
      * @return string
      */
+<<<<<<< HEAD
     private static function buildExceptionMessage(int $categoryId): string
+=======
+    private function buildExceptionMessage(int $categoryId): string
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $translatedMsg = (string)__('Cannot delete category with id %1');
 
@@ -268,6 +302,7 @@ class CategoryRepositoryTest extends WebapiAbstract
         $this->createdCategories = [$categoryId];
     }
 
+<<<<<<< HEAD
     #[
         DataFixture(CategoryFixture::class, as: 'category')
     ]
@@ -275,6 +310,14 @@ class CategoryRepositoryTest extends WebapiAbstract
     {
         $category = $this->fixtures->get('category');
         $categoryId = $category->getId();
+=======
+    /**
+     * @magentoApiDataFixture Magento/Catalog/_files/category.php
+     */
+    public function testUpdateWithDefaultSortByAttribute()
+    {
+        $categoryId = 333;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $categoryData = [
             'name' => 'Update Category Test With default_sort_by Attribute',
             'is_active' => true,
@@ -282,7 +325,11 @@ class CategoryRepositoryTest extends WebapiAbstract
             'custom_attributes' => [
                 [
                     'attribute_code' => 'default_sort_by',
+<<<<<<< HEAD
                     'value' => "price"
+=======
+                    'value' => ["name"],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ],
             ],
         ];
@@ -293,7 +340,11 @@ class CategoryRepositoryTest extends WebapiAbstract
         $category = $model->load($categoryId);
         $this->assertTrue((bool)$category->getIsActive(), 'Category "is_active" must equal to true');
         $this->assertEquals("Update Category Test With default_sort_by Attribute", $category->getName());
+<<<<<<< HEAD
         $this->assertEquals("price", $category->getDefaultSortBy());
+=======
+        $this->assertEquals("name", $category->getDefaultSortBy());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->createdCategories = [$categoryId];
     }
 

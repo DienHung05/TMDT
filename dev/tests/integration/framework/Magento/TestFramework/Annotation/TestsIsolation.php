@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\TestFramework\Annotation;
 
@@ -9,8 +14,11 @@ use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\ResourceConnection;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\AssertionFailedError;
+<<<<<<< HEAD
 use Magento\TestFramework\Event\Magento;
 use PHPUnit\TestRunner\TestResult\PassedTests;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Validates tests isolation. Makes sure that test does not keep exceed data in DB.
@@ -132,6 +140,7 @@ class TestsIsolation
     private function checkIsolationRequired(TestCase $test): bool
     {
         $isRequired = false;
+<<<<<<< HEAD
         $passedTests = PassedTests::instance();
         $event = Magento::getCurrentEventObject();
         $className = $event->test()->className();
@@ -143,6 +152,13 @@ class TestsIsolation
         }
 
         $passedClasses = [$className.'::'.$methodName];
+=======
+        if (!$test->getTestResultObject()) {
+            return $isRequired;
+        }
+        $passedClasses = $test->getTestResultObject()->passedClasses();
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         if ($passedClasses) {
             $testFilename = current($passedClasses);
 

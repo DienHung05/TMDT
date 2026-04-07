@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -14,7 +19,10 @@ use Magento\Customer\Api\Data\CustomerInterfaceFactory;
 use Magento\Customer\Model\Customer;
 use Magento\Customer\Model\CustomerFactory;
 use Magento\Customer\Model\EmailNotification;
+<<<<<<< HEAD
 use Magento\Customer\Test\Fixture\Customer as CustomerFixture;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Email\Model\ResourceModel\Template\CollectionFactory as TemplateCollectionFactory;
 use Magento\Framework\Api\DataObjectHelper;
 use Magento\Framework\Api\ExtensibleDataObjectConverter;
@@ -23,13 +31,17 @@ use Magento\Framework\App\Config\MutableScopeConfigInterface;
 use Magento\Framework\Encryption\EncryptorInterface;
 use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\LocalizedException;
+<<<<<<< HEAD
 use Magento\Framework\Exception\NoSuchEntityException;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Exception\State\InputMismatchException;
 use Magento\Framework\Math\Random;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\Validator\Exception;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
+<<<<<<< HEAD
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\AppIsolation;
 use Magento\TestFramework\Fixture\Config;
@@ -41,6 +53,11 @@ use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Helper\Xpath;
 use Magento\TestFramework\Mail\Template\TransportBuilderMock;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\TestFramework\Helper\Xpath;
+use Magento\TestFramework\Mail\Template\TransportBuilderMock;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -126,11 +143,14 @@ class CreateAccountTest extends TestCase
     private $templateCollectionFactory;
 
     /**
+<<<<<<< HEAD
      * @var DataFixtureStorage
      */
     private DataFixtureStorage $fixtures;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
@@ -148,7 +168,10 @@ class CreateAccountTest extends TestCase
         $this->encryptor = $this->objectManager->get(EncryptorInterface::class);
         $this->mutableScopeConfig = $this->objectManager->get(MutableScopeConfigInterface::class);
         $this->templateCollectionFactory = $this->objectManager->get(TemplateCollectionFactory::class);
+<<<<<<< HEAD
         $this->fixtures = DataFixtureStorageManager::getStorage();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         parent::setUp();
     }
 
@@ -162,13 +185,20 @@ class CreateAccountTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider createInvalidAccountDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $customerData
      * @param string $password
      * @param string $errorType
      * @param string $errorMessage
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('createInvalidAccountDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateAccountWithInvalidFields(
         array $customerData,
         string $password,
@@ -184,6 +214,7 @@ class CreateAccountTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function createInvalidAccountDataProvider(): array
     {
         return [
@@ -234,27 +265,95 @@ class CreateAccountTest extends TestCase
                 'password' => 'test_password',
                 'errorType' => InputException::class,
                 'errorMessage' => [
+=======
+    public function createInvalidAccountDataProvider(): array
+    {
+        return [
+            'empty_firstname' => [
+                'customer_data' => ['firstname' => ''],
+                'password' => '_aPassword1',
+                'error_type' =>  Exception::class,
+                'error_message' => ['"%1" is a required value.', 'First Name'],
+            ],
+            'empty_lastname' => [
+                'customer_data' => ['lastname' => ''],
+                'password' => '_aPassword1',
+                'error_type' =>  Exception::class,
+                'error_message' => ['"%1" is a required value.', 'Last Name'],
+            ],
+            'empty_email' => [
+                'customer_data' => ['email' => ''],
+                'password' => '_aPassword1',
+                'error_type' => Exception::class,
+                'error_message' => ['The customer email is missing. Enter and try again.'],
+            ],
+            'invalid_email' => [
+                'customer_data' => ['email' => 'zxczxczxc'],
+                'password' => '_aPassword1',
+                'error_type' => Exception::class,
+                'error_message' => ['"%1" is not a valid email address.', 'Email'],
+            ],
+            'empty_password' => [
+                'customer_data' => [],
+                'password' => '',
+                'error_type' => InputException::class,
+                'error_message' => ['The password needs at least 8 characters. Create a new password and try again.'],
+            ],
+            'invalid_password_minimum_length' => [
+                'customer_data' => [],
+                'password' => 'test',
+                'error_type' => InputException::class,
+                'error_message' => ['The password needs at least 8 characters. Create a new password and try again.'],
+            ],
+            'invalid_password_maximum_length' => [
+                'customer_data' => [],
+                'password' => $this->getRandomNumericString(257),
+                'error_type' => InputException::class,
+                'error_message' => ['Please enter a password with at most 256 characters.'],
+            ],
+            'invalid_password_without_minimum_characters_classes' => [
+                'customer_data' => [],
+                'password' => 'test_password',
+                'error_type' => InputException::class,
+                'error_message' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'Minimum of different classes of characters in password is %1.'
                     . ' Classes of characters: Lower Case, Upper Case, Digits, Special Characters.',
                     3,
                 ],
             ],
             'password_same_as_email' => [
+<<<<<<< HEAD
                 'customerData' => ['email' => 'test1@test.com'],
                 'password' => 'test1@test.com',
                 'errorType' => LocalizedException::class,
                 'errorMessage' => [
+=======
+                'customer_data' => ['email' => 'test1@test.com'],
+                'password' => 'test1@test.com',
+                'error_type' => LocalizedException::class,
+                'error_message' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'The password can\'t be the same as the email address. Create a new password and try again.',
                 ],
             ],
             'send_email_store_id_not_match_website' => [
+<<<<<<< HEAD
                 'customerData' => [
+=======
+                'customer_data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     CustomerInterface::WEBSITE_ID => 1,
                     CustomerInterface::STORE_ID => 5,
                 ],
                 'password' => '_aPassword1',
+<<<<<<< HEAD
                 'errorType' => LocalizedException::class,
                 'errorMessage' => [
+=======
+                'error_type' => LocalizedException::class,
+                'error_message' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'The store view is not in the associated website.',
                 ],
             ],
@@ -263,8 +362,11 @@ class CreateAccountTest extends TestCase
 
     /**
      * @magentoAppArea frontend
+<<<<<<< HEAD
      * @magentoDbIsolation enabled
      * @magentoAppIsolation enabled
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Customer/_files/customer_welcome_email_template.php
      * @return void
      */
@@ -287,8 +389,11 @@ class CreateAccountTest extends TestCase
 
     /**
      * @magentoAppArea frontend
+<<<<<<< HEAD
      * @magentoDbIsolation enabled
      * @magentoAppIsolation enabled
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Customer/_files/customer_welcome_no_password_email_template.php
      * @magentoConfigFixture current_store customer/create_account/email_identity support
      * @return void
@@ -309,8 +414,11 @@ class CreateAccountTest extends TestCase
 
     /**
      * @magentoAppArea frontend
+<<<<<<< HEAD
      * @magentoDbIsolation enabled
      * @magentoAppIsolation enabled
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Customer/_files/customer_confirmation_email_template.php
      * @magentoConfigFixture current_website customer/create_account/confirm 1
      * @magentoConfigFixture current_store customer/create_account/email_identity custom1
@@ -335,8 +443,11 @@ class CreateAccountTest extends TestCase
 
     /**
      * @magentoAppArea frontend
+<<<<<<< HEAD
      * @magentoDbIsolation enabled
      * @magentoAppIsolation enabled
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Customer/_files/customer_confirmed_email_template.php
      * @magentoConfigFixture current_store customer/create_account/email_identity custom1
      * @magentoConfigFixture current_website customer/create_account/confirm 1
@@ -364,31 +475,45 @@ class CreateAccountTest extends TestCase
     /**
      * Assert that when you create customer account via admin, link with "set password" is send to customer email.
      *
+<<<<<<< HEAD
      * @magentoAppArea frontend
      * @magentoDbIsolation enabled
      * @magentoAppIsolation enabled
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @return void
      */
     public function testSendEmailWithSetPasswordLink(): void
     {
         $customerEntity = $this->populateCustomerEntity($this->defaultCustomerData);
         $newCustomerEntity = $this->accountManagement->createAccount($customerEntity);
+<<<<<<< HEAD
         $mailTemplate = $this->transportBuilderMock->getSentMessage()->getBody()->bodyToString();
+=======
+        $mailTemplate = $this->transportBuilderMock->getSentMessage()->getBody()->getParts()[0]->getRawContent();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertEquals(
             1,
             Xpath::getElementsCountForXpath(
                 sprintf("//a[contains(@href, 'customer/account/createPassword/?id=%s')]", $newCustomerEntity->getId()),
+<<<<<<< HEAD
                 quoted_printable_decode($mailTemplate)
+=======
+                $mailTemplate
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ),
             'Password creation link was not found.'
         );
     }
 
     /**
+<<<<<<< HEAD
      * @magentoAppArea frontend
      * @magentoDbIsolation enabled
      * @magentoAppIsolation enabled
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Store/_files/second_website_with_two_stores.php
      * @return void
      */
@@ -408,6 +533,7 @@ class CreateAccountTest extends TestCase
 
     /**
      * @return void
+<<<<<<< HEAD
      * @throws InputException
      * @throws InputMismatchException
      * @throws LocalizedException
@@ -417,6 +543,9 @@ class CreateAccountTest extends TestCase
         AppIsolation(true),
         AppArea('frontend'),
     ]
+=======
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateNewCustomerWithPasswordHash(): void
     {
         $customerData = $expectedCustomerData = [
@@ -445,9 +574,12 @@ class CreateAccountTest extends TestCase
     /**
      * Customer has two addresses one of it is allowed in website and second is not
      *
+<<<<<<< HEAD
      * @magentoAppArea frontend
      * @magentoDbIsolation enabled
      * @magentoAppIsolation enabled
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @magentoDataFixture Magento/Customer/_files/customer_two_addresses.php
      * @magentoDataFixture Magento/Store/_files/websites_different_countries.php
@@ -462,6 +594,7 @@ class CreateAccountTest extends TestCase
         $customerData = $this->customerRepository->getById($customerId);
         $customerData->getAddresses()[1]->setRegion(null)->setCountryId($allowedCountryIdForSecondWebsite)
             ->setRegionId(null);
+<<<<<<< HEAD
         $customerData->getAddresses()[1]->setIsDefaultBilling(true);
         $customerData->getAddresses()[1]->setIsDefaultShipping(true);
         foreach ($customerData->getAddresses() as $address) {
@@ -470,6 +603,8 @@ class CreateAccountTest extends TestCase
         }
         $customerData->setDefaultBilling(null);
         $customerData->setDefaultShipping(null);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $customerData->setStoreId($store->getId())->setWebsiteId($store->getWebsiteId())->setId(null);
         $password = $this->random->getRandomString(8);
         $passwordHash = $this->encryptor->getHash($password, true);
@@ -491,8 +626,11 @@ class CreateAccountTest extends TestCase
 
     /**
      * @magentoAppArea frontend
+<<<<<<< HEAD
      * @magentoDbIsolation enabled
      * @magentoAppIsolation enabled
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @return void
      */
@@ -508,9 +646,12 @@ class CreateAccountTest extends TestCase
         ];
         unset($expectedCustomerData[CustomerInterface::ID]);
         $customerEntity = $this->populateCustomerEntity($existingCustomer->__toArray(), $customerData);
+<<<<<<< HEAD
         $customerEntity->setDefaultBilling(null);
         $customerEntity->setDefaultShipping(null);
         $customerEntity->setAddresses([]);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $customerAfter = $this->accountManagement->createAccount($customerEntity, '_aPassword1');
         $this->assertGreaterThan(0, $customerAfter->getId());
@@ -535,8 +676,11 @@ class CreateAccountTest extends TestCase
         $inBeforeOnly = array_diff_assoc($attributesBefore, $attributesAfter);
         $inAfterOnly = array_diff_assoc($attributesAfter, $attributesBefore);
         $expectedInBefore = [
+<<<<<<< HEAD
             'default_billing',
             'default_shipping',
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'email',
             'firstname',
             'id',
@@ -561,6 +705,7 @@ class CreateAccountTest extends TestCase
 
     /**
      * @return void
+<<<<<<< HEAD
      * @throws LocalizedException
      * @throws NoSuchEntityException
      */
@@ -569,6 +714,9 @@ class CreateAccountTest extends TestCase
         AppIsolation(true),
         AppArea('frontend'),
     ]
+=======
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateCustomerInServiceVsInModel(): void
     {
         $password = '_aPassword1';
@@ -630,6 +778,7 @@ class CreateAccountTest extends TestCase
 
     /**
      * @return void
+<<<<<<< HEAD
      * @throws LocalizedException
      */
     #[
@@ -637,6 +786,9 @@ class CreateAccountTest extends TestCase
         AppIsolation(true),
         AppArea('frontend'),
     ]
+=======
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateNewCustomer(): void
     {
         $customerData = $expectedCustomerData = [
@@ -677,9 +829,12 @@ class CreateAccountTest extends TestCase
         ];
         unset($expectedCustomerData[CustomerInterface::ID]);
         $customerEntity = $this->populateCustomerEntity($customerData, [], $customerEntity);
+<<<<<<< HEAD
         $customerEntity->setDefaultBilling(null);
         $customerEntity->setDefaultShipping(null);
         $customerEntity->setAddresses([]);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $customer = $this->accountManagement->createAccount($customerEntity, '_aPassword1');
         $this->assertNotEmpty($customer->getId());
@@ -694,9 +849,12 @@ class CreateAccountTest extends TestCase
      * Test for create customer account for second website (with existing email for default website)
      * with global account scope config.
      *
+<<<<<<< HEAD
      * @magentoAppArea frontend
      * @magentoDbIsolation enabled
      * @magentoAppIsolation enabled
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoConfigFixture current_store customer/account_share/scope 0
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @magentoDataFixture Magento/Store/_files/second_website_with_two_stores.php
@@ -724,7 +882,11 @@ class CreateAccountTest extends TestCase
      * @param int $length
      * @return string
      */
+<<<<<<< HEAD
     private static function getRandomNumericString(int $length): string
+=======
+    private function getRandomNumericString(int $length): string
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $string = '';
         for ($i = 0; $i <= $length; $i++) {
@@ -812,7 +974,11 @@ class CreateAccountTest extends TestCase
         $this->assertEquals($expectedData['email'], $messageFrom->getEmail());
         $this->assertStringContainsString(
             $expectedData['message'],
+<<<<<<< HEAD
             quoted_printable_decode($message->getBody()->bodyToString()),
+=======
+            $message->getBody()->getParts()[0]->getRawContent(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'Expected message wasn\'t found in email content.'
         );
     }

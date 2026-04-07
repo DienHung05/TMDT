@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Setup\Module\I18n\Dictionary;
 
@@ -45,8 +50,15 @@ class GeneratorTest extends \PHPUnit\Framework\TestCase
     {
         $reflection = new \ReflectionClass(\Magento\Framework\Component\ComponentRegistrar::class);
         $paths = $reflection->getProperty('paths');
+<<<<<<< HEAD
         $this->backupRegistrar = $paths->getValue();
         $paths->setValue(null, ['module' => [], 'theme' => []]);
+=======
+        $paths->setAccessible(true);
+        $this->backupRegistrar = $paths->getValue();
+        $paths->setValue(['module' => [], 'theme' => []]);
+        $paths->setAccessible(false);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->testDir = realpath(__DIR__ . '/_files');
         $this->expectedDir = $this->testDir . '/expected';
@@ -81,11 +93,23 @@ class GeneratorTest extends \PHPUnit\Framework\TestCase
             unlink($this->outputFileName);
         }
         $property = new \ReflectionProperty(\Magento\Setup\Module\I18n\ServiceLocator::class, '_dictionaryGenerator');
+<<<<<<< HEAD
         $property->setValue(null, null);
 
         $reflection = new \ReflectionClass(\Magento\Framework\Component\ComponentRegistrar::class);
         $paths = $reflection->getProperty('paths');
         $paths->setValue(null, $this->backupRegistrar);
+=======
+        $property->setAccessible(true);
+        $property->setValue(null);
+        $property->setAccessible(false);
+
+        $reflection = new \ReflectionClass(\Magento\Framework\Component\ComponentRegistrar::class);
+        $paths = $reflection->getProperty('paths');
+        $paths->setAccessible(true);
+        $paths->setValue($this->backupRegistrar);
+        $paths->setAccessible(false);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     public function testGenerationWithoutContext()

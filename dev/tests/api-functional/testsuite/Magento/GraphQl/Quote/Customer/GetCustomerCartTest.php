@@ -1,12 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2025 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Quote\Customer;
 
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\GraphQl\Quote\GetMaskedQuoteIdByReservedOrderId;
@@ -17,6 +23,11 @@ use Magento\Store\Test\Fixture\Website as WebsiteFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorage;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
+=======
+use Exception;
+use Magento\GraphQl\Quote\GetMaskedQuoteIdByReservedOrderId;
+use Magento\Integration\Api\CustomerTokenServiceInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\Quote\Model\ResourceModel\Quote\Collection;
 use Magento\Framework\ObjectManagerInterface;
@@ -42,17 +53,23 @@ class GetCustomerCartTest extends GraphQlAbstract
      */
     private $objectManager;
 
+<<<<<<< HEAD
     /**
      * @var DataFixtureStorage;
      */
     private $fixtures;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     protected function setUp(): void
     {
         $this->objectManager = Bootstrap::getObjectManager();
         $this->getMaskedQuoteIdByReservedOrderId = $this->objectManager->get(GetMaskedQuoteIdByReservedOrderId::class);
         $this->customerTokenService = $this->objectManager->get(CustomerTokenServiceInterface::class);
+<<<<<<< HEAD
         $this->fixtures = $this->objectManager->get(DataFixtureStorageManager::class)->getStorage();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -147,6 +164,7 @@ class GetCustomerCartTest extends GraphQlAbstract
     }
 
     /**
+<<<<<<< HEAD
      * Test graphql customer cart should expect an exception when customer doesn't belong to given website
      */
     #[
@@ -182,6 +200,8 @@ class GetCustomerCartTest extends GraphQlAbstract
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Query for customer cart after customer token is revoked
      *
      * @magentoApiDataFixture Magento/Customer/_files/customer.php
@@ -189,7 +209,11 @@ class GetCustomerCartTest extends GraphQlAbstract
     public function testGetCustomerCartAfterTokenRevoked()
     {
         $this->expectException(\Exception::class);
+<<<<<<< HEAD
         $this->expectExceptionMessage('User token has been revoked');
+=======
+        $this->expectExceptionMessage('The request is allowed for logged in customer');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $customerCartQuery = $this->getCustomerCartQuery();
         $headers = $this->getHeaderMap();
@@ -310,6 +334,7 @@ QUERY;
         $headerMap = ['Authorization' => 'Bearer ' . $customerToken];
         return $headerMap;
     }
+<<<<<<< HEAD
 
     /**
      * Get customer login token query
@@ -331,4 +356,6 @@ mutation {
 }
 MUTATION;
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -9,7 +14,10 @@ declare(strict_types=1);
 namespace Magento\WebapiAsync\Model;
 
 use Magento\Catalog\Api\Data\ProductInterface;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Exception\NotFoundException;
 use Magento\TestFramework\MessageQueue\PreconditionFailedException;
 use Magento\TestFramework\MessageQueue\PublisherConsumerController;
@@ -32,6 +40,7 @@ use Magento\Catalog\Api\ProductRepositoryInterface;
  */
 class AsyncScheduleCustomRouteTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     public const ASYNC_RESOURCE_CUSTOM_PATH = '/asyncProducts';
     public const ASYNC_CONSUMER_NAME = 'async.operations.all';
 
@@ -44,6 +53,17 @@ class AsyncScheduleCustomRouteTest extends WebapiAbstract
     /**
      * @var string[]
      */
+=======
+    const ASYNC_RESOURCE_CUSTOM_PATH = '/asyncProducts';
+    const ASYNC_CONSUMER_NAME = 'async.operations.all';
+
+    const KEY_TIER_PRICES = 'tier_prices';
+    const KEY_SPECIAL_PRICE = 'special_price';
+    const KEY_CATEGORY_LINKS = 'category_links';
+
+    const BULK_UUID_KEY = 'bulk_uuid';
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     protected $consumers = [
         self::ASYNC_CONSUMER_NAME,
     ];
@@ -105,8 +125,14 @@ class AsyncScheduleCustomRouteTest extends WebapiAbstract
         parent::setUp();
     }
 
+<<<<<<< HEAD
     /** */
     #[DataProvider('productCreationProvider')]
+=======
+    /**
+     * @dataProvider productCreationProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAsyncScheduleBulkByCustomRoute($product)
     {
         $this->_markTestAsRestOnly();
@@ -175,11 +201,19 @@ class AsyncScheduleCustomRouteTest extends WebapiAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function productCreationProvider()
     {
         $productBuilder = function ($data) {
             return array_replace_recursive(
                 self::getSimpleProductData(),
+=======
+    public function productCreationProvider()
+    {
+        $productBuilder = function ($data) {
+            return array_replace_recursive(
+                $this->getSimpleProductData(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $data
             );
         };
@@ -211,7 +245,11 @@ class AsyncScheduleCustomRouteTest extends WebapiAbstract
      * @param array $productData
      * @return array
      */
+<<<<<<< HEAD
     private static function getSimpleProductData($productData = [])
+=======
+    private function getSimpleProductData($productData = [])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ProductInterface::SKU              => isset($productData[ProductInterface::SKU])

@@ -1,13 +1,19 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Newsletter\Customer;
 
 use Exception;
+<<<<<<< HEAD
 use Magento\Customer\Model\AccountManagement;
 use Magento\Customer\Model\CustomerAuthUpdate;
 use Magento\Customer\Model\CustomerRegistry;
@@ -16,6 +22,13 @@ use Magento\Framework\Exception\AuthenticationException;
 use Magento\Integration\Api\CustomerTokenServiceInterface;
 use Magento\Newsletter\Model\ResourceModel\Subscriber as SubscriberResourceModel;
 use Magento\Store\Model\ScopeInterface;
+=======
+use Magento\Customer\Model\CustomerAuthUpdate;
+use Magento\Customer\Model\CustomerRegistry;
+use Magento\Framework\Exception\AuthenticationException;
+use Magento\Integration\Api\CustomerTokenServiceInterface;
+use Magento\Newsletter\Model\ResourceModel\Subscriber as SubscriberResourceModel;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
 
@@ -43,10 +56,13 @@ class SubscribeEmailToNewsletterTest extends GraphQlAbstract
      * @var SubscriberResourceModel
      */
     private $subscriberResource;
+<<<<<<< HEAD
     /**
      * @var ScopeConfigInterface
      */
     private $scopeConfig;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @inheritDoc
@@ -54,7 +70,10 @@ class SubscribeEmailToNewsletterTest extends GraphQlAbstract
     protected function setUp(): void
     {
         $objectManager = Bootstrap::getObjectManager();
+<<<<<<< HEAD
         $this->scopeConfig = $objectManager->get(ScopeConfigInterface::class);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->customerAuthUpdate = Bootstrap::getObjectManager()->get(CustomerAuthUpdate::class);
         $this->customerRegistry = Bootstrap::getObjectManager()->get(CustomerRegistry::class);
         $this->customerTokenService = $objectManager->get(CustomerTokenServiceInterface::class);
@@ -154,6 +173,7 @@ class SubscribeEmailToNewsletterTest extends GraphQlAbstract
     {
         $query = $this->getQuery('customer2@search.example.com');
 
+<<<<<<< HEAD
         $guestLoginConfig = $this->scopeConfig->getValue(
             AccountManagement::GUEST_CHECKOUT_LOGIN_OPTION_SYS_CONFIG,
             ScopeInterface::SCOPE_WEBSITE,
@@ -165,6 +185,12 @@ class SubscribeEmailToNewsletterTest extends GraphQlAbstract
             $this->expectExceptionMessage('Cannot create a newsletter subscription.' . "\n");
             $this->graphQlMutation($query, [], '', $this->getHeaderMap('customer@search.example.com'));
         }
+=======
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Cannot create a newsletter subscription.' . "\n");
+
+        $this->graphQlMutation($query, [], '', $this->getHeaderMap('customer@search.example.com'));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**

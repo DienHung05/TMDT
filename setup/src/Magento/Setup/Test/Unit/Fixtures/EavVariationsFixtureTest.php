@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -19,7 +24,10 @@ use Magento\Setup\Fixtures\FixtureModel;
 use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManager;
 use PHPUnit\Framework\MockObject\MockObject;
+<<<<<<< HEAD
 use Magento\Framework\TestFramework\Unit\Helper\MockCreationTrait;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -28,8 +36,11 @@ use PHPUnit\Framework\TestCase;
  */
 class EavVariationsFixtureTest extends TestCase
 {
+<<<<<<< HEAD
     use MockCreationTrait;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @var FixtureModel|MockObject
      */
@@ -84,9 +95,15 @@ class EavVariationsFixtureTest extends TestCase
             ->getMock();
         $this->cacheMock = $this->getMockBuilder(CacheInterface::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->getMock();
         $this->attributeFactoryMock = $this->getMockBuilder(AttributeFactory::class)
             ->onlyMethods(['create'])
+=======
+            ->getMockForAbstractClass();
+        $this->attributeFactoryMock = $this->getMockBuilder(AttributeFactory::class)
+            ->setMethods(['create'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -144,10 +161,21 @@ class EavVariationsFixtureTest extends TestCase
         $this->attributeSetMock->expects($this->once())->method('load')->willReturnSelf();
         $this->attributeSetMock->expects($this->once())->method('getDefaultGroupId')->willReturn(2);
 
+<<<<<<< HEAD
         $attributeMock = $this->createPartialMockWithReflection(
             Attribute::class,
             ['setAttributeSetId', 'save', 'setAttributeGroupId']
         );
+=======
+        $attributeMock = $this->getMockBuilder(Attribute::class)
+            ->setMethods([
+                'setAttributeSetId',
+                'setAttributeGroupId',
+                'save',
+            ])
+            ->disableOriginalConstructor()
+            ->getMock();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $attributeMock->expects($this->exactly(2))->method('setAttributeSetId')->willReturnSelf();
         $attributeMock->expects($this->once())->method('setAttributeGroupId')->willReturnSelf();
         $this->attributeFactoryMock->expects($this->once())->method('create')

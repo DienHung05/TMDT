@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,7 +16,10 @@ use Magento\Framework\App\Request\Http as HttpRequest;
 use Magento\Framework\Message\MessageInterface;
 use Magento\Shipping\Controller\Adminhtml\Order\Shipment\AbstractShipmentControllerTest;
 use Magento\Framework\Escaper;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test cases related to check that shipment creates as expected or proper error message appear.
@@ -41,12 +49,19 @@ class CreateShipmentForOrderTest extends AbstractShipmentControllerTest
      * Assert that shipment created successfully.
      *
      * @magentoDataFixture Magento/Sales/_files/order_with_two_order_items_with_simple_product.php
+<<<<<<< HEAD
+=======
+     * @dataProvider dataForCreateShipmentDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @param array $dataForBuildPostData
      * @param array $expectedShippedQtyBySku
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('dataForCreateShipmentDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateOrderShipment(array $dataForBuildPostData, array $expectedShippedQtyBySku): void
     {
         $postData = $this->createPostData($dataForBuildPostData);
@@ -69,7 +84,11 @@ class CreateShipmentForOrderTest extends AbstractShipmentControllerTest
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function dataForCreateShipmentDataProvider(): array
+=======
+    public function dataForCreateShipmentDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'create_full_shipment' => [

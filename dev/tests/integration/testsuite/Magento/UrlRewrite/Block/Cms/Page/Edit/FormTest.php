@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\UrlRewrite\Block\Cms\Page\Edit;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\UrlRewrite\Block\Cms\Page\Edit;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * Test for \Magento\UrlRewrite\Block\Cms\Page\Edit\FormTest
  * @magentoAppArea adminhtml
@@ -41,6 +49,11 @@ class FormTest extends \PHPUnit\Framework\TestCase
      *
      * @covers \Magento\UrlRewrite\Block\Cms\Page\Edit\Form::_formPostInit
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider formPostInitDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $cmsPageData
      * @param string $action
      * @param string $requestPath
@@ -48,7 +61,10 @@ class FormTest extends \PHPUnit\Framework\TestCase
      * @magentoConfigFixture current_store general/single_store_mode/enabled 1
      * @magentoAppIsolation enabled
      */
+<<<<<<< HEAD
     #[DataProvider('formPostInitDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testFormPostInit($cmsPageData, $action, $requestPath, $targetPath)
     {
         $args = [];
@@ -114,7 +130,11 @@ class FormTest extends \PHPUnit\Framework\TestCase
      * @return array
      * phpcs:disable Magento2.Functions.StaticFunction
      */
+<<<<<<< HEAD
     public static function formPostInitDataProvider(): array
+=======
+    public static function formPostInitDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -136,14 +156,22 @@ class FormTest extends \PHPUnit\Framework\TestCase
     {
         $resourceMock = $this->getMockBuilder(
             \Magento\Cms\Model\ResourceModel\Page::class
+<<<<<<< HEAD
         )->onlyMethods(
+=======
+        )->setMethods(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ['lookupStoreIds']
         )->disableOriginalConstructor()->getMock();
         $resourceMock->expects($this->any())->method('lookupStoreIds')->willReturn($stores);
 
         $cmsPageMock = $this->getMockBuilder(
             \Magento\Cms\Model\Page::class
+<<<<<<< HEAD
         )->onlyMethods(
+=======
+        )->setMethods(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ['getResource', 'getId']
         )->disableOriginalConstructor()->getMock();
         $cmsPageMock->expects($this->any())->method('getId')->willReturn(1);

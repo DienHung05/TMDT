@@ -1,7 +1,13 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -12,17 +18,27 @@ use Magento\Eav\Model\AttributeRepository;
 use Magento\Eav\Model\Entity\Attribute\Option;
 use Magento\Framework\Webapi\Rest\Request;
 use Magento\TestFramework\TestCase\WebapiAbstract;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class LinkManagementTest for testing ConfigurableProduct to SimpleProduct link functionality
  */
 class LinkManagementTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     public const SERVICE_NAME = 'configurableProductLinkManagementV1';
     public const OPTION_SERVICE_NAME = 'configurableProductOptionRepositoryV1';
     public const SERVICE_VERSION = 'V1';
     public const RESOURCE_PATH = '/V1/configurable-products';
+=======
+    const SERVICE_NAME = 'configurableProductLinkManagementV1';
+    const OPTION_SERVICE_NAME = 'configurableProductOptionRepositoryV1';
+    const SERVICE_VERSION = 'V1';
+    const RESOURCE_PATH = '/V1/configurable-products';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var \Magento\Framework\ObjectManagerInterface
@@ -428,6 +444,11 @@ class LinkManagementTest extends WebapiAbstract
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider errorsDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoApiDataFixture Magento/ConfigurableProduct/_files/product_configurable.php
      * @magentoApiDataFixture Magento/Catalog/_files/second_product_simple.php
      *
@@ -436,7 +457,10 @@ class LinkManagementTest extends WebapiAbstract
      * @param string $errorMessage
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('errorsDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddChildWithError(string $parentSku, string $childSku, string $errorMessage): void
     {
         $this->expectException(\Exception::class);
@@ -447,6 +471,7 @@ class LinkManagementTest extends WebapiAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function errorsDataProvider(): array
     {
         return [
@@ -459,12 +484,30 @@ class LinkManagementTest extends WebapiAbstract
                 'configurable', // parentSku
                 'simple2', // childSku
                 TESTS_WEB_API_ADAPTER === self::ADAPTER_SOAP
+=======
+    public function errorsDataProvider(): array
+    {
+        return [
+            'simple_instead_of_configurable' => [
+                'parent_sku' => 'simple2',
+                'child_sku' => 'configurable',
+                'error_message' => (string)__("The parent product doesn't have configurable product options."),
+            ],
+            'simple_with_empty_configurable_attribute_value' => [
+                'parent_sku' => 'configurable',
+                'child_sku' => 'simple2',
+                'error_message' => TESTS_WEB_API_ADAPTER === self::ADAPTER_SOAP
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     ? (string)__(
                         'The child product doesn\'t have the "%1" attribute value. Verify the value and try again.'
                     )
                     : (string)__(
                         'The child product doesn\'t have the \\"%1\\" attribute value. Verify the value and try again.'
+<<<<<<< HEAD
                     ), // errorMessage
+=======
+                    ),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

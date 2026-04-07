@@ -1,6 +1,11 @@
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /* eslint max-nested-callbacks: 0 */
@@ -15,6 +20,7 @@ require.config({
 define(['rjsResolver', 'mixins'], function (resolver, mixins) {
     'use strict';
 
+<<<<<<< HEAD
     describe('mixins.js context behavior', function () {
         var defContext, unbundledContext;
 
@@ -59,6 +65,8 @@ define(['rjsResolver', 'mixins'], function (resolver, mixins) {
         });
     });
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     describe('mixins module', function () {
         beforeEach(function (done) {
             spyOn(mixins, 'hasMixins').and.callThrough();

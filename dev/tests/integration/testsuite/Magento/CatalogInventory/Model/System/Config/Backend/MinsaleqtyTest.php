@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\CatalogInventory\Model\System\Config\Backend;
 
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\Customer\Api\GroupManagementInterface;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class MinsaleqtyTest extends \PHPUnit\Framework\TestCase
 {
@@ -31,8 +39,13 @@ class MinsaleqtyTest extends \PHPUnit\Framework\TestCase
      * @param string $encodedExpectedValue
      * @param array $decodedExpectedValue
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
      */
     #[DataProvider('saveAndLoadDataProvider')]
+=======
+     * @dataProvider saveAndLoadDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveAndLoad($value, $encodedExpectedValue, array $decodedExpectedValue)
     {
         $this->minSaleQtyConfig->setValue($value);
@@ -53,7 +66,11 @@ class MinsaleqtyTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function saveAndLoadDataProvider()
+=======
+    public function saveAndLoadDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $objectManager = Bootstrap::getObjectManager();
         $groupManagement = $objectManager->create(GroupManagementInterface::class);

@@ -1,6 +1,11 @@
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /* eslint max-nested-callbacks: 0 */
@@ -31,8 +36,12 @@ define(['squire', 'ko', 'jquery', 'jquery/validate'], function (Squire, ko, $) {
                         'getCheckedEmailValue'
                     ]
                 ),
+<<<<<<< HEAD
                 'Magento_Checkout/js/model/full-screen-loader': jasmine.createSpy(),
                 'Magento_Checkout/js/view/shipping': jasmine.createSpy()
+=======
+                'Magento_Checkout/js/model/full-screen-loader': jasmine.createSpy()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             },
             Component;
 

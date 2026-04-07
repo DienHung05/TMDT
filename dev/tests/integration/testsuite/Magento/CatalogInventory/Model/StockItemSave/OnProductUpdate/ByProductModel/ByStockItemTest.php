@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\CatalogInventory\Model\StockItemSave\OnProductUpdate\ByProductModel;
 
@@ -76,7 +81,11 @@ class ByStockItemTest extends \PHPUnit\Framework\TestCase
      * product model (deprecated)
      *
      * @magentoDataFixture Magento/Catalog/_files/product_simple.php
+<<<<<<< HEAD
      * @magentoDbIsolation enabled
+=======
+     * @magentoDbIsolation disabled
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function testSaveManuallyCreatedStockItem()
     {
@@ -97,7 +106,11 @@ class ByStockItemTest extends \PHPUnit\Framework\TestCase
      * product repository (deprecated)
      *
      * @magentoDataFixture Magento/Catalog/_files/product_simple.php
+<<<<<<< HEAD
      * @magentoDbIsolation enabled
+=======
+     * @magentoDbIsolation disabled
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function testSaveManuallyUpdatedStockItem()
     {
@@ -113,6 +126,7 @@ class ByStockItemTest extends \PHPUnit\Framework\TestCase
 
         $this->stockItemDataChecker->checkStockItemData('simple', $this->stockItemData);
     }
+<<<<<<< HEAD
 
     /**
      * @magentoDataFixture Magento/Catalog/_files/product_simple.php
@@ -200,4 +214,6 @@ class ByStockItemTest extends \PHPUnit\Framework\TestCase
 
         $this->stockItemDataChecker->checkStockItemData('simple', $expectedData);
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

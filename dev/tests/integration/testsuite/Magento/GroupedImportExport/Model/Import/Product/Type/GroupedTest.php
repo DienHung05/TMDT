@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -24,20 +29,36 @@ use Magento\ImportExport\Model\Import\Source\Csv;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
 
+<<<<<<< HEAD
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class GroupedTest extends TestCase
 {
     /**
      * Configurable product test Name
      */
+<<<<<<< HEAD
     public const TEST_PRODUCT_NAME = 'Test Grouped';
+=======
+    const TEST_PRODUCT_NAME = 'Test Grouped';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * Configurable product test Type
      */
+<<<<<<< HEAD
     public const TEST_PRODUCT_TYPE = 'grouped';
+=======
+    const TEST_PRODUCT_TYPE = 'grouped';
+
+    /**
+     * @var ProductImport
+     */
+    private $model;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var ObjectManagerInterface
@@ -57,6 +78,10 @@ class GroupedTest extends TestCase
     protected function setUp(): void
     {
         $this->objectManager = Bootstrap::getObjectManager();
+<<<<<<< HEAD
+=======
+        $this->model = $this->objectManager->create(ProductImport::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -129,6 +154,10 @@ class GroupedTest extends TestCase
         return reset($items);
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Perform products import.
      *
@@ -137,6 +166,7 @@ class GroupedTest extends TestCase
      */
     private function import(string $pathToFile): void
     {
+<<<<<<< HEAD
         /** @var ProductImport $model */
         $model = $this->objectManager->create(ProductImport::class);
         $filesystem = $this->objectManager->create(Filesystem::class);
@@ -147,5 +177,21 @@ class GroupedTest extends TestCase
         $errors = $model->validateData();
         $this->assertTrue($errors->getErrorsCount() == 0);
         $model->importData();
+=======
+        $filesystem = $this->objectManager->create(Filesystem::class);
+        $directory = $filesystem->getDirectoryWrite(DirectoryList::ROOT);
+        $source = $this->objectManager->create(Csv::class, ['file' => $pathToFile, 'directory' => $directory]);
+        $errors = $this->model->setSource(
+            $source
+        )->setParameters(
+            [
+                'behavior' => Import::BEHAVIOR_APPEND,
+                'entity' => 'catalog_product',
+            ]
+        )->validateData();
+
+        $this->assertTrue($errors->getErrorsCount() == 0);
+        $this->model->importData();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

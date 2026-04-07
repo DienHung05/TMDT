@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -24,7 +29,10 @@ use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -414,12 +422,19 @@ class AddressRepositoryTest extends TestCase
      * @param int $currentPage current page for search criteria
      *
      * @return void
+<<<<<<< HEAD
+=======
+     * @dataProvider searchAddressDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @magentoDataFixture  Magento/Customer/_files/customer.php
      * @magentoDataFixture  Magento/Customer/_files/customer_two_addresses.php
      * @magentoAppIsolation enabled
      */
+<<<<<<< HEAD
     #[DataProvider('searchAddressDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSearchAddresses(
         $filters,
         $filterGroup,
@@ -465,7 +480,11 @@ class AddressRepositoryTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function searchAddressDataProvider(): array
+=======
+    public function searchAddressDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         /**
          * @var FilterBuilder $filterBuilder

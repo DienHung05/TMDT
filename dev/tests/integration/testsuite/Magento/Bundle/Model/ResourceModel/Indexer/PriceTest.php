@@ -1,21 +1,32 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Bundle\Model\ResourceModel\Indexer;
 
+<<<<<<< HEAD
 use Magento\Bundle\Test\Fixture\Option as BundleOptionFixture;
 use Magento\Bundle\Test\Fixture\Product as BundleProductFixture;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\Indexer\Product\Price;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
+=======
+use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Catalog\Model\Indexer\Product\Price;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Customer\Model\Group;
 use Magento\Framework\Indexer\ActionInterface;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Store\Api\WebsiteRepositoryInterface;
 use Magento\TestFramework\Catalog\Model\Product\Price\GetPriceIndexDataByProductId;
+<<<<<<< HEAD
 use Magento\TestFramework\Fixture\Config;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
@@ -26,6 +37,12 @@ use PHPUnit\Framework\TestCase;
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
+=======
+use Magento\CatalogInventory\Model\Indexer\Stock;
+use Magento\TestFramework\Helper\Bootstrap;
+use PHPUnit\Framework\TestCase;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class PriceTest extends TestCase
 {
     /**
@@ -54,6 +71,14 @@ class PriceTest extends TestCase
     private $websiteRepository;
 
     /**
+<<<<<<< HEAD
+=======
+     * @var Stock
+     */
+    private $stockIndexer;
+
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritDoc
      */
     protected function setUp(): void
@@ -63,6 +88,7 @@ class PriceTest extends TestCase
         $this->productRepository = $this->objectManager->get(ProductRepositoryInterface::class);
         $this->getPriceIndexDataByProductId = $this->objectManager->get(GetPriceIndexDataByProductId::class);
         $this->websiteRepository = $this->objectManager->get(WebsiteRepositoryInterface::class);
+<<<<<<< HEAD
     }
 
     #[
@@ -157,5 +183,57 @@ class PriceTest extends TestCase
             $actualPriceData[$sku] = $priceData ? array_intersect_key($priceData, $expectedPrice) : null;
         }
         $this->assertEquals($expectedPriceData, $actualPriceData);
+=======
+        $this->stockIndexer = $this->objectManager->get(Stock::class);
+    }
+
+    /**
+     * Test get bundle index price if enabled show out off stock
+     *
+     * @magentoDbIsolation disabled
+     * @magentoAppIsolation enabled
+     * @magentoDataFixture Magento/Bundle/_files/bundle_product_with_dynamic_price.php
+     * @magentoConfigFixture default_store cataloginventory/options/show_out_of_stock 1
+     *
+     * @return void
+     */
+    public function testExecuteRowWithShowOutOfStock(): void
+    {
+
+        $expectedPrices = [
+            'price' => 0,
+            'final_price' => 0,
+            'min_price' => 15.99,
+            'max_price' => 15.99,
+            'tier_price' => null
+        ];
+        $product = $this->productRepository->get('simple1');
+        $product->setStockData(['qty' => 0]);
+        $this->productRepository->save($product);
+        $this->stockIndexer->executeRow($product->getId());
+        $bundleProduct = $this->productRepository->get('bundle_product_with_dynamic_price');
+        $this->indexer->executeRow($bundleProduct->getId());
+        $this->assertIndexTableData($bundleProduct->getId(), $expectedPrices);
+    }
+
+    /**
+     * Asserts price data in index table.
+     *
+     * @param int $productId
+     * @param array $expectedPrices
+     * @return void
+     */
+    private function assertIndexTableData(int $productId, array $expectedPrices): void
+    {
+        $data = $this->getPriceIndexDataByProductId->execute(
+            $productId,
+            Group::NOT_LOGGED_IN_ID,
+            (int)$this->websiteRepository->get('base')->getId()
+        );
+        $data = reset($data);
+        foreach ($expectedPrices as $column => $price) {
+            $this->assertEquals($price, $data[$column]);
+        }
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

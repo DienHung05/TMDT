@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Backend\Block;
 
@@ -42,7 +47,13 @@ class MenuTest extends \PHPUnit\Framework\TestCase
 
         $reflection = new \ReflectionClass(\Magento\Framework\Component\ComponentRegistrar::class);
         $paths = $reflection->getProperty('paths');
+<<<<<<< HEAD
         $this->backupRegistrar = $paths->getValue();
+=======
+        $paths->setAccessible(true);
+        $this->backupRegistrar = $paths->getValue();
+        $paths->setAccessible(false);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->menuConfig = $this->prepareMenuConfig();
 
@@ -57,7 +68,11 @@ class MenuTest extends \PHPUnit\Framework\TestCase
      */
     public function testRenderNavigation()
     {
+<<<<<<< HEAD
         $menuHtml = $this->blockMenu->renderNavigation($this->menuConfig->getMenu(), 0, 12);
+=======
+        $menuHtml = $this->blockMenu->renderNavigation($this->menuConfig->getMenu());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $menu = new \SimpleXMLElement($menuHtml);
 
         $item = $menu->xpath('/ul/li/a/span')[0];
@@ -72,17 +87,23 @@ class MenuTest extends \PHPUnit\Framework\TestCase
             'Invited Customers',
         ];
         foreach ($menu->xpath('/ul//ul//ul/li/a/span') as $sortOrder => $item) {
+<<<<<<< HEAD
             if ($sortOrder>2) {
                 break;
             }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $this->assertEquals(
                 $liTitles[$sortOrder],
                 (string)$item,
                 '"' . $liTitles[$sortOrder] . '" item is absent or located on wrong menu level.'
             );
         }
+<<<<<<< HEAD
         // test column break if submenu contain more than 12 node
         $this->assertStringContainsString('<li class="column">', $menuHtml);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -97,9 +118,15 @@ class MenuTest extends \PHPUnit\Framework\TestCase
 
         $reflection = new \ReflectionClass(\Magento\Framework\Component\ComponentRegistrar::class);
         $paths = $reflection->getProperty('paths');
+<<<<<<< HEAD
 
         $paths->setValue(
             null,
+=======
+        $paths->setAccessible(true);
+
+        $paths->setValue(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             [
                 ComponentRegistrar::MODULE => [],
                 ComponentRegistrar::THEME => [],
@@ -107,6 +134,10 @@ class MenuTest extends \PHPUnit\Framework\TestCase
                 ComponentRegistrar::LIBRARY => []
             ]
         );
+<<<<<<< HEAD
+=======
+        $paths->setAccessible(false);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         ComponentRegistrar::register(ComponentRegistrar::LIBRARY, 'magento/framework', $libraryPath);
 
@@ -158,6 +189,12 @@ class MenuTest extends \PHPUnit\Framework\TestCase
         $this->configCacheType->save('', \Magento\Backend\Model\Menu\Config::CACHE_MENU_OBJECT);
         $reflection = new \ReflectionClass(\Magento\Framework\Component\ComponentRegistrar::class);
         $paths = $reflection->getProperty('paths');
+<<<<<<< HEAD
         $paths->setValue(null, $this->backupRegistrar);
+=======
+        $paths->setAccessible(true);
+        $paths->setValue($this->backupRegistrar);
+        $paths->setAccessible(false);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

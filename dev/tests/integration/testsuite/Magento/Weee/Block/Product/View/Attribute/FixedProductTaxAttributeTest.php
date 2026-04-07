@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -10,11 +15,17 @@ namespace Magento\Weee\Block\Product\View\Attribute;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Block\Product\ListProduct;
+<<<<<<< HEAD
 use Magento\Catalog\Model\ResourceModel\Product\Collection;
 use Magento\Catalog\Pricing\Render as CatalogPricingRender;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Model\Session;
 use Magento\Framework\Exception\LocalizedException;
+=======
+use Magento\Catalog\Pricing\Render as CatalogPricingRender;
+use Magento\Customer\Api\CustomerRepositoryInterface;
+use Magento\Customer\Model\Session;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\Pricing\Render;
 use Magento\Framework\Pricing\Render\RendererPool;
@@ -70,11 +81,14 @@ class FixedProductTaxAttributeTest extends TestCase
     private $baseWebsiteId;
 
     /**
+<<<<<<< HEAD
      * @var Collection
      */
     private $productCollection;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
@@ -100,7 +114,10 @@ class FixedProductTaxAttributeTest extends TestCase
                 'state' => '',
             ]
         ];
+<<<<<<< HEAD
         $this->productCollection = $this->objectManager->create(Collection::class);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -120,14 +137,20 @@ class FixedProductTaxAttributeTest extends TestCase
      * @magentoConfigFixture default_store tax/weee/display_list 0
      *
      * @return void
+<<<<<<< HEAD
      * @throws LocalizedException
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function testFPTCategoryPageIncludingFPTOnly(): void
     {
         $this->prepareLayoutCategoryPage();
         $product = $this->updateProduct('simple2', $this->textTaxData);
+<<<<<<< HEAD
         $this->productCollection->addItem($product);
         $this->productListBlock->setCollection($this->productCollection);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $productPrice = $this->productListBlock->getProductPrice($product);
         $this->assertEquals('$15.00', preg_replace('/\s+/', '', strip_tags($productPrice)));
     }
@@ -137,14 +160,20 @@ class FixedProductTaxAttributeTest extends TestCase
      * @magentoConfigFixture default_store tax/weee/display_list 1
      *
      * @return void
+<<<<<<< HEAD
      * @throws LocalizedException
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function testFPTCategoryPageIncludingFPTAndDescription(): void
     {
         $this->prepareLayoutCategoryPage();
         $product = $this->updateProduct('simple2', $this->textTaxData);
+<<<<<<< HEAD
         $this->productCollection->addItem($product);
         $this->productListBlock->setCollection($this->productCollection);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $productPrice = $this->productListBlock->getProductPrice($product);
         $this->assertStringContainsString('data-label="fixed&#x20;product&#x20;tax"', $productPrice);
         $this->assertEquals('$15.00$5.00', preg_replace('/\s+/', '', strip_tags($productPrice)));
@@ -160,8 +189,11 @@ class FixedProductTaxAttributeTest extends TestCase
     {
         $this->prepareLayoutCategoryPage();
         $product = $this->updateProduct('simple2', $this->textTaxData);
+<<<<<<< HEAD
         $this->productCollection->addItem($product);
         $this->productListBlock->setCollection($this->productCollection);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $productPrice = $this->productListBlock->getProductPrice($product);
         $this->assertStringContainsString('data-label="fixed&#x20;product&#x20;tax"', $productPrice);
         $this->assertEquals('$10.00$5.00$15.00', preg_replace('/\s+/', '', strip_tags($productPrice)));
@@ -177,8 +209,11 @@ class FixedProductTaxAttributeTest extends TestCase
     {
         $this->prepareLayoutCategoryPage();
         $product = $this->updateProduct('simple2', $this->textTaxData);
+<<<<<<< HEAD
         $this->productCollection->addItem($product);
         $this->productListBlock->setCollection($this->productCollection);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $productPrice = $this->productListBlock->getProductPrice($product);
         $this->assertEquals('$10.00', preg_replace('/\s+/', '', strip_tags($productPrice)));
     }

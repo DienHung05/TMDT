@@ -4,8 +4,13 @@ namespace Magento\Framework\Code\GeneratorTest\SourceClassWithNamespace;
 /**
  * Proxy class for @see \Magento\Framework\Code\GeneratorTest\SourceClassWithNamespace
  *
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class Proxy extends \Magento\Framework\Code\GeneratorTest\SourceClassWithNamespace implements \Magento\Framework\ObjectManager\NoninterceptableInterface
 {
@@ -72,6 +77,7 @@ class Proxy extends \Magento\Framework\Code\GeneratorTest\SourceClassWithNamespa
      */
     public function __clone()
     {
+<<<<<<< HEAD
         if ($this->_subject) {
             $this->_subject = clone $this->_getSubject();
         }
@@ -83,6 +89,9 @@ class Proxy extends \Magento\Framework\Code\GeneratorTest\SourceClassWithNamespa
     public function __debugInfo()
     {
         return ['i' => $this->_subject];
+=======
+        $this->_subject = clone $this->_getSubject();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -127,7 +136,11 @@ class Proxy extends \Magento\Framework\Code\GeneratorTest\SourceClassWithNamespa
     /**
      * {@inheritdoc}
      */
+<<<<<<< HEAD
     public function public71($arg1, string $arg2, ?int $arg3, ?int $arg4 = null): void
+=======
+    public function public71($arg1, string $arg2, ?int $arg3, ?int $arg4 = null) : void
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $this->_getSubject()->public71($arg1, $arg2, $arg3, $arg4);
     }
@@ -135,7 +148,11 @@ class Proxy extends \Magento\Framework\Code\GeneratorTest\SourceClassWithNamespa
     /**
      * {@inheritdoc}
      */
+<<<<<<< HEAD
     public function public71Another(?\DateTime $arg1, $arg2 = false): ?string
+=======
+    public function public71Another(?\DateTime $arg1, $arg2 = false) : ?string
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return $this->_getSubject()->public71Another($arg1, $arg2);
     }
@@ -143,7 +160,11 @@ class Proxy extends \Magento\Framework\Code\GeneratorTest\SourceClassWithNamespa
     /**
      * {@inheritdoc}
      */
+<<<<<<< HEAD
     public function publicWithSelf($arg = false): \Magento\Framework\Code\GeneratorTest\SourceClassWithNamespace
+=======
+    public function publicWithSelf($arg = false) : \Magento\Framework\Code\GeneratorTest\SourceClassWithNamespace
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return $this->_getSubject()->publicWithSelf($arg);
     }

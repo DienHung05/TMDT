@@ -1,12 +1,20 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Theme\Model\Design\Backend;
 
 use Magento\Framework\Serialize\Serializer\Json;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class ExceptionsTest extends \PHPUnit\Framework\TestCase
 {
@@ -72,9 +80,17 @@ class ExceptionsTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @magentoDbIsolation enabled
      */
     #[DataProvider('saveExceptionDataProvider')]
+=======
+     * @param array $designException
+     * @param string $regexp
+     * @dataProvider saveExceptionDataProvider
+     * @magentoDbIsolation enabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveException($designException, $regexp)
     {
         $this->exceptions->setValue(['1' => $designException]);
@@ -84,7 +100,14 @@ class ExceptionsTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($processedValue['1']['regexp'], $regexp);
     }
 
+<<<<<<< HEAD
     public static function saveExceptionDataProvider(): array
+=======
+    /**
+     * @return array
+     */
+    public function saveExceptionDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $result = [
             [['search' => 'Opera', 'value' => 'Magento/blank'], '/Opera/i'],
@@ -100,9 +123,16 @@ class ExceptionsTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @magentoDbIsolation enabled
      */
     #[DataProvider('saveWrongExceptionDataProvider')]
+=======
+     * @var array $value
+     * @dataProvider saveWrongExceptionDataProvider
+     * @magentoDbIsolation enabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveWrongException($value)
     {
         $this->expectException(\Magento\Framework\Exception\LocalizedException::class);
@@ -111,7 +141,14 @@ class ExceptionsTest extends \PHPUnit\Framework\TestCase
         $this->exceptions->save();
     }
 
+<<<<<<< HEAD
     public static function saveWrongExceptionDataProvider(): array
+=======
+    /**
+     * @return array
+     */
+    public function saveWrongExceptionDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $result = [
             [

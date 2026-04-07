@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Framework\Api\ExtensionAttribute;
 
@@ -12,7 +17,10 @@ use Magento\Framework\Api\ExtensionAttribute\JoinDataInterfaceFactory;
 use Magento\Framework\Reflection\TypeProcessor;
 use Magento\Framework\App\ResourceConnection as AppResource;
 use Magento\Framework\Api\ExtensionAttributesFactory;
+<<<<<<< HEAD
 use Magento\Framework\TestFramework\Unit\Helper\MockCreationTrait;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class to test the JoinProcessor functionality
@@ -21,7 +29,10 @@ use Magento\Framework\TestFramework\Unit\Helper\MockCreationTrait;
  */
 class JoinProcessorTest extends \PHPUnit\Framework\TestCase
 {
+<<<<<<< HEAD
     use MockCreationTrait;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @var \Magento\Framework\Api\ExtensionAttribute\JoinProcessor
      */
@@ -106,10 +117,17 @@ class JoinProcessorTest extends \PHPUnit\Framework\TestCase
             ->method('get')
             ->willReturn($this->getConfig());
 
+<<<<<<< HEAD
         $collection = $this->createPartialMockWithReflection(
             \Magento\Framework\Data\Collection\AbstractDb::class,
             ['joinExtensionAttribute', 'getResource']
         );
+=======
+        $collection = $this->getMockBuilder(\Magento\Framework\Data\Collection\AbstractDb::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['joinExtensionAttribute'])
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $extensionAttributeJoinData = new JoinData();
         $this->extensionAttributeJoinDataFactory

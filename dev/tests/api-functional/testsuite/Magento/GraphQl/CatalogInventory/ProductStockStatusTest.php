@@ -1,12 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\CatalogInventory;
 
+<<<<<<< HEAD
 use Exception;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
@@ -26,6 +32,12 @@ use Magento\Framework\DataObject;
 use Magento\Quote\Test\Fixture\AddProductToCart;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\Quote\Test\Fixture\QuoteIdMask as QuoteMaskFixture;
+=======
+use Magento\CatalogInventory\Api\Data\StockStatusInterface;
+use Magento\CatalogInventory\Api\StockRegistryInterface;
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\TestFramework\TestCase\GraphQlAbstract;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for product status
@@ -33,6 +45,7 @@ use Magento\Quote\Test\Fixture\QuoteIdMask as QuoteMaskFixture;
 class ProductStockStatusTest extends GraphQlAbstract
 {
     /**
+<<<<<<< HEAD
      * @var DataFixtureStorage
      */
     private $fixtures;
@@ -287,5 +300,69 @@ class ProductStockStatusTest extends GraphQlAbstract
   }
 }
 QUERY;
+=======
+     * @var StockRegistryInterface
+     */
+    private $stockRegistry;
+
+    protected function setUp(): void
+    {
+        $this->stockRegistry = Bootstrap::getObjectManager()->create(StockRegistryInterface::class);
+    }
+
+    /**
+     * @magentoApiDataFixture Magento/Catalog/_files/product_simple_with_all_fields.php
+     */
+    public function testQueryProductStockStatusInStock()
+    {
+        $productSku = 'simple';
+
+        $query = <<<QUERY
+        {
+            products(filter: {sku: {eq: "{$productSku}"}})
+            {
+                items {
+                    stock_status            
+                }
+            }
+        }
+QUERY;
+
+        $response = $this->graphQlQuery($query);
+
+        $this->assertArrayHasKey(0, $response['products']['items']);
+        $this->assertArrayHasKey('stock_status', $response['products']['items'][0]);
+        $this->assertEquals('IN_STOCK', $response['products']['items'][0]['stock_status']);
+    }
+
+    /**
+     * @magentoApiDataFixture Magento/Catalog/_files/product_simple_with_all_fields.php
+     * @magentoConfigFixture default_store cataloginventory/options/show_out_of_stock 1
+     */
+    public function testQueryProductStockStatusOutOfStock()
+    {
+        $productSku = 'simple';
+
+        $query = <<<QUERY
+        {
+            products(filter: {sku: {eq: "{$productSku}"}})
+            {
+                items {
+                    stock_status            
+                }
+            }
+        }
+QUERY;
+
+        $stockItem = $this->stockRegistry->getStockItemBySku($productSku);
+        $stockItem->setQty(0);
+        $this->stockRegistry->updateStockItemBySku($productSku, $stockItem);
+
+        $response = $this->graphQlQuery($query);
+
+        $this->assertArrayHasKey(0, $response['products']['items']);
+        $this->assertArrayHasKey('stock_status', $response['products']['items'][0]);
+        $this->assertEquals('OUT_OF_STOCK', $response['products']['items'][0]['stock_status']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

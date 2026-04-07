@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Setup\Console\Command;
@@ -18,7 +23,10 @@ use Magento\Framework\App\ObjectManager;
  */
 class InfoTimezoneListCommand extends Command
 {
+<<<<<<< HEAD
     public const NAME = 'info:timezone:list';
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * List model provides lists of available options for currency, language locales, timezones
      *
@@ -35,7 +43,11 @@ class InfoTimezoneListCommand extends Command
      * @param Lists $lists
      * @param TableFactory $tableHelperFactory
      */
+<<<<<<< HEAD
     public function __construct(Lists $lists, ?TableFactory $tableHelperFactory = null)
+=======
+    public function __construct(Lists $lists, TableFactory $tableHelperFactory = null)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $this->lists = $lists;
         $this->tableHelperFactory = $tableHelperFactory ?: ObjectManager::getInstance()->create(TableFactory::class);
@@ -43,20 +55,34 @@ class InfoTimezoneListCommand extends Command
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
      */
     protected function configure()
     {
         $this->setName(self::NAME)
+=======
+     * {@inheritdoc}
+     */
+    protected function configure()
+    {
+        $this->setName('info:timezone:list')
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->setDescription('Displays the list of available timezones');
 
         parent::configure();
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
+=======
+     * {@inheritdoc}
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $tableHelper = $this->tableHelperFactory->create(['output' => $output]);
         $tableHelper->setHeaders(['Timezone', 'Code']);

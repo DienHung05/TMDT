@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\TestFramework\Dependency;
@@ -11,7 +16,10 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager as ObjectManagerHelper;
 use Magento\TestFramework\Dependency\Reader\ClassScanner;
 use Magento\TestFramework\Dependency\Route\RouteMapper;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for PhpRule dependency check
@@ -87,8 +95,13 @@ class PhpRuleTest extends \PHPUnit\Framework\TestCase
      * @param array $expected
      *
      * @throws \Exception
+<<<<<<< HEAD
      */
     #[DataProvider('getDependencyInfoDataProvider')]
+=======
+     * @dataProvider getDependencyInfoDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetDependencyInfo(string $class, string $content, int $expectedScans, array $expected): void
     {
         $file = $this->makeMockFilepath($class);
@@ -103,7 +116,11 @@ class PhpRuleTest extends \PHPUnit\Framework\TestCase
     /**
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function getDependencyInfoDataProvider()
+=======
+    public function getDependencyInfoDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Extend class in same module' => [
@@ -234,8 +251,13 @@ class PhpRuleTest extends \PHPUnit\Framework\TestCase
      * @param string $content
      * @param array $expected
      * @throws \Exception
+<<<<<<< HEAD
      */
     #[DataProvider('getDependencyInfoDataCaseGetUrlDataProvider')]
+=======
+     * @dataProvider getDependencyInfoDataCaseGetUrlDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetDependencyInfoCaseGetUrl(
         string $class,
         string $content,
@@ -250,7 +272,11 @@ class PhpRuleTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getDependencyInfoDataCaseGetUrlDataProvider()
+=======
+    public function getDependencyInfoDataCaseGetUrlDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'getUrl from same module' => [
@@ -318,8 +344,13 @@ class PhpRuleTest extends \PHPUnit\Framework\TestCase
      * @param string $content
      * @param array $expected
      * @throws \Exception
+<<<<<<< HEAD
      */
     #[DataProvider('getDependencyInfoDataCaseGetTemplateUrlDataProvider')]
+=======
+     * @dataProvider getDependencyInfoDataCaseGetTemplateUrlDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetDependencyInfoCaseTemplateGetUrl(
         string $template,
         string $content,
@@ -333,7 +364,11 @@ class PhpRuleTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array[]
      */
+<<<<<<< HEAD
     public static function getDependencyInfoDataCaseGetTemplateUrlDataProvider()
+=======
+    public function getDependencyInfoDataCaseGetTemplateUrlDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [ 'getUrl from ignore template' => [
             'app/code/Magento/Backend/view/adminhtml/templates/dashboard/totalbar/script.phtml',
@@ -345,8 +380,13 @@ class PhpRuleTest extends \PHPUnit\Framework\TestCase
      * @param string $class
      * @param string $content
      * @param array $expected
+<<<<<<< HEAD
      */
     #[DataProvider('processWildcardUrlDataProvider')]
+=======
+     * @dataProvider processWildcardUrlDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testProcessWildcardUrl(
         string $class,
         string $content,
@@ -378,7 +418,11 @@ class PhpRuleTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array[]
      */
+<<<<<<< HEAD
     public static function processWildcardUrlDataProvider()
+=======
+    public function processWildcardUrlDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'wildcard controller route' => [
@@ -416,8 +460,13 @@ class PhpRuleTest extends \PHPUnit\Framework\TestCase
      * @param string $content
      * @param \Exception $expected
      * @throws \Exception
+<<<<<<< HEAD
      */
     #[DataProvider('getDependencyInfoDataCaseGetUrlExceptionDataProvider')]
+=======
+     * @dataProvider getDependencyInfoDataCaseGetUrlExceptionDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetDependencyInfoCaseGetUrlException(
         string $class,
         string $content,
@@ -433,7 +482,11 @@ class PhpRuleTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getDependencyInfoDataCaseGetUrlExceptionDataProvider()
+=======
+    public function getDependencyInfoDataCaseGetUrlExceptionDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'getUrl from same module' => [
@@ -453,9 +506,15 @@ class PhpRuleTest extends \PHPUnit\Framework\TestCase
      * @param string $module
      * @param string $content
      * @param array $expected
+<<<<<<< HEAD
      * @throws \Exception
      */
     #[DataProvider('getDefaultModelDependencyDataProvider')]
+=======
+     * @dataProvider getDefaultModelDependencyDataProvider
+     * @throws \Exception
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetDefaultModelDependency($module, $content, array $expected)
     {
         $mapLayoutBlocks = [
@@ -472,7 +531,11 @@ class PhpRuleTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getDefaultModelDependencyDataProvider()
+=======
+    public function getDefaultModelDependencyDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -21,12 +26,19 @@ use Magento\TestFramework\Request;
 use Magento\TestFramework\Response;
 use Magento\TestFramework\Store\ExecuteInStoreContext;
 use Magento\TestFramework\TestCase\AbstractController;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Checks category availability on storefront by url rewrite
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+<<<<<<< HEAD
+=======
+ * @magentoConfigFixture default/catalog/seo/generate_category_product_rewrites 1
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  * @magentoDbIsolation enabled
  */
 class CategoryUrlRewriteTest extends AbstractController
@@ -73,12 +85,19 @@ class CategoryUrlRewriteTest extends AbstractController
 
     /**
      * @magentoDataFixture Magento/Catalog/_files/category_tree.php
+<<<<<<< HEAD
      * @magentoConfigFixture default/catalog/seo/generate_category_product_rewrites 1
+=======
+     * @dataProvider categoryRewriteProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param int $categoryId
      * @param string $urlPath
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('categoryRewriteProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCategoryUrlRewrite(int $categoryId, string $urlPath): void
     {
         $this->dispatch(sprintf($urlPath, $this->categoryUrlSuffix));
@@ -96,6 +115,7 @@ class CategoryUrlRewriteTest extends AbstractController
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function categoryRewriteProvider(): array
     {
         return [
@@ -110,6 +130,22 @@ class CategoryUrlRewriteTest extends AbstractController
             [
                 'categoryId' => 402,
                 'urlPath' => '/category-1/category-1-1/category-1-1-1%s',
+=======
+    public function categoryRewriteProvider(): array
+    {
+        return [
+            [
+                'category_id' => 400,
+                'url_path' => '/category-1%s',
+            ],
+            [
+                'category_id' => 401,
+                'url_path' => '/category-1/category-1-1%s',
+            ],
+            [
+                'category_id' => 402,
+                'url_path' => '/category-1/category-1-1/category-1-1-1%s',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }
@@ -119,7 +155,10 @@ class CategoryUrlRewriteTest extends AbstractController
      *
      * @magentoDataFixture Magento/Catalog/_files/category.php
      * @magentoDataFixture Magento/Store/_files/store.php
+<<<<<<< HEAD
      * @magentoConfigFixture default/catalog/seo/generate_category_product_rewrites 1
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @return void
      */
     public function testCategoryUrlOnStoreView(): void

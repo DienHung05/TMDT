@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\SendFriend;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\Exception\AuthenticationException;
 use Magento\Integration\Api\CustomerTokenServiceInterface;
@@ -124,7 +132,11 @@ class SendFriendTest extends GraphQlAbstract
     {
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage(
+<<<<<<< HEAD
             'The product with ID "2018" does not exist.'
+=======
+            'The product that was requested doesn\'t exist. Verify the product and try again.'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
 
         $productId = 2018;
@@ -188,10 +200,17 @@ class SendFriendTest extends GraphQlAbstract
      * @magentoApiDataFixture Magento/Customer/_files/customer.php
      * @magentoApiDataFixture Magento/Catalog/_files/product_simple.php
      * @magentoConfigFixture default_store sendfriend/email/enabled 1
+<<<<<<< HEAD
      * @param string $input
      * @param string $errorMessage
      */
     #[DataProvider('sendFriendsErrorsDataProvider')]
+=======
+     * @dataProvider sendFriendsErrorsDataProvider
+     * @param string $input
+     * @param string $errorMessage
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testErrors(string $input, string $errorMessage)
     {
         $query =
@@ -293,18 +312,30 @@ QUERY;
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function sendFriendsErrorsDataProvider(): array
     {
         return array_merge(
             self::getRecipientErrors(),
             self::getSenderErrors()
+=======
+    public function sendFriendsErrorsDataProvider(): array
+    {
+        return array_merge(
+            $this->getRecipientErrors(),
+            $this->getSenderErrors()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
     }
 
     /**
      * @return array
      */
+<<<<<<< HEAD
     private static function getRecipientErrors(): array
+=======
+    private function getRecipientErrors(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -351,7 +382,11 @@ QUERY;
     /**
      * @return array
      */
+<<<<<<< HEAD
     private static function getSenderErrors(): array
+=======
+    private function getSenderErrors(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

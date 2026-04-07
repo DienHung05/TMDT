@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -13,7 +18,10 @@ use Magento\Search\Setup\CompositeInstallConfig;
 use Magento\Setup\Model\SearchConfig;
 use Magento\Setup\Model\SearchConfigOptionsList;
 use PHPUnit\Framework\MockObject\MockObject;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 class SearchConfigTest extends TestCase
@@ -62,8 +70,13 @@ class SearchConfigTest extends TestCase
     /**
      * @param array $installInput
      * @param array $searchInput
+<<<<<<< HEAD
      */
     #[DataProvider('installInputDataProvider')]
+=======
+     * @dataProvider installInputDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveConfiguration(array $installInput, array $searchInput)
     {
         $this->installConfigMock->expects($this->once())->method('configure')->with($searchInput);
@@ -78,8 +91,13 @@ class SearchConfigTest extends TestCase
     /**
      * @param array $installInput
      * @param array $searchInput
+<<<<<<< HEAD
      */
     #[DataProvider('installInputDataProvider')]
+=======
+     * @dataProvider installInputDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveConfigurationInvalidSearchEngine(array $installInput, array $searchInput)
     {
         $this->expectException(\Magento\Setup\Exception::class);
@@ -95,8 +113,13 @@ class SearchConfigTest extends TestCase
     /**
      * @param array $installInput
      * @param array $searchInput
+<<<<<<< HEAD
      */
     #[DataProvider('installInputDataProvider')]
+=======
+     * @dataProvider installInputDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveConfigurationValidationFail(array $installInput, array $searchInput)
     {
         $this->expectException(\Magento\Framework\Validation\ValidationException::class);
@@ -111,11 +134,19 @@ class SearchConfigTest extends TestCase
         $this->searchConfig->saveConfiguration($installInput);
     }
 
+<<<<<<< HEAD
     public static function installInputDataProvider()
     {
         return [
             [
                 'installInput' => [
+=======
+    public function installInputDataProvider()
+    {
+        return [
+            [
+                'all' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'amqp-host' => '',
                     'amqp-port' => '5672',
                     'amqp-user' => '',
@@ -142,7 +173,11 @@ class SearchConfigTest extends TestCase
                     'base-url-secure' => null,
                     'use-secure-admin' => null,
                     'admin-use-security-key' => null,
+<<<<<<< HEAD
                     'search-engine' => 'elasticsearch8',
+=======
+                    'search-engine' => 'elasticsearch7',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'elasticsearch-host' => 'localhost',
                     'elasticsearch-port' => '9200',
                     'elasticsearch-enable-auth' => false,
@@ -150,8 +185,13 @@ class SearchConfigTest extends TestCase
                     'elasticsearch-timeout' => 15,
                     'no-interaction' => false,
                 ],
+<<<<<<< HEAD
                 'searchInput' => [
                     'search-engine' => 'elasticsearch8',
+=======
+                'search' => [
+                    'search-engine' => 'elasticsearch7',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'elasticsearch-host' => 'localhost',
                     'elasticsearch-port' => '9200',
                     'elasticsearch-enable-auth' => false,

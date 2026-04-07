@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2011 Adobe
  * All Rights Reserved.
  */
@@ -16,6 +17,13 @@ use Magento\TestFramework\Fixture\DataFixtureStorage;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Customer\Model\Visitor;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+namespace Magento\Catalog\Helper\Product;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class CompareTest extends \PHPUnit\Framework\TestCase
 {
@@ -24,6 +32,7 @@ class CompareTest extends \PHPUnit\Framework\TestCase
      */
     protected $_helper;
 
+<<<<<<< HEAD
     /** @var StoreManagerInterface */
     private $storeManager;
 
@@ -32,6 +41,8 @@ class CompareTest extends \PHPUnit\Framework\TestCase
      */
     private $fixtures;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @var \Magento\Framework\ObjectManagerInterface
      */
@@ -41,8 +52,11 @@ class CompareTest extends \PHPUnit\Framework\TestCase
     {
         $this->_objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
         $this->_helper = $this->_objectManager->get(\Magento\Catalog\Helper\Product\Compare::class);
+<<<<<<< HEAD
         $this->fixtures = $this->_objectManager->get(DataFixtureStorageManager::class)->getStorage();
         $this->storeManager = $this->_objectManager->get(StoreManagerInterface::class);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     public function testGetListUrl()
@@ -95,10 +109,25 @@ class CompareTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @see testGetListUrl() for coverage of customer case
+     */
+    public function testGetItemCollection()
+    {
+        $this->assertInstanceOf(
+            \Magento\Catalog\Model\ResourceModel\Product\Compare\Item\Collection::class,
+            $this->_helper->getItemCollection()
+        );
+    }
+
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * calculate()
      * getItemCount()
      * hasItems()
      *
+<<<<<<< HEAD
      * @magentoDbIsolation disabled
      */
     #[
@@ -110,6 +139,11 @@ class CompareTest extends \PHPUnit\Framework\TestCase
         DataFixture(ProductFixture::class, ['website_ids' => [1, '$website2.id$']], as: 'product2'),
         DataFixture(ProductFixture::class, ['website_ids' => ['$website2.id$']], as: 'product3'),
     ]
+=======
+     * @magentoDataFixture Magento/Catalog/_files/multiple_products.php
+     * @magentoDbIsolation disabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCalculate()
     {
         /** @var \Magento\Catalog\Model\Session $session */
@@ -119,14 +153,19 @@ class CompareTest extends \PHPUnit\Framework\TestCase
             $this->assertFalse($this->_helper->hasItems());
             $this->assertEquals(0, $session->getCatalogCompareItemsCount());
 
+<<<<<<< HEAD
             $visitor = $this->_objectManager->get(Visitor::class);
             $visitor->setVisitorId(1);
             $this->_populateCompareList('product1');
             $this->_populateCompareList('product2');
+=======
+            $this->_populateCompareList();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $this->_helper->calculate();
             $this->assertEquals(2, $session->getCatalogCompareItemsCount());
             $this->assertTrue($this->_helper->hasItems());
 
+<<<<<<< HEAD
             $secondStore = $this->fixtures->get('store2')->getCode();
             $this->storeManager->setCurrentStore($secondStore);
             $this->_helper->calculate();
@@ -148,6 +187,8 @@ class CompareTest extends \PHPUnit\Framework\TestCase
             $this->_helper->calculate();
             $this->assertEquals(2, $session->getCatalogCompareItemsCount());
             $this->assertTrue($this->_helper->hasItems());
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $session->unsCatalogCompareItemsCount();
         } catch (\Exception $e) {
             $session->unsCatalogCompareItemsCount();
@@ -155,6 +196,7 @@ class CompareTest extends \PHPUnit\Framework\TestCase
         }
     }
 
+<<<<<<< HEAD
     /**
      * @see testGetListUrl() for coverage of customer case
      */
@@ -166,6 +208,8 @@ class CompareTest extends \PHPUnit\Framework\TestCase
         );
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSetGetAllowUsedFlat()
     {
         $this->assertTrue($this->_helper->getAllowUsedFlat());
@@ -183,6 +227,7 @@ class CompareTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Add products from fixture to compare list
+<<<<<<< HEAD
      *
      * @param string $sku
      */
@@ -192,5 +237,16 @@ class CompareTest extends \PHPUnit\Framework\TestCase
         /** @var $compareList \Magento\Catalog\Model\Product\Compare\ListCompare */
         $compareList = $this->_objectManager->create(\Magento\Catalog\Model\Product\Compare\ListCompare::class);
         $compareList->addProduct($product);
+=======
+     */
+    protected function _populateCompareList()
+    {
+        $productRepository = $this->_objectManager->create(\Magento\Catalog\Api\ProductRepositoryInterface::class);
+        $productOne = $productRepository->get('simple1');
+        $productTwo = $productRepository->get('simple2');
+        /** @var $compareList \Magento\Catalog\Model\Product\Compare\ListCompare */
+        $compareList = $this->_objectManager->create(\Magento\Catalog\Model\Product\Compare\ListCompare::class);
+        $compareList->addProduct($productOne)->addProduct($productTwo);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

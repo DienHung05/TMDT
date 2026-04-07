@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\CatalogImportExport\Model\Import\Product\Type;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\CatalogImportExport\Model\Import\Product\Type;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * Tests \Magento\CatalogImportExport\Model\Import\Product\Type\AbstractType.
  */
@@ -30,10 +38,16 @@ class AbstractTest extends \PHPUnit\Framework\TestCase
     {
         $this->objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
         $params = [$this->objectManager->create(\Magento\CatalogImportExport\Model\Import\Product::class), 'simple'];
+<<<<<<< HEAD
         $this->_model = $this->getMockBuilder(
             \Magento\CatalogImportExport\Model\Import\Product\Type\AbstractType::class
         )
             ->setConstructorArgs([
+=======
+        $this->_model = $this->getMockForAbstractClass(
+            \Magento\CatalogImportExport\Model\Import\Product\Type\AbstractType::class,
+            [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $this->objectManager->get(
                     \Magento\Eav\Model\ResourceModel\Entity\Attribute\Set\CollectionFactory::class
                 ),
@@ -44,18 +58,31 @@ class AbstractTest extends \PHPUnit\Framework\TestCase
                     \Magento\Framework\App\ResourceConnection::class
                 ),
                 $params
+<<<<<<< HEAD
             ])
             ->onlyMethods([])
             ->getMock();
     }
 
     /**
+=======
+            ]
+        );
+    }
+
+    /**
+     * @dataProvider prepareAttributesWithDefaultValueForSaveDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $rowData
      * @param bool  $withDefaultValue
      * @param array $expectedAttributes
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('prepareAttributesWithDefaultValueForSaveDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPrepareAttributesWithDefaultValueForSave(
         array $rowData,
         bool $withDefaultValue,
@@ -72,7 +99,11 @@ class AbstractTest extends \PHPUnit\Framework\TestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function prepareAttributesWithDefaultValueForSaveDataProvider(): array
+=======
+    public function prepareAttributesWithDefaultValueForSaveDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Updating existing product with attributes that do not have default values' => [
@@ -194,11 +225,18 @@ class AbstractTest extends \PHPUnit\Framework\TestCase
      * Test cleaning imported attribute data from empty values (note '0' is not empty).
      *
      * @magentoDataFixture  Magento/CatalogImportExport/Model/Import/_files/custom_attributes.php
+<<<<<<< HEAD
+=======
+     * @dataProvider        clearEmptyDataDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $rowData
      * @param array $expectedAttributes
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('clearEmptyDataDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testClearEmptyData(array $rowData, array $expectedAttributes): void
     {
         $actualAttributes = $this->_model->clearEmptyData($rowData);
@@ -213,7 +251,11 @@ class AbstractTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function clearEmptyDataDataProvider(): array
+=======
+    public function clearEmptyDataDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         // We use sku attribute to test static attributes.
         return [

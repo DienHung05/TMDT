@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -21,7 +26,10 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Registry;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -92,13 +100,21 @@ class AddressAttributeFilterTest extends TestCase
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @magentoDataFixture Magento/Customer/_files/customer_address.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider addressesDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param $storeId
      * @param $allowedCountries
      * @return void
      * @throws LocalizedException
      * @throws NoSuchEntityException
      */
+<<<<<<< HEAD
     #[DataProvider('addressesDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSetScopeFilter($storeId, $allowedCountries) : void
     {
         /** @var ConfigInterface $config */
@@ -125,7 +141,11 @@ class AddressAttributeFilterTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function addressesDataProvider(): array
+=======
+    public function addressesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'address_in_single_allowed_country' => [1, ['US']],

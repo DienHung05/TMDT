@@ -1,10 +1,19 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2012 Adobe
  * All Rights Reserved.
  */
 namespace Magento\TestFramework\Annotation;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\TestFramework\Annotation;
+
+use Magento\Framework\Exception\LocalizedException;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Event\Param\Transaction;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
@@ -90,8 +99,14 @@ class DbIsolation
         } catch (\Throwable $exception) {
             ExceptionHandler::handle(
                 'Unable to parse fixtures',
+<<<<<<< HEAD
                 $exception,
                 $test
+=======
+                get_class($test),
+                $test->getName(false),
+                $exception
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             );
         }
         return $state;

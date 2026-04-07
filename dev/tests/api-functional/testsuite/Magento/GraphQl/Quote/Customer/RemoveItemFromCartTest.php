@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,7 +16,10 @@ use Magento\GraphQl\Quote\GetMaskedQuoteIdByReservedOrderId;
 use Magento\GraphQl\Quote\GetQuoteItemIdByReservedQuoteIdAndSku;
 use Magento\Integration\Api\CustomerTokenServiceInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use Magento\TestFramework\TestCase\GraphQl\ResponseContainsErrorsException;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\TestCase\GraphQlAbstract;
 
 /**
@@ -148,6 +156,7 @@ class RemoveItemFromCartTest extends GraphQlAbstract
             'test_quote',
             'simple_product'
         );
+<<<<<<< HEAD
         $query = $this->getQuery($anotherCustomerQuoteMaskedId, $anotherCustomerQuoteItemId);
 
         try {
@@ -198,6 +207,15 @@ class RemoveItemFromCartTest extends GraphQlAbstract
   }
 }
 QUERY;
+=======
+
+        $this->expectExceptionMessage(
+            "The current user cannot perform operations on cart \"$anotherCustomerQuoteMaskedId\""
+        );
+
+        $query = $this->getQuery($anotherCustomerQuoteMaskedId, $anotherCustomerQuoteItemId);
+        $this->graphQlMutation($query, [], '', $this->getHeaderMap('customer2@search.example.com'));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**

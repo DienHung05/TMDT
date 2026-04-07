@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2012 Adobe
  * All Rights Reserved.
  */
@@ -45,24 +46,41 @@ class RuleTest extends TestCase
 
     /**
      * @var Rule
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\CatalogRule\Model;
+
+class RuleTest extends \PHPUnit\Framework\TestCase
+{
+    /**
+     * @var \Magento\CatalogRule\Model\Rule
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     protected $_object;
 
     /**
+<<<<<<< HEAD
      * @var DataFixtureStorage
      */
     private $fixtures;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
     protected function setUp(): void
     {
+<<<<<<< HEAD
         $this->objectManager = Bootstrap::getObjectManager();
         $this->fixtures = $this->objectManager->get(DataFixtureStorageManager::class)->getStorage();
         $this->cartRepository = $this->objectManager->get(CartRepositoryInterface::class);
         $this->catalogRuleRepository = $this->objectManager->get(CatalogRuleRepositoryInterface::class);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $resourceMock = $this->createPartialMock(
             \Magento\CatalogRule\Model\ResourceModel\Rule::class,
             ['getIdFieldName', 'getRulesFromProduct']
@@ -76,19 +94,33 @@ class RuleTest extends TestCase
             $this->_getCatalogRulesFixtures()
         );
 
+<<<<<<< HEAD
         $this->_object = $this->objectManager ->create(
             Rule::class,
+=======
+        $this->_object = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(
+            \Magento\CatalogRule\Model\Rule::class,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ['ruleResourceModel' => $resourceMock]
         );
     }
 
     /**
      * @magentoAppIsolation enabled
+<<<<<<< HEAD
      */
     public function testCalcProductPriceRule()
     {
         $product = $this->objectManager->create(
             Product::class
+=======
+     * @covers \Magento\CatalogRule\Model\Rule::calcProductPriceRule
+     */
+    public function testCalcProductPriceRule()
+    {
+        $product = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(
+            \Magento\Catalog\Model\Product::class
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
         $this->assertEquals($this->_object->calcProductPriceRule($product, 100), 45);
         $product->setParentId(true);
@@ -115,6 +147,7 @@ class RuleTest extends TestCase
             ]
         ];
     }
+<<<<<<< HEAD
 
     /**
      * Test case where changing in catalog rule price updates the quote price.
@@ -181,4 +214,6 @@ class RuleTest extends TestCase
         $this->assertEquals($updatedItems[0]->getProduct()->getId(), $product->getId());
         $this->assertEquals((float) $updatedItems[0]->getPrice(), 50.00);
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

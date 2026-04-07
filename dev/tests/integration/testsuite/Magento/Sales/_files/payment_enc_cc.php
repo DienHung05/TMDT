@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
 
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Api\SearchCriteria;
+<<<<<<< HEAD
 use Magento\Framework\Config\ConfigOptionsListConstants;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\ResourceModel\Order\Payment\EncryptionUpdateTest;
 use Magento\Framework\App\DeploymentConfig;
@@ -31,6 +39,7 @@ $deployConfig = $objectManager->get(DeploymentConfig::class);
 $handle = @mcrypt_module_open(MCRYPT_RIJNDAEL_256, '', MCRYPT_MODE_CBC, '');
 $initVectorSize = @mcrypt_enc_get_iv_size($handle);
 $initVector = str_repeat("\0", $initVectorSize);
+<<<<<<< HEAD
 
 // Key is also encrypted to support 256-key
 $key = $deployConfig->get('crypt/key');
@@ -39,6 +48,9 @@ $originalKey = (str_starts_with($key, ConfigOptionsListConstants::STORE_KEY_ENCO
     $key;
 
 @mcrypt_generic_init($handle, $originalKey, $initVector);
+=======
+@mcrypt_generic_init($handle, $deployConfig->get('crypt/key'), $initVector);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 $encCcNumber = @mcrypt_generic($handle, EncryptionUpdateTest::TEST_CC_NUMBER);
 

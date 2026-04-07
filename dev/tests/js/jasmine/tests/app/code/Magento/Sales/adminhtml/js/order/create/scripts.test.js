@@ -1,8 +1,15 @@
+<<<<<<< HEAD
 /**
  * Copyright 2020 Adobe
  * All Rights Reserved.
  */
 
+=======
+/*
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /*eslint-disable max-nested-callbacks*/
 /*jscs:disable jsDoc*/
 define([
@@ -34,7 +41,10 @@ define([
                     '</fieldset>' +
                     '<input id="p_method_free" type="radio" name="payment[method]" value="free"/>' +
                 '</div>' +
+<<<<<<< HEAD
             '<button id="submit_order_top_button" type="button">Submit Order</button>' +
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             '</form>';
 
     $.widget('magetest.testPaymentMethodA', {
@@ -162,6 +172,7 @@ define([
             jQueryAjax = undefined;
         });
 
+<<<<<<< HEAD
         describe('Testing syncAddressField method', function () {
             it('Synchronize region and region_id fields display when called with field named "country"', function () {
                 let form, billingCountryId, billingRegionId, billingRegion, billingCountryIdOption1,
@@ -258,6 +269,8 @@ define([
             expect(order.loadArea).toHaveBeenCalled();
         });
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         describe('Testing the process customer group change', function () {
             it('and confirm method is called', function () {
                 init();
@@ -371,6 +384,7 @@ define([
                 );
             });
         });
+<<<<<<< HEAD
 
         describe('Check that payment custom handler is executed and button states', function () {
             let $submitButton;
@@ -478,5 +492,7 @@ define([
             });
         });
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     });
 });

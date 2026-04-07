@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Test\Integrity\Library;
 
 use Laminas\Code\Reflection\ClassReflection;
 use Laminas\Code\Reflection\Exception\InvalidArgumentException;
+<<<<<<< HEAD
 use Magento\Framework\App\Utility\AggregateInvoker;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\App\Utility\Files;
 use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Setup\Module\Di\Code\Reader\FileClassScanner;
@@ -40,11 +48,18 @@ class DependencyTest extends TestCase
             'Framework',
             'SomeModule',
             'ModuleName',
+<<<<<<< HEAD
             'Setup\Console\CommandLoader',
             'Setup\Console\CompilerPreparation',
             'Setup\Model\ObjectManagerProvider',
             'Setup\Mvc\Bootstrap\InitParamListener',
             'Setup\Module',
+=======
+            'Setup\Console\CommandList',
+            'Setup\Console\CompilerPreparation',
+            'Setup\Model\ObjectManagerProvider',
+            'Setup\Mvc\Bootstrap\InitParamListener',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'Store\Model\ScopeInterface',
             'Store\Model\StoreManagerInterface',
             'Directory\Model\CurrencyFactory',
@@ -62,7 +77,11 @@ class DependencyTest extends TestCase
 
     public function testCheckDependencies(): void
     {
+<<<<<<< HEAD
         $invoker = new AggregateInvoker($this);
+=======
+        $invoker = new \Magento\Framework\App\Utility\AggregateInvoker($this);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $invoker(
             /**
              * @param string $file

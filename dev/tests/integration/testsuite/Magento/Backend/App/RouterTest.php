@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Backend\App;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Backend\App;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * @magentoAppArea adminhtml
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -41,14 +49,24 @@ class RouterTest extends \PHPUnit\Framework\TestCase
      * @param string $module
      * @param string $controller
      * @param string $className
+<<<<<<< HEAD
      */
     #[DataProvider('getControllerClassNameDataProvider')]
+=======
+     *
+     * @dataProvider getControllerClassNameDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetControllerClassName($module, $controller, $className)
     {
         $this->assertEquals($className, $this->model->getActionClassName($module, $controller));
     }
 
+<<<<<<< HEAD
     public static function getControllerClassNameDataProvider()
+=======
+    public function getControllerClassNameDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['Magento_TestModule', 'controller', \Magento\TestModule\Controller\Adminhtml\Controller::class],
@@ -70,7 +88,11 @@ class RouterTest extends \PHPUnit\Framework\TestCase
         ];
 
         $routeConfig = $this->getMockBuilder(\Magento\Framework\App\Route\Config::class)
+<<<<<<< HEAD
             ->onlyMethods(['_getRoutes'])
+=======
+            ->setMethods(['_getRoutes'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->setConstructorArgs(
                 [
                     'reader' => $this->objectManager->get(\Magento\Framework\App\Route\Config\Reader::class),

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,7 +16,10 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magento\TestFramework\Config\Model\ConfigStorage;
 use Magento\TestModuleOverrideConfig\AbstractOverridesTest;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class checks that magentoConfigFixtures can be removed using override config
@@ -66,13 +74,22 @@ class RemoveFixtureTest extends AbstractOverridesTest
      *
      * @magentoConfigFixture default_store test_section/test_group/field_2 new_value
      * @magentoConfigFixture default_store test_section/test_group/field_3 new_value
+<<<<<<< HEAD
+=======
+     *
+     * @dataProvider testDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $expectedFirstValue
      * @param string $expectedSecondValue
      * @param bool $firstvalueExist
      * @param bool $secondvalueExist
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('testDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRemoveFixtureForMethod(
         string $expectedFirstValue,
         string $expectedSecondValue,
@@ -133,6 +150,7 @@ class RemoveFixtureTest extends AbstractOverridesTest
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function testDataProvider(): array
     {
         return [
@@ -147,6 +165,22 @@ class RemoveFixtureTest extends AbstractOverridesTest
                 '3rd field website scope default value',
                 false,
                 false,
+=======
+    public function testDataProvider(): array
+    {
+        return [
+            'first_data_set' => [
+                'expected_first_config_value' => '2nd field default value',
+                'expected_second_config_value' => 'new_value',
+                'first_value_exist' => false,
+                'second_value_exist' => true,
+            ],
+            'second_data_set' => [
+                'expected_first_config_value' => '2nd field default value',
+                'expected_second_config_value' => '3rd field website scope default value',
+                'first_value_exist' => false,
+                'second_value_exist' => false,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

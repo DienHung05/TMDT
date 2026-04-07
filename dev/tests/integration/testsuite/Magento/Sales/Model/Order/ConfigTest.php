@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -9,7 +14,10 @@ namespace Magento\Sales\Model\Order;
 
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test class for \Magento\Sales\Model\Order\Config
@@ -57,8 +65,13 @@ class ConfigTest extends \PHPUnit\Framework\TestCase
      *
      * @param string $code
      * @param string $expected
+<<<<<<< HEAD
      */
     #[DataProvider('dataProviderForTestMaskStatusForArea')]
+=======
+     * @dataProvider dataProviderForTestMaskStatusForArea
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testMaskStatusForArea(string $code, string $expected)
     {
         $result = $this->orderConfig->getStatusFrontendLabel($code);
@@ -68,7 +81,11 @@ class ConfigTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function dataProviderForTestMaskStatusForArea(): array
+=======
+    public function dataProviderForTestMaskStatusForArea()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['fraud', 'Suspected Fraud'],

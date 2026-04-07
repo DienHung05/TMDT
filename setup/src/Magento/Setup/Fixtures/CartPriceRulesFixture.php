@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Setup\Fixtures;
@@ -53,7 +58,11 @@ class CartPriceRulesFixture extends Fixture
      */
     public function __construct(
         FixtureModel $fixtureModel,
+<<<<<<< HEAD
         ?\Magento\SalesRule\Model\RuleFactory $ruleFactory = null
+=======
+        \Magento\SalesRule\Model\RuleFactory $ruleFactory = null
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ) {
         parent::__construct($fixtureModel);
         $this->ruleFactory = $ruleFactory ?: $this->fixtureModel->getObjectManager()
@@ -66,6 +75,10 @@ class CartPriceRulesFixture extends Fixture
      */
     public function execute()
     {
+<<<<<<< HEAD
+=======
+        $this->fixtureModel->resetObjectManager();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->cartPriceRulesCount = $this->fixtureModel->getValue('cart_price_rules', 0);
         if (!$this->cartPriceRulesCount) {
             return;
@@ -304,6 +317,7 @@ class CartPriceRulesFixture extends Fixture
         } else {
             // Shipping Region
             $regions = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut',
+<<<<<<< HEAD
                 'Delaware', 'District of Columbia', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois',
                 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts',
                 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada',
@@ -311,6 +325,15 @@ class CartPriceRulesFixture extends Fixture
                 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota',
                 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia',
                 'Wisconsin', 'Wyoming'];
+=======
+                        'Delaware', 'District of Columbia', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois',
+                        'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts',
+                        'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada',
+                        'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
+                        'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota',
+                        'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia',
+                        'Wisconsin', 'Wyoming'];
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $firstCondition = [
                 'type'      => \Magento\SalesRule\Model\Rule\Condition\Address::class,
                 'attribute' => 'region',

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -12,7 +17,10 @@ use Magento\TestFramework\Catalog\Model\Layer\QuickSearchByQuery;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test founded products order after quick search with changed attribute search weight using mysql search engine.
@@ -65,6 +73,10 @@ class AttributeSearchWeightTest extends TestCase
      *
      * @magentoDataFixture Magento/CatalogSearch/_files/products_for_sku_search_weight_score.php
      * @magentoDataFixture Magento/CatalogSearch/_files/full_reindex.php
+<<<<<<< HEAD
+=======
+     * @dataProvider attributeSearchWeightDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDbIsolation disabled
      *
      * @param string $searchQuery
@@ -72,7 +84,10 @@ class AttributeSearchWeightTest extends TestCase
      * @param array $expectedProductNames
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('attributeSearchWeightDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAttributeSearchWeight(
         string $searchQuery,
         array $attributeWeights,
@@ -91,7 +106,11 @@ class AttributeSearchWeightTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function attributeSearchWeightDataProvider(): array
+=======
+    public function attributeSearchWeightDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'name_order_more_than_sku' => [

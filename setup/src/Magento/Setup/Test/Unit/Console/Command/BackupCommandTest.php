@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -52,7 +57,16 @@ class BackupCommandTest extends TestCase
     {
         $maintenanceMode = $this->createMock(MaintenanceMode::class);
         $objectManagerProvider = $this->createMock(ObjectManagerProvider::class);
+<<<<<<< HEAD
         $this->objectManager = $this->createMock(ObjectManagerInterface::class);
+=======
+        $this->objectManager = $this->getMockForAbstractClass(
+            ObjectManagerInterface::class,
+            [],
+            '',
+            false
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $objectManagerProvider->expects($this->any())->method('get')->willReturn($this->objectManager);
         $this->backupRollback = $this->createMock(BackupRollback::class);
         $this->backupRollbackFactory = $this->createMock(BackupRollbackFactory::class);
@@ -61,7 +75,16 @@ class BackupCommandTest extends TestCase
             ->willReturn($this->backupRollback);
         $this->deploymentConfig = $this->createMock(DeploymentConfig::class);
         $appState = $this->createMock(State::class);
+<<<<<<< HEAD
         $configLoader = $this->createMock(ConfigLoaderInterface::class);
+=======
+        $configLoader = $this->getMockForAbstractClass(
+            ConfigLoaderInterface::class,
+            [],
+            '',
+            false
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $configLoader->expects($this->any())->method('load')->willReturn([]);
 
         $this->objectManager->expects($this->any())

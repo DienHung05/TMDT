@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -86,7 +91,14 @@ class SchemaFixture
         if ($scope === null) {
             $annotations = $this->getAnnotations($test);
         } else {
+<<<<<<< HEAD
             $source = TestCaseAnnotation::getInstance()->getAnnotations($test);
+=======
+            $source = TestUtil::parseTestMethodAnnotations(
+                get_class($test),
+                $test->getName(false)
+            );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $annotations = $source[$scope];
         }
         $result = [];
@@ -117,7 +129,15 @@ class SchemaFixture
      */
     private function getAnnotations(\PHPUnit\Framework\TestCase $test)
     {
+<<<<<<< HEAD
         $annotations = TestCaseAnnotation::getInstance()->getAnnotations($test);
+=======
+        $annotations = TestUtil::parseTestMethodAnnotations(
+            get_class($test),
+            $test->getName(false)
+        );
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         return array_replace($annotations['class'], $annotations['method']);
     }
 

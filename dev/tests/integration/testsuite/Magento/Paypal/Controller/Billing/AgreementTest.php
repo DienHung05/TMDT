@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,7 +16,10 @@ use Magento\Customer\Model\Session;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\ObjectManagerInterface;
+<<<<<<< HEAD
 use Magento\Framework\TestFramework\Unit\Helper\MockCreationTrait;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Payment\Helper\Data;
 use Magento\Paypal\Controller\Billing\Agreement\ReturnWizard;
 use Magento\Paypal\Model\Express;
@@ -25,7 +33,10 @@ use Magento\TestFramework\TestCase\AbstractController;
  */
 class AgreementTest extends AbstractController
 {
+<<<<<<< HEAD
     use MockCreationTrait;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Test billing agreement record creation in Magento DB.
      *
@@ -47,7 +58,11 @@ class AgreementTest extends AbstractController
         $objectManager = Bootstrap::getObjectManager();
 
         /** Mock Request */
+<<<<<<< HEAD
         $requestMock = $this->createMock(RequestInterface::class);
+=======
+        $requestMock = $this->getMockForAbstractClass(RequestInterface::class, [], '', false);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $requestMock->expects($this->any())
             ->method('getParam')
             ->willReturnMap(
@@ -62,10 +77,21 @@ class AgreementTest extends AbstractController
          * in \Magento\Paypal\Model\Billing\Agreement::place()
          */
         $objectManagerMock = $this->createMock(ObjectManagerInterface::class);
+<<<<<<< HEAD
         $paymentMethodMock = $this->createPartialMockWithReflection(
             Express::class,
             ['getTitle', 'setStore', 'placeBillingAgreement']
         );
+=======
+        $paymentMethodMock = $this->getMockBuilder(Express::class)
+            ->disableOriginalConstructor()
+            ->disableOriginalClone()
+            ->disableArgumentCloning()
+            ->disallowMockingUnknownTypes()
+            ->onlyMethods(['getTitle', 'setStore'])
+            ->addMethods(['placeBillingAgreement'])
+            ->getMock();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $paymentMethodMock->expects($this->any())->method('placeBillingAgreement')->willReturnSelf();
         $paymentMethodMock->expects($this->any())->method('getTitle')->willReturn($paymentMethod);
 

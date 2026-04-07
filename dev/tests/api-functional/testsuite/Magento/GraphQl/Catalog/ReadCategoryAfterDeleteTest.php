@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Catalog;
 
 use Magento\TestFramework\TestCase\GraphQlAbstract;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test category read after children category was deleted
@@ -26,12 +34,19 @@ class ReadCategoryAfterDeleteTest extends GraphQlAbstract
      * Verify that after delete children category data category tree returns correct values for given category
      *
      * @magentoApiDataFixture Magento/Catalog/_files/category_tree.php
+<<<<<<< HEAD
+=======
+     * @dataProvider categoriesDeleteDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param int $categoryToDelete
      * @param array $expectedResult
      * @return void
      * @throws \Exception
      */
+<<<<<<< HEAD
     #[DataProvider('categoriesDeleteDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCategoryDelete($categoryToDelete, $expectedResult): void
     {
         $this->deleteCategory($categoryToDelete);
@@ -89,12 +104,21 @@ QUERY;
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function categoriesDeleteDataProvider(): array
     {
         return [
             [
                 'categoryToDelete' => 402,
                 'expectedResult' => [
+=======
+    public function categoriesDeleteDataProvider(): array
+    {
+        return [
+            [
+                'category_to_delete' => 402,
+                'expected_result' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'categoryList' => [
                         [
                             'id' => 400,

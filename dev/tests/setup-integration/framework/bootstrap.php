@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 use Magento\Framework\App\Filesystem\DirectoryList;
@@ -13,11 +18,14 @@ require_once __DIR__ . '/autoload.php';
 require __DIR__ . '/../../error_handler.php';
 
 error_reporting(E_ALL);
+<<<<<<< HEAD
 
 if (extension_loaded('xdebug')) {
     ini_set('xdebug.max_nesting_level', '200');
 }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 $testsBaseDir = dirname(__DIR__);
 $integrationTestsDir = realpath("{$testsBaseDir}/../integration");
 $fixtureBaseDir = $integrationTestsDir . '/testsuite';

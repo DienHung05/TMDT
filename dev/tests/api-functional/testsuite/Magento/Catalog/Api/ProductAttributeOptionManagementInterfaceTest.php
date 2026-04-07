@@ -1,11 +1,19 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
 namespace Magento\Catalog\Api;
 
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Catalog\Api;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Eav\Api\Data\AttributeOptionInterface;
 use Magento\Eav\Api\Data\AttributeOptionLabelInterface;
 use Magento\Framework\Webapi\Rest\Request;
@@ -16,9 +24,15 @@ use Magento\TestFramework\TestCase\WebapiAbstract;
  */
 class ProductAttributeOptionManagementInterfaceTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     public const SERVICE_NAME = 'catalogProductAttributeOptionManagementV1';
     public const SERVICE_VERSION = 'V1';
     public const RESOURCE_PATH = '/V1/products/attributes';
+=======
+    const SERVICE_NAME = 'catalogProductAttributeOptionManagementV1';
+    const SERVICE_VERSION = 'V1';
+    const RESOURCE_PATH = '/V1/products/attributes';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * Test to get attribute options
@@ -53,8 +67,13 @@ class ProductAttributeOptionManagementInterfaceTest extends WebapiAbstract
      *
      * @param array $optionData
      * @magentoApiDataFixture Magento/Catalog/Model/Product/Attribute/_files/select_attribute.php
+<<<<<<< HEAD
      */
     #[DataProvider('addDataProvider')]
+=======
+     * @dataProvider addDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAdd(array $optionData)
     {
         $testAttributeCode = 'select_attribute';
@@ -86,7 +105,11 @@ class ProductAttributeOptionManagementInterfaceTest extends WebapiAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function addDataProvider(): array
+=======
+    public function addDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionPayload = [
             AttributeOptionInterface::LABEL => 'new color',

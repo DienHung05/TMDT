@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -43,8 +48,13 @@ class DirectoryScannerTest extends TestCase
             'php' => [
                 $this->_testDir . '/additional.php',
                 $this->_testDir . '/app/bootstrap.php',
+<<<<<<< HEAD
                 $this->_testDir . '/app/code/Magento/SomeModule/Helper/TestHelper.php',
                 $this->_testDir . '/app/code/Magento/SomeModule/Model/TestHelper.php',
+=======
+                $this->_testDir . '/app/code/Magento/SomeModule/Helper/Test.php',
+                $this->_testDir . '/app/code/Magento/SomeModule/Model/Test.php',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             'config' => [
                 $this->_testDir . '/app/code/Magento/SomeModule/etc/adminhtml/system.xml',

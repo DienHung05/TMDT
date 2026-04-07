@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 use Magento\TestFramework\Workaround\Override\Fixture\Resolver;
@@ -79,6 +84,7 @@ foreach ($orders as $orderData) {
     $messageModel->setMessage('Gift Message Text');
     $message->save($messageModel);
 
+<<<<<<< HEAD
     /** @var MessageResource $productMessage */
     $productMessage = $objectManager->create(MessageResource::class);
     /** @var Message $productMessageModel */
@@ -89,6 +95,8 @@ foreach ($orders as $orderData) {
     $productMessageModel->setMessage('Good Job!');
     $productMessage->save($productMessageModel);
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /** @var Order\Item $orderItem */
     $orderItem = $objectManager->create(Order\Item::class);
     $orderItem->setProductId($product->getId())
@@ -96,8 +104,12 @@ foreach ($orders as $orderData) {
         ->setBasePrice($product->getPrice())
         ->setPrice($product->getPrice())
         ->setRowTotal($product->getPrice())
+<<<<<<< HEAD
         ->setProductType('simple')
         ->setGiftMessageId($productMessageModel->getId());
+=======
+        ->setProductType('simple');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     $order
         ->setData($orderData)

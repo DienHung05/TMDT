@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,21 +16,27 @@ use Magento\Catalog\Api\CategoryRepositoryInterface;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Block\Product\ListProduct;
+<<<<<<< HEAD
 use Magento\Catalog\Model\Product\Visibility;
 use Magento\Catalog\Test\Fixture\AssignProducts as AssignProductsFixture;
 use Magento\Catalog\Test\Fixture\Category as CategoryFixture;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\ConfigurableProduct\Test\Fixture\Attribute as AttributeFixture;
 use Magento\ConfigurableProduct\Test\Fixture\Product as ConfigurableProductFixture;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Eav\Model\Entity\Collection\AbstractCollection;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 use Magento\Store\Model\StoreManagerInterface;
+<<<<<<< HEAD
 use Magento\TestFramework\Fixture\AppIsolation;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Store\ExecuteInStoreContext;
 use PHPUnit\Framework\TestCase;
@@ -130,11 +141,16 @@ class ConfigurableViewOnCategoryPageTest extends TestCase
     {
         $this->executeInStoreContext->execute(
             'fixture_second_store',
+<<<<<<< HEAD
             [$this, 'assertProductPriceContains'],
+=======
+            [$this, 'assertProductPrice'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'configurable',
             __('As low as') . ' $10.00'
         );
         $this->resetPageLayout();
+<<<<<<< HEAD
         $this->assertProductPrice('configurable', '$150.00');
     }
 
@@ -237,6 +253,9 @@ class ConfigurableViewOnCategoryPageTest extends TestCase
         $this->assertCollectionSize(1, $this->getListingBlock()->getLoadedProductCollection());
         $priceHtml = $this->getListingBlock()->getProductPrice($this->getProduct($sku));
         $this->assertStringContainsString($priceString, $this->clearPriceHtml($priceHtml));
+=======
+        $this->assertProductPrice('configurable', __('As low as') . ' $150.00');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**

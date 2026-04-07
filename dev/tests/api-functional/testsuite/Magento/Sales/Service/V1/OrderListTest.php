@@ -1,12 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Sales\Service\V1;
 
 use Magento\TestFramework\TestCase\WebapiAbstract;
 
+<<<<<<< HEAD
 class OrderListTest extends WebapiAbstract
 {
     private const RESOURCE_PATH = '/V1/orders';
@@ -14,6 +20,19 @@ class OrderListTest extends WebapiAbstract
     private const SERVICE_READ_NAME = 'salesOrderRepositoryV1';
 
     private const SERVICE_VERSION = 'V1';
+=======
+/**
+ * Class OrderListTest
+ * @package Magento\Sales\Service\V1
+ */
+class OrderListTest extends WebapiAbstract
+{
+    const RESOURCE_PATH = '/V1/orders';
+
+    const SERVICE_READ_NAME = 'salesOrderRepositoryV1';
+
+    const SERVICE_VERSION = 'V1';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var \Magento\Framework\ObjectManagerInterface
@@ -85,6 +104,7 @@ class OrderListTest extends WebapiAbstract
         $appliedTaxes = $result['items'][0]['extension_attributes']['item_applied_taxes'];
         $this->assertEquals($expectedTax['type'], $appliedTaxes[0]['type']);
         $this->assertNotEmpty($appliedTaxes[0]['applied_taxes']);
+<<<<<<< HEAD
         $this->assertFalse($result['items'][0]['extension_attributes']['converting_from_quote']);
         $this->assertArrayHasKey('payment_additional_info', $result['items'][0]['extension_attributes']);
         $this->assertNotEmpty($result['items'][0]['extension_attributes']['payment_additional_info']);
@@ -100,6 +120,11 @@ class OrderListTest extends WebapiAbstract
         $this->assertEquals(45, $shippingTaxItem['real_amount']);
         $this->assertEquals('shipping', $shippingTaxItem['taxable_item_type']);
         $this->assertEquals('US-NY-*-Rate 1', $shippingTaxItem['tax_code']);
+=======
+        $this->assertTrue($result['items'][0]['extension_attributes']['converting_from_quote']);
+        $this->assertArrayHasKey('payment_additional_info', $result['items'][0]['extension_attributes']);
+        $this->assertNotEmpty($result['items'][0]['extension_attributes']['payment_additional_info']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**

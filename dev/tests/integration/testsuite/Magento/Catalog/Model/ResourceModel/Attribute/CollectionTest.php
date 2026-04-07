@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -9,7 +14,10 @@ namespace Magento\Catalog\Model\ResourceModel\Attribute;
 
 use Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -33,13 +41,20 @@ class CollectionTest extends TestCase
 
     /**
      * @magentoAppArea adminhtml
+<<<<<<< HEAD
+=======
+     * @dataProvider attributesCollectionGetCurrentPageDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @param array|null $condition
      * @param int $currentPage
      * @param int $expectedCurrentPage
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('attributesCollectionGetCurrentPageDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAttributesCollectionGetCurrentPage(
         ?array $condition,
         int $currentPage,
@@ -58,7 +73,11 @@ class CollectionTest extends TestCase
     /**
      * @return array[]
      */
+<<<<<<< HEAD
     public static function attributesCollectionGetCurrentPageDataProvider(): array
+=======
+    public function attributesCollectionGetCurrentPageDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

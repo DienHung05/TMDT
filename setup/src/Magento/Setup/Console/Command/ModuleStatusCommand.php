@@ -1,8 +1,15 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 declare(strict_types=1);
 
 namespace Magento\Setup\Console\Command;
@@ -20,7 +27,10 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class ModuleStatusCommand extends AbstractSetupCommand
 {
+<<<<<<< HEAD
     public const NAME = 'module:status';
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @var ObjectManagerProvider
      */
@@ -40,7 +50,11 @@ class ModuleStatusCommand extends AbstractSetupCommand
      */
     protected function configure()
     {
+<<<<<<< HEAD
         $this->setName(self::NAME)
+=======
+        $this->setName('module:status')
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->setDescription('Displays status of modules')
             ->addArgument(
                 'module-names',
@@ -55,7 +69,11 @@ class ModuleStatusCommand extends AbstractSetupCommand
     /**
      * @inheritdoc
      */
+<<<<<<< HEAD
     protected function execute(InputInterface $input, OutputInterface $output): int
+=======
+    protected function execute(InputInterface $input, OutputInterface $output)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $moduleNames = $input->getArgument('module-names');
         if (!empty($moduleNames)) {

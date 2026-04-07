@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Eav\Model\Entity;
 
 use Magento\Framework\DataObject;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Helper\CacheCleaner;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppIsolation enabled
@@ -40,7 +48,11 @@ class AttributeLoaderTest extends \PHPUnit\Framework\TestCase
         $context = $this->objectManager->get(\Magento\Eav\Model\Entity\Context::class);
         $this->resource = $this->getMockBuilder(\Magento\Eav\Model\Entity\AbstractEntity::class)
             ->setConstructorArgs([$context])
+<<<<<<< HEAD
             ->onlyMethods(['getEntityType', 'getLinkField'])
+=======
+            ->setMethods(['getEntityType', 'getLinkField'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
         $this->resource->method('getEntityType')
             ->willReturn($entityType);
@@ -52,8 +64,13 @@ class AttributeLoaderTest extends \PHPUnit\Framework\TestCase
      * @param int $expectedNumOfAttributesByCode
      * @param int $expectedNumOfAttributesByTable
      * @param DataObject|null $object
+<<<<<<< HEAD
      */
     #[DataProvider('loadAllAttributesDataProvider')]
+=======
+     * @dataProvider loadAllAttributesDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testLoadAllAttributesTheFirstTime(
         $expectedNumOfAttributesByCode,
         $expectedNumOfAttributesByTable,
@@ -76,7 +93,11 @@ class AttributeLoaderTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expectedNumOfAttributesByTable, count($attributesByTable2));
     }
 
+<<<<<<< HEAD
     public static function loadAllAttributesDataProvider()
+=======
+    public function loadAllAttributesDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         /** @var \Magento\Eav\Model\Entity\Type $entityType */
         $entityType = Bootstrap::getObjectManager()->create(\Magento\Eav\Model\Entity\Type::class)
@@ -120,6 +141,10 @@ class AttributeLoaderTest extends \PHPUnit\Framework\TestCase
         $reflection = new \ReflectionObject($this);
         foreach ($reflection->getProperties() as $property) {
             if (!$property->isStatic() && 0 !== strpos($property->getDeclaringClass()->getName(), 'PHPUnit')) {
+<<<<<<< HEAD
+=======
+                $property->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $property->setValue($this, null);
             }
         }

@@ -1,17 +1,28 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Elasticsearch\Catalog\Controller\Adminhtml\Product\Attribute;
 
 use Magento\Catalog\Controller\Adminhtml\Product\Attribute\Save\AbstractSaveAttributeTest;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Test cases related to creating attribute and search engine.
+=======
+
+/**
+ * Test cases related to creating attribute and elasticsearch.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class SaveTest extends AbstractSaveAttributeTest
 {
@@ -47,8 +58,13 @@ class SaveTest extends AbstractSaveAttributeTest
     /**
      * @param array $data
      * @param string $errorMessage
+<<<<<<< HEAD
      */
     #[DataProvider('createAttributeWithErrorDataProvider')]
+=======
+     * @dataProvider createAttributeWithErrorDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateAttributeWithError(array $data, string $errorMessage): void
     {
         $this->createAttributeUsingDataWithErrorAndAssert(
@@ -60,7 +76,11 @@ class SaveTest extends AbstractSaveAttributeTest
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function createAttributeWithErrorDataProvider(): array
+=======
+    public function createAttributeWithErrorDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'should not create attribute with reserved code "category_name"' => [

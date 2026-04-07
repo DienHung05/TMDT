@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\TestFramework\Annotation;
@@ -44,7 +49,14 @@ class CopyModules
      */
     public function startTest(\PHPUnit\Framework\TestCase $test)
     {
+<<<<<<< HEAD
         $annotations = TestCaseAnnotation::getInstance()->getAnnotations($test);
+=======
+        $annotations = TestUtil::parseTestMethodAnnotations(
+            get_class($test),
+            $test->getName(false)
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         //This annotation can be declared only on method level
         if (isset($annotations['method']['moduleName'])) {
             $moduleNames = $annotations['method']['moduleName'];
@@ -65,7 +77,14 @@ class CopyModules
      */
     public function endTest(\PHPUnit\Framework\TestCase $test)
     {
+<<<<<<< HEAD
         $annotations = TestCaseAnnotation::getInstance()->getAnnotations($test);
+=======
+        $annotations = TestUtil::parseTestMethodAnnotations(
+            get_class($test),
+            $test->getName(false)
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         //This annotation can be declared only on method level
         if (!empty($annotations['method']['moduleName'])) {
             foreach ($annotations['method']['moduleName'] as $moduleName) {
@@ -91,8 +110,15 @@ class CopyModules
     {
         $reflection = new \ReflectionClass(ComponentRegistrar::class);
         $reflectionProperty = $reflection->getProperty('paths');
+<<<<<<< HEAD
         $value = $reflectionProperty->getValue();
         unset($value[ComponentRegistrar::MODULE][$moduleName]);
         $reflectionProperty->setValue(null, $value);
+=======
+        $reflectionProperty->setAccessible(true);
+        $value = $reflectionProperty->getValue();
+        unset($value[ComponentRegistrar::MODULE][$moduleName]);
+        $reflectionProperty->setValue($value);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

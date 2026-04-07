@@ -1,9 +1,15 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 declare(strict_types=1);
 
 namespace Magento\Wishlist\Controller\Index;
@@ -16,7 +22,10 @@ use Magento\Framework\Message\MessageInterface;
 use Magento\TestFramework\Helper\Xpath;
 use Magento\TestFramework\Mail\Template\TransportBuilderMock;
 use Magento\TestFramework\TestCase\AbstractController;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test sending wish list.
@@ -78,7 +87,11 @@ class SendTest extends AbstractController
             MessageInterface::TYPE_SUCCESS
         );
         $this->assertNotNull($this->transportBuilder->getSentMessage());
+<<<<<<< HEAD
         $messageContent = quoted_printable_decode($this->transportBuilder->getSentMessage()->getBody()->bodyToString());
+=======
+        $messageContent = $this->transportBuilder->getSentMessage()->getBody()->getParts()[0]->getRawContent();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertStringContainsString($shareMessage, $messageContent);
         $this->assertStringContainsString(
             sprintf(
@@ -157,6 +170,7 @@ class SendTest extends AbstractController
     }
 
     /**
+<<<<<<< HEAD
      * Test that messages with template injection attempts are rejected.
      *
      * @param string $maliciousMessage
@@ -194,6 +208,8 @@ class SendTest extends AbstractController
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Dispatch send wish list request.
      *
      * @param array $postValues

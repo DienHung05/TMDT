@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -9,6 +14,7 @@
  */
 namespace Magento\Sales\Block\Adminhtml\Order\Create\Form;
 
+<<<<<<< HEAD
 use Magento\Backend\App\Area\FrontNameResolver;
 use Magento\Backend\Block\Template\Context;
 use Magento\Backend\Model\Session\Quote;
@@ -22,20 +28,32 @@ use Magento\Sales\Model\AdminOrder\Create;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
+=======
+use Magento\Customer\Api\Data\AttributeMetadataInterfaceFactory;
+use Magento\Customer\Api\Data\OptionInterfaceFactory;
+use Magento\Customer\Api\Data\ValidationRuleInterfaceFactory;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class AbstractTest
  *
+<<<<<<< HEAD
  * Test cases to check custom attribute can be added successfully with the form
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class AbstractTest extends TestCase
+=======
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
+class AbstractTest extends \PHPUnit\Framework\TestCase
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 {
     /**
      * @magentoAppIsolation enabled
      */
     public function testAddAttributesToForm()
     {
+<<<<<<< HEAD
         $objectManager = Bootstrap::getObjectManager();
         Bootstrap::getInstance()
             ->loadArea(FrontNameResolver::AREA_CODE);
@@ -95,5 +113,51 @@ class AbstractTest extends TestCase
         $this->assertNotNull($element2);
         $this->assertNotEmpty($element2->getSortOrder());
         $this->assertEquals($element2->getSortOrder(), 200);
+=======
+        $objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
+        \Magento\TestFramework\Helper\Bootstrap::getInstance()
+            ->loadArea(\Magento\Backend\App\Area\FrontNameResolver::AREA_CODE);
+
+        $objectManager->get(\Magento\Framework\View\DesignInterface::class)->setDefaultDesignTheme();
+        $arguments = [
+            $objectManager->get(\Magento\Backend\Block\Template\Context::class),
+            $objectManager->get(\Magento\Backend\Model\Session\Quote::class),
+            $objectManager->get(\Magento\Sales\Model\AdminOrder\Create::class),
+            $objectManager->get(\Magento\Framework\Pricing\PriceCurrencyInterface::class),
+            $objectManager->get(\Magento\Framework\Data\FormFactory::class),
+            $objectManager->get(\Magento\Framework\Reflection\DataObjectProcessor::class)
+        ];
+
+        /** @var $block \Magento\Sales\Block\Adminhtml\Order\Create\Form\AbstractForm */
+        $block = $this->getMockForAbstractClass(
+            \Magento\Sales\Block\Adminhtml\Order\Create\Form\AbstractForm::class,
+            $arguments
+        );
+        $block->setLayout($objectManager->create(\Magento\Framework\View\Layout::class));
+
+        $method = new \ReflectionMethod(
+            \Magento\Sales\Block\Adminhtml\Order\Create\Form\AbstractForm::class,
+            '_addAttributesToForm'
+        );
+        $method->setAccessible(true);
+
+        /** @var $formFactory \Magento\Framework\Data\FormFactory */
+        $formFactory = $objectManager->get(\Magento\Framework\Data\FormFactory::class);
+        $form = $formFactory->create();
+        $fieldset = $form->addFieldset('test_fieldset', []);
+        /** @var \Magento\Customer\Api\Data\AttributeMetadataInterfaceFactory $attributeMetadataFactory */
+        $attributeMetadataFactory =
+            $objectManager->create(\Magento\Customer\Api\Data\AttributeMetadataInterfaceFactory::class);
+        $dateAttribute = $attributeMetadataFactory->create()->setAttributeCode('date')
+            ->setBackendType('datetime')
+            ->setFrontendInput('date')
+            ->setFrontendLabel('Date');
+        $attributes = ['date' => $dateAttribute];
+        $method->invoke($block, $attributes, $fieldset);
+
+        $element = $form->getElement('date');
+        $this->assertNotNull($element);
+        $this->assertNotEmpty($element->getDateFormat());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

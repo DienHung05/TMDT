@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -21,29 +26,42 @@ namespace Magento\Setup\Test\Unit\Model {
     use Magento\Framework\Config\ConfigOptionsListConstants;
     use Magento\Framework\Config\File\ConfigFilePool;
     use Magento\Framework\DB\Adapter\AdapterInterface;
+<<<<<<< HEAD
     use Magento\Framework\DB\Adapter\Pdo\Mysql;
     use Magento\Framework\DB\Ddl\Table;
     use Magento\Framework\DB\Select;
     use Magento\Framework\Exception\FileSystemException;
     use Magento\Framework\Exception\LocalizedException;
+=======
+    use Magento\Framework\DB\Ddl\Table;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     use Magento\Framework\Exception\RuntimeException;
     use Magento\Framework\Filesystem;
     use Magento\Framework\Filesystem\Directory\WriteInterface;
     use Magento\Framework\Filesystem\DriverPool;
+<<<<<<< HEAD
     use Magento\Framework\Indexer\IndexerInterface;
     use Magento\Framework\Indexer\IndexerRegistry;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     use Magento\Framework\Model\ResourceModel\Db\Context;
     use Magento\Framework\Module\ModuleList\Loader;
     use Magento\Framework\Module\ModuleListInterface;
     use Magento\Framework\Module\ModuleResource;
     use Magento\Framework\ObjectManagerInterface;
     use Magento\Framework\Registry;
+<<<<<<< HEAD
     use Magento\Framework\Setup\ConsoleLoggerInterface;
     use Magento\Framework\Setup\FilePermissions;
+=======
+    use Magento\Framework\Setup\FilePermissions;
+    use Magento\Framework\Setup\LoggerInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     use Magento\Framework\Setup\Patch\PatchApplier;
     use Magento\Framework\Setup\Patch\PatchApplierFactory;
     use Magento\Framework\Setup\SampleData\State;
     use Magento\Framework\Setup\SchemaListener;
+<<<<<<< HEAD
     use Magento\Framework\TestFramework\Unit\Helper\MockCreationTrait;
     use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
     use Magento\Framework\Validation\ValidationException;
@@ -51,6 +69,11 @@ namespace Magento\Setup\Test\Unit\Model {
     use Magento\RemoteStorage\Driver\DriverException;
     use Magento\RemoteStorage\Setup\ConfigOptionsList as RemoteStorageValidator;
     use Magento\Setup\Console\Command\InstallCommand;
+=======
+    use Magento\Framework\Validation\ValidationException;
+    use Magento\RemoteStorage\Driver\DriverException;
+    use Magento\RemoteStorage\Setup\ConfigOptionsList as RemoteStorageValidator;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     use Magento\Setup\Controller\ResponseTypeInterface;
     use Magento\Setup\Model\AdminAccount;
     use Magento\Setup\Model\AdminAccountFactory;
@@ -68,7 +91,10 @@ namespace Magento\Setup\Test\Unit\Model {
     use Magento\Setup\Validator\DbValidator;
     use PHPUnit\Framework\MockObject\MockObject;
     use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     use ReflectionException;
 
     /**
@@ -77,12 +103,19 @@ use PHPUnit\Framework\Attributes\DataProvider;
      */
     class InstallerTest extends TestCase
     {
+<<<<<<< HEAD
         use MockCreationTrait;
 
         /**
          * @var array
          */
         private static $request = [
+=======
+        /**
+         * @var array
+         */
+        private $request = [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ConfigOptionsListConstants::INPUT_KEY_DB_HOST => '127.0.0.1',
             ConfigOptionsListConstants::INPUT_KEY_DB_NAME => 'magento',
             ConfigOptionsListConstants::INPUT_KEY_DB_USER => 'magento',
@@ -131,7 +164,11 @@ use PHPUnit\Framework\Attributes\DataProvider;
         private $adminFactory;
 
         /**
+<<<<<<< HEAD
          * @var ConsoleLoggerInterface|MockObject
+=======
+         * @var LoggerInterface|MockObject
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
          */
         private $logger;
 
@@ -234,6 +271,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
         private $patchApplierFactoryMock;
 
         /**
+<<<<<<< HEAD
          * @var Collection|MockObject
          */
         private $indexerMock;
@@ -247,10 +285,13 @@ use PHPUnit\Framework\Attributes\DataProvider;
         private $indexerInterfaceMock;
 
         /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
          * @inheritdoc
          */
         protected function setUp(): void
         {
+<<<<<<< HEAD
             $objectManagerHelper = new ObjectManager($this);
             $objects = [
                 [
@@ -259,22 +300,36 @@ use PHPUnit\Framework\Attributes\DataProvider;
                 ]
             ];
             $objectManagerHelper->prepareObjectManager($objects);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $this->filePermissions = $this->createMock(FilePermissions::class);
             $this->configWriter = $this->createMock(Writer::class);
             $this->configReader = $this->createMock(Reader::class);
             $this->config = $this->createMock(DeploymentConfig::class);
 
+<<<<<<< HEAD
             $this->moduleList = $this->createMock(ModuleListInterface::class);
+=======
+            $this->moduleList = $this->getMockForAbstractClass(ModuleListInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $this->moduleList->expects($this->any())->method('getNames')->willReturn(
                 ['Foo_One', 'Bar_Two']
             );
             $this->moduleLoader = $this->createMock(Loader::class);
             $this->adminFactory = $this->createMock(AdminAccountFactory::class);
+<<<<<<< HEAD
             $this->logger = $this->createMock(ConsoleLoggerInterface::class);
             $this->connection = $this->createMock(AdapterInterface::class);
             $this->maintenanceMode = $this->createMock(MaintenanceMode::class);
             $this->filesystem = $this->createMock(Filesystem::class);
             $this->objectManager = $this->createMock(ObjectManagerInterface::class);
+=======
+            $this->logger = $this->getMockForAbstractClass(LoggerInterface::class);
+            $this->connection = $this->getMockForAbstractClass(AdapterInterface::class);
+            $this->maintenanceMode = $this->createMock(MaintenanceMode::class);
+            $this->filesystem = $this->createMock(Filesystem::class);
+            $this->objectManager = $this->getMockForAbstractClass(ObjectManagerInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $this->contextMock =
                 $this->createMock(Context::class);
             $this->configModel = $this->createMock(ConfigModel::class);
@@ -293,10 +348,13 @@ use PHPUnit\Framework\Attributes\DataProvider;
             $this->patchApplierFactoryMock->expects($this->any())->method('create')->willReturn(
                 $this->patchApplierMock
             );
+<<<<<<< HEAD
             $this->indexerMock = $this->createMock(Collection::class);
             $this->indexerRegistryMock = $this->createMock(IndexerRegistry::class);
             $this->indexerInterfaceMock = $this->createMock(IndexerInterface::class);
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $this->object = $this->createObject();
         }
 
@@ -352,11 +410,18 @@ use PHPUnit\Framework\Attributes\DataProvider;
         /**
          * @param array $request
          * @param array $logMessages
+<<<<<<< HEAD
          * @param array $logMetaMessages
          * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
          */
     #[DataProvider('installDataProvider')]
         public function testInstall(array $request, array $logMessages, array $logMetaMessages)
+=======
+         * @dataProvider installDataProvider
+         * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+         */
+        public function testInstall(array $request, array $logMessages)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         {
             $this->moduleList->method('getOne')
                 ->willReturnMap(
@@ -381,7 +446,14 @@ use PHPUnit\Framework\Attributes\DataProvider;
             $this->moduleLoader->expects($this->any())->method('load')->willReturn($allModules);
             $setup = $this->createMock(Setup::class);
             $table = $this->createMock(Table::class);
+<<<<<<< HEAD
             $connection = $this->createMock(Mysql::class);
+=======
+            $connection = $this->getMockBuilder(AdapterInterface::class)
+                ->onlyMethods(['getTables', 'newTable'])
+                ->addMethods(['getSchemaListener'])
+                ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $connection->expects($this->any())->method('getSchemaListener')->willReturn($this->schemaListenerMock);
             $connection->expects($this->once())->method('getTables')->willReturn([]);
             $setup->expects($this->any())->method('getConnection')->willReturn($connection);
@@ -398,6 +470,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
                 ->onlyMethods(['getDbVersion', 'getDataVersion'])
                 ->setConstructorArgs(['context' => $this->contextMock])
                 ->getMock();
+<<<<<<< HEAD
             $moduleResource->method('getDbVersion')
                 ->willReturnCallback(function () use (&$callCount) {
                     $callCount++;
@@ -407,6 +480,9 @@ use PHPUnit\Framework\Attributes\DataProvider;
                         return '2.1.0';
                     }
                 });
+=======
+            $moduleResource->method('getDbVersion')->willReturnOnConsecutiveCalls(false, '2.1.0');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $moduleResource->method('getDataVersion')->willReturn(false);
             $this->object->method('getModuleResource')->willReturn($moduleResource);
 
@@ -414,11 +490,20 @@ use PHPUnit\Framework\Attributes\DataProvider;
             $dataSetup->expects($this->any())->method('getConnection')->willReturn($connection);
             $cacheManager = $this->createMock(Manager::class);
             $cacheManager->expects($this->any())->method('getAvailableTypes')->willReturn(['foo', 'bar']);
+<<<<<<< HEAD
             $cacheManager->expects($this->once())->method('setEnabled')->willReturn(['foo', 'bar']);
             $cacheManager->expects($this->exactly(2))->method('clean');
             $cacheManager->expects($this->once())->method('getStatus')->willReturn(['foo' => 1, 'bar' => 1]);
             $appState = $this->getMockBuilder(\Magento\Framework\App\State::class)
                 ->disableOriginalConstructor()
+=======
+            $cacheManager->expects($this->exactly(3))->method('setEnabled')->willReturn(['foo', 'bar']);
+            $cacheManager->expects($this->exactly(3))->method('clean');
+            $cacheManager->expects($this->exactly(3))->method('getStatus')->willReturn(['foo' => 1, 'bar' => 1]);
+            $appState = $this->getMockBuilder(\Magento\Framework\App\State::class)
+                ->disableOriginalConstructor()
+                ->disableArgumentCloning()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ->getMock();
             $appState->expects($this->once())
                 ->method('setAreaCode')
@@ -468,9 +553,13 @@ use PHPUnit\Framework\Attributes\DataProvider;
                         [DeclarationInstaller::class, $this->declarationInstallerMock],
                         [Registry::class, $registry],
                         [SearchConfig::class, $searchConfigMock],
+<<<<<<< HEAD
                         [RemoteStorageValidator::class, $remoteStorageValidatorMock],
                         [Collection::class, $this->indexerMock],
                         [IndexerRegistry::class, $this->indexerRegistryMock]
+=======
+                        [RemoteStorageValidator::class, $remoteStorageValidatorMock]
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     ]
                 );
             $this->adminFactory->expects($this->any())->method('create')->willReturn(
@@ -486,6 +575,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
             $this->filePermissions->expects($this->once())
                 ->method('getMissingWritableDirectoriesForDbUpgrade')
                 ->willReturn([]);
+<<<<<<< HEAD
             $this->indexerMock->expects($this->once())->method('getAllIds')->willReturn(
                 [
                     'catalog_category_product',
@@ -516,6 +606,21 @@ use PHPUnit\Framework\Attributes\DataProvider;
                         return null;
                     }
                 });
+=======
+            call_user_func_array(
+                [
+                    $this->logger->expects($this->exactly(count($logMessages)))->method('log'),
+                    'withConsecutive'
+                ],
+                $logMessages
+            );
+            $this->logger->expects($this->exactly(2))
+                ->method('logSuccess')
+                ->withConsecutive(
+                    ['Magento installation complete.'],
+                    ['Magento Admin URI: /']
+                );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
             $this->object->install($request);
         }
@@ -524,19 +629,36 @@ use PHPUnit\Framework\Attributes\DataProvider;
          * @return array
          * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
          */
+<<<<<<< HEAD
         public static function installDataProvider()
         {
             return [
                 [
                     'request' => self::$request,
                     'logMessages' => [
+=======
+        public function installDataProvider()
+        {
+            return [
+                [
+                    'request' => $this->request,
+                    'logMessages' => [
+                        ['Starting Magento installation:'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         ['File permissions check...'],
                         ['Required extensions check...'],
                         ['Enabling Maintenance Mode...'],
                         ['Installing deployment configuration...'],
                         ['Installing database schema:'],
+<<<<<<< HEAD
                         ['Module \'Foo_One\':'],
                         ['Module \'Bar_Two\':'],
+=======
+                        ['Schema creation/updates:'],
+                        ['Module \'Foo_One\':'],
+                        ['Module \'Bar_Two\':'],
+                        ['Schema post-updates:'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         ['Module \'Foo_One\':'],
                         ['Module \'Bar_Two\':'],
                         ['Installing search configuration...'],
@@ -547,6 +669,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
                         ['foo: 1'],
                         ['bar: 1'],
                         ['Installing data...'],
+<<<<<<< HEAD
                         ['Module \'Foo_One\':'],
                         ['Module \'Bar_Two\':'],
                         ['Module \'Foo_One\':'],
@@ -589,6 +712,25 @@ use PHPUnit\Framework\Attributes\DataProvider;
                         ['[Progress: 22 / 23]'],
                         ['[Progress: 23 / 23]'],
                     ],
+=======
+                        ['Data install/update:'],
+                        ['Disabling caches:'],
+                        ['Current status:'],
+                        ['Module \'Foo_One\':'],
+                        ['Module \'Bar_Two\':'],
+                        ['Data post-updates:'],
+                        ['Module \'Foo_One\':'],
+                        ['Module \'Bar_Two\':'],
+                        ['Enabling caches:'],
+                        ['Current status:'],
+                        ['Caches clearing:'],
+                        ['Cache cleared successfully'],
+                        ['Disabling Maintenance Mode:'],
+                        ['Post installation file permissions check...'],
+                        ['Write installation date...'],
+                        ['Sample Data is installed with errors. See log file for details']
+                    ],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ],
                 [
                     'request' => [
@@ -604,13 +746,24 @@ use PHPUnit\Framework\Attributes\DataProvider;
                         AdminAccount::KEY_LAST_NAME => 'Doe'
                     ],
                     'logMessages' => [
+<<<<<<< HEAD
+=======
+                        ['Starting Magento installation:'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         ['File permissions check...'],
                         ['Required extensions check...'],
                         ['Enabling Maintenance Mode...'],
                         ['Installing deployment configuration...'],
                         ['Installing database schema:'],
+<<<<<<< HEAD
                         ['Module \'Foo_One\':'],
                         ['Module \'Bar_Two\':'],
+=======
+                        ['Schema creation/updates:'],
+                        ['Module \'Foo_One\':'],
+                        ['Module \'Bar_Two\':'],
+                        ['Schema post-updates:'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         ['Module \'Foo_One\':'],
                         ['Module \'Bar_Two\':'],
                         ['Installing search configuration...'],
@@ -621,6 +774,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
                         ['foo: 1'],
                         ['bar: 1'],
                         ['Installing data...'],
+<<<<<<< HEAD
                         ['Module \'Foo_One\':'],
                         ['Module \'Bar_Two\':'],
                         ['Module \'Foo_One\':'],
@@ -936,6 +1090,26 @@ use PHPUnit\Framework\Attributes\DataProvider;
                         ['[Progress: 23 / 24]'],
                         ['[Progress: 24 / 24]'],
                     ],
+=======
+                        ['Data install/update:'],
+                        ['Disabling caches:'],
+                        ['Current status:'],
+                        ['Module \'Foo_One\':'],
+                        ['Module \'Bar_Two\':'],
+                        ['Data post-updates:'],
+                        ['Module \'Foo_One\':'],
+                        ['Module \'Bar_Two\':'],
+                        ['Enabling caches:'],
+                        ['Current status:'],
+                        ['Installing admin user...'],
+                        ['Caches clearing:'],
+                        ['Cache cleared successfully'],
+                        ['Disabling Maintenance Mode:'],
+                        ['Post installation file permissions check...'],
+                        ['Write installation date...'],
+                        ['Sample Data is installed with errors. See log file for details']
+                    ],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ],
             ];
         }
@@ -945,30 +1119,51 @@ use PHPUnit\Framework\Attributes\DataProvider;
          * and reverts configuration back to local file driver
          *
          * @param bool $isDeploymentConfigWritable
+<<<<<<< HEAD
+=======
+         * @dataProvider installWithInvalidRemoteStorageConfigurationDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
          * @throws \Magento\Framework\Exception\FileSystemException
          * @throws \Magento\Framework\Exception\LocalizedException
          * @throws \Magento\Framework\Exception\RuntimeException
          * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
          */
+<<<<<<< HEAD
     #[DataProvider('installWithInvalidRemoteStorageConfigurationDataProvider')]
         public function testInstallWithInvalidRemoteStorageConfiguration(bool $isDeploymentConfigWritable)
         {
             $request = self::$request;
 
             $logMessages = [
+=======
+        public function testInstallWithInvalidRemoteStorageConfiguration(bool $isDeploymentConfigWritable)
+        {
+            $request = $this->request;
+
+            $logMessages = [
+                ['Starting Magento installation:'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ['File permissions check...'],
                 ['Required extensions check...'],
                 ['Enabling Maintenance Mode...'],
                 ['Installing deployment configuration...'],
                 ['Installing database schema:'],
+<<<<<<< HEAD
                 ['Module \'Foo_One\':'],
                 ['Module \'Bar_Two\':'],
+=======
+                ['Schema creation/updates:'],
+                ['Module \'Foo_One\':'],
+                ['Module \'Bar_Two\':'],
+                ['Schema post-updates:'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ['Module \'Foo_One\':'],
                 ['Module \'Bar_Two\':'],
                 ['Installing search configuration...'],
                 ['Validating remote storage configuration...'],
             ];
 
+<<<<<<< HEAD
             $logMetaMessages = [
                 ['Starting Magento installation:'],
                 ['[Progress: 1 / 23]'],
@@ -985,6 +1180,8 @@ use PHPUnit\Framework\Attributes\DataProvider;
                 ['[Progress: 10 / 23]'],
             ];
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $this->config->expects(static::atLeastOnce())
                 ->method('get')
                 ->willReturnMap(
@@ -1001,7 +1198,14 @@ use PHPUnit\Framework\Attributes\DataProvider;
             $this->moduleLoader->expects(static::exactly(2))->method('load')->willReturn($allModules);
             $setup = $this->createMock(Setup::class);
             $table = $this->createMock(Table::class);
+<<<<<<< HEAD
             $connection = $this->createMock(Mysql::class);
+=======
+            $connection = $this->getMockBuilder(AdapterInterface::class)
+                ->onlyMethods(['newTable', 'getTables'])
+                ->addMethods(['getSchemaListener'])
+                ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $connection->expects(static::any())->method('getSchemaListener')->willReturn($this->schemaListenerMock);
             $connection->expects(static::once())->method('getTables')->willReturn([]);
             $setup->expects(static::any())->method('getConnection')->willReturn($connection);
@@ -1024,6 +1228,10 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
             $appState = $this->getMockBuilder(\Magento\Framework\App\State::class)
                 ->disableOriginalConstructor()
+<<<<<<< HEAD
+=======
+                ->disableArgumentCloning()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ->getMock();
             $registry = $this->createMock(Registry::class);
             $searchConfigMock = $this->getMockBuilder(SearchConfig::class)->disableOriginalConstructor()->getMock();
@@ -1059,11 +1267,15 @@ use PHPUnit\Framework\Attributes\DataProvider;
             if ($isDeploymentConfigWritable) { // assert remote storage reversion is attempted
                 $this->configWriter
                     ->method('saveConfig')
+<<<<<<< HEAD
                     ->willReturnCallback(function ($arg) use ($remoteStorageReversionArguments) {
                         if (empty($arg) || $arg == $remoteStorageReversionArguments) {
                             return null;
                         }
                     });
+=======
+                    ->withConsecutive([], [], $remoteStorageReversionArguments);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             } else { // assert remote storage reversion is never attempted
                 $this->configWriter
                     ->expects(static::any())
@@ -1117,6 +1329,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
                 ->method('getMissingWritablePathsForInstallation')
                 ->willReturn([]);
 
+<<<<<<< HEAD
             $this->logger->expects($this->exactly(count($logMessages)))->method('log')
                 ->willReturnCallback(function ($arg) use ($logMessages) {
                     if ($arg == $logMessages) {
@@ -1130,6 +1343,15 @@ use PHPUnit\Framework\Attributes\DataProvider;
                         return null;
                     }
                 });
+=======
+            call_user_func_array(
+                [
+                    $this->logger->expects(static::exactly(count($logMessages)))->method('log'),
+                    'withConsecutive'
+                ],
+                $logMessages
+            );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
             $this->logger->expects(static::never())->method('logSuccess');
 
@@ -1139,7 +1361,11 @@ use PHPUnit\Framework\Attributes\DataProvider;
         /**
          * @return array
          */
+<<<<<<< HEAD
         public static function installWithInvalidRemoteStorageConfigurationDataProvider()
+=======
+        public function installWithInvalidRemoteStorageConfigurationDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         {
             return [
                 [true],
@@ -1154,16 +1380,26 @@ use PHPUnit\Framework\Attributes\DataProvider;
          * @throws \Magento\Framework\Exception\FileSystemException
          * @throws \Magento\Framework\Exception\LocalizedException
          * @throws \Magento\Framework\Exception\RuntimeException
+<<<<<<< HEAD
          * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
          * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
          */
         public function testInstallWithUnresolvableRemoteStorageValidator()
         {
+<<<<<<< HEAD
             $request = self::$request;
 
             // every log message call is expected
             $logMessages = $this->installDataProvider()[0]['logMessages'];
             $logMetaMessages = $this->installDataProvider()[0]['logMetaMessages'];
+=======
+            $request = $this->request;
+
+            // every log message call is expected
+            $logMessages = $this->installDataProvider()[0]['logMessages'];
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
             $this->config->expects(static::atLeastOnce())
                 ->method('get')
@@ -1181,7 +1417,14 @@ use PHPUnit\Framework\Attributes\DataProvider;
             $this->moduleLoader->expects(static::any())->method('load')->willReturn($allModules);
             $setup = $this->createMock(Setup::class);
             $table = $this->createMock(Table::class);
+<<<<<<< HEAD
             $connection = $this->createMock(Mysql::class);
+=======
+            $connection = $this->getMockBuilder(AdapterInterface::class)
+                ->addMethods(['getSchemaListener'])
+                ->onlyMethods(['getTables', 'newTable'])
+                ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $connection->expects(static::any())->method('getSchemaListener')->willReturn($this->schemaListenerMock);
             $connection->expects(static::once())->method('getTables')->willReturn([]);
             $setup->expects(static::any())->method('getConnection')->willReturn($connection);
@@ -1198,11 +1441,20 @@ use PHPUnit\Framework\Attributes\DataProvider;
             $dataSetup->expects(static::any())->method('getConnection')->willReturn($connection);
             $cacheManager = $this->createMock(Manager::class);
             $cacheManager->expects(static::any())->method('getAvailableTypes')->willReturn(['foo', 'bar']);
+<<<<<<< HEAD
             $cacheManager->expects(static::once())->method('setEnabled')->willReturn(['foo', 'bar']);
             $cacheManager->expects(static::exactly(2))->method('clean');
             $cacheManager->expects(static::once())->method('getStatus')->willReturn(['foo' => 1, 'bar' => 1]);
             $appState = $this->getMockBuilder(\Magento\Framework\App\State::class)
                 ->disableOriginalConstructor()
+=======
+            $cacheManager->expects(static::exactly(3))->method('setEnabled')->willReturn(['foo', 'bar']);
+            $cacheManager->expects(static::exactly(3))->method('clean');
+            $cacheManager->expects(static::exactly(3))->method('getStatus')->willReturn(['foo' => 1, 'bar' => 1]);
+            $appState = $this->getMockBuilder(\Magento\Framework\App\State::class)
+                ->disableOriginalConstructor()
+                ->disableArgumentCloning()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ->getMock();
             $appState->expects(static::once())
                 ->method('setAreaCode')
@@ -1270,6 +1522,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
             $objectManagerReturnMapSequence = [
                 0 => [Registry::class, $registry],
                 1 => [DeclarationInstaller::class, $this->declarationInstallerMock],
+<<<<<<< HEAD
                 2 => [SearchConfig::class, $searchConfigMock],
                 3 => [
                     RemoteStorageValidator::class,
@@ -1281,11 +1534,24 @@ use PHPUnit\Framework\Attributes\DataProvider;
                 7 => [Collection::class, $this->indexerMock],
                 8 => [IndexerRegistry::class, $this->indexerRegistryMock],
                 9 => [IndexerRegistry::class, $this->indexerRegistryMock]
+=======
+                3 => [SearchConfig::class, $searchConfigMock],
+                4 => [
+                    RemoteStorageValidator::class,
+                    new ReflectionException('Class ' . RemoteStorageValidator::class . ' does not exist')
+                ],
+                5 => [\Magento\Framework\App\State::class, $appState],
+                7 => [Registry::class, $registry],
+                11 => [Manager::class, $cacheManager]
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ];
             $withArgs = $willReturnArgs = [];
 
             foreach ($objectManagerReturnMapSequence as $map) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 list($getArgument, $mockedObject) = $map;
 
                 $withArgs[] = [$getArgument];
@@ -1296,6 +1562,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
                     $willReturnArgs[] = $mockedObject;
                 }
             }
+<<<<<<< HEAD
 
             $this->objectManager
                 ->method('get')
@@ -1321,6 +1588,13 @@ use PHPUnit\Framework\Attributes\DataProvider;
             $this->indexerRegistryMock->expects($this->exactly(2))->method('get')->willReturn(
                 $this->indexerInterfaceMock
             );
+=======
+            $this->objectManager
+                ->method('get')
+                ->withConsecutive(...$withArgs)
+                ->willReturnOnConsecutiveCalls(...$willReturnArgs);
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $this->adminFactory->expects(static::any())->method('create')->willReturn(
                 $this->createMock(AdminAccount::class)
             );
@@ -1334,6 +1608,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
             $this->filePermissions->expects(static::once())
                 ->method('getMissingWritableDirectoriesForDbUpgrade')
                 ->willReturn([]);
+<<<<<<< HEAD
             $this->logger->expects($this->exactly(count($logMessages)))->method('log')
                 ->willReturnCallback(function ($arg) use ($logMessages) {
                     if ($arg == $logMessages) {
@@ -1356,6 +1631,21 @@ use PHPUnit\Framework\Attributes\DataProvider;
                         return null;
                     }
                 });
+=======
+            call_user_func_array(
+                [
+                    $this->logger->expects(static::exactly(count($logMessages)))->method('log'),
+                    'withConsecutive'
+                ],
+                $logMessages
+            );
+            $this->logger->expects(static::exactly(2))
+                ->method('logSuccess')
+                ->withConsecutive(
+                    ['Magento installation complete.'],
+                    ['Magento Admin URI: /']
+                );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
             $this->object->install($request);
         }
@@ -1364,22 +1654,36 @@ use PHPUnit\Framework\Attributes\DataProvider;
          * Test installation with invalid remote storage configuration is able to be caught earlier than
          * the queued validation step if necessary, and that configuration is reverted back to local file driver.
          *
+<<<<<<< HEAD
+=======
+         * @dataProvider installWithInvalidRemoteStorageConfigurationWithEarlyExceptionDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
          * @throws \Magento\Framework\Exception\FileSystemException
          * @throws \Magento\Framework\Exception\LocalizedException
          * @throws \Magento\Framework\Exception\RuntimeException
          * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
          */
+<<<<<<< HEAD
     #[DataProvider('installWithInvalidRemoteStorageConfigurationWithEarlyExceptionDataProvider')]
         public function testInstallWithInvalidRemoteStorageConfigurationWithEarlyException(\Exception $exception)
         {
             $request = self::$request;
 
             $logMessages = [
+=======
+        public function testInstallWithInvalidRemoteStorageConfigurationWithEarlyException(\Exception $exception)
+        {
+            $request = $this->request;
+
+            $logMessages = [
+                ['Starting Magento installation:'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ['File permissions check...'],
                 ['Required extensions check...'],
                 ['Enabling Maintenance Mode...'],
                 ['Installing deployment configuration...'],
                 ['Installing database schema:'],
+<<<<<<< HEAD
             ];
 
             $logMetaMessages = [
@@ -1389,6 +1693,9 @@ use PHPUnit\Framework\Attributes\DataProvider;
                 ['[Progress: 3 / 23]'],
                 ['[Progress: 4 / 23]'],
                 ['Schema creation/updates:'],
+=======
+                ['Schema creation/updates:']
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ];
 
             $this->config->expects(static::atLeastOnce())
@@ -1413,7 +1720,14 @@ use PHPUnit\Framework\Attributes\DataProvider;
             $this->moduleLoader->expects(static::exactly(2))->method('load')->willReturn($allModules);
             $setup = $this->createMock(Setup::class);
             $table = $this->createMock(Table::class);
+<<<<<<< HEAD
             $connection = $this->createMock(Mysql::class);
+=======
+            $connection = $this->getMockBuilder(AdapterInterface::class)
+                ->onlyMethods(['getTables', 'newTable'])
+                ->addMethods(['getSchemaListener'])
+                ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $connection->expects(static::any())->method('getSchemaListener')->willReturn($this->schemaListenerMock);
             $connection->expects(static::once())->method('getTables')->willReturn([]);
             $setup->expects(static::any())->method('getConnection')->willReturn($connection);
@@ -1459,12 +1773,16 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
             $this->configWriter
                 ->method('saveConfig')
+<<<<<<< HEAD
                 ->willReturnCallback(function ($arg) use ($remoteStorageReversionArguments) {
                     if (empty($arg) || $arg == $remoteStorageReversionArguments
                     ) {
                         return null;
                     }
                 });
+=======
+                ->withConsecutive([], [], $remoteStorageReversionArguments);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
             $this->setupFactory->expects(static::once())->method('create')->with($resource)->willReturn($setup);
 
@@ -1487,6 +1805,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
                 ->method('getMissingWritablePathsForInstallation')
                 ->willReturn([]);
 
+<<<<<<< HEAD
             $this->logger->expects($this->exactly(count($logMessages)))->method('log')
                 ->willReturnCallback(function ($arg) use ($logMessages) {
                     if ($arg == $logMessages) {
@@ -1500,13 +1819,26 @@ use PHPUnit\Framework\Attributes\DataProvider;
                         return null;
                     }
                 });
+=======
+            call_user_func_array(
+                [
+                    $this->logger->expects(static::exactly(count($logMessages)))->method('log'),
+                    'withConsecutive'
+                ],
+                $logMessages
+            );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
             $this->logger->expects(static::never())->method('logSuccess');
 
             $this->object->install($request);
         }
 
+<<<<<<< HEAD
         public static function installWithInvalidRemoteStorageConfigurationWithEarlyExceptionDataProvider()
+=======
+        public function installWithInvalidRemoteStorageConfigurationWithEarlyExceptionDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         {
             return [
                 [new RuntimeException(__('Remote driver is not available.'))],
@@ -1517,13 +1849,37 @@ use PHPUnit\Framework\Attributes\DataProvider;
         /**
          * Test for InstallDataFixtures
          *
+<<<<<<< HEAD
          * @return void
          */
         public function testInstallDataFixtures(): void
+=======
+         * @dataProvider testInstallDataFixturesDataProvider
+         *
+         * @param bool $keepCache
+         * @param array $expectedToEnableCacheTypes
+         * @return void
+         */
+        public function testInstallDataFixtures(bool $keepCache, array $expectedToEnableCacheTypes): void
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         {
             $this->moduleList->method('getOne')->willReturn(['setup_version' => '2.0.0']);
 
             $cacheManagerMock = $this->createMock(Manager::class);
+<<<<<<< HEAD
+=======
+            //simulate disabled layout cache type
+            $cacheManagerMock->expects($this->atLeastOnce())
+                ->method('getStatus')
+                ->willReturn(['layout' => 0]);
+            $cacheManagerMock->expects($this->atLeastOnce())
+                ->method('getAvailableTypes')
+                ->willReturn(['block_html', 'full_page', 'layout' , 'config', 'collections']);
+            $cacheManagerMock->expects($this->exactly(2))
+                ->method('setEnabled')
+                ->withConsecutive([$expectedToEnableCacheTypes, false], [$expectedToEnableCacheTypes, true])
+                ->willReturn([]);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
             $this->objectManager->expects($this->atLeastOnce())
                 ->method('create')
@@ -1552,7 +1908,13 @@ use PHPUnit\Framework\Attributes\DataProvider;
                 ->method('getMissingWritableDirectoriesForDbUpgrade')
                 ->willReturn([]);
 
+<<<<<<< HEAD
             $connection = $this->createMock(Mysql::class);
+=======
+            $connection = $this->getMockBuilder(AdapterInterface::class)
+                ->addMethods(['getSchemaListener'])
+                ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $connection->expects($this->once())
                 ->method('getSchemaListener')
                 ->willReturn($this->schemaListenerMock);
@@ -1575,7 +1937,29 @@ use PHPUnit\Framework\Attributes\DataProvider;
                 ->method('create')
                 ->willReturn($dataSetup);
 
+<<<<<<< HEAD
             $this->object->installDataFixtures(self::$request);
+=======
+            $this->object->installDataFixtures($this->request, $keepCache);
+        }
+
+        /**
+         * DataProvider for testInstallDataFixtures
+         *
+         * @return array
+         */
+        public function testInstallDataFixturesDataProvider(): array
+        {
+            return [
+                'keep cache' => [
+                    true, ['block_html', 'full_page']
+                ],
+                'do not keep a cache' => [
+                    false,
+                    ['block_html', 'full_page', 'layout']
+                ],
+            ];
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
 
         public function testCheckInstallationFilePermissions()
@@ -1642,6 +2026,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
             $this->logger
                 ->method('log')
+<<<<<<< HEAD
                 ->willReturnCallback(function ($arg) {
                     if ($arg == 'The directory \'/generation\' doesn\'t exist - skipping cleanup') {
                         return null;
@@ -1665,6 +2050,15 @@ use PHPUnit\Framework\Attributes\DataProvider;
                         return null;
                     }
                 });
+=======
+                ->withConsecutive(
+                    ['Cache types config flushed successfully'],
+                    ['Cache cleared successfully'],
+                    ['File system cleanup:'],
+                    ['The directory \'/generation\' doesn\'t exist - skipping cleanup'],
+                    ['Updating modules:']
+                );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
             $installer->updateModulesSequence(false);
         }
@@ -1675,6 +2069,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
             $installer = $this->prepareForUpdateModulesTests();
             $this->logger
+<<<<<<< HEAD
                 ->method('logSuccess')
                 ->willReturnCallback(function ($arg) {
                     if ($arg == 'Cache types config flushed successfully' ||
@@ -1690,13 +2085,24 @@ use PHPUnit\Framework\Attributes\DataProvider;
                         return null;
                     }
                 });
+=======
+                ->method('log')
+                ->withConsecutive(
+                    ['Cache types config flushed successfully'],
+                    ['Cache cleared successfully'],
+                    ['Updating modules:']
+                );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
             $installer->updateModulesSequence(true);
         }
 
         /**
          * @return void
+<<<<<<< HEAD
          * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
          */
         public function testUninstall(): void
         {
@@ -1710,7 +2116,11 @@ use PHPUnit\Framework\Attributes\DataProvider;
                     'ConfigTwo.php'
                 ]
             );
+<<<<<<< HEAD
             $configDir = $this->createMock(
+=======
+            $configDir = $this->getMockForAbstractClass(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 WriteInterface::class
             );
             $configDir
@@ -1737,6 +2147,10 @@ use PHPUnit\Framework\Attributes\DataProvider;
                 ->method('get')
                 ->with(Manager::class)
                 ->willReturn($cacheManager);
+<<<<<<< HEAD
+=======
+            $this->logger->expects($this->once())->method('logSuccess')->with('Magento uninstallation complete.');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $this->cleanupFiles->expects($this->once())->method('clearAllFiles')->willReturn(
                 [
                     "The directory '/var' doesn't exist - skipping cleanup",
@@ -1746,6 +2160,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
             $this->logger
                 ->method('log')
+<<<<<<< HEAD
                 ->willReturnCallback(function ($arg) {
                     if ($arg == 'No database connection defined - skipping database cleanup' ||
                         $arg == "The directory '/var' doesn't exist - skipping cleanup" ||
@@ -1774,6 +2189,18 @@ use PHPUnit\Framework\Attributes\DataProvider;
                         return null;
                     }
                 });
+=======
+                ->withConsecutive(
+                    ['Starting Magento uninstallation:'],
+                    ['Cache cleared successfully'],
+                    ['No database connection defined - skipping database cleanup'],
+                    ['File system cleanup:'],
+                    ["The directory '/var' doesn't exist - skipping cleanup"],
+                    ["The directory '/static' doesn't exist - skipping cleanup"],
+                    ["The file '/config/ConfigOne.php' doesn't exist - skipping cleanup"],
+                    ["The file '/config/ConfigTwo.php' doesn't exist - skipping cleanup"]
+                );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
             $this->object->uninstall();
         }
@@ -1794,6 +2221,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
             $this->connection
                 ->method('query')
+<<<<<<< HEAD
                 ->willReturnCallback(function ($arg) {
                     if ($arg == 'DROP DATABASE IF EXISTS `magento`' ||
                         $arg == 'CREATE DATABASE IF NOT EXISTS `magento`'
@@ -1801,6 +2229,12 @@ use PHPUnit\Framework\Attributes\DataProvider;
                         return null;
                     }
                 });
+=======
+                ->withConsecutive(
+                    ['DROP DATABASE IF EXISTS `magento`'],
+                    ['CREATE DATABASE IF NOT EXISTS `magento`']
+                );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
             $this->logger->expects($this->once())->method('log')->with('Cleaning up database `magento`');
             $this->object->cleanupDb();

@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Tax\Model;
 
 use Magento\Tax\Api\Data\TaxClassKeyInterface;
 use Magento\Tax\Model\TaxClass\Key;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoDbIsolation enabled
@@ -17,16 +25,26 @@ use PHPUnit\Framework\Attributes\DataProvider;
 class TaxCalculationTest extends \PHPUnit\Framework\TestCase
 {
     /**
+<<<<<<< HEAD
      * @var float
      */
     private const EPSILON = 0.0000000001;
 
     /**
+=======
+     * Object Manager
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @var \Magento\Framework\ObjectManagerInterface
      */
     private $objectManager;
 
     /**
+<<<<<<< HEAD
+=======
+     * Tax calculation service
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @var \Magento\Tax\Api\TaxCalculationInterface
      */
     private $taxCalculationService;
@@ -97,8 +115,13 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @magentoConfigFixture current_store tax/calculation/algorithm UNIT_BASE_CALCULATION
+<<<<<<< HEAD
      */
     #[DataProvider('calculateUnitBasedDataProvider')]
+=======
+     * @dataProvider calculateUnitBasedDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCalculateTaxUnitBased($quoteDetailsData, $expected)
     {
         $quoteDetailsData = $this->performTaxClassSubstitution($quoteDetailsData);
@@ -110,15 +133,25 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
         );
 
         $taxDetails = $this->taxCalculationService->calculateTax($quoteDetails, 1);
+<<<<<<< HEAD
         $this->assertEqualsWithDelta($expected, $this->convertObjectToArray($taxDetails), self::EPSILON);
+=======
+        $this->assertEquals($expected, $this->convertObjectToArray($taxDetails));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function calculateUnitBasedDataProvider()
     {
         $baseQuote = self::getBaseQuoteData();
+=======
+    public function calculateUnitBasedDataProvider()
+    {
+        $baseQuote = $this->getBaseQuoteData();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $oneProduct = $baseQuote;
         $oneProduct['items'][] = [
             'code' => 'sku_1',
@@ -772,6 +805,7 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
 
         return [
             'one product' => [
+<<<<<<< HEAD
                 'quoteDetailsData' => $oneProduct,
                 'expected' => $oneProductResults,
             ],
@@ -806,14 +840,56 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
             'bundle product' => [
                 'quoteDetailsData' => $bundleProduct,
                 'expected' => $bundleProductResults,
+=======
+                'quote_details' => $oneProduct,
+                'expected_tax_details' => $oneProductResults,
+            ],
+            'weee product' => [
+                'quote_details' => $weeeProduct,
+                'expected_tax_details' => $weeeProductResults,
+            ],
+            'weee products' => [
+                'quote_details' => $weeeProducts,
+                'expected_tax_details' => $weeeProductsResults,
+            ],
+            'multi weee products' => [
+                'quote_details' => $multiWeeeProducts,
+                'expected_tax_details' => $multiWeeeProductsResults,
+            ],
+            'one product, tax included' => [
+                'quote_details' => $oneProductInclTax,
+                'expected_tax_details' => $oneProductInclTaxResults,
+            ],
+            'one product, tax included but differs from store rate' => [
+                'quote_details' => $oneProductInclTaxDiffRate,
+                'expected_tax_details' => $oneProductInclTaxDiffRateResults,
+            ],
+            'two products' => [
+                'quote_details' => $twoProducts,
+                'expected_tax_details' => $twoProductsResults,
+            ],
+            'two products, tax included' => [
+                'quote_details' => $twoProductsInclTax,
+                'expected_tax_details' => $twoProductInclTaxResults,
+            ],
+            'bundle product' => [
+                'quote_details' => $bundleProduct,
+                'expected_tax_details' => $bundleProductResults,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }
 
     /**
+<<<<<<< HEAD
      * @magentoConfigFixture current_store tax/calculation/algorithm TOTAL_BASE_CALCULATION
      */
     #[DataProvider('calculateTaxTotalBasedDataProvider')]
+=======
+     * @dataProvider calculateTaxTotalBasedDataProvider
+     * @magentoConfigFixture current_store tax/calculation/algorithm TOTAL_BASE_CALCULATION
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCalculateTaxTotalBased($quoteDetailsData, $expectedTaxDetails, $storeId = null)
     {
         $quoteDetailsData = $this->performTaxClassSubstitution($quoteDetailsData);
@@ -829,22 +905,38 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expectedTaxDetails, $this->convertObjectToArray($taxDetails));
     }
 
+<<<<<<< HEAD
     public static function calculateTaxTotalBasedDataProvider()
     {
         return array_merge(
             self::calculateTaxNoTaxInclDataProvider(),
             self::calculateTaxTaxInclDataProvider(),
             self::calculateTaxRoundingDataProvider()
+=======
+    public function calculateTaxTotalBasedDataProvider()
+    {
+        return array_merge(
+            $this->calculateTaxNoTaxInclDataProvider(),
+            $this->calculateTaxTaxInclDataProvider(),
+            $this->calculateTaxRoundingDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
     }
 
     /**
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function calculateTaxNoTaxInclDataProvider()
     {
         $prodNoTaxInclBase = [
             'quoteDetailsData' => [
+=======
+    public function calculateTaxNoTaxInclDataProvider()
+    {
+        $prodNoTaxInclBase = [
+            'quote_details' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'shipping_address' => [
                     'postcode' => '55555',
                     'country_id' => 'US',
@@ -861,14 +953,22 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
                 ],
                 'customer_tax_class_key' => 'DefaultCustomerClass',
             ],
+<<<<<<< HEAD
             'expectedTaxDetails' => [
+=======
+            'expected_tax_details' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'subtotal' => 10.0,
                 'tax_amount' => 0.0,
                 'discount_tax_compensation_amount' => 0.0,
                 'applied_taxes' => [],
                 'items' => [],
             ],
+<<<<<<< HEAD
             'storeId' => null,
+=======
+            'store_id' => null,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
 
         $prodQuoteDetailItemBase = [
@@ -950,6 +1050,7 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
         $prodWithoutStoreIdWithTaxClassId = $prodNoTaxInclBase;
         $prodWithoutStoreIdWithoutTaxClassId = $prodNoTaxInclBase;
 
+<<<<<<< HEAD
         $prodWithStoreIdWithTaxClassId['storeId'] = 1;
         $prodWithStoreIdWithTaxClassId['quoteDetailsData']['items'][] = $quoteDetailItemWithDefaultProductTaxClass;
         $prodWithStoreIdWithTaxClassId['expectedTaxDetails']['tax_amount'] = 0.75;
@@ -967,6 +1068,30 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
 
         $prodWithoutStoreIdWithoutTaxClassId['quoteDetailsData']['items'][] = $prodQuoteDetailItemBase;
         $prodWithoutStoreIdWithoutTaxClassId['expectedTaxDetails']['items'] = $prodExpectedItemWithNoProductTaxClass;
+=======
+        $prodWithStoreIdWithTaxClassId['store_id'] = 1;
+        $prodWithStoreIdWithTaxClassId['quote_details']['items'][] = $quoteDetailItemWithDefaultProductTaxClass;
+        $prodWithStoreIdWithTaxClassId['expected_tax_details']['tax_amount'] = 0.75;
+        $prodWithStoreIdWithTaxClassId['expected_tax_details']['applied_taxes'] = $quoteDetailAppliedTaxesBase;
+        $prodWithStoreIdWithTaxClassId['expected_tax_details']['items'] =
+            $prodExpectedItemWithDefaultProductTaxClass;
+
+        $prodWithStoreIdWithoutTaxClassId['store_id'] = 1;
+        $prodWithStoreIdWithoutTaxClassId['quote_details']['items'][] = $prodQuoteDetailItemBase;
+        $prodWithStoreIdWithoutTaxClassId['expected_tax_details']['items'] =
+            $prodExpectedItemWithNoProductTaxClass;
+
+        $prodWithoutStoreIdWithTaxClassId['quote_details']['items'][] =
+            $quoteDetailItemWithDefaultProductTaxClass;
+        $prodWithoutStoreIdWithTaxClassId['expected_tax_details']['tax_amount'] = 0.75;
+        $prodWithoutStoreIdWithTaxClassId['expected_tax_details']['applied_taxes'] = $quoteDetailAppliedTaxesBase;
+        $prodWithoutStoreIdWithTaxClassId['expected_tax_details']['items'] =
+            $prodExpectedItemWithDefaultProductTaxClass;
+
+        $prodWithoutStoreIdWithoutTaxClassId['quote_details']['items'][] = $prodQuoteDetailItemBase;
+        $prodWithoutStoreIdWithoutTaxClassId['expected_tax_details']['items'] =
+            $prodExpectedItemWithNoProductTaxClass;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         return [
             'product with store id, with tax class id' => $prodWithStoreIdWithTaxClassId,
@@ -979,10 +1104,17 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
     /**
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function calculateTaxTaxInclDataProvider()
     {
         $productTaxInclBase = [
             'quoteDetailsData' => [
+=======
+    public function calculateTaxTaxInclDataProvider()
+    {
+        $productTaxInclBase = [
+            'quote_details' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'shipping_address' => [
                     'postcode' => '55555',
                     'country_id' => 'US',
@@ -1002,14 +1134,22 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
                     Key::KEY_VALUE => 'DefaultCustomerClass',
                 ],
             ],
+<<<<<<< HEAD
             'expectedTaxDetails' => [
+=======
+            'expected_tax_details' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'subtotal' => 10.0,
                 'tax_amount' => 0.0,
                 'discount_tax_compensation_amount' => 0.0,
                 'applied_taxes' => [],
                 'items' => [],
             ],
+<<<<<<< HEAD
             'storeId' => null,
+=======
+            'store_id' => null,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
 
         $productTaxInclQuoteDetailItemBase = [
@@ -1088,6 +1228,7 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
         $productInclTaxWithoutStoreIdWithTaxClassId = $productTaxInclBase;
         $productInclTaxWithoutStoreIdWithoutTaxClassId = $productTaxInclBase;
 
+<<<<<<< HEAD
         $productInclTaxWithStoreIdWithTaxClassId['storeId'] = 1;
         $productInclTaxWithStoreIdWithTaxClassId['quoteDetailsData']['items'][] =
             $quoteDetailTaxInclItemWithDefaultProductTaxClass;
@@ -1125,16 +1266,59 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
                 $productInclTaxWithoutStoreIdWithTaxClassId,
             'product incl tax without store id, without tax class id' =>
                 $productInclTaxWithoutStoreIdWithoutTaxClassId,
+=======
+        $productInclTaxWithStoreIdWithTaxClassId['store_id'] = 1;
+        $productInclTaxWithStoreIdWithTaxClassId['quote_details']['items'][] =
+            $quoteDetailTaxInclItemWithDefaultProductTaxClass;
+        $productInclTaxWithStoreIdWithTaxClassId['expected_tax_details']['tax_amount'] = 0.70;
+        $productInclTaxWithStoreIdWithTaxClassId['expected_tax_details']['subtotal'] = 9.30;
+        $productInclTaxWithStoreIdWithTaxClassId['expected_tax_details']['applied_taxes'] =
+            $quoteDetailAppliedTaxesBase;
+        $productInclTaxWithStoreIdWithTaxClassId['expected_tax_details']['items'] =
+            $productTaxInclExpectedItemWithDefaultProductTaxClass;
+
+        $productInclTaxWithStoreIdWithoutTaxClassId['store_id'] = 1;
+        $productInclTaxWithStoreIdWithoutTaxClassId['quote_details']['items'][] =
+            $productTaxInclQuoteDetailItemBase;
+        $productInclTaxWithStoreIdWithoutTaxClassId['expected_tax_details']['items'] =
+            $productTaxInclExpectedItemWithNoProductTaxClass;
+
+        $productInclTaxWithoutStoreIdWithTaxClassId['quote_details']['items'][] =
+            $quoteDetailTaxInclItemWithDefaultProductTaxClass;
+        $productInclTaxWithoutStoreIdWithTaxClassId['expected_tax_details']['tax_amount'] = 0.70;
+        $productInclTaxWithoutStoreIdWithTaxClassId['expected_tax_details']['subtotal'] = 9.30;
+        $productInclTaxWithoutStoreIdWithTaxClassId['expected_tax_details']['applied_taxes'] =
+            $quoteDetailAppliedTaxesBase;
+        $productInclTaxWithoutStoreIdWithTaxClassId['expected_tax_details']['items'] =
+            $productTaxInclExpectedItemWithDefaultProductTaxClass;
+
+        $productInclTaxWithoutStoreIdWithoutTaxClassId['quote_details']['items'][] = $productTaxInclQuoteDetailItemBase;
+        $productInclTaxWithoutStoreIdWithoutTaxClassId['expected_tax_details']['items'] =
+            $productTaxInclExpectedItemWithNoProductTaxClass;
+
+        return [
+            'product incl tax with store id, with tax class id' => $productInclTaxWithStoreIdWithTaxClassId,
+            'product incl tax with store id, without tax class id' => $productInclTaxWithStoreIdWithoutTaxClassId,
+            'product incl tax without store id, with tax class id' => $productInclTaxWithoutStoreIdWithTaxClassId,
+            'product incl tax without store id, without tax class id' => $productInclTaxWithoutStoreIdWithoutTaxClassId,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
     }
 
     /**
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function calculateTaxRoundingDataProvider()
     {
         $prodRoundingNoTaxInclBase = [
             'quoteDetailsData' => [
+=======
+    public function calculateTaxRoundingDataProvider()
+    {
+        $prodRoundingNoTaxInclBase = [
+            'quote_details' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'shipping_address' => [
                     'postcode' => '55555',
                     'country_id' => 'US',
@@ -1151,14 +1335,22 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
                 ],
                 'customer_tax_class_key' => 'DefaultCustomerClass',
             ],
+<<<<<<< HEAD
             'expectedTaxDetails' => [
+=======
+            'expected_tax_details' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'subtotal' => 15.94,
                 'tax_amount' => 0.0,
                 'discount_tax_compensation_amount' => 0.0,
                 'applied_taxes' => [],
                 'items' => [],
             ],
+<<<<<<< HEAD
             'storeId' => null,
+=======
+            'store_id' => null,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
 
         $prodQuoteDetailItemBase = [
@@ -1237,6 +1429,7 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
         $prodWithoutStoreIdWithTaxClassId = $prodRoundingNoTaxInclBase;
         $prodWithoutStoreIdWithoutTaxClassId = $prodRoundingNoTaxInclBase;
 
+<<<<<<< HEAD
         $prodWithStoreIdWithTaxClassId['storeId'] = 1;
         $prodWithStoreIdWithTaxClassId['quoteDetailsData']['items'][] = $quoteDetailItemWithDefaultProductTaxClass;
         $prodWithStoreIdWithTaxClassId['expectedTaxDetails']['tax_amount'] = 1.20;
@@ -1254,6 +1447,31 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
 
         $prodWithoutStoreIdWithoutTaxClassId['quoteDetailsData']['items'][] = $prodQuoteDetailItemBase;
         $prodWithoutStoreIdWithoutTaxClassId['expectedTaxDetails']['items'] = $prodExpectedItemWithNoProductTaxClass;
+=======
+        $prodWithStoreIdWithTaxClassId['store_id'] = 1;
+        $prodWithStoreIdWithTaxClassId['quote_details']['items'][] = $quoteDetailItemWithDefaultProductTaxClass;
+        $prodWithStoreIdWithTaxClassId['expected_tax_details']['tax_amount'] = 1.20;
+        $prodWithStoreIdWithTaxClassId['expected_tax_details']['applied_taxes'] = $quoteDetailAppliedTaxesBase;
+        $prodWithStoreIdWithTaxClassId['expected_tax_details']['items'] =
+            $prodExpectedItemWithDefaultProductTaxClass;
+
+        $prodWithStoreIdWithoutTaxClassId['store_id'] = 1;
+        $prodWithStoreIdWithoutTaxClassId['quote_details']['items'][] = $prodQuoteDetailItemBase;
+        $prodWithStoreIdWithoutTaxClassId['expected_tax_details']['items'] =
+            $prodExpectedItemWithNoProductTaxClass;
+
+        $prodWithoutStoreIdWithTaxClassId['quote_details']['items'][] =
+            $quoteDetailItemWithDefaultProductTaxClass;
+        $prodWithoutStoreIdWithTaxClassId['expected_tax_details']['tax_amount'] = 1.20;
+        $prodWithoutStoreIdWithTaxClassId['expected_tax_details']['applied_taxes'] =
+            $quoteDetailAppliedTaxesBase;
+        $prodWithoutStoreIdWithTaxClassId['expected_tax_details']['items'] =
+            $prodExpectedItemWithDefaultProductTaxClass;
+
+        $prodWithoutStoreIdWithoutTaxClassId['quote_details']['items'][] = $prodQuoteDetailItemBase;
+        $prodWithoutStoreIdWithoutTaxClassId['expected_tax_details']['items'] =
+            $prodExpectedItemWithNoProductTaxClass;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         return [
             'rounding product with store id, with tax class id' => $prodWithStoreIdWithTaxClassId,
@@ -1265,9 +1483,15 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
      * @magentoConfigFixture default_store tax/calculation/algorithm ROW_BASE_CALCULATION
      */
     #[DataProvider('calculateTaxRowBasedDataProvider')]
+=======
+     * @dataProvider calculateTaxRowBasedDataProvider
+     * @magentoConfigFixture default_store tax/calculation/algorithm ROW_BASE_CALCULATION
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCalculateTaxRowBased($quoteDetailsData, $expectedTaxDetails)
     {
         $quoteDetailsData = $this->performTaxClassSubstitution($quoteDetailsData);
@@ -1280,15 +1504,25 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
 
         $taxDetails = $this->taxCalculationService->calculateTax($quoteDetails);
 
+<<<<<<< HEAD
         $this->assertEqualsWithDelta($expectedTaxDetails, $this->convertObjectToArray($taxDetails), self::EPSILON);
+=======
+        $this->assertEquals($expectedTaxDetails, $this->convertObjectToArray($taxDetails));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function calculateTaxRowBasedDataProvider()
     {
         $baseQuote = self::getBaseQuoteData();
+=======
+    public function calculateTaxRowBasedDataProvider()
+    {
+        $baseQuote = $this->getBaseQuoteData();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $oneProduct = $baseQuote;
         $oneProduct['items'][] = [
@@ -1410,10 +1644,17 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
                 'weee1-Recycling Fee' => [
                     'code' => 'weee1-Recycling Fee',
                     'row_tax' => 0.57,
+<<<<<<< HEAD
                     'price' => 7.0,
                     'price_incl_tax' => 7.58,
                     'row_total' => 7.0,
                     'row_total_incl_tax' => 7.58,
+=======
+                    'price' => 7,
+                    'price_incl_tax' => 7.57,
+                    'row_total' => 7,
+                    'row_total_incl_tax' => 7.57,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'type' => 'weee',
                     'tax_percent' => 8.25,
                     'discount_tax_compensation_amount' => 0,
@@ -2107,6 +2348,7 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
 
         return [
             'one product' => [
+<<<<<<< HEAD
                 'quoteDetailsData' => $oneProduct,
                 'expectedTaxDetails' => $oneProductResults,
             ],
@@ -2141,6 +2383,42 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
             'one product with two children' => [
                 'quoteDetailsData' => $oneProductWithChildren,
                 'expectedTaxDetails' => $oneProductWithChildrenResults,
+=======
+                'quote_details' => $oneProduct,
+                'expected_tax_details' => $oneProductResults,
+            ],
+            'weee_product' => [
+                'quote_details' => $weeeProduct,
+                'expected_tax_details' => $weeeProductResults,
+            ],
+            'weee_products' => [
+                'quote_details' => $weeeProducts,
+                'expected_tax_details' => $weeeProductsResults,
+            ],
+            'multi weee_products' => [
+                'quote_details' => $multiWeeeProducts,
+                'expected_tax_details' => $multiWeeeProductsResults,
+            ],
+            'one product, tax included' => [
+                'quote_details' => $oneProductInclTax,
+                'expected_tax_details' => $oneProductInclTaxResults,
+            ],
+            'one product, tax included but differs from store rate' => [
+                'quote_details' => $oneProductInclTaxDiffRate,
+                'expected_tax_details' => $oneProductInclTaxDiffRateResults,
+            ],
+            'two products' => [
+                'quote_details' => $twoProducts,
+                'expected_tax_details' => $twoProductsResults,
+            ],
+            'two products, tax included' => [
+                'quote_details' => $twoProductsInclTax,
+                'expected_tax_details' => $twoProductInclTaxResults,
+            ],
+            'one product with two children' => [
+                'quote_details' => $oneProductWithChildren,
+                'expected_tax_details' => $oneProductWithChildrenResults,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }
@@ -2150,9 +2428,15 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     protected static function setupMultiRuleQuote()
     {
         $baseQuote = self::getBaseQuoteData();
+=======
+    protected function setupMultiRuleQuote()
+    {
+        $baseQuote = $this->getBaseQuoteData();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $baseQuote['items'][] = [
             'code' => 'sku_1',
@@ -2191,7 +2475,11 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     protected static function getBaseQuoteResult()
+=======
+    protected function getBaseQuoteResult()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $result = [
             'subtotal' => 183.75,
@@ -2366,9 +2654,15 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
      * @magentoConfigFixture default_store tax/calculation/algorithm ROW_BASE_CALCULATION
      */
     #[DataProvider('multiRulesRowBasedDataProvider')]
+=======
+     * @dataProvider multiRulesRowBasedDataProvider
+     * @magentoConfigFixture default_store tax/calculation/algorithm ROW_BASE_CALCULATION
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testMultiRulesRowBased($quoteDetailsData, $expectedTaxDetails)
     {
         $quoteDetailsData = $this->performTaxClassSubstitution($quoteDetailsData);
@@ -2381,12 +2675,17 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
 
         $taxDetails = $this->taxCalculationService->calculateTax($quoteDetails);
 
+<<<<<<< HEAD
         $this->assertEqualsWithDelta($expectedTaxDetails, $this->convertObjectToArray($taxDetails), self::EPSILON);
+=======
+        $this->assertEquals($expectedTaxDetails, $this->convertObjectToArray($taxDetails));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function multiRulesRowBasedDataProvider()
     {
         $quoteDetails = self::setupMultiRuleQuote();
@@ -2397,15 +2696,33 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
             'multi rules, multi rows' => [
                 'quoteDetailsData' => $quoteDetails,
                 'expectedTaxDetails' => $results,
+=======
+    public function multiRulesRowBasedDataProvider()
+    {
+        $quoteDetails = $this->setupMultiRuleQuote();
+
+        $results = $this->getBaseQuoteResult();
+
+        return [
+            'multi rules, multi rows' => [
+                'quote_details' => $quoteDetails,
+                'expected_tax_details' => $results,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }
 
     /**
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
      * @magentoConfigFixture default_store tax/calculation/algorithm TOTAL_BASE_CALCULATION
      */
     #[DataProvider('multiRulesTotalBasedDataProvider')]
+=======
+     * @dataProvider multiRulesTotalBasedDataProvider
+     * @magentoConfigFixture default_store tax/calculation/algorithm TOTAL_BASE_CALCULATION
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testMultiRulesTotalBased($quoteDetailsData, $expectedTaxDetails)
     {
         $quoteDetailsData = $this->performTaxClassSubstitution($quoteDetailsData);
@@ -2418,17 +2735,29 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
 
         $taxDetails = $this->taxCalculationService->calculateTax($quoteDetails);
 
+<<<<<<< HEAD
         $this->assertEqualsWithDelta($expectedTaxDetails, $this->convertObjectToArray($taxDetails), self::EPSILON);
+=======
+        $this->assertEquals($expectedTaxDetails, $this->convertObjectToArray($taxDetails));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function multiRulesTotalBasedDataProvider()
     {
         $quoteDetails = self::setupMultiRuleQuote();
 
         $results = self::getBaseQuoteResult();
+=======
+    public function multiRulesTotalBasedDataProvider()
+    {
+        $quoteDetails = $this->setupMultiRuleQuote();
+
+        $results = $this->getBaseQuoteResult();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         //Differences from the row base result
         $results['subtotal'] = 183.76;
@@ -2442,17 +2771,28 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
 
         return [
             'multi rules, multi rows' => [
+<<<<<<< HEAD
                 'quoteDetailsData' => $quoteDetails,
                 'expectedTaxDetails' => $results,
+=======
+                'quote_details' => $quoteDetails,
+                'expected_tax_details' => $results,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }
 
     /**
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
      * @magentoConfigFixture default_store tax/calculation/algorithm UNIT_BASE_CALCULATION
      */
     #[DataProvider('multiRulesUnitBasedDataProvider')]
+=======
+     * @dataProvider multiRulesUnitBasedDataProvider
+     * @magentoConfigFixture default_store tax/calculation/algorithm UNIT_BASE_CALCULATION
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testMultiRulesUnitBased($quoteDetailsData, $expectedTaxDetails)
     {
         $quoteDetailsData = $this->performTaxClassSubstitution($quoteDetailsData);
@@ -2465,17 +2805,29 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
 
         $taxDetails = $this->taxCalculationService->calculateTax($quoteDetails);
 
+<<<<<<< HEAD
         $this->assertEqualsWithDelta($expectedTaxDetails, $this->convertObjectToArray($taxDetails), self::EPSILON);
+=======
+        $this->assertEquals($expectedTaxDetails, $this->convertObjectToArray($taxDetails));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function multiRulesUnitBasedDataProvider()
     {
         $quoteDetails = self::setupMultiRuleQuote();
 
         $results = self::getBaseQuoteResult();
+=======
+    public function multiRulesUnitBasedDataProvider()
+    {
+        $quoteDetails = $this->setupMultiRuleQuote();
+
+        $results = $this->getBaseQuoteResult();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         //Differences from the row base result
         $results['subtotal'] = 183.79;
@@ -2491,8 +2843,13 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
 
         return [
             'multi rules, multi rows' => [
+<<<<<<< HEAD
                 'quoteDetailsData' => $quoteDetails,
                 'expectedTaxDetails' => $results,
+=======
+                'quote_details' => $quoteDetails,
+                'expected_tax_details' => $results,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }
@@ -2639,7 +2996,11 @@ class TaxCalculationTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     private static function getBaseQuoteData()
+=======
+    private function getBaseQuoteData()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $baseQuote = [
             'billing_address' => [

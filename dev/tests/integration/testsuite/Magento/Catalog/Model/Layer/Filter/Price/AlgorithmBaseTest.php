@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,15 @@ namespace Magento\Catalog\Model\Layer\Filter\Price;
 
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Catalog\Model\Layer\Filter\Price;
+
+use Magento\Framework\Search\Dynamic\IntervalInterface;
+use Magento\TestFramework\Helper\Bootstrap;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test class for \Magento\Catalog\Model\Layer\Filter\Price.
@@ -39,12 +49,19 @@ class AlgorithmBaseTest extends \PHPUnit\Framework\TestCase
     /**
      * @magentoDbIsolation disabled
      * @magentoAppIsolation enabled
+<<<<<<< HEAD
+=======
+     * @dataProvider pricesSegmentationDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param $categoryId
      * @param array $entityIds
      * @param array $intervalItems
      * @covers \Magento\Framework\Search\Dynamic\Algorithm::calculateSeparators
      */
+<<<<<<< HEAD
     #[DataProvider('pricesSegmentationDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPricesSegmentation($categoryId, array $entityIds, array $intervalItems)
     {
         $this->markTestSkipped('MC-33826:'
@@ -110,10 +127,17 @@ class AlgorithmBaseTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function pricesSegmentationDataProvider()
     {
         $testCases = include __DIR__ . '/_files/_algorithm_base_data.php';
         $testCasesNew = self::getUnSkippedTestCases($testCases);
+=======
+    public function pricesSegmentationDataProvider()
+    {
+        $testCases = include __DIR__ . '/_files/_algorithm_base_data.php';
+        $testCasesNew = $this->getUnSkippedTestCases($testCases);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $result = [];
         foreach ($testCasesNew as $index => $testCase) {
             $result[] = [
@@ -131,7 +155,11 @@ class AlgorithmBaseTest extends \PHPUnit\Framework\TestCase
      * @param array $testCases
      * @return array
      */
+<<<<<<< HEAD
     private static function getUnSkippedTestCases(array $testCases) : array
+=======
+    private function getUnSkippedTestCases(array $testCases) : array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         // TO DO UnSkip skipped test cases and remove this function
         $SkippedTestCases = [];

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -9,9 +14,12 @@
  */
 namespace Magento\Framework\DB\Adapter;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Depends;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * @magentoDbIsolation disabled
  */
@@ -132,8 +140,13 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      */
     #[Depends('testDropColumn')]
+=======
+     * @depends testDropColumn
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDropColumnRemoveFromIndexes()
     {
         $this->_connection->dropColumn($this->_tableName, 'column1');
@@ -149,8 +162,13 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      */
     #[Depends('testDropColumn')]
+=======
+     * @depends testDropColumn
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDropColumnRemoveIndexDuplicate()
     {
         $this->_connection->dropColumn($this->_tableName, 'column2');
@@ -169,8 +187,13 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
      * @param array $columns
      * @param array $data
      * @param array $expected
+<<<<<<< HEAD
      */
     #[DataProvider('insertArrayDataProvider')]
+=======
+     * @dataProvider insertArrayDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testInsertArray(array $columns, array $data, array $expected)
     {
         $this->_connection->insertArray($this->_tableName, $columns, $data);
@@ -184,7 +207,11 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function insertArrayDataProvider()
+=======
+    public function insertArrayDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'one column' => [
@@ -223,7 +250,13 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
         $this->_connection->insertArray($this->_tableName, ['column1', 'column2'], [1, 2]);
     }
 
+<<<<<<< HEAD
     #[DataProvider('insertDataProvider')]
+=======
+    /**
+     * @dataProvider insertDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testInsertMultiple($data)
     {
         $this->_connection->insertMultiple($this->_tableName, $data);
@@ -234,7 +267,13 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($data, $result);
     }
 
+<<<<<<< HEAD
     #[DataProvider('insertDataProvider')]
+=======
+    /**
+     * @dataProvider insertDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testInsertOnDuplicate($data)
     {
         $this->_connection->insertOnDuplicate($this->_tableName, $data);
@@ -245,7 +284,13 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($data, $result);
     }
 
+<<<<<<< HEAD
     #[DataProvider('insertDataProvider')]
+=======
+    /**
+     * @dataProvider insertDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testInsertForce($data)
     {
         $this->assertEquals(1, $this->_connection->insertForce($this->_tableName, $data));
@@ -261,7 +306,11 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function insertDataProvider()
+=======
+    public function insertDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return ['column with identity field' => [['id' => 1, 'column1' => 10, 'column2' => 20]]];
     }

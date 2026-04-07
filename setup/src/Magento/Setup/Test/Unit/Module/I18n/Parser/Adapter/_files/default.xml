@@ -1,15 +1,23 @@
 <?xml version='1.0' encoding="utf-8" ?>
 <!--
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 -->
 
 <layout>
+<<<<<<< HEAD
     <head>
         <title>Title</title>
     </head>
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     <node1 translate="description, label">
         <description>Phrase 1</description>
         <label>Phrase 2</label>

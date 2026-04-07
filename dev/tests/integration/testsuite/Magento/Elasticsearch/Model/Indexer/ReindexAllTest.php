@@ -1,14 +1,23 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Elasticsearch\Model\Indexer;
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Indexer\Model\Indexer;
 use Magento\TestFramework\Fixture\DataFixture;
+=======
+use Magento\Indexer\Model\Indexer;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Elasticsearch\SearchAdapter\ConnectionManager;
@@ -16,6 +25,7 @@ use Magento\AdvancedSearch\Model\Client\ClientInterface as ElasticsearchClient;
 use Magento\Elasticsearch\Model\Config;
 use Magento\Elasticsearch\SearchAdapter\SearchIndexNameResolver;
 use Magento\Framework\Search\EngineResolverInterface;
+<<<<<<< HEAD
 use Magento\TestModuleCatalogSearch\Model\SearchEngineVersionReader;
 use PHPUnit\Framework\Attributes\DataProvider;
 
@@ -24,6 +34,15 @@ use PHPUnit\Framework\Attributes\DataProvider;
  * achieve this, use @magentoConfigFixture to pass unique value for index_prefix for every test
  * method.
  * E.g. '@magentoConfigFixture current_store catalog/search/elasticsearch8_index_prefix indexerhandlertest_configurable'
+=======
+use Magento\TestModuleCatalogSearch\Model\ElasticsearchVersionChecker;
+
+/**
+ * Important: Please make sure that each integration test file works with unique elastic search index. In order to
+ * achieve this, use @magentoConfigFixture to pass unique value for 'elasticsearch_index_prefix' for every test
+ * method.
+ * E.g. '@magentoConfigFixture current_store catalog/search/elasticsearch_index_prefix indexerhandlertest_configurable'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  *
  * @magentoDbIsolation disabled
  * @magentoAppIsolation enabled
@@ -32,6 +51,14 @@ use PHPUnit\Framework\Attributes\DataProvider;
 class ReindexAllTest extends \PHPUnit\Framework\TestCase
 {
     /**
+<<<<<<< HEAD
+=======
+     * @var string
+     */
+    private $searchEngine;
+
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @var ConnectionManager
      */
     private $connectionManager;
@@ -61,6 +88,17 @@ class ReindexAllTest extends \PHPUnit\Framework\TestCase
      */
     private $productRepository;
 
+<<<<<<< HEAD
+=======
+    /**
+     * Elasticsearch7 engine configuration is also compatible with OpenSearch 1
+     */
+    private const ENGINE_SUPPORTED_VERSIONS = [
+        7 => 'elasticsearch7',
+        1 => 'elasticsearch7',
+    ];
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     protected function setUp(): void
     {
         $this->connectionManager = Bootstrap::getObjectManager()->create(ConnectionManager::class);
@@ -76,12 +114,18 @@ class ReindexAllTest extends \PHPUnit\Framework\TestCase
      */
     protected function assertPreConditions(): void
     {
+<<<<<<< HEAD
         $objectManager = Bootstrap::getObjectManager();
         $currentEngine = $objectManager->get(EngineResolverInterface::class)->getCurrentSearchEngine();
         // phpstan:ignore "Class Magento\TestModuleCatalogSearch\Model\SearchEngineVersionReader not found."
         $installedEngine = $objectManager->get(SearchEngineVersionReader::class)->getFullVersion();
         $this->assertEquals(
             $installedEngine,
+=======
+        $currentEngine = Bootstrap::getObjectManager()->get(EngineResolverInterface::class)->getCurrentSearchEngine();
+        $this->assertEquals(
+            $this->getInstalledSearchEngine(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $currentEngine,
             sprintf(
                 'Search engine configuration "%s" is not compatible with the installed version',
@@ -93,6 +137,10 @@ class ReindexAllTest extends \PHPUnit\Framework\TestCase
     /**
      * Test search of all products after full reindex
      *
+<<<<<<< HEAD
+=======
+     * @magentoConfigFixture current_store catalog/search/elasticsearch_index_prefix indexerhandlertest_configurable
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/ConfigurableProduct/_files/configurable_products.php
      */
     public function testSearchAll()
@@ -106,6 +154,10 @@ class ReindexAllTest extends \PHPUnit\Framework\TestCase
      * Test sorting of all products after full reindex
      *
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
+=======
+     * @magentoConfigFixture current_store catalog/search/elasticsearch_index_prefix indexerhandlertest_configurable
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/ConfigurableProduct/_files/configurable_products.php
      */
     public function testSort()
@@ -140,6 +192,10 @@ class ReindexAllTest extends \PHPUnit\Framework\TestCase
      * Test sorting of products with lower and upper case names after full reindex
      *
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
+=======
+     * @magentoConfigFixture current_store catalog/search/elasticsearch_index_prefix indexerhandlertest
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Elasticsearch/_files/case_sensitive.php
      */
     public function testSortCaseSensitive(): void
@@ -170,6 +226,7 @@ class ReindexAllTest extends \PHPUnit\Framework\TestCase
         self::assertEquals($productThird->getId(), $fifthInSearchResults);
     }
 
+<<<<<<< HEAD
     #[
         DataFixture(ProductFixture::class, ['sku' => 'p1', 'name' => 'A']),
         DataFixture(ProductFixture::class, ['sku' => 'p2', 'name' => 'Ç']),
@@ -198,11 +255,23 @@ class ReindexAllTest extends \PHPUnit\Framework\TestCase
      *
      * @magentoDataFixture Magento/ConfigurableProduct/_files/configurable_products.php
      * @magentoDataFixture Magento/Catalog/_files/products.php
+=======
+    /**
+     * Test search of specific product after full reindex
+     *
+     * @magentoConfigFixture current_store catalog/search/elasticsearch_index_prefix indexerhandlertest_configurable
+     * @magentoDataFixture Magento/ConfigurableProduct/_files/configurable_products.php
+     * @magentoDataFixture Magento/Catalog/_files/products.php
+     * @dataProvider searchSpecificProductDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $searchName
      * @param string $sku
      * @param int $expectedCount
      */
+<<<<<<< HEAD
     #[DataProvider('searchSpecificProductDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSearchSpecificProduct(string $searchName, string $sku, int $expectedCount)
     {
         $this->reindexAll();
@@ -213,7 +282,11 @@ class ReindexAllTest extends \PHPUnit\Framework\TestCase
         self::assertEquals($specificProduct->getId(), $result[0]['_id']);
     }
 
+<<<<<<< HEAD
     public static function searchSpecificProductDataProvider(): array
+=======
+    public function searchSpecificProductDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'search by numeric name' => ['12345', 'configurable_12345', 1],
@@ -295,4 +368,22 @@ class ReindexAllTest extends \PHPUnit\Framework\TestCase
         $indexer->load('catalogsearch_fulltext');
         $indexer->reindexAll();
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * Returns installed on server search service
+     *
+     * @return string
+     */
+    private function getInstalledSearchEngine()
+    {
+        if (!$this->searchEngine) {
+            // phpstan:ignore "Class Magento\TestModuleCatalogSearch\Model\ElasticsearchVersionChecker not found."
+            $version = Bootstrap::getObjectManager()->get(ElasticsearchVersionChecker::class)->getVersion();
+            $this->searchEngine = self::ENGINE_SUPPORTED_VERSIONS[$version] ?? 'elasticsearch' . $version;
+        }
+        return $this->searchEngine;
+    }
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

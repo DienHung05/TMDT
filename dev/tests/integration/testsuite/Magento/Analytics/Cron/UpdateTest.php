@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
 
 namespace Magento\Analytics\Cron;
 
+<<<<<<< HEAD
 use Laminas\Http\Response;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Analytics\Model\Config\Backend\Baseurl\SubscriptionUpdateHandler;
 use Magento\Analytics\Model\Connector\Http\Client\Curl as CurlClient;
 use Magento\Analytics\Model\Connector\Http\ClientInterface;
@@ -67,7 +75,12 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         $this->objectManager = Bootstrap::getObjectManager();
+<<<<<<< HEAD
         $this->httpClient = $this->createMock(ClientInterface::class);
+=======
+        $this->httpClient = $this->getMockBuilder(ClientInterface::class)
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->objectManager->addSharedInstance($this->httpClient, CurlClient::class);
         $this->preparedValueFactory = $this->objectManager->get(PreparedValueFactory::class);
         $this->configValueResourceModel = $this->objectManager->get(ConfigDataResource::class);
@@ -209,11 +222,24 @@ class UpdateTest extends \PHPUnit\Framework\TestCase
      */
     private function mockRequestCall(int $responseCode, string $responseMessage): void
     {
+<<<<<<< HEAD
         /** @var Response $response */
         $response = $this->objectManager->create(Response::class);
         $response->setStatusCode($responseCode);
         $response->getHeaders()->addHeaderLine('Content-Type', 'application/json');
         $response->setContent(json_encode(['message' => $responseMessage]));
+=======
+        $response = $this->objectManager->create(
+            \Zend_Http_Response::class,
+            [
+                'code' => $responseCode,
+                'headers' => [
+                    'Content-Type' => 'application/json'
+                ],
+                'body' => json_encode(['message' => $responseMessage])
+            ]
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->httpClient
             ->expects($this->once())

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -16,7 +21,11 @@ use Magento\CatalogSearch\Model\ResourceModel\Fulltext\SearchCollectionFactory;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
+<<<<<<< HEAD
 use Magento\TestModuleCatalogSearch\Model\SearchEngineVersionReader;
+=======
+use Magento\TestModuleCatalogSearch\Model\ElasticsearchVersionChecker;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Search\EngineResolverInterface;
 
 /**
@@ -30,6 +39,14 @@ use Magento\Framework\Search\EngineResolverInterface;
 class RowsTest extends \PHPUnit\Framework\TestCase
 {
     /**
+<<<<<<< HEAD
+=======
+     * @var string
+     */
+    private $searchEngine;
+
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @var ObjectManager
      */
     private $objectManager;
@@ -50,6 +67,17 @@ class RowsTest extends \PHPUnit\Framework\TestCase
     private $fulltextSearchCollectionFactory;
 
     /**
+<<<<<<< HEAD
+=======
+     * Elasticsearch7 engine configuration is also compatible with OpenSearch 1
+     */
+    private const ENGINE_SUPPORTED_VERSIONS = [
+        7 => 'elasticsearch7',
+        1 => 'elasticsearch7',
+    ];
+
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
@@ -66,9 +94,14 @@ class RowsTest extends \PHPUnit\Framework\TestCase
     protected function assertPreConditions(): void
     {
         $currentEngine = $this->objectManager->get(EngineResolverInterface::class)->getCurrentSearchEngine();
+<<<<<<< HEAD
         $installedEngine = $this->objectManager->get(SearchEngineVersionReader::class)->getFullVersion();
         $this->assertEquals(
             $installedEngine,
+=======
+        $this->assertEquals(
+            $this->getInstalledSearchEngine(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $currentEngine,
             sprintf(
                 'Search engine configuration "%s" is not compatible with the installed version',
@@ -78,8 +111,30 @@ class RowsTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @magentoDataFixture Magento/Catalog/_files/category_tree_with_products.php
      * @magentoDataFixture Magento/CatalogSearch/_files/full_reindex.php
+=======
+     * Returns installed on server search service.
+     *
+     * @return string
+     */
+    private function getInstalledSearchEngine(): string
+    {
+        if (!$this->searchEngine) {
+            // phpstan:ignore "Class Magento\TestModuleCatalogSearch\Model\ElasticsearchVersionChecker not found."
+            $version = $this->objectManager->get(ElasticsearchVersionChecker::class)->getVersion();
+            $this->searchEngine = self::ENGINE_SUPPORTED_VERSIONS[$version] ?? 'elasticsearch' . $version;
+        }
+
+        return $this->searchEngine;
+    }
+
+    /**
+     * @magentoDataFixture Magento/Catalog/_files/category_tree_with_products.php
+     * @magentoDataFixture Magento/CatalogSearch/_files/full_reindex.php
+     * @magentoConfigFixture current_store catalog/search/elasticsearch_index_prefix indexerhandlertest
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixtureBeforeTransaction Magento/Catalog/_files/enable_reindex_schedule.php
      * @return void
      */

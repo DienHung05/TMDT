@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Cookie\Model\Config\Backend;
 
 use Magento\Framework\Exception\LocalizedException;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,10 +27,17 @@ class DomainTest extends TestCase
 {
     /**
      * @param string $value
+<<<<<<< HEAD
      * @param string|null $exceptionMessage
      * @magentoDbIsolation enabled
      */
     #[DataProvider('beforeSaveDataProvider')]
+=======
+     * @param string $exceptionMessage
+     * @magentoDbIsolation enabled
+     * @dataProvider beforeSaveDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testBeforeSave($value, $exceptionMessage = null)
     {
         /** @var $domain Domain */
@@ -46,6 +61,7 @@ class DomainTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function beforeSaveDataProvider(): array
     {
         return [
@@ -71,6 +87,21 @@ class DomainTest extends TestCase
                 'hostname,com',  // $value
                 'Invalid domain name: invalid character in cookie domain'  // $exceptionMessage
             ],
+=======
+    public function beforeSaveDataProvider(): array
+    {
+        return [
+            'notString' => [['array'], 'Invalid domain name: must be a string'],
+            'invalidHostname' => [
+                'http://',
+                'Invalid domain name: The input does not match the expected structure for a DNS hostname; '
+                . 'The input does not appear to be a valid URI hostname; '
+                . 'The input does not appear to be a valid local network name',
+            ],
+            'validHostname' => ['hostname.com'],
+            'emptyString' => [''],
+            'invalidCharacter' => ['hostname,com', 'Invalid domain name: invalid character in cookie domain'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
     }
 }

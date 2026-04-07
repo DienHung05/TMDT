@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,7 +16,10 @@ use Magento\Catalog\Model\Layer\Resolver;
 use Magento\Framework\Module\Manager;
 use Magento\LayeredNavigation\Block\Navigation\AbstractFiltersTest;
 use Magento\Catalog\Model\Layer\Filter\AbstractFilter;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Provides tests for custom select filter for bundle products in navigation block on category page.
@@ -43,12 +51,19 @@ class SelectFilterTest extends AbstractFiltersTest
     /**
      * @magentoDataFixture Magento/Catalog/_files/product_dropdown_attribute.php
      * @magentoDataFixture Magento/Bundle/_files/dynamic_and_fixed_bundle_products_in_category.php
+<<<<<<< HEAD
+=======
+     * @dataProvider getFiltersWithCustomAttributeDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $products
      * @param array $attributeData
      * @param array $expectation
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('getFiltersWithCustomAttributeDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetFiltersWithCustomAttribute(array $products, array $attributeData, array $expectation): void
     {
         $this->getCategoryFiltersAndAssert($products, $attributeData, $expectation, 'Category 1');
@@ -57,6 +72,7 @@ class SelectFilterTest extends AbstractFiltersTest
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getFiltersWithCustomAttributeDataProvider(): array
     {
         return [
@@ -71,17 +87,41 @@ class SelectFilterTest extends AbstractFiltersTest
                     'bundle-product-dropdown-options' => 'Option 2',
                 ],
                 'attributeData' => ['is_filterable' => AbstractFilter::ATTRIBUTE_OPTIONS_ONLY_WITH_RESULTS],
+=======
+    public function getFiltersWithCustomAttributeDataProvider(): array
+    {
+        return [
+            'not_used_in_navigation' => [
+                'products_data' => [],
+                'attribute_data' => ['is_filterable' => 0],
+                'expectation' => [],
+            ],
+            'used_in_navigation_with_results' => [
+                'products_data' => [
+                    'bundle-product' => 'Option 1',
+                    'bundle-product-dropdown-options' => 'Option 2',
+                ],
+                'attribute_data' => ['is_filterable' => AbstractFilter::ATTRIBUTE_OPTIONS_ONLY_WITH_RESULTS],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectation' => [
                     ['label' => 'Option 1', 'count' => 1],
                     ['label' => 'Option 2', 'count' => 1],
                 ],
             ],
             'used_in_navigation_without_results' => [
+<<<<<<< HEAD
                 'products' => [
                     'bundle-product' => 'Option 1',
                     'bundle-product-dropdown-options' => 'Option 2',
                 ],
                 'attributeData' => ['is_filterable' => 2],
+=======
+                'products_data' => [
+                    'bundle-product' => 'Option 1',
+                    'bundle-product-dropdown-options' => 'Option 2',
+                ],
+                'attribute_data' => ['is_filterable' => 2],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectation' => [
                     ['label' => 'Option 1', 'count' => 1],
                     ['label' => 'Option 2', 'count' => 1],

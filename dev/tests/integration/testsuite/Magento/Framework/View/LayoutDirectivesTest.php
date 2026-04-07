@@ -2,14 +2,22 @@
 /**
  * Set of tests of layout directives handling behavior
  *
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Framework\View;
 
 use Magento\Framework\App\State;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -277,9 +285,15 @@ class LayoutDirectivesTest extends \PHPUnit\Framework\TestCase
     /**
      * @param string $case
      * @param string $expectedResult
+<<<<<<< HEAD
      * @magentoAppIsolation enabled
      */
     #[DataProvider('sortSpecialCasesDataProvider')]
+=======
+     * @dataProvider sortSpecialCasesDataProvider
+     * @magentoAppIsolation enabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSortSpecialCases($case, $expectedResult)
     {
         $layout = $this->_getLayoutModel($case);
@@ -289,7 +303,11 @@ class LayoutDirectivesTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function sortSpecialCasesDataProvider()
+=======
+    public function sortSpecialCasesDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Before element which is after' => ['sort_before_after.xml', '312'],

@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Framework;
 
 use Laminas\Stdlib\Parameters;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test class for \Magento\Framework\Url
@@ -59,6 +67,11 @@ class UrlTest extends \PHPUnit\Framework\TestCase
      * Note: isolation flushes the URL memory cache
      * @magentoAppIsolation enabled
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider getBaseUrlConfiguredDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoConfigFixture current_store web/secure/base_url http://sample.com/base_path/
      * @magentoConfigFixture current_store web/unsecure/base_link_url http://sample.com/base_link_path/
      * @magentoConfigFixture current_store web/secure/base_link_url https://sample.com/base_link_path/
@@ -67,7 +80,10 @@ class UrlTest extends \PHPUnit\Framework\TestCase
      * @param array $params
      * @param string $expectedUrl
      */
+<<<<<<< HEAD
     #[DataProvider('getBaseUrlConfiguredDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetBaseUrlConfigured($params, $expectedUrl)
     {
         $actualUrl = $this->model->getBaseUrl($params);
@@ -185,7 +201,11 @@ class UrlTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('http://localhost/index.php/', $this->model->getBaseUrl(), 'Incorrect link url');
     }
 
+<<<<<<< HEAD
     public static function getBaseUrlConfiguredDataProvider()
+=======
+    public function getBaseUrlConfiguredDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [['_type' => \Magento\Framework\UrlInterface::URL_TYPE_WEB], 'http://sample.com/base_path/'],
@@ -205,7 +225,11 @@ class UrlTest extends \PHPUnit\Framework\TestCase
         $this->model->setRouteName('catalog');
         $this->assertEquals('catalog', $this->model->getRouteName());
 
+<<<<<<< HEAD
         $this->markTestSkipped('setRouteName() logic is unclear.');
+=======
+        $this->markTestIncomplete('setRouteName() logic is unclear.');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     public function testSetGetControllerName()
@@ -213,7 +237,11 @@ class UrlTest extends \PHPUnit\Framework\TestCase
         $this->model->setControllerName('product');
         $this->assertEquals('product', $this->model->getControllerName());
 
+<<<<<<< HEAD
         $this->markTestSkipped('setControllerName() logic is unclear.');
+=======
+        $this->markTestIncomplete('setControllerName() logic is unclear.');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     public function testSetGetActionName()
@@ -221,7 +249,11 @@ class UrlTest extends \PHPUnit\Framework\TestCase
         $this->model->setActionName('view');
         $this->assertEquals('view', $this->model->getActionName());
 
+<<<<<<< HEAD
         $this->markTestSkipped('setActionName() logic is unclear.');
+=======
+        $this->markTestIncomplete('setActionName() logic is unclear.');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -289,6 +321,11 @@ class UrlTest extends \PHPUnit\Framework\TestCase
      * Note: isolation flushes the URL memory cache
      * @magentoAppIsolation enabled
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider consequentCallsDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $firstCallUrl
      * @param string $secondCallUrl
      * @param array $firstRouteParams
@@ -297,7 +334,10 @@ class UrlTest extends \PHPUnit\Framework\TestCase
      * @param string $secondExpectedUrl
      * @covers \Magento\Framework\Url::getUrl
      */
+<<<<<<< HEAD
     #[DataProvider('consequentCallsDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetUrlOnConsequentCalls(
         $firstCallUrl,
         $secondCallUrl,
@@ -319,7 +359,11 @@ class UrlTest extends \PHPUnit\Framework\TestCase
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      * @return array
      */
+<<<<<<< HEAD
     public static function consequentCallsDataProvider()
+=======
+    public function consequentCallsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

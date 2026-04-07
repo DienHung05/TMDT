@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Backend\Model\Locale;
 
 use Magento\Framework\Locale\Resolver;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea adminhtml
@@ -83,8 +91,13 @@ class ResolverTest extends \PHPUnit\Framework\TestCase
      * @param string|null $localeParam
      * @param string|null $localeRequestParam
      * @param string $localeExpected
+<<<<<<< HEAD
      */
     #[DataProvider('setLocaleWithParameterDataProvider')]
+=======
+     * @dataProvider setLocaleWithParameterDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSetLocaleWithParameter(
         ?string $localeParam,
         ?string $localeRequestParam,
@@ -100,7 +113,11 @@ class ResolverTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function setLocaleWithParameterDataProvider(): array
+=======
+    public function setLocaleWithParameterDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['ko_KR', 'ja_JP', 'ja_JP'],

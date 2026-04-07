@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -15,7 +20,10 @@ use Magento\Framework\Filesystem;
 use Magento\ImportExport\Model\Import;
 use Magento\ImportExport\Model\Import\Source\Csv;
 use Magento\TestFramework\Helper\Bootstrap as BootstrapHelper;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Integration test for \Magento\CatalogImportExport\Model\Import\Product class.
@@ -32,13 +40,20 @@ class ProductImportImagesTest extends ProductTestBase
      * @magentoDataFixture mediaImportImageFixture
      * @magentoDataFixture Magento/Store/_files/core_fixturestore.php
      * @magentoDataFixture Magento/Catalog/_files/product_with_image.php
+<<<<<<< HEAD
+=======
+     * @dataProvider importImagesDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $importFile
      * @param string $productSku
      * @param string $storeCode
      * @param array $expectedImages
      * @param array $select
      */
+<<<<<<< HEAD
     #[DataProvider('importImagesDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testImportImages(
         string $importFile,
         string $productSku,
@@ -60,7 +75,11 @@ class ProductImportImagesTest extends ProductTestBase
     /**
      * @return array[]
      */
+<<<<<<< HEAD
     public static function importImagesDataProvider(): array
+=======
+    public function importImagesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

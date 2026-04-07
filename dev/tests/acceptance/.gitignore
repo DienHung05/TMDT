@@ -8,5 +8,8 @@ tests/functional/Magento/_generated
 vendor/*
 mftf.log
 /.credentials.example
+<<<<<<< HEAD
 /.credentials
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /utils/

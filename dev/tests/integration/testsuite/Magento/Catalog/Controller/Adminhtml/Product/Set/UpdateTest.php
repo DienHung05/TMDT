@@ -1,9 +1,15 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
  */
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 declare(strict_types=1);
 
 namespace Magento\Catalog\Controller\Adminhtml\Product\Set;
@@ -168,6 +174,7 @@ class UpdateTest extends AbstractBackendController
     }
 
     /**
+<<<<<<< HEAD
      * Test - should be able to remove group if system attributes were moved to another group.
      *
      * @magentoDataFixture Magento/Catalog/_files/attribute_set_based_on_default.php
@@ -263,6 +270,8 @@ class UpdateTest extends AbstractBackendController
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Process attribute set save request.
      *
      * @param int $attributeSetId
@@ -283,6 +292,7 @@ class UpdateTest extends AbstractBackendController
      * Prepare default data to request from attribute set.
      *
      * @param AttributeSetInterface $attributeSet
+<<<<<<< HEAD
      * @param array $unassignAttributes
      * @param array $regroupAttributes
      * @param array $removeGroups
@@ -310,6 +320,21 @@ class UpdateTest extends AbstractBackendController
                 continue;
             }
             $result['groups'][] = [
+=======
+     * @return array
+     */
+    private function prepareDataToRequest(AttributeSetInterface $attributeSet): array
+    {
+        $result = [
+            'attribute_set_name' => $attributeSet->getAttributeSetName(),
+            'removeGroups' => [],
+            'not_attributes' => [],
+        ];
+        $groups = $attributes = [];
+        /** @var AttributeGroupInterface $group */
+        foreach ($this->getAttributeSetGroupCollection((int)$attributeSet->getAttributeSetId()) as $group) {
+            $groups[] = [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $group->getAttributeGroupId(),
                 $group->getAttributeGroupName(),
                 $group->getSortOrder(),
@@ -320,6 +345,7 @@ class UpdateTest extends AbstractBackendController
             $attributeSet->getAttributeSetId()
         );
         foreach ($attributeSetAttributes as $attribute) {
+<<<<<<< HEAD
             $groupId = $attribute->getAttributeGroupId();
             if (isset($regroupAttributes[$attribute->getAttributeCode()])) {
                 $groupId = $groupIdsByNames[$regroupAttributes[$attribute->getAttributeCode()]];
@@ -335,6 +361,16 @@ class UpdateTest extends AbstractBackendController
                 $attribute->getSortOrder(),
             ];
         }
+=======
+            $attributes[] = [
+                $attribute->getAttributeId(),
+                $attribute->getAttributeGroupId(),
+                $attribute->getSortOrder(),
+            ];
+        }
+        $result['groups'] = $groups;
+        $result['attributes'] = $attributes;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         return $result;
     }
@@ -352,6 +388,7 @@ class UpdateTest extends AbstractBackendController
 
         return $groupCollection;
     }
+<<<<<<< HEAD
 
     /**
      * @param int $attributeSetId
@@ -369,4 +406,6 @@ class UpdateTest extends AbstractBackendController
             )
         ));
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

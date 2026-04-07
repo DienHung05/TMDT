@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,11 +16,18 @@ use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\Product;
 use Magento\Catalog\Pricing\Price\FinalPrice;
+<<<<<<< HEAD
 use Magento\ConfigurableProduct\Pricing\Render\FinalPriceBox;
 use Magento\Framework\Pricing\Render\Amount;
 use Magento\Framework\Pricing\Render\RendererPool;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\Catalog\Pricing\Render\FinalPriceBox;
+use Magento\Framework\Pricing\Render\Amount;
+use Magento\Framework\Pricing\Render\RendererPool;
+use Magento\TestFramework\Helper\Bootstrap;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoDbIsolation disabled
@@ -50,9 +62,12 @@ class RenderingBasedOnIsProductListFlagWithDimensionTest extends \PHPUnit\Framew
      */
     protected function setUp(): void
     {
+<<<<<<< HEAD
         /** @var  \Magento\Framework\App\Cache\StateInterface $cacheState */
         $cacheState = Bootstrap::getObjectManager()->get(\Magento\Framework\App\Cache\StateInterface::class);
         $cacheState->setEnabled(\Magento\Framework\App\Cache\Type\Collection::TYPE_IDENTIFIER, true);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $productRepository = Bootstrap::getObjectManager()->get(ProductRepositoryInterface::class);
         $this->product = $productRepository->get('configurable');
         $this->finalPrice = Bootstrap::getObjectManager()->create(FinalPrice::class, [
@@ -113,16 +128,28 @@ class RenderingBasedOnIsProductListFlagWithDimensionTest extends \PHPUnit\Framew
      * Test when is_product_list flag is specified
      *
      * Special price should be valid
+<<<<<<< HEAD
      * Regular price for Configurable product should be rendered for is_product_list = false (product page), and
      * not for is_product_list = true (list of products)
+=======
+     * FinalPriceBox::hasSpecialPrice should not be call
+     * Regular price for Configurable product should be rendered for is_product_list = false (product page), but not be
+     * for for is_product_list = true (list of products)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @param bool $flag
      * @param int|bool $count
      * @magentoDataFixture Magento/ConfigurableProduct/_files/product_configurable.php
      * @magentoAppArea frontend
+<<<<<<< HEAD
      * @magentoDbIsolation disabled
      */
     #[DataProvider('isProductListDataProvider')]
+=======
+     * @dataProvider isProductListDataProvider
+     * @magentoDbIsolation disabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRenderingAccordingToIsProductListFlag($flag, $count)
     {
         $this->finalPriceBox->setData('is_product_list', $flag);
@@ -147,10 +174,17 @@ class RenderingBasedOnIsProductListFlagWithDimensionTest extends \PHPUnit\Framew
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function isProductListDataProvider()
     {
         return [
             //'is_not_product_list' => [false, 1],
+=======
+    public function isProductListDataProvider()
+    {
+        return [
+            'is_not_product_list' => [false, 1],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'is_product_list' => [true, 0],
         ];
     }

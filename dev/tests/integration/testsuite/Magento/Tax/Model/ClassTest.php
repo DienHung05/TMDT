@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Tax\Model;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Tax\Model;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class ClassTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -80,8 +88,13 @@ class ClassTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
      */
     #[DataProvider('classesDataProvider')]
+=======
+     * @dataProvider classesDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCheckClassCanBeDeletedPositiveResult($classType)
     {
         /** @var $model \Magento\Tax\Model\ClassModel */
@@ -92,7 +105,11 @@ class ClassTest extends \PHPUnit\Framework\TestCase
         $model->delete();
     }
 
+<<<<<<< HEAD
     public static function classesDataProvider()
+=======
+    public function classesDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [\Magento\Tax\Model\ClassModel::TAX_CLASS_TYPE_CUSTOMER],

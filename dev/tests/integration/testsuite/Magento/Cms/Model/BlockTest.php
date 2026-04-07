@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Cms\Model;
 
@@ -13,7 +18,10 @@ use Magento\Framework\Stdlib\DateTime\DateTime;
 use Magento\Framework\Stdlib\DateTime\Timezone;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea adminhtml
@@ -59,8 +67,13 @@ class BlockTest extends TestCase
      * @throws \Exception
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
      */
     #[DataProvider('blockGetByIdentifierDataProvider')]
+=======
+     * @dataProvider testGetByIdentifierDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetByIdentifier(array $blockData)
     {
         # Prepare and save the temporary block
@@ -80,8 +93,13 @@ class BlockTest extends TestCase
      * @throws \Exception
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
      */
     #[DataProvider('blockGetByIdentifierDataProvider')]
+=======
+     * @dataProvider testGetByIdentifierDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateTime(array $blockData)
     {
         /**
@@ -113,11 +131,19 @@ class BlockTest extends TestCase
      * Data provider for "testGetByIdentifier" and "testUpdateTime" method
      * @return array
      */
+<<<<<<< HEAD
     public static function blockGetByIdentifierDataProvider(): array
     {
         return [
             [
                 'blockData' => [
+=======
+    public function testGetByIdentifierDataProvider(): array
+    {
+        return [
+            [
+                'data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'title'      => 'Test title',
                     'stores'     => [0],
                     'identifier' => 'test-identifier',

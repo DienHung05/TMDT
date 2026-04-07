@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\TestFramework\Utility;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\TestFramework\Utility;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class CodeCheckTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -21,8 +29,14 @@ class CodeCheckTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @param string $fileContent
+<<<<<<< HEAD
      * @param bool $isClassUsed     */
     #[DataProvider('isClassUsedDataProvider')]
+=======
+     * @param bool $isClassUsed
+     * @dataProvider isClassUsedDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testIsClassUsed($fileContent, $isClassUsed)
     {
         $this->assertEquals(
@@ -34,7 +48,11 @@ class CodeCheckTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function isClassUsedDataProvider()
+=======
+    public function isClassUsedDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [file_get_contents(__DIR__ . '/_files/create_new_instance.txt'), true],
@@ -51,8 +69,13 @@ class CodeCheckTest extends \PHPUnit\Framework\TestCase
     /**
      * @param string $fileContent
      * @param bool $isDirectDescendant
+<<<<<<< HEAD
      */
     #[DataProvider('isDirectDescendantDataProvider')]
+=======
+     * @dataProvider isDirectDescendantDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testIsDirectDescendant($fileContent, $isDirectDescendant)
     {
         $this->assertEquals(
@@ -64,7 +87,11 @@ class CodeCheckTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function isDirectDescendantDataProvider()
+=======
+    public function isDirectDescendantDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [file_get_contents(__DIR__ . '/_files/extends.txt'), true],

@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Customer\Model\ResourceModel\CustomerRepository;
 
 use Magento\Customer\Model\Address\UpdateAddressTest as UpdateAddressViaAddressRepositoryTest;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test cases related to update customer address using customer repository.
@@ -23,13 +31,21 @@ class UpdateAddressTest extends UpdateAddressViaAddressRepositoryTest
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @magentoDataFixture Magento/Customer/_files/customer_address.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider updateAddressIsDefaultDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param bool $isShippingDefault
      * @param bool $isBillingDefault
      * @param int|null $expectedShipping
      * @param int|null $expectedBilling
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('updateAddressIsDefaultDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateAddressIsDefault(
         bool $isShippingDefault,
         bool $isBillingDefault,
@@ -57,11 +73,19 @@ class UpdateAddressTest extends UpdateAddressViaAddressRepositoryTest
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @magentoDataFixture Magento/Customer/_files/customer_address.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider updateAddressesDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $updateData
      * @param array $expectedData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('updateAddressesDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateAddress(array $updateData, array $expectedData): void
     {
         $this->processedAddressesIds[] = 1;
@@ -85,11 +109,19 @@ class UpdateAddressTest extends UpdateAddressViaAddressRepositoryTest
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @magentoDataFixture Magento/Customer/_files/customer_address.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider updateWrongAddressesDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $updateData
      * @param \Exception $expectException
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('updateWrongAddressesDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExceptionThrownDuringUpdateAddress(array $updateData, \Exception $expectException): void
     {
         $this->processedAddressesIds[] = 1;

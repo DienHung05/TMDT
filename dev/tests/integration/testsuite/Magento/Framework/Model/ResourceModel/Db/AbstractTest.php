@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Framework\Model\ResourceModel\Db;
@@ -22,15 +27,26 @@ class AbstractTest extends \PHPUnit\Framework\TestCase
             \Magento\Framework\Model\ResourceModel\Db\Context::class,
             ['resource' => $resource]
         );
+<<<<<<< HEAD
         $this->_model = $this->getMockBuilder(\Magento\Framework\Model\ResourceModel\Db\AbstractDb::class)
             ->setConstructorArgs(['context' => $context])
             ->onlyMethods(['_construct'])
             ->getMock();
+=======
+        $this->_model = $this->getMockForAbstractClass(
+            \Magento\Framework\Model\ResourceModel\Db\AbstractDb::class,
+            ['context' => $context]
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     public function testConstruct()
     {
         $resourceProperty = new \ReflectionProperty(get_class($this->_model), '_resources');
+<<<<<<< HEAD
+=======
+        $resourceProperty->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertInstanceOf(
             \Magento\Framework\App\ResourceConnection::class,
             $resourceProperty->getValue($this->_model)
@@ -40,6 +56,11 @@ class AbstractTest extends \PHPUnit\Framework\TestCase
     public function testSetMainTable()
     {
         $setMainTableMethod = new \ReflectionMethod($this->_model, '_setMainTable');
+<<<<<<< HEAD
+=======
+        $setMainTableMethod->setAccessible(true);
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $tableName = $this->_model->getTable('store_website');
         $idFieldName = 'website_id';
 
@@ -64,10 +85,17 @@ class AbstractTest extends \PHPUnit\Framework\TestCase
             ['resource' => $resource]
         );
 
+<<<<<<< HEAD
         $model = $this->getMockBuilder(\Magento\Framework\Model\ResourceModel\Db\AbstractDb::class)
             ->setConstructorArgs(['context' => $context])
             ->onlyMethods(['_construct'])
             ->getMock();
+=======
+        $model = $this->getMockForAbstractClass(
+            \Magento\Framework\Model\ResourceModel\Db\AbstractDb::class,
+            ['context' => $context]
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $tableName = $model->getTable([$tableNameOrig, $tableSuffix]);
         $this->assertEquals('prefix_store_website_suffix', $tableName);

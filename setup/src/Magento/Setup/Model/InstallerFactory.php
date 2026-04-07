@@ -1,14 +1,23 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Setup\Model;
 
 use Laminas\ServiceManager\ServiceLocatorInterface;
 use Magento\Framework\App\ErrorHandler;
+<<<<<<< HEAD
 use Magento\Framework\Setup\ConsoleLoggerInterface;
+=======
+use Magento\Framework\Setup\LoggerInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Setup\Module\ResourceFactory;
 
 /**
@@ -48,11 +57,19 @@ class InstallerFactory
     /**
      * Factory method for installer object
      *
+<<<<<<< HEAD
      * @param ConsoleLoggerInterface $log
      * @return Installer
      * @throws \Magento\Setup\Exception
      */
     public function create(ConsoleLoggerInterface $log)
+=======
+     * @param LoggerInterface $log
+     * @return Installer
+     * @throws \Magento\Setup\Exception
+     */
+    public function create(LoggerInterface $log)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return new Installer(
             $this->serviceLocator->get(\Magento\Framework\Setup\FilePermissions::class),

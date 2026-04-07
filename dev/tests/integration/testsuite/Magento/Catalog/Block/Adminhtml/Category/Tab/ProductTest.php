@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -9,6 +14,7 @@ namespace Magento\Catalog\Block\Adminhtml\Category\Tab;
 
 use Magento\Catalog\Api\CategoryRepositoryInterface;
 use Magento\Catalog\Api\Data\CategoryInterface;
+<<<<<<< HEAD
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Model\ResourceModel\Collection\AbstractCollection;
 use Magento\Catalog\Test\Fixture\AssignProducts as AssignProductsFixture;
@@ -23,6 +29,15 @@ use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+=======
+use Magento\Catalog\Model\ResourceModel\Collection\AbstractCollection;
+use Magento\Framework\Registry;
+use Magento\Framework\View\LayoutInterface;
+use Magento\TestFramework\Helper\Bootstrap;
+use PHPUnit\Framework\TestCase;
+use Magento\Framework\ObjectManagerInterface;
+use Magento\Catalog\Api\Data\ProductInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Checks grid data on the tab 'Products in Category' category view page.
@@ -31,7 +46,10 @@ use PHPUnit\Framework\TestCase;
  * @magentoAppArea adminhtml
  * @magentoDbIsolation enabled
  * @magentoAppIsolation enabled
+<<<<<<< HEAD
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class ProductTest extends TestCase
 {
@@ -74,13 +92,20 @@ class ProductTest extends TestCase
      * @magentoDataFixture Magento/Catalog/_files/category_with_two_products.php
      * @magentoDataFixture Magento/Catalog/_files/product_associated.php
      * @magentoDataFixture Magento/Catalog/_files/simple_product_disabled.php
+<<<<<<< HEAD
+=======
+     * @dataProvider optionsFilterProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $filterColumn
      * @param int $categoryId
      * @param int $storeId
      * @param array $items
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('optionsFilterProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testFilterProductInCategory(string $filterColumn, int $categoryId, int $storeId, array $items): void
     {
         $collection = $this->filterProductInGrid($filterColumn, $categoryId, $storeId);
@@ -104,6 +129,7 @@ class ProductTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function optionsFilterProvider(): array
     {
         return [
@@ -111,24 +137,45 @@ class ProductTest extends TestCase
                 'filterColumn' => 'in_category=1',
                 'categoryId' => 333,
                 'storeId' => 1,
+=======
+    public function optionsFilterProvider(): array
+    {
+        return [
+            'filter_yes' => [
+                'filter_column' => 'in_category=1',
+                'id_category' => 333,
+                'store_id' => 1,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'items' => [
                     'simple333',
                     'simple2',
                 ],
             ],
             'filter_no' => [
+<<<<<<< HEAD
                 'filterColumn' => 'in_category=0',
                 'categoryId' => 333,
                 'storeId' => 1,
+=======
+                'filter_column' => 'in_category=0',
+                'id_category' => 333,
+                'store_id' => 1,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'items' => [
                     'product_disabled',
                     'simple',
                 ],
             ],
             'filter_any' => [
+<<<<<<< HEAD
                 'filterColumn' => "",
                 'categoryId' => 333,
                 'storeId' => 1,
+=======
+                'filter_column' => "",
+                'id_category' => 333,
+                'store_id' => 1,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'items' => [
                     'product_disabled',
                     'simple333',
@@ -137,9 +184,15 @@ class ProductTest extends TestCase
                 ],
             ],
             'flag_status' => [
+<<<<<<< HEAD
                 'filterColumn' => 'status=1',
                 'categoryId' => 333,
                 'storeId' => 1,
+=======
+                'filter_column' => 'status=1',
+                'id_category' => 333,
+                'store_id' => 1,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'items' => [
                     'simple333',
                     'simple2',
@@ -150,6 +203,7 @@ class ProductTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param string $sortField
      * @param string $sortDirection
      * @param string $store
@@ -246,6 +300,8 @@ class ProductTest extends TestCase
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Filter product in grid
      *
      * @param string $filterOption
@@ -278,6 +334,7 @@ class ProductTest extends TestCase
         $this->registry->unregister('category');
         $this->registry->register('category', $category);
     }
+<<<<<<< HEAD
 
     /**
      * Sort products in grid
@@ -307,4 +364,6 @@ class ProductTest extends TestCase
 
         return $block->getCollection();
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

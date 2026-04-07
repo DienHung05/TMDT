@@ -1,8 +1,15 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
  */
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 namespace Magento\TestFramework\Annotation;
 
 use Magento\TestFramework\Fixture\ParserInterface;
@@ -35,8 +42,14 @@ class Cache
         } catch (\Throwable $exception) {
             ExceptionHandler::handle(
                 'Unable to parse fixtures',
+<<<<<<< HEAD
                 $exception,
                 $test
+=======
+                get_class($test),
+                $test->getName(false),
+                $exception
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             );
         }
 
@@ -91,7 +104,12 @@ class Cache
             if (!isset($this->origValues[$type])) {
                 ExceptionHandler::handle(
                     "Unknown cache type specified: '{$type}' in @magentoCache",
+<<<<<<< HEAD
                     test: $test
+=======
+                    get_class($test),
+                    $test->getName(false)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 );
             }
             $states->setEnabled($type, $isEnabled);

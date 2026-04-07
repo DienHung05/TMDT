@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Test\Integrity\Modular;
 
@@ -121,12 +126,19 @@ class TemplateFilesTest extends \Magento\TestFramework\TestCase\AbstractIntegrit
             }
             return $templates;
         } catch (\Exception $e) {
+<<<<<<< HEAD
             // PHP 8.4+ Compatibility: throw exception instead of trigger_error with E_USER_ERROR
             throw new \RuntimeException(
                 "Corrupted data provider. Last known block instantiation attempt: '{$blockClass}'." .
                 " Exception: {$e}",
                 0,
                 $e
+=======
+            trigger_error(
+                "Corrupted data provider. Last known block instantiation attempt: '{$blockClass}'." .
+                " Exception: {$e}",
+                E_USER_ERROR
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             );
         }
     }

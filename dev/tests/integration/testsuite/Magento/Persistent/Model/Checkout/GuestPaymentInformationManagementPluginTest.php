@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2024 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Persistent\Model\Checkout;
@@ -132,7 +137,11 @@ class GuestPaymentInformationManagementPluginTest extends \PHPUnit\Framework\Tes
      */
     public function testBeforeSavePaymentInformationAndPlaceOrder()
     {
+<<<<<<< HEAD
         $guestEmail = 'customer@example.com';
+=======
+        $guestEmail = 'guest@example.com';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         //Retrieve customer from repository
         /** @var \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository */

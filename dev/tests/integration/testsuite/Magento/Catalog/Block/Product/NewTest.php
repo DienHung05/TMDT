@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Catalog\Block\Product;
 
@@ -136,11 +141,14 @@ class NewTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals('CATALOG_PRODUCT_NEW', $info[0]);
         $this->assertEquals(json_encode($requestParams), $info[8]);
+<<<<<<< HEAD
 
         $currentStore = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->get(
             \Magento\Store\Model\StoreManagerInterface::class
         )->getStore();
 
         $this->assertSame($currentStore->getDefaultCurrency()->getCode(), $info[9]);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

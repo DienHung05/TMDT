@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Cms\Controller;
@@ -18,7 +23,11 @@ class RouterTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp(): void
     {
+<<<<<<< HEAD
         $this->markTestSkipped('MAGETWO-3393');
+=======
+        $this->markTestIncomplete('MAGETWO-3393');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->_model = new \Magento\Cms\Controller\Router(
             \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->get(
                 \Magento\Framework\App\ActionFactory::class
@@ -45,7 +54,11 @@ class RouterTest extends \PHPUnit\Framework\TestCase
      */
     public function testMatch()
     {
+<<<<<<< HEAD
         $this->markTestSkipped('MAGETWO-3393');
+=======
+        $this->markTestIncomplete('MAGETWO-3393');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $request = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()
             ->create(\Magento\Framework\App\RequestInterface::class);
         //Open Node

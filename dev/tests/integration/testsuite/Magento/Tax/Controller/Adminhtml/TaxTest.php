@@ -1,12 +1,20 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Tax\Controller\Adminhtml;
 
 use Magento\Framework\Exception\NoSuchEntityException;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea adminhtml
@@ -14,12 +22,19 @@ use PHPUnit\Framework\Attributes\DataProvider;
 class TaxTest extends \Magento\TestFramework\TestCase\AbstractBackendController
 {
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider ajaxActionDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDbIsolation enabled
      *
      * @param array $postData
      * @param array $expectedData
      */
+<<<<<<< HEAD
     #[DataProvider('ajaxActionDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAjaxSaveAction($postData, $expectedData)
     {
         $this->getRequest()->setPostValue($postData);
@@ -44,6 +59,7 @@ class TaxTest extends \Magento\TestFramework\TestCase\AbstractBackendController
     }
 
     /**
+<<<<<<< HEAD
      * @magentoDbIsolation enabled
      *
      * @param array $taxClassData
@@ -52,6 +68,14 @@ class TaxTest extends \Magento\TestFramework\TestCase\AbstractBackendController
      */
     #[DataProvider('ajaxActionDataProvider')]
     public function testAjaxDeleteAction($taxClassData, $expectedData)
+=======
+     * @dataProvider ajaxActionDataProvider
+     * @magentoDbIsolation enabled
+     *
+     * @param array $taxClassData
+     */
+    public function testAjaxDeleteAction($taxClassData)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         /** @var \Magento\Tax\Api\TaxClassRepositoryInterface $taxClassService */
         $taxClassService = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->get(
@@ -90,7 +114,11 @@ class TaxTest extends \Magento\TestFramework\TestCase\AbstractBackendController
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function ajaxActionDataProvider()
+=======
+    public function ajaxActionDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

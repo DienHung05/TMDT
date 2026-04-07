@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -12,6 +17,7 @@ use Magento\Catalog\Api\Data\ProductCustomOptionValuesInterfaceFactory;
 use Magento\Catalog\Api\ProductCustomOptionRepositoryInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\ObjectManagerInterface;
+<<<<<<< HEAD
 use Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\Area;
 use Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\Checkbox;
 use Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\Date;
@@ -23,6 +29,9 @@ use Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\RadioBu
 use Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\Time;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\Attributes\DataProviderExternal;
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -31,7 +40,10 @@ use PHPUnit\Framework\TestCase;
  * "Checkbox", "Multiple Select", "Date", "Date & Time" and "Time".
  *
  * @magentoDbIsolation enabled
+<<<<<<< HEAD
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class DeleteCustomOptionsTest extends TestCase
 {
@@ -80,10 +92,18 @@ class DeleteCustomOptionsTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_without_options.php
      *
+<<<<<<< HEAD
      * @param array $optionData
      * @return void
      */
     #[DataProviderExternal(Area::class, 'getDataForCreateOptions')]
+=======
+     * @dataProvider \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\Area::getDataForCreateOptions()
+     *
+     * @param array $optionData
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDeleteAreaCustomOption(array $optionData): void
     {
         $this->deleteAndAssertNotSelectCustomOptions($optionData);
@@ -94,10 +114,18 @@ class DeleteCustomOptionsTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_without_options.php
      *
+<<<<<<< HEAD
      * @param array $optionData
      * @return void
      */
     #[DataProviderExternal(File::class, 'getDataForCreateOptions')]
+=======
+     * @dataProvider \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\File::getDataForCreateOptions()
+     *
+     * @param array $optionData
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDeleteFileCustomOption(array $optionData): void
     {
         $this->deleteAndAssertNotSelectCustomOptions($optionData);
@@ -108,10 +136,18 @@ class DeleteCustomOptionsTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_without_options.php
      *
+<<<<<<< HEAD
      * @param array $optionData
      * @return void
      */
     #[DataProviderExternal(Date::class, 'getDataForCreateOptions')]
+=======
+     * @dataProvider \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\Date::getDataForCreateOptions()
+     *
+     * @param array $optionData
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDeleteDateCustomOption(array $optionData): void
     {
         $this->deleteAndAssertNotSelectCustomOptions($optionData);
@@ -122,10 +158,18 @@ class DeleteCustomOptionsTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_without_options.php
      *
+<<<<<<< HEAD
      * @param array $optionData
      * @return void
      */
     #[DataProviderExternal(DateTime::class, 'getDataForCreateOptions')]
+=======
+     * @dataProvider \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\DateTime::getDataForCreateOptions()
+     *
+     * @param array $optionData
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDeleteDateTimeCustomOption(array $optionData): void
     {
         $this->deleteAndAssertNotSelectCustomOptions($optionData);
@@ -136,10 +180,18 @@ class DeleteCustomOptionsTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_without_options.php
      *
+<<<<<<< HEAD
      * @param array $optionData
      * @return void
      */
     #[DataProviderExternal(Time::class, 'getDataForCreateOptions')]
+=======
+     * @dataProvider \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\Time::getDataForCreateOptions()
+     *
+     * @param array $optionData
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDeleteTimeCustomOption(array $optionData): void
     {
         $this->deleteAndAssertNotSelectCustomOptions($optionData);
@@ -150,11 +202,19 @@ class DeleteCustomOptionsTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_without_options.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\DropDown::getDataForCreateOptions()
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $optionData
      * @param array $optionValueData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProviderExternal(DropDown::class, 'getDataForCreateOptions')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDeleteDropDownCustomOption(array $optionData, array $optionValueData): void
     {
         $this->deleteAndAssertSelectCustomOptions($optionData, $optionValueData);
@@ -165,11 +225,19 @@ class DeleteCustomOptionsTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_without_options.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\RadioButtons::getDataForCreateOptions()
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $optionData
      * @param array $optionValueData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProviderExternal(RadioButtons::class, 'getDataForCreateOptions')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDeleteRadioButtonsCustomOption(array $optionData, array $optionValueData): void
     {
         $this->deleteAndAssertSelectCustomOptions($optionData, $optionValueData);
@@ -180,11 +248,19 @@ class DeleteCustomOptionsTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_without_options.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\Checkbox::getDataForCreateOptions()
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $optionData
      * @param array $optionValueData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProviderExternal(Checkbox::class, 'getDataForCreateOptions')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDeleteCheckboxCustomOption(array $optionData, array $optionValueData): void
     {
         $this->deleteAndAssertSelectCustomOptions($optionData, $optionValueData);
@@ -195,11 +271,19 @@ class DeleteCustomOptionsTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_without_options.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\MultipleSelect::getDataForCreateOptions()
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $optionData
      * @param array $optionValueData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProviderExternal(MultipleSelect::class, 'getDataForCreateOptions')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDeleteMultipleSelectCustomOption(array $optionData, array $optionValueData): void
     {
         $this->deleteAndAssertSelectCustomOptions($optionData, $optionValueData);

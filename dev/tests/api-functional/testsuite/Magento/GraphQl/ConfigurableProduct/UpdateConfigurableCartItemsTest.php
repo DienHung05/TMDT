@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -17,7 +22,10 @@ use Magento\Quote\Model\QuoteIdMaskFactory;
 use Magento\Quote\Model\ResourceModel\Quote as QuoteResource;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * checks that qty of configurable product is updated in cart
@@ -47,9 +55,15 @@ class UpdateConfigurableCartItemsTest extends GraphQlAbstract
     /**
      * @param string $itemArgName
      * @param string $reservedOrderId
+<<<<<<< HEAD
      * @magentoApiDataFixture Magento/ConfigurableProduct/_files/quote_with_configurable_product.php
      */
     #[DataProvider('updateConfigurableCartItemQuantityDataProvider')]
+=======
+     * @dataProvider updateConfigurableCartItemQuantityDataProvider
+     * @magentoApiDataFixture Magento/ConfigurableProduct/_files/quote_with_configurable_product.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateConfigurableCartItemQuantity(string $itemArgName, string $reservedOrderId)
     {
         $maskedQuoteId = $this->getMaskedQuoteIdByReservedOrderId->execute($reservedOrderId);
@@ -73,7 +87,11 @@ class UpdateConfigurableCartItemsTest extends GraphQlAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function updateConfigurableCartItemQuantityDataProvider(): array
+=======
+    public function updateConfigurableCartItemQuantityDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['cart_item_id', 'test_cart_with_configurable'],

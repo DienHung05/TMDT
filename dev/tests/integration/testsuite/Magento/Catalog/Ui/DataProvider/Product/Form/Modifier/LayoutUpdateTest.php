@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -64,7 +69,11 @@ class LayoutUpdateTest extends TestCase
                     \Magento\TestFramework\Catalog\Model\ProductLayoutUpdateManager::class
             ]
         ]);
+<<<<<<< HEAD
         $this->locator = $this->createMock(LocatorInterface::class);
+=======
+        $this->locator = $this->getMockForAbstractClass(LocatorInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $store = Bootstrap::getObjectManager()->create(StoreInterface::class);
         $this->locator->method('getStore')->willReturn($store);
         $this->modifier = Bootstrap::getObjectManager()->create(LayoutUpdate::class, ['locator' => $this->locator]);

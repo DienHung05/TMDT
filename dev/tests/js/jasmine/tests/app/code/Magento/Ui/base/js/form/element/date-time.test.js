@@ -1,6 +1,11 @@
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /*eslint max-nested-callbacks: 0*/
@@ -62,7 +67,11 @@ define([
 
         it('Check onShiftedValueChange function', function () {
             spyOn(moment, 'tz').and.callThrough();
+<<<<<<< HEAD
             model.onShiftedValueChange('12/23/2016 9:11 PM');
+=======
+            model.onShiftedValueChange('2016-12-23 9:11 PM');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             expect(moment.tz).toHaveBeenCalled();
         });
 

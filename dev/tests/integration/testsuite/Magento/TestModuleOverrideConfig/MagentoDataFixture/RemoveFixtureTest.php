@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -9,7 +14,10 @@ namespace Magento\TestModuleOverrideConfig\MagentoDataFixture;
 
 use Magento\TestModuleOverrideConfig\AbstractOverridesTest;
 use Magento\TestModuleOverrideConfig\Model\FixtureCallStorage;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Checks that magentoDataFixture can be removed using override config
@@ -28,7 +36,10 @@ class RemoveFixtureTest extends AbstractOverridesTest
     {
         parent::setUp();
 
+<<<<<<< HEAD
         // phpstan:ignore "Class Magento\TestModuleOverrideConfig\Model\FixtureCallStorage not found."
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->fixtureCallStorage = $this->objectManager->get(FixtureCallStorage::class);
     }
 
@@ -50,10 +61,18 @@ class RemoveFixtureTest extends AbstractOverridesTest
      * @magentoDataFixture Magento/TestModuleOverrideConfig/_files/fixture2_first_module.php
      * @magentoDataFixture Magento/TestModuleOverrideConfig/_files/fixture3_first_module.php
      *
+<<<<<<< HEAD
      * @param string $fixtureName
      * @return void
      */
     #[DataProvider('datasetDataProvider')]
+=======
+     * @dataProvider testDataProvider
+     *
+     * @param string $fixtureName
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRemoveFixtureForMethod(string $fixtureName): void
     {
         $this->assertEmpty($this->fixtureCallStorage->getFixturesCount($fixtureName));
@@ -62,7 +81,11 @@ class RemoveFixtureTest extends AbstractOverridesTest
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function datasetDataProvider(): array
+=======
+    public function testDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'first_data_set' => ['fixture2_first_module.php'],

@@ -1,20 +1,35 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Setup\Model;
 
 use Magento\Backend\Setup\ConfigOptionsList as BackendConfigOptionsList;
 use Magento\Framework\App\Cache\Manager;
+<<<<<<< HEAD
 use Magento\Framework\App\Cache\Type\Config as ConfigCache;
 use Magento\Framework\App\DeploymentConfig;
+=======
+use Magento\Framework\App\Cache\Manager as CacheManager;
+use Magento\Framework\App\Cache\Type\Block as BlockCache;
+use Magento\Framework\App\Cache\Type\Config as ConfigCache;
+use Magento\Framework\App\Cache\Type\Layout as LayoutCache;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\App\DeploymentConfig\Reader;
 use Magento\Framework\App\DeploymentConfig\Writer;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\App\MaintenanceMode;
+<<<<<<< HEAD
 use Magento\Framework\App\ObjectManager;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\App\State\CleanupFiles;
 use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Framework\Config\ConfigOptionsListConstants;
@@ -26,18 +41,28 @@ use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\RuntimeException;
 use Magento\Framework\Filesystem;
+<<<<<<< HEAD
 use Magento\Framework\Indexer\IndexerInterface;
 use Magento\Framework\Indexer\IndexerRegistry;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Model\ResourceModel\Db\Context;
 use Magento\Framework\Module\ModuleList\Loader as ModuleLoader;
 use Magento\Framework\Module\ModuleListInterface;
 use Magento\Framework\Module\ModuleResource;
 use Magento\Framework\Mview\TriggerCleaner;
+<<<<<<< HEAD
 use Magento\Framework\Setup\ConsoleLoggerInterface;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Setup\Declaration\Schema\DryRunLogger;
 use Magento\Framework\Setup\FilePermissions;
 use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\InstallSchemaInterface;
+<<<<<<< HEAD
+=======
+use Magento\Framework\Setup\LoggerInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\PatchApplier;
 use Magento\Framework\Setup\Patch\PatchApplierFactory;
@@ -47,7 +72,11 @@ use Magento\Framework\Setup\SchemaSetupInterface;
 use Magento\Framework\Setup\UpgradeDataInterface;
 use Magento\Framework\Setup\UpgradeSchemaInterface;
 use Magento\Framework\Validation\ValidationException;
+<<<<<<< HEAD
 use Magento\Indexer\Model\Indexer\Collection;
+=======
+use Magento\PageCache\Model\Cache\Type as PageCache;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\RemoteStorage\Driver\DriverException;
 use Magento\Setup\Console\Command\InstallCommand;
 use Magento\Setup\Controller\ResponseTypeInterface;
@@ -60,7 +89,10 @@ use Magento\Setup\Validator\DbValidator;
 use Magento\Store\Model\Store;
 use Magento\RemoteStorage\Setup\ConfigOptionsList as RemoteStorageValidator;
 use ReflectionException;
+<<<<<<< HEAD
 use Magento\Framework\Setup\Declaration\Schema\Dto\Factories\Table as DtoFactoriesTable;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class Installer contains the logic to install Magento application.
@@ -93,8 +125,11 @@ class Installer
 
     public const INFO_MESSAGE = 'message';
 
+<<<<<<< HEAD
     public const ENTITY_TYPE_ORDER = 'order';
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * The lowest supported MySQL verion
      */
@@ -137,7 +172,11 @@ class Installer
     /**
      * Logger
      *
+<<<<<<< HEAD
      * @var ConsoleLoggerInterface
+=======
+     * @var LoggerInterface
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     private $log;
 
@@ -177,16 +216,23 @@ class Installer
     private $installInfo = [];
 
     /**
+<<<<<<< HEAD
      * @var DeploymentConfig
+=======
+     * @var \Magento\Framework\App\DeploymentConfig
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     private $deploymentConfig;
 
     /**
+<<<<<<< HEAD
      * @var DeploymentConfig
      */
     private $firstDeploymentConfig;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @var ObjectManagerProvider
      */
     private $objectManagerProvider;
@@ -260,6 +306,7 @@ class Installer
      */
     private $triggerCleaner;
 
+<<<<<<< HEAD
     /***
      * Old Charset for cl tables
      */
@@ -270,6 +317,8 @@ class Installer
      */
     private $columnConfig;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Constructor
      *
@@ -280,7 +329,11 @@ class Installer
      * @param ModuleListInterface $moduleList
      * @param ModuleLoader $moduleLoader
      * @param AdminAccountFactory $adminAccountFactory
+<<<<<<< HEAD
      * @param ConsoleLoggerInterface $log
+=======
+     * @param LoggerInterface $log
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param ConnectionFactory $connectionFactory
      * @param MaintenanceMode $maintenanceMode
      * @param Filesystem $filesystem
@@ -294,7 +347,10 @@ class Installer
      * @param State $sampleDataState
      * @param ComponentRegistrar $componentRegistrar
      * @param PhpReadinessCheck $phpReadinessCheck
+<<<<<<< HEAD
      * @param DtoFactoriesTable|null $dtoFactoriesTable
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @throws Exception
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
@@ -306,7 +362,11 @@ class Installer
         ModuleListInterface $moduleList,
         ModuleLoader $moduleLoader,
         AdminAccountFactory $adminAccountFactory,
+<<<<<<< HEAD
         ConsoleLoggerInterface $log,
+=======
+        LoggerInterface $log,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ConnectionFactory $connectionFactory,
         MaintenanceMode $maintenanceMode,
         Filesystem $filesystem,
@@ -319,8 +379,12 @@ class Installer
         DataSetupFactory $dataSetupFactory,
         State $sampleDataState,
         ComponentRegistrar $componentRegistrar,
+<<<<<<< HEAD
         PhpReadinessCheck $phpReadinessCheck,
         ?DtoFactoriesTable $dtoFactoriesTable = null
+=======
+        PhpReadinessCheck $phpReadinessCheck
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ) {
         $this->filePermissions = $filePermissions;
         $this->deploymentConfigWriter = $deploymentConfigWriter;
@@ -346,6 +410,7 @@ class Installer
         $this->phpReadinessCheck = $phpReadinessCheck;
         $this->schemaPersistor = $this->objectManagerProvider->get()->get(SchemaPersistor::class);
         $this->triggerCleaner = $this->objectManagerProvider->get()->get(TriggerCleaner::class);
+<<<<<<< HEAD
         /* Note: Because this class is dependency injected with Laminas ServiceManager, but our plugins, and some
          * other classes also use the App\ObjectManager instead, we have to make sure that the DeploymentConfig object
          * from that ObjectManager gets reset as different steps in the installer will write to the deployment config.
@@ -353,6 +418,8 @@ class Installer
         $this->firstDeploymentConfig = ObjectManager::getInstance()->get(DeploymentConfig::class);
         $this->columnConfig = $dtoFactoriesTable ?: ObjectManager::getInstance()->get(DtoFactoriesTable::class);
         ;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -363,8 +430,11 @@ class Installer
      * @throws FileSystemException
      * @throws LocalizedException
      * @throws RuntimeException
+<<<<<<< HEAD
      * @SuppressWarnings(PHPMD.NPathComplexity)
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function install($request)
     {
@@ -383,7 +453,11 @@ class Installer
             [$request]
         ];
         $script[] = ['Installing user configuration...', 'installUserConfig', [$request]];
+<<<<<<< HEAD
         $script[] = ['Enabling caches:', 'enableCaches', [true]];
+=======
+        $script[] = ['Enabling caches:', 'updateCaches', [true]];
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $script[] = ['Installing data...', 'installDataFixtures', [$request]];
         if (!empty($request[InstallCommand::INPUT_KEY_SALES_ORDER_INCREMENT_PREFIX])) {
             $script[] = [
@@ -402,19 +476,28 @@ class Installer
         $script[] = ['Disabling Maintenance Mode:', 'setMaintenanceMode', [0]];
         $script[] = ['Post installation file permissions check...', 'checkApplicationFilePermissions', []];
         $script[] = ['Write installation date...', 'writeInstallationDate', []];
+<<<<<<< HEAD
         if (empty($request['magento-init-params'])) {
             $script[] = ['Indexing...', 'reindexAll', []];
         }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $estimatedModules = $this->createModulesConfig($request, true);
         $total = count($script) + 4 * count(array_filter($estimatedModules));
         $this->progress = new Installer\Progress($total, 0);
 
+<<<<<<< HEAD
         $this->log->logMeta('Starting Magento installation:');
 
         foreach ($script as $item) {
             /* Note: Because the $this->DeploymentConfig gets written to, but plugins use $this->firstDeploymentConfig,
              * we have to reset this one after each item of $script so the plugins will see the config updates. */
             $this->firstDeploymentConfig->resetData();
+=======
+        $this->log->log('Starting Magento installation:');
+
+        foreach ($script as $item) {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             list($message, $method, $params) = $item;
             $this->log->log($message);
             try {
@@ -659,6 +742,7 @@ class Installer
                     'Data Version'
                 )->setComment('Module versions registry');
             $connection->createTable($table);
+<<<<<<< HEAD
         } else {
             // Set default collation to utf8mb4 for MySQL
             $getTableSchema = $connection->getCreateTable($setup->getTable('setup_module')) ?? '';
@@ -669,6 +753,8 @@ class Installer
                             'data_version' => ['varchar(50)','']];
                 $this->setDefaultCharsetAndCollation($tableName, $columns, $connection);
             }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
     }
 
@@ -728,6 +814,7 @@ class Installer
                 'Database Sessions Storage'
             );
             $connection->createTable($table);
+<<<<<<< HEAD
         } else {
             // Set default collation to utf8mb4 for MySQL
             $getTableSchema = $connection->getCreateTable($setup->getTable('session')) ?? '';
@@ -736,6 +823,8 @@ class Installer
                 $columns = ['session_id' => ['varchar(255)','']];
                 $this->setDefaultCharsetAndCollation($tableName, $columns, $connection);
             }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
     }
 
@@ -791,6 +880,7 @@ class Installer
                 'Caches'
             );
             $connection->createTable($table);
+<<<<<<< HEAD
         } else {
             // change the charset to utf8mb4
             $getTableSchema = $connection->getCreateTable($setup->getTable('cache')) ?? '';
@@ -799,6 +889,8 @@ class Installer
                 $columns = ['id' => ['varchar(200)','']];
                 $this->setDefaultCharsetAndCollation($tableName, $columns, $connection);
             }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
     }
 
@@ -836,6 +928,7 @@ class Installer
                 'Tag Caches'
             );
             $connection->createTable($table);
+<<<<<<< HEAD
         } else {
             // Set default collation to utf8mb4 for MySQL
             $getTableSchema = $connection->getCreateTable($setup->getTable('cache_tag')) ?? '';
@@ -844,6 +937,8 @@ class Installer
                 $columns = ['tag' => ['varchar(100)',''],'cache_id' => ['varchar(200)','']];
                 $this->setDefaultCharsetAndCollation($tableName, $columns, $connection);
             }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
     }
 
@@ -902,12 +997,15 @@ class Installer
             $connection->createTable($table);
         } else {
             $this->updateColumnType($connection, $tableName, 'flag_data', 'mediumtext');
+<<<<<<< HEAD
             // change the charset to utf8mb4
             $getTableSchema = $connection->getCreateTable($tableName) ?? '';
             if (preg_match('/\b('. self::OLDCHARSET .')\b/', $getTableSchema)) {
                 $columns = ['flag_code' => ['varchar(255)','NOT NULL'],'flag_data' => ['mediumtext','']];
                 $this->setDefaultCharsetAndCollation($tableName, $columns, $connection);
             }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
     }
 
@@ -967,7 +1065,11 @@ class Installer
         $this->setupModuleRegistry($setup);
         $this->setupCoreTables($setup);
         $this->cleanMemoryTables($setup);
+<<<<<<< HEAD
         $this->log->logMeta('Schema creation/updates:');
+=======
+        $this->log->log('Schema creation/updates:');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->declarativeInstallSchema($request);
         $this->handleDBSchemaData($setup, 'schema', $request);
         /** @var Mysql $adapter */
@@ -998,6 +1100,7 @@ class Installer
      * Installs data fixtures
      *
      * @param array $request
+<<<<<<< HEAD
      *
      * @return void
      *
@@ -1006,6 +1109,27 @@ class Installer
      */
     public function installDataFixtures(array $request = [])
     {
+=======
+     * @param boolean $keepCacheStatuses
+     * @return void
+     * @throws Exception
+     * @throws \Magento\Framework\Setup\Exception
+     */
+    public function installDataFixtures(array $request = [], $keepCacheStatuses = false)
+    {
+        $frontendCaches = [
+            PageCache::TYPE_IDENTIFIER,
+            BlockCache::TYPE_IDENTIFIER,
+            LayoutCache::TYPE_IDENTIFIER,
+        ];
+
+        if ($keepCacheStatuses) {
+            $disabledCaches = $this->getDisabledCacheTypes($frontendCaches);
+
+            $frontendCaches = array_diff($frontendCaches, $disabledCaches);
+        }
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         /** @var \Magento\Framework\Registry $registry */
         $registry = $this->objectManagerProvider->get()->get(\Magento\Framework\Registry::class);
         //For backward compatibility in install and upgrade scripts with enabled parallelization.
@@ -1015,9 +1139,27 @@ class Installer
         $this->assertDbAccessible();
         $setup = $this->dataSetupFactory->create();
         $this->checkFilePermissionsForDbUpgrade();
+<<<<<<< HEAD
         $this->log->logMeta('Data install/update:');
 
         $this->handleDBSchemaData($setup, 'data', $request);
+=======
+        $this->log->log('Data install/update:');
+
+        if ($frontendCaches) {
+            $this->log->log('Disabling caches:');
+            $this->updateCaches(false, $frontendCaches);
+        }
+
+        try {
+            $this->handleDBSchemaData($setup, 'data', $request);
+        } finally {
+            if ($frontendCaches) {
+                $this->log->log('Enabling caches:');
+                $this->updateCaches(true, $frontendCaches);
+            }
+        }
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $registry->unregister('setup-mode-enabled');
     }
@@ -1109,7 +1251,11 @@ class Installer
                 if ($status == \Magento\Framework\Setup\ModuleDataSetupInterface::VERSION_COMPARE_GREATER) {
                     $upgrader = $this->getSchemaDataHandler($moduleName, $upgradeType);
                     if ($upgrader) {
+<<<<<<< HEAD
                         $this->log->logMetaInline("Upgrading $type.. ");
+=======
+                        $this->log->logInline("Upgrading $type.. ");
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         $upgrader->upgrade($setup, $moduleContextList[$moduleName]);
                         if ($type === 'schema') {
                             $resource->setDbVersion($moduleName, $configVer);
@@ -1121,12 +1267,20 @@ class Installer
             } elseif ($configVer) {
                 $installer = $this->getSchemaDataHandler($moduleName, $installType);
                 if ($installer) {
+<<<<<<< HEAD
                     $this->log->logMetaInline("Installing $type... ");
+=======
+                    $this->log->logInline("Installing $type... ");
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     $installer->install($setup, $moduleContextList[$moduleName]);
                 }
                 $upgrader = $this->getSchemaDataHandler($moduleName, $upgradeType);
                 if ($upgrader) {
+<<<<<<< HEAD
                     $this->log->logMetaInline("Upgrading $type... ");
+=======
+                    $this->log->logInline("Upgrading $type... ");
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     $upgrader->upgrade($setup, $moduleContextList[$moduleName]);
                 }
             }
@@ -1152,9 +1306,15 @@ class Installer
         }
 
         if ($type === 'schema') {
+<<<<<<< HEAD
             $this->log->logMeta('Schema post-updates:');
         } elseif ($type === 'data') {
             $this->log->logMeta('Data post-updates:');
+=======
+            $this->log->log('Schema post-updates:');
+        } elseif ($type === 'data') {
+            $this->log->log('Data post-updates:');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
         $handlerType = $type === 'schema' ? 'schema-recurring' : 'data-recurring';
 
@@ -1167,7 +1327,11 @@ class Installer
             $this->log->log("Module '{$moduleName}':");
             $modulePostUpdater = $this->getSchemaDataHandler($moduleName, $handlerType);
             if ($modulePostUpdater) {
+<<<<<<< HEAD
                 $this->log->logMetaInline('Running ' . str_replace('-', ' ', $handlerType) . '...');
+=======
+                $this->log->logInline('Running ' . str_replace('-', ' ', $handlerType) . '...');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $modulePostUpdater->install($setup, $moduleContextList[$moduleName]);
             }
             $this->logProgress();
@@ -1323,6 +1487,7 @@ class Installer
         // get entity_type_id for order
         $select = $dbConnection->select()
             ->from($setup->getTable('eav_entity_type'), 'entity_type_id')
+<<<<<<< HEAD
             ->where('entity_type_code = ?', self::ENTITY_TYPE_ORDER);
         $entityTypeId = $dbConnection->fetchOne($select);
 
@@ -1332,6 +1497,16 @@ class Installer
             ->where('entity_type_id = ?', $entityTypeId)
             ->where('store_id = ?', Store::DISTRO_STORE_ID);
         $incrementRow = $dbConnection->fetchRow($eavEntityStore);
+=======
+            ->where('entity_type_code = \'order\'');
+        $entityTypeId = $dbConnection->fetchOne($select);
+
+        // See if row already exists
+        $incrementRow = $dbConnection->fetchRow(
+            'SELECT * FROM ' . $setup->getTable('eav_entity_store') . ' WHERE entity_type_id = ? AND store_id = ?',
+            [$entityTypeId, Store::DISTRO_STORE_ID]
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         if (!empty($incrementRow)) {
             // row exists, update it
@@ -1350,6 +1525,7 @@ class Installer
             ];
             $dbConnection->insert($setup->getTable('eav_entity_store'), $rowData);
         }
+<<<<<<< HEAD
 
         // Get meta id for adding in profile table for order prefix
         $selectMeta = $dbConnection->select()
@@ -1372,6 +1548,8 @@ class Installer
                 'profile_id = ' . $incrementRow['profile_id']
             );
         }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -1422,7 +1600,11 @@ class Installer
         if (!$keepGeneratedFiles) {
             $this->cleanupGeneratedFiles();
         }
+<<<<<<< HEAD
         $this->log->logMeta('Updating modules:');
+=======
+        $this->log->log('Updating modules:');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->createModulesConfig([]);
     }
 
@@ -1444,7 +1626,11 @@ class Installer
      */
     public function uninstall()
     {
+<<<<<<< HEAD
         $this->log->logMeta('Starting Magento uninstallation:');
+=======
+        $this->log->log('Starting Magento uninstallation:');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         try {
             $this->cleanCaches();
@@ -1458,7 +1644,11 @@ class Installer
 
         $this->cleanupDb();
 
+<<<<<<< HEAD
         $this->log->logMeta('File system cleanup:');
+=======
+        $this->log->log('File system cleanup:');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $messages = $this->cleanupFiles->clearAllFiles();
         foreach ($messages as $message) {
             $this->log->log($message);
@@ -1470,6 +1660,7 @@ class Installer
     }
 
     /**
+<<<<<<< HEAD
      * Enable caches for after installing application
      *
      * Note this is called by install() via callback.
@@ -1481,16 +1672,50 @@ class Installer
      * @throws Exception
      */
     private function enableCaches()
+=======
+     * Enable or disable caches for specific types that are available
+     *
+     * If no types are specified then it will enable or disable all available types
+     * Note this is called by install() via callback.
+     *
+     * @param bool $isEnabled
+     * @param array $types
+     * @return void
+     * @throws Exception
+     */
+    private function updateCaches($isEnabled, $types = [])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         /** @var Manager $cacheManager */
         $cacheManager = $this->objectManagerProvider->get()->create(Manager::class);
 
+<<<<<<< HEAD
         $types = $cacheManager->getAvailableTypes();
         $enabledTypes = $cacheManager->setEnabled($types, true);
         $cacheManager->clean($enabledTypes);
 
         $this->log->log('Current status:');
         foreach ($cacheManager->getStatus() as $cache => $status) {
+=======
+        $availableTypes = $cacheManager->getAvailableTypes();
+        $types = empty($types) ? $availableTypes : array_intersect($availableTypes, $types);
+        $enabledTypes = $cacheManager->setEnabled($types, $isEnabled);
+        if ($isEnabled) {
+            $cacheManager->clean($enabledTypes);
+        }
+
+        // Only get statuses of specific cache types
+        $cacheStatus = array_filter(
+            $cacheManager->getStatus(),
+            function (string $key) use ($types) {
+                return in_array($key, $types);
+            },
+            ARRAY_FILTER_USE_KEY
+        );
+
+        $this->log->log('Current status:');
+        foreach ($cacheStatus as $cache => $status) {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $this->log->log(sprintf('%s: %d', $cache, $status));
         }
     }
@@ -1509,7 +1734,11 @@ class Installer
         $cacheManager = $this->objectManagerProvider->get()->get(Manager::class);
         $types = $cacheManager->getAvailableTypes();
         $cacheManager->clean($types);
+<<<<<<< HEAD
         $this->log->logSuccess('Cache cleared successfully');
+=======
+        $this->log->log('Cache cleared successfully');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -1526,7 +1755,11 @@ class Installer
         $cacheManager = $this->objectManagerProvider->get()->get(Manager::class);
         $types = empty($types) ? $cacheManager->getAvailableTypes() : $types;
         $cacheManager->flush($types);
+<<<<<<< HEAD
         $this->log->logSuccess('Cache types ' . implode(',', $types) . ' flushed successfully');
+=======
+        $this->log->log('Cache types ' . implode(',', $types) . ' flushed successfully');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -1758,7 +1991,11 @@ class Installer
      */
     private function cleanupGeneratedFiles()
     {
+<<<<<<< HEAD
         $this->log->logMeta('File system cleanup:');
+=======
+        $this->log->log('File system cleanup:');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $messages = $this->cleanupFiles->clearCodeGeneratedFiles();
 
         // unload Magento autoloader because it may be using compiled definition
@@ -1791,12 +2028,21 @@ class Installer
                 return in_array(
                     $key,
                     [
+<<<<<<< HEAD
                             AdminAccount::KEY_EMAIL,
                             AdminAccount::KEY_FIRST_NAME,
                             AdminAccount::KEY_LAST_NAME,
                             AdminAccount::KEY_USER,
                             AdminAccount::KEY_PASSWORD,
                         ]
+=======
+                        AdminAccount::KEY_EMAIL,
+                        AdminAccount::KEY_FIRST_NAME,
+                        AdminAccount::KEY_LAST_NAME,
+                        AdminAccount::KEY_USER,
+                        AdminAccount::KEY_PASSWORD,
+                    ]
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ) && $value !== null;
             },
             ARRAY_FILTER_USE_BOTH
@@ -1841,6 +2087,32 @@ class Installer
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Returns list of disabled cache types
+     *
+     * @param array $cacheTypesToCheck
+     * @return array
+     */
+    private function getDisabledCacheTypes(array $cacheTypesToCheck): array
+    {
+        $disabledCaches = [];
+
+        /** @var CacheManager $cacheManager */
+        $cacheManager = $this->objectManagerProvider->get()->create(CacheManager::class);
+        $cacheStatus = $cacheManager->getStatus();
+
+        foreach ($cacheTypesToCheck as $cacheType) {
+            if (isset($cacheStatus[$cacheType]) && $cacheStatus[$cacheType] === 0) {
+                $disabledCaches[] = $cacheType;
+            }
+        }
+
+        return $disabledCaches;
+    }
+
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Revert remote storage configuration back to local file driver
      */
     private function revertRemoteStorageConfiguration()
@@ -1854,6 +2126,7 @@ class Installer
         $configData = [$remoteStorageData->getFileKey() => $remoteStorageData->getData()];
         $this->deploymentConfigWriter->saveConfig($configData, true);
     }
+<<<<<<< HEAD
 
     /**
      * Reindexing
@@ -1903,4 +2176,6 @@ class Installer
         $qry .= sprintf('DEFAULT CHARSET=%s, DEFAULT COLLATE=%s', $charset, $collate);
         $connection->query($qry);
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

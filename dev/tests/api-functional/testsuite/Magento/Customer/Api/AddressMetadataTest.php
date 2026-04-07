@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Customer\Api;
 
 use Magento\Config\Model\ResourceModel\Config;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Customer\Api\Data\AddressInterface as Address;
 use Magento\Customer\Model\Data\AttributeMetadata;
 use Magento\Framework\App\Config\ReinitableConfigInterface;
@@ -19,9 +27,15 @@ use Magento\TestFramework\TestCase\WebapiAbstract;
  */
 class AddressMetadataTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     private const SERVICE_NAME = "customerAddressMetadataV1";
     private const SERVICE_VERSION = "V1";
     private const RESOURCE_PATH = "/V1/attributeMetadata/customerAddress";
+=======
+    const SERVICE_NAME = "customerAddressMetadataV1";
+    const SERVICE_VERSION = "V1";
+    const RESOURCE_PATH = "/V1/attributeMetadata/customerAddress";
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var Config $config
@@ -50,9 +64,15 @@ class AddressMetadataTest extends WebapiAbstract
      *
      * @param string $attributeCode The attribute code of the requested metadata.
      * @param array $expectedMetadata Expected entity metadata for the attribute code.
+<<<<<<< HEAD
      * @magentoDbIsolation disabled
      */
     #[DataProvider('getAttributeMetadataDataProvider')]
+=======
+     * @dataProvider getAttributeMetadataDataProvider
+     * @magentoDbIsolation disabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetAttributeMetadata($attributeCode, $configOptions, $expectedMetadata)
     {
         $this->initConfig($configOptions);
@@ -85,7 +105,11 @@ class AddressMetadataTest extends WebapiAbstract
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function getAttributeMetadataDataProvider()
+=======
+    public function getAttributeMetadataDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             Address::POSTCODE => [
@@ -251,8 +275,14 @@ class AddressMetadataTest extends WebapiAbstract
      * Test retrieval of attributes
      *
      * @param string $formCode Form code
+<<<<<<< HEAD
      * @param array $expectedMetadata The expected attribute metadata */
     #[DataProvider('getAttributesDataProvider')]
+=======
+     * @param array $expectedMetadata The expected attribute metadata
+     * @dataProvider getAttributesDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetAttributes($formCode, $expectedMetadata)
     {
         $serviceInfo = [
@@ -289,9 +319,15 @@ class AddressMetadataTest extends WebapiAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function getAttributesDataProvider()
     {
         $attributeMetadata = self::getAttributeMetadataDataProvider();
+=======
+    public function getAttributesDataProvider()
+    {
+        $attributeMetadata = $this->getAttributeMetadataDataProvider();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         return [
             [
                 'customer_address_edit',
@@ -373,6 +409,25 @@ class AddressMetadataTest extends WebapiAbstract
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Remove test attribute
+     */
+    public static function tearDownAfterClass(): void
+    {
+        parent::tearDownAfterClass();
+        /** @var \Magento\Customer\Model\Attribute $attribute */
+        $attribute = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(
+            \Magento\Customer\Model\Attribute::class
+        );
+        foreach (['custom_attribute1', 'custom_attribute2'] as $attributeCode) {
+            $attribute->loadByCode('customer_address', $attributeCode);
+            $attribute->delete();
+        }
+    }
+
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Set core config data.
      *
      * @param $configOptions

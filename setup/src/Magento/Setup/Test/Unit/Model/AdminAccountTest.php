@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -51,7 +56,11 @@ class AdminAccountTest extends TestCase
             });
 
         $this->encryptor = $this->getMockBuilder(EncryptorInterface::class)
+<<<<<<< HEAD
             ->getMock();
+=======
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $data = [
             AdminAccount::KEY_FIRST_NAME => 'John',
@@ -180,13 +189,21 @@ class AdminAccountTest extends TestCase
                 'SELECT * FROM ' . $this->prefix .
                 'authorization_role WHERE parent_id = :parent_id AND tree_level = :tree_level ' .
                 'AND role_type = :role_type AND user_id = :user_id ' .
+<<<<<<< HEAD
                 'AND user_type = :user_type ORDER BY sort_order DESC',
+=======
+                'AND user_type = :user_type AND role_name = :role_name',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 [
                     'parent_id'  => 0,
                     'tree_level' => 1,
                     'role_type' => 'G',
                     'user_id' => 0,
                     'user_type' => 2,
+<<<<<<< HEAD
+=======
+                    'role_name' => 'Administrators',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ],
                 null,
                 $administratorRoleData
@@ -206,6 +223,7 @@ class AdminAccountTest extends TestCase
         // should only insert once (admin role)
         $this->dbAdapter
             ->method('insert')
+<<<<<<< HEAD
             ->willReturnCallback(
                 function ($arg1, $arg2) {
                     if ($arg1 == 'pre_admin_passwords' && !empty($arg2)) {
@@ -214,6 +232,11 @@ class AdminAccountTest extends TestCase
                         return null;
                     }
                 }
+=======
+            ->withConsecutive(
+                [self::equalTo('pre_admin_passwords'), self::anything()],
+                [self::equalTo('pre_authorization_role'), self::anything()]
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             );
 
         $this->adminAccount->save();
@@ -259,6 +282,7 @@ class AdminAccountTest extends TestCase
         // insert only once (new user)
         $this->dbAdapter
             ->method('insert')
+<<<<<<< HEAD
             ->willReturnCallback(
                 function ($arg1, $arg2) {
                     if ($arg1 == 'pre_admin_user' && !empty($arg2)) {
@@ -268,6 +292,9 @@ class AdminAccountTest extends TestCase
                     }
                 }
             );
+=======
+            ->withConsecutive(['pre_admin_user', $this->anything()], ['pre_admin_passwords', $this->anything()]);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         // after inserting new user
         $this->dbAdapter->expects($this->once())->method('lastInsertId')->willReturn(1);
@@ -310,13 +337,21 @@ class AdminAccountTest extends TestCase
                 'SELECT * FROM ' . $this->prefix .
                 'authorization_role WHERE parent_id = :parent_id AND tree_level = :tree_level ' .
                 'AND role_type = :role_type AND user_id = :user_id ' .
+<<<<<<< HEAD
                 'AND user_type = :user_type ORDER BY sort_order DESC',
+=======
+                'AND user_type = :user_type AND role_name = :role_name',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 [
                     'parent_id'  => 0,
                     'tree_level' => 1,
                     'role_type' => 'G',
                     'user_id' => 0,
                     'user_type' => 2,
+<<<<<<< HEAD
+=======
+                    'role_name' => 'Administrators',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ],
                 null,
                 $administratorRoleData
@@ -386,7 +421,11 @@ class AdminAccountTest extends TestCase
     public function testSaveExceptionSpecialAdminRoleNotFound(): void
     {
         $this->expectException('Exception');
+<<<<<<< HEAD
         $this->expectExceptionMessage('No administrators role was found, data fixture needs to be run');
+=======
+        $this->expectExceptionMessage('No Administrators role was found, data fixture needs to be run');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->dbAdapter->expects($this->exactly(3))->method('fetchRow')->willReturn([]);
         $this->dbAdapter->expects($this->once())->method('lastInsertId')->willReturn(1);
 

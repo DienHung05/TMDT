@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Review\Model\ResourceModel\Review\Product;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * Tests some functionality of the Product Review collection
  */
@@ -20,9 +28,15 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
      * @param string $sortAttribute
      * @param string $dir
      * @param callable $assertion
+<<<<<<< HEAD
      * @magentoDataFixture Magento/Review/_files/different_reviews.php
      */
     #[DataProvider('sortOrderAssertionsDataProvider')]
+=======
+     * @dataProvider sortOrderAssertionsDataProvider
+     * @magentoDataFixture Magento/Review/_files/different_reviews.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetResultingIds(
         ?int $status,
         int $expectedCount,
@@ -48,7 +62,11 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function sortOrderAssertionsDataProvider() :array
+=======
+    public function sortOrderAssertionsDataProvider() :array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -57,7 +75,11 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
                 'rt.review_id',
                 'DESC',
                 function (array $actual) :void {
+<<<<<<< HEAD
                     self::assertLessThan($actual[0], $actual[1]);
+=======
+                    $this->assertLessThan($actual[0], $actual[1]);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 }
             ],
             [
@@ -66,7 +88,11 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
                 'rt.review_id',
                 'ASC',
                 function (array $actual) :void {
+<<<<<<< HEAD
                     self::assertLessThan($actual[1], $actual[0]);
+=======
+                    $this->assertLessThan($actual[1], $actual[0]);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 }
             ],
             [
@@ -75,7 +101,11 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
                 'rt.created_at',
                 'ASC',
                 function (array $actual) :void {
+<<<<<<< HEAD
                     self::assertLessThan($actual[1], $actual[0]);
+=======
+                    $this->assertLessThan($actual[1], $actual[0]);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 }
             ],
             [
@@ -84,7 +114,11 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
                 'rt.review_id',
                 'ASC',
                 function (array $actual) :void {
+<<<<<<< HEAD
                     self::assertLessThan($actual[1], $actual[0]);
+=======
+                    $this->assertLessThan($actual[1], $actual[0]);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 }
             ]
         ];

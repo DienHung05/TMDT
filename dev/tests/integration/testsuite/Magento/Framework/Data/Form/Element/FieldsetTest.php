@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -9,8 +14,11 @@
  */
 namespace Magento\Framework\Data\Form\Element;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class FieldsetTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -38,8 +46,14 @@ class FieldsetTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Test whether fieldset contains advanced section or not
+<<<<<<< HEAD
      */
     #[DataProvider('fieldsDataProvider')]
+=======
+     *
+     * @dataProvider fieldsDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testHasAdvanced(array $fields, $expect)
     {
         $this->_fillFieldset($fields);
@@ -60,7 +74,11 @@ class FieldsetTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function fieldsDataProvider()
+=======
+    public function fieldsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -146,7 +164,13 @@ class FieldsetTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+<<<<<<< HEAD
     #[DataProvider('getChildrenDataProvider')]
+=======
+    /**
+     * @dataProvider getChildrenDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetChildren($fields, $expect)
     {
         $this->_fillFieldset($fields);
@@ -156,9 +180,15 @@ class FieldsetTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getChildrenDataProvider()
     {
         $data = self::fieldsDataProvider();
+=======
+    public function getChildrenDataProvider()
+    {
+        $data = $this->fieldsDataProvider();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $textField = $data[1][0][0];
         $fieldsetField = $textField;
         $fieldsetField[1] = 'fieldset';
@@ -167,10 +197,17 @@ class FieldsetTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param array $fields
      * @param int $expect
      */
     #[DataProvider('getBasicChildrenDataProvider')]
+=======
+     * @dataProvider getBasicChildrenDataProvider
+     * @param array $fields
+     * @param int $expect
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetBasicChildren($fields, $expect)
     {
         $this->_fillFieldset($fields);
@@ -178,10 +215,17 @@ class FieldsetTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param array $fields
      * @param int $expect
      */
     #[DataProvider('getBasicChildrenDataProvider')]
+=======
+     * @dataProvider getBasicChildrenDataProvider
+     * @param array $fields
+     * @param int $expect
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetCountBasicChildren($fields, $expect)
     {
         $this->_fillFieldset($fields);
@@ -191,19 +235,32 @@ class FieldsetTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getBasicChildrenDataProvider()
     {
         $data = self::getChildrenDataProvider();
+=======
+    public function getBasicChildrenDataProvider()
+    {
+        $data = $this->getChildrenDataProvider();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         // set isAdvanced flag
         $data[0][0][0][4] = true;
         return $data;
     }
 
     /**
+<<<<<<< HEAD
      * @param array $fields
      * @param int $expect
      */
     #[DataProvider('getAdvancedChildrenDataProvider')]
+=======
+     * @dataProvider getAdvancedChildrenDataProvider
+     * @param array $fields
+     * @param int $expect
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetAdvancedChildren($fields, $expect)
     {
         $this->_fillFieldset($fields);
@@ -213,9 +270,15 @@ class FieldsetTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getAdvancedChildrenDataProvider()
     {
         $data = self::getChildrenDataProvider();
+=======
+    public function getAdvancedChildrenDataProvider()
+    {
+        $data = $this->getChildrenDataProvider();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         // change isAdvanced flag
         $data[0][0][0][4] = true;
         // change expected results
@@ -225,10 +288,17 @@ class FieldsetTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param array $fields
      * @param int $expect
      */
     #[DataProvider('getSubFieldsetDataProvider')]
+=======
+     * @dataProvider getSubFieldsetDataProvider
+     * @param array $fields
+     * @param int $expect
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetSubFieldset($fields, $expect)
     {
         $this->_fillFieldset($fields);
@@ -238,9 +308,15 @@ class FieldsetTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getSubFieldsetDataProvider()
     {
         $data = self::fieldsDataProvider();
+=======
+    public function getSubFieldsetDataProvider()
+    {
+        $data = $this->fieldsDataProvider();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $textField = $data[1][0][0];
         $fieldsetField = $textField;
         $fieldsetField[1] = 'fieldset';

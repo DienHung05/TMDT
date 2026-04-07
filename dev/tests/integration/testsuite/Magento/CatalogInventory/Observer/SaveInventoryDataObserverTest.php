@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
 
 namespace Magento\CatalogInventory\Observer;
 
+<<<<<<< HEAD
 use Magento\TestFramework\Fixture\DataFixture;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
 use Magento\Catalog\Api\ProductRepositoryInterface;
@@ -20,11 +28,14 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\StateException;
 use Magento\Framework\Exception\CouldNotSaveException;
+<<<<<<< HEAD
 use Magento\TestFramework\Fixture\DataFixtureStorage;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\ConfigurableProduct\Test\Fixture\Attribute as AttributeFixture;
 use Magento\ConfigurableProduct\Test\Fixture\Product as ConfigurableProductFixture;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for SaveInventoryDataObserver
@@ -42,11 +53,14 @@ class SaveInventoryDataObserverTest extends TestCase
     private $stockItemRepository;
 
     /**
+<<<<<<< HEAD
      * @var DataFixtureStorage
      */
     private $fixtures;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritDoc
      */
     protected function setUp(): void
@@ -55,7 +69,10 @@ class SaveInventoryDataObserverTest extends TestCase
             ->get(ProductRepositoryInterface::class);
         $this->stockItemRepository = Bootstrap::getObjectManager()
             ->get(StockItemRepositoryInterface::class);
+<<<<<<< HEAD
         $this->fixtures = DataFixtureStorageManager::getStorage();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -78,6 +95,10 @@ class SaveInventoryDataObserverTest extends TestCase
 
         /** @var ProductExtensionInterface $attributes*/
         $attributes = $product->getExtensionAttributes();
+<<<<<<< HEAD
+=======
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         /** @var StockItemInterface $stockItem */
         $stockItem = $attributes->getStockItem();
         $stockItem->setQty(0);
@@ -86,6 +107,7 @@ class SaveInventoryDataObserverTest extends TestCase
         $product->setExtensionAttributes($attributes);
         $this->productRepository->save($product);
 
+<<<<<<< HEAD
          /** @var ProductInterface $product */
          $parentProduct = $this->productRepository->get('configurable');
 
@@ -130,6 +152,11 @@ class SaveInventoryDataObserverTest extends TestCase
         $sku = $this->fixtures->get('conf1')->getSku();
         /** @var ProductInterface $parentProduct */
         $parentProduct = $this->productRepository->get($sku);
+=======
+        /** @var ProductInterface $product */
+        $parentProduct = $this->productRepository->get('configurable');
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $parentProductStockItem = $this->stockItemRepository->get(
             $parentProduct->getExtensionAttributes()->getStockItem()->getItemId()
         );

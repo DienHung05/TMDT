@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -9,6 +14,7 @@ namespace Magento\GraphQl\Controller;
 
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
+<<<<<<< HEAD
 use Magento\Framework\App\Area;
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\EntityManager\MetadataPool;
@@ -19,10 +25,17 @@ use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DbIsolation;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\Attributes\CoversClass;
+=======
+use Magento\Framework\App\Request\Http;
+use Magento\Framework\EntityManager\MetadataPool;
+use Magento\Framework\Serialize\SerializerInterface;
+use Magento\TestFramework\Helper\Bootstrap;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Tests the dispatch method in the GraphQl Controller class using a simple product query
  *
+<<<<<<< HEAD
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 #[
@@ -33,6 +46,17 @@ use PHPUnit\Framework\Attributes\CoversClass;
 ]
 class GraphQlControllerTest extends \Magento\TestFramework\Indexer\TestCase
 {
+=======
+ * @magentoAppArea graphql
+ * @magentoDataFixture Magento/Catalog/_files/product_simple_with_url_key.php
+ * @magentoDbIsolation disabled
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
+class GraphQlControllerTest extends \Magento\TestFramework\Indexer\TestCase
+{
+    const CONTENT_TYPE = 'application/json';
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /** @var \Magento\Framework\ObjectManagerInterface */
     private $objectManager;
 
@@ -63,8 +87,13 @@ class GraphQlControllerTest extends \Magento\TestFramework\Indexer\TestCase
 
     protected function setUp(): void
     {
+<<<<<<< HEAD
         $this->objectManager = Bootstrap::getObjectManager();
         $this->graphql = $this->objectManager->get(GraphQl::class);
+=======
+        $this->objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
+        $this->graphql = $this->objectManager->get(\Magento\GraphQl\Controller\GraphQl::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->jsonSerializer = $this->objectManager->get(SerializerInterface::class);
         $this->metadataPool = $this->objectManager->get(MetadataPool::class);
         $this->request = $this->objectManager->get(Http::class);
@@ -182,7 +211,11 @@ query GetProducts(\$filterInput:ProductAttributeFilterInput){
             id
             name
             sku
+<<<<<<< HEAD
         }
+=======
+        }  
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }
 QUERY;
@@ -230,12 +263,21 @@ QUERY;
     }
   ])
     {
+<<<<<<< HEAD
       items{
       attribute_code
       attribute_type
       entity_type
     }
     }
+=======
+      items{        
+      attribute_code
+      attribute_type
+      entity_type
+    }      
+    }  
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
   }
 QUERY;
 
@@ -252,6 +294,7 @@ QUERY;
             ->addHeaders(['Content-Type' => 'application/json']);
         $this->request->setHeaders($headers);
         $response = $this->graphql->dispatch($this->request);
+<<<<<<< HEAD
         self::assertEquals(200, $response->getStatusCode());
 
         $outputResponse = $this->jsonSerializer->unserialize($response->getContent());
@@ -401,3 +444,26 @@ QUERY;
         self::assertEquals('Mutation requests allowed only for POST requests', $output['errors'][0]['message']);
     }
 }
+=======
+        $outputResponse = $this->jsonSerializer->unserialize($response->getContent());
+        if (isset($outputResponse['errors'][0])) {
+            if (is_array($outputResponse['errors'][0])) {
+                foreach ($outputResponse['errors'] as $error) {
+                    $this->assertEquals(
+                        \Magento\Framework\GraphQl\Exception\GraphQlInputException::EXCEPTION_CATEGORY,
+                        $error['extensions']['category']
+                    );
+                    if (isset($error['message'])) {
+                        $this->assertEquals($error['message'], 'Invalid entity_type specified: invalid');
+                    }
+                    if (isset($error['trace'])) {
+                        if (is_array($error['trace'])) {
+                            $this->assertNotEmpty($error['trace']);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f

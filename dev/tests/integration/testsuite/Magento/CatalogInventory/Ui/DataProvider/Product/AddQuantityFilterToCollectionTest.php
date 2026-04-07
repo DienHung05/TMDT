@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -13,7 +18,10 @@ use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Framework\View\Element\UiComponentInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -45,12 +53,19 @@ class AddQuantityFilterToCollectionTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider quantityFilterProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/multiple_products.php
      * @param array $filter
      * @param array $expectedProducts
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('quantityFilterProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testQuantityFilter(array $filter, array $expectedProducts): void
     {
         $this->request->setParams([ContextInterface::FILTER_VAR => $filter]);
@@ -64,7 +79,11 @@ class AddQuantityFilterToCollectionTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function quantityFilterProvider(): array
+=======
+    public function quantityFilterProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'from' => [
@@ -73,7 +92,11 @@ class AddQuantityFilterToCollectionTest extends TestCase
                         'from' => 100,
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedProducts' => [
+=======
+                'expected_products' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple1',
                     'simple3',
                 ],
@@ -84,7 +107,11 @@ class AddQuantityFilterToCollectionTest extends TestCase
                         'to' => 100,
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedProducts' => [
+=======
+                'expected_products' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple1',
                     'simple2',
                 ],
@@ -96,7 +123,11 @@ class AddQuantityFilterToCollectionTest extends TestCase
                         'to' => 130,
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedProducts' => [
+=======
+                'expected_products' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple1',
                 ],
             ],

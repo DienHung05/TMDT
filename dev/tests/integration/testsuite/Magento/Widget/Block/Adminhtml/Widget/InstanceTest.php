@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -15,7 +20,10 @@ use Magento\Framework\View\Result\PageFactory;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\Theme\Model\ResourceModel\Theme as ThemeResource;
 use Magento\Theme\Model\ThemeFactory;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -49,13 +57,21 @@ class InstanceTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider gridFiltersDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Widget/_files/widgets.php
      *
      * @param array $filter
      * @param array $expectedWidgets
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('gridFiltersDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGridFiltering(array $filter, array $expectedWidgets): void
     {
         $this->request->setParams($filter);
@@ -67,7 +83,11 @@ class InstanceTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function gridFiltersDataProvider(): array
+=======
+    public function gridFiltersDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'first_page' => [
@@ -75,7 +95,11 @@ class InstanceTest extends TestCase
                     'limit' => 2,
                     'page' => 1,
                 ],
+<<<<<<< HEAD
                 'expectedWidgets' => [
+=======
+                'expected_widgets' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'cms page widget title',
                     'product link widget title',
                 ],
@@ -85,7 +109,11 @@ class InstanceTest extends TestCase
                     'limit' => 2,
                     'page' => 2,
                 ],
+<<<<<<< HEAD
                 'expectedWidgets' => [
+=======
+                'expected_widgets' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'recently compared products',
                 ],
             ],
@@ -93,7 +121,11 @@ class InstanceTest extends TestCase
                 'filter' => [
                     'filter' => base64_encode('title=product link widget title'),
                 ],
+<<<<<<< HEAD
                 'expectedWidgets' => [
+=======
+                'expected_widgets' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'product link widget title',
                 ],
             ],
@@ -101,15 +133,25 @@ class InstanceTest extends TestCase
                 'filter' => [
                     'filter' => base64_encode('type=Magento%5CCms%5CBlock%5CWidget%5CPage%5CLink'),
                 ],
+<<<<<<< HEAD
                 'expectedWidgets' => [
+=======
+                'expected_widgets' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'cms page widget title',
                 ],
             ],
             'filter_by_theme' => [
                 'filter' => [
+<<<<<<< HEAD
                     'filter' => base64_encode('theme_id=' . self::loadThemeIdByCode('Magento/blank')),
                 ],
                 'expectedWidgets' => [
+=======
+                    'filter' => base64_encode('theme_id=' . $this->loadThemeIdByCode('Magento/blank')),
+                ],
+                'expected_widgets' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'recently compared products',
                 ],
             ],
@@ -117,27 +159,45 @@ class InstanceTest extends TestCase
                 'filter' => [
                     'filter' => base64_encode('sort_order=1'),
                 ],
+<<<<<<< HEAD
                 'expectedWidgets' => [
+=======
+                'expected_widgets' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'recently compared products',
                 ],
             ],
             'filter_by_title_and_luma_theme' => [
                 'filter' => [
                     'filter' => base64_encode(
+<<<<<<< HEAD
                         'title=cms page widget title&theme_id=' . self::loadThemeIdByCode('Magento/luma')
                     ),
                 ],
                 'expectedWidgets' => [
+=======
+                        'title=cms page widget title&theme_id=' . $this->loadThemeIdByCode('Magento/luma')
+                    ),
+                ],
+                'expected_widgets' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'cms page widget title',
                 ],
             ],
             'filter_by_title_and_blank_theme' => [
                 'filter' => [
                     'filter' => base64_encode(
+<<<<<<< HEAD
                         'title=recently compared products&theme_id=' . self::loadThemeIdByCode('Magento/blank')
                     ),
                 ],
                 'expectedWidgets' => [
+=======
+                        'title=recently compared products&theme_id=' . $this->loadThemeIdByCode('Magento/blank')
+                    ),
+                ],
+                'expected_widgets' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'recently compared products',
                 ],
             ],
@@ -145,13 +205,21 @@ class InstanceTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider gridSortDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Widget/_files/widgets.php
      *
      * @param array $filter
      * @param array $expectedWidgets
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('gridSortDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGridSorting(array $filter, array $expectedWidgets): void
     {
         $this->request->setParams($filter);
@@ -162,12 +230,20 @@ class InstanceTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function gridSortDataProvider(): array
+=======
+    public function gridSortDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'sort_by_id_asc' => [
                 'filter' => ['sort' => 'instance_id', 'dir' => 'asc'],
+<<<<<<< HEAD
                 'expectedWidgets' => [
+=======
+                'expected_widgets' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'cms page widget title',
                     'product link widget title',
                     'recently compared products',
@@ -175,7 +251,11 @@ class InstanceTest extends TestCase
             ],
             'sort_by_id_desc' => [
                 'filter' => ['sort' => 'instance_id', 'dir' => 'desc'],
+<<<<<<< HEAD
                 'expectedWidgets' => [
+=======
+                'expected_widgets' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'recently compared products',
                     'product link widget title',
                     'cms page widget title',
@@ -183,7 +263,11 @@ class InstanceTest extends TestCase
             ],
             'sort_by_title_asc' => [
                 'filter' => ['sort' => 'title', 'dir' => 'asc'],
+<<<<<<< HEAD
                 'expectedWidgets' => [
+=======
+                'expected_widgets' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'cms page widget title',
                     'product link widget title',
                     'recently compared products',
@@ -191,7 +275,11 @@ class InstanceTest extends TestCase
             ],
             'sort_by_title_desc' => [
                 'filter' => ['sort' => 'title', 'dir' => 'desc'],
+<<<<<<< HEAD
                 'expectedWidgets' => [
+=======
+                'expected_widgets' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'recently compared products',
                     'product link widget title',
                     'cms page widget title',
@@ -199,7 +287,11 @@ class InstanceTest extends TestCase
             ],
             'sort_by_type_asc' => [
                 'filter' => ['sort' => 'type', 'dir' => 'asc'],
+<<<<<<< HEAD
                 'expectedWidgets' => [
+=======
+                'expected_widgets' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'product link widget title',
                     'recently compared products',
                     'cms page widget title',
@@ -207,7 +299,11 @@ class InstanceTest extends TestCase
             ],
             'sort_by_type_desc' => [
                 'filter' => ['sort' => 'type', 'dir' => 'desc'],
+<<<<<<< HEAD
                 'expectedWidgets' => [
+=======
+                'expected_widgets' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'cms page widget title',
                     'recently compared products',
                     'product link widget title',
@@ -215,7 +311,11 @@ class InstanceTest extends TestCase
             ],
             'sort_by_sort_order_asc' => [
                 'filter' => ['sort' => 'sort_order', 'dir' => 'asc'],
+<<<<<<< HEAD
                 'expectedWidgets' => [
+=======
+                'expected_widgets' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'recently compared products',
                     'product link widget title',
                     'cms page widget title',
@@ -223,7 +323,11 @@ class InstanceTest extends TestCase
             ],
             'sort_by_sort_order_desc' => [
                 'filter' => ['sort' => 'sort_order', 'dir' => 'desc'],
+<<<<<<< HEAD
                 'expectedWidgets' => [
+=======
+                'expected_widgets' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'cms page widget title',
                     'product link widget title',
                     'recently compared products',
@@ -231,7 +335,11 @@ class InstanceTest extends TestCase
             ],
             'sort_by_theme_asc' => [
                 'filter' => ['sort' => 'theme_id', 'dir' => 'asc'],
+<<<<<<< HEAD
                 'expectedWidgets' => [
+=======
+                'expected_widgets' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'recently compared products',
                     'cms page widget title',
                     'product link widget title',
@@ -239,7 +347,11 @@ class InstanceTest extends TestCase
             ],
             'sort_by_theme_desc' => [
                 'filter' => ['sort' => 'theme_id', 'dir' => 'asc'],
+<<<<<<< HEAD
                 'expectedWidgets' => [
+=======
+                'expected_widgets' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'recently compared products',
                     'cms page widget title',
                     'product link widget title',
@@ -254,7 +366,11 @@ class InstanceTest extends TestCase
      * @param string $code
      * @return int
      */
+<<<<<<< HEAD
     private static function loadThemeIdByCode(string $code): int
+=======
+    private function loadThemeIdByCode(string $code): int
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $objectManager = Bootstrap::getObjectManager();
         /** @var ThemeFactory $themeFactory */

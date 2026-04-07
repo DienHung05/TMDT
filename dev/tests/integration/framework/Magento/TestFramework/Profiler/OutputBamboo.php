@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -21,7 +26,11 @@ class OutputBamboo extends \Magento\Framework\Profiler\Driver\Standard\Output\Cs
      *
      * @param array|null $config
      */
+<<<<<<< HEAD
     public function __construct(?array $config = null)
+=======
+    public function __construct(array $config = null)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         parent::__construct($config);
         $this->_metrics = isset($config['metrics']) ? (array)$config['metrics'] : [];

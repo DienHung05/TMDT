@@ -1,11 +1,19 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
  */
 namespace Magento\UrlRewrite\Block\Cms\Page;
 
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\UrlRewrite\Block\Cms\Page;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -17,12 +25,20 @@ class EditTest extends TestCase
     /**
      * Test prepare layout
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider prepareLayoutDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $blockAttributes
      * @param array $expected
      *
      * @magentoAppIsolation enabled
      */
+<<<<<<< HEAD
     #[DataProvider('prepareLayoutDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPrepareLayout($blockAttributes, $expected)
     {
         /** @var $layout \Magento\Framework\View\LayoutInterface */
@@ -279,7 +295,11 @@ class EditTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function prepareLayoutDataProvider(): array
+=======
+    public function prepareLayoutDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         /** @var $urlRewrite \Magento\UrlRewrite\Model\UrlRewrite */
         $urlRewrite = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(

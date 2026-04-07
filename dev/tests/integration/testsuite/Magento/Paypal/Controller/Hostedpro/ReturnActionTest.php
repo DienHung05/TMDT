@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -46,6 +51,10 @@ class ReturnActionTest extends AbstractController
         $request = $this->getRequest();
         $reflection = new \ReflectionClass($request);
         $property = $reflection->getProperty('requestUri');
+<<<<<<< HEAD
+=======
+        $property->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $property->setValue($request, null);
 
         $request->setServer(new Parameters(['REQUEST_URI' => $requestUri]));

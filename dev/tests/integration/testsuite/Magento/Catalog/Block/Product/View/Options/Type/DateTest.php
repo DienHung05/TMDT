@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -16,7 +21,10 @@ use Magento\Framework\Locale\ResolverInterface;
 use Magento\Framework\Pricing\Render;
 use Magento\Framework\View\LayoutInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -102,8 +110,13 @@ class DateTest extends TestCase
      * @param array $expected
      * @magentoAppArea frontend
      * @magentoConfigFixture current_store catalog/custom_options/year_range 2020,2030
+<<<<<<< HEAD
      */
     #[DataProvider('toHtmlWithDropDownDataProvider')]
+=======
+     * @dataProvider toHtmlWithDropDownDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testToHtmlWithDropDown(array $data, array $expected): void
     {
         $this->prepareBlock($data);
@@ -117,8 +130,13 @@ class DateTest extends TestCase
      * @magentoAppArea frontend
      * @magentoConfigFixture current_store catalog/custom_options/use_calendar 1
      * @magentoConfigFixture current_store catalog/custom_options/year_range 2020,2030
+<<<<<<< HEAD
      */
     #[DataProvider('toHtmlWithCalendarDataProvider')]
+=======
+     * @dataProvider toHtmlWithCalendarDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testToHtmlWithCalendar(array $data, array $expected, ?string $locale = null): void
     {
         if ($locale) {
@@ -209,7 +227,11 @@ HTML;
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function toHtmlWithDropDownDataProvider(): array
+=======
+    public function toHtmlWithDropDownDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -254,7 +276,11 @@ HTML;
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function toHtmlWithCalendarDataProvider(): array
+=======
+    public function toHtmlWithCalendarDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

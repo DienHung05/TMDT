@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,7 +16,10 @@ use Magento\Paypal\Model\Api\Nvp;
 use Magento\PaypalGraphQl\PaypalExpressAbstractTest;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Quote\Model\QuoteIdToMaskedQuoteId;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test ExpressSetPaymentMethodTest graphql endpoint for guest
@@ -43,6 +51,10 @@ class PaypalExpressSetPaymentMethodTest extends PaypalExpressAbstractTest
      *
      * @param string $paymentMethod
      * @return void
+<<<<<<< HEAD
+=======
+     * @dataProvider getPaypalCodesProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Sales/_files/default_rollback.php
      * @magentoDataFixture Magento/GraphQl/Catalog/_files/simple_product.php
      * @magentoDataFixture Magento/GraphQl/Quote/_files/guest/create_empty_cart.php
@@ -53,7 +65,10 @@ class PaypalExpressSetPaymentMethodTest extends PaypalExpressAbstractTest
      * @magentoDataFixture Magento/GraphQl/Quote/_files/set_flatrate_shipping_method.php
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     #[DataProvider('getPaypalCodesProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testResolveGuest(string $paymentMethod): void
     {
         $this->enablePaymentMethod($paymentMethod);
@@ -141,6 +156,7 @@ QUERY;
 
         $this->nvpMock
             ->method('call')
+<<<<<<< HEAD
             ->willReturnCallback(
                 function (
                     $arg1,
@@ -175,6 +191,29 @@ QUERY;
                         ];
                     }
                 }
+=======
+            ->withConsecutive(
+                [Nvp::SET_EXPRESS_CHECKOUT, $paypalRequest],
+                [Nvp::GET_EXPRESS_CHECKOUT_DETAILS, $paypalRequestDetails],
+                [Nvp::DO_EXPRESS_CHECKOUT_PAYMENT, $paypalRequestPlaceOrder]
+            )
+            ->willReturnOnConsecutiveCalls(
+                $paypalResponse,
+                $paypalRequestDetailsResponse,
+                [
+                    'RESULT' => '0',
+                    'PNREF' => 'B7PPAC033FF2',
+                    'RESPMSG' => 'Approved',
+                    'AVSADDR' => 'Y',
+                    'AVSZIP' => 'Y',
+                    'TOKEN' => $token,
+                    'PAYERID' => $payerId,
+                    'PPREF' => '7RK43642T8939154L',
+                    'CORRELATIONID' => $correlationId,
+                    'PAYMENTTYPE' => 'instant',
+                    'PENDINGREASON' => 'authorization'
+                ]
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             );
 
         $response = $this->graphQlRequest->send($query);
@@ -209,7 +248,11 @@ QUERY;
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function getPaypalCodesProvider(): array
+=======
+    public function getPaypalCodesProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['paypal_express'],

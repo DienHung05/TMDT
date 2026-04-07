@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -16,7 +21,10 @@ use Magento\Review\Model\ResourceModel\Review\CollectionFactory as ReviewCollect
 use Magento\Review\Model\Review;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test coverage for adding product reviews mutation
@@ -65,8 +73,13 @@ class CreateProductReviewsTest extends GraphQlAbstract
      * @magentoApiDataFixture Magento/GraphQl/Catalog/_files/simple_product.php
      * @magentoApiDataFixture Magento/Customer/_files/customer.php
      *
+<<<<<<< HEAD
      */
     #[DataProvider('customerDataProvider')]
+=======
+     * @dataProvider customerDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCustomerAddProductReviews(string $customerName, bool $isGuest)
     {
         $productSku = 'simple_product';
@@ -138,7 +151,11 @@ class CreateProductReviewsTest extends GraphQlAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function customerDataProvider(): array
+=======
+    public function customerDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Guest Customer' => ['John Doe', true],

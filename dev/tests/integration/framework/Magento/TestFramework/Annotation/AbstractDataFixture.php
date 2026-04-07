@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,6 +16,11 @@ use Magento\TestFramework\Fixture\ParserInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Workaround\Override\Fixture\Resolver;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
+=======
+use ReflectionClass;
+use ReflectionException;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class consist of dataFixtures base logic
@@ -63,8 +73,14 @@ abstract class AbstractDataFixture
         } catch (\Throwable $exception) {
             ExceptionHandler::handle(
                 'Unable to parse fixtures',
+<<<<<<< HEAD
                 $exception,
                 $test
+=======
+                get_class($test),
+                $test->getName(false),
+                $exception
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             );
         }
 
@@ -114,7 +130,11 @@ abstract class AbstractDataFixture
             }
             $fixture['test'] = [
                 'class' => get_class($test),
+<<<<<<< HEAD
                 'method' => $test->name(),
+=======
+                'method' => $test->getName(false),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'dataSet' => $test->dataName(),
             ];
             try {
@@ -122,8 +142,14 @@ abstract class AbstractDataFixture
             } catch (\Throwable $exception) {
                 ExceptionHandler::handle(
                     'Unable to apply fixture: ' . $this->getFixtureReference($fixture),
+<<<<<<< HEAD
                     $exception,
                     $test
+=======
+                    $fixture['test']['class'],
+                    $fixture['test']['method'],
+                    $exception
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 );
             }
             $this->_appliedFixtures[] = $fixture;
@@ -151,8 +177,14 @@ abstract class AbstractDataFixture
             } catch (\Throwable $exception) {
                 ExceptionHandler::handle(
                     'Unable to revert fixture: ' . $this->getFixtureReference($fixture),
+<<<<<<< HEAD
                     $exception,
                     $test
+=======
+                    $fixture['test']['class'],
+                    $fixture['test']['method'],
+                    $exception
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 );
             }
         }
@@ -217,7 +249,11 @@ abstract class AbstractDataFixture
      */
     private function getTestKey(TestCase $test): string
     {
+<<<<<<< HEAD
         return sprintf('%s::%s', get_class($test), $test->nameWithDataSet());
+=======
+        return sprintf('%s::%s', get_class($test), $test->getName());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**

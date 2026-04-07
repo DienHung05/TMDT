@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -18,7 +23,10 @@ use Magento\Framework\ObjectManagerInterface;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProviderExternal;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -27,7 +35,10 @@ use PHPUnit\Framework\TestCase;
  * "Checkbox", "Multiple Select", "Date", "Date & Time" and "Time".
  *
  * @magentoDbIsolation enabled
+<<<<<<< HEAD
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class UpdateCustomOptionsTest extends TestCase
 {
@@ -100,14 +111,22 @@ class UpdateCustomOptionsTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_without_options.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\Area::getDataForUpdateOptions
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $optionData
      * @param array $updateData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProviderExternal(
         \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\Area::class,
         'getDataForUpdateOptions'
     )]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateAreaCustomOption(array $optionData, array $updateData): void
     {
         $this->updateAndAssertNotSelectCustomOptions($optionData, $updateData);
@@ -118,14 +137,22 @@ class UpdateCustomOptionsTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_without_options.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\File::getDataForUpdateOptions
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $optionData
      * @param array $updateData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProviderExternal(
         \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\File::class,
         'getDataForUpdateOptions'
     )]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateFileCustomOption(array $optionData, array $updateData): void
     {
         $this->updateAndAssertNotSelectCustomOptions($optionData, $updateData);
@@ -136,14 +163,22 @@ class UpdateCustomOptionsTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_without_options.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\Date::getDataForUpdateOptions
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $optionData
      * @param array $updateData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProviderExternal(
         \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\Date::class,
         'getDataForUpdateOptions'
     )]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateDateCustomOption(array $optionData, array $updateData): void
     {
         $this->updateAndAssertNotSelectCustomOptions($optionData, $updateData);
@@ -154,14 +189,22 @@ class UpdateCustomOptionsTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_without_options.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\DateTime::getDataForUpdateOptions
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $optionData
      * @param array $updateData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProviderExternal(
         \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\DateTime::class,
         'getDataForUpdateOptions'
     )]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateDateTimeCustomOption(array $optionData, array $updateData): void
     {
         $this->updateAndAssertNotSelectCustomOptions($optionData, $updateData);
@@ -172,14 +215,22 @@ class UpdateCustomOptionsTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_without_options.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\Time::getDataForUpdateOptions
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $optionData
      * @param array $updateData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProviderExternal(
         \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\Time::class,
         'getDataForUpdateOptions'
     )]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateTimeCustomOption(array $optionData, array $updateData): void
     {
         $this->updateAndAssertNotSelectCustomOptions($optionData, $updateData);
@@ -190,16 +241,24 @@ class UpdateCustomOptionsTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_without_options.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\DropDown::getDataForUpdateOptions
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $optionData
      * @param array $optionValueData
      * @param array $updateOptionData
      * @param array $updateOptionValueData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProviderExternal(
         \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\DropDown::class,
         'getDataForUpdateOptions'
     )]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateDropDownCustomOption(
         array $optionData,
         array $optionValueData,
@@ -219,16 +278,24 @@ class UpdateCustomOptionsTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_without_options.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\RadioButtons::getDataForUpdateOptions
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $optionData
      * @param array $optionValueData
      * @param array $updateOptionData
      * @param array $updateOptionValueData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProviderExternal(
         \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\RadioButtons::class,
         'getDataForUpdateOptions'
     )]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateRadioButtonsCustomOption(
         array $optionData,
         array $optionValueData,
@@ -248,16 +315,24 @@ class UpdateCustomOptionsTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_without_options.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\Checkbox::getDataForUpdateOptions
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $optionData
      * @param array $optionValueData
      * @param array $updateOptionData
      * @param array $updateOptionValueData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProviderExternal(
         \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\Checkbox::class,
         'getDataForUpdateOptions'
     )]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateCheckboxCustomOption(
         array $optionData,
         array $optionValueData,
@@ -277,16 +352,24 @@ class UpdateCustomOptionsTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_without_options.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\MultipleSelect::getDataForUpdateOptions
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $optionData
      * @param array $optionValueData
      * @param array $updateOptionData
      * @param array $updateOptionValueData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProviderExternal(
         \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\MultipleSelect::class,
         'getDataForUpdateOptions'
     )]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateMultipleSelectCustomOption(
         array $optionData,
         array $optionValueData,

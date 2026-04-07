@@ -1,7 +1,13 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Cms\Model\Wysiwyg\Images;
 
@@ -13,7 +19,10 @@ use Magento\Framework\Filesystem;
 use Magento\Framework\Filesystem\Driver\File;
 use Magento\Framework\Filesystem\DriverInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test methods of class Storage
@@ -239,8 +248,13 @@ class StorageTest extends \PHPUnit\Framework\TestCase
      * @param string|null $storageType
      *
      * @return void
+<<<<<<< HEAD
      */
     #[DataProvider('filenameUploadFileWithWrongExtensionDataProvider')]
+=======
+     * @dataProvider testUploadFileWithWrongExtensionDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUploadFileWithWrongExtension(string $fileName, string $fileType, ?string $storageType): void
     {
         $this->expectException(\Magento\Framework\Exception\LocalizedException::class);
@@ -268,7 +282,11 @@ class StorageTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function filenameUploadFileWithWrongExtensionDataProvider(): array
+=======
+    public function testUploadFileWithWrongExtensionDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -317,8 +335,13 @@ class StorageTest extends \PHPUnit\Framework\TestCase
      *
      * @param array $sizes
      * @param bool $resized
+<<<<<<< HEAD
      */
     #[DataProvider('getThumbnailsSizes')]
+=======
+     * @dataProvider getThumbnailsSizes
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testResizeFile(array $sizes, bool $resized): void
     {
         $root = $this->storage->getCmsWysiwygImages()->getStorageRoot();
@@ -344,7 +367,11 @@ class StorageTest extends \PHPUnit\Framework\TestCase
     /**
      * Provide sizes for resizeFile test
      */
+<<<<<<< HEAD
     public static function getThumbnailsSizes(): array
+=======
+    public function getThumbnailsSizes(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

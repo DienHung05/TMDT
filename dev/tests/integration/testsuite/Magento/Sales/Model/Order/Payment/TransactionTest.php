@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
@@ -251,5 +252,44 @@ class TransactionTest extends \PHPUnit\Framework\TestCase
             $paymentId,
             $txnId
         );
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Sales\Model\Order\Payment;
+
+/**
+ * Tests transaction model:
+ *
+ * @see \Magento\Sales\Model\Order\Payment\Transaction
+ * @magentoDataFixture Magento/Sales/_files/transactions.php
+ */
+class TransactionTest extends \PHPUnit\Framework\TestCase
+{
+    public function testLoadByTxnId()
+    {
+        $order = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(\Magento\Sales\Model\Order::class);
+        $order->loadByIncrementId('100000001');
+
+        /**
+         * @var $repository \Magento\Sales\Model\Order\Payment\Transaction\Repository
+         */
+        $repository = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(
+            \Magento\Sales\Model\Order\Payment\Transaction\Repository::class
+        );
+        /**
+         * @var $model \Magento\Sales\Model\Order\Payment\Transaction
+         */
+        $model = $repository->getByTransactionId(
+            'invalid_transaction_id',
+            $order->getPayment()->getId(),
+            $order->getId()
+        );
+
+        $this->assertFalse($model);
+
+        $model = $repository->getByTransactionId('trx1', $order->getPayment()->getId(), $order->getId());
+        $this->assertNotFalse($model->getId());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

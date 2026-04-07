@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Downloadable\Controller\Adminhtml\Downloadable;
 
 use Magento\Framework\Serialize\Serializer\Json;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Magento\Downloadable\Controller\Adminhtml\Downloadable\File
@@ -72,8 +80,13 @@ class FileTest extends \Magento\TestFramework\TestCase\AbstractBackendController
      * Checks a case when php files are not allowed to upload.
      *
      * @param string $fileName
+<<<<<<< HEAD
      */
     #[DataProvider('extensionsDataProvider')]
+=======
+     * @dataProvider extensionsDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUploadProhibitedExtensions($fileName)
     {
         // phpcs:ignore Magento2.Functions.DiscouragedFunction
@@ -106,7 +119,11 @@ class FileTest extends \Magento\TestFramework\TestCase\AbstractBackendController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function extensionsDataProvider()
+=======
+    public function extensionsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['sample.php'],
@@ -118,9 +135,15 @@ class FileTest extends \Magento\TestFramework\TestCase\AbstractBackendController
     }
 
     /**
+<<<<<<< HEAD
      * @return void
      */
     #[DataProvider('uploadWrongUploadTypeDataProvider')]
+=======
+     * @dataProvider uploadWrongUploadTypeDataProvider
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUploadWrongUploadType($postData): void
     {
         $this->getRequest()->setPostValue($postData);
@@ -134,7 +157,11 @@ class FileTest extends \Magento\TestFramework\TestCase\AbstractBackendController
         $this->assertEquals(0, $result['errorcode']);
     }
 
+<<<<<<< HEAD
     public static function uploadWrongUploadTypeDataProvider(): array
+=======
+    public function uploadWrongUploadTypeDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

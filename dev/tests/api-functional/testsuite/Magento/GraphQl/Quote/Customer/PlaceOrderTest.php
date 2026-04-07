@@ -1,12 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Quote\Customer;
 
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\ProductStock as ProductStockFixture;
 use Magento\Checkout\Test\Fixture\SetGuestEmail as SetGuestEmailFixture;
 use Magento\Customer\Test\Fixture\Customer;
@@ -32,6 +38,16 @@ use Magento\Checkout\Test\Fixture\SetDeliveryMethod as SetDeliveryMethodFixture;
 use Magento\Checkout\Test\Fixture\SetPaymentMethod as SetPaymentMethodFixture;
 use Magento\Checkout\Test\Fixture\SetShippingAddress as SetShippingAddressFixture;
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
+=======
+use Exception;
+use Magento\Framework\Registry;
+use Magento\GraphQl\Quote\GetMaskedQuoteIdByReservedOrderId;
+use Magento\Integration\Api\CustomerTokenServiceInterface;
+use Magento\Sales\Api\OrderRepositoryInterface;
+use Magento\Sales\Model\ResourceModel\Order\CollectionFactory;
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\TestFramework\TestCase\GraphQlAbstract;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for placing an order for customer
@@ -44,6 +60,14 @@ class PlaceOrderTest extends GraphQlAbstract
     private $customerTokenService;
 
     /**
+<<<<<<< HEAD
+=======
+     * @var GetMaskedQuoteIdByReservedOrderId
+     */
+    private $getMaskedQuoteIdByReservedOrderId;
+
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @var CollectionFactory
      */
     private $orderCollectionFactory;
@@ -59,23 +83,31 @@ class PlaceOrderTest extends GraphQlAbstract
     private $registry;
 
     /**
+<<<<<<< HEAD
      * @var QuoteIdToMaskedQuoteIdInterface
      */
     private $quoteIdToMaskedQuoteIdInterface;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
     {
         $objectManager = Bootstrap::getObjectManager();
+<<<<<<< HEAD
         $this->quoteIdToMaskedQuoteIdInterface = $objectManager->get(QuoteIdToMaskedQuoteIdInterface::class);
+=======
+        $this->getMaskedQuoteIdByReservedOrderId = $objectManager->get(GetMaskedQuoteIdByReservedOrderId::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->customerTokenService = $objectManager->get(CustomerTokenServiceInterface::class);
         $this->orderCollectionFactory = $objectManager->get(CollectionFactory::class);
         $this->orderRepository = $objectManager->get(OrderRepositoryInterface::class);
         $this->registry = Bootstrap::getObjectManager()->get(Registry::class);
     }
 
+<<<<<<< HEAD
     #[
         Config('carriers/flatrate/active', '1', 'store', 'default'),
         Config('carriers/tablerate/active', '1', 'store', 'default'),
@@ -106,6 +138,29 @@ class PlaceOrderTest extends GraphQlAbstract
     {
         $reservedOrderId = 'test_quote';
         $maskedQuoteId = DataFixtureStorageManager::getStorage()->get('quoteIdMask')->getMaskedId();
+=======
+    /**
+     * @magentoApiDataFixture Magento/Customer/_files/customer.php
+     * @magentoApiDataFixture Magento/GraphQl/Catalog/_files/simple_product.php
+     * @magentoConfigFixture default_store carriers/flatrate/active 1
+     * @magentoConfigFixture default_store carriers/tablerate/active 1
+     * @magentoConfigFixture default_store carriers/freeshipping/active 1
+     * @magentoConfigFixture default_store payment/banktransfer/active 1
+     * @magentoConfigFixture default_store payment/cashondelivery/active 1
+     * @magentoConfigFixture default_store payment/checkmo/active 1
+     * @magentoConfigFixture default_store payment/purchaseorder/active 1
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/customer/create_empty_cart.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/add_simple_product.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_new_shipping_address.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_new_billing_address.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_flatrate_shipping_method.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_checkmo_payment_method.php
+     */
+    public function testPlaceOrder()
+    {
+        $reservedOrderId = 'test_quote';
+        $maskedQuoteId = $this->getMaskedQuoteIdByReservedOrderId->execute($reservedOrderId);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $query = $this->getQuery($maskedQuoteId);
         $response = $this->graphQlMutation($query, [], '', $this->getHeaderMap());
@@ -115,9 +170,15 @@ class PlaceOrderTest extends GraphQlAbstract
         self::assertEquals($reservedOrderId, $response['placeOrder']['order']['order_number']);
     }
 
+<<<<<<< HEAD
     #[
         DataFixture(Customer::class, ['email' => 'customer@example.com'], as: 'customer'),
     ]
+=======
+    /**
+     * @magentoApiDataFixture Magento/Customer/_files/customer.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPlaceOrderIfCartIdIsEmpty()
     {
         $this->expectException(\Exception::class);
@@ -129,6 +190,7 @@ class PlaceOrderTest extends GraphQlAbstract
         $this->graphQlMutation($query, [], '', $this->getHeaderMap());
     }
 
+<<<<<<< HEAD
     #[
         DataFixture(Customer::class, ['email' => 'customer@example.com'], as: 'customer'),
         DataFixture(
@@ -450,12 +512,184 @@ class PlaceOrderTest extends GraphQlAbstract
     {
         $cart = DataFixtureStorageManager::getStorage()->get('cart');
         $maskedQuoteId = $this->quoteIdToMaskedQuoteIdInterface->execute((int) $cart->getId());
+=======
+    /**
+     * @magentoApiDataFixture Magento/Customer/_files/customer.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/customer/create_empty_cart.php
+     */
+    public function testPlaceOrderWithNoItemsInCart()
+    {
+        $reservedOrderId = 'test_quote';
+        $maskedQuoteId = $this->getMaskedQuoteIdByReservedOrderId->execute($reservedOrderId);
+        $query = $this->getQuery($maskedQuoteId);
+
+        self::expectExceptionMessage(
+            'Unable to place order: A server error stopped your order from being placed. ' .
+            'Please try to place your order again'
+        );
+        $this->graphQlMutation($query, [], '', $this->getHeaderMap());
+    }
+
+    /**
+     * @magentoApiDataFixture Magento/Customer/_files/customer.php
+     * @magentoApiDataFixture Magento/GraphQl/Catalog/_files/simple_product.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/customer/create_empty_cart.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/add_simple_product.php
+     */
+    public function testPlaceOrderWithNoShippingAddress()
+    {
+        $reservedOrderId = 'test_quote';
+        $maskedQuoteId = $this->getMaskedQuoteIdByReservedOrderId->execute($reservedOrderId);
+        $query = $this->getQuery($maskedQuoteId);
+
+        self::expectExceptionMessage(
+            'Unable to place order: Some addresses can\'t be used due to the configurations for specific countries'
+        );
+        $this->graphQlMutation($query, [], '', $this->getHeaderMap());
+    }
+
+    /**
+     * @magentoApiDataFixture Magento/Customer/_files/customer.php
+     * @magentoApiDataFixture Magento/GraphQl/Catalog/_files/simple_product.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/customer/create_empty_cart.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/add_simple_product.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_new_shipping_address.php
+     */
+    public function testPlaceOrderWithNoShippingMethod()
+    {
+        $reservedOrderId = 'test_quote';
+        $maskedQuoteId = $this->getMaskedQuoteIdByReservedOrderId->execute($reservedOrderId);
+        $query = $this->getQuery($maskedQuoteId);
+
+        self::expectExceptionMessage(
+            'Unable to place order: The shipping method is missing. Select the shipping method and try again'
+        );
+        $this->graphQlMutation($query, [], '', $this->getHeaderMap());
+    }
+
+    /**
+     * @magentoApiDataFixture Magento/Customer/_files/customer.php
+     * @magentoApiDataFixture Magento/GraphQl/Catalog/_files/simple_product.php
+     * @magentoConfigFixture default_store carriers/flatrate/active 1
+     * @magentoConfigFixture default_store carriers/tablerate/active 1
+     * @magentoConfigFixture default_store carriers/freeshipping/active 1
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/customer/create_empty_cart.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/add_simple_product.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_new_shipping_address.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_flatrate_shipping_method.php
+     */
+    public function testPlaceOrderWithNoBillingAddress()
+    {
+        $reservedOrderId = 'test_quote';
+        $maskedQuoteId = $this->getMaskedQuoteIdByReservedOrderId->execute($reservedOrderId);
+        $query = $this->getQuery($maskedQuoteId);
+
+        self::expectExceptionMessageMatches(
+            '/Unable to place order: Please check the billing address information*/'
+        );
+        $this->graphQlMutation($query, [], '', $this->getHeaderMap());
+    }
+
+    /**
+     * @magentoApiDataFixture Magento/Customer/_files/customer.php
+     * @magentoApiDataFixture Magento/GraphQl/Catalog/_files/simple_product.php
+     * @magentoConfigFixture default_store carriers/flatrate/active 1
+     * @magentoConfigFixture default_store carriers/tablerate/active 1
+     * @magentoConfigFixture default_store carriers/freeshipping/active 1
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/customer/create_empty_cart.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/add_simple_product.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_new_shipping_address.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_new_billing_address.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_flatrate_shipping_method.php
+     */
+    public function testPlaceOrderWithNoPaymentMethod()
+    {
+        $reservedOrderId = 'test_quote';
+        $maskedQuoteId = $this->getMaskedQuoteIdByReservedOrderId->execute($reservedOrderId);
+        $query = $this->getQuery($maskedQuoteId);
+
+        self::expectExceptionMessage('Unable to place order: Enter a valid payment method and try again');
+        $this->graphQlMutation($query, [], '', $this->getHeaderMap());
+    }
+
+    /**
+     * @magentoConfigFixture cataloginventory/options/enable_inventory_check 1
+     * @magentoApiDataFixture Magento/Customer/_files/customer.php
+     * @magentoApiDataFixture Magento/GraphQl/Catalog/_files/simple_product.php
+     * @magentoConfigFixture default_store carriers/flatrate/active 1
+     * @magentoConfigFixture default_store carriers/tablerate/active 1
+     * @magentoConfigFixture default_store carriers/freeshipping/active 1
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/customer/create_empty_cart.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/add_simple_product.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_new_shipping_address.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_new_billing_address.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_flatrate_shipping_method.php
+     * @magentoApiDataFixture Magento/GraphQl/Catalog/_files/set_simple_product_out_of_stock.php
+     */
+    public function testPlaceOrderWithOutOfStockProduct()
+    {
+        $reservedOrderId = 'test_quote';
+        $maskedQuoteId = $this->getMaskedQuoteIdByReservedOrderId->execute($reservedOrderId);
+        $query = $this->getQuery($maskedQuoteId);
+
+        self::expectExceptionMessage('Unable to place order: Some of the products are out of stock');
+        $this->graphQlMutation($query, [], '', $this->getHeaderMap());
+    }
+
+    /**
+     * @magentoConfigFixture cataloginventory/options/enable_inventory_check 0
+     * @magentoApiDataFixture Magento/Customer/_files/customer.php
+     * @magentoApiDataFixture Magento/GraphQl/Catalog/_files/simple_product.php
+     * @magentoConfigFixture default_store carriers/flatrate/active 1
+     * @magentoConfigFixture default_store carriers/tablerate/active 1
+     * @magentoConfigFixture default_store carriers/freeshipping/active 1
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/customer/create_empty_cart.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/add_simple_product.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_new_shipping_address.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_new_billing_address.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_flatrate_shipping_method.php
+     * @magentoApiDataFixture Magento/GraphQl/Catalog/_files/set_simple_product_out_of_stock.php
+     */
+    public function testPlaceOrderWithOutOfStockProductWithDisabledInventoryCheck()
+    {
+        $reservedOrderId = 'test_quote';
+        $maskedQuoteId = $this->getMaskedQuoteIdByReservedOrderId->execute($reservedOrderId);
+        $query = $this->getQuery($maskedQuoteId);
+
+        self::expectExceptionMessage('Unable to place order: Enter a valid payment method and try again.');
+        $this->graphQlMutation($query, [], '', $this->getHeaderMap());
+    }
+
+    /**
+     * _security
+     * @magentoApiDataFixture Magento/Customer/_files/customer.php
+     * @magentoApiDataFixture Magento/GraphQl/Catalog/_files/simple_product.php
+     * @magentoConfigFixture default_store carriers/flatrate/active 1
+     * @magentoConfigFixture default_store carriers/tablerate/active 1
+     * @magentoConfigFixture default_store carriers/freeshipping/active 1
+     * @magentoConfigFixture default_store payment/banktransfer/active 1
+     * @magentoConfigFixture default_store payment/cashondelivery/active 1
+     * @magentoConfigFixture default_store payment/checkmo/active 1
+     * @magentoConfigFixture default_store payment/purchaseorder/active 1
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/guest/create_empty_cart.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/add_simple_product.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_new_shipping_address.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_new_billing_address.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_flatrate_shipping_method.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_checkmo_payment_method.php
+     */
+    public function testPlaceOrderOfGuestCart()
+    {
+        $reservedOrderId = 'test_quote';
+        $maskedQuoteId = $this->getMaskedQuoteIdByReservedOrderId->execute($reservedOrderId);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $query = $this->getQuery($maskedQuoteId);
 
         self::expectExceptionMessageMatches('/The current user cannot perform operations on cart*/');
         $this->graphQlMutation($query, [], '', $this->getHeaderMap());
     }
 
+<<<<<<< HEAD
     #[
         Config('carriers/flatrate/active', '1', 'store', 'default'),
         Config('carriers/tablerate/active', '1', 'store', 'default'),
@@ -486,6 +720,30 @@ class PlaceOrderTest extends GraphQlAbstract
     public function testPlaceOrderOfAnotherCustomerCart()
     {
         $maskedQuoteId = DataFixtureStorageManager::getStorage()->get('quoteIdMask')->getMaskedId();
+=======
+    /**
+     * _security
+     * @magentoApiDataFixture Magento/Customer/_files/three_customers.php
+     * @magentoApiDataFixture Magento/GraphQl/Catalog/_files/simple_product.php
+     * @magentoConfigFixture default_store carriers/flatrate/active 1
+     * @magentoConfigFixture default_store carriers/tablerate/active 1
+     * @magentoConfigFixture default_store carriers/freeshipping/active 1
+     * @magentoConfigFixture default_store payment/banktransfer/active 1
+     * @magentoConfigFixture default_store payment/cashondelivery/active 1
+     * @magentoConfigFixture default_store payment/checkmo/active 1
+     * @magentoConfigFixture default_store payment/purchaseorder/active 1
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/customer/create_empty_cart.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/add_simple_product.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_new_shipping_address.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_new_billing_address.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_flatrate_shipping_method.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_checkmo_payment_method.php
+     */
+    public function testPlaceOrderOfAnotherCustomerCart()
+    {
+        $reservedOrderId = 'test_quote';
+        $maskedQuoteId = $this->getMaskedQuoteIdByReservedOrderId->execute($reservedOrderId);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $query = $this->getQuery($maskedQuoteId);
 
         self::expectExceptionMessageMatches('/The current user cannot perform operations on cart*/');
@@ -522,6 +780,7 @@ QUERY;
         return $headerMap;
     }
 
+<<<<<<< HEAD
     #[
         Config('carriers/flatrate/active', '1', 'store', 'default'),
         Config('payment/checkmo/active', '1', 'store', 'default'),
@@ -555,6 +814,8 @@ QUERY;
         $this->graphQlMutation($query, [], '', $this->getHeaderMap());
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @inheritdoc
      */

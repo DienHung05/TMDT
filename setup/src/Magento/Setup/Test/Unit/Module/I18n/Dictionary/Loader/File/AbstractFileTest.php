@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -47,6 +52,7 @@ class AbstractFileTest extends TestCase
     {
         $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('Cannot open dictionary file: "wrong_file.csv".');
+<<<<<<< HEAD
         $abstractLoaderMock = $this->getMockBuilder(AbstractFile::class)
             ->setConstructorArgs([$this->_factoryMock])
             ->onlyMethods(['_openFile', '_closeFile', '_readFile'])
@@ -54,6 +60,14 @@ class AbstractFileTest extends TestCase
         
         $abstractLoaderMock->method('_openFile')
             ->willThrowException(new \InvalidArgumentException('Cannot open dictionary file: "wrong_file.csv".'));
+=======
+        $abstractLoaderMock = $this->getMockForAbstractClass(
+            AbstractFile::class,
+            [],
+            '',
+            false
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         /** @var AbstractFile $abstractLoaderMock */
         $abstractLoaderMock->load('wrong_file.csv');
@@ -64,6 +78,7 @@ class AbstractFileTest extends TestCase
      */
     public function testLoad(): void
     {
+<<<<<<< HEAD
         $abstractLoaderMock = $this->getMockBuilder(AbstractFile::class)
             ->setConstructorArgs([$this->_factoryMock])
             ->onlyMethods(['_openFile', '_readFile', '_closeFile'])
@@ -78,6 +93,23 @@ class AbstractFileTest extends TestCase
                     return ['phrase2', 'translation2', 'context_type2', 'context_value2'];
                 }
             });
+=======
+        $abstractLoaderMock = $this->getMockForAbstractClass(
+            AbstractFile::class,
+            [$this->_factoryMock],
+            '',
+            true,
+            true,
+            true,
+            ['_openFile', '_readFile', '_closeFile']
+        );
+        $abstractLoaderMock
+            ->method('_readFile')
+            ->willReturnOnConsecutiveCalls(
+                ['phrase1', 'translation1'],
+                ['phrase2', 'translation2', 'context_type2', 'context_value2']
+            );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $phraseFirstMock = $this->createMock(Phrase::class);
         $phraseSecondMock = $this->createMock(Phrase::class);
@@ -87,6 +119,7 @@ class AbstractFileTest extends TestCase
             ->willReturn($this->_dictionaryMock);
         $this->_factoryMock
             ->method('createPhrase')
+<<<<<<< HEAD
             ->willReturnCallback(
                 function ($args) use ($phraseFirstMock, $phraseSecondMock) {
                     if ($args == [
@@ -116,6 +149,31 @@ class AbstractFileTest extends TestCase
                     }
                 }
             );
+=======
+            ->withConsecutive(
+                [
+                    [
+                        'phrase' => 'phrase1',
+                        'translation' => 'translation1',
+                        'context_type' => '',
+                        'context_value' => ''
+                    ]
+                ],
+                [
+                    [
+                        'phrase' => 'phrase2',
+                        'translation' => 'translation2',
+                        'context_type' => 'context_type2',
+                        'context_value' => 'context_value2'
+                    ]
+                ]
+            )
+            ->willReturnOnConsecutiveCalls($phraseFirstMock, $phraseSecondMock);
+
+        $this->_dictionaryMock
+            ->method('addPhrase')
+            ->withConsecutive([$phraseFirstMock], [$phraseSecondMock]);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         /** @var AbstractFile $abstractLoaderMock */
         $this->assertEquals($this->_dictionaryMock, $abstractLoaderMock->load('test.csv'));
@@ -128,6 +186,7 @@ class AbstractFileTest extends TestCase
     {
         $this->expectException('RuntimeException');
         $this->expectExceptionMessage('Invalid row #1: "exception_message".');
+<<<<<<< HEAD
         $abstractLoaderMock = $this->getMockBuilder(AbstractFile::class)
             ->setConstructorArgs([$this->_factoryMock])
             ->onlyMethods(['_openFile', '_readFile', '_closeFile'])
@@ -139,6 +198,21 @@ class AbstractFileTest extends TestCase
                     return ['phrase1', 'translation1'];
                 }
             );
+=======
+        $abstractLoaderMock = $this->getMockForAbstractClass(
+            AbstractFile::class,
+            [$this->_factoryMock],
+            '',
+            true,
+            true,
+            true,
+            ['_openFile', '_readFile']
+        );
+        $abstractLoaderMock
+            ->method('_readFile')
+            ->withConsecutive()
+            ->willReturn(['phrase1', 'translation1']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->_factoryMock->expects($this->once())
             ->method('createDictionary')

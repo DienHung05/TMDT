@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -20,12 +25,15 @@ use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Interception\PluginList;
 use Magento\TestFramework\Quote\Model\GetQuoteByReservedOrderId;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\Config;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Quote\Test\Fixture\CustomerCart;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for checkout config provider plugin
@@ -137,6 +145,7 @@ class ConfigProviderPluginTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @return void
      */
     #[
@@ -150,6 +159,13 @@ class ConfigProviderPluginTest extends TestCase
         DataFixture(ProductFixture::class, as: 'product'),
         DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
     ]
+=======
+     * @magentoDataFixture Magento/Checkout/_files/quote_with_customer_without_address.php
+     * @magentoConfigFixture current_store persistent/options/enabled 0
+     *
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPersistentDisabled(): void
     {
         $quote = $this->getQuoteByReservedOrderId->execute('test_order_with_customer_without_address');
@@ -159,6 +175,7 @@ class ConfigProviderPluginTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @return void
      */
     #[
@@ -172,6 +189,13 @@ class ConfigProviderPluginTest extends TestCase
         DataFixture(ProductFixture::class, as: 'product'),
         DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
     ]
+=======
+     * @magentoDataFixture Magento/Checkout/_files/quote_with_customer_without_address.php
+     * @magentoConfigFixture current_store persistent/options/enabled 1
+     *
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testWithoutPersistentSession(): void
     {
         $quote = $this->getQuoteByReservedOrderId->execute('test_order_with_customer_without_address');

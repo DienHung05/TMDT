@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2011 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Test;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Test;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class EntityTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -52,6 +60,11 @@ class EntityTest extends \PHPUnit\Framework\TestCase
         $this->_model->setId(null);
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testConstructorIrrelevantModelClass()
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -60,7 +73,11 @@ class EntityTest extends \PHPUnit\Framework\TestCase
         new \Magento\TestFramework\Entity($this->_model, [], 'stdClass');
     }
 
+<<<<<<< HEAD
     public static function crudDataProvider()
+=======
+    public function crudDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'successful CRUD' => ['saveModelSuccessfully'],
@@ -71,7 +88,13 @@ class EntityTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+<<<<<<< HEAD
     #[DataProvider('crudDataProvider')]
+=======
+    /**
+     * @dataProvider crudDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testTestCrud($saveCallback, $expectedException = null)
     {
         if ($expectedException != null) {
@@ -95,7 +118,11 @@ class EntityTest extends \PHPUnit\Framework\TestCase
         $this->_model->expects($this->any())->method('getIdFieldName')->willReturn('id');
 
         $test = $this->getMockBuilder(\Magento\TestFramework\Entity::class)
+<<<<<<< HEAD
             ->onlyMethods(['_getEmptyModel'])
+=======
+            ->setMethods(['_getEmptyModel'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->setConstructorArgs([$this->_model, ['test' => 'test']])
             ->getMock();
 

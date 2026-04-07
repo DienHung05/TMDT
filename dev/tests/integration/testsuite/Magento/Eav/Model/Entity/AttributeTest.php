@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Eav\Model\Entity;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Locale\ResolverInterface;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
@@ -56,6 +64,10 @@ class AttributeTest extends TestCase
         $reflection = new \ReflectionObject($this);
         foreach ($reflection->getProperties() as $property) {
             if (!$property->isStatic() && 0 !== strpos($property->getDeclaringClass()->getName(), 'PHPUnit')) {
+<<<<<<< HEAD
+=======
+                $property->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $property->setValue($this, null);
             }
         }
@@ -66,9 +78,15 @@ class AttributeTest extends TestCase
      * @param string $backendType
      * @param string $locale
      * @param string $expected
+<<<<<<< HEAD
      * @throws
      */
     #[DataProvider('beforeSaveDataProvider')]
+=======
+     * @dataProvider beforeSaveDataProvider
+     * @throws
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testBeforeSave(
         string $defaultValue,
         string $backendType,
@@ -90,7 +108,11 @@ class AttributeTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function beforeSaveDataProvider()
+=======
+    public function beforeSaveDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['21/07/18', 'datetime', 'date', 'en_AU', '2018-07-21 00:00:00'],
@@ -110,8 +132,13 @@ class AttributeTest extends TestCase
      * @param string $backendType
      * @param string $locale
      * @param string $expected
+<<<<<<< HEAD
      */
     #[DataProvider('beforeSaveErrorDataDataProvider')]
+=======
+     * @dataProvider beforeSaveErrorDataDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testBeforeSaveErrorData($defaultValue, $backendType, $locale, $expected)
     {
         $this->expectException(\Magento\Framework\Exception\LocalizedException::class);
@@ -129,7 +156,11 @@ class AttributeTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function beforeSaveErrorDataDataProvider()
+=======
+    public function beforeSaveErrorDataDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'wrong date for Australia' => ['32/38', 'datetime', 'en_AU', 'Invalid default date'],

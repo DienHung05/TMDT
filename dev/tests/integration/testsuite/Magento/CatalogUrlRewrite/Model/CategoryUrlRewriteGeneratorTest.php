@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\CatalogUrlRewrite\Model;
@@ -23,7 +28,10 @@ use Magento\UrlRewrite\Model\UrlFinderInterface;
 use Magento\UrlRewrite\Service\V1\Data\UrlRewrite;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea adminhtml
@@ -212,8 +220,13 @@ class CategoryUrlRewriteGeneratorTest extends TestCase
      * @throws CouldNotSaveException
      * @throws NoSuchEntityException
      * @throws Exception
+<<<<<<< HEAD
      */
     #[DataProvider('incorrectUrlRewritesDataProvider')]
+=======
+     * @dataProvider incorrectUrlRewritesDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGenerateUrlRewritesWithIncorrectUrlKey($urlKey)
     {
         $this->expectException(LocalizedException::class);
@@ -228,7 +241,11 @@ class CategoryUrlRewriteGeneratorTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function incorrectUrlRewritesDataProvider()
+=======
+    public function incorrectUrlRewritesDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['#'],

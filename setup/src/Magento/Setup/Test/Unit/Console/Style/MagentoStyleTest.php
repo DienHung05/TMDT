@@ -1,8 +1,13 @@
 <?php
 
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -264,6 +269,7 @@ class MagentoStyleTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
         $input = $this->getMockBuilder(InputInterface::class)
+<<<<<<< HEAD
             ->onlyMethods([
                 'getFirstArgument', 'hasParameterOption', 'getParameterOption', 'bind',
                 'validate', 'getArguments', 'getArgument', 'setArgument', 'hasArgument',
@@ -272,16 +278,27 @@ class MagentoStyleTest extends TestCase
             ])
             ->disableOriginalConstructor()
             ->getMock();
+=======
+            ->setMethods(['isInteractive'])
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $input->expects($this->exactly(2))
             ->method('isInteractive')
             ->willReturn(false);
         $output = $this->getMockBuilder(OutputInterface::class)
+<<<<<<< HEAD
             ->onlyMethods([
                 'write', 'writeln', 'setVerbosity', 'getVerbosity', 'isQuiet', 'isVerbose',
                 'isVeryVerbose', 'isDebug', 'setDecorated', 'isDecorated', 'setFormatter', 'getFormatter'
             ])
             ->disableOriginalConstructor()
             ->getMock();
+=======
+            ->setMethods(['getVerbosity', 'getFormatter'])
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $output->expects($this->once())
             ->method('getVerbosity')
             ->willReturn(32);

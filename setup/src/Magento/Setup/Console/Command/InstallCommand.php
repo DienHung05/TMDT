@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -89,8 +94,11 @@ class InstallCommand extends AbstractSetupCommand
      */
     public const SALES_ORDER_INCREMENT_PREFIX_RULE = '/^.{0,20}$/';
 
+<<<<<<< HEAD
     public const NAME = 'setup:install';
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Installer service factory
      *
@@ -222,7 +230,11 @@ class InstallCommand extends AbstractSetupCommand
                 false
             ),
         ]);
+<<<<<<< HEAD
         $this->setName(self::NAME)
+=======
+        $this->setName('setup:install')
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->setDescription('Installs the Magento application')
             ->setDefinition($inputOptions);
         parent::configure();
@@ -231,7 +243,11 @@ class InstallCommand extends AbstractSetupCommand
     /**
      * @inheritdoc
      */
+<<<<<<< HEAD
     protected function execute(InputInterface $input, OutputInterface $output): int
+=======
+    protected function execute(InputInterface $input, OutputInterface $output)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $consoleLogger = new ConsoleLogger($output);
         $installer = $this->installerFactory->create($consoleLogger);

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -15,7 +20,10 @@ use Magento\Framework\Setup\Option\SelectConfigOption;
 use Magento\Framework\Setup\Option\TextConfigOption;
 use Magento\Setup\Model\ConfigOptionsList\Lock as LockConfigOptionsList;
 use PHPUnit\Framework\MockObject\MockObject;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 class LockTest extends TestCase
@@ -71,8 +79,13 @@ class LockTest extends TestCase
     /**
      * @param array $options
      * @param array $expectedResult
+<<<<<<< HEAD
      */
     #[DataProvider('createConfigDataProvider')]
+=======
+     * @dataProvider createConfigDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateConfig(array $options, array $expectedResult)
     {
         $this->deploymentConfigMock->expects($this->any())
@@ -88,7 +101,11 @@ class LockTest extends TestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function createConfigDataProvider(): array
+=======
+    public function createConfigDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Check default values' => [
@@ -198,6 +215,7 @@ class LockTest extends TestCase
     /**
      * @param array $options
      * @param array $expectedResult
+<<<<<<< HEAD
      */
     #[DataProvider('updateConfigDataProvider')]
     public function testUpdateConfig(array $options, array $expectedResult)
@@ -296,6 +314,10 @@ class LockTest extends TestCase
      * @param array $expectedResult
      */
     #[DataProvider('validateDataProvider')]
+=======
+     * @dataProvider validateDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testValidate(array $options, array $expectedResult)
     {
         $this->deploymentConfigMock->expects($this->any())
@@ -310,7 +332,11 @@ class LockTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function validateDataProvider(): array
+=======
+    public function validateDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Wrong lock provider' => [

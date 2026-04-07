@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -10,7 +15,10 @@ namespace Magento\TestFramework\ErrorLog;
 use Magento\Framework\Logger\Monolog;
 use Monolog\Handler\HandlerInterface;
 use Monolog\DateTimeImmutable;
+<<<<<<< HEAD
 use Monolog\Level;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class Logger extends Monolog
 {
@@ -67,6 +75,7 @@ class Logger extends Monolog
     /**
      * @inheritdoc
      *
+<<<<<<< HEAD
      * @param int|Level $level The logging level
      * @param string $message The log message
      * @param array $context The log context
@@ -78,6 +87,19 @@ class Logger extends Monolog
         string $message,
         array $context = [],
         DateTimeImmutable|null $datetime = null
+=======
+     * @param int $level The logging level
+     * @param string $message The log message
+     * @param array $context The log context
+     * @param DateTimeImmutable $datetime Optional log date to log into the past or future
+     * @return bool Whether the record has been processed
+     */
+    public function addRecord(
+        int $level,
+        string $message,
+        array $context = [],
+        DateTimeImmutable $datetime = null
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ): bool {
         if ($level <= $this->minimumErrorLevel) {
             $this->messages[] = [

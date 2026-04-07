@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -11,7 +16,10 @@ namespace Magento\Framework\MessageQueue;
 use Magento\TestFramework\Helper\Amqp;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @see dev/tests/integration/_files/Magento/TestModuleMessageQueueConfiguration
@@ -32,15 +40,19 @@ class TopologyTest extends TestCase
     private $helper;
 
     /**
+<<<<<<< HEAD
      * @var string
      */
     private $connectionType;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @return void
      */
     protected function setUp(): void
     {
+<<<<<<< HEAD
         $objectManager = Bootstrap::getObjectManager();
         /** @var DefaultValueProvider $defaultValueProvider */
         $defaultValueProvider = $objectManager->get(DefaultValueProvider::class);
@@ -69,6 +81,24 @@ class TopologyTest extends TestCase
             This test is AMQP-specific.');
         }
 
+=======
+        $this->helper = Bootstrap::getObjectManager()->create(Amqp::class);
+
+        if (!$this->helper->isAvailable()) {
+            $this->fail('This test relies on RabbitMQ Management Plugin.');
+        }
+
+        $this->declaredExchanges = $this->helper->getExchanges();
+    }
+
+    /**
+     * @dataProvider exchangeDataProvider
+     * @param array $expectedConfig
+     * @param array $bindingConfig
+     */
+    public function testTopologyInstallation(array $expectedConfig, array $bindingConfig): void
+    {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $name = $expectedConfig['name'];
         $this->assertArrayHasKey($name, $this->declaredExchanges);
         unset(
@@ -100,12 +130,20 @@ class TopologyTest extends TestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function exchangeDataProvider(): array
+=======
+    public function exchangeDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $virtualHost = defined('RABBITMQ_VIRTUALHOST') ? RABBITMQ_VIRTUALHOST : Amqp::DEFAULT_VIRTUALHOST;
         return [
             'magento-topic-based-exchange1' => [
+<<<<<<< HEAD
                 'expectedConfig' => [
+=======
+                'exchangeConfig' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'name' => 'magento-topic-based-exchange1',
                     'vhost' => $virtualHost,
                     'type' => 'topic',
@@ -130,7 +168,11 @@ class TopologyTest extends TestCase
                 ]
             ],
             'magento-topic-based-exchange2' => [
+<<<<<<< HEAD
                 'expectedConfig' => [
+=======
+                'exchangeConfig' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'name' => 'magento-topic-based-exchange2',
                     'vhost' => $virtualHost,
                     'type' => 'topic',
@@ -158,7 +200,11 @@ class TopologyTest extends TestCase
                 ]
             ],
             'magento-topic-based-exchange3' => [
+<<<<<<< HEAD
                 'expectedConfig' => [
+=======
+                'exchangeConfig' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'name' => 'magento-topic-based-exchange3',
                     'vhost' => $virtualHost,
                     'type' => 'topic',
@@ -170,7 +216,11 @@ class TopologyTest extends TestCase
                 'bindingConfig' => [],
             ],
             'magento-topic-based-exchange4' => [
+<<<<<<< HEAD
                 'expectedConfig' => [
+=======
+                'exchangeConfig' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'name' => 'magento-topic-based-exchange4',
                     'vhost' => $virtualHost,
                     'type' => 'topic',

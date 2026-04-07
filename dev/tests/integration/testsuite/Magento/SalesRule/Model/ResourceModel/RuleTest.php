@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
  */
@@ -13,6 +14,13 @@ use Magento\TestFramework\Fixture\DataFixtureStorage;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Helper\Bootstrap;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\SalesRule\Model\ResourceModel;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * @magentoDbIsolation enabled
  * @magentoAppIsolation enabled
@@ -20,6 +28,7 @@ use Magento\TestFramework\Helper\Bootstrap;
 class RuleTest extends \PHPUnit\Framework\TestCase
 {
     /**
+<<<<<<< HEAD
      * @var DataFixtureStorage
      */
     private $fixtures;
@@ -43,10 +52,13 @@ class RuleTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/SalesRule/_files/rule_custom_product_attribute.php
      */
     public function testAfterSave()
     {
+<<<<<<< HEAD
         $items = $this->resource->getActiveAttributes();
 
         $this->assertEquals([['attribute_code' => 'attribute_for_sales_rule_1']], $items);
@@ -77,4 +89,13 @@ class RuleTest extends \PHPUnit\Framework\TestCase
         $items = $this->resource->getActiveAttributes();
         $this->assertEquals([['attribute_code' => 'category_ids']], $items);
     }
+=======
+        $resource = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(
+            \Magento\SalesRule\Model\ResourceModel\Rule::class
+        );
+        $items = $resource->getActiveAttributes();
+
+        $this->assertEquals([['attribute_code' => 'attribute_for_sales_rule_1']], $items);
+    }
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

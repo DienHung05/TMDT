@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -20,7 +25,10 @@ use PHPUnit\Framework\TestCase;
  * Class checks subscription behavior.
  *
  * @see \Magento\Newsletter\Model\Subscriber
+<<<<<<< HEAD
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class SubscriberTest extends TestCase
 {
@@ -76,12 +84,19 @@ class SubscriberTest extends TestCase
     {
         $subscriber = $this->subscriberFactory->create();
         $subscriber->subscribe('customer_confirm@example.com');
+<<<<<<< HEAD
         $emailMessage = quoted_printable_decode($this->transportBuilder->getSentMessage()->getBody()->bodyToString());
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         // confirmationCode 'ysayquyajua23iq29gxwu2eax2qb6gvy' is taken from fixture
         $this->assertStringContainsString(
             '/newsletter/subscriber/confirm/id/' . $subscriber->getSubscriberId()
             . '/code/ysayquyajua23iq29gxwu2eax2qb6gvy',
+<<<<<<< HEAD
             $emailMessage
+=======
+            $this->transportBuilder->getSentMessage()->getBody()->getParts()[0]->getRawContent()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
         $this->assertEquals(Subscriber::STATUS_NOT_ACTIVE, $subscriber->getSubscriberStatus());
     }
@@ -268,10 +283,14 @@ class SubscriberTest extends TestCase
         $messageContent = $this->getMessageRawContent($message);
 
         $emailDom = new \DOMDocument();
+<<<<<<< HEAD
         $emailDom->loadHTML(
             $messageContent,
             LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD | LIBXML_NOERROR | LIBXML_NOWARNING
         );
+=======
+        $emailDom->loadHTML($messageContent);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $emailXpath = new \DOMXPath($emailDom);
         $greeting = $emailXpath->query("//p[contains(text(), '$expectedMessage')]");
@@ -287,6 +306,11 @@ class SubscriberTest extends TestCase
      */
     private function getMessageRawContent(EmailMessage $message): string
     {
+<<<<<<< HEAD
         return quoted_printable_decode($message->getBody()->bodyToString());
+=======
+        $emailParts = $message->getBody()->getParts();
+        return current($emailParts)->getRawContent();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

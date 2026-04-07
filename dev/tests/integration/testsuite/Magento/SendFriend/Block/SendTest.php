@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -10,11 +15,17 @@ namespace Magento\SendFriend\Block;
 use Magento\Customer\Api\AccountManagementInterface;
 use Magento\Customer\Model\Session;
 use Magento\Framework\ObjectManagerInterface;
+<<<<<<< HEAD
 use Magento\Framework\View\Element\ButtonLockManager;
 use Magento\Framework\View\LayoutInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Helper\Xpath;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\Framework\View\LayoutInterface;
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\TestFramework\Helper\Xpath;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -60,8 +71,12 @@ class SendTest extends TestCase
     {
         $this->objectManager = Bootstrap::getObjectManager();
         $this->layout = $this->objectManager->get(LayoutInterface::class);
+<<<<<<< HEAD
         $this->block = $this->layout->createBlock(Send::class)
             ->setButtonLockManager(Bootstrap::getObjectManager()->create(ButtonLockManager::class));
+=======
+        $this->block = $this->layout->createBlock(Send::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->session = $this->objectManager->get(Session::class);
         $this->accountManagement = $this->objectManager->get(AccountManagementInterface::class);
     }
@@ -77,11 +92,19 @@ class SendTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider formDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $field
      * @param string $value
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('formDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetCustomerFieldFromFormData(string $field, string $value): void
     {
         $formData = ['sender' => [$field => $value]];
@@ -92,7 +115,11 @@ class SendTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function formDataProvider(): array
+=======
+    public function formDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['name', 'Customer Form Name'],
@@ -103,13 +130,21 @@ class SendTest extends TestCase
     /**
      * @magentoDataFixture Magento/Customer/_files/customer.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider customerSessionDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoAppIsolation enabled
      *
      * @param string $field
      * @param string $value
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('customerSessionDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetCustomerFieldFromSession(string $field, string $value): void
     {
         $customer = $this->accountManagement->authenticate('customer@example.com', 'password');
@@ -120,7 +155,11 @@ class SendTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function customerSessionDataProvider(): array
+=======
+    public function customerSessionDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['name', 'John Smith'],

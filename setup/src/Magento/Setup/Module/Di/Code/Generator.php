@@ -1,7 +1,13 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Setup\Module\Di\Code;
@@ -31,9 +37,15 @@ class Generator extends FrameworkGenerator
      */
     public function __construct(
         ObjectManagerInterface $objectManagerInterface,
+<<<<<<< HEAD
         ?\Magento\Framework\Code\Generator\Io $ioObject = null,
         array $generatedEntities = [],
         ?DefinedClasses $definedClasses = null
+=======
+        \Magento\Framework\Code\Generator\Io $ioObject = null,
+        array $generatedEntities = [],
+        DefinedClasses $definedClasses = null
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ) {
         parent::__construct($ioObject, $generatedEntities, $definedClasses);
         $this->setObjectManager($objectManagerInterface);

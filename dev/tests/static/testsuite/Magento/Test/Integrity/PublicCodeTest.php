@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Test\Integrity;
 
 use Exception;
 use Magento\Framework\App\Utility\Files;
 use Magento\Setup\Module\Di\Code\Reader\FileClassScanner;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionMethod;
@@ -31,16 +39,26 @@ class PublicCodeTest extends TestCase
     /**
      * @var string[]|null
      */
+<<<<<<< HEAD
     private static $blockWhitelist;
+=======
+    private $blockWhitelist;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * Return whitelist class names
      *
      * @return string[]
      */
+<<<<<<< HEAD
     private static function getWhitelist(): array
     {
         if (self::$blockWhitelist === null) {
+=======
+    private function getWhitelist(): array
+    {
+        if ($this->blockWhitelist === null) {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $whiteListFiles = str_replace(
                 '\\',
                 '/',
@@ -50,9 +68,15 @@ class PublicCodeTest extends TestCase
             foreach (glob($whiteListFiles) as $fileName) {
                 $whiteListItems[] = file($fileName, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
             }
+<<<<<<< HEAD
             self::$blockWhitelist = array_merge([], ...$whiteListItems);
         }
         return self::$blockWhitelist;
+=======
+            $this->blockWhitelist = array_merge([], ...$whiteListItems);
+        }
+        return $this->blockWhitelist;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -61,8 +85,13 @@ class PublicCodeTest extends TestCase
      *
      * @param $layoutFile
      * @throws \ReflectionException
+<<<<<<< HEAD
      */
     #[DataProvider('layoutFilesDataProvider')]
+=======
+     * @dataProvider layoutFilesDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAllBlocksReferencedInLayoutArePublic($layoutFile)
     {
         $nonPublishedBlocks = [];
@@ -92,7 +121,11 @@ class PublicCodeTest extends TestCase
      * @return array
      * @throws Exception
      */
+<<<<<<< HEAD
     public static function layoutFilesDataProvider()
+=======
+    public function layoutFilesDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return Files::init()->getLayoutFiles([], true);
     }
@@ -105,8 +138,13 @@ class PublicCodeTest extends TestCase
      *
      * @param string $class
      * @throws \ReflectionException
+<<<<<<< HEAD
      */
     #[DataProvider('publicPHPTypesDataProvider')]
+=======
+     * @dataProvider publicPHPTypesDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAllPHPClassesReferencedFromPublicClassesArePublic($class)
     {
         $nonPublishedClasses = [];
@@ -151,7 +189,11 @@ class PublicCodeTest extends TestCase
      * @return array
      * @throws Exception
      */
+<<<<<<< HEAD
     public static function publicPHPTypesDataProvider(): array
+=======
+    public function publicPHPTypesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $files = Files::init()->getPhpFiles(Files::INCLUDE_LIBS | Files::INCLUDE_APP_CODE);
         $result = [];
@@ -161,7 +203,11 @@ class PublicCodeTest extends TestCase
                 $fileClassScanner = new FileClassScanner($file);
                 $className = $fileClassScanner->getClassName();
 
+<<<<<<< HEAD
                 if (!in_array($className, self::getWhitelist())
+=======
+                if (!in_array($className, $this->getWhitelist())
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     && (class_exists($className) || interface_exists($className))
                 ) {
                     $result[$className] = [$className];

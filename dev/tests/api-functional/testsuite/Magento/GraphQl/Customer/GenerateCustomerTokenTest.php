@@ -1,12 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Customer;
 
+<<<<<<< HEAD
 use Magento\Customer\Api\AccountManagementInterface;
 use Magento\Customer\Model\Log;
 use Magento\Customer\Model\Logger;
@@ -21,6 +27,9 @@ use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Magento\Customer\Model\CustomerFactory;
+=======
+use Magento\TestFramework\TestCase\GraphQlAbstract;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * API-functional tests cases for generateCustomerToken mutation
@@ -28,6 +37,7 @@ use Magento\Customer\Model\CustomerFactory;
 class GenerateCustomerTokenTest extends GraphQlAbstract
 {
     /**
+<<<<<<< HEAD
      * @var Logger
      */
     private $logger;
@@ -48,10 +58,13 @@ class GenerateCustomerTokenTest extends GraphQlAbstract
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Verify customer token with valid credentials
      *
      * @magentoApiDataFixture Magento/Customer/_files/customer.php
      */
+<<<<<<< HEAD
     public function testGenerateCustomerValidToken(): void
     {
         $mutation = $this->getQuery('customer@example.com', 'wrongpassword');
@@ -71,6 +84,16 @@ class GenerateCustomerTokenTest extends GraphQlAbstract
             ->loadByEmail('customer@example.com');
         $this->assertEquals(0, $customer->getFailuresNum());
         $this->assertNull($customer->getFirstFailure());
+=======
+    public function testGenerateCustomerValidToken()
+    {
+        $email = 'customer@example.com';
+        $password = 'password';
+
+        $mutation = $this->getQuery($email, $password);
+
+        $response = $this->graphQlMutation($mutation);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertArrayHasKey('generateCustomerToken', $response);
         $this->assertIsArray($response['generateCustomerToken']);
     }
@@ -80,12 +103,20 @@ class GenerateCustomerTokenTest extends GraphQlAbstract
      *
      * @magentoApiDataFixture Magento/Customer/_files/customer.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider dataProviderInvalidCustomerInfo
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $email
      * @param string $password
      * @param string $message
      */
+<<<<<<< HEAD
     #[DataProvider('dataProviderInvalidCustomerInfo')]
     public function testGenerateCustomerTokenInvalidData(string $email, string $password, string $message): void
+=======
+    public function testGenerateCustomerTokenInvalidData(string $email, string $password, string $message)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $this->expectException(\Exception::class);
 
@@ -94,6 +125,7 @@ class GenerateCustomerTokenTest extends GraphQlAbstract
         $this->graphQlMutation($mutation);
     }
 
+<<<<<<< HEAD
     #[
         Config('customer/create_account/confirm', 1),
         DataFixture(
@@ -115,14 +147,25 @@ class GenerateCustomerTokenTest extends GraphQlAbstract
         $this->graphQlMutation($mutation);
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Test customer token regeneration.
      *
      * @magentoApiDataFixture Magento/Customer/_files/customer.php
      */
+<<<<<<< HEAD
     public function testRegenerateCustomerToken(): void
     {
         $mutation = $this->getQuery();
+=======
+    public function testRegenerateCustomerToken()
+    {
+        $email = 'customer@example.com';
+        $password = 'password';
+
+        $mutation = $this->getQuery($email, $password);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $response1 = $this->graphQlMutation($mutation);
         $token1 = $response1['generateCustomerToken']['token'];
@@ -138,7 +181,11 @@ class GenerateCustomerTokenTest extends GraphQlAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function dataProviderInvalidCustomerInfo(): array
+=======
+    public function dataProviderInvalidCustomerInfo(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'invalid_email' => [
@@ -172,7 +219,11 @@ class GenerateCustomerTokenTest extends GraphQlAbstract
      * @param string $password
      * @return string
      */
+<<<<<<< HEAD
     private function getQuery(string $email = 'customer@example.com', string $password = 'password'): string
+=======
+    private function getQuery(string $email, string $password) : string
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return <<<MUTATION
 mutation {
@@ -189,12 +240,30 @@ MUTATION;
     /**
      * Verify customer with empty email
      */
+<<<<<<< HEAD
     public function testGenerateCustomerTokenWithEmptyEmail(): void
+=======
+    public function testGenerateCustomerTokenWithEmptyEmail()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $email = '';
         $password = 'bad-password';
 
+<<<<<<< HEAD
         $mutation = $this->getQuery($email, $password);
+=======
+        $mutation
+            = <<<MUTATION
+mutation {
+	generateCustomerToken(
+        email: "{$email}"
+        password: "{$password}"
+    ) {
+        token
+    }
+}
+MUTATION;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('GraphQL response contains errors: Specify the "email" value.');
@@ -204,17 +273,36 @@ MUTATION;
     /**
      * Verify customer with empty password
      */
+<<<<<<< HEAD
     public function testGenerateCustomerTokenWithEmptyPassword(): void
+=======
+    public function testGenerateCustomerTokenWithEmptyPassword()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $email = 'customer@example.com';
         $password = '';
 
+<<<<<<< HEAD
         $mutation = $this->getQuery($email, $password);
+=======
+        $mutation
+            = <<<MUTATION
+mutation {
+	generateCustomerToken(
+        email: "{$email}"
+        password: "{$password}"
+    ) {
+        token
+    }
+}
+MUTATION;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('GraphQL response contains errors: Specify the "password" value.');
         $this->graphQlMutation($mutation);
     }
+<<<<<<< HEAD
 
     /**
      * Verify customer log after generate customer token
@@ -251,4 +339,6 @@ MUTATION;
         }
         parent::tearDown();
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

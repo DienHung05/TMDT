@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\TestFramework;
 
@@ -76,7 +81,12 @@ class ObjectManager extends \Magento\Framework\App\ObjectManager
         if ($resourceConnection) {
             $reflection = new \ReflectionClass($resourceConnection);
             $dataProperty = $reflection->getProperty('mappedTableNames');
+<<<<<<< HEAD
             $dataProperty->setValue($resourceConnection, []);
+=======
+            $dataProperty->setAccessible(true);
+            $dataProperty->setValue($resourceConnection, null);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
     }
 

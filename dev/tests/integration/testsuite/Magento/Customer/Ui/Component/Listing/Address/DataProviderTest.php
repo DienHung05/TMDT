@@ -1,13 +1,19 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Customer\Ui\Component\Listing\Address;
 
 use Magento\Backend\Model\Locale\Resolver;
+<<<<<<< HEAD
 use Magento\Customer\Model\Customer;
 use Magento\Customer\Ui\Component\Listing\Address\DataProvider;
 use Magento\Framework\Api\Filter;
@@ -16,6 +22,12 @@ use Magento\Framework\Indexer\IndexerRegistry;
 use Magento\Framework\Locale\ResolverInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\Attributes\DataProvider as DataProviderAttribute;
+=======
+use Magento\Framework\Api\Filter;
+use Magento\Framework\App\RequestInterface;
+use Magento\Framework\Locale\ResolverInterface;
+use Magento\TestFramework\Helper\Bootstrap;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -56,9 +68,12 @@ class DataProviderTest extends TestCase
                 'request' => $this->requestMock,
             ]
         );
+<<<<<<< HEAD
         $indexerRegistry = Bootstrap::getObjectManager()->create(IndexerRegistry::class);
         $indexer = $indexerRegistry->get(Customer::CUSTOMER_GRID_INDEXER_ID);
         $indexer->reindexAll();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -68,8 +83,13 @@ class DataProviderTest extends TestCase
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @magentoDataFixture Magento/Customer/_files/customer_address.php
      * @magentoDataFixture Magento/Directory/_files/region_name_jp.php
+<<<<<<< HEAD
      */
     #[DataProviderAttribute('getDataByRegionDataProvider')]
+=======
+     * @dataProvider getDataByRegionDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetDataByRegion(array $filterData)
     {
         $customerId = 1;
@@ -102,7 +122,11 @@ class DataProviderTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getDataByRegionDataProvider(): array
+=======
+    public function getDataByRegionDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [['condition_type' => 'fulltext', 'field' => 'fulltext', 'value' => 'アラバマ']],

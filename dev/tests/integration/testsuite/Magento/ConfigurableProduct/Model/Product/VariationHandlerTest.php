@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -13,7 +18,10 @@ use Magento\CatalogInventory\Api\StockRegistryInterface;
 use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -64,10 +72,17 @@ class VariationHandlerTest extends TestCase
 
     /**
      * @magentoDataFixture Magento/ConfigurableProduct/_files/product_configurable.php
+<<<<<<< HEAD
      * @param array $productsData
      * @return void
      */
     #[DataProvider('generateSimpleProductsDataProvider')]
+=======
+     * @dataProvider generateSimpleProductsDataProvider
+     * @param array $productsData
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGenerateSimpleProducts(array $productsData): void
     {
         $this->product->setImage('some_test_image.jpg')
@@ -95,9 +110,15 @@ class VariationHandlerTest extends TestCase
     /**
      * @param array $productsData
      * @magentoDataFixture Magento/ConfigurableProduct/_files/product_configurable.php
+<<<<<<< HEAD
      * @return void
      */
     #[DataProvider('generateSimpleProductsWithPartialDataDataProvider')]
+=======
+     * @dataProvider generateSimpleProductsWithPartialDataDataProvider
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGenerateSimpleProductsWithPartialData(array $productsData): void
     {
         $this->product->setNewVariationsAttributeSetId(4);
@@ -111,6 +132,7 @@ class VariationHandlerTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @magentoDataFixture Magento/ConfigurableProduct/_files/product_configurable.php
      * @param array $productsData
      * @return void
@@ -128,6 +150,11 @@ class VariationHandlerTest extends TestCase
      * @return array
      */
     public static function generateSimpleProductsDataProvider(): array
+=======
+     * @return array
+     */
+    public function generateSimpleProductsDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -164,7 +191,11 @@ class VariationHandlerTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function generateSimpleProductsWithPartialDataDataProvider(): array
+=======
+    public function generateSimpleProductsWithPartialDataDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

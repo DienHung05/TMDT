@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -15,7 +20,10 @@ use Magento\Framework\Message\MessageInterface;
 use Magento\Newsletter\Model\CustomerSubscriberCache;
 use Magento\Newsletter\Model\Plugin\CustomerPlugin;
 use Magento\TestFramework\TestCase\AbstractController;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class checks customer subscription
@@ -62,11 +70,19 @@ class SaveTest extends AbstractController
     /**
      * @magentoDataFixture Magento/Customer/_files/new_customer.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider subscriptionDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param bool $isSubscribed
      * @param string $expectedMessage
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('subscriptionDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveAction(bool $isSubscribed, string $expectedMessage): void
     {
         $this->loginCustomer('new_customer@example.com');
@@ -77,6 +93,7 @@ class SaveTest extends AbstractController
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function subscriptionDataProvider(): array
     {
         return [
@@ -87,6 +104,18 @@ class SaveTest extends AbstractController
             'unsubscribe_customer' => [
                 'isSubscribed' => false,
                 'expectedMessage' => 'We have updated your subscription.',
+=======
+    public function subscriptionDataProvider(): array
+    {
+        return [
+            'subscribe_customer' => [
+                'is_subscribed' => true,
+                'expected_message' => 'We have saved your subscription.',
+            ],
+            'unsubscribe_customer' => [
+                'is_subscribed' => false,
+                'expected_message' => 'We have updated your subscription.',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

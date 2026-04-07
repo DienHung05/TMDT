@@ -9,6 +9,7 @@
   },
   "homepage": "https://magento.com/",
   "devDependencies": {
+<<<<<<< HEAD
     "eslint-formatter-junit": "~8.40.0",
     "glob": "~11.0.0",
     "grunt": "~1.6.1",
@@ -22,17 +23,36 @@
     "grunt-contrib-less": "~3.0.0",
     "grunt-contrib-watch": "~1.1.0",
     "grunt-eslint": "~25.0.0",
+=======
+    "glob": "~8.0.1",
+    "grunt": "~1.5.2",
+    "grunt-banner": "~0.6.0",
+    "grunt-continue": "~0.1.0",
+    "grunt-contrib-clean": "~2.0.0",
+    "grunt-contrib-connect": "~3.0.0",
+    "grunt-contrib-cssmin": "~4.0.0",
+    "grunt-contrib-imagemin": "~4.0.0",
+    "grunt-contrib-jasmine": "~3.0.0",
+    "grunt-contrib-less": "~2.1.0",
+    "grunt-contrib-watch": "~1.1.0",
+    "grunt-eslint": "~24.0.0",
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     "grunt-exec": "~3.0.0",
     "grunt-replace": "~2.0.2",
     "grunt-styledocco": "~0.3.0",
     "grunt-template-jasmine-requirejs": "~0.2.3",
     "grunt-text-replace": "~0.4.0",
     "imagemin-svgo": "~9.0.0",
+<<<<<<< HEAD
     "less": "4.2.2",
+=======
+    "less": "3.13.1",
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     "load-grunt-config": "~4.0.1",
     "morgan": "~1.10.0",
     "node-minify": "~3.6.0",
     "path": "~0.12.7",
+<<<<<<< HEAD
     "serve-static": "~1.16.2",
     "squirejs": "~0.2.1",
     "strip-comments": "~2.0.1",
@@ -85,5 +105,12 @@
   },
   "dependencies": {
     "magento-coding-standard-eslint-plugin": "file:vendor/magento/magento-coding-standard/eslint"
+=======
+    "serve-static": "~1.15.0",
+    "squirejs": "~0.2.1",
+    "strip-json-comments": "~3.1.1",
+    "time-grunt": "~2.0.0",
+    "underscore": "1.13.3"
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
   }
 }

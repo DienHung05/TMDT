@@ -1,12 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\ProductAlert\Model\Mailing;
 
+<<<<<<< HEAD
 use Magento\Catalog\Model\ProductFactory;
 use Magento\Catalog\Model\ResourceModel\Product as ProductResourceModel;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
@@ -36,6 +42,29 @@ use PHPUnit\Framework\TestCase;
  * @magentoAppIsolation enabled
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
+=======
+use Magento\Customer\Api\AccountManagementInterface;
+use Magento\Customer\Model\Session;
+use Magento\Framework\App\Area;
+use Magento\Framework\Locale\Resolver;
+use Magento\Framework\Module\Dir\Reader;
+use Magento\Framework\Phrase;
+use Magento\Framework\Phrase\Renderer\Translate as PhraseRendererTranslate;
+use Magento\Framework\Phrase\RendererInterface;
+use Magento\Framework\Translate;
+use Magento\Store\Model\StoreRepository;
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\TestFramework\Mail\Template\TransportBuilderMock;
+use Magento\TestFramework\ObjectManager;
+use PHPUnit\Framework\TestCase;
+
+/**
+* Test for Product Alert observer
+*
+* @magentoAppIsolation enabled
+* @magentoAppArea frontend
+*/
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class AlertProcessorTest extends TestCase
 {
     /**
@@ -59,11 +88,14 @@ class AlertProcessorTest extends TestCase
     private $transportBuilder;
 
     /**
+<<<<<<< HEAD
      * @var DataFixtureStorage
      */
     private $fixtures;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritDoc
      */
     protected function setUp(): void
@@ -73,6 +105,7 @@ class AlertProcessorTest extends TestCase
         $this->alertProcessor = $this->objectManager->get(AlertProcessor::class);
 
         $this->transportBuilder = $this->objectManager->get(TransportBuilderMock::class);
+<<<<<<< HEAD
         $this->fixtures = DataFixtureStorageManager::getStorage();
     }
 
@@ -340,4 +373,85 @@ class AlertProcessorTest extends TestCase
     {
         return quoted_printable_decode($message->getBody()->bodyToString());
     }
+=======
+        $service = $this->objectManager->create(AccountManagementInterface::class);
+        $customer = $service->authenticate('customer@example.com', 'password');
+        $customerSession = $this->objectManager->get(Session::class);
+        $customerSession->setCustomerDataAsLoggedIn($customer);
+    }
+
+    /**
+     * @magentoConfigFixture current_store catalog/productalert/allow_price 1
+     * @magentoDataFixture Magento/ProductAlert/_files/product_alert.php
+     */
+    public function testProcess()
+    {
+        $this->processAlerts();
+
+        /** Checking is the email was sent */
+        $this->assertStringContainsString(
+            'John Smith,',
+            $this->transportBuilder->getSentMessage()->getBody()->getParts()[0]->getRawContent()
+        );
+    }
+
+    /**
+     * Check translations for product alerts
+     *
+     * @magentoDbIsolation disabled
+     * @magentoDataFixture Magento/Catalog/_files/category.php
+     * @magentoConfigFixture current_store catalog/productalert/allow_price 1
+     * @magentoDataFixture Magento/Store/_files/second_store.php
+     * @magentoConfigFixture fixture_second_store_store general/locale/code pt_BR
+     * @magentoDataFixture Magento/ProductAlert/_files/product_alert_with_store.php
+     */
+    public function testProcessPortuguese()
+    {
+        // get second store
+        $storeRepository = $this->objectManager->create(StoreRepository::class);
+        $secondStore = $storeRepository->get('fixture_second_store');
+
+        // check if Portuguese language is specified for the second store
+        $storeResolver = $this->objectManager->get(Resolver::class);
+        $storeResolver->emulate($secondStore->getId());
+        $this->assertEquals('pt_BR', $storeResolver->getLocale());
+
+        // set translation data and check it
+        $modulesReader = $this->createPartialMock(Reader::class, ['getModuleDir']);
+        $modulesReader->method('getModuleDir')
+            ->willReturn(dirname(__DIR__) . '/../_files/i18n');
+        /** @var Translate $translator */
+        $translator = $this->objectManager->create(Translate::class, ['modulesReader' => $modulesReader]);
+        $translation = [
+            'Price change alert! We wanted you to know that prices have changed for these products:' =>
+                'Alerta de mudanca de preco! Queriamos que voce soubesse que os precos mudaram para esses produtos:'
+        ];
+        $translator->loadData();
+        $this->assertEquals($translation, $translator->getData());
+        $this->objectManager->addSharedInstance($translator, Translate::class);
+        $this->objectManager->removeSharedInstance(PhraseRendererTranslate::class);
+        Phrase::setRenderer($this->objectManager->create(RendererInterface::class));
+
+        // dispatch process() method and check sent message
+        $this->processAlerts();
+        $message = $this->transportBuilder->getSentMessage();
+        $messageContent = $message->getBody()->getParts()[0]->getRawContent();
+        $expectedText = array_shift($translation);
+        $this->assertStringContainsString('/frontend/Magento/luma/pt_BR/', $messageContent);
+        $this->assertStringContainsString(substr($expectedText, 0, 50), $messageContent);
+    }
+
+    /**
+     * Process price alerts
+     */
+    private function processAlerts(): void
+    {
+        $alertType = AlertProcessor::ALERT_TYPE_PRICE;
+        $customerId = 1;
+        $websiteId = 1;
+
+        $this->publisher->execute($alertType, [$customerId], $websiteId);
+        $this->alertProcessor->process($alertType, [$customerId], $websiteId);
+    }
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

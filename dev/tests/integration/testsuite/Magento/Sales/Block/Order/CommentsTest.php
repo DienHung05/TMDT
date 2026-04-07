@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Sales\Block\Order;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Sales\Block\Order;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class CommentsTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -26,8 +34,13 @@ class CommentsTest extends \PHPUnit\Framework\TestCase
     /**
      * @param string $commentedEntity
      * @param string $expectedClass
+<<<<<<< HEAD
      */
     #[DataProvider('getCommentsDataProvider')]
+=======
+     * @dataProvider getCommentsDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetComments($commentedEntity, $expectedClass)
     {
         $commentedEntity = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create($commentedEntity);
@@ -39,7 +52,11 @@ class CommentsTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getCommentsDataProvider(): array
+=======
+    public function getCommentsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

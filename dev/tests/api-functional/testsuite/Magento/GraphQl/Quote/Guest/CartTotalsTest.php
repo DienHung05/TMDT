@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Quote\Guest;
 
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
+<<<<<<< HEAD
 use Magento\Framework\GraphQl\Exception\GraphQlNoSuchEntityException;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\GraphQl\Quote\GetMaskedQuoteIdByReservedOrderId;
 use Magento\Quote\Model\QuoteIdToMaskedQuoteIdInterface;
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
@@ -266,6 +274,7 @@ class CartTotalsTest extends GraphQlAbstract
         self::assertEmpty($pricesResponse['applied_taxes']);
     }
 
+<<<<<<< HEAD
     #[
         DataFixture(ProductFixture::class, [
             'price' => 15,
@@ -300,6 +309,8 @@ class CartTotalsTest extends GraphQlAbstract
         self::assertEmpty($pricesResponse['applied_taxes']);
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * The totals calculation is based on quote address.
      * But the totals should be calculated even if no address is set
@@ -350,6 +361,7 @@ class CartTotalsTest extends GraphQlAbstract
         $this->graphQlQuery($query);
     }
 
+<<<<<<< HEAD
     public function testGetCartTotalsWithNonExistingCartId(): void
     {
         $maskedQuoteId = 'NonExistingQuoteId';
@@ -369,6 +381,8 @@ class CartTotalsTest extends GraphQlAbstract
         }
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Generates GraphQl query for retrieving cart totals
      *
@@ -407,10 +421,13 @@ class CartTotalsTest extends GraphQlAbstract
                 value
             }
         }
+<<<<<<< HEAD
         original_row_total {
             value
             currency
         }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
       }
     }
     prices {

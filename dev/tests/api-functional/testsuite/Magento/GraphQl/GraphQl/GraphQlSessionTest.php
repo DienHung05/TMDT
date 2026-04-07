@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2022 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -35,7 +40,11 @@ class GraphQlSessionTest extends GraphQlAbstract
     private $customerTokenService;
 
     /**
+<<<<<<< HEAD
      * @inheritDoc
+=======
+     * @inheirtdoc
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function setUp(): void
     {
@@ -48,10 +57,13 @@ class GraphQlSessionTest extends GraphQlAbstract
     /**
      * Test for checking if graphQL query sets session cookies
      *
+<<<<<<< HEAD
      * Note: The reason why the first response doesn't have cookies, but the subsequent responses do is
      * because Magento/Framework/App/PageCache/Kernel.php removes Set-Cookie headers when the response has a
      * public Cache-Control.  This test asserts that behaviour.
      *
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoApiDataFixture Magento/Catalog/_files/categories.php
      * @magentoConfigFixture graphql/session/disable 0
      */
@@ -75,7 +87,12 @@ QUERY;
         $result = $this->graphQlClient->getWithResponseHeaders($query, [], '', [], true);
         $this->assertEmpty($result['cookies']);
         // perform secondary request after cookies have been flushed
+<<<<<<< HEAD
         $result = $this->graphQlClient->getWithResponseHeaders($query, [], '', [], true);
+=======
+        $result = $this->graphQlClient->getWithResponseHeaders($query, [], '', []);
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         // may have other cookies than session
         $this->assertNotEmpty($result['cookies']);
         $this->assertAnyCookieMatchesRegex('/PHPSESSID=[a-z0-9]+;/', $result['cookies']);
@@ -283,6 +300,7 @@ QUERY;
         }
         $this->assertTrue($result, 'Failed assertion. At least one cookie in the array matches pattern: ' . $pattern);
     }
+<<<<<<< HEAD
 
     /**
      * Tests that Magento\Customer\Model\Session works properly when graphql/session/disable=0
@@ -325,4 +343,6 @@ QUERY;
         $this->assertAnyCookieMatchesRegex('/PHPSESSID=[a-z0-9]+;/', $result['cookies']);
         $this->assertEquals('customer@example.com', $result['body']['customer']['email'] ?? '');
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

@@ -2,8 +2,13 @@
 /**
  * Test constructions of layout files
  *
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -21,7 +26,10 @@
 namespace Magento\Test\Integrity;
 
 use Magento\Framework\Component\ComponentRegistrar;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -141,8 +149,13 @@ class ViewFileReferenceTest extends \PHPUnit\Framework\TestCase
      * @param string $modularCall
      * @param array $usages
      * @param null|string $area
+<<<<<<< HEAD
      */
     #[DataProvider('modularFallbackDataProvider')]
+=======
+     * @dataProvider modularFallbackDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testModularFallback($modularCall, array $usages, $area)
     {
         list(, $file) = explode(\Magento\Framework\View\Asset\Repository::FILE_ID_SEPARATOR, $modularCall);

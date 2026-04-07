@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\TestFramework\Annotation;
@@ -20,11 +25,16 @@ class DataProviderFromFile
     /**
      * @var string
      */
+<<<<<<< HEAD
     public const FALLBACK_VALUE = 'default';
+=======
+    const FALLBACK_VALUE = 'default';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var array
      */
+<<<<<<< HEAD
     public const POSSIBLE_SUFFIXES = [
         SqlVersionProvider::MYSQL_8_0_VERSION => 'mysql8',
         SqlVersionProvider::MARIA_DB_10_4_VERSION => 'mariadb10',
@@ -33,6 +43,11 @@ class DataProviderFromFile
         SqlVersionProvider::MYSQL_8_0_29_VERSION => 'mysql829',
         SqlVersionProvider::MARIA_DB_10_4_27_VERSION => 'mariadb10427',
         SqlVersionProvider::MARIA_DB_10_6_11_VERSION => 'mariadb10611'
+=======
+    const POSSIBLE_SUFFIXES = [
+        SqlVersionProvider::MYSQL_8_0_VERSION => 'mysql8',
+        SqlVersionProvider::MARIA_DB_10_VERSION => 'mariadb10',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ];
 
     /**
@@ -46,11 +61,14 @@ class DataProviderFromFile
     private $cliCommand;
 
     /**
+<<<<<<< HEAD
      * @var \PHPUnit\Framework\TestCase|[]
      */
     private static $testObj;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * CopyModules constructor.
      */
     public function __construct()
@@ -67,6 +85,7 @@ class DataProviderFromFile
      */
     public function startTest(\PHPUnit\Framework\TestCase $test)
     {
+<<<<<<< HEAD
         $annotations = TestCaseAnnotation::getInstance()->getAnnotations($test);
         //This annotation can be declared only on method level
         if (isset($annotations['method']['dataProviderFromFile']) && $test instanceof MutableDataInterface) {
@@ -76,12 +95,24 @@ class DataProviderFromFile
             );
 
             self::setTestObject($test);
+=======
+        $annotations = TestUtil::parseTestMethodAnnotations(
+            get_class($test),
+            $test->getName(false)
+        );
+        //This annotation can be declared only on method level
+        if (isset($annotations['method']['dataProviderFromFile']) && $test instanceof MutableDataInterface) {
+            $test->setData(
+                $this->loadAllFiles(TESTS_MODULES_PATH . "/" . $annotations['method']['dataProviderFromFile'][0])
+            );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         } elseif (!$test instanceof MutableDataInterface) {
             throw new \Exception("Test type do not supports @dataProviderFromFile annotation");
         }
     }
 
     /**
+<<<<<<< HEAD
      * Set test Object.
      *
      * @param \PHPUnit\Framework\TestCase|[] $test
@@ -102,6 +133,8 @@ class DataProviderFromFile
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Finish test.
      *
      * @param \PHPUnit\Framework\TestCase $test

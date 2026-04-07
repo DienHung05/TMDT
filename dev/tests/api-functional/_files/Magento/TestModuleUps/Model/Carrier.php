@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -12,7 +17,10 @@ use Magento\Framework\HTTP\ClientFactory;
 use Magento\Framework\Xml\Security;
 use Magento\Shipping\Model\Rate\Result\ProxyDeferredFactory;
 use Magento\Ups\Helper\Config;
+<<<<<<< HEAD
 use Magento\Ups\Model\UpsAuth;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Mock UPS shipping implementation
@@ -43,7 +51,10 @@ class Carrier extends \Magento\Ups\Model\Carrier
      * @param \Magento\CatalogInventory\Api\StockRegistryInterface $stockRegistry
      * @param \Magento\Framework\Locale\FormatInterface $localeFormat
      * @param Config $configHelper
+<<<<<<< HEAD
      * @param UpsAuth $upsAuth
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param ClientFactory $httpClientFactory
      * @param array $data
      * @param AsyncClientInterface $asyncHttpClient
@@ -70,7 +81,10 @@ class Carrier extends \Magento\Ups\Model\Carrier
         \Magento\CatalogInventory\Api\StockRegistryInterface $stockRegistry,
         \Magento\Framework\Locale\FormatInterface $localeFormat,
         Config $configHelper,
+<<<<<<< HEAD
         UpsAuth $upsAuth,
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ClientFactory $httpClientFactory,
         AsyncClientInterface $asyncHttpClient,
         ProxyDeferredFactory $proxyDeferredFactory,
@@ -95,7 +109,10 @@ class Carrier extends \Magento\Ups\Model\Carrier
             $stockRegistry,
             $localeFormat,
             $configHelper,
+<<<<<<< HEAD
             $upsAuth,
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $httpClientFactory,
             $data,
             $asyncHttpClient,

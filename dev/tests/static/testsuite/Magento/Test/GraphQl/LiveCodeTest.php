@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Test\GraphQl;
 
+<<<<<<< HEAD
 use Exception;
 use Magento\Framework\App\Utility\Files;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\CodingStandard\Tool\CodeSniffer;
 use Magento\TestFramework\CodingStandard\Tool\CodeSniffer\Wrapper;
 use Magento\Test\Php\LiveCodeTest as PHPCodeTest;
@@ -26,6 +34,7 @@ class LiveCodeTest extends TestCase
     private static $reportDir = '';
 
     /**
+<<<<<<< HEAD
      * @var string
      */
     private static $changeCheckDir = '';
@@ -36,6 +45,8 @@ class LiveCodeTest extends TestCase
     private static mixed $frontendUIComponent;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Setup basics for all tests
      */
     public static function setUpBeforeClass(): void
@@ -44,8 +55,11 @@ class LiveCodeTest extends TestCase
         if (!is_dir(self::$reportDir)) {
             mkdir(self::$reportDir, 0770);
         }
+<<<<<<< HEAD
 
         self::$changeCheckDir = BP . '/app/code/Magento';
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -64,6 +78,7 @@ class LiveCodeTest extends TestCase
             "PHP Code Sniffer detected {$result} violation(s): " . PHP_EOL . $report
         );
     }
+<<<<<<< HEAD
 
     /**
      * Test if there is corresponding GraphQL module change for each magento core modules
@@ -232,4 +247,6 @@ class LiveCodeTest extends TestCase
 
         return array_filter($fileList, $filter);
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

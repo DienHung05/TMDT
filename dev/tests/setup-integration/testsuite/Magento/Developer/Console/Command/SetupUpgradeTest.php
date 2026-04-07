@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -96,6 +101,7 @@ class SetupUpgradeTest extends SetupTestCase
     }
 
     /**
+<<<<<<< HEAD
      * Test upgrading a module with a modified db_schema.xml column type.
      *
      * @moduleName Magento_TestSetupDeclarationModule11
@@ -122,6 +128,8 @@ class SetupUpgradeTest extends SetupTestCase
         $this->assertSchemaColumnTypeChange($moduleName);
     }
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Convert file content in the DOM document.
      *
      * @param string $schemaFileName
@@ -196,6 +204,7 @@ class SetupUpgradeTest extends SetupTestCase
 
         return $schemaFixturePath;
     }
+<<<<<<< HEAD
 
     /**
      * Assert that the column type has changed as expected.
@@ -213,4 +222,6 @@ class SetupUpgradeTest extends SetupTestCase
             "The generated db_schema.xml does not match the expected schema after upgrade."
         );
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

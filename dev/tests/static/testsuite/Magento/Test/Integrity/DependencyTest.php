@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Test\Integrity;
 
@@ -24,8 +29,11 @@ use Magento\TestFramework\Dependency\PhpRule;
 use Magento\TestFramework\Dependency\ReportsConfigRule;
 use Magento\TestFramework\Dependency\Route\RouteMapper;
 use Magento\TestFramework\Dependency\VirtualType\VirtualTypeMapper;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\Attributes\Test;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Scan source code for incorrect or undeclared modules dependencies
@@ -62,12 +70,15 @@ class DependencyTest extends \PHPUnit\Framework\TestCase
     public const MAP_TYPE_REDUNDANT = 'redundant';
 
     /**
+<<<<<<< HEAD
      * Redundant dependencies error message
      */
     public const UNUSED_DEPENDENCY_ERROR_MSG =
         'Some dependencies required by composer.json are not used in the module and must be removed:';
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Count of directories in path
      */
     public const DIR_PATH_COUNT = 4;
@@ -443,7 +454,10 @@ class DependencyTest extends \PHPUnit\Framework\TestCase
     {
         $contents = null;
         switch ($fileType) {
+<<<<<<< HEAD
             case 'fixture':
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             case 'php':
                 $contents = php_strip_whitespace($file);
                 break;
@@ -508,7 +522,11 @@ class DependencyTest extends \PHPUnit\Framework\TestCase
                 $result = [];
 
                 foreach ($undeclaredDependency as $type => $modules) {
+<<<<<<< HEAD
                     $modules = $this->filterOutBlacklistedDependencies($file, $fileType, $modules, $blackList);
+=======
+                    $modules = $this->filterOutBlacklistedDependencies($file, $modules, $blackList);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     $modules = array_unique($modules);
                     if (empty($modules)) {
                         continue;
@@ -526,16 +544,23 @@ class DependencyTest extends \PHPUnit\Framework\TestCase
     /**
      * Filter out list of module dependencies based on the provided blacklist.
      *
+<<<<<<< HEAD
      * Additionally, exclude:
      *   - dependency on Setup for all modules as it is part of base Magento package.
      *   - dependency on Magento\TestFramework for in fixture classes
      *
      * @param string $filePath
      * @param string $fileType
+=======
+     * Always exclude dependency on Setup because it is part of base Magento package.
+     *
+     * @param string $filePath
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string[] $modules
      * @param array $blackList
      * @return string[]
      */
+<<<<<<< HEAD
     private function filterOutBlacklistedDependencies($filePath, $fileType, $modules, $blackList): array
     {
         $relativeFilePath = substr_replace($filePath, '', 0, strlen(BP . '/'));
@@ -544,6 +569,13 @@ class DependencyTest extends \PHPUnit\Framework\TestCase
                 unset($modules[$moduleKey]);
             }
             if ($fileType === 'fixture' && $module === 'Magento\TestFramework') {
+=======
+    private function filterOutBlacklistedDependencies($filePath, $modules, array $blackList): array
+    {
+        $relativeFilePath = substr_replace($filePath, '', 0, strlen(BP . '/'));
+        foreach ($modules as $moduleKey => $module) {
+            if ($module == 'Magento\Setup') {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 unset($modules[$moduleKey]);
             }
             if (isset($blackList[$relativeFilePath])
@@ -582,7 +614,11 @@ class DependencyTest extends \PHPUnit\Framework\TestCase
                 // Prepare output message
                 $result = [];
                 foreach ($externalDependencies as $type => $modules) {
+<<<<<<< HEAD
                     $modules = $this->filterOutBlacklistedDependencies($file, $fileType, $modules, $blackList);
+=======
+                    $modules = $this->filterOutBlacklistedDependencies($file, $modules, $blackList);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     $modules = array_unique($modules);
                     if (empty($modules)) {
                         continue;
@@ -825,10 +861,17 @@ class DependencyTest extends \PHPUnit\Framework\TestCase
      * Collect redundant dependencies
      *
      * @SuppressWarnings(PHPMD.NPathComplexity)
+<<<<<<< HEAD
      * @throws \Exception
      */
     #[Test]
     #[Depends('testUndeclared')]
+=======
+     * @test
+     * @depends testUndeclared
+     * @throws \Exception
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function collectRedundant()
     {
         $objectManager = Bootstrap::create(BP, $_SERVER)->getObjectManager();
@@ -851,8 +894,14 @@ class DependencyTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Check redundant dependencies
+<<<<<<< HEAD
      */
     #[Depends('collectRedundant')]
+=======
+     *
+     * @depends collectRedundant
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRedundant()
     {
         $output = [];
@@ -876,7 +925,11 @@ class DependencyTest extends \PHPUnit\Framework\TestCase
             }
         }
         if (!empty($output)) {
+<<<<<<< HEAD
             $this->fail(self::UNUSED_DEPENDENCY_ERROR_MSG . "\r\n" . implode(' ', $output));
+=======
+            $this->fail("Redundant dependencies found!\r\n" . implode(' ', $output));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
     }
 
@@ -917,8 +970,12 @@ class DependencyTest extends \PHPUnit\Framework\TestCase
             ),
             $this->_prepareFiles('config', Files::init()->getConfigFiles()),
             $this->_prepareFiles('layout', Files::init()->getLayoutFiles()),
+<<<<<<< HEAD
             $this->_prepareFiles('template', Files::init()->getPhtmlFiles()),
             $this->_prepareFiles('fixture', Files::composeDataSets($this->getFixtureFiles()), true)
+=======
+            $this->_prepareFiles('template', Files::init()->getPhtmlFiles())
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
     }
 
@@ -968,7 +1025,11 @@ class DependencyTest extends \PHPUnit\Framework\TestCase
                 $area = $matches['area'];
                 self::$_mapLayoutBlocks[$area] = self::$_mapLayoutBlocks[$area] ?? [];
             }
+<<<<<<< HEAD
             if (preg_match('/(?<namespace>[A-Z][A-Za-z]+)[_\/\\\\](?<module>[A-Z][a-zA-Z]+)/', $file, $matches)) {
+=======
+            if (preg_match('/(?<namespace>[A-Z][a-z]+)[_\/\\\\](?<module>[A-Z][a-zA-Z]+)/', $file, $matches)) {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $module = $matches['namespace'] . '\\' . $matches['module'];
                 $xml = simplexml_load_file($file);
                 foreach ((array)$xml->xpath('//container | //block') as $element) {
@@ -1331,6 +1392,7 @@ class DependencyTest extends \PHPUnit\Framework\TestCase
         }
         return self::$allowedDependencies;
     }
+<<<<<<< HEAD
 
     /**
      * Returns fixture files located in <module-directory>/Test/Fixture directory
@@ -1345,4 +1407,6 @@ class DependencyTest extends \PHPUnit\Framework\TestCase
         }
         return Files::getFiles($fixtureDirs, '*.php');
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

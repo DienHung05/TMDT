@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -9,21 +14,29 @@ namespace Magento\CatalogImportExport\Model\Import\ProductTest;
 
 use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\ResourceModel\Product as ProductResource;
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Attribute as AttributeFixture;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\CatalogImportExport\Model\Import\Product as ImportProduct;
 use Magento\CatalogImportExport\Model\Import\Product\RowValidatorInterface;
+=======
+use Magento\CatalogImportExport\Model\Import\Product as ImportProduct;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\CatalogImportExport\Model\Import\ProductTestBase;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Filesystem;
 use Magento\ImportExport\Model\Import;
 use Magento\ImportExport\Model\Import\ErrorProcessing\ProcessingErrorAggregatorInterface;
 use Magento\ImportExport\Model\Import\Source\Csv;
+<<<<<<< HEAD
 use Magento\ImportExport\Test\Fixture\CsvFile as CsvFileFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Helper\Bootstrap as BootstrapHelper;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\TestFramework\Helper\Bootstrap as BootstrapHelper;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Integration test for \Magento\CatalogImportExport\Model\Import\Product class.
@@ -71,8 +84,13 @@ class ProductValidationTest extends ProductTestBase
      * @param bool $expectedResult
      * @magentoAppArea adminhtml
      * @magentoDataFixture Magento/Catalog/Model/ResourceModel/_files/product_simple.php
+<<<<<<< HEAD
      */
     #[DataProvider('validateRowDataProvider')]
+=======
+     * @dataProvider validateRowDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testValidateRow(array $row, $behavior, $expectedResult)
     {
         $this->_model->setParameters(['behavior' => $behavior, 'entity' => 'catalog_product']);
@@ -82,7 +100,11 @@ class ProductValidationTest extends ProductTestBase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function validateRowDataProvider()
+=======
+    public function validateRowDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -216,8 +238,13 @@ class ProductValidationTest extends ProductTestBase
      * @magentoDataFixture Magento/CatalogImportExport/_files/product_export_with_product_links_data.php
      * @magentoAppArea adminhtml
      * @magentoAppIsolation enabled
+<<<<<<< HEAD
      */
     #[DataProvider('getEmptyLinkedData')]
+=======
+     * @dataProvider getEmptyLinkedData
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testProductLinksWithEmptyValue(
         string $pathToFile,
         bool $expectedResultCrossell,
@@ -261,7 +288,11 @@ class ProductValidationTest extends ProductTestBase
      *
      * @return array[]
      */
+<<<<<<< HEAD
     public static function getEmptyLinkedData(): array
+=======
+    public function getEmptyLinkedData(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -408,6 +439,7 @@ class ProductValidationTest extends ProductTestBase
 
         $this->assertEmpty($errors->getAllErrors());
     }
+<<<<<<< HEAD
 
     #[
         DataFixture(AttributeFixture::class, ['is_unique' => 1, 'attribute_code' => 'uniq_test_attr']),
@@ -461,4 +493,6 @@ class ProductValidationTest extends ProductTestBase
         $this->assertErrorsCount(0, $errors);
         $importModel->importData();
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

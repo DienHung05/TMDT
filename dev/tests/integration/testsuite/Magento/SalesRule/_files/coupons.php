@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
  */
@@ -8,6 +9,16 @@ $collection = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->creat
     \Magento\SalesRule\Model\ResourceModel\Rule\Collection::class
 );
 $items = array_values($collection->getItems());
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+$this->_collection = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(
+    \Magento\SalesRule\Model\ResourceModel\Rule\Collection::class
+);
+$items = array_values($this->_collection->getItems());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 // type SPECIFIC with code
 $coupon = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(\Magento\SalesRule\Model\Coupon::class);

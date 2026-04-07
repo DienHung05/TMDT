@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,7 +16,10 @@ use Magento\Framework\Exception\MailException;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -65,16 +73,24 @@ class EmailMessageTest extends TestCase
             'cc2@adobe.com' => 'CC 2 Address',
             'cc3@adobe.com' => 'CC 3 Address',
         ],
+<<<<<<< HEAD
         'bcc' => [
             'bcc1@adobe.com' => 'BCC 1 Address',
             'bcc2@adobe.com' => 'BCC 2 Address'
         ],
+=======
+        'bcc' => ['bcc1@adobe.com', 'bcc2@adobe.com'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ];
 
     /**
      * @var string
      */
+<<<<<<< HEAD
     private $subject = 'Test subject';
+=======
+    private $subject = 'Test=20subject';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var string
@@ -97,14 +113,23 @@ class EmailMessageTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getEmailMessageDataProvider(): array
+=======
+    public function getEmailMessageDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
                 'Content Test',
                 MimeInterface::TYPE_TEXT
+<<<<<<< HEAD
             ],
             [
+=======
+            ], [
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 '<h1>Html message</h1>',
                 MimeInterface::TYPE_HTML
             ]
@@ -114,12 +139,19 @@ class EmailMessageTest extends TestCase
     /**
      * Tests Email Message with Addresses
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider getEmailMessageDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param $content
      * @param $type
      * @return void
      * @throws MailException
      */
+<<<<<<< HEAD
     #[DataProvider('getEmailMessageDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testEmailMessage($content, $type): void
     {
         $mimePart = $this->mimePartFactory->create(
@@ -171,6 +203,7 @@ class EmailMessageTest extends TestCase
             'sender' => $sender,
         ];
         $message = $this->messageFactory->create($data);
+<<<<<<< HEAD
         $messageString = $message->toString();
 
         $this->assertStringContainsString($content, $messageString);
@@ -209,6 +242,46 @@ class EmailMessageTest extends TestCase
             quoted_printable_decode($messageString)
         );
         $this->assertStringContainsString($content, $messageString);
+=======
+
+        $this->assertStringContainsString($content, $message->toString());
+        $this->assertStringContainsString('Content-Type: ' . $type, $message->toString());
+        $senderString = 'Sender: =?utf-8?Q?'
+            . str_replace(' ', '=20', $sender->getName())
+            . '?= <'
+            . $sender->getEmail()
+            . '>';
+        $this->assertStringContainsString($senderString, $message->toString());
+        $this->assertStringContainsString('From: ' . $from[0]->getEmail(), $message->toString());
+        $replyToString = 'Reply-To: =?utf-8?Q?'
+            . str_replace(' ', '=20', $replyTo[0]->getName())
+            . '?= <'
+            . $replyTo[0]->getEmail()
+            . '>';
+        $this->assertStringContainsString($replyToString, $message->toString());
+        $toString = 'To: =?utf-8?Q?'
+            . str_replace(' ', '=20', $to[0]->getName())
+            . '?= <'
+            . $to[0]->getEmail()
+            . '>';
+        $this->assertStringContainsString($toString, $message->toString());
+        $ccString = 'Cc: =?utf-8?Q?'
+            . str_replace(' ', '=20', $cc[0]->getName())
+            . '?= <'
+            . $cc[0]->getEmail()
+            . '>';
+        $this->assertStringContainsString($ccString, $message->toString());
+        $this->assertStringContainsString('Bcc: ' . $bcc[0]->getEmail(), $message->toString());
+        $contentDescription = 'Content-Description: =?UTF-8?Q?'
+            . str_replace(' ', '=20', $this->description)
+            . '?=';
+        $this->assertStringContainsString($contentDescription, $message->toString());
+        $this->assertStringContainsString(
+            'Subject: =?UTF-8?Q?' . $this->subject,
+            quoted_printable_decode($message->toString())
+        );
+        $this->assertStringContainsString($content, $message->toString());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         //tests address factory
         $this->assertInstanceOf(Address::class, $message->getTo()[0]);
         //tests address converter convert method
@@ -226,18 +299,37 @@ class EmailMessageTest extends TestCase
     {
         $mimePartMain = $this->mimePartFactory->create(
             [
+<<<<<<< HEAD
                 'content' => $this->getXmlContent(),
                 'description' => $this->description,
                 'type' => self::XML_TYPE,
                 'fileName' => self::ATTACHMENT_FILE_NAME,
                 'disposition' => MimeInterface::DISPOSITION_ATTACHMENT,
                 'encoding' => MimeInterface::ENCODING_QUOTED_PRINTABLE
+=======
+                'content' => 'Test',
+                'description' => $this->description,
+                'type' => MimeInterface::TYPE_TEXT
+            ]
+        );
+        $mimePartAttachment = $this->mimePartFactory->create(
+            [
+                'content' => $this->getXmlContent(),
+                'disposition' => MimeInterface::DISPOSITION_ATTACHMENT,
+                'fileName' => self::ATTACHMENT_FILE_NAME,
+                'encoding' => MimeInterface::ENCODING_8BIT,
+                'type' => self::XML_TYPE
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ]
         );
 
         $mimeMessage = $this->mimeMessageFactory->create(
             [
+<<<<<<< HEAD
                 'parts' => [$mimePartMain]
+=======
+                'parts' => [$mimePartMain, $mimePartAttachment]
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ]
         );
 
@@ -251,6 +343,7 @@ class EmailMessageTest extends TestCase
                 ]
             );
 
+<<<<<<< HEAD
         $from = $this->addressFactory->create(
             [
                 'email' => $this->addressList['from'],
@@ -258,10 +351,13 @@ class EmailMessageTest extends TestCase
             ]
         );
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $data = [
             'body' => $mimeMessage,
             'subject' => $this->subject,
             'to' => [$addressTo],
+<<<<<<< HEAD
             'from' => [$from],
             'encoding' => '',
         ];
@@ -273,6 +369,16 @@ class EmailMessageTest extends TestCase
         $this->assertStringContainsString('Content-Type: ' . self::XML_TYPE, $messageString);
         $contentDisposition = 'Content-Disposition: ' . MimeInterface::DISPOSITION_ATTACHMENT
             .'; name=' . self::ATTACHMENT_FILE_NAME . '; filename=' . self::ATTACHMENT_FILE_NAME;
+=======
+            'encoding' => '',
+        ];
+        $message = $this->messageFactory->create($data);
+
+        $this->assertStringContainsString($this->getXmlContent(), $message->toString());
+        $this->assertStringContainsString('Content-Type: ' . self::XML_TYPE, $message->toString());
+        $contentDisposition = 'Content-Disposition: ' . MimeInterface::DISPOSITION_ATTACHMENT
+            . '; filename="' . self::ATTACHMENT_FILE_NAME . '"';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertStringContainsString($contentDisposition, $message->toString());
     }
 

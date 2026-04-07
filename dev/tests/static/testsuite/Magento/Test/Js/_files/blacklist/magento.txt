@@ -13,6 +13,7 @@ lib/web/mage/adminhtml/varienLoader.js
 lib/web/magnifier/magnifier.js
 lib/web/magnifier/magnify.js
 lib/web/varien/js.js
+<<<<<<< HEAD
 lib/web/jquery/jquery.validate.js
 lib/web/prototype/**/*.js
 lib/web/jquery/jstree/jquery.jstree.js
@@ -32,6 +33,11 @@ lib/web/hugerte/**/*.js
 lib/web/hugerte/***/*.js
 lib/web/jquery/uppy/dist/uppy.min.js
 lib/web/chartjs/Chart.min.js
+=======
+
+// MINIFIED FILES
+app/code/**/*.min.js
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 // TEST
 vendor/magento/magento-coding-standard/Magento2/Tests/Eslint/*

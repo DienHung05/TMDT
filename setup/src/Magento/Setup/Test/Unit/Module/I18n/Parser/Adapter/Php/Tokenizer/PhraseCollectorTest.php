@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -12,7 +17,10 @@ use Magento\Setup\Module\I18n\Parser\Adapter\Php\Tokenizer;
 use Magento\Setup\Module\I18n\Parser\Adapter\Php\Tokenizer\PhraseCollector;
 use Magento\Setup\Module\I18n\Parser\Adapter\Php\Tokenizer\Token;
 use PHPUnit\Framework\MockObject\MockObject;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -58,8 +66,13 @@ class PhraseCollectorTest extends TestCase
      * @param array $getFunctionArgumentsTokensReturnValues
      * @param array $isMatchingClassReturnValues
      * @param array $result
+<<<<<<< HEAD
      */
     #[DataProvider('parseDataProvider')]
+=======
+     * @dataProvider testParseDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testParse(
         $file,
         array $isEndOfLoopReturnValues,
@@ -68,6 +81,7 @@ class PhraseCollectorTest extends TestCase
         array $isMatchingClassReturnValues,
         array $result
     ) {
+<<<<<<< HEAD
         $nextRealToken = [];
         foreach ($getNextRealTokenReturnValues as $key => $token) {
             if (is_callable($token)) {
@@ -83,11 +97,14 @@ class PhraseCollectorTest extends TestCase
             }
         }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $matchingClass = 'Phrase';
 
         $this->tokenizerMock->expects($this->once())
             ->method('parse')
             ->with($file);
+<<<<<<< HEAD
         $isEndOfLoopCallCount = 0;
         $this->tokenizerMock->expects($this->atLeastOnce())
             ->method('isEndOfLoop')
@@ -113,6 +130,33 @@ class PhraseCollectorTest extends TestCase
             ->willReturnCallback(function() use (&$isMatchingClassCallCount, $isMatchingClassReturnValues) {
                 return $isMatchingClassReturnValues[$isMatchingClassCallCount++] ?? false;
             });
+=======
+        $this->tokenizerMock->expects($this->atLeastOnce())
+            ->method('isEndOfLoop')
+            ->will(call_user_func_array(
+                [$this, 'onConsecutiveCalls'],
+                $isEndOfLoopReturnValues
+            ));
+        $this->tokenizerMock->expects($this->any())
+            ->method('getNextRealToken')
+            ->will(call_user_func_array(
+                [$this, 'onConsecutiveCalls'],
+                $getNextRealTokenReturnValues
+            ));
+        $this->tokenizerMock->expects($this->any())
+            ->method('getFunctionArgumentsTokens')
+            ->will(call_user_func_array(
+                [$this, 'onConsecutiveCalls'],
+                $getFunctionArgumentsTokensReturnValues
+            ));
+        $this->tokenizerMock->expects($this->any())
+            ->method('isMatchingClass')
+            ->with($matchingClass)
+            ->will(call_user_func_array(
+                [$this, 'onConsecutiveCalls'],
+                $isMatchingClassReturnValues
+            ));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->phraseCollector->setIncludeObjects();
         $this->phraseCollector->parse($file);
@@ -122,7 +166,11 @@ class PhraseCollectorTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function parseDataProvider()
+=======
+    public function testParseDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $file = 'path/to/file.php';
         $line = 110;
@@ -147,6 +195,7 @@ class PhraseCollectorTest extends TestCase
                     true //after ;
                 ],
                 'getNextRealTokenReturnValues' => [
+<<<<<<< HEAD
                     static fn (self $testCase) => $testCase->createToken(false, false, false, false, '$phrase1'),
                     static fn (self $testCase) => $testCase->createToken(false, false, false, false, '='),
                     static fn (self $testCase) => $testCase->createToken(false, false, true, false, 'new', $line),
@@ -173,6 +222,22 @@ class PhraseCollectorTest extends TestCase
                         true,
                         '\'More testing\''
                     )]] // 'More testing')
+=======
+                    $this->createToken(false, false, false, false, '$phrase1'),
+                    $this->createToken(false, false, false, false, '='),
+                    $this->createToken(false, false, true, false, 'new', $line),
+                    $this->createToken(false, false, false, false, ';'),
+                    $this->createToken(false, false, false, false, '$phrase2'),
+                    $this->createToken(false, false, false, false, '='),
+                    $this->createToken(true, false, false, false, '__', $line),
+                    $this->createToken(false, true, false, false, '('),
+                    $this->createToken(false, false, false, false, ';'),
+                    false
+                ],
+                'getFunctionArgumentsTokensReturnValues' => [
+                    [[$this->createToken(false, false, false, true, '\'Testing\'')]], // 'Testing')
+                    [[$this->createToken(false, false, false, true, '\'More testing\'')]] // 'More testing')
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ],
                 'isMatchingClassReturnValues' => [
                     true // \Magento\Framework\Phrase(
@@ -252,6 +317,10 @@ class PhraseCollectorTest extends TestCase
             '_collectPhrase'
         );
 
+<<<<<<< HEAD
+=======
+        $reflectionMethod->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertSame($phraseString, $reflectionMethod->invoke($this->phraseCollector, $phraseTokens));
     }
 }

@@ -1,7 +1,13 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -33,9 +39,12 @@ class CreatePdfFileTest extends \PHPUnit\Framework\TestCase
         $contentType = 'application/pdf';
         $fileContent = ['type' => 'string', 'value' => ''];
         $response = $fileFactory->create($filename, $fileContent, DirectoryList::VAR_DIR, $contentType);
+<<<<<<< HEAD
         ob_start();
         $response->sendResponse();
         ob_end_clean();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         /** @var ContentType $contentTypeHeader */
         $contentTypeHeader = $response->getHeader('Content-type');
 
@@ -50,10 +59,14 @@ class CreatePdfFileTest extends \PHPUnit\Framework\TestCase
 
         /* Check the file is removed after generation if the corresponding option is set */
         $fileContent = ['type' => 'string', 'value' => '', 'rm' => true];
+<<<<<<< HEAD
         $response = $fileFactory->create($filename, $fileContent, DirectoryList::VAR_DIR, $contentType);
         ob_start();
         $response->sendResponse();
         ob_end_clean();
+=======
+        $fileFactory->create($filename, $fileContent, DirectoryList::VAR_DIR, $contentType);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         self::assertFalse($varDirectory->isFile($filename));
     }

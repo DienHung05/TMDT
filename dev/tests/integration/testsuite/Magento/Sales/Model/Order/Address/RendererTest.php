@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -124,10 +129,18 @@ class RendererTest extends TestCase
      */
     public function testFormatNonDisplayedCompanyField()
     {
+<<<<<<< HEAD
         $orderFixtureStore = $this->objectManager->create(Order::class)->loadByIncrementId('100000001');
         $configData = [
             'section' => 'customer',
             'website' => $orderFixtureStore->getStore()->getWebsite()->getId(),
+=======
+        $storeManager = $this->objectManager->get(StoreManagerInterface::class);
+        $website = $storeManager->getWebsites(false, true)['test'];
+        $configData = [
+            'section' => 'customer',
+            'website' => $website->getId(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'store' => null,
             'groups' => [
                 'address' => [
@@ -140,6 +153,10 @@ class RendererTest extends TestCase
         $configFactory = $this->objectManager->get(Factory::class);
         $config = $configFactory->create(['data' => $configData]);
         $config->save();
+<<<<<<< HEAD
+=======
+        $orderFixtureStore = $this->objectManager->create(Order::class)->loadByIncrementId('100000001');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $address = $orderFixtureStore->getBillingAddress();
         self::assertStringNotContainsString('Test Company', $this->orderAddressRenderer->format($address, 'html'));
     }

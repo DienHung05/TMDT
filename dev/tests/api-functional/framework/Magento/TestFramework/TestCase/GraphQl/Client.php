@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\TestFramework\TestCase\GraphQl;
@@ -22,8 +27,11 @@ class Client
     public const GRAPHQL_METHOD_POST = 'POST';
     /**#@-*/
 
+<<<<<<< HEAD
     private const SET_COOKIE_HEADER_NAME = 'Set-Cookie';
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /** @var CurlClient */
     private $curlClient;
 
@@ -35,8 +43,13 @@ class Client
      * @param JsonSerializer|null $json
      */
     public function __construct(
+<<<<<<< HEAD
         ?\Magento\TestFramework\TestCase\HttpClient\CurlClient $curlClient = null,
         ?\Magento\TestFramework\Helper\JsonSerializer $json = null
+=======
+        \Magento\TestFramework\TestCase\HttpClient\CurlClient $curlClient = null,
+        \Magento\TestFramework\Helper\JsonSerializer $json = null
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ) {
         $objectManager = Bootstrap::getObjectManager();
         $this->curlClient = $curlClient ?: $objectManager->get(CurlClient::class);
@@ -103,6 +116,7 @@ class Client
     }
 
     /**
+<<<<<<< HEAD
      * Process response from GraphQL server.
      *
      * @param string $response
@@ -119,15 +133,37 @@ class Client
         } catch (\Exception $exception) {
             // Note: We don't care about this exception because we have error checking bellow if it fails to decode.
         }
+=======
+     * Process response from GraphQl server
+     *
+     * @param string $response
+     * @return mixed
+     * @throws \Exception
+     */
+    private function processResponse(string $response)
+    {
+        $responseArray = $this->json->jsonDecode($response);
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         if (!is_array($responseArray)) {
             //phpcs:ignore Magento2.Exceptions.DirectThrow
             throw new \Exception('Unknown GraphQL response body: ' . $response);
         }
+<<<<<<< HEAD
         $this->processErrors($responseArray, $responseHeaders, $responseCookies);
+=======
+
+        $this->processErrors($responseArray);
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         if (!isset($responseArray['data'])) {
             //phpcs:ignore Magento2.Exceptions.DirectThrow
             throw new \Exception('Unknown GraphQL response body: ' . $response);
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         return $responseArray['data'];
     }
 
@@ -158,9 +194,15 @@ class Client
         array_filter($requestArray);
 
         $response = $this->curlClient->getWithFullResponse($url, $requestArray, $headers, $flushCookies);
+<<<<<<< HEAD
         $responseHeaders = !empty($response['header']) ? $this->processResponseHeaders($response['header']) : [];
         $responseCookies = !empty($response['header']) ? $this->processResponseCookies($response['header']) : [];
         $responseBody = $this->processResponse($response['body'], $responseHeaders, $responseCookies);
+=======
+        $responseBody = $this->processResponse($response['body']);
+        $responseHeaders = !empty($response['header']) ? $this->processResponseHeaders($response['header']) : [];
+        $responseCookies = !empty($response['header']) ? $this->processResponseCookies($response['header']) : [];
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         return ['headers' => $responseHeaders, 'body' => $responseBody, 'cookies' => $responseCookies];
     }
@@ -193,14 +235,21 @@ class Client
         $postData = $this->json->jsonEncode($requestArray);
 
         $response = $this->curlClient->postWithFullResponse($url, $postData, $headers, $flushCookies);
+<<<<<<< HEAD
         $responseHeaders = !empty($response['header']) ? $this->processResponseHeaders($response['header']) : [];
         $responseCookies = !empty($response['header']) ? $this->processResponseCookies($response['header']) : [];
         $responseBody = $this->processResponse($response['body'], $responseHeaders, $responseCookies);
+=======
+        $responseBody = $this->processResponse($response['body']);
+        $responseHeaders = !empty($response['header']) ? $this->processResponseHeaders($response['header']) : [];
+        $responseCookies = !empty($response['header']) ? $this->processResponseCookies($response['header']) : [];
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         return ['headers' => $responseHeaders, 'body' => $responseBody, 'cookies' => $responseCookies];
     }
 
     /**
+<<<<<<< HEAD
      * Process errors.
      *
      * @param array $responseBodyArray
@@ -210,6 +259,14 @@ class Client
      * @throws ResponseContainsErrorsException
      */
     private function processErrors($responseBodyArray, array $responseHeaders = [], array $responseCookies = [])
+=======
+     * Process errors
+     *
+     * @param array $responseBodyArray
+     * @throws \Exception
+     */
+    private function processErrors($responseBodyArray)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         if (isset($responseBodyArray['errors'])) {
             $errorMessage = '';
@@ -228,12 +285,17 @@ class Client
                 }
 
                 throw new ResponseContainsErrorsException(
+<<<<<<< HEAD
                     'GraphQL response contains errors: ' . $errorMessage . "\n" . var_export($responseBodyArray, true),
                     $responseBodyArray,
                     null,
                     0,
                     $responseHeaders,
                     $responseCookies
+=======
+                    'GraphQL response contains errors: ' . $errorMessage,
+                    $responseBodyArray
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 );
             }
             //phpcs:ignore Magento2.Exceptions.DirectThrow
@@ -266,6 +328,7 @@ class Client
         foreach ($headerLines as $headerLine) {
             $headerParts = preg_split('/: /', $headerLine, 2);
             if (count($headerParts) == 2) {
+<<<<<<< HEAD
                 $headerName = trim($headerParts[0]);
                 if ($headerName === self::SET_COOKIE_HEADER_NAME) {
                     if (!isset($headersArray[self::SET_COOKIE_HEADER_NAME])) {
@@ -275,6 +338,9 @@ class Client
                 } else {
                     $headersArray[$headerName] = trim($headerParts[1]);
                 }
+=======
+                $headersArray[trim($headerParts[0])] = trim($headerParts[1]);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             } elseif (preg_match('/HTTP\/[\.0-9]+/', $headerLine)) {
                 $headersArray[trim('Status-Line')] = trim($headerLine);
             }

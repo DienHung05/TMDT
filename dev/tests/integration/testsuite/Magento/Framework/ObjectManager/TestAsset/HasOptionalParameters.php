@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Framework\ObjectManager\TestAsset;
 
@@ -51,8 +56,13 @@ class HasOptionalParameters
     public function __construct(
         TestAssetInterface $requiredInterfaceParameter,
         Basic $requiredObjectParameter,
+<<<<<<< HEAD
         ?TestAssetInterface $optionalInterfaceParameter = null,
         ?Basic $optionalObjectParameter = null,
+=======
+        TestAssetInterface $optionalInterfaceParameter = null,
+        Basic $optionalObjectParameter = null,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $optionalStringParameter = self::CONSTRUCTOR_STRING_PARAM_DEFAULT,
         $optionalIntegerParameter = self::CONSTRUCTOR_INT_PARAM_DEFAULT
     ) {

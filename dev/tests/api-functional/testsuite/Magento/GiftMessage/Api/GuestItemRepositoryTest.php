@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\GiftMessage\Api;
 
@@ -9,9 +14,15 @@ use Magento\TestFramework\TestCase\WebapiAbstract;
 
 class GuestItemRepositoryTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     public const SERVICE_VERSION = 'V1';
     public const SERVICE_NAME = 'giftMessageGuestItemRepositoryV1';
     public const RESOURCE_PATH = '/V1/guest-carts/';
+=======
+    const SERVICE_VERSION = 'V1';
+    const SERVICE_NAME = 'giftMessageGuestItemRepositoryV1';
+    const RESOURCE_PATH = '/V1/guest-carts/';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var \Magento\TestFramework\ObjectManager
@@ -74,6 +85,7 @@ class GuestItemRepositoryTest extends WebapiAbstract
 
     /**
      * @magentoApiDataFixture Magento/GiftMessage/_files/quote_with_item_message.php
+<<<<<<< HEAD
      * @magentoConfigFixture default_store sales/gift_options/allow_items 1
      */
     public function testSave()
@@ -82,6 +94,14 @@ class GuestItemRepositoryTest extends WebapiAbstract
         // sales/gift_options/allow_items must be set to 1 in system configuration
         // @todo remove above statement when \Magento\TestFramework\TestCase\WebapiAbstract::_updateAppConfig is fixed
 
+=======
+     */
+    public function testSave()
+    {
+        // sales/gift_options/allow_items must be set to 1 in system configuration
+        // @todo remove next statement when \Magento\TestFramework\TestCase\WebapiAbstract::_updateAppConfig is fixed
+        $this->markTestIncomplete('This test relies on system configuration state.');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         /** @var \Magento\Quote\Model\Quote $quote */
         $quote = $this->objectManager->create(\Magento\Quote\Model\Quote::class);
         $quote->load('test_order_item_with_message', 'reserved_order_id');

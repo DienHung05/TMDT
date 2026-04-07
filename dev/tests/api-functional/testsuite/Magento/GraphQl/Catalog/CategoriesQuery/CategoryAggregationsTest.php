@@ -1,16 +1,24 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Catalog\CategoriesQuery;
 
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Category as CategoryFixture;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\TestCase\GraphQlAbstract;
 
 /**
@@ -69,6 +77,7 @@ QUERY;
         $this->assertEquals(2, $optionsAttribute1[1]['count']);
         $this->assertEquals(3, $optionsAttribute1[2]['count']);
     }
+<<<<<<< HEAD
 
     /**
      * Test to return category aggregations filtered by category_uid
@@ -111,4 +120,6 @@ QUERY;
         $this->assertArrayHasKey('products', $response);
         $this->assertArrayHasKey('aggregations', $response['products']);
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

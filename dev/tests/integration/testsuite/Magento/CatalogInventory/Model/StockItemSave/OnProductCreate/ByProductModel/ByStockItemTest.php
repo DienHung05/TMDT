@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\CatalogInventory\Model\StockItemSave\OnProductCreate\ByProductModel;
 
@@ -109,6 +114,7 @@ class ByStockItemTest extends \PHPUnit\Framework\TestCase
 
         $this->stockItemDataChecker->checkStockItemData('simpleByStockItemTest', $this->stockItemData);
     }
+<<<<<<< HEAD
 
     public function testAutomaticIsInStockUpdate(): void
     {
@@ -134,4 +140,6 @@ class ByStockItemTest extends \PHPUnit\Framework\TestCase
 
         $this->stockItemDataChecker->checkStockItemData('simpleByStockItemTest', $expected);
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

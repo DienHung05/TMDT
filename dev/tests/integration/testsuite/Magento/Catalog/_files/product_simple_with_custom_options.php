@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 \Magento\TestFramework\Helper\Bootstrap::getInstance()->reinitialize();
@@ -35,7 +40,11 @@ $product->setTypeId(\Magento\Catalog\Model\Product\Type::TYPE_SIMPLE)
             'use_config_manage_stock' => 1,
             'qty' => 100,
             'is_qty_decimal' => 0,
+<<<<<<< HEAD
             'is_in_stock' => 2,
+=======
+            'is_in_stock' => 1,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ]
     )->setCanSaveCustomOptions(true)
     ->setHasOptions(true);

@@ -1,32 +1,53 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
 
 namespace Magento\AsynchronousOperations\Api;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Webapi\Rest\Request;
 use Magento\TestFramework\TestCase\WebapiAbstract;
 use Magento\Framework\Bulk\OperationInterface;
 
 class BulkStatusInterfaceTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     public const RESOURCE_PATH = '/V1/bulk/';
     public const SERVICE_NAME = 'asynchronousOperationsBulkStatusV1';
     public const GET_COUNT_OPERATION_NAME = "getOperationsCountByBulkIdAndStatus";
 
     /**
      * @magentoApiDataFixture Magento/AsynchronousOperations/_files/operation_searchable.php
+=======
+    const RESOURCE_PATH = '/V1/bulk/';
+    const SERVICE_NAME = 'asynchronousOperationsBulkStatusV1';
+    const GET_COUNT_OPERATION_NAME = "getOperationsCountByBulkIdAndStatus";
+
+    /**
+     * @magentoApiDataFixture Magento/AsynchronousOperations/_files/operation_searchable.php
+     * @dataProvider getBulkOperationCountDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $bulkUuid
      * @param int $expectedOperationCount
      * @param int $status
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('getBulkOperationCountDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetOperationsCountByBulkIdAndStatus(
         string $bulkUuid,
         int $expectedOperationCount,
@@ -54,7 +75,11 @@ class BulkStatusInterfaceTest extends WebapiAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getBulkOperationCountDataProvider(): array
+=======
+    public function getBulkOperationCountDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Completed operations' => [

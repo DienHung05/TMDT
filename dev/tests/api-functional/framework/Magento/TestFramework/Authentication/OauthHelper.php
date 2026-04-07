@@ -1,17 +1,32 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Helper class for generating OAuth related credentials
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\TestFramework\Authentication;
 
 use Magento\Framework\Exception\IntegrationException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Oauth\Exception;
+<<<<<<< HEAD
 use Magento\TestFramework\Helper\Bootstrap;
 use Laminas\Stdlib\Exception\LogicException;
 use Magento\Integration\Model\Integration;
 use Magento\TestFramework\Authentication\Rest\OauthClient;
+=======
+use Magento\TestFramework\Authentication\Rest\OauthClient;
+use Magento\TestFramework\Helper\Bootstrap;
+use OAuth\Common\Consumer\Credentials;
+use Laminas\Stdlib\Exception\LogicException;
+use Magento\Integration\Model\Integration;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Authentication Oauth helper
@@ -65,6 +80,44 @@ class OauthHelper
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Create an access token to associated to a consumer to access APIs. No resources are available to this consumer.
+     *
+     * @return array comprising of token  key and secret
+     * <pre>
+     * array (
+     *   'key' => 'ajdsjashgdkahsdlkjasldkjals', //token key
+     *   'secret' => 'alsjdlaskjdlaksjdlasjkdlas', //token secret
+     *   'oauth_client' => $oauthClient // OauthClient instance used to fetch the access token
+     *   );
+     * </pre>
+     * @throws LocalizedException
+     * @throws Exception
+     * @throws \OAuth\Common\Http\Exception\TokenResponseException
+     */
+    public static function getAccessToken()
+    {
+        $consumerCredentials = self::getConsumerCredentials();
+        $credentials = new Credentials($consumerCredentials['key'], $consumerCredentials['secret'], TESTS_BASE_URL);
+        $oAuthClient = new OauthClient($credentials);
+        $requestToken = $oAuthClient->requestRequestToken();
+        $accessToken = $oAuthClient->requestAccessToken(
+            $requestToken->getRequestToken(),
+            $consumerCredentials['verifier'],
+            $requestToken->getRequestTokenSecret()
+        );
+
+        /** TODO: Reconsider return format. It is not aligned with method name. */
+        return [
+            'key' => $accessToken->getAccessToken(),
+            'secret' => $accessToken->getAccessTokenSecret(),
+            'oauth_client' => $oAuthClient
+        ];
+    }
+
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Create an access token, tied to integration which has permissions to all API resources in the system.
      *
      * @param array $resources list of resources to grant to the integration
@@ -81,7 +134,11 @@ class OauthHelper
      * @throws LocalizedException
      * @throws Exception
      */
+<<<<<<< HEAD
     public static function getApiAccessCredentials($resources = null, ?Integration $integrationModel = null)
+=======
+    public static function getApiAccessCredentials($resources = null, Integration $integrationModel = null)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         if (!self::$_apiCredentials) {
             $integration = $integrationModel === null ? self::_createIntegration($resources) : $integrationModel;
@@ -94,13 +151,23 @@ class OauthHelper
                 throw new LogicException('Access token was not created.');
             }
             $consumer = $oauthService->loadConsumer($integration->getConsumerId());
+<<<<<<< HEAD
             $oauthClientObj = $objectManager->create(OauthClient::class);
             $oauthClient = $oauthClientObj->create($consumer->getKey(), $consumer->getSecret());
+=======
+            $credentials = new Credentials($consumer->getKey(), $consumer->getSecret(), TESTS_BASE_URL);
+            /** @var $oAuthClient OauthClient */
+            $oAuthClient = new OauthClient($credentials);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
             self::$_apiCredentials = [
                 'key' => $accessToken->getToken(),
                 'secret' => $accessToken->getSecret(),
+<<<<<<< HEAD
                 'oauth_client' => $oauthClient,
+=======
+                'oauth_client' => $oAuthClient,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'integration' => $integration,
             ];
         }

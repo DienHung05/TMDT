@@ -1,6 +1,11 @@
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /*eslint max-nested-callbacks: 0*/
@@ -62,17 +67,25 @@ define([
             it('check on failed status', function () {
                 var messageContainer = jasmine.createSpyObj('globalMessageList', ['addErrorMessage']);
 
+<<<<<<< HEAD
                 let messageObject = {
                     message: 'You are not authorized to access this resource.'
                 };
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 spyOn(model, 'redirectTo').and.callFake(function () {});
                 model.process({
                     status: 401,
                     responseText: ''
                 }, messageContainer);
+<<<<<<< HEAD
                 expect(messageContainer.addErrorMessage)
                     .toHaveBeenCalledWith(messageObject);
+=======
+                expect(mocks['mage/url'].build)
+                    .toHaveBeenCalled();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             });
         });
     });

@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
@@ -8,6 +9,13 @@ namespace Magento\Backend\App;
 use Magento\TestFramework\Bootstrap;
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Backend\App;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * Test class for \Magento\Backend\App\AbstractAction.
  * @magentoAppArea adminhtml
@@ -72,8 +80,13 @@ class AbstractActionTest extends \Magento\TestFramework\TestCase\AbstractBackend
      * @param string $blockName
      * @param string $resource
      * @param bool $isLimitedAccess
+<<<<<<< HEAD
      */
     #[DataProvider('nodesWithAcl')]
+=======
+     * @dataProvider nodesWithAcl
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAclInNodes($blockName, $resource, $isLimitedAccess)
     {
         /** @var $noticeInbox \Magento\AdminNotification\Model\Inbox */
@@ -94,7 +107,11 @@ class AbstractActionTest extends \Magento\TestFramework\TestCase\AbstractBackend
             ->get(\Magento\Framework\Acl\Builder::class)
             ->getAcl();
         if ($isLimitedAccess) {
+<<<<<<< HEAD
             $acl->deny(Bootstrap::ADMIN_ROLE_ID, $resource);
+=======
+            $acl->deny(null, $resource);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
 
         $this->dispatch('backend/admin/dashboard');
@@ -117,7 +134,11 @@ class AbstractActionTest extends \Magento\TestFramework\TestCase\AbstractBackend
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function nodesWithAcl()
+=======
+    public function nodesWithAcl()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['notification_window', 'Magento_AdminNotification::show_toolbar', true],

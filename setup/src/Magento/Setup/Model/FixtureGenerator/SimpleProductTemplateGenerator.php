@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Setup\Model\FixtureGenerator;
@@ -39,7 +44,11 @@ class SimpleProductTemplateGenerator implements TemplateEntityGeneratorInterface
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
+=======
+     * {@inheritdoc}
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function generateEntity()
     {
@@ -70,9 +79,12 @@ class SimpleProductTemplateGenerator implements TemplateEntityGeneratorInterface
                 'name' => 'template name' . $productRandomizerNumber,
                 'url_key' => 'template-url' . $productRandomizerNumber,
                 'sku' => 'template_sku_simple' . $productRandomizerNumber,
+<<<<<<< HEAD
                 'meta_description' => 'Simple Product',
                 'meta_keyword' => $productRandomizerNumber,
                 'meta_title' => $productRandomizerNumber,
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'price' => 10,
                 'visibility' => Visibility::VISIBILITY_BOTH,
                 'status' => Status::STATUS_ENABLED,

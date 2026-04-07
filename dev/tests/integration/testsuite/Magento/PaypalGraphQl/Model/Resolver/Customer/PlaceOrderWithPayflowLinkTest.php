@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -70,11 +75,19 @@ class PlaceOrderWithPayflowLinkTest extends TestCase
             ->getMock();
         $this->gateway = $this->getMockBuilder(Gateway::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['postRequest'])
             ->getMock();
 
         $requestFactory = $this->getMockBuilder(RequestFactory::class)
             ->onlyMethods(['create'])
+=======
+            ->setMethods(['postRequest'])
+            ->getMock();
+
+        $requestFactory = $this->getMockBuilder(RequestFactory::class)
+            ->setMethods(['create'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -161,6 +174,7 @@ QUERY;
             ->willReturnMap(
                 [
                     [
+<<<<<<< HEAD
                         [
                             'user' => null,
                             'vendor' => null,
@@ -175,6 +189,20 @@ QUERY;
                 ],
                 ['USER1', 1, $this->payflowRequest],
                 ['USER2', 'USER2SilentPostHash', $this->payflowRequest]
+=======
+                        'user' => null,
+                        'vendor' => null,
+                        'partner' => null,
+                        'pwd' => null,
+                        'verbosity' => null,
+                        'BUTTONSOURCE' => $button,
+                        'tender' => 'C',
+                    ],
+                    $this->returnSelf()
+                ],
+                ['USER1', 1, $this->returnSelf()],
+                ['USER2', 'USER2SilentPostHash', $this->returnSelf()]
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             );
 
         /** @var CustomerTokenServiceInterface $tokenService */

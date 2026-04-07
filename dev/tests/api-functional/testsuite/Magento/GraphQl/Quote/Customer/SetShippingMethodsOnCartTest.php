@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -12,7 +17,10 @@ use Magento\GraphQl\Quote\GetMaskedQuoteIdByReservedOrderId;
 use Magento\Integration\Api\CustomerTokenServiceInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for setting shipping methods on cart for customer
@@ -139,7 +147,10 @@ class SetShippingMethodsOnCartTest extends GraphQlAbstract
     }
 
     /**
+<<<<<<< HEAD
      * @magentoConfigFixture default_store carriers/freeshipping/active 0
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoApiDataFixture Magento/Customer/_files/customer.php
      * @magentoApiDataFixture Magento/GraphQl/Catalog/_files/simple_product.php
      * @magentoApiDataFixture Magento/GraphQl/Quote/_files/customer/create_empty_cart.php
@@ -148,9 +159,15 @@ class SetShippingMethodsOnCartTest extends GraphQlAbstract
      *
      * @param string $input
      * @param string $message
+<<<<<<< HEAD
      * @throws Exception
      */
     #[DataProvider('dataProviderSetShippingMethodWithWrongParameters')]
+=======
+     * @dataProvider dataProviderSetShippingMethodWithWrongParameters
+     * @throws Exception
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSetShippingMethodWithWrongParameters(string $input, string $message)
     {
         $maskedQuoteId = $this->getMaskedQuoteIdByReservedOrderId->execute('test_quote');
@@ -179,7 +196,11 @@ QUERY;
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function dataProviderSetShippingMethodWithWrongParameters(): array
+=======
+    public function dataProviderSetShippingMethodWithWrongParameters(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'shipping_methods_are_empty' => [
@@ -387,9 +408,13 @@ QUERY;
     public function testSetShippingMethodOnAnEmptyCart()
     {
         $this->expectException(\Exception::class);
+<<<<<<< HEAD
         $this->expectExceptionMessage(
             'The shipping method can\'t be set for an empty cart. Add an item to cart and try again.'
         );
+=======
+        $this->expectExceptionMessage('The shipping method can\'t be set for an empty cart. Add an item to cart and try again.');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $maskedQuoteId = $this->getMaskedQuoteIdByReservedOrderId->execute('test_quote');
         $carrierCode = 'flatrate';

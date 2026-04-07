@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -17,12 +22,18 @@ use Magento\MediaStorage\Helper\File\Storage\Database;
 use Magento\MediaStorage\Model\File\Storage\Directory\DatabaseFactory;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Tests for the \Magento\Catalog\Model\ImageUploader class
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+
+/**
+ * Tests for the \Magento\Catalog\Model\ImageUploader class
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class ImageUploaderTest extends TestCase
 {
@@ -78,11 +89,18 @@ class ImageUploaderTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider saveFileToTmpDirProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $fileName
      * @param string $expectedName
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('saveFileToTmpDirProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveFileToTmpDir(string $fileName, string $expectedName): void
     {
         $fixtureDir = realpath(__DIR__ . '/../_files');
@@ -105,6 +123,7 @@ class ImageUploaderTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function saveFileToTmpDirProvider(): array
     {
         return [
@@ -115,6 +134,18 @@ class ImageUploaderTest extends TestCase
             'image_with_space_in_name' => [
                 'fileName' => 'magento_image with space in name.jpg',
                 'expectedName' => 'magento_image_with_space_in_name.jpg',
+=======
+    public function saveFileToTmpDirProvider(): array
+    {
+        return [
+            'image_default_name' => [
+                'file_name' => 'magento_small_image.jpg',
+                'expected_name' => 'magento_small_image.jpg',
+            ],
+            'image_with_space_in_name' => [
+                'file_name' => 'magento_image with space in name.jpg',
+                'expected_name' => 'magento_image_with_space_in_name.jpg',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

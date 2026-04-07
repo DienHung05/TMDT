@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -16,7 +21,10 @@ use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\View\LayoutInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -62,10 +70,17 @@ class ProductInCategoriesViewTest extends TestCase
 
     /**
      * @magentoDataFixture Magento/Catalog/_files/category_with_two_products.php
+<<<<<<< HEAD
      * @param array $data
      * @return void
      */
     #[DataProvider('productDataProvider')]
+=======
+     * @dataProvider productDataProvider
+     * @param array $data
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCategoryProductView(array $data): void
     {
         $this->updateProduct($data['sku'], $data);
@@ -78,7 +93,11 @@ class ProductInCategoriesViewTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function productDataProvider(): array
+=======
+    public function productDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'simple_product_enabled_disabled' => [
@@ -116,10 +135,17 @@ class ProductInCategoriesViewTest extends TestCase
 
     /**
      * @magentoDataFixture Magento/Catalog/_files/category_product.php
+<<<<<<< HEAD
      * @param array $data
      * @return void
      */
     #[DataProvider('productVisibilityProvider')]
+=======
+     * @dataProvider productVisibilityProvider
+     * @param array $data
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCategoryProductVisibility(array $data): void
     {
         $this->updateProduct($data['data']['sku'], $data['data']);
@@ -131,7 +157,11 @@ class ProductInCategoriesViewTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function productVisibilityProvider(): array
+=======
+    public function productVisibilityProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'not_visible' => [

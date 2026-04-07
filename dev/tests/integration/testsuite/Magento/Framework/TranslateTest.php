@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Framework;
@@ -9,7 +14,10 @@ namespace Magento\Framework;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Helper\CacheCleaner;
 use PHPUnit\Framework\MockObject\MockObject as MockObject;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppIsolation enabled
@@ -37,9 +45,15 @@ class TranslateTest extends \PHPUnit\Framework\TestCase
         $viewFileSystem->expects($this->any())
             ->method('getLocaleFileName')
             ->willReturn(
+<<<<<<< HEAD
 
                     dirname(__DIR__) . '/Translation/Model/_files/Magento/design/Magento/theme/i18n/en_US.csv'
 
+=======
+                
+                    dirname(__DIR__) . '/Translation/Model/_files/Magento/design/Magento/theme/i18n/en_US.csv'
+                
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             );
 
         /** @var \Magento\Framework\View\Design\ThemeInterface|MockObject $theme */
@@ -65,7 +79,11 @@ class TranslateTest extends \PHPUnit\Framework\TestCase
 
         /** @var \Magento\Theme\Model\View\Design|MockObject $designModel */
         $designModel = $this->getMockBuilder(\Magento\Theme\Model\View\Design::class)
+<<<<<<< HEAD
             ->onlyMethods(['getDesignTheme'])
+=======
+            ->setMethods(['getDesignTheme'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->setConstructorArgs(
                 [
                     $objectManager->get(\Magento\Store\Model\StoreManagerInterface::class),
@@ -102,13 +120,20 @@ class TranslateTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @magentoCache all disabled
+<<<<<<< HEAD
+=======
+     * @dataProvider translateDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @param string $inputText
      * @param string $expectedTranslation
      * @return void
      * @throws Exception\LocalizedException
      */
+<<<<<<< HEAD
     #[DataProvider('translateDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testTranslate($inputText, $expectedTranslation)
     {
         $this->translate->loadData(\Magento\Framework\App\Area::AREA_FRONTEND);
@@ -119,7 +144,11 @@ class TranslateTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function translateDataProvider()
+=======
+    public function translateDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['', ''],

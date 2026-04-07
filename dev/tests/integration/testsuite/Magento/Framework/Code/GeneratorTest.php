@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Framework\Code;
 
@@ -12,7 +17,10 @@ use Magento\Framework\Interception\Code\Generator as InterceptionGenerator;
 use Magento\Framework\ObjectManager\Code\Generator as DIGenerator;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 require_once __DIR__ . '/GeneratorTest/SourceClassWithNamespace.php';
 require_once __DIR__ . '/GeneratorTest/ParentClassWithNamespace.php';
@@ -111,8 +119,13 @@ class GeneratorTest extends TestCase
      * @param $className
      * @param $generateType
      * @param $expectedDataPath
+<<<<<<< HEAD
      */
     #[DataProvider('generateClassFactoryDataProvider')]
+=======
+     * @dataProvider generateClassFactoryDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGenerateClassFactory($className, $generateType, $expectedDataPath)
     {
         $factoryClassName = $className . $generateType;
@@ -133,7 +146,11 @@ class GeneratorTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function generateClassFactoryDataProvider()
+=======
+    public function generateClassFactoryDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'factory_with_namespace' => [
@@ -142,17 +159,29 @@ class GeneratorTest extends TestCase
                 'expectedDataPath' => '/_expected/SourceClassWithNamespaceFactory.php.sample'
             ],
             'factory_with_nested_namespace' => [
+<<<<<<< HEAD
                 'className' => self::CLASS_NAME_WITH_NESTED_NAMESPACE,
+=======
+                'classToGenerate' => self::CLASS_NAME_WITH_NESTED_NAMESPACE,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'generateType' => 'Factory',
                 'expectedDataPath' => '/_expected/SourceClassWithNestedNamespaceFactory.php.sample'
             ],
             'ext_interface_factory_with_namespace' => [
+<<<<<<< HEAD
                 'className' => self::EXTENSION_CLASS_NAME_WITH_NAMESPACE,
+=======
+                'classToGenerate' => self::EXTENSION_CLASS_NAME_WITH_NAMESPACE,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'generateType' => 'InterfaceFactory',
                 'expectedDataPath' => '/_expected/SourceClassWithNamespaceExtensionInterfaceFactory.php.sample'
             ],
             'ext_interface_factory_with_nested_namespace' => [
+<<<<<<< HEAD
                 'className' => self::EXTENSION_CLASS_NAME_WITH_NESTED_NAMESPACE,
+=======
+                'classToGenerate' => self::EXTENSION_CLASS_NAME_WITH_NESTED_NAMESPACE,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'generateType' => 'InterfaceFactory',
                 'expectedDataPath' => '/_expected/SourceClassWithNestedNamespaceExtensionInterfaceFactory.php.sample'
             ],
@@ -163,8 +192,13 @@ class GeneratorTest extends TestCase
      * @param $className
      * @param $generateType
      * @param $expectedDataPath
+<<<<<<< HEAD
      */
     #[DataProvider('generateClassDataProvider')]
+=======
+     * @dataProvider generateClassDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGenerateClass($className, $generateType, $expectedDataPath)
     {
         $generateClassName = $className . $generateType;
@@ -185,7 +219,11 @@ class GeneratorTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function generateClassDataProvider()
+=======
+    public function generateClassDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'proxy' => [

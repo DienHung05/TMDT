@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Setup\Console\Command;
 
@@ -24,10 +29,18 @@ class DbStatusCommand extends AbstractSetupCommand
     /**
      * Code for error when application upgrade is required.
      */
+<<<<<<< HEAD
     public const EXIT_CODE_UPGRADE_REQUIRED = 2;
     public const NAME = 'setup:db:status';
 
     /**
+=======
+    const EXIT_CODE_UPGRADE_REQUIRED = 2;
+
+    /**
+     * Object manager provider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @var ObjectManagerProvider
      */
     private $objectManagerProvider;
@@ -68,16 +81,25 @@ class DbStatusCommand extends AbstractSetupCommand
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
      */
     protected function configure()
     {
         $this->setName(self::NAME)
+=======
+     * {@inheritdoc}
+     */
+    protected function configure()
+    {
+        $this->setName('setup:db:status')
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->setDescription('Checks if DB schema or data requires upgrade');
         parent::configure();
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -85,6 +107,12 @@ class DbStatusCommand extends AbstractSetupCommand
         $timestamp = date('Y-m-d H:i:s');
         $output->writeln("<info>DbStatusCommand execution started at {$timestamp}</info>");
 
+=======
+     * {@inheritdoc}
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         if (!$this->deploymentConfig->isAvailable()) {
             $output->writeln(
                 "<info>No information is available: the Magento application is not installed.</info>"
@@ -95,6 +123,7 @@ class DbStatusCommand extends AbstractSetupCommand
         $outDated = false;
 
         foreach ($this->upToDateValidators as $validator) {
+<<<<<<< HEAD
             $validatorClass = get_class($validator);
 
             try {
@@ -120,6 +149,10 @@ class DbStatusCommand extends AbstractSetupCommand
                     "<info>Validator {$validatorClass} failed with error: " . $e->getMessage() . "</info>"
                 );
                 $output->writeln("<info>Treating as upgrade required due to validation error.</info>");
+=======
+            if (!$validator->isUpToDate()) {
+                $output->writeln(sprintf('<info>%s</info>', $validator->getNotUpToDateMessage()));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $outDated = true;
             }
         }

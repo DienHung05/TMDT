@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\JwtFrameworkAdapter\Model;
 
@@ -21,7 +26,11 @@ class JwsManagerTest extends \PHPUnit\Framework\TestCase
 
     public function testCreatingJwsWithAlgorithmSetInHeadersDirectly(): void
     {
+<<<<<<< HEAD
         $secret = "ZXF1YXRpb24tS2VudHVja3ktY29udGludWVkLWRpZmZlcmVuY2U";
+=======
+        $secret = "ZXF1YXRpb24tS2VudHVja3ktY29udGludWVkLWRpZmZlcmVuY2U=";
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $payload = json_encode([
             'MyCustomClaim' => 'some value', // not important at all
             'nbf' => time(),

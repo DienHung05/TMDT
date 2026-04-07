@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -24,7 +29,10 @@ use Magento\JwtUserToken\Model\Data\JwtUserContext;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
 use Magento\User\Model\User as UserModel;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 use Magento\Integration\Api\Data\UserTokenParametersInterface;
 use Magento\Integration\Api\Data\UserTokenParametersInterfaceFactory;
@@ -61,7 +69,11 @@ class ReaderTest extends TestCase
      */
     private $config;
 
+<<<<<<< HEAD
     public static function getJwtCases(): array
+=======
+    public function getJwtCases(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'jws-hs256' => [Jwk::ALGORITHM_HS256, JweEncryptionSettingsInterface::CONTENT_ENCRYPTION_ALGO_A128GCM],
@@ -85,8 +97,13 @@ class ReaderTest extends TestCase
      * @return void
      * @throws \Throwable
      * @magentoDataFixture Magento/Customer/_files/customer.php
+<<<<<<< HEAD
      */
     #[DataProvider('getJwtCases')]
+=======
+     * @dataProvider getJwtCases
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testIssueForCustomer(string $jwtAlg, string $jweAlg): void
     {
         $this->config->setValue('webapi/jwtauth/jwt_alg', $jwtAlg);

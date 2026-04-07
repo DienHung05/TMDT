@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -14,6 +19,7 @@ use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\Product\Option;
 use Magento\Framework\App\Request\Http as HttpRequest;
 use Magento\Framework\Message\MessageInterface;
+<<<<<<< HEAD
 use Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\Field;
 use Magento\TestFramework\TestCase\AbstractBackendController;
 use PHPUnit\Framework\Attributes\DataProviderExternal;
@@ -21,6 +27,13 @@ use PHPUnit\Framework\Attributes\DataProviderExternal;
 /**
  * Base test cases for update product custom options with type "field".
  * Option updating via product controller save with updated options data in POST.
+=======
+use Magento\TestFramework\TestCase\AbstractBackendController;
+
+/**
+ * Base test cases for update product custom options with type "field".
+ * Option updating via dispatch product controller action save with updated options data in POST data.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  *
  * @magentoAppArea adminhtml
  * @magentoDbIsolation enabled
@@ -36,11 +49,19 @@ class UpdateCustomOptionsTest extends AbstractBackendController
     /**
      * Test add to product custom option with type "field".
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\Field::getDataForUpdateOptions
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $optionData
      * @param array $updateData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProviderExternal(Field::class, 'getDataForUpdateOptions')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateCustomOptionWithTypeField(array $optionData, array $updateData): void
     {
         $productRepository = $this->_objectManager->get(ProductRepositoryInterface::class);
@@ -118,6 +139,10 @@ class UpdateCustomOptionsTest extends AbstractBackendController
         $reflection = new \ReflectionObject($this);
         foreach ($reflection->getProperties() as $property) {
             if (!$property->isStatic() && 0 !== strpos($property->getDeclaringClass()->getName(), 'PHPUnit')) {
+<<<<<<< HEAD
+=======
+                $property->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $property->setValue($this, null);
             }
         }

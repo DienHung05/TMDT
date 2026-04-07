@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -16,7 +21,10 @@ use Magento\Framework\View\LayoutInterface;
 use Magento\Store\Api\StoreRepositoryInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Provide tests for displaying images on product page.
@@ -58,7 +66,11 @@ class GalleryTest extends \PHPUnit\Framework\TestCase
     /**
      * @var array
      */
+<<<<<<< HEAD
     private static $imageExpectation = [
+=======
+    private $imageExpectation = [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         'thumb' => '/m/a/magento_image.jpg',
         'img' => '/m/a/magento_image.jpg',
         'full' => '/m/a/magento_image.jpg',
@@ -72,7 +84,11 @@ class GalleryTest extends \PHPUnit\Framework\TestCase
     /**
      * @var array
      */
+<<<<<<< HEAD
     private static $thumbnailExpectation = [
+=======
+    private $thumbnailExpectation = [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         'thumb' => '/m/a/magento_thumbnail.jpg',
         'img' => '/m/a/magento_thumbnail.jpg',
         'full' => '/m/a/magento_thumbnail.jpg',
@@ -136,6 +152,10 @@ class GalleryTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider galleryDisabledImagesDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/product_with_multiple_images.php
      * @magentoConfigFixture default/web/url/catalog_media_url_format hash
      * @magentoDbIsolation enabled
@@ -143,7 +163,10 @@ class GalleryTest extends \PHPUnit\Framework\TestCase
      * @param array $expectation
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('galleryDisabledImagesDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetGalleryImagesJsonWithDisabledImage(array $images, array $expectation): void
     {
         $product = $this->getProduct();
@@ -154,6 +177,10 @@ class GalleryTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider galleryDisabledImagesDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/product_with_multiple_images.php
      * @magentoDataFixture Magento/Store/_files/second_store.php
      * @magentoConfigFixture default/web/url/catalog_media_url_format hash
@@ -162,7 +189,10 @@ class GalleryTest extends \PHPUnit\Framework\TestCase
      * @param array $expectation
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('galleryDisabledImagesDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetGalleryImagesJsonOnStoreWithDisabledImage(array $images, array $expectation): void
     {
         $secondStoreId = (int)$this->storeRepository->get('fixture_second_store')->getId();
@@ -176,7 +206,11 @@ class GalleryTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function galleryDisabledImagesDataProvider(): array
+=======
+    public function galleryDisabledImagesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -184,7 +218,11 @@ class GalleryTest extends \PHPUnit\Framework\TestCase
                     '/m/a/magento_image.jpg' => ['disabled' => true],
                     '/m/a/magento_thumbnail.jpg' => [],
                 ],
+<<<<<<< HEAD
                 'expectation' => self::$thumbnailExpectation,
+=======
+                'expectation' => $this->thumbnailExpectation,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }
@@ -192,13 +230,20 @@ class GalleryTest extends \PHPUnit\Framework\TestCase
     /**
      * Test default image generation format.
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider galleryImagesDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/product_with_multiple_images.php
      * @magentoDbIsolation enabled
      * @param array $images
      * @param array $expectation
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('galleryImagesDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetGalleryImagesJson(array $images, array $expectation): void
     {
         $product = $this->getProduct();
@@ -213,7 +258,11 @@ class GalleryTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function galleryImagesDataProvider(): array
+=======
+    public function galleryImagesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'with_main_image' => [
@@ -222,8 +271,13 @@ class GalleryTest extends \PHPUnit\Framework\TestCase
                     '/m/a/magento_thumbnail.jpg' => ['main' => true],
                 ],
                 'expectation' => [
+<<<<<<< HEAD
                     self::$imageExpectation,
                     array_merge(self::$thumbnailExpectation, ['isMain' => true]),
+=======
+                    $this->imageExpectation,
+                    array_merge($this->thumbnailExpectation, ['isMain' => true]),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ],
             ],
             'without_main_image' => [
@@ -232,8 +286,13 @@ class GalleryTest extends \PHPUnit\Framework\TestCase
                     '/m/a/magento_thumbnail.jpg' => [],
                 ],
                 'expectation' => [
+<<<<<<< HEAD
                     array_merge(self::$imageExpectation, ['isMain' => true]),
                     self::$thumbnailExpectation,
+=======
+                    array_merge($this->imageExpectation, ['isMain' => true]),
+                    $this->thumbnailExpectation,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ],
             ],
             'with_changed_position' => [
@@ -242,14 +301,23 @@ class GalleryTest extends \PHPUnit\Framework\TestCase
                     '/m/a/magento_thumbnail.jpg' => ['position' => '1'],
                 ],
                 'expectation' => [
+<<<<<<< HEAD
                     array_merge(self::$thumbnailExpectation, ['position' => '1']),
                     array_merge(self::$imageExpectation, ['position' => '2', 'isMain' => true]),
+=======
+                    array_merge($this->thumbnailExpectation, ['position' => '1']),
+                    array_merge($this->imageExpectation, ['position' => '2', 'isMain' => true]),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ],
             ],
         ];
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider galleryImagesWithImageOptimizationParametersInUrlDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/product_with_multiple_images.php
      * @magentoConfigFixture default/web/url/catalog_media_url_format image_optimization_parameters
      * @magentoDbIsolation enabled
@@ -257,7 +325,10 @@ class GalleryTest extends \PHPUnit\Framework\TestCase
      * @param array $expectation
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('galleryImagesWithImageOptimizationParametersInUrlDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetGalleryImagesJsonWithImageOptimizationParametersInUrl(
         array $images,
         array $expectation
@@ -274,7 +345,11 @@ class GalleryTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function galleryImagesWithImageOptimizationParametersInUrlDataProvider(): array
+=======
+    public function galleryImagesWithImageOptimizationParametersInUrlDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
 
         $imageExpectation = [
@@ -334,6 +409,10 @@ class GalleryTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider galleryImagesOnStoreViewDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/product_with_multiple_images.php
      * @magentoDataFixture Magento/Store/_files/second_store.php
      * @magentoConfigFixture default/web/url/catalog_media_url_format hash
@@ -342,7 +421,10 @@ class GalleryTest extends \PHPUnit\Framework\TestCase
      * @param array $expectation
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('galleryImagesOnStoreViewDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetGalleryImagesJsonOnStoreView(array $images, array $expectation): void
     {
         $secondStoreId = (int)$this->storeRepository->get('fixture_second_store')->getId();
@@ -358,7 +440,11 @@ class GalleryTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function galleryImagesOnStoreViewDataProvider(): array
+=======
+    public function galleryImagesOnStoreViewDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'with_store_labels' => [
@@ -367,8 +453,13 @@ class GalleryTest extends \PHPUnit\Framework\TestCase
                     '/m/a/magento_thumbnail.jpg' => [],
                 ],
                 'expectation' => [
+<<<<<<< HEAD
                     array_merge(self::$imageExpectation, ['isMain' => true, 'caption' => 'Some store label']),
                     self::$thumbnailExpectation,
+=======
+                    array_merge($this->imageExpectation, ['isMain' => true, 'caption' => 'Some store label']),
+                    $this->thumbnailExpectation,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ],
             ],
             'with_changed_position' => [
@@ -377,8 +468,13 @@ class GalleryTest extends \PHPUnit\Framework\TestCase
                     '/m/a/magento_thumbnail.jpg' => [],
                 ],
                 'expectation' => [
+<<<<<<< HEAD
                     array_merge(self::$thumbnailExpectation, ['position' => '2']),
                     array_merge(self::$imageExpectation, ['position' => '3', 'isMain' => true]),
+=======
+                    array_merge($this->thumbnailExpectation, ['position' => '2']),
+                    array_merge($this->imageExpectation, ['position' => '3', 'isMain' => true]),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ],
             ],
             'with_main_store_image' => [
@@ -387,8 +483,13 @@ class GalleryTest extends \PHPUnit\Framework\TestCase
                     '/m/a/magento_thumbnail.jpg' => ['main' => true],
                 ],
                 'expectation' => [
+<<<<<<< HEAD
                     self::$imageExpectation,
                     array_merge(self::$thumbnailExpectation, ['isMain' => true]),
+=======
+                    $this->imageExpectation,
+                    array_merge($this->thumbnailExpectation, ['isMain' => true]),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ],
             ],
         ];
@@ -400,13 +501,20 @@ class GalleryTest extends \PHPUnit\Framework\TestCase
      * @magentoDataFixture Magento/Catalog/_files/product_with_image.php
      * @magentoDataFixture Magento/Store/_files/second_store.php
      * @magentoConfigFixture default/web/url/catalog_media_url_format image_optimization_parameters
+<<<<<<< HEAD
+=======
+     * @dataProvider imagesPositionStoreViewDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $addFromStore
      * @param array $newImages
      * @param string $viewFromStore
      * @param array $expectedImages
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('imagesPositionStoreViewDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testImagesPositionStoreView(
         string $addFromStore,
         array $newImages,
@@ -439,7 +547,11 @@ class GalleryTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array[]
      */
+<<<<<<< HEAD
     public static function imagesPositionStoreViewDataProvider(): array
+=======
+    public function imagesPositionStoreViewDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -503,7 +615,11 @@ class GalleryTest extends \PHPUnit\Framework\TestCase
      * @param int|null $storeId
      * @return void
      */
+<<<<<<< HEAD
     private function setGalleryImages(ProductInterface $product, array $images, ?int $storeId = null): void
+=======
+    private function setGalleryImages(ProductInterface $product, array $images, int $storeId = null): void
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $product->setImage(null);
         foreach ($images as $file => $data) {

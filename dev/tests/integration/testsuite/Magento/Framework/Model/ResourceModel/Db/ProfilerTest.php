@@ -2,13 +2,21 @@
 /**
  * Test for \Magento\Framework\Model\ResourceModel\Db\Profiler
  *
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Framework\Model\ResourceModel\Db;
 
 use Magento\Framework\Config\ConfigOptionsListConstants;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test profiler on database queries
@@ -75,8 +83,13 @@ class ProfilerTest extends \PHPUnit\Framework\TestCase
      *
      * @param string $selectQuery
      * @param int $queryType
+<<<<<<< HEAD
      */
     #[DataProvider('profileQueryDataProvider')]
+=======
+     * @dataProvider profileQueryDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testProfilerInit($selectQuery, $queryType)
     {
         $connection = $this->_getConnection();
@@ -109,7 +122,11 @@ class ProfilerTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function profileQueryDataProvider()
+=======
+    public function profileQueryDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ["SELECT * FROM %s", \Magento\Framework\DB\Profiler::SELECT],

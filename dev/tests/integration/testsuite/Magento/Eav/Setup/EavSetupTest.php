@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Eav\Setup;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * Test class for Magento\Eav\Setup\EavSetup.
  * @magentoDbIsolation enabled
@@ -35,9 +43,14 @@ class EavSetupTest extends \PHPUnit\Framework\TestCase
      *
      * @param string $attributeCode
      *
+<<<<<<< HEAD
      * 
      */
     #[DataProvider('addAttributeDataProvider')]
+=======
+     * @dataProvider addAttributeDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddAttribute($attributeCode)
     {
         $attributeData = $this->getAttributeData();
@@ -54,7 +67,11 @@ class EavSetupTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function addAttributeDataProvider()
+=======
+    public function addAttributeDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['eav_setup_test'],
@@ -67,9 +84,14 @@ class EavSetupTest extends \PHPUnit\Framework\TestCase
      *
      * @param string|null $attributeCode
      *
+<<<<<<< HEAD
      * 
      */
     #[DataProvider('addAttributeThrowExceptionDataProvider')]
+=======
+     * @dataProvider addAttributeThrowExceptionDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddAttributeThrowException($attributeCode)
     {
         $this->expectException(\Magento\Framework\Exception\LocalizedException::class);
@@ -85,7 +107,11 @@ class EavSetupTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function addAttributeThrowExceptionDataProvider()
+=======
+    public function addAttributeThrowExceptionDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [null],
@@ -100,9 +126,14 @@ class EavSetupTest extends \PHPUnit\Framework\TestCase
      *
      * @param string|null $attributeCode
      *
+<<<<<<< HEAD
      * 
      */
     #[DataProvider('addInvalidAttributeThrowExceptionDataProvider')]
+=======
+     * @dataProvider addInvalidAttributeThrowExceptionDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddInvalidAttributeThrowException($attributeCode)
     {
         $this->expectException(\Magento\Framework\Exception\LocalizedException::class);
@@ -116,7 +147,11 @@ class EavSetupTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function addInvalidAttributeThrowExceptionDataProvider()
+=======
+    public function addInvalidAttributeThrowExceptionDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['1first_character_is_not_letter'],
@@ -162,6 +197,10 @@ class EavSetupTest extends \PHPUnit\Framework\TestCase
         $reflection = new \ReflectionObject($this);
         foreach ($reflection->getProperties() as $property) {
             if (!$property->isStatic() && 0 !== strpos($property->getDeclaringClass()->getName(), 'PHPUnit')) {
+<<<<<<< HEAD
+=======
+                $property->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $property->setValue($this, null);
             }
         }

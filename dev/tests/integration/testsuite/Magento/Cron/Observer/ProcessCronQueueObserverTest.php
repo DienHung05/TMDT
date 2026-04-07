@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All rights reserved.
  */
@@ -11,6 +12,16 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class ProcessCronQueueObserverTest extends TestCase
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Cron\Observer;
+
+use \Magento\TestFramework\Helper\Bootstrap;
+
+class ProcessCronQueueObserverTest extends \PHPUnit\Framework\TestCase
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 {
     /**
      * @var \Magento\Cron\Observer\ProcessCronQueueObserver
@@ -52,6 +63,7 @@ class ProcessCronQueueObserverTest extends TestCase
             $this->fail($item->getMessages());
         }
     }
+<<<<<<< HEAD
 
     /**
      * @param array $expectedGroupsToRun
@@ -173,4 +185,6 @@ class ProcessCronQueueObserverTest extends TestCase
         }
         return $listOfGroups;
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

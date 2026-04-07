@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -9,7 +14,10 @@ namespace Magento\Quote\Model;
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\Product\Type;
+<<<<<<< HEAD
 use Magento\Checkout\Api\PaymentInformationManagementInterface;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Model\Vat;
 use Magento\Framework\App\Config\ScopeConfigInterface;
@@ -19,8 +27,11 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\StateException;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Quote\Api\CartManagementInterface;
+<<<<<<< HEAD
 use Magento\Quote\Api\Data\AddressInterface;
 use Magento\Quote\Api\Data\PaymentInterface;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Quote\Observer\Frontend\Quote\Address\CollectTotalsObserver;
 use Magento\Quote\Observer\Frontend\Quote\Address\VatValidator;
 use Magento\Sales\Api\OrderManagementInterface;
@@ -78,6 +89,7 @@ class QuoteManagementTest extends TestCase
     private $storeManager;
 
     /**
+<<<<<<< HEAD
      * @var PaymentInformationManagementInterface
      */
     private $paymentManagement;
@@ -93,6 +105,8 @@ class QuoteManagementTest extends TestCase
     private $address;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
@@ -107,9 +121,12 @@ class QuoteManagementTest extends TestCase
         $this->productRepository->cleanCache();
         $this->customerRepository = $this->objectManager->get(CustomerRepositoryInterface::class);
         $this->storeManager = $this->objectManager->get(StoreManagerInterface::class);
+<<<<<<< HEAD
         $this->paymentManagement = $this->objectManager->get(PaymentInformationManagementInterface::class);
         $this->payment = $this->objectManager->get(PaymentInterface::class);
         $this->address = $this->objectManager->get(AddressInterface::class);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -153,7 +170,11 @@ class QuoteManagementTest extends TestCase
         $quote = $this->getQuoteByReservedOrderId->execute('guest_quote');
         $this->cartManagement->placeOrder($quote->getId());
         $quoteAfterOrderPlaced = $this->getQuoteByReservedOrderId->execute('guest_quote');
+<<<<<<< HEAD
         self::assertEquals(0, $quoteAfterOrderPlaced->getCustomerGroupId());
+=======
+        self::assertEquals(2, $quoteAfterOrderPlaced->getCustomerGroupId());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         self::assertEquals(3, $quoteAfterOrderPlaced->getCustomerTaxClassId());
     }
 
@@ -389,6 +410,7 @@ class QuoteManagementTest extends TestCase
         $this->objectManager->removeSharedInstance(Vat::class);
         $this->objectManager->addSharedInstance($vatMock, Vat::class);
     }
+<<<<<<< HEAD
 
     /**
      * Creates order with purchase_order payment method
@@ -437,4 +459,6 @@ class QuoteManagementTest extends TestCase
         $this->assertNotNull($shippingAddress->getCustomerAddressId());
         $this->assertEquals($billingAddress->getCustomerAddressId(), $shippingAddress->getCustomerAddressId());
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

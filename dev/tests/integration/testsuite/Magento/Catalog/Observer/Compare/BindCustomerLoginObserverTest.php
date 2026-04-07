@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -10,12 +15,17 @@ namespace Magento\Catalog\Observer\Compare;
 use Magento\Catalog\Model\Product\Compare\ListCompareFactory;
 use Magento\Customer\Model\Session;
 use Magento\Customer\Model\Visitor;
+<<<<<<< HEAD
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureBeforeTransaction;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Fixture\DbIsolation;
+=======
+use Magento\Eav\Model\Entity\Collection\AbstractCollection;
+use Magento\Framework\ObjectManagerInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
 
@@ -24,6 +34,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @see \Magento\Catalog\Observer\Compare\BindCustomerLoginObserver
  *
+<<<<<<< HEAD
  * Attributes-based fixtures used for new test methods
  */
 #[
@@ -33,6 +44,14 @@ use PHPUnit\Framework\TestCase;
 class BindCustomerLoginObserverTest extends TestCase
 {
     /** @var $objectManager */
+=======
+ * @magentoAppArea frontend
+ * @magentoDbIsolation enabled
+ */
+class BindCustomerLoginObserverTest extends TestCase
+{
+    /** @var ObjectManagerInterface */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     private $objectManager;
 
     /** @var Session */
@@ -83,6 +102,7 @@ class BindCustomerLoginObserverTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * Ensures visitor compare items from different store views are merged and remain store-scoped after login,
      * using new DataFixtures.
      */
@@ -239,6 +259,19 @@ class BindCustomerLoginObserverTest extends TestCase
         $mergeItem->setVisitorId(123);
         $mergeItem->bindCustomerLogin();
         $this->assertCustomerItems((int)$customer->getId(), ['simple', 'simple2']);
+=======
+     * @magentoDataFixture Magento/Catalog/_files/customer_compare_list_with_simple_product.php
+     * @magentoDataFixture Magento/Catalog/_files/product_in_compare_list_with_customer.php
+     * @magentoDataFixture Magento/Catalog/_files/visitor_compare_list.php
+     *
+     * @return void
+     */
+    public function testExecuteWithSameProducts(): void
+    {
+        $this->visitor->setId(123);
+        $this->session->loginById(1);
+        $this->assertCustomerItems(1, ['simple', 'simple2']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertVisitorItems(123, []);
     }
 
@@ -274,11 +307,19 @@ class BindCustomerLoginObserverTest extends TestCase
     /**
      * Check collection
      *
+<<<<<<< HEAD
      * @param mixed $collection
      * @param array $expectedSkus
      * @return void
      */
     private function checkCollection($collection, array $expectedSkus): void
+=======
+     * @param AbstractCollection $collection
+     * @param array $expectedSkus
+     * @return void
+     */
+    private function checkCollection(AbstractCollection $collection, array $expectedSkus): void
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $this->assertCount(count($expectedSkus), $collection);
         foreach ($expectedSkus as $expectedSku) {

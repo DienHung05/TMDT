@@ -2,6 +2,7 @@
 /**
  * Test case for \Magento\Framework\Profiler\Driver\Standard\Output\Html
  *
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
  */
@@ -9,6 +10,13 @@ namespace Magento\Framework\Profiler\Driver\Standard\Output;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Framework\Profiler\Driver\Standard\Output;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class HtmlTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -24,10 +32,17 @@ class HtmlTest extends \PHPUnit\Framework\TestCase
     /**
      * Test display method
      *
+<<<<<<< HEAD
      * @param string $statFile
      * @param string $expectedHtmlFile
      */
     #[DataProvider('displayDataProvider')]
+=======
+     * @dataProvider displayDataProvider
+     * @param string $statFile
+     * @param string $expectedHtmlFile
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDisplay($statFile, $expectedHtmlFile)
     {
         $stat = include $statFile;
@@ -43,7 +58,11 @@ class HtmlTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function displayDataProvider()
+=======
+    public function displayDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['statFile' => __DIR__ . '/_files/timers.php', 'expectedHtmlFile' => __DIR__ . '/_files/output.html']

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -16,7 +21,10 @@ use Magento\Framework\Exception\InputException;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Checks product attribute save behaviour.
@@ -84,11 +92,19 @@ class RepositoryTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider errorProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $fieldName
      * @param string $fieldValue
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('errorProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveWithInvalidCode(string $fieldName, string $fieldValue): void
     {
         $this->expectExceptionObject(InputException::invalidFieldValue($fieldName, $fieldValue));
@@ -98,6 +114,7 @@ class RepositoryTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function errorProvider(): array
     {
         return [
@@ -108,6 +125,18 @@ class RepositoryTest extends TestCase
             'with_invalid_frontend_input' => [
                 'fieldName' => 'frontend_input',
                 'fieldValue' => 'invalid_input',
+=======
+    public function errorProvider(): array
+    {
+        return [
+            'with_invalid_attribute_code' => [
+                'field_name' => 'attribute_code',
+                'field_value' => '****',
+            ],
+            'with_invalid_frontend_input' => [
+                'field_name' => 'frontend_input',
+                'field_value' => 'invalid_input',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

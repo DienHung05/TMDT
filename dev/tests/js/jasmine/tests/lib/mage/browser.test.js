@@ -1,9 +1,16 @@
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
  */
 
 /* eslint-disable */
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 define([
     'mage/adminhtml/browser',
     'jquery'
@@ -11,6 +18,7 @@ define([
     'use strict';
 
     var obj,
+<<<<<<< HEAD
         originalJQueryAjax,
         openUrl = 'http://example.com/target_element_id/theTargetId/tree_path/wysiwyg&current_tree_path=d3lzaXd5Zw,';
 
@@ -29,6 +37,11 @@ define([
             };
         }
 
+=======
+        openUrl = 'http://example.com/target_element_id/theTargetId/tree_path/wysiwyg&current_tree_path=d3lzaXd5Zw,';
+
+    beforeEach(function () {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         /**
          * Dummy constructor to use for instantiation
          * @constructor
@@ -40,6 +53,7 @@ define([
         obj = new Constr();
     });
 
+<<<<<<< HEAD
     afterEach(function () {
         // Restore original $.ajax
         if (originalJQueryAjax) {
@@ -49,6 +63,8 @@ define([
         }
     });
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     describe('"openDialog" method', function () {
         it('Opens dialog with provided targetElementId', function () {
             var options = {

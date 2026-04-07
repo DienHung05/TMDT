@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Deploy\Console\Command\App;
 
@@ -170,6 +175,7 @@ class ApplicationDumpCommandTest extends \PHPUnit\Framework\TestCase
             'CONFIG__DEFAULT__WEB__TEST__TEST_SENSITIVE_ENVIRONMENT4 for web/test/test_sensitive_environment4',
             'CONFIG__DEFAULT__WEB__TEST__TEST_SENSITIVE_ENVIRONMENT5 for web/test/test_sensitive_environment5'
         ]);
+<<<<<<< HEAD
         $outputMock = $this->createMock(OutputInterface::class);
         $outputMock
             ->method('writeln')
@@ -185,6 +191,18 @@ class ApplicationDumpCommandTest extends \PHPUnit\Framework\TestCase
         /** @var ApplicationDumpCommand command */
         $command = $this->objectManager->create(ApplicationDumpCommand::class);
         $command->run($this->createMock(InputInterface::class), $outputMock);
+=======
+        $outputMock = $this->getMockForAbstractClass(OutputInterface::class);
+        $outputMock
+            ->method('writeln')
+            ->withConsecutive(
+                [['system' => $comment]],
+                [$this->matchesRegularExpression('/<info>Done. Config types dumped: [a-z0-9,\s]+<\/info>/')]
+            );
+        /** @var ApplicationDumpCommand command */
+        $command = $this->objectManager->create(ApplicationDumpCommand::class);
+        $command->run($this->getMockForAbstractClass(InputInterface::class), $outputMock);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $config = $this->loadConfig();
 

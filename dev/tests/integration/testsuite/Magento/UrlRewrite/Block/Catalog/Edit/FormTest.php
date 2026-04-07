@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\UrlRewrite\Block\Catalog\Edit;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\UrlRewrite\Block\Catalog\Edit;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * Test for \Magento\UrlRewrite\Block\Catalog\Edit\Form
  * @magentoAppArea adminhtml
@@ -51,6 +59,11 @@ class FormTest extends \PHPUnit\Framework\TestCase
      *
      * @covers \Magento\UrlRewrite\Block\Catalog\Edit\Form::_formPostInit
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider formPostInitDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $productData
      * @param array $categoryData
      * @param string $action
@@ -59,7 +72,10 @@ class FormTest extends \PHPUnit\Framework\TestCase
      * @magentoConfigFixture current_store general/single_store_mode/enabled 1
      * @magentoAppIsolation enabled
      */
+<<<<<<< HEAD
     #[DataProvider('formPostInitDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testFormPostInitNew($productData, $categoryData, $action, $requestPath, $targetPath)
     {
         $args = [];
@@ -87,6 +103,10 @@ class FormTest extends \PHPUnit\Framework\TestCase
     /**
      * Test entity stores
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider getEntityStoresDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoAppIsolation enabled
      * @magentoDataFixture Magento/Store/_files/core_fixturestore.php
      *
@@ -94,7 +114,10 @@ class FormTest extends \PHPUnit\Framework\TestCase
      * @param array $categoryData
      * @param array $expectedStores
      */
+<<<<<<< HEAD
     #[DataProvider('getEntityStoresDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetEntityStores($productData, $categoryData, $expectedStores)
     {
         $args = [];
@@ -193,7 +216,11 @@ class FormTest extends \PHPUnit\Framework\TestCase
      * @return array
      * phpcs:disable Magento2.Functions.StaticFunction
      */
+<<<<<<< HEAD
     public static function formPostInitDataProvider(): array
+=======
+    public static function formPostInitDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -230,7 +257,11 @@ class FormTest extends \PHPUnit\Framework\TestCase
      * @return array
      * phpcs:disable Magento2.Functions.StaticFunction
      */
+<<<<<<< HEAD
     public static function getEntityStoresDataProvider(): array
+=======
+    public static function getEntityStoresDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

@@ -1,17 +1,28 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Customer\Model\ResourceModel\Grid;
 
 use Magento\Customer\Api\AccountManagementInterface;
+<<<<<<< HEAD
 use Magento\Customer\Model\Customer;
 use Magento\Customer\Model\CustomerRegistry;
 use Magento\Framework\Exception\InvalidEmailOrPasswordException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Indexer\IndexerRegistry;
+=======
+use Magento\Customer\Model\CustomerRegistry;
+use Magento\Framework\Exception\InvalidEmailOrPasswordException;
+use Magento\Framework\Exception\NoSuchEntityException;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Indexer\TestCase;
 
@@ -22,6 +33,7 @@ use Magento\TestFramework\Indexer\TestCase;
  */
 class CollectionReindexOnAccountLockTest extends TestCase
 {
+<<<<<<< HEAD
     /** Set Up
      *
      * @return void
@@ -35,6 +47,8 @@ class CollectionReindexOnAccountLockTest extends TestCase
         $indexer->reindexAll();
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Trigger customer account lock by making 10 failed authentication attempts
      */

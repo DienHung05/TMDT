@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Tax\Model\Sales\Total\Quote;
 
@@ -9,7 +14,10 @@ use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Quote\Model\Quote\TotalsCollector;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 require_once __DIR__ . '/SetupUtil.php';
 require_once __DIR__ . '/../../../../_files/tax_calculation_data_aggregated.php';
@@ -25,11 +33,14 @@ require_once __DIR__ . '/../../../../_files/full_discount_with_tax.php';
 class TaxTest extends \Magento\TestFramework\Indexer\TestCase
 {
     /**
+<<<<<<< HEAD
      * @var float
      */
     private const EPSILON = 0.0000000001;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Utility object for setting up tax rates, tax classes and tax rules
      *
      * @var SetupUtil
@@ -182,7 +193,11 @@ class TaxTest extends \Magento\TestFramework\Indexer\TestCase
     protected function verifyItem($item, $expectedItemData)
     {
         foreach ($expectedItemData as $key => $value) {
+<<<<<<< HEAD
             $this->assertEqualsWithDelta($value, $item->getData($key), self::EPSILON, 'item ' . $key . ' is incorrect');
+=======
+            $this->assertEquals($value, $item->getData($key), 'item ' . $key . ' is incorrect');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
 
         return $this;
@@ -253,12 +268,16 @@ class TaxTest extends \Magento\TestFramework\Indexer\TestCase
             if ($key == 'applied_taxes') {
                 $this->verifyAppliedTaxes($quoteAddress->getAppliedTaxes(), $value);
             } else {
+<<<<<<< HEAD
                 $this->assertEqualsWithDelta(
                     $value,
                     $quoteAddress->getData($key),
                     self::EPSILON,
                     'Quote address ' . $key . ' is incorrect'
                 );
+=======
+                $this->assertEquals($value, $quoteAddress->getData($key), 'Quote address ' . $key . ' is incorrect');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             }
         }
 
@@ -298,10 +317,17 @@ class TaxTest extends \Magento\TestFramework\Indexer\TestCase
      * @param array $expectedResults
      * @magentoDbIsolation disabled
      * @magentoAppIsolation enabled
+<<<<<<< HEAD
      * @return void
      */
     #[DataProvider('taxDataProvider')]
     public function testTaxCalculation($config_data, $quote_data, $expected_results)
+=======
+     * @dataProvider taxDataProvider
+     * @return void
+     */
+    public function testTaxCalculation($configData, $quoteData, $expectedResults)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $db = \Magento\TestFramework\Helper\Bootstrap::getInstance()->getBootstrap()
             ->getApplication()
@@ -311,12 +337,21 @@ class TaxTest extends \Magento\TestFramework\Indexer\TestCase
         }
         $db->restoreFromDbDump();
         //Setup tax configurations
+<<<<<<< HEAD
         $this->setupUtil->setupTax($config_data);
 
         $quote = $this->setupUtil->setupQuote($quote_data);
         $quoteAddress = $quote->getShippingAddress();
         $this->totalsCollector->collectAddressTotals($quote, $quoteAddress);
         $this->verifyResult($quoteAddress, $expected_results);
+=======
+        $this->setupUtil->setupTax($configData);
+
+        $quote = $this->setupUtil->setupQuote($quoteData);
+        $quoteAddress = $quote->getShippingAddress();
+        $this->totalsCollector->collectAddressTotals($quote, $quoteAddress);
+        $this->verifyResult($quoteAddress, $expectedResults);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $skus = array_map(function ($item) {
             return $item['sku'];
@@ -330,7 +365,11 @@ class TaxTest extends \Magento\TestFramework\Indexer\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function taxDataProvider()
+=======
+    public function taxDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         global $taxCalculationData;
         return $taxCalculationData;

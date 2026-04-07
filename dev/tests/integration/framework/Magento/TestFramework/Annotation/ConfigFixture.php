@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -14,7 +19,10 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Store\Model\ScopeInterface;
 use Magento\TestFramework\Annotation\TestCaseAnnotation;
+<<<<<<< HEAD
 use Magento\TestFramework\Event\Magento;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Fixture\Parser\Config as ConfigFixtureParser;
 use Magento\TestFramework\Fixture\ParserInterface;
 use Magento\TestFramework\Helper\Bootstrap;
@@ -76,7 +84,11 @@ class ConfigFixture
      * @param string|null $scopeCode
      * @return mixed|null
      */
+<<<<<<< HEAD
     protected function getScopeConfigValue(string $configPath, string $scopeType, ?string $scopeCode = null)
+=======
+    protected function getScopeConfigValue(string $configPath, string $scopeType, string $scopeCode = null)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $result = null;
         if ($scopeCode !== false) {
@@ -190,7 +202,11 @@ class ConfigFixture
         $parts = preg_split('/\s+/', $configPathAndValue, 3);
         list($configScope, $configPath, $requiredValue) = $parts + ['', '', ''];
         $originalValue = $this->_getConfigValue($configPath, $storeCode);
+<<<<<<< HEAD
         $this->storeConfigValues[$storeCode ?? ''][$configPath] = $originalValue;
+=======
+        $this->storeConfigValues[$storeCode][$configPath] = $originalValue;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->_setConfigValue($configPath, $requiredValue, $storeCode);
     }
 
@@ -204,7 +220,11 @@ class ConfigFixture
      */
     protected function setWebsiteConfigValue(array $matches, $configPathAndValue): void
     {
+<<<<<<< HEAD
         $websiteCode = $matches[0] != 'current' ? $matches[0] : '';
+=======
+        $websiteCode = $matches[0] != 'current' ? $matches[0] : null;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $parts = preg_split('/\s+/', $configPathAndValue, 3);
         list($configScope, $configPath, $requiredValue) = $parts + ['', '', ''];
         $originalValue = $this->getScopeConfigValue($configPath, ScopeInterface::SCOPE_WEBSITES, $websiteCode);
@@ -272,6 +292,7 @@ class ConfigFixture
      */
     public function startTest(TestCase $test)
     {
+<<<<<<< HEAD
         if ($eventObj = Magento::getCurrentEventObject()) {
             $testData = $eventObj->test()->testData();
 
@@ -282,6 +303,8 @@ class ConfigFixture
             }
         }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->_currentTest = $test;
         $this->_assignConfigData($test);
     }

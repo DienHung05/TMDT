@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\TestFramework\Deploy;
 
@@ -51,6 +56,10 @@ class ShardingConfig
                     'dbname' => $dbData['dbname'],
                     'model' => 'mysql4',
                     'engine' => 'innodb',
+<<<<<<< HEAD
+=======
+                    'initStatements' => 'SET NAMES utf8;',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'active' => '1'
                 ];
                 $config['resource'][$connectionName] = [

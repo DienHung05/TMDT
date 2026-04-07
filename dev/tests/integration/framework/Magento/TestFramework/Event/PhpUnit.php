@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -9,7 +14,11 @@
  */
 namespace Magento\TestFramework\Event;
 
+<<<<<<< HEAD
 class PhpUnit
+=======
+class PhpUnit implements \PHPUnit\Framework\TestListener
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 {
     /**
      * Used when PHPUnit framework instantiates the class on its own and passes nothing to the constructor
@@ -28,7 +37,11 @@ class PhpUnit
      *
      * @param \Magento\TestFramework\EventManager $eventManager
      */
+<<<<<<< HEAD
     public static function setDefaultEventManager(?\Magento\TestFramework\EventManager $eventManager = null)
+=======
+    public static function setDefaultEventManager(\Magento\TestFramework\EventManager $eventManager = null)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         self::$_defaultEventManager = $eventManager;
     }
@@ -37,7 +50,11 @@ class PhpUnit
      * @param \Magento\TestFramework\EventManager $eventManager
      * @throws \Magento\Framework\Exception\LocalizedException
      */
+<<<<<<< HEAD
     public function __construct(?\Magento\TestFramework\EventManager $eventManager = null)
+=======
+    public function __construct(\Magento\TestFramework\EventManager $eventManager = null)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $this->_eventManager = $eventManager ?: self::$_defaultEventManager;
         if (!$this->_eventManager) {

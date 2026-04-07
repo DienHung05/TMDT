@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Setup\Model;
@@ -17,12 +22,21 @@ class AdminAccount
     /**#@+
      * Data keys
      */
+<<<<<<< HEAD
     public const KEY_USER = 'admin-user';
     public const KEY_PASSWORD = 'admin-password';
     public const KEY_EMAIL = 'admin-email';
     public const KEY_FIRST_NAME = 'admin-firstname';
     public const KEY_LAST_NAME = 'admin-lastname';
     public const KEY_PREFIX = 'db-prefix';
+=======
+    const KEY_USER = 'admin-user';
+    const KEY_PASSWORD = 'admin-password';
+    const KEY_EMAIL = 'admin-email';
+    const KEY_FIRST_NAME = 'admin-firstname';
+    const KEY_LAST_NAME = 'admin-lastname';
+    const KEY_PREFIX = 'db-prefix';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**#@- */
 
     /**
@@ -154,7 +168,12 @@ class AdminAccount
     }
 
     /**
+<<<<<<< HEAD
      * Validate that the username and email both match the user,and that password exists and is different from username.
+=======
+     * Validates that the username and email both match the user,
+     * and that password exists and is different from user name.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @return void
      * @throws \Exception If the username and email do not both match data provided to install
@@ -163,14 +182,20 @@ class AdminAccount
     public function validateUserMatches()
     {
         if (empty($this->data[self::KEY_PASSWORD])) {
+<<<<<<< HEAD
             // phpcs:ignore Magento2.Exceptions.DirectThrow
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             throw new \Exception(
                 '"Password" is required. Enter and try again.'
             );
         }
 
         if (strcasecmp($this->data[self::KEY_PASSWORD], $this->data[self::KEY_USER]) == 0) {
+<<<<<<< HEAD
             // phpcs:ignore Magento2.Exceptions.DirectThrow
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             throw new \Exception(
                 'Password cannot be the same as the user name.'
             );
@@ -192,7 +217,10 @@ class AdminAccount
         if ((strcasecmp($email, $this->data[self::KEY_EMAIL]) == 0) &&
             (strcasecmp($username, $this->data[self::KEY_USER]) != 0)) {
             // email matched but username did not
+<<<<<<< HEAD
             // phpcs:ignore Magento2.Exceptions.DirectThrow
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             throw new \Exception(
                 'An existing user has the given email but different username. '
                 . 'Username and email both need to match an existing user or both be new.'
@@ -201,7 +229,10 @@ class AdminAccount
         if ((strcasecmp($username, $this->data[self::KEY_USER]) == 0) &&
             (strcasecmp($email, $this->data[self::KEY_EMAIL]) != 0)) {
             // username matched but email did not
+<<<<<<< HEAD
             // phpcs:ignore Magento2.Exceptions.DirectThrow
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             throw new \Exception(
                 'An existing user has the given username but different email. '
                 . 'Username and email both need to match an existing user or both be new.'
@@ -239,6 +270,7 @@ class AdminAccount
     }
 
     /**
+<<<<<<< HEAD
      * Gets an administrators role id, the special role created by data fixture in Authorization module.
      *
      * @return int The id of an administrators role
@@ -247,22 +279,44 @@ class AdminAccount
     private function retrieveAdministratorsRoleId()
     {
         // Get an administrators role id to use as parent_id
+=======
+     * Gets the "Administrators" role id, the special role created by data fixture in Authorization module.
+     *
+     * @return int The id of the Administrators role
+     * @throws \Exception If Administrators role not found or problem connecting with database.
+     */
+    private function retrieveAdministratorsRoleId()
+    {
+        // Get Administrators role id to use as parent_id
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $administratorsRoleData = [
             'parent_id'  => 0,
             'tree_level' => 1,
             'role_type' => Group::ROLE_TYPE,
             'user_id' => 0,
             'user_type' => UserContextInterface::USER_TYPE_ADMIN,
+<<<<<<< HEAD
+=======
+            'role_name' => 'Administrators',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
         $result = $this->connection->fetchRow(
             'SELECT * FROM ' . $this->getTableName('authorization_role') . ' ' .
             'WHERE parent_id = :parent_id AND tree_level = :tree_level AND role_type = :role_type AND ' .
+<<<<<<< HEAD
             'user_id = :user_id AND user_type = :user_type ORDER BY sort_order DESC',
             $administratorsRoleData
         );
         if (empty($result)) {
             // phpcs:ignore Magento2.Exceptions.DirectThrow
             throw new \Exception('No administrators role was found, data fixture needs to be run');
+=======
+            'user_id = :user_id AND user_type = :user_type AND role_name = :role_name',
+            $administratorsRoleData
+        );
+        if (empty($result)) {
+            throw new \Exception('No Administrators role was found, data fixture needs to be run');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         } else {
             // Found at least one, use first
             return $result['role_id'];

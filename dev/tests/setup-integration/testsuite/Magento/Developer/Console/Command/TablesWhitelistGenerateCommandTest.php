@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -70,7 +75,10 @@ class TablesWhitelistGenerateCommandTest extends SetupTestCase
      *
      * @moduleName Magento_TestSetupDeclarationModule1
      * @moduleName Magento_TestSetupDeclarationModule8
+<<<<<<< HEAD
      * @moduleName Magento_TestSetupDeclarationModule10
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @throws \Exception
      */
     public function testExecute()
@@ -78,7 +86,10 @@ class TablesWhitelistGenerateCommandTest extends SetupTestCase
         $modules = [
             'Magento_TestSetupDeclarationModule1',
             'Magento_TestSetupDeclarationModule8',
+<<<<<<< HEAD
             'Magento_TestSetupDeclarationModule10',
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
 
         $this->cliCommand->install($modules);
@@ -116,7 +127,11 @@ class TablesWhitelistGenerateCommandTest extends SetupTestCase
         $this->assertEmpty($this->tester->getDisplay());
 
         $whitelistFileContent = file_get_contents($whiteListFileName);
+<<<<<<< HEAD
         $expectedWhitelistContent = rtrim(file_get_contents(
+=======
+        $expectedWhitelistContent = file_get_contents(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             dirname(__DIR__, 2)
             . DIRECTORY_SEPARATOR
             . implode(
@@ -128,7 +143,11 @@ class TablesWhitelistGenerateCommandTest extends SetupTestCase
                     'db_schema_whitelist.json'
                 ]
             )
+<<<<<<< HEAD
         ), "\n");
+=======
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertEquals($expectedWhitelistContent, $whitelistFileContent);
     }
 }

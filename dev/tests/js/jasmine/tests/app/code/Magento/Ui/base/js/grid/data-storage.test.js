@@ -1,9 +1,17 @@
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
  */
 
 /* eslint-disable */
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/*eslint max-nested-callbacks: 0*/
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /*jscs:disable requireCamelCaseOrUpperCaseIdentifiers*/
 define([
     'jquery',
@@ -230,6 +238,7 @@ define([
         });
 
         describe('"requestData" method', function () {
+<<<<<<< HEAD
             var model = new DataStorage(),
                 originalJQueryAjax;
 
@@ -255,11 +264,28 @@ define([
                     delete $.ajax;
                 }
             });
+=======
+            var model = new DataStorage();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
             it('Check Ajax request', function () {
                 var result = 'result';
 
                 spyOn(model, 'onRequestComplete').and.returnValue(result);
+<<<<<<< HEAD
+=======
+                spyOn($, 'ajax').and.returnValue({
+                    /**
+                     * Success result for ajax request
+                     *
+                     * @param {Function} handler
+                     * @returns {*}
+                     */
+                    done: function (handler) {
+                        return handler();
+                    }
+                });
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 expect(model.requestData({})).toEqual(result);
             });
         });
@@ -289,7 +315,11 @@ define([
         });
 
         describe('"getRequestData" method', function () {
+<<<<<<< HEAD
             it('returns request data', function (done) {
+=======
+            it('returns request data', function () {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 var request = {
                         ids: [1,2],
                         totalRecords: 2,
@@ -308,8 +338,12 @@ define([
                     result = {
                         items: items,
                         totalRecords: 2,
+<<<<<<< HEAD
                         errorMessage: '',
                         showTotalRecords: true
+=======
+                        errorMessage: ''
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     },
                     model = new DataStorage({
                         cachedRequestDelay: 0
@@ -318,10 +352,13 @@ define([
                 spyOn(model, 'getByIds').and.returnValue(items);
                 model.getRequestData(request).then(function (promiseResult) {
                     expect(promiseResult).toEqual(result);
+<<<<<<< HEAD
                     done();
                 }).catch(function (error) {
                     fail('Promise was rejected: ' + error);
                     done();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 });
             });
         });
@@ -342,14 +379,20 @@ define([
                     data = {
                         items: ids,
                         totalRecords: 3,
+<<<<<<< HEAD
                         showTotalRecords: true,
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         errorMessage: ''
                     },
                     request = {
                         ids: ids,
                         params: params,
                         totalRecords: 3,
+<<<<<<< HEAD
                         showTotalRecords: true,
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         errorMessage: ''
                     };
 
@@ -371,27 +414,39 @@ define([
                     firstData = {
                         items: ids,
                         totalRecords: 3,
+<<<<<<< HEAD
                         showTotalRecords: true,
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         errorMessage: ''
                     },
                     secondData = {
                         items: ids,
                         totalRecords: 3,
+<<<<<<< HEAD
                         showTotalRecords: true,
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         errorMessage: 'Error message'
                     },
                     firstRequest = {
                         ids: ids,
                         params: params,
                         totalRecords: 3,
+<<<<<<< HEAD
                         showTotalRecords: true,
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         errorMessage: ''
                     },
                     secondRequest = {
                         ids: ids,
                         params: params,
                         totalRecords: 3,
+<<<<<<< HEAD
                         showTotalRecords: true,
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         errorMessage: 'Error message'
                     };
 

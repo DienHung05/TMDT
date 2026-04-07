@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\ImportExport\Controller\Adminhtml;
 
 use Magento\TestFramework\Helper\Xpath;
 use Magento\TestFramework\TestCase\AbstractBackendController;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea adminhtml
@@ -48,14 +56,25 @@ class ExportTest extends AbstractBackendController
     /**
      * Test getFilter action
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider getEntityTypesDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $entityType
      * @param string|null $customerEntityType
      * @param array $expectedAttributes
      */
+<<<<<<< HEAD
     #[DataProvider('getEntityTypesDataProvider')]
     public function testGetFilterAction(
         string $entityType,
         ?string $customerEntityType = null,
+=======
+    public function testGetFilterAction(
+        string $entityType,
+        string $customerEntityType = null,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         array $expectedAttributes = []
     ) {
         $this->getRequest()->setParam('isAjax', true);
@@ -82,7 +101,11 @@ class ExportTest extends AbstractBackendController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function getEntityTypesDataProvider()
+=======
+    public function getEntityTypesDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'products' => [

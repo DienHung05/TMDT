@@ -1,12 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Catalog\Block\Product\ListProduct;
 
+<<<<<<< HEAD
 use Magento\Catalog\Model\ResourceModel\Product\Collection;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Block\Product\ListProduct;
@@ -21,6 +27,13 @@ use Magento\Tax\Test\Fixture\TaxRate as TaxRateFixture;
 use Magento\Tax\Test\Fixture\TaxRule as TaxRuleFixture;
 use Magento\TestFramework\Fixture\Config as ConfigFixture;
 use Magento\TestFramework\Fixture\DataFixture;
+=======
+use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Catalog\Block\Product\ListProduct;
+use Magento\Customer\Model\Session;
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Result\PageFactory;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
 use PHPUnit\Framework\TestCase;
@@ -54,11 +67,14 @@ class CheckProductPriceTest extends TestCase
     private $customerSession;
 
     /**
+<<<<<<< HEAD
      * @var Collection
      */
     private $productCollection;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
@@ -67,6 +83,7 @@ class CheckProductPriceTest extends TestCase
         $this->pageFactory = $this->objectManager->get(PageFactory::class);
         $this->productRepository = $this->objectManager->get(ProductRepositoryInterface::class);
         $this->customerSession = $this->objectManager->create(Session::class);
+<<<<<<< HEAD
         $this->productCollection = $this->objectManager->create(Collection::class);
         parent::setUp();
     }
@@ -110,6 +127,11 @@ class CheckProductPriceTest extends TestCase
         $this->assertAsLowAsPriceWithTaxes($priceHtml, 5.5, 5.00);
     }
 
+=======
+        parent::setUp();
+    }
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Assert that product price without additional price configurations will render as expected.
      *
@@ -127,7 +149,10 @@ class CheckProductPriceTest extends TestCase
      * Assert that product special price rendered correctly.
      *
      * @magentoDataFixture Magento/Catalog/_files/product_special_price.php
+<<<<<<< HEAD
      * @magentoDbIsolation disabled
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @return void
      */
@@ -170,7 +195,10 @@ class CheckProductPriceTest extends TestCase
      * Assert that price of product with fixed tier price for not logged user is renders correctly.
      *
      * @magentoDataFixture Magento/Catalog/_files/product_simple_with_fixed_tier_price_for_not_logged_user.php
+<<<<<<< HEAD
      * @magentoDbIsolation disabled
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @return void
      */
@@ -299,6 +327,7 @@ class CheckProductPriceTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * Assert that price html contain "As low as" label and expected price amount with taxes
      *
      * @param string $priceHtml
@@ -323,6 +352,8 @@ class CheckProductPriceTest extends TestCase
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Assert that price html contain expected final price amount.
      *
      * @param string $priceHtml
@@ -365,9 +396,12 @@ class CheckProductPriceTest extends TestCase
     private function getProductPriceHtml(string $sku): string
     {
         $product = $this->productRepository->get($sku, false, null, true);
+<<<<<<< HEAD
         if (false === in_array($product->getId(), $this->productCollection->getAllIds())) {
             $this->productCollection->addItem($product);
         }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         return preg_replace('/[\n\r]/', '', $this->getListProductBlock()->getProductPrice($product));
     }
@@ -387,8 +421,11 @@ class CheckProductPriceTest extends TestCase
         $page->getLayout()->generateXml();
         /** @var Template $categoryProductsBlock */
         $categoryProductsBlock = $page->getLayout()->getBlock('category.products');
+<<<<<<< HEAD
         $listProduct = $categoryProductsBlock->getChildBlock('product_list');
         $listProduct->setCollection($this->productCollection);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         return $categoryProductsBlock->getChildBlock('product_list');
     }

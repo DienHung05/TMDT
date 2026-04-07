@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -54,7 +59,11 @@ class AddCommentTest extends AbstractCreditmemoControllerTest
         );
 
         $this->assertEquals($message->getSubject(), $subject);
+<<<<<<< HEAD
         $this->assertThat(quoted_printable_decode($message->getBody()->bodyToString()), $messageConstraint);
+=======
+        $this->assertThat($message->getBody()->getParts()[0]->getRawContent(), $messageConstraint);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -94,7 +103,12 @@ class AddCommentTest extends AbstractCreditmemoControllerTest
             ]
         );
 
+<<<<<<< HEAD
         $this->getRequest()->setPostValue($params);
+=======
+        $data = $params ?? [];
+        $this->getRequest()->setPostValue($data);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         return $order;
     }

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -47,7 +52,11 @@ class LoadTest extends AbstractController
      */
     protected function tearDown(): void
     {
+<<<<<<< HEAD
         $this->customerSession->logout();
+=======
+        $this->customerSession->setCustomerId(null);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         parent::tearDown();
     }
@@ -73,7 +82,11 @@ class LoadTest extends AbstractController
      */
     public function testWishListCounterUseQty(): void
     {
+<<<<<<< HEAD
         $this->customerSession->loginById(1);
+=======
+        $this->customerSession->setCustomerId(1);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $response = $this->performWishListSectionRequest();
         $this->assertEquals('3 items', $response['wishlist']['counter']);
     }
@@ -86,7 +99,11 @@ class LoadTest extends AbstractController
      */
     public function testWishListCounterNotUseQty(): void
     {
+<<<<<<< HEAD
         $this->customerSession->loginById(1);
+=======
+        $this->customerSession->setCustomerId(1);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $response = $this->performWishListSectionRequest();
         $this->assertEquals('1 item', $response['wishlist']['counter']);
     }

@@ -1,6 +1,11 @@
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /*eslint max-nested-callbacks: 0*/
@@ -26,6 +31,10 @@ define([
             data = [{
                 'options': [
                     {
+<<<<<<< HEAD
+=======
+                        'sort_order': 1,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         'option_id': 1,
                         'option_type_id': 1,
                         'values': [{
@@ -35,6 +44,10 @@ define([
                         }]
                     },
                     {
+<<<<<<< HEAD
+=======
+                        'sort_order': 2,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         'option_id': 2,
                         'option_type_id': 2,
                         'values': [{

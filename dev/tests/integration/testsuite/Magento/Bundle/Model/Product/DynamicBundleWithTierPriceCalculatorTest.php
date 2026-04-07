@@ -1,13 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Bundle\Model\Product;
 
+<<<<<<< HEAD
 use Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use \Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea frontend
@@ -26,11 +35,18 @@ class DynamicBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
     /**
      * @param array $strategyModifiers
      * @param array $expectedResults
+<<<<<<< HEAD
+=======
+     * @dataProvider getTestCases
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoAppIsolation enabled
      * @magentoDataFixture Magento/Bundle/_files/PriceCalculator/dynamic_bundle_product.php
      * @magentoDbIsolation disabled
      */
+<<<<<<< HEAD
     #[DataProvider('getTestCases')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPriceForDynamicBundle(array $strategyModifiers, array $expectedResults)
     {
         $this->prepareFixture($strategyModifiers, 'bundle_product');
@@ -66,6 +82,7 @@ class DynamicBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function getTestCases()
     {
         return [
@@ -74,6 +91,16 @@ class DynamicBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
                 with one required option and tier price
             ' => [
                 'strategyModifiers' => self::getBundleConfiguration1(),
+=======
+    public function getTestCases()
+    {
+        return [
+            '
+                #1 Testing product price for dynamic bundle 
+                with one required option and tier price
+            ' => [
+                'strategy' => $this->getBundleConfiguration1(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     // 0.5 * 10
                     'minimalPrice' => 5,
@@ -83,10 +110,17 @@ class DynamicBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
             ],
 
             '
+<<<<<<< HEAD
                 #2 Testing product price for dynamic bundle
                 with one non required option and tier price
             ' => [
                 'strategyModifiers' => self::getBundleConfiguration2(),
+=======
+                #2 Testing product price for dynamic bundle 
+                with one non required option and tier price
+            ' => [
+                'strategy' => $this->getBundleConfiguration2(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     // 0.5 * 2 * 10
                     'minimalPrice' => 10,
@@ -96,10 +130,17 @@ class DynamicBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
             ],
 
             '
+<<<<<<< HEAD
                 #3 Testing product price for dynamic bundle
                 with one required checkbox type option and tier price
             ' => [
                 'strategyModifiers' => self::getBundleConfiguration3(),
+=======
+                #3 Testing product price for dynamic bundle 
+                with one required checkbox type option and tier price
+            ' => [
+                'strategy' => $this->getBundleConfiguration3(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     // 0.5 * 1 * 10
                     'minimalPrice' => 5,
@@ -109,10 +150,17 @@ class DynamicBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
             ],
 
             '
+<<<<<<< HEAD
                 #4 Testing product price for dynamic bundle
                 with one required multi type option and tier price
             ' => [
                 'strategyModifiers' => self::getBundleConfiguration4(),
+=======
+                #4 Testing product price for dynamic bundle 
+                with one required multi type option and tier price
+            ' => [
+                'strategy' => $this->getBundleConfiguration4(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     // 0.5 * 1 * 10
                     'minimalPrice' => 5,
@@ -122,10 +170,17 @@ class DynamicBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
             ],
 
             '
+<<<<<<< HEAD
                 #5 Testing product price for dynamic bundle
                 with one required radio type option and tier price
             ' => [
                 'strategyModifiers' => self::getBundleConfiguration5(),
+=======
+                #5 Testing product price for dynamic bundle 
+                with one required radio type option and tier price
+            ' => [
+                'strategy' => $this->getBundleConfiguration5(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     // 0.5 * 1 * 10
                     'minimalPrice' => 5,
@@ -136,10 +191,17 @@ class DynamicBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
             ],
 
             '
+<<<<<<< HEAD
                 #6 Testing product price for dynamic bundle
                 with two required options and tier price
             ' => [
                 'strategyModifiers' => self::getBundleConfiguration6(),
+=======
+                #6 Testing product price for dynamic bundle 
+                with two required options and tier price
+            ' => [
+                'strategy' => $this->getBundleConfiguration6(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     // 0.5 * (1 * 10 + 1 * 10)
                     'minimalPrice' => 10,
@@ -149,10 +211,17 @@ class DynamicBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
             ],
 
             '
+<<<<<<< HEAD
                 #7 Testing product price for dynamic bundle
                 with one required option, one non required option and tier price
             ' => [
                 'strategyModifiers' => self::getBundleConfiguration7(),
+=======
+                #7 Testing product price for dynamic bundle 
+                with one required option, one non required option and tier price
+            ' => [
+                'strategy' => $this->getBundleConfiguration7(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     // 0.5 * (1 * 10)
                     'minimalPrice' => 5,
@@ -162,10 +231,17 @@ class DynamicBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
             ],
 
             '
+<<<<<<< HEAD
                 #8 Testing product price for dynamic bundle
                 with two non required options and tier price
             ' => [
                 'strategyModifiers' => self::getBundleConfiguration8(),
+=======
+                #8 Testing product price for dynamic bundle 
+                with two non required options and tier price
+            ' => [
+                'strategy' => $this->getBundleConfiguration8(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     // 0.5 * (1 * 10)
                     'minimalPrice' => 5,
@@ -175,10 +251,17 @@ class DynamicBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
             ],
 
             '
+<<<<<<< HEAD
                 #9 Testing product price for dynamic bundle
                 with tier price and with simple with tier price
             ' => [
                 'strategyModifiers' => self::getBundleConfiguration9(),
+=======
+                #9 Testing product price for dynamic bundle 
+                with tier price and with simple with tier price
+            ' => [
+                'strategy' => $this->getBundleConfiguration9(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     // 0.5 * 1 * 2.5
                     'minimalPrice' => 1.25,
@@ -193,7 +276,11 @@ class DynamicBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
      * Dynamic bundle with one required option and tier price
      * @return array
      */
+<<<<<<< HEAD
     private static function getBundleConfiguration1()
+=======
+    private function getBundleConfiguration1()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -232,7 +319,11 @@ class DynamicBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
      * Dynamic bundle with one non required option and tier price
      * @return array
      */
+<<<<<<< HEAD
     private static function getBundleConfiguration2()
+=======
+    private function getBundleConfiguration2()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -271,7 +362,11 @@ class DynamicBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
      * Dynamic bundle with one required checkbox type option and tier price
      * @return array
      */
+<<<<<<< HEAD
     private static function getBundleConfiguration3()
+=======
+    private function getBundleConfiguration3()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -314,7 +409,11 @@ class DynamicBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
      * Dynamic bundle with one required multi type option and tier price
      * @return array
      */
+<<<<<<< HEAD
     private static function getBundleConfiguration4()
+=======
+    private function getBundleConfiguration4()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -357,7 +456,11 @@ class DynamicBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
      * Dynamic bundle with one required radio type option and tier price
      * @return array
      */
+<<<<<<< HEAD
     private static function getBundleConfiguration5()
+=======
+    private function getBundleConfiguration5()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -400,7 +503,11 @@ class DynamicBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
      * Dynamic bundle with two required options and tier price
      * @return array
      */
+<<<<<<< HEAD
     private static function getBundleConfiguration6()
+=======
+    private function getBundleConfiguration6()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -458,7 +565,11 @@ class DynamicBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
      * Dynamic bundle with one required option, one non required option and tier price
      * @return array
      */
+<<<<<<< HEAD
     private static function getBundleConfiguration7()
+=======
+    private function getBundleConfiguration7()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -516,7 +627,11 @@ class DynamicBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
      * Dynamic bundle with two non required options and tier price
      * @return array
      */
+<<<<<<< HEAD
     private static function getBundleConfiguration8()
+=======
+    private function getBundleConfiguration8()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -574,7 +689,11 @@ class DynamicBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
      * Dynamic bundle with tier price and with simple with tier price
      * @return array
      */
+<<<<<<< HEAD
     private static function getBundleConfiguration9()
+=======
+    private function getBundleConfiguration9()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [

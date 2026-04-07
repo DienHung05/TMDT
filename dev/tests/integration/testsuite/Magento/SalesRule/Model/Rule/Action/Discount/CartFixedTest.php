@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -12,10 +17,14 @@ use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\Product\Attribute\Source\Status;
 use Magento\Catalog\Model\Product\Visibility;
 use Magento\Catalog\Model\ProductRepository;
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Checkout\Api\Data\TotalsInformationInterface;
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Checkout\Model\TotalsInformationManagement;
+=======
+use Magento\Checkout\Model\Session as CheckoutSession;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\InputException;
@@ -25,17 +34,24 @@ use Magento\Framework\ObjectManagerInterface;
 use Magento\Multishipping\Model\Checkout\Type\Multishipping;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\CartItemInterface;
+<<<<<<< HEAD
 use Magento\Quote\Api\Data\TotalsInterface;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Quote\Api\GuestCartItemRepositoryInterface;
 use Magento\Quote\Api\GuestCartManagementInterface;
 use Magento\Quote\Api\GuestCartTotalRepositoryInterface;
 use Magento\Quote\Api\GuestCouponManagementInterface;
 use Magento\Quote\Model\Quote;
+<<<<<<< HEAD
 use Magento\Quote\Model\Quote\Address;
 use Magento\Quote\Model\Quote\AddressFactory;
 use Magento\Quote\Model\QuoteIdMask;
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
+=======
+use Magento\Quote\Model\QuoteIdMask;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\Order;
@@ -43,6 +59,7 @@ use Magento\Sales\Model\Order\Email\Sender\OrderSender;
 use Magento\SalesRule\Api\RuleRepositoryInterface;
 use Magento\SalesRule\Model\Rule;
 use Magento\SalesRule\Model\RuleFactory;
+<<<<<<< HEAD
 use Magento\SalesRule\Test\Fixture\ProductCondition as ProductConditionFixture;
 use Magento\SalesRule\Test\Fixture\ProductFoundInCartConditions as ProductFoundInCartConditionsFixture;
 use Magento\SalesRule\Test\Fixture\ProductSubselectionInCartConditions as ProductSubselectionInCartConditionsFixture;
@@ -53,23 +70,33 @@ use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Fixture\DbIsolation;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\Store\Model\StoreManagerInterface;
+use Magento\TestFramework\Helper\Bootstrap;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for Magento\SalesRule\Model\Rule\Action\Discount\CartFixed.
  *
  * @magentoAppArea frontend
+<<<<<<< HEAD
  * @magentoAppIsolation enabled
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class CartFixedTest extends TestCase
 {
     /**
+<<<<<<< HEAD
      * @var float
      */
     private const EPSILON = 0.0000000001;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @var GuestCartManagementInterface
      */
     private $cartManagement;
@@ -124,8 +151,13 @@ class CartFixedTest extends TestCase
      * @magentoDbIsolation enabled
      * @magentoAppIsolation enabled
      * @magentoDataFixture Magento/SalesRule/_files/coupon_cart_fixed_discount.php
+<<<<<<< HEAD
      */
     #[DataProvider('applyFixedDiscountDataProvider')]
+=======
+     * @dataProvider applyFixedDiscountDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testApplyFixedDiscount(array $productPrices): void
     {
         $expectedDiscount = '-15.0000';
@@ -246,7 +278,11 @@ class CartFixedTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function applyFixedDiscountDataProvider(): array
+=======
+    public function applyFixedDiscountDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'prices when discount had wrong value 15.01' => [[22, 14, 43, 7.50, 0.00]],
@@ -339,6 +375,10 @@ class CartFixedTest extends TestCase
      * @magentoAppIsolation enabled
      * @magentoDataFixture Magento/SalesRule/_files/coupon_cart_fixed_discount.php
      * @magentoDataFixture Magento/Multishipping/Fixtures/quote_with_split_items.php
+<<<<<<< HEAD
+=======
+     * @dataProvider multishippingDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param float $discount
      * @param array $firstOrderTotals
      * @param array $secondOrderTotals
@@ -346,7 +386,10 @@ class CartFixedTest extends TestCase
      * @return void
      * @throws LocalizedException
      */
+<<<<<<< HEAD
     #[DataProvider('multishippingDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testMultishipping(
         float $discount,
         array $firstOrderTotals,
@@ -368,16 +411,28 @@ class CartFixedTest extends TestCase
         $orderSender = $this->getMockBuilder(OrderSender::class)
             ->disableOriginalConstructor()
             ->getMock();
+<<<<<<< HEAD
         $model = $this->objectManager->create(Multishipping::class, ['orderSender' => $orderSender]);
         $model->createOrders();
         $orderList = $this->getOrderList((int)$quote->getId());
         $this->assertCount(3, $orderList);
 
+=======
+
+        $model = $this->objectManager->create(
+            Multishipping::class,
+            ['orderSender' => $orderSender]
+        );
+        $model->createOrders();
+        $orderList = $this->getOrderList((int)$quote->getId());
+        $this->assertCount(3, $orderList);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         /**
          * The order with $10 simple product
          * @var Order $firstOrder
          */
         $firstOrder = array_shift($orderList);
+<<<<<<< HEAD
         $this->assertNotEmpty($firstOrder->getAppliedRuleIds());
         $this->assertEquals($firstOrderTotals['subtotal'], $firstOrder->getSubtotal());
         $this->assertEquals($firstOrderTotals['discount_amount'], $firstOrder->getDiscountAmount());
@@ -387,11 +442,31 @@ class CartFixedTest extends TestCase
         $this->assertNotEmpty($firstOrderItem->getAppliedRuleIds());
         $this->assertEquals($firstOrderTotals['discount_amount'] * -1, $firstOrderItem->getDiscountAmount());
 
+=======
+
+        $this->assertEquals(
+            $firstOrderTotals['subtotal'],
+            $firstOrder->getSubtotal()
+        );
+        $this->assertEquals(
+            $firstOrderTotals['discount_amount'],
+            $firstOrder->getDiscountAmount()
+        );
+        $this->assertEquals(
+            $firstOrderTotals['shipping_amount'],
+            $firstOrder->getShippingAmount()
+        );
+        $this->assertEquals(
+            $firstOrderTotals['grand_total'],
+            $firstOrder->getGrandTotal()
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         /**
          * The order with $20 simple product
          * @var Order $secondOrder
          */
         $secondOrder = array_shift($orderList);
+<<<<<<< HEAD
         $this->assertNotEmpty($secondOrder->getAppliedRuleIds());
         $this->assertEquals($secondOrderTotals['subtotal'], $secondOrder->getSubtotal());
         $this->assertEquals($secondOrderTotals['discount_amount'], $secondOrder->getDiscountAmount());
@@ -401,11 +476,30 @@ class CartFixedTest extends TestCase
         $this->assertNotEmpty($secondOrderItem->getAppliedRuleIds());
         $this->assertEquals($secondOrderTotals['discount_amount'] * -1, $secondOrderItem->getDiscountAmount());
 
+=======
+        $this->assertEquals(
+            $secondOrderTotals['subtotal'],
+            $secondOrder->getSubtotal()
+        );
+        $this->assertEquals(
+            $secondOrderTotals['discount_amount'],
+            $secondOrder->getDiscountAmount()
+        );
+        $this->assertEquals(
+            $secondOrderTotals['shipping_amount'],
+            $secondOrder->getShippingAmount()
+        );
+        $this->assertEquals(
+            $secondOrderTotals['grand_total'],
+            $secondOrder->getGrandTotal()
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         /**
          * The order with $5 virtual product and billing address as shipping
          * @var Order $thirdOrder
          */
         $thirdOrder = array_shift($orderList);
+<<<<<<< HEAD
         $this->assertNotEmpty($thirdOrder->getAppliedRuleIds());
         $this->assertEquals($thirdOrderTotals['subtotal'], $thirdOrder->getSubtotal());
         $this->assertEquals($thirdOrderTotals['discount_amount'], $thirdOrder->getDiscountAmount());
@@ -414,13 +508,35 @@ class CartFixedTest extends TestCase
         $thirdOrderItem = array_values($thirdOrder->getItems())[0];
         $this->assertNotEmpty($thirdOrderItem->getAppliedRuleIds());
         $this->assertEquals($thirdOrderTotals['discount_amount'] * -1, $thirdOrderItem->getDiscountAmount());
+=======
+        $this->assertEquals(
+            $thirdOrderTotals['subtotal'],
+            $thirdOrder->getSubtotal()
+        );
+        $this->assertEquals(
+            $thirdOrderTotals['discount_amount'],
+            $thirdOrder->getDiscountAmount()
+        );
+        $this->assertEquals(
+            $thirdOrderTotals['shipping_amount'],
+            $thirdOrder->getShippingAmount()
+        );
+        $this->assertEquals(
+            $thirdOrderTotals['grand_total'],
+            $thirdOrder->getGrandTotal()
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function multishippingDataProvider(): array
+=======
+    public function multishippingDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Discount $5 proportionally spread between products' => [
@@ -494,19 +610,33 @@ class CartFixedTest extends TestCase
      * @magentoDataFixture Magento/SalesRule/_files/cart_rule_50_percent_off_no_condition.php
      * @magentoDataFixture Magento/SalesRule/_files/cart_fixed_10_discount.php
      * @magentoDataFixture Magento/Checkout/_files/quote_with_simple_products.php
+<<<<<<< HEAD
      * @return void
      */
     #[DataProvider('discountByPercentDataProvider')]
+=======
+     * @dataProvider discountByPercentDataProvider
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDiscountsWhenByPercentRuleAppliedFirstAndCartFixedRuleSecond(
         $percentDiscount,
         $expectedDiscounts
     ): void {
         //Update rule discount
+<<<<<<< HEAD
         /** @var Rule $rule */
+=======
+        /** @var \Magento\SalesRule\Model\Rule $rule */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $rule = $this->getRule('50% off - July 4');
         $rule->setDiscountAmount($percentDiscount);
         $this->saveRule($rule);
         $quote = $this->getQuote('test_quote_with_simple_products');
+<<<<<<< HEAD
+=======
+        $quote->setCouponCode('2?ds5!2d');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $quote->collectTotals();
         $this->quoteRepository->save($quote);
         $this->assertEquals(21.98, $quote->getBaseSubtotal());
@@ -516,6 +646,7 @@ class CartFixedTest extends TestCase
         $item = array_shift($items);
         $this->assertEquals('simple1', $item->getSku());
         $this->assertEquals(5.99, $item->getPrice());
+<<<<<<< HEAD
         $this->assertEqualsWithDelta($expectedDiscounts[$item->getSku()], $item->getDiscountAmount(), self::EPSILON);
         $item = array_shift($items);
         $this->assertEquals('simple2', $item->getSku());
@@ -524,6 +655,16 @@ class CartFixedTest extends TestCase
     }
 
     public static function discountByPercentDataProvider()
+=======
+        $this->assertEquals($expectedDiscounts[$item->getSku()], $item->getDiscountAmount());
+        $item = array_shift($items);
+        $this->assertEquals('simple2', $item->getSku());
+        $this->assertEquals(15.99, $item->getPrice());
+        $this->assertEquals($expectedDiscounts[$item->getSku()], $item->getDiscountAmount());
+    }
+
+    public function discountByPercentDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -536,7 +677,11 @@ class CartFixedTest extends TestCase
             ],
             [
                 'percentDiscount' => 50,
+<<<<<<< HEAD
                 'expectedDiscounts' => ['simple1' => 5.72, 'simple2' => 15.28, 'totalDiscount' => -21]
+=======
+                'expectedDiscounts' => ['simple1' => 5.72, 'simple2' => 15.27, 'totalDiscount' => -20.99]
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             [
                 'percentDiscount' => 100,
@@ -572,6 +717,7 @@ class CartFixedTest extends TestCase
         $this->assertEquals(-5, $quote->getShippingAddress()->getDiscountAmount());
     }
 
+<<<<<<< HEAD
     #[
         DataFixture(ProductFixture::class, ['price' => 15], 'p1'),
         DataFixture(ProductFixture::class, ['price' => 10], 'p2'),
@@ -754,6 +900,8 @@ class CartFixedTest extends TestCase
         $this->assertEquals(-167, $totals->getDiscountAmount());
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Get list of orders by quote id.
      *
@@ -809,6 +957,7 @@ class CartFixedTest extends TestCase
         $resourceModel = $this->objectManager->get(\Magento\SalesRule\Model\ResourceModel\Rule::class);
         $resourceModel->save($rule);
     }
+<<<<<<< HEAD
     /**
      * @param int $cartId
      * @return TotalsInterface
@@ -836,4 +985,6 @@ class CartFixedTest extends TestCase
 
         return $totalsManagement->calculate($cartId, $addressInformation);
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -13,7 +18,10 @@ use Magento\Framework\App\ScopeInterface;
 use Magento\Framework\App\ScopeResolverPool;
 use Magento\Framework\Message\MessageInterface;
 use Magento\TestFramework\TestCase\AbstractBackendController;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Checks saving and updating of configuration data
@@ -41,12 +49,19 @@ class SaveTest extends AbstractBackendController
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider saveConfigDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDbIsolation enabled
      * @param array $params
      * @param array $post
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('saveConfigDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveConfig(array $params, array $post): void
     {
         $expectedPathValue = $this->prepareExpectedPathValue($params['section'], $post['groups']);
@@ -61,7 +76,11 @@ class SaveTest extends AbstractBackendController
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function saveConfigDataProvider(): array
+=======
+    public function saveConfigDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'configure_shipping_origin' => [

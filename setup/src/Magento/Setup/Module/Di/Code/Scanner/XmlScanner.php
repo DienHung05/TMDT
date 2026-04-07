@@ -1,9 +1,15 @@
 <?php
+<<<<<<< HEAD
 declare(strict_types=1);
 
 /**
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Setup\Module\Di\Code\Scanner;
 
@@ -44,6 +50,7 @@ class XmlScanner implements ScannerInterface
             $virtualTypeQuery = "//virtualType/@name";
 
             foreach ($xpath->query($virtualTypeQuery) as $virtualNode) {
+<<<<<<< HEAD
                 $virtualTypes[] = ltrim($virtualNode->nodeValue, '\\');
             }
 
@@ -53,11 +60,32 @@ class XmlScanner implements ScannerInterface
 
         $output = array_unique(array_merge([], ...$output));
         $factoriesOutput = array_unique(array_merge([], ...$factoriesOutput));
+=======
+                $virtualTypes[] = $virtualNode->nodeValue;
+            }
+
+            $regex = '/^(.*)\\\(.*)Proxy$/';
+            $query = "/config/preference[ php:functionString('preg_match', '{$regex}', @type) > 0]/@type | " .
+                "//argument[@xsi:type='object' and php:functionString('preg_match', '{$regex}', text()) > 0] |" .
+                "//item[@xsi:type='object' and php:functionString('preg_match', '{$regex}', text()) > 0] |" .
+                "/config/virtualType[ php:functionString('preg_match', '{$regex}', @type) > 0]/@type";
+            /** @var \DOMNode $node */
+            foreach ($xpath->query($query) as $node) {
+                $output[] = $node->nodeValue;
+            }
+
+            $factoriesOutput = array_merge($factoriesOutput, $this->scanFactories($xpath));
+        }
+
+        $output = array_unique($output);
+        $factoriesOutput = array_unique($factoriesOutput);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $factoriesOutput = array_diff($factoriesOutput, $virtualTypes);
         return array_merge($this->_filterEntities($output), $factoriesOutput);
     }
 
     /**
+<<<<<<< HEAD
      * Scan proxies from all di.xml
      *
      * @param \DOMXPath $xpath
@@ -80,10 +108,14 @@ class XmlScanner implements ScannerInterface
 
     /**
      * Scan factories from all di.xml and retrieve non-virtual one
+=======
+     * Scan factories from all di.xml and retrieve non virtual one
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @param \DOMXPath $domXpath
      * @return array
      */
+<<<<<<< HEAD
     private function scanFactories(\DOMXPath $domXpath): array
     {
         $output = [];
@@ -93,6 +125,16 @@ class XmlScanner implements ScannerInterface
 
         foreach ($domXpath->query($query) as $node) {
             $output[] = ltrim(trim($node->nodeValue), '\\');
+=======
+    private function scanFactories(\DOMXPath $domXpath)
+    {
+        $output = [];
+        $regex = '/^(.*)Factory$/';
+        $query = "//argument[@xsi:type='object' and php:functionString('preg_match', '{$regex}', text()) > 0] |" .
+            "//item[@xsi:type='object' and php:functionString('preg_match', '{$regex}', text()) > 0]";
+        foreach ($domXpath->query($query) as $node) {
+            $output[] = $node->nodeValue;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
 
         return $output;
@@ -109,13 +151,21 @@ class XmlScanner implements ScannerInterface
         $entitySuffix = '\\' . ucfirst(ProxyGenerator::ENTITY_TYPE);
         $filteredEntities = [];
         foreach ($output as $className) {
+<<<<<<< HEAD
             $entityName = str_ends_with($className, $entitySuffix)
+=======
+            $entityName = substr($className, -strlen($entitySuffix)) === $entitySuffix
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ? substr($className, 0, -strlen($entitySuffix))
                 : $className;
             $isClassExists = false;
             try {
                 $isClassExists = class_exists($className);
+<<<<<<< HEAD
             } catch (\RuntimeException $e) { //@codingStandardsIgnoreLine
+=======
+            } catch (\RuntimeException $e) {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             }
             if (false === $isClassExists) {
                 if (class_exists($entityName) || interface_exists($entityName)) {

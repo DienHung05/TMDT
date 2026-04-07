@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -31,9 +36,12 @@ class StaticProperties
         '/dev/tests/integration/framework' => [],
     ];
 
+<<<<<<< HEAD
     /**
      * @var array
      */
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     protected static $backupStaticVariables = [];
 
     /**
@@ -153,7 +161,12 @@ class StaticProperties
             $reflectionClass = self::getReflectionClass($class);
             $staticProperties = $reflectionClass->getProperties(\ReflectionProperty::IS_STATIC);
             foreach ($staticProperties as $staticProperty) {
+<<<<<<< HEAD
                 $staticProperty->setValue(null, self::$backupStaticVariables[$class][$staticProperty->getName()]);
+=======
+                $staticProperty->setAccessible(true);
+                $staticProperty->setValue(self::$backupStaticVariables[$class][$staticProperty->getName()]);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             }
         }
     }
@@ -218,6 +231,10 @@ class StaticProperties
             if (self::_isClassCleanable($reflectionClass)) {
                 $staticProperties = $reflectionClass->getProperties(\ReflectionProperty::IS_STATIC);
                 foreach ($staticProperties as $staticProperty) {
+<<<<<<< HEAD
+=======
+                    $staticProperty->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     $value = $staticProperty->getValue();
                     self::$backupStaticVariables[$className][$staticProperty->getName()] = $value;
                 }

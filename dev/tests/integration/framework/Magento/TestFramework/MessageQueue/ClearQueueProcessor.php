@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2022 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -62,6 +67,7 @@ class ClearQueueProcessor
         /** @var ConsumerConfigItemInterface $consumerConfig */
         $consumerConfig = $this->consumerConfig->getConsumer($consumerName);
         $queue = $this->queueRepository->get($consumerConfig->getConnection(), $consumerConfig->getQueue());
+<<<<<<< HEAD
 
         if ($consumerConfig->getConnection() === 'stomp') {
             $queue->clearQueue();
@@ -70,6 +76,10 @@ class ClearQueueProcessor
             while ($message = $queue->dequeue()) {
                 $queue->acknowledge($message);
             }
+=======
+        while ($message = $queue->dequeue()) {
+            $queue->acknowledge($message);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
     }
 }

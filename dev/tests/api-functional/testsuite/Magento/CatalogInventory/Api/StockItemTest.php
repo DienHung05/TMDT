@@ -1,21 +1,34 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\CatalogInventory\Api;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\WebapiAbstract;
 
 /**
+<<<<<<< HEAD
  * API tests for catalog inventory stock item endpoint.
+=======
+ * Class StockItemTest
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class StockItemTest extends WebapiAbstract
 {
     /**
+<<<<<<< HEAD
      * REST service name for catalog inventory stock item API.
      */
     public const SERVICE_NAME = 'catalogInventoryStockItemApi';
@@ -34,6 +47,26 @@ class StockItemTest extends WebapiAbstract
      * REST resource path for put stock item operation.
      */
     public const RESOURCE_PUT_PATH = '/V1/products/:productSku/stockItems/:itemId';
+=======
+     * Service name
+     */
+    const SERVICE_NAME = 'catalogInventoryStockItemApi';
+
+    /**
+     * Service version
+     */
+    const SERVICE_VERSION = 'V1';
+
+    /**
+     * Resource path
+     */
+    const RESOURCE_GET_PATH = '/V1/stockItems';
+
+    /**
+     * Resource path
+     */
+    const RESOURCE_PUT_PATH = '/V1/products/:productSku/stockItems/:itemId';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /** @var \Magento\Framework\ObjectManagerInterface */
     protected $objectManager;
@@ -76,8 +109,13 @@ class StockItemTest extends WebapiAbstract
      * @param array $expectedResult
      * @param array $fixtureData
      * @magentoApiDataFixture Magento/Catalog/_files/multiple_products.php
+<<<<<<< HEAD
      */
     #[DataProvider('saveStockItemBySkuWithWrongInputDataProvider')]
+=======
+     * @dataProvider saveStockItemBySkuWithWrongInputDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testStockItemPUTWithWrongInput($newData, $expectedResult, $fixtureData)
     {
         $stockItemOld = $this->getStockItemBySku($fixtureData);
@@ -128,7 +166,11 @@ class StockItemTest extends WebapiAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function saveStockItemBySkuWithWrongInputDataProvider()
+=======
+    public function saveStockItemBySkuWithWrongInputDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

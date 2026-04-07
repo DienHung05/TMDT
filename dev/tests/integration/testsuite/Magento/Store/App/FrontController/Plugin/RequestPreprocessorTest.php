@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Store\App\FrontController\Plugin;
@@ -12,7 +17,10 @@ use Magento\Framework\App\Config\Value;
 use Magento\Framework\Data\Form\FormKey;
 use Magento\TestFramework\Response;
 use Laminas\Stdlib\Parameters;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Tests \Magento\Store\App\FrontController\Plugin\RequestPreprocessor.
@@ -92,8 +100,13 @@ class RequestPreprocessorTest extends \Magento\TestFramework\TestCase\AbstractCo
      * @param string $requestUrl
      * @param string $redirectUrl
      * @magentoAppArea frontend
+<<<<<<< HEAD
      */
     #[DataProvider('autoRedirectToBaseURLDataProvider')]
+=======
+     * @dataProvider autoRedirectToBaseURLDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAutoRedirectToBaseURL(array $config, string $requestUrl, string $redirectUrl)
     {
         $request = [
@@ -113,7 +126,11 @@ class RequestPreprocessorTest extends \Magento\TestFramework\TestCase\AbstractCo
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function autoRedirectToBaseURLDataProvider(): array
+=======
+    public function autoRedirectToBaseURLDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $baseConfig = [
             'web/unsecure/base_url' => 'http://magento.com/us/',
@@ -124,72 +141,128 @@ class RequestPreprocessorTest extends \Magento\TestFramework\TestCase\AbstractCo
         return [
             [
                 'config' => $baseConfig,
+<<<<<<< HEAD
                 'requestUrl' => 'http://magento.com/a/b/c/d/e.html',
+=======
+                'request' => 'http://magento.com/a/b/c/d/e.html',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'redirectUrl' => 'http://magento.com/us/a/b/c/d/e.html'
             ],
             [
                 'config' => $baseConfig,
+<<<<<<< HEAD
                 'requestUrl' => 'http://magento.com/a/b/c/d.html',
+=======
+                'request' => 'http://magento.com/a/b/c/d.html',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'redirectUrl' => 'http://magento.com/us/a/b/c/d.html'
             ],
             [
                 'config' => $baseConfig,
+<<<<<<< HEAD
                 'requestUrl' => 'http://magento.com/a/b/c.html',
+=======
+                'request' => 'http://magento.com/a/b/c.html',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'redirectUrl' => 'http://magento.com/us/a/b/c.html'
             ],
             [
                 'config' => $baseConfig,
+<<<<<<< HEAD
                 'requestUrl' => 'http://magento.com/a/b.html',
+=======
+                'request' => 'http://magento.com/a/b.html',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'redirectUrl' => 'http://magento.com/us/a/b.html'
             ],
             [
                 'config' => $baseConfig,
+<<<<<<< HEAD
                 'requestUrl' => 'http://magento.com/a.html',
+=======
+                'request' => 'http://magento.com/a.html',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'redirectUrl' => 'http://magento.com/us/a.html'
             ],
             [
                 'config' => $baseConfig,
+<<<<<<< HEAD
                 'requestUrl' => 'http://magento.com/a/b/c/d/e',
+=======
+                'request' => 'http://magento.com/a/b/c/d/e',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'redirectUrl' => 'http://magento.com/us/a/b/c/d/e'
             ],
             [
                 'config' => $baseConfig,
+<<<<<<< HEAD
                 'requestUrl' => 'http://magento.com/a/b/c/d',
+=======
+                'request' => 'http://magento.com/a/b/c/d',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'redirectUrl' => 'http://magento.com/us/a/b/c/d'
             ],
             [
                 'config' => $baseConfig,
+<<<<<<< HEAD
                 'requestUrl' => 'http://magento.com/a/b/c',
+=======
+                'request' => 'http://magento.com/a/b/c',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'redirectUrl' => 'http://magento.com/us/a/b/c'
             ],
             [
                 'config' => $baseConfig,
+<<<<<<< HEAD
                 'requestUrl' => 'http://magento.com/a/b',
+=======
+                'request' => 'http://magento.com/a/b',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'redirectUrl' => 'http://magento.com/us/a/b'
             ],
             [
                 'config' => $baseConfig,
+<<<<<<< HEAD
                 'requestUrl' => 'http://magento.com/a',
+=======
+                'request' => 'http://magento.com/a',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'redirectUrl' => 'http://magento.com/us/a'
             ],
             [
                 'config' => $baseConfig,
+<<<<<<< HEAD
                 'requestUrl' => 'http://magento.com/',
+=======
+                'request' => 'http://magento.com/',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'redirectUrl' => 'http://magento.com/us/'
             ],
             [
                 'config' => array_merge($baseConfig, ['web/seo/use_rewrites' => 0]),
+<<<<<<< HEAD
                 'requestUrl' => 'http://magento.com/',
+=======
+                'request' => 'http://magento.com/',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'redirectUrl' => 'http://magento.com/us/index.php/'
             ],
             [
                 'config' => array_merge($baseConfig, ['web/seo/use_rewrites' => 0]),
+<<<<<<< HEAD
                 'requestUrl' => 'http://magento.com/a/b/c/d.html',
+=======
+                'request' => 'http://magento.com/a/b/c/d.html',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'redirectUrl' => 'http://magento.com/us/index.php/a/b/c/d.html'
             ],
             [
                 'config' => array_merge($baseConfig, ['web/seo/use_rewrites' => 0]),
+<<<<<<< HEAD
                 'requestUrl' => 'http://magento.com/a/b/c/d',
+=======
+                'request' => 'http://magento.com/a/b/c/d',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'redirectUrl' => 'http://magento.com/us/index.php/a/b/c/d'
             ],
         ];
@@ -324,6 +397,10 @@ class RequestPreprocessorTest extends \Magento\TestFramework\TestCase\AbstractCo
 
         foreach ($properties as $name) {
             $property = $reflection->getProperty($name);
+<<<<<<< HEAD
+=======
+            $property->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $property->setValue($request, null);
         }
         $request->setServer(new Parameters($server));

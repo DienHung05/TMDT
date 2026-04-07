@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Framework\View\Design\FileResolution;
@@ -9,7 +14,10 @@ namespace Magento\Framework\View\Design\FileResolution;
 use Magento\Framework\App\Bootstrap as AppBootstrap;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoComponentsDir Magento/Framework/View/_files/fallback
@@ -59,8 +67,14 @@ class FallbackTest extends \PHPUnit\Framework\TestCase
      * @param string $themePath
      * @param string|null $module
      * @param string|null $expectedFilename
+<<<<<<< HEAD
      */
     #[DataProvider('getTemplateFileDataProvider')]
+=======
+     *
+     * @dataProvider getTemplateFileDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetTemplateFile($file, $themePath, $module, $expectedFilename)
     {
         $this->reinitializeEnvironment();
@@ -82,7 +96,11 @@ class FallbackTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getTemplateFileDataProvider()
+=======
+    public function getTemplateFileDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'non-modular: no default inheritance' => [
@@ -120,8 +138,14 @@ class FallbackTest extends \PHPUnit\Framework\TestCase
      * @param string $themePath
      * @param string $locale
      * @param string|null $expectedFilename
+<<<<<<< HEAD
      */
     #[DataProvider('getLocaleFileDataProvider')]
+=======
+     *
+     * @dataProvider getLocaleFileDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetI18nCsvFile($themePath, $locale, $expectedFilename)
     {
         $this->reinitializeEnvironment();
@@ -142,7 +166,11 @@ class FallbackTest extends \PHPUnit\Framework\TestCase
         }
     }
 
+<<<<<<< HEAD
     public static function getLocaleFileDataProvider()
+=======
+    public function getLocaleFileDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'no default inheritance' => [
@@ -168,8 +196,14 @@ class FallbackTest extends \PHPUnit\Framework\TestCase
      * @param string $locale
      * @param string $module
      * @param string|null $expectedFilename
+<<<<<<< HEAD
      */
     #[DataProvider('getViewFileDataProvider')]
+=======
+     *
+     * @dataProvider getViewFileDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetViewFile($file, $themePath, $locale, $module, $expectedFilename)
     {
         $this->reinitializeEnvironment();
@@ -188,7 +222,11 @@ class FallbackTest extends \PHPUnit\Framework\TestCase
         }
     }
 
+<<<<<<< HEAD
     public static function getViewFileDataProvider()
+=======
+    public function getViewFileDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'non-modular: no default inheritance' => [
@@ -264,8 +302,14 @@ class FallbackTest extends \PHPUnit\Framework\TestCase
      * @param string $themePath
      * @param string $module
      * @param string|null $expectedFilename
+<<<<<<< HEAD
      */
     #[DataProvider('getEmailTemplateFileDataProvider')]
+=======
+     *
+     * @dataProvider getEmailTemplateFileDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetEmailTemplateFile($file, $themePath, $module, $expectedFilename)
     {
         $area = \Magento\Framework\App\Area::AREA_FRONTEND;
@@ -290,7 +334,11 @@ class FallbackTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getEmailTemplateFileDataProvider()
+=======
+    public function getEmailTemplateFileDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'no fallback' => [

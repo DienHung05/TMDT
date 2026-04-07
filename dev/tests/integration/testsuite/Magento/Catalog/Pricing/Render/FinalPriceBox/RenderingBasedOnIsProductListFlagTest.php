@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Catalog\Pricing\Render\FinalPriceBox;
 
@@ -12,7 +17,10 @@ use Magento\Catalog\Pricing\Render\FinalPriceBox;
 use Magento\Framework\Pricing\Render\Amount;
 use Magento\Framework\Pricing\Render\RendererPool;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test price rendering according to is_product_list flag
@@ -98,12 +106,20 @@ class RenderingBasedOnIsProductListFlagTest extends \PHPUnit\Framework\TestCase
      * @param bool $flag
      * @magentoDataFixture Magento/Catalog/_files/product_special_price.php
      * @magentoAppArea frontend
+<<<<<<< HEAD
      */
     #[DataProvider('isProductListDataProvider')]
     public function testRenderingAccordingToIsProductListFlag($flag)
     {
         $this->finalPriceBox->setData('is_product_list', $flag);
         $this->finalPriceBox->setData('special_price_map', [$this->product->getId() => true]);
+=======
+     * @dataProvider isProductListDataProvider
+     */
+    public function testRenderingAccordingToIsProductListFlag($flag)
+    {
+        $this->finalPriceBox->setData('is_product_list', $flag);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $html = $this->finalPriceBox->toHtml();
         self::assertStringContainsString('5.99', $html);
         $this->assertGreaterThanOrEqual(
@@ -125,7 +141,11 @@ class RenderingBasedOnIsProductListFlagTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function isProductListDataProvider()
+=======
+    public function isProductListDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'is_not_product_list' => [false],

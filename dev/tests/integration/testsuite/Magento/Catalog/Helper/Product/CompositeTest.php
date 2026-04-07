@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -14,7 +19,10 @@ use Magento\Framework\DataObject;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\Registry;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -94,11 +102,18 @@ class CompositeTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider renderConfigureResultExceptionProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $data
      * @param string $expectedErrorMessage
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('renderConfigureResultExceptionProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRenderConfigureResultException(array $data, string $expectedErrorMessage): void
     {
         /** @var DataObject $configureResult */
@@ -122,7 +137,11 @@ class CompositeTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function renderConfigureResultExceptionProvider(): array
+=======
+    public function renderConfigureResultExceptionProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'error_true' => [
@@ -130,13 +149,22 @@ class CompositeTest extends TestCase
                     'error' => true,
                     'message' => 'Test Message'
                 ],
+<<<<<<< HEAD
                 'expectedErrorMessage' => 'Test Message',
+=======
+                'expected_error_message' => 'Test Message',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             'without_product' => [
                 'data' => [
                     'ok' => true,
                 ],
+<<<<<<< HEAD
                 'expectedErrorMessage' => 'The product with ID "" does not exist.',
+=======
+                'expected_error_message' => 'The product that was requested doesn\'t exist.'
+                    . ' Verify the product and try again.',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

@@ -1,6 +1,11 @@
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 define([
@@ -82,6 +87,7 @@ define([
             model.value('2:43 am');
             expect(model.getPreview()).toBe('02:43:00');
         });
+<<<<<<< HEAD
 
         it('Prefers pickerDateTimeFormat for date-only display format', function () {
             // simulate UI XML providing pickerDateTimeFormat while showsTime is false
@@ -107,5 +113,7 @@ define([
             model.value('21-11-2025');
             expect(model.getPreview()).toBe('21-11-2025');
         });
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     });
 });

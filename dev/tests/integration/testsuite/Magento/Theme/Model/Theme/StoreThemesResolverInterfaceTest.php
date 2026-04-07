@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -15,7 +20,10 @@ use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\Theme\Model\ResourceModel\Theme\CollectionFactory;
 use Magento\Theme\Model\ResourceModel\Theme\Collection;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 class StoreThemesResolverInterfaceTest extends TestCase
@@ -79,7 +87,15 @@ class StoreThemesResolverInterfaceTest extends TestCase
         parent::tearDown();
     }
 
+<<<<<<< HEAD
     #[DataProvider('getThemesDataProvider')]
+=======
+    /**
+     * @param array $config
+     * @param array $expected
+     * @dataProvider getThemesDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetThemes(array $config, array $expected): void
     {
         $store = $this->storeManager->getStore();
@@ -113,7 +129,14 @@ class StoreThemesResolverInterfaceTest extends TestCase
         );
     }
 
+<<<<<<< HEAD
     public static function getThemesDataProvider(): array
+=======
+    /**
+     * @return array
+     */
+    public function getThemesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

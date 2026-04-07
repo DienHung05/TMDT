@@ -1,12 +1,20 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Setup\Module\I18n;
 
 use Magento\Framework\Component\ComponentRegistrar;
+<<<<<<< HEAD
 use Magento\Framework\Filesystem\Driver\File;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  *  Service Locator (instead DI container)
@@ -29,14 +37,22 @@ class ServiceLocator
     private static $_context;
 
     /**
+<<<<<<< HEAD
      * I18n Dictionary generator
+=======
+     * Dictionary generator
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @var \Magento\Setup\Module\I18n\Dictionary\Generator
      */
     private static $_dictionaryGenerator;
 
     /**
+<<<<<<< HEAD
      * I18n Pack generator
+=======
+     * Pack generator
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @var \Magento\Setup\Module\I18n\Pack\Generator
      */
@@ -53,11 +69,18 @@ class ServiceLocator
             $filesCollector = new FilesCollector();
 
             $phraseCollector = new Parser\Adapter\Php\Tokenizer\PhraseCollector(new Parser\Adapter\Php\Tokenizer());
+<<<<<<< HEAD
             $fileSystem = new File;
             $adapters = [
                 'php' => new Parser\Adapter\Php($phraseCollector),
                 'html' => new Parser\Adapter\Html(),
                 'js' => new Parser\Adapter\Js($fileSystem),
+=======
+            $adapters = [
+                'php' => new Parser\Adapter\Php($phraseCollector),
+                'html' => new Parser\Adapter\Html(),
+                'js' => new Parser\Adapter\Js(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'xml' => new Parser\Adapter\Xml(),
             ];
 

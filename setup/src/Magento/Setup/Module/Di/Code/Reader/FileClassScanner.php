@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -137,11 +142,14 @@ class FileClassScanner
             // `class` token is not used with a valid class name
             } elseif ($triggerClass && !$tokenIsArray) {
                 $triggerClass = false;
+<<<<<<< HEAD
             // `class` token was used as a string; not to define class
             // phpstan:ignore
             } elseif ($triggerClass && empty($class) && $token[0] === T_DOUBLE_ARROW) {
                 $triggerClass = false;
                 continue;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             // The class keyword was found in the last loop
             } elseif ($triggerClass && $token[0] === T_STRING) {
                 $triggerClass = false;

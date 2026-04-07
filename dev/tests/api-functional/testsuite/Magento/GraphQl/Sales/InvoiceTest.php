@@ -1,12 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Sales;
 
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Checkout\Test\Fixture\PlaceOrder as PlaceOrderFixture;
 use Magento\Checkout\Test\Fixture\SetBillingAddress as SetBillingAddressFixture;
@@ -24,6 +30,11 @@ use Magento\Sales\Model\ResourceModel\Order\Collection;
 use Magento\Sales\Test\Fixture\Invoice as InvoiceFixture;
 use Magento\Sales\Test\Fixture\InvoiceComment as InvoiceCommentFixture ;
 use Magento\TestFramework\Fixture\DataFixture;
+=======
+use Magento\Framework\Registry;
+use Magento\Sales\Api\OrderRepositoryInterface;
+use Magento\Sales\Model\ResourceModel\Order\Collection;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
 use Magento\GraphQl\GetCustomerAuthenticationHeader;
@@ -424,6 +435,7 @@ QUERY;
         $this->deleteOrder();
     }
 
+<<<<<<< HEAD
     #[
         DataFixture(Customer::class, ['email' => 'customer@search.example.com'], as: 'customer'),
         DataFixture(ProductFixture::class, as: 'product'),
@@ -482,13 +494,19 @@ QUERY;
         $this->assertNotEmpty($invoice['comments'][0]['timestamp']);
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Prepare invoice for the order
      *
      * @param string $orderNumber
      * @param int|null $qty
      */
+<<<<<<< HEAD
     private function prepareInvoice(string $orderNumber, ?int $qty = null)
+=======
+    private function prepareInvoice(string $orderNumber, int $qty = null)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         /** @var \Magento\Sales\Model\Order $order */
         $order = Bootstrap::getObjectManager()

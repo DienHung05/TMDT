@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -33,8 +38,14 @@ class EntityAbstractTest extends \PHPUnit\Framework\TestCase
 
         $objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
         /** @var $model \Magento\ImportExport\Model\Import\AbstractEntity|\PHPUnit\Framework\MockObject\MockObject */
+<<<<<<< HEAD
         $model = $this->getMockBuilder(\Magento\ImportExport\Model\Import\AbstractEntity::class)
             ->setConstructorArgs([
+=======
+        $model = $this->getMockForAbstractClass(
+            \Magento\ImportExport\Model\Import\AbstractEntity::class,
+            [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $objectManager->get(\Magento\Framework\Stdlib\StringUtils::class),
                 $objectManager->get(\Magento\Framework\App\Config\ScopeConfigInterface::class),
                 $objectManager->get(\Magento\ImportExport\Model\ImportFactory::class),
@@ -43,9 +54,19 @@ class EntityAbstractTest extends \PHPUnit\Framework\TestCase
                 $objectManager->get(
                     \Magento\ImportExport\Model\Import\ErrorProcessing\ProcessingErrorAggregatorInterface::class
                 )
+<<<<<<< HEAD
             ])
             ->onlyMethods(['getMasterAttributeCode', 'validateRow', 'getEntityTypeCode', '_importData'])
             ->getMock();
+=======
+            ],
+            '',
+            true,
+            false,
+            true,
+            ['getMasterAttributeCode', 'validateRow', 'getEntityTypeCode']
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $model->expects($this->any())->method('getMasterAttributeCode')->willReturn("email");
         $model->expects($this->any())->method('validateRow')->willReturn(true);
         $model->expects($this->any())->method('getEntityTypeCode')->willReturn('customer');
@@ -53,6 +74,10 @@ class EntityAbstractTest extends \PHPUnit\Framework\TestCase
         $model->setSource($source);
 
         $method = new \ReflectionMethod($model, '_saveValidatedBunches');
+<<<<<<< HEAD
+=======
+        $method->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $method->invoke($model);
 
         /** @var $dataSourceModel \Magento\ImportExport\Model\ResourceModel\Import\Data */

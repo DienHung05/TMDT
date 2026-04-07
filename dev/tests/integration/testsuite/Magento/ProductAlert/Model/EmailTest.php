@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -20,7 +25,10 @@ use Magento\Store\Model\Website;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Mail\Template\TransportBuilderMock;
 use Magento\TestFramework\ObjectManager;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -87,13 +95,20 @@ class EmailTest extends TestCase
      * @magentoAppArea frontend
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @magentoDataFixture Magento/Catalog/_files/product_simple.php
+<<<<<<< HEAD
+=======
+     * @dataProvider customerFunctionDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @param bool isCustomerIdUsed
      * @throws LocalizedException
      * @throws MailException
      * @throws NoSuchEntityException
      */
+<<<<<<< HEAD
     #[DataProvider('customerFunctionDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSend($isCustomerIdUsed)
     {
         /** @var Website $website */
@@ -114,6 +129,7 @@ class EmailTest extends TestCase
 
         $this->_emailModel->addPriceProduct($product);
         $this->_emailModel->send();
+<<<<<<< HEAD
         $emailMessage = quoted_printable_decode($this->transportBuilder->getSentMessage()->getBody()->bodyToString());
         $this->assertStringContainsString(
             'John Smith,',
@@ -122,6 +138,16 @@ class EmailTest extends TestCase
     }
 
     public static function customerFunctionDataProvider()
+=======
+
+        $this->assertStringContainsString(
+            'John Smith,',
+            $this->transportBuilder->getSentMessage()->getBody()->getParts()[0]->getRawContent()
+        );
+    }
+
+    public function customerFunctionDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [true],
@@ -167,12 +193,19 @@ class EmailTest extends TestCase
             $expectedPriceBox = '<span id="product-price-' . $product->getId() . '" data-price-amount="'
                 . $expectedPrice . '" data-price-type="finalPrice" '
                 . 'class="price-wrapper "><span class="price">$' . $expectedPrice . '.00</span></span>';
+<<<<<<< HEAD
             $emailMessage = quoted_printable_decode(
                 $this->transportBuilder->getSentMessage()->getBody()->bodyToString()
             );
             $this->assertStringContainsString(
                 $expectedPriceBox,
                 $emailMessage
+=======
+
+            $this->assertStringContainsString(
+                $expectedPriceBox,
+                $this->transportBuilder->getSentMessage()->getBody()->getParts()[0]->getRawContent()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             );
         }
     }

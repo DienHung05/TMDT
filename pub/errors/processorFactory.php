@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
@@ -10,6 +11,15 @@ namespace Magento\Framework\Error;
 require_once realpath(__DIR__) . '/../../app/bootstrap.php';
 require_once 'processor.php'; // phpcs:ignore Magento2.Security.IncludeFile
 use Magento\Framework\App\ObjectManager as AppObjectManager;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Framework\Error;
+
+require_once realpath(__DIR__) . '/../../app/bootstrap.php';
+require_once 'processor.php';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Error processor factory
@@ -23,6 +33,7 @@ class ProcessorFactory
      */
     public function createProcessor()
     {
+<<<<<<< HEAD
         try {
             $objectManager = AppObjectManager::getInstance();
             return $objectManager->create(Processor::class);
@@ -33,5 +44,11 @@ class ProcessorFactory
             $response = $objectManager->create(\Magento\Framework\App\Response\Http::class);
             return new Processor($response);
         }
+=======
+        $objectManagerFactory = \Magento\Framework\App\Bootstrap::createObjectManagerFactory(BP, $_SERVER);
+        $objectManager = $objectManagerFactory->create($_SERVER);
+        $response = $objectManager->create(\Magento\Framework\App\Response\Http::class);
+        return new Processor($response);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

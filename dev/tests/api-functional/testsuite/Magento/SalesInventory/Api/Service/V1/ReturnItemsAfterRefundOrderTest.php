@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\SalesInventory\Api\Service\V1;
 
@@ -25,12 +30,18 @@ use Magento\TestFramework\Fixture\DataFixtureStorage;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\WebapiAbstract;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * API test for return items to stock
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+
+/**
+ * API test for return items to stock
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class ReturnItemsAfterRefundOrderTest extends WebapiAbstract
 {
@@ -53,8 +64,15 @@ class ReturnItemsAfterRefundOrderTest extends WebapiAbstract
         $this->fixtures = $this->objectManager->get(DataFixtureStorageManager::class)->getStorage();
     }
 
+<<<<<<< HEAD
     #[
         DataProvider('dataProvider'),
+=======
+    /**
+     * @dataProvider dataProvider
+     */
+    #[
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         DataFixture(ProductFixture::class, as: 'product'),
         DataFixture(GuestCartFixture::class, as: 'cart'),
         DataFixture(
@@ -107,8 +125,15 @@ class ReturnItemsAfterRefundOrderTest extends WebapiAbstract
         }
     }
 
+<<<<<<< HEAD
     #[
         DataProvider('refundWithReturnItemsToStockUnshippedOrderDataProvider'),
+=======
+    /**
+     * @dataProvider refundWithReturnItemsToStockUnshippedOrderDataProvider
+     */
+    #[
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         DataFixture(ProductFixture::class, as: 'product'),
         DataFixture(GuestCartFixture::class, as: 'cart'),
         DataFixture(
@@ -154,7 +179,11 @@ class ReturnItemsAfterRefundOrderTest extends WebapiAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function refundWithReturnItemsToStockUnshippedOrderDataProvider()
+=======
+    public function refundWithReturnItemsToStockUnshippedOrderDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [false, 99],
@@ -165,7 +194,11 @@ class ReturnItemsAfterRefundOrderTest extends WebapiAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function dataProvider()
+=======
+    public function dataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'refundAllOrderItems' => [2],

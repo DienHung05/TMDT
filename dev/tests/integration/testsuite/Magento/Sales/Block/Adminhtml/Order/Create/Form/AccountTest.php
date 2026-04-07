@@ -2,8 +2,13 @@
 /**
  * Test class for \Magento\Sales\Block\Adminhtml\Order\Create\Form\Account
  *
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -24,7 +29,10 @@ use Magento\Quote\Model\Quote;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -72,6 +80,7 @@ class AccountTest extends TestCase
 
         $this->session = $this->getMockBuilder(SessionQuote::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['getQuote', '__call'])
             ->getMock();
         $this->session->method('getQuote')
@@ -83,6 +92,14 @@ class AccountTest extends TestCase
                 }
                 return null;
             });
+=======
+            ->setMethods(['getCustomerId','getQuote'])
+            ->getMock();
+        $this->session->method('getQuote')
+            ->willReturn($quote);
+        $this->session->method('getCustomerId')
+            ->willReturn(1);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         /** @var LayoutInterface $layout */
         $layout = $this->objectManager->get(LayoutInterface::class);
@@ -183,6 +200,7 @@ class AccountTest extends TestCase
 
         $this->session = $this->getMockBuilder(SessionQuote::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['getQuote', '__call'])
             ->getMock();
         $this->session->method('getQuote')
@@ -194,6 +212,14 @@ class AccountTest extends TestCase
                 }
                 return null;
             });
+=======
+            ->setMethods(['getCustomerId', 'getQuote'])
+            ->getMock();
+        $this->session->method('getQuote')
+            ->willReturn($quote);
+        $this->session->method('getCustomerId')
+            ->willReturn(1);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $formFactory = $this->getFormFactoryMock();
         $this->objectManager->addSharedInstance($formFactory, FormFactory::class);
@@ -219,13 +245,20 @@ class AccountTest extends TestCase
     /**
      * Test for get form with customer group based on vat id validation
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider getDataForVatValidatedCustomer
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param int $defaultCustomerGroupId
      * @param int $vatValidatedCustomerGroupId
      * @param array $customerDetails
      * @param array $orderDetails
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('getDataForVatValidatedCustomer')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetFormWithVatValidatedCustomerGroup(
         int $defaultCustomerGroupId,
         int $vatValidatedCustomerGroupId,
@@ -236,7 +269,12 @@ class AccountTest extends TestCase
             ->disableOriginalConstructor()
             ->disableOriginalClone()
             ->getMock();
+<<<<<<< HEAD
         $requestMock = $this->createMock(Request::class);
+=======
+        $requestMock = $this->getMockBuilder(Request::class)
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $contextMock->expects($this->once())
             ->method('getRequest')
             ->willReturn($requestMock);
@@ -248,6 +286,7 @@ class AccountTest extends TestCase
         $quote->setCustomerGroupId($defaultCustomerGroupId);
         $quote->setData($customerDetails);
 
+<<<<<<< HEAD
         $customerId = $customerDetails['customer_id'];
         $this->session = $this->getMockBuilder(SessionQuote::class)
             ->disableOriginalConstructor()
@@ -262,6 +301,16 @@ class AccountTest extends TestCase
                 }
                 return null;
             });
+=======
+        $this->session = $this->getMockBuilder(SessionQuote::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getCustomerId', 'getQuote'])
+            ->getMock();
+        $this->session->method('getQuote')
+            ->willReturn($quote);
+        $this->session->method('getCustomerId')
+            ->willReturn($customerDetails['customer_id']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $formFactory = $this->getFormFactoryMock();
         $this->objectManager->addSharedInstance($formFactory, FormFactory::class);
@@ -292,7 +341,11 @@ class AccountTest extends TestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function getDataForVatValidatedCustomer(): array
+=======
+    public function getDataForVatValidatedCustomer(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Validated customer group id when its set in quote' => [

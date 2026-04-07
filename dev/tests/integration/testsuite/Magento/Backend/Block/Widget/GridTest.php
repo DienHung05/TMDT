@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -21,7 +26,10 @@ use Magento\Framework\View\LayoutInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use Magento\Framework\TestFramework\Unit\Helper\MockCreationTrait;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea adminhtml
@@ -29,7 +37,10 @@ use Magento\Framework\TestFramework\Unit\Helper\MockCreationTrait;
  */
 class GridTest extends TestCase
 {
+<<<<<<< HEAD
     use MockCreationTrait;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @var ColumnSet
      */
@@ -50,10 +61,21 @@ class GridTest extends TestCase
      */
     protected function setUp(): void
     {
+<<<<<<< HEAD
         $this->layoutMock = $this->createPartialMockWithReflection(
             Layout::class,
             ['getChildName', 'getBlock', 'createBlock', 'renameElement', 'unsetChild', 'setChild', 'helper']
         );
+=======
+        $this->layoutMock = $this->getMockBuilder(Layout::class)
+            ->disableOriginalConstructor()
+            ->disableOriginalClone()
+            ->disableArgumentCloning()
+            ->disallowMockingUnknownTypes()
+            ->onlyMethods(['getChildName', 'getBlock', 'createBlock', 'renameElement', 'unsetChild', 'setChild'])
+            ->addMethods(['helper'])
+            ->getMock();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->columnSetMock = $this->getColumnSetMock();
 

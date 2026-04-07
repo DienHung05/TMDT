@@ -1,11 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
 
 declare(strict_types=1);
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 namespace Magento\User\Model;
 
 use Magento\Authorization\Model\Role;
@@ -18,12 +25,16 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NotFoundException;
 use Magento\Framework\Exception\State\UserLockedException;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\Phrase;
 use Magento\Framework\Stdlib\DateTime;
 use Magento\TestFramework\Bootstrap as TestFrameworkBootstrap;
 use Magento\TestFramework\Entity;
+<<<<<<< HEAD
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorage;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
@@ -32,6 +43,11 @@ use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Mail\Template\TransportBuilderMock;
 use Magento\User\Model\User as UserModel;
 use Magento\User\Test\Fixture\User as UserDataFixture;
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\TestFramework\Mail\Template\TransportBuilderMock;
+use Magento\User\Model\User as UserModel;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -71,11 +87,14 @@ class UserTest extends TestCase
     private $objectManager;
 
     /**
+<<<<<<< HEAD
      * @var DataFixtureStorage
      */
     private $fixtures;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritDoc
      */
     protected function setUp(): void
@@ -85,7 +104,10 @@ class UserTest extends TestCase
         $this->_dateTime = $this->objectManager->get(DateTime::class);
         $this->encryptor = $this->objectManager->get(Encryptor::class);
         $this->cache = $this->objectManager->get(CacheInterface::class);
+<<<<<<< HEAD
         $this->fixtures = DataFixtureStorageManager::getStorage();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -446,10 +468,17 @@ class UserTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @magentoDbIsolation enabled
      * @param string $password
      */
     #[DataProvider('beforeSavePasswordInsecureDataProvider')]
+=======
+     * @dataProvider beforeSavePasswordInsecureDataProvider
+     * @magentoDbIsolation enabled
+     * @param string $password
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testBeforeSavePasswordInsecure($password)
     {
         $this->expectException(LocalizedException::class);
@@ -459,7 +488,11 @@ class UserTest extends TestCase
         $this->_model->save();
     }
 
+<<<<<<< HEAD
     public static function beforeSavePasswordInsecureDataProvider()
+=======
+    public function beforeSavePasswordInsecureDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return ['alpha chars only' => ['aaaaaaaa'], 'digits only' => ['1234567']];
     }
@@ -498,6 +531,7 @@ class UserTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * Test that password validation works with various custom minimum lengths
      *
      * @param int $minLength
@@ -553,6 +587,8 @@ class UserTest extends TestCase
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDbIsolation enabled
      */
     public function testChangeResetPasswordLinkToken()
@@ -683,11 +719,16 @@ class UserTest extends TestCase
         $sentMessage = $transportBuilderMock->getSentMessage();
         $this->assertSame(
             'New User Notification Custom Text ' . $userModel->getFirstname() . ', ' . $userModel->getLastname(),
+<<<<<<< HEAD
             quoted_printable_decode($sentMessage->getBody()->bodyToString())
+=======
+            $sentMessage->getBodyText()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
     }
 
     /**
+<<<<<<< HEAD
      * Test admin email notification after password change
      *
      * @throws LocalizedException
@@ -723,6 +764,8 @@ class UserTest extends TestCase
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Return email template id by origin template code
      *
      * @param string $origTemplateCode
@@ -773,7 +816,11 @@ class UserTest extends TestCase
         $sentMessage = $transportBuilderMock->getSentMessage();
         $this->assertStringContainsString(
             'id='.$userModel->getId(),
+<<<<<<< HEAD
             quoted_printable_decode($sentMessage->getBody()->bodyToString())
+=======
+            quoted_printable_decode($sentMessage->getBodyText())
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
     }
 }

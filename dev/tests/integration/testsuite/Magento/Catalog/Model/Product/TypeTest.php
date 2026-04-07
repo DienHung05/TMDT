@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Catalog\Model\Product;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Catalog\Model\Product;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class TypeTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -24,8 +32,13 @@ class TypeTest extends \PHPUnit\Framework\TestCase
     /**
      * @param string|null $typeId
      * @param string $expectedClass
+<<<<<<< HEAD
      */
     #[DataProvider('factoryDataProvider')]
+=======
+     * @dataProvider factoryDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testFactory($typeId, $expectedClass)
     {
         $product = new \Magento\Framework\DataObject();
@@ -39,7 +52,11 @@ class TypeTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function factoryDataProvider()
+=======
+    public function factoryDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [null, \Magento\Catalog\Model\Product\Type\Simple::class],
@@ -55,8 +72,13 @@ class TypeTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @param string|null $typeId
+<<<<<<< HEAD
      */
     #[DataProvider('factoryReturnsSingletonDataProvider')]
+=======
+     * @dataProvider factoryReturnsSingletonDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testFactoryReturnsSingleton($typeId)
     {
         $product = new \Magento\Framework\DataObject();
@@ -72,7 +94,11 @@ class TypeTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function factoryReturnsSingletonDataProvider()
+=======
+    public function factoryReturnsSingletonDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [null],
@@ -86,15 +112,24 @@ class TypeTest extends \PHPUnit\Framework\TestCase
     /**
      * @param string|null $typeId
      * @param string $expectedClass
+<<<<<<< HEAD
      */
     #[DataProvider('priceFactoryDataProvider')]
+=======
+     * @dataProvider priceFactoryDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPriceFactory($typeId, $expectedClass)
     {
         $type = $this->_productType->priceFactory($typeId);
         $this->assertInstanceOf($expectedClass, $type);
     }
 
+<<<<<<< HEAD
     public static function priceFactoryDataProvider()
+=======
+    public function priceFactoryDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [null, \Magento\Catalog\Model\Product\Type\Price::class],
@@ -140,14 +175,23 @@ class TypeTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @param string $typeId
+<<<<<<< HEAD
      */
     #[DataProvider('getOptionTextDataProvider')]
+=======
+     * @dataProvider getOptionTextDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetOptionText($typeId)
     {
         $this->assertNotEmpty($this->_productType->getOptionText($typeId));
     }
 
+<<<<<<< HEAD
     public static function getOptionTextDataProvider()
+=======
+    public function getOptionTextDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [\Magento\Catalog\Model\Product\Type::TYPE_SIMPLE],

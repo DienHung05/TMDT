@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -209,6 +214,7 @@ class OrderUpdateTest extends WebapiAbstract
     }
 
     /**
+<<<<<<< HEAD
      * Check that changes to taxes extension attribute are saved
      *
      * @magentoApiDataFixture Magento/Sales/_files/order_with_tax.php
@@ -308,6 +314,8 @@ class OrderUpdateTest extends WebapiAbstract
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Prepare order data for request
      *
      * @param Order $order

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\CatalogSearch\Block;
 
@@ -13,7 +18,10 @@ use Magento\Framework\View\LayoutInterface;
 use Magento\Search\Model\QueryFactory;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\Search\ViewModel\ConfigProvider;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class ResultTest extends \PHPUnit\Framework\TestCase
 {
@@ -61,13 +69,21 @@ class ResultTest extends \PHPUnit\Framework\TestCase
     /**
      * Verify search value escaping process
      *
+<<<<<<< HEAD
+=======
+     * @magentoConfigFixture default/catalog/search/engine elasticsearch6
+     * @dataProvider toEscapeSearchTextDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoAppArea frontend
      * @param string $searchValue
      * @param string $expectedOutput
      * @param string $unexpectedOutput
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('toEscapeSearchTextDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testEscapeSearchText(string $searchValue, string $expectedOutput, string $unexpectedOutput): void
     {
         /** @var Result $searchResultBlock */
@@ -75,7 +91,11 @@ class ResultTest extends \PHPUnit\Framework\TestCase
         /** @var Template $searchBlock */
         $searchQueryParams = $this->getMockBuilder(\Magento\Search\ViewModel\AdditionalSearchFormData::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['getFormData'])
+=======
+            ->setMethods(['getFormData'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
         $searchQueryParams->expects($this->any())
             ->method('getFormData')
@@ -105,7 +125,11 @@ class ResultTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function toEscapeSearchTextDataProvider(): array
+=======
+    public function toEscapeSearchTextDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'less_than_sign_escaped' => ['<', '&lt;', '&amp;lt&#x3B;'],

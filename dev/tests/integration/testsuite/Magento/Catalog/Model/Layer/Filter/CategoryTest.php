@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Catalog\Model\Layer\Filter;
 
 use PHPUnit\Framework\Attributes\Depends;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Catalog\Model\Layer\Filter;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * Test class for \Magento\Catalog\Model\Layer\Filter\Category.
  *
@@ -84,7 +92,13 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
         return $this->_model;
     }
 
+<<<<<<< HEAD
     #[Depends('testApply')]
+=======
+    /**
+     * @depends testApply
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetResetValueApplied(\Magento\Catalog\Model\Layer\Filter\Category $modelApplied)
     {
         $this->assertEquals(2, $modelApplied->getResetValue());

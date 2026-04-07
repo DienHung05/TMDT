@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 // @codingStandardsIgnoreFile
@@ -9,7 +14,10 @@
 namespace Magento\Tax\Model\Sales\Total\Quote;
 
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test \Magento\Tax\Model\Sales\Total\Quote\Subtotal
@@ -67,17 +75,28 @@ class SubtotalTest extends \Magento\TestFramework\Indexer\TestCase
      * @magentoDataFixture Magento/Customer/_files/customer_group.php
      * @magentoDataFixture Magento/Catalog/_files/products.php
      * @magentoConfigFixture current_store tax/calculation/algorithm UNIT_BASE_CALCULATION
+<<<<<<< HEAD
+=======
+     * @dataProvider collectUnitBasedDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $quoteItems
      * @param array $expected
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('collectUnitBasedDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCollectUnitBased(array $quoteItems, array $expected): void
     {
         $this->quote($quoteItems, $expected);
     }
 
+<<<<<<< HEAD
     public static function collectUnitBasedDataProvider(): array
+=======
+    public function collectUnitBasedDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'one_item' => [
@@ -117,11 +136,18 @@ class SubtotalTest extends \Magento\TestFramework\Indexer\TestCase
      * @magentoDataFixture Magento/Customer/_files/customer_group.php
      * @magentoDataFixture Magento/Bundle/_files/product.php
      * @magentoConfigFixture current_store tax/calculation/algorithm UNIT_BASE_CALCULATION
+<<<<<<< HEAD
+=======
+     * @dataProvider collectUnitBasedBundleProductDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $quoteItems
      * @param array $expected
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('collectUnitBasedBundleProductDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCollectUnitBasedBundleProduct(array $quoteItems, array $expected): void
     {
         $productTaxClassId = $this->getProductTaxClassId();
@@ -137,7 +163,11 @@ class SubtotalTest extends \Magento\TestFramework\Indexer\TestCase
         $this->quote($quoteItems, $expected);
     }
 
+<<<<<<< HEAD
     public static function collectUnitBasedBundleProductDataProvider(): array
+=======
+    public function collectUnitBasedBundleProductDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'one_item' => [
@@ -189,10 +219,17 @@ class SubtotalTest extends \Magento\TestFramework\Indexer\TestCase
      * @magentoDataFixture Magento/Catalog/_files/products.php
      * @magentoConfigFixture current_store tax/calculation/algorithm UNIT_BASE_CALCULATION
      * @magentoConfigFixture current_store tax/calculation/price_includes_tax 1
+<<<<<<< HEAD
      * @param array $quoteItems
      * @param array $expected
      */
     #[DataProvider('collectUnitBasedPriceIncludesTaxDataProvider')]
+=======
+     * @dataProvider collectUnitBasedPriceIncludesTaxDataProvider
+     * @param array $quoteItems
+     * @param array $expected
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCollectUnitBasedPriceIncludesTax(array $quoteItems, array $expected): void
     {
         $this->quote($quoteItems, $expected);
@@ -201,7 +238,11 @@ class SubtotalTest extends \Magento\TestFramework\Indexer\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function collectUnitBasedPriceIncludesTaxDataProvider(): array
+=======
+    public function collectUnitBasedPriceIncludesTaxDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

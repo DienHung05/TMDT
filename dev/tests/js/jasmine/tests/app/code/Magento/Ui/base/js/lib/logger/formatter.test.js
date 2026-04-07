@@ -1,6 +1,11 @@
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 /* eslint-disable max-nested-callbacks */
 /*jscs:disable jsDoc*/
@@ -24,7 +29,11 @@ define([
                     timestamp: Date.now()
                 };
 
+<<<<<<< HEAD
                 date = moment(entry.timestamp).format('YYYY-MM-DD HH:mm:ssZ');
+=======
+                date = moment(entry.timestamp).format('YYYY-MM-DD hh:mm:ss');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
                 expect(formatter.process(entry)).toBe('[' + date + '] [DEBUG] message text');
             });
@@ -43,7 +52,11 @@ define([
                     }
                 };
 
+<<<<<<< HEAD
                 date = moment(entry.timestamp).format('YYYY-MM-DD HH:mm:ssZ');
+=======
+                date = moment(entry.timestamp).format('YYYY-MM-DD hh:mm:ss');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
                 expect(formatter.process(entry)).toBe('[' + date + '] [DEBUG] Foo Bar');
             });

@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Framework\Message;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Framework\Message;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * \Magento\Framework\Message\Factory test case
  */
@@ -28,14 +36,24 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
         $this->model = $this->objectManager->create(\Magento\Framework\Message\Factory::class);
     }
 
+<<<<<<< HEAD
     #[DataProvider('createProvider')]
+=======
+    /**
+     * @dataProvider createProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreate($messageType)
     {
         $message = $this->model->create($messageType, 'some text');
         $this->assertInstanceOf(\Magento\Framework\Message\MessageInterface::class, $message);
     }
 
+<<<<<<< HEAD
     public static function createProvider()
+=======
+    public function createProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [MessageInterface::TYPE_SUCCESS],

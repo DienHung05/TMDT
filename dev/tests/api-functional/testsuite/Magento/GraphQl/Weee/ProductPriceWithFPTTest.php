@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Weee;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\Product;
 use Magento\Framework\App\Config\ScopeConfigInterface;
@@ -96,10 +104,17 @@ class ProductPriceWithFPTTest extends GraphQlAbstract
      * @param array $weeTaxSettings
      * @return void
      *
+<<<<<<< HEAD
      * @magentoApiDataFixture Magento/Weee/_files/product_with_fpt.php
      * @magentoApiDataFixture Magento/GraphQl/Tax/_files/tax_rule_for_region_1.php
      */
     #[DataProvider('catalogPriceExcludeTaxAndIncludeFPTOnlySettingsProvider')]
+=======
+     * @dataProvider catalogPriceExcludeTaxAndIncludeFPTOnlySettingsProvider
+     * @magentoApiDataFixture Magento/Weee/_files/product_with_fpt.php
+     * @magentoApiDataFixture Magento/GraphQl/Tax/_files/tax_rule_for_region_1.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCatalogPriceExcludeTaxAndIncludeFPTOnly(array $weeTaxSettings)
     {
         $this->writeConfig($weeTaxSettings);
@@ -130,7 +145,11 @@ class ProductPriceWithFPTTest extends GraphQlAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function catalogPriceExcludeTaxAndIncludeFPTOnlySettingsProvider()
+=======
+    public function catalogPriceExcludeTaxAndIncludeFPTOnlySettingsProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -153,10 +172,17 @@ class ProductPriceWithFPTTest extends GraphQlAbstract
      * @param array $weeTaxSettings
      * @return void
      *
+<<<<<<< HEAD
      * @magentoApiDataFixture Magento/Weee/_files/product_with_fpt.php
      * @magentoApiDataFixture Magento/GraphQl/Tax/_files/tax_rule_for_region_1.php
      */
     #[DataProvider('catalogPriceExcludeTaxAndIncludeFPTWithDescriptionSettingsProvider')]
+=======
+     * @dataProvider catalogPriceExcludeTaxAndIncludeFPTWithDescriptionSettingsProvider
+     * @magentoApiDataFixture Magento/Weee/_files/product_with_fpt.php
+     * @magentoApiDataFixture Magento/GraphQl/Tax/_files/tax_rule_for_region_1.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCatalogPriceExcludeTaxAndIncludeFPTWithDescription(array $weeTaxSettings)
     {
         $this->writeConfig($weeTaxSettings);
@@ -187,7 +213,11 @@ class ProductPriceWithFPTTest extends GraphQlAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function catalogPriceExcludeTaxAndIncludeFPTWithDescriptionSettingsProvider()
+=======
+    public function catalogPriceExcludeTaxAndIncludeFPTWithDescriptionSettingsProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -210,10 +240,17 @@ class ProductPriceWithFPTTest extends GraphQlAbstract
      * @param array $weeTaxSettings
      * @return void
      *
+<<<<<<< HEAD
      * @magentoApiDataFixture Magento/Weee/_files/product_with_fpt.php
      * @magentoApiDataFixture Magento/GraphQl/Tax/_files/tax_rule_for_region_1.php
      */
     #[DataProvider('catalogPriceExcludeTaxCatalogDisplayIncludeTaxAndIncludeFPTOnlySettingsProvider')]
+=======
+     * @dataProvider catalogPriceExcludeTaxCatalogDisplayIncludeTaxAndIncludeFPTOnlySettingsProvider
+     * @magentoApiDataFixture Magento/Weee/_files/product_with_fpt.php
+     * @magentoApiDataFixture Magento/GraphQl/Tax/_files/tax_rule_for_region_1.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCatalogPriceExcludeTaxCatalogDisplayIncludeTaxAndIncludeFPTOnly(array $weeTaxSettings)
     {
         $this->writeConfig($weeTaxSettings);
@@ -253,7 +290,11 @@ class ProductPriceWithFPTTest extends GraphQlAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function catalogPriceExcludeTaxCatalogDisplayIncludeTaxAndIncludeFPTOnlySettingsProvider()
+=======
+    public function catalogPriceExcludeTaxCatalogDisplayIncludeTaxAndIncludeFPTOnlySettingsProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -277,10 +318,17 @@ class ProductPriceWithFPTTest extends GraphQlAbstract
      * @param array $weeTaxSettings
      * @return void
      *
+<<<<<<< HEAD
      * @magentoApiDataFixture Magento/Weee/_files/product_with_fpt.php
      * @magentoApiDataFixture Magento/GraphQl/Tax/_files/tax_rule_for_region_1.php
      */
     #[DataProvider('catalogPriceExclTaxCatalogDisplayInclTaxAndInclFPTWithDescriptionSettingsProvider')]
+=======
+     * @dataProvider catalogPriceExclTaxCatalogDisplayInclTaxAndInclFPTWithDescriptionSettingsProvider
+     * @magentoApiDataFixture Magento/Weee/_files/product_with_fpt.php
+     * @magentoApiDataFixture Magento/GraphQl/Tax/_files/tax_rule_for_region_1.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCatalogPriceExclTaxCatalogDisplayInclTaxAndInclFPTWithDescription(array $weeTaxSettings)
     {
         $this->writeConfig($weeTaxSettings);
@@ -320,7 +368,11 @@ class ProductPriceWithFPTTest extends GraphQlAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function catalogPriceExclTaxCatalogDisplayInclTaxAndInclFPTWithDescriptionSettingsProvider()
+=======
+    public function catalogPriceExclTaxCatalogDisplayInclTaxAndInclFPTWithDescriptionSettingsProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -344,10 +396,17 @@ class ProductPriceWithFPTTest extends GraphQlAbstract
      * @param array $weeTaxSettings
      * @return void
      *
+<<<<<<< HEAD
      * @magentoApiDataFixture Magento/Weee/_files/product_with_fpt.php
      * @magentoApiDataFixture Magento/GraphQl/Tax/_files/tax_rule_for_region_1.php
      */
     #[DataProvider('catalogPriceInclTaxCatalogDisplayExclTaxAndInclFPTWithDescriptionSettingsProvider')]
+=======
+     * @dataProvider catalogPriceInclTaxCatalogDisplayExclTaxAndInclFPTWithDescriptionSettingsProvider
+     * @magentoApiDataFixture Magento/Weee/_files/product_with_fpt.php
+     * @magentoApiDataFixture Magento/GraphQl/Tax/_files/tax_rule_for_region_1.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCatalogPriceInclTaxCatalogDisplayExclTaxAndInclFPTWithDescription(array $weeTaxSettings)
     {
         $this->writeConfig($weeTaxSettings);
@@ -378,7 +437,11 @@ class ProductPriceWithFPTTest extends GraphQlAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function catalogPriceInclTaxCatalogDisplayExclTaxAndInclFPTWithDescriptionSettingsProvider()
+=======
+    public function catalogPriceInclTaxCatalogDisplayExclTaxAndInclFPTWithDescriptionSettingsProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -402,10 +465,17 @@ class ProductPriceWithFPTTest extends GraphQlAbstract
      * @param array $weeTaxSettings
      * @return void
      *
+<<<<<<< HEAD
      * @magentoApiDataFixture Magento/Weee/_files/product_with_fpt.php
      * @magentoApiDataFixture Magento/GraphQl/Tax/_files/tax_rule_for_region_1.php
      */
     #[DataProvider('catalogPriceInclTaxCatalogDisplayInclTaxAndInclFPTOnlySettingsProvider')]
+=======
+     * @dataProvider catalogPriceInclTaxCatalogDisplayInclTaxAndInclFPTOnlySettingsProvider
+     * @magentoApiDataFixture Magento/Weee/_files/product_with_fpt.php
+     * @magentoApiDataFixture Magento/GraphQl/Tax/_files/tax_rule_for_region_1.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCatalogPriceInclTaxCatalogDisplayInclTaxAndInclFPTOnly(array $weeTaxSettings)
     {
         $this->writeConfig($weeTaxSettings);
@@ -436,7 +506,11 @@ class ProductPriceWithFPTTest extends GraphQlAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function catalogPriceInclTaxCatalogDisplayInclTaxAndInclFPTOnlySettingsProvider()
+=======
+    public function catalogPriceInclTaxCatalogDisplayInclTaxAndInclFPTOnlySettingsProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -461,10 +535,17 @@ class ProductPriceWithFPTTest extends GraphQlAbstract
      * @param array $weeTaxSettings
      * @return void
      *
+<<<<<<< HEAD
      * @magentoApiDataFixture Magento/Weee/_files/product_with_fpt.php
      * @magentoApiDataFixture Magento/GraphQl/Tax/_files/tax_rule_for_region_1.php
      */
     #[DataProvider('catalogPriceIncTaxCatalogDisplayInclTaxInclFPTWithDescrWithTaxAppliedOnFPTSettingsProvider')]
+=======
+     * @dataProvider catalogPriceIncTaxCatalogDisplayInclTaxInclFPTWithDescrWithTaxAppliedOnFPTSettingsProvider
+     * @magentoApiDataFixture Magento/Weee/_files/product_with_fpt.php
+     * @magentoApiDataFixture Magento/GraphQl/Tax/_files/tax_rule_for_region_1.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCatalogPriceIncTaxCatalogDisplayInclTaxInclFPTWithDescrWithTaxAppliedOnFPT(
         array $weeTaxSettings
     ) {
@@ -510,7 +591,11 @@ class ProductPriceWithFPTTest extends GraphQlAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function catalogPriceIncTaxCatalogDisplayInclTaxInclFPTWithDescrWithTaxAppliedOnFPTSettingsProvider()
+=======
+    public function catalogPriceIncTaxCatalogDisplayInclTaxInclFPTWithDescrWithTaxAppliedOnFPTSettingsProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -537,10 +622,17 @@ class ProductPriceWithFPTTest extends GraphQlAbstract
      * @param array $weeTaxSettings
      * @return void
      *
+<<<<<<< HEAD
      * @magentoApiDataFixture Magento/Weee/_files/product_with_two_fpt.php
      * @magentoApiDataFixture Magento/GraphQl/Tax/_files/tax_rule_for_region_1.php
      */
     #[DataProvider('catalogPriceInclTaxCatalogDisplayIncludeTaxAndMuyltipleFPTsSettingsProvider')]
+=======
+     * @dataProvider catalogPriceInclTaxCatalogDisplayIncludeTaxAndMuyltipleFPTsSettingsProvider
+     * @magentoApiDataFixture Magento/Weee/_files/product_with_two_fpt.php
+     * @magentoApiDataFixture Magento/GraphQl/Tax/_files/tax_rule_for_region_1.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCatalogPriceInclTaxCatalogDisplayIncludeTaxAndMuyltipleFPTs(array $weeTaxSettings)
     {
         $this->writeConfig($weeTaxSettings);
@@ -597,7 +689,11 @@ class ProductPriceWithFPTTest extends GraphQlAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function catalogPriceInclTaxCatalogDisplayIncludeTaxAndMuyltipleFPTsSettingsProvider()
+=======
+    public function catalogPriceInclTaxCatalogDisplayIncludeTaxAndMuyltipleFPTsSettingsProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -621,9 +717,15 @@ class ProductPriceWithFPTTest extends GraphQlAbstract
      * @param array $weeTaxSettings
      * @return void
      *
+<<<<<<< HEAD
      * @magentoApiDataFixture Magento/Weee/_files/product_with_fpt.php
      */
     #[DataProvider('catalogPriceDisabledFPTSettingsProvider')]
+=======
+     * @dataProvider catalogPriceDisabledFPTSettingsProvider
+     * @magentoApiDataFixture Magento/Weee/_files/product_with_fpt.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCatalogPriceDisableFPT(array $weeTaxSettings)
     {
         $this->writeConfig($weeTaxSettings);
@@ -660,7 +762,11 @@ class ProductPriceWithFPTTest extends GraphQlAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function catalogPriceDisabledFPTSettingsProvider()
+=======
+    public function catalogPriceDisabledFPTSettingsProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

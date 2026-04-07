@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe.
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -77,10 +82,13 @@ class RetrieveOrdersWithBundleProductByOrderNumberTest extends GraphQlAbstract
             'bundle-product-two-dropdown-options-simple1-simple2',
             $bundledItemInTheOrder['product_sku']
         );
+<<<<<<< HEAD
         $this->assertEquals(
             'bundle-product-two-dropdown-options',
             $bundledItemInTheOrder['parent_sku']
         );
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $priceOfBundledItemInOrder = $bundledItemInTheOrder['product_sale_price']['value'];
         $this->assertEquals(15, $priceOfBundledItemInOrder);
         $this->assertArrayHasKey('bundle_options', $bundledItemInTheOrder);
@@ -270,7 +278,10 @@ class RetrieveOrdersWithBundleProductByOrderNumberTest extends GraphQlAbstract
                     quantity_ordered
                     discounts{amount{value} label}
                     ... on BundleOrderItem{
+<<<<<<< HEAD
                         parent_sku
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         bundle_options{
                             __typename
                             label

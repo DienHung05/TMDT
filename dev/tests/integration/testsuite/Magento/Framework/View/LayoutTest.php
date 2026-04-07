@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -22,10 +27,14 @@ use Magento\Framework\View\Element\Text\ListText;
 use Magento\Framework\View\Layout\Data\Structure;
 use Magento\Framework\View\Layout\Element;
 use Magento\Framework\View\Layout\ProcessorInterface;
+<<<<<<< HEAD
 use Magento\Framework\TestFramework\Unit\Helper\MockCreationTrait;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Depends;
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -33,8 +42,11 @@ use PHPUnit\Framework\TestCase;
  */
 class LayoutTest extends TestCase
 {
+<<<<<<< HEAD
     use MockCreationTrait;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @var Layout
      */
@@ -103,7 +115,17 @@ class LayoutTest extends TestCase
             ->setConstructorArgs($layoutUtility->getLayoutDependencies())
             ->getMock();
 
+<<<<<<< HEAD
         $merge = $this->createPartialMockWithReflection(\StdClass::class, ['asSimplexml']);
+=======
+        $merge = $this->getMockBuilder(\StdClass::class)
+            ->disableOriginalConstructor()
+            ->disableOriginalClone()
+            ->disableArgumentCloning()
+            ->disallowMockingUnknownTypes()
+            ->addMethods(['asSimplexml'])
+            ->getMock();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $merge->expects($this->once())
             ->method('asSimplexml')
@@ -214,8 +236,13 @@ class LayoutTest extends TestCase
 
     /**
      * @return void
+<<<<<<< HEAD
      */
     #[DataProvider('createBlockDataProvider')]
+=======
+     * @dataProvider createBlockDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateBlock($blockType, $blockName, array $blockData, $expectedName): void
     {
         $expectedData = $blockData + ['type' => $blockType];
@@ -229,7 +256,11 @@ class LayoutTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function createBlockDataProvider(): array
+=======
+    public function createBlockDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'named block' => [Template::class,
@@ -247,8 +278,13 @@ class LayoutTest extends TestCase
 
     /**
      * @return void
+<<<<<<< HEAD
      */
     #[DataProvider('blockNotExistsDataProvider')]
+=======
+     * @dataProvider blockNotExistsDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateBlockNotExists($name): void
     {
         $this->expectException(LocalizedException::class);
@@ -259,7 +295,11 @@ class LayoutTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function blockNotExistsDataProvider(): array
+=======
+    public function blockNotExistsDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [[''], ['block_not_exists']];
     }
@@ -287,8 +327,13 @@ class LayoutTest extends TestCase
     /**
      * @magentoAppIsolation enabled
      * @return void
+<<<<<<< HEAD
      */
     #[DataProvider('addContainerDataProvider')]
+=======
+     * @dataProvider addContainerDataProvider()
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddContainer($htmlTag): void
     {
         $this->assertFalse($this->layout->hasElement('container'));
@@ -304,7 +349,11 @@ class LayoutTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function addContainerDataProvider(): array
+=======
+    public function addContainerDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['aside'],
@@ -381,9 +430,15 @@ class LayoutTest extends TestCase
 
     /**
      * @param LayoutInterface $layout
+<<<<<<< HEAD
      * @return void
      */
     #[Depends('testSetChild')]
+=======
+     * @depends testSetChild
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testReorderChild(LayoutInterface $layout): void
     {
         $layout->addContainer('four', 'Four', [], 'one');

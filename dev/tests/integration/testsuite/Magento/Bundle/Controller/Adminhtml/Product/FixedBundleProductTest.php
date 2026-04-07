@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -9,7 +14,10 @@ namespace Magento\Bundle\Controller\Adminhtml\Product;
 
 use Magento\Bundle\Model\Product\Price;
 use Magento\Catalog\Model\Product\Type\AbstractType;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class checks fixed bundle product save behavior
@@ -21,10 +29,18 @@ class FixedBundleProductTest extends AbstractBundleProductSaveTest
     /**
      * @magentoDataFixture Magento/Catalog/_files/second_product_simple.php
      *
+<<<<<<< HEAD
      * @param array $post
      * @return void
      */
     #[DataProvider('fixedBundleProductDataProvider')]
+=======
+     * @dataProvider fixedBundleProductDataProvider
+     *
+     * @param array $post
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testBundleProductSave(array $post): void
     {
         $post = $this->prepareRequestData($post);
@@ -35,7 +51,11 @@ class FixedBundleProductTest extends AbstractBundleProductSaveTest
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function fixedBundleProductDataProvider(): array
+=======
+    public function fixedBundleProductDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'with_dropdown_option' => [
@@ -113,10 +133,18 @@ class FixedBundleProductTest extends AbstractBundleProductSaveTest
      * @magentoDataFixture Magento/Catalog/_files/second_product_simple.php
      * @magentoDataFixture Magento/Catalog/_files/product_simple_duplicated.php
      *
+<<<<<<< HEAD
      * @param array $post
      * @return void
      */
     #[DataProvider('multiOptionsDataProvider')]
+=======
+     * @dataProvider multiOptionsDataProvider
+     *
+     * @param array $post
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testBundleProductSaveMultiOptions(array $post): void
     {
         $post = $this->prepareRequestData($post);
@@ -127,7 +155,11 @@ class FixedBundleProductTest extends AbstractBundleProductSaveTest
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function multiOptionsDataProvider(): array
+=======
+    public function multiOptionsDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'with_two_options_few_selections' => [
@@ -167,10 +199,18 @@ class FixedBundleProductTest extends AbstractBundleProductSaveTest
      * @magentoDataFixture Magento/Bundle/_files/bundle_product_checkbox_options.php
      * @magentoDataFixture Magento/Catalog/_files/second_product_simple.php
      *
+<<<<<<< HEAD
      * @param array $post
      * @return void
      */
     #[DataProvider('updateProductDataProvider')]
+=======
+     * @dataProvider updateProductDataProvider
+     *
+     * @param array $post
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateProduct(array $post): void
     {
         $id = $this->productRepository->get('bundle-product-checkbox-options')->getId();
@@ -182,7 +222,11 @@ class FixedBundleProductTest extends AbstractBundleProductSaveTest
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function updateProductDataProvider(): array
+=======
+    public function updateProductDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'update_existing_product' => [

@@ -2,14 +2,22 @@
 /**
  * Test for \Magento\Framework\Filesystem\Directory\Read
  *
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Framework\Filesystem\Directory;
 
 use Magento\Framework\Exception\ValidatorException;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class ReadTest
@@ -99,11 +107,18 @@ class ReadTest extends \PHPUnit\Framework\TestCase
     /**
      * Test for read method
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider readProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $dirPath
      * @param string $readPath
      * @param array $expectedResult
      */
+<<<<<<< HEAD
     #[DataProvider('readProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRead($dirPath, $readPath, $expectedResult)
     {
         $dir = $this->getDirectoryInstance($dirPath);
@@ -118,7 +133,11 @@ class ReadTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function readProvider()
+=======
+    public function readProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['foo', null, ['bar', 'file_three.txt']],
@@ -152,11 +171,18 @@ class ReadTest extends \PHPUnit\Framework\TestCase
     /**
      * Test for search method
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider searchProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $dirPath
      * @param string $pattern
      * @param array $expectedResult
      */
+<<<<<<< HEAD
     #[DataProvider('searchProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSearch($dirPath, $pattern, $expectedResult)
     {
         $dir = $this->getDirectoryInstance($dirPath);
@@ -171,7 +197,11 @@ class ReadTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function searchProvider()
+=======
+    public function searchProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['foo', 'bar/*', ['bar/file_two.txt', 'bar/baz']],
@@ -205,11 +235,18 @@ class ReadTest extends \PHPUnit\Framework\TestCase
     /**
      * Test for isExist method
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider existsProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $dirPath
      * @param string $path
      * @param bool $exists
      */
+<<<<<<< HEAD
     #[DataProvider('existsProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testIsExist($dirPath, $path, $exists)
     {
         $dir = $this->getDirectoryInstance($dirPath);
@@ -221,7 +258,11 @@ class ReadTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function existsProvider()
+=======
+    public function existsProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['foo', 'bar', true],
@@ -257,10 +298,17 @@ class ReadTest extends \PHPUnit\Framework\TestCase
     /**
      * Test for stat method
      *
+<<<<<<< HEAD
      * @param string $dirPath
      * @param string $path
      */
     #[DataProvider('statProvider')]
+=======
+     * @dataProvider statProvider
+     * @param string $dirPath
+     * @param string $path
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testStat($dirPath, $path)
     {
         $dir = $this->getDirectoryInstance($dirPath);
@@ -290,7 +338,11 @@ class ReadTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function statProvider()
+=======
+    public function statProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [['foo', 'bar'], ['foo', 'file_three.txt']];
     }
@@ -320,11 +372,18 @@ class ReadTest extends \PHPUnit\Framework\TestCase
     /**
      * Test for isReadable method
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider isReadableProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $dirPath
      * @param string $path
      * @param bool $readable
      */
+<<<<<<< HEAD
     #[DataProvider('isReadableProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testIsReadable($dirPath, $path, $readable)
     {
         $dir = $this->getDirectoryInstance($dirPath);
@@ -356,10 +415,17 @@ class ReadTest extends \PHPUnit\Framework\TestCase
     /**
      * Test for isFile method
      *
+<<<<<<< HEAD
      * @param string $path
      * @param bool $isFile
      */
     #[DataProvider('isFileProvider')]
+=======
+     * @dataProvider isFileProvider
+     * @param string $path
+     * @param bool $isFile
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testIsFile($path, $isFile)
     {
         $this->assertEquals($isFile, $this->getDirectoryInstance('foo')->isFile($path));
@@ -390,10 +456,17 @@ class ReadTest extends \PHPUnit\Framework\TestCase
     /**
      * Test for isDirectory method
      *
+<<<<<<< HEAD
      * @param string $path
      * @param bool $isDirectory
      */
     #[DataProvider('isDirectoryProvider')]
+=======
+     * @dataProvider isDirectoryProvider
+     * @param string $path
+     * @param bool $isDirectory
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testIsDirectory($path, $isDirectory)
     {
         $this->assertEquals($isDirectory, $this->getDirectoryInstance('foo')->isDirectory($path));
@@ -426,7 +499,11 @@ class ReadTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function isReadableProvider()
+=======
+    public function isReadableProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [['foo', 'bar', true], ['foo', 'file_three.txt', true]];
     }
@@ -436,7 +513,11 @@ class ReadTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function isFileProvider()
+=======
+    public function isFileProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [['bar', false], ['file_three.txt', true]];
     }
@@ -446,7 +527,11 @@ class ReadTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function isDirectoryProvider()
+=======
+    public function isDirectoryProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [['bar', true], ['file_three.txt', false]];
     }
@@ -486,10 +571,17 @@ class ReadTest extends \PHPUnit\Framework\TestCase
     /**
      * Test readFile
      *
+<<<<<<< HEAD
      * @param string $path
      * @param string $content
      */
     #[DataProvider('readFileProvider')]
+=======
+     * @dataProvider readFileProvider
+     * @param string $path
+     * @param string $content
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testReadFile($path, $content)
     {
         $directory = $this->getDirectoryInstance('');
@@ -501,7 +593,11 @@ class ReadTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function readFileProvider()
+=======
+    public function readFileProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['popup.csv', 'var myData = 5;'],

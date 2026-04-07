@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\GroupedProduct\Model\Product\Type;
 
@@ -15,7 +20,10 @@ use Magento\Framework\App\Config\Value;
 use Magento\GroupedProduct\Test\Fixture\Product as GroupedProductFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\DataFixture;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class GroupedTest extends \PHPUnit\Framework\TestCase
 {
@@ -167,11 +175,18 @@ class GroupedTest extends \PHPUnit\Framework\TestCase
      * @magentoAppArea frontend
      * @magentoAppIsolation enabled
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
+=======
+     * @dataProvider outOfStockSubProductDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param bool $outOfStockShown
      * @param array $data
      * @param array $expected
      */
+<<<<<<< HEAD
     #[DataProvider('outOfStockSubProductDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testOutOfStockSubProduct(bool $outOfStockShown, array $data, array $expected)
     {
         $this->changeConfigValue(Configuration::XML_PATH_SHOW_OUT_OF_STOCK, $outOfStockShown);
@@ -202,7 +217,11 @@ class GroupedTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function outOfStockSubProductDataProvider()
+=======
+    public function outOfStockSubProductDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Out of stock product are shown #1' => [

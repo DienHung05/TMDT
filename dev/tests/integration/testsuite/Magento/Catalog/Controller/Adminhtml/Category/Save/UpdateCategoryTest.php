@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,7 +16,10 @@ use Magento\Catalog\Api\CategoryRepositoryInterface;
 use Magento\Catalog\Api\Data\CategoryInterface;
 use Magento\Catalog\Model\Category;
 use Magento\Store\Model\StoreManagerInterface;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test related to update category.
@@ -39,12 +47,17 @@ class UpdateCategoryTest extends AbstractSaveCategoryTest
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider categoryDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Store/_files/second_store.php
      * @magentoDataFixture Magento/Catalog/_files/category.php
      *
      * @param array $postData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('categoryDataProvider')]
     public function testUpdateCategoryForDefaultStoreView(array $postData): void
     {
@@ -52,6 +65,15 @@ class UpdateCategoryTest extends AbstractSaveCategoryTest
         $responseData = $this->performSaveCategoryRequest($postData);
         $this->assertRequestIsSuccessfullyPerformed($responseData);
         $category = $this->categoryRepository->get($postData['entity_id'], $storeId);
+=======
+    public function testUpdateCategoryForDefaultStoreView(array $postData): void
+    {
+        $storeId = (int)$this->storeManager->getStore('default')->getId();
+        $postData = array_merge($postData, ['store_id' => $storeId]);
+        $responseData = $this->performSaveCategoryRequest($postData);
+        $this->assertRequestIsSuccessfullyPerformed($responseData);
+        $category = $this->categoryRepository->get($postData['entity_id'], $postData['store_id']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         unset($postData['use_default']);
         unset($postData['use_config']);
         foreach ($postData as $key => $value) {
@@ -62,11 +84,19 @@ class UpdateCategoryTest extends AbstractSaveCategoryTest
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function categoryDataProvider(): array
     {
         return [
             [
                 'postData' => [
+=======
+    public function categoryDataProvider(): array
+    {
+        return [
+            [
+                'post_data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'entity_id' => 333,
                     CategoryInterface::KEY_IS_ACTIVE => '0',
                     CategoryInterface::KEY_INCLUDE_IN_MENU => '0',

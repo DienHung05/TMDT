@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Cms\Setup;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Cms\Setup;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class ContentConverterTest extends \Magento\TestFramework\TestCase\AbstractController
 {
     /** @var \Magento\Cms\Setup\ContentConverter */
@@ -22,14 +30,23 @@ class ContentConverterTest extends \Magento\TestFramework\TestCase\AbstractContr
     /**
      * @param string $value
      * @param string $expected
+<<<<<<< HEAD
      */
     #[DataProvider('convertDataProvider')]
+=======
+     * @dataProvider convertDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testConvert($value, $expected)
     {
         $this->assertEquals($expected, $this->converter->convert($value));
     }
 
+<<<<<<< HEAD
     public static function convertDataProvider()
+=======
+    public function convertDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         // @codingStandardsIgnoreStart
         $someContent = '<div class="content-heading">

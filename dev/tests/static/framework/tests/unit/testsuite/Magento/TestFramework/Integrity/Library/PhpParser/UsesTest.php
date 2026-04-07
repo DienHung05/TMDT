@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\TestFramework\Integrity\Library\PhpParser;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\TestFramework\Integrity\Library\PhpParser;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * Check Uses parsing
  */
@@ -28,11 +36,18 @@ class UsesTest extends \PHPUnit\Framework\TestCase
     /**
      * Covered hasUses method
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider hasUsesDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @test
      *
      * @param array $tokens
      */
+<<<<<<< HEAD
     #[DataProvider('hasUsesDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testHasUses($tokens)
     {
         foreach ($tokens as $k => $token) {
@@ -46,7 +61,11 @@ class UsesTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function hasUsesDataProvider(): array
+=======
+    public function hasUsesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'simple_php7' => [
@@ -159,8 +178,13 @@ class UsesTest extends \PHPUnit\Framework\TestCase
      * Covered getClassNameWithNamespace
      *
      * @test
+<<<<<<< HEAD
      */
     #[DataProvider('classNamesDataProvider')]
+=======
+     * @dataProvider classNamesDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetClassNameWithNamespace($className, $tokens)
     {
         foreach ($tokens as $k => $token) {
@@ -175,7 +199,11 @@ class UsesTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function classNamesDataProvider(): array
+=======
+    public function classNamesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'class_from_uses_php7' => [

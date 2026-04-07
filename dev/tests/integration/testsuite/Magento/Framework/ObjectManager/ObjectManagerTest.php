@@ -1,39 +1,65 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Framework\ObjectManager;
 
 use ReflectionClass;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class ObjectManagerTest extends \PHPUnit\Framework\TestCase
 {
     /**#@+
      * Test class with type error
      */
+<<<<<<< HEAD
     public const TEST_CLASS_WITH_TYPE_ERROR =
         \Magento\Framework\ObjectManager\TestAsset\ConstructorWithTypeError::class;
+=======
+    const TEST_CLASS_WITH_TYPE_ERROR = \Magento\Framework\ObjectManager\TestAsset\ConstructorWithTypeError::class;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**#@+
      * Test classes for basic instantiation
      */
+<<<<<<< HEAD
     public const TEST_CLASS = \Magento\Framework\ObjectManager\TestAsset\Basic::class;
 
     public const TEST_CLASS_INJECTION = \Magento\Framework\ObjectManager\TestAsset\BasicInjection::class;
+=======
+    const TEST_CLASS = \Magento\Framework\ObjectManager\TestAsset\Basic::class;
+
+    const TEST_CLASS_INJECTION = \Magento\Framework\ObjectManager\TestAsset\BasicInjection::class;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**#@-*/
 
     /**#@+
      * Test classes and interface to test preferences
      */
+<<<<<<< HEAD
     public const TEST_INTERFACE = \Magento\Framework\ObjectManager\TestAsset\TestAssetInterface::class;
 
     public const TEST_INTERFACE_IMPLEMENTATION =
         \Magento\Framework\ObjectManager\TestAsset\InterfaceImplementation::class;
 
     public const TEST_CLASS_WITH_INTERFACE = \Magento\Framework\ObjectManager\TestAsset\InterfaceInjection::class;
+=======
+    const TEST_INTERFACE = \Magento\Framework\ObjectManager\TestAsset\TestAssetInterface::class;
+
+    const TEST_INTERFACE_IMPLEMENTATION = \Magento\Framework\ObjectManager\TestAsset\InterfaceImplementation::class;
+
+    const TEST_CLASS_WITH_INTERFACE = \Magento\Framework\ObjectManager\TestAsset\InterfaceInjection::class;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**#@-*/
 
@@ -47,7 +73,11 @@ class ObjectManagerTest extends \PHPUnit\Framework\TestCase
      *
      * @var array
      */
+<<<<<<< HEAD
     protected static $_numerableClasses = [
+=======
+    protected $_numerableClasses = [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         0 => \Magento\Framework\ObjectManager\TestAsset\ConstructorNoArguments::class,
         1 => \Magento\Framework\ObjectManager\TestAsset\ConstructorOneArgument::class,
         2 => \Magento\Framework\ObjectManager\TestAsset\ConstructorTwoArguments::class,
@@ -66,7 +96,11 @@ class ObjectManagerTest extends \PHPUnit\Framework\TestCase
      *
      * @var array
      */
+<<<<<<< HEAD
     protected static $_numerableProperties = [
+=======
+    protected $_numerableProperties = [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         1 => '_one',
         2 => '_two',
         3 => '_three',
@@ -101,6 +135,7 @@ class ObjectManagerTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function newInstanceDataProvider()
     {
         $data = [
@@ -121,6 +156,28 @@ class ObjectManagerTest extends \PHPUnit\Framework\TestCase
                 $properties[$propertyName] = self::TEST_CLASS;
             }
             $data[$number . ' arguments'] = ['actualClassName' => $className, 'properties' => $properties];
+=======
+    public function newInstanceDataProvider()
+    {
+        $data = [
+            'basic model' => [
+                '$actualClassName' => self::TEST_CLASS_INJECTION,
+                '$properties' => ['_object' => self::TEST_CLASS],
+            ],
+            'model with interface' => [
+                '$actualClassName' => self::TEST_CLASS_WITH_INTERFACE,
+                '$properties' => ['_object' => self::TEST_INTERFACE_IMPLEMENTATION],
+            ],
+        ];
+
+        foreach ($this->_numerableClasses as $number => $className) {
+            $properties = [];
+            for ($i = 1; $i <= $number; $i++) {
+                $propertyName = $this->_numerableProperties[$i];
+                $properties[$propertyName] = self::TEST_CLASS;
+            }
+            $data[$number . ' arguments'] = ['$actualClassName' => $className, '$properties' => $properties];
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
 
         return $data;
@@ -130,8 +187,14 @@ class ObjectManagerTest extends \PHPUnit\Framework\TestCase
      * @param string $actualClassName
      * @param array $properties
      * @param string|null $expectedClassName
+<<<<<<< HEAD
      */
     #[DataProvider('newInstanceDataProvider')]
+=======
+     *
+     * @dataProvider newInstanceDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testNewInstance($actualClassName, array $properties = [], $expectedClassName = null)
     {
         if (!$expectedClassName) {
@@ -143,10 +206,18 @@ class ObjectManagerTest extends \PHPUnit\Framework\TestCase
         $object = new ReflectionClass($actualClassName);
         if ($properties) {
             foreach ($properties as $propertyName => $propertyClass) {
+<<<<<<< HEAD
                 $this->assertIsObject($testObject);
                 $this->assertTrue(property_exists($testObject, $propertyName));
                 $attribute = $object->getProperty($propertyName);
                 $propertyObject = $attribute->getValue($testObject);
+=======
+                $this->assertClassHasAttribute($propertyName, $actualClassName);
+                $attribute = $object->getProperty($propertyName);
+                $attribute->setAccessible(true);
+                $propertyObject = $attribute->getValue($testObject);
+                $attribute->setAccessible(false);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $this->assertInstanceOf($propertyClass, $propertyObject);
             }
         }

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -18,7 +23,10 @@ use Magento\Framework\Escaper;
 use Magento\Framework\Message\MessageInterface;
 use Magento\TestFramework\Directory\Model\GetRegionIdByName;
 use Magento\TestFramework\TestCase\AbstractController;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test cases related to check that customer address correctly updated from
@@ -120,12 +128,20 @@ class UpdateAddressTest extends AbstractController
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @magentoDataFixture Magento/Customer/_files/customer_two_addresses.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider postDataForSuccessCreateDefaultAddressDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $postData
      * @param int $expectedShippingId
      * @param int $expectedBillingId
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('postDataForSuccessCreateDefaultAddressDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddressSuccessfullyCreatedAsDefaultForCustomer(
         array $postData,
         int $expectedShippingId,
@@ -147,7 +163,11 @@ class UpdateAddressTest extends AbstractController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function postDataForSuccessCreateDefaultAddressDataProvider(): array
+=======
+    public function postDataForSuccessCreateDefaultAddressDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'any_addresses_are_default' => [
@@ -180,11 +200,19 @@ class UpdateAddressTest extends AbstractController
     /**
      * Assert that customer address successfully updated via controller on frontend.
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider postDataForSuccessUpdateAddressDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $postData
      * @param array $expectedData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('postDataForSuccessUpdateAddressDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddressSuccessfullyUpdatedForCustomer(array $postData, array $expectedData): void
     {
         if (isset($expectedData['custom_region_name'])) {
@@ -217,7 +245,11 @@ class UpdateAddressTest extends AbstractController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function postDataForSuccessUpdateAddressDataProvider(): array
+=======
+    public function postDataForSuccessUpdateAddressDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'required_fields_valid_data' => [
@@ -276,11 +308,19 @@ class UpdateAddressTest extends AbstractController
      * Assert that customer address wasn't updated via controller on frontend
      * when POST data broken.
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider postDataForUpdateAddressWithErrorDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $postData
      * @param array $expectedSessionMessages
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('postDataForUpdateAddressWithErrorDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddressWasntUpdatedForCustomer(array $postData, array $expectedSessionMessages): void
     {
         $this->performRequestWithData($postData, 1);
@@ -292,7 +332,11 @@ class UpdateAddressTest extends AbstractController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function postDataForUpdateAddressWithErrorDataProvider(): array
+=======
+    public function postDataForUpdateAddressWithErrorDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'empty_post_data' => [

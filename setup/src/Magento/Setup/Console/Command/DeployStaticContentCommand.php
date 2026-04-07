@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Setup\Console\Command;
 
@@ -31,8 +36,12 @@ class DeployStaticContentCommand extends Command
     /**
      * Default language value. Always used for adminhtml, fallback if no frontend locale is supplied.
      */
+<<<<<<< HEAD
     public const DEFAULT_LANGUAGE_VALUE = 'en_US';
     public const NAME = 'setup:static-content:deploy';
+=======
+    const DEFAULT_LANGUAGE_VALUE = 'en_US';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var InputValidator
@@ -91,7 +100,11 @@ class DeployStaticContentCommand extends Command
      */
     protected function configure()
     {
+<<<<<<< HEAD
         $this->setName(self::NAME)
+=======
+        $this->setName('setup:static-content:deploy')
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->setDescription('Deploys static view files')
             ->setDefinition($this->options->getOptionsList());
 
@@ -106,7 +119,11 @@ class DeployStaticContentCommand extends Command
      * @throws \InvalidArgumentException
      * @throws LocalizedException
      */
+<<<<<<< HEAD
     protected function execute(InputInterface $input, OutputInterface $output): int
+=======
+    protected function execute(InputInterface $input, OutputInterface $output)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $time = microtime(true);
 

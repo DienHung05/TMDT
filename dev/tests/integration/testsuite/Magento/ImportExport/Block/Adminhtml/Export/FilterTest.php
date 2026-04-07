@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -26,6 +31,11 @@ class FilterTest extends \PHPUnit\Framework\TestCase
             \Magento\ImportExport\Block\Adminhtml\Export\Filter::class,
             '_getDateFromToHtmlWithValue'
         );
+<<<<<<< HEAD
+=======
+        $method->setAccessible(true);
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $arguments = [
             'data' => [
                 'attribute_code' => 'date',

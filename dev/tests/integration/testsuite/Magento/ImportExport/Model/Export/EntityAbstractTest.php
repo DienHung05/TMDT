@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -25,15 +30,26 @@ class EntityAbstractTest extends \PHPUnit\Framework\TestCase
 
         /** @var \Magento\TestFramework\ObjectManager  $objectManager */
         $objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
+<<<<<<< HEAD
         $this->_model = $this->getMockBuilder(\Magento\ImportExport\Model\Export\AbstractEntity::class)
             ->setConstructorArgs([
+=======
+        $this->_model = $this->getMockForAbstractClass(
+            \Magento\ImportExport\Model\Export\AbstractEntity::class,
+            [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $objectManager->get(\Magento\Framework\App\Config\ScopeConfigInterface::class),
                 $objectManager->get(\Magento\Store\Model\StoreManager::class),
                 $objectManager->get(\Magento\ImportExport\Model\Export\Factory::class),
                 $objectManager->get(\Magento\ImportExport\Model\ResourceModel\CollectionByPagesIteratorFactory::class)
+<<<<<<< HEAD
             ])
             ->onlyMethods(['export', 'exportItem', 'getEntityTypeCode', '_getHeaderColumns', '_getEntityCollection'])
             ->getMock();
+=======
+            ]
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**

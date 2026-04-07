@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,7 +16,10 @@ use Magento\MediaGalleryApi\Api\GetAssetsByPathsInterface;
 use Magento\MediaGalleryApi\Api\DeleteAssetsByPathsInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Testing delete assets operation
@@ -46,8 +54,14 @@ class DeleteAssetsTest extends TestCase
      * @param array $paths
      * @throws \Magento\Framework\Exception\CouldNotSaveException
      * @throws \Magento\Framework\Exception\LocalizedException
+<<<<<<< HEAD
      */
     #[DataProvider('matchingPathsProvider')]
+=======
+     *
+     * @dataProvider matchingPathsProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAssetsAreDeleted(array $paths): void
     {
         $this->deleteAssetsByPaths->execute($paths);
@@ -62,8 +76,14 @@ class DeleteAssetsTest extends TestCase
      * @param array $paths
      * @throws \Magento\Framework\Exception\CouldNotSaveException
      * @throws \Magento\Framework\Exception\LocalizedException
+<<<<<<< HEAD
      */
     #[DataProvider('notMatchingPathsProvider')]
+=======
+     *
+     * @dataProvider notMatchingPathsProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAssetsAreNotDeleted(array $paths): void
     {
         $this->deleteAssetsByPaths->execute($paths);
@@ -75,7 +95,11 @@ class DeleteAssetsTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function matchingPathsProvider(): array
+=======
+    public function matchingPathsProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [['testDirectory/path.jpg']],
@@ -89,7 +113,11 @@ class DeleteAssetsTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function notMatchingPathsProvider(): array
+=======
+    public function notMatchingPathsProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [['testDirectory/path.png']],

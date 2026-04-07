@@ -1,9 +1,17 @@
 <!--
+<<<<<<< HEAD
 /**
  * Copyright 2017 Adobe
  * All Rights Reserved.
  */
 -->
+=======
+  ~ /**
+  ~ * Copyright © Magento, Inc. All rights reserved.
+  ~ * See COPYING.txt for license details.
+  ~ */
+  -->
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 <theme xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/theme.xsd">
     <title>Magento Zoom 3</title>
     <parent>Magento/zoom2</parent>

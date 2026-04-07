@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -31,9 +36,12 @@ class SubscribeEmailToNewsletterTest extends GraphQlAbstract
         $this->subscriberResource = $objectManager->get(SubscriberResourceModel::class);
     }
 
+<<<<<<< HEAD
     /**
      * @magentoConfigFixture default_store newsletter/subscription/allow_guest_subscribe 1
      */
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddEmailIntoNewsletterSubscription()
     {
         $query = $this->getQuery('guest@example.com');
@@ -44,9 +52,12 @@ class SubscribeEmailToNewsletterTest extends GraphQlAbstract
         self::assertEquals('SUBSCRIBED', $response['subscribeEmailToNewsletter']['status']);
     }
 
+<<<<<<< HEAD
     /**
      * @magentoConfigFixture default_store newsletter/subscription/allow_guest_subscribe 1
      */
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testNewsletterSubscriptionWithIncorrectEmailFormat()
     {
         $query = $this->getQuery('guest.example.com');
@@ -74,7 +85,10 @@ class SubscribeEmailToNewsletterTest extends GraphQlAbstract
 
     /**
      * @magentoApiDataFixture Magento/Newsletter/_files/guest_subscriber.php
+<<<<<<< HEAD
      * @magentoConfigFixture default_store newsletter/subscription/allow_guest_subscribe 1
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function testNewsletterSubscriptionWithAlreadySubscribedEmail()
     {

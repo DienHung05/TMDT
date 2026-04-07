@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -49,7 +54,11 @@ class ExportTest extends AbstractBackendController
     private $localeResolver;
 
     /**
+<<<<<<< HEAD
      * @inheritDoc
+=======
+     * @inheridoc
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     protected function setUp(): void
     {
@@ -90,16 +99,22 @@ class ExportTest extends AbstractBackendController
                 [
                     'entity' => ProductAttributeInterface::ENTITY_TYPE_CODE,
                     'file_format' => $fileFormat,
+<<<<<<< HEAD
                     'fields_enclosure' => '1'
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ]
             );
         $this->dispatch('backend/admin/export/export');
         $this->assertSessionMessages($this->containsEqual($expectedSessionMessage));
         $this->assertRedirect($this->stringContains('/export/index/key/'));
         $queue = $this->queueRepository->get($this->defaultValueProvider->getConnection(), 'export');
+<<<<<<< HEAD
         if ($this->defaultValueProvider->getConnection() === 'stomp') {
             $queue->subscribeQueue();
         }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         /** @var Envelope $message */
         $message = $queue->dequeue();
         $this->assertEquals(self::TOPIC_NAME, $message->getProperties()['topic_name']);
@@ -111,7 +126,10 @@ class ExportTest extends AbstractBackendController
         $this->assertEquals($filter, reset($actualFilter));
         $this->assertNotEmpty($body['locale']);
         $this->assertEquals($locale, $body['locale']);
+<<<<<<< HEAD
         $this->assertArrayHasKey('fields_enclosure', $body);
         $this->assertTrue($body['fields_enclosure']);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

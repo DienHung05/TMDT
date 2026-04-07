@@ -1,18 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 /**
+<<<<<<< HEAD
  * Copyright 2011 Adobe
  * All Rights Reserved.
  */
 -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/12.5/phpunit.xsd"
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
          colors="true"
          columns="max"
          beStrictAboutTestsThatDoNotTestAnything="false"
          bootstrap="./framework/bootstrap.php"
+<<<<<<< HEAD
          stderr="true">
     <source>
+=======
+         stderr="true"
+         testSuiteLoaderClass="Magento\TestFramework\SuiteLoader"
+         testSuiteLoaderFile="framework/Magento/TestFramework/SuiteLoader.php">
+    <coverage>
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         <include>
             <directory suffix=".php">../../../app/code/Magento</directory>
             <directory suffix=".php">../../../lib/internal/Magento</directory>
@@ -23,9 +39,18 @@
             <directory>../../../lib/internal/*/*/*/Test</directory>
             <directory>../../../setup/src/*/*/Test</directory>
         </exclude>
+<<<<<<< HEAD
     </source>
     <!-- Test suites definition -->
     <testsuites>
+=======
+    </coverage>
+    <!-- Test suites definition -->
+    <testsuites>
+        <testsuite name="Magento Integration Tests">
+            <file>testsuite/Magento/IntegrationTest.php</file>
+        </testsuite>
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         <!-- Memory tests run first to prevent influence of other tests on accuracy of memory measurements -->
         <testsuite name="Memory Usage Tests">
             <file>testsuite/Magento/MemoryUsageTest.php</file>
@@ -34,6 +59,10 @@
             <directory>testsuite</directory>
             <directory>../../../app/code/*/*/Test/Integration</directory>
             <exclude>testsuite/Magento/MemoryUsageTest.php</exclude>
+<<<<<<< HEAD
+=======
+            <exclude>testsuite/Magento/IntegrationTest.php</exclude>
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         </testsuite>
     </testsuites>
     <!-- Code coverage filters -->
@@ -42,6 +71,10 @@
         <includePath>.</includePath>
         <includePath>testsuite</includePath>
         <ini name="date.timezone" value="America/Los_Angeles"/>
+<<<<<<< HEAD
+=======
+        <ini name="xdebug.max_nesting_level" value="200"/>
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         <!-- Local XML configuration file ('.dist' extension will be added, if the specified file doesn't exist) -->
         <const name="TESTS_INSTALL_CONFIG_FILE" value="etc/install-config-mysql.php"/>
         <!-- Local XML post installation configuration file ('.dist' extension will be added, if the specified file doesn't exist) -->
@@ -79,6 +112,7 @@
         <!--<const name="TESTS_PARALLEL_RUN" value="1"/>-->
         <const name="USE_OVERRIDE_CONFIG" value="enabled"/>
     </php>
+<<<<<<< HEAD
     <extensions>
         <bootstrap class="Qameta\Allure\PHPUnit\AllureExtension">
             <!-- Path to config file (default is config/allure.config.php) -->
@@ -86,4 +120,59 @@
         </bootstrap>
         <bootstrap class="Magento\TestFramework\Event\Subscribers"/>
     </extensions>
+=======
+    <!-- Test listeners -->
+    <listeners>
+        <listener class="Yandex\Allure\PhpUnit\AllurePhpUnit">
+            <arguments>
+                <string>var/allure-results</string> <!-- XML files output directory -->
+                <boolean>true</boolean> <!-- Whether to delete previous results on rerun -->
+                <array> <!-- A list of custom annotations to ignore (optional) -->
+                    <element key="codingStandardsIgnoreStart">
+                        <string>codingStandardsIgnoreStart</string>
+                    </element>
+                    <element key="codingStandardsIgnoreEnd">
+                        <string>codingStandardsIgnoreEnd</string>
+                    </element>
+                    <element key="expectedExceptionMessageRegExp">
+                        <string>expectedExceptionMessageRegExp</string>
+                    </element>
+                    <element key="magentoAdminConfigFixture">
+                        <string>magentoAdminConfigFixture</string>
+                    </element>
+                    <element key="magentoAppArea">
+                        <string>magentoAppArea</string>
+                    </element>
+                    <element key="magentoAppIsolation">
+                        <string>magentoAppIsolation</string>
+                    </element>
+                    <element key="magentoCache">
+                        <string>magentoCache</string>
+                    </element>
+                    <element key="magentoComponentsDir">
+                        <string>magentoComponentsDir</string>
+                    </element>
+                    <element key="magentoConfigFixture">
+                        <string>magentoConfigFixture</string>
+                    </element>
+                    <element key="magentoDataFixture">
+                        <string>magentoDataFixture</string>
+                    </element>
+                    <element key="magentoDataFixtureBeforeTransaction">
+                        <string>magentoDataFixtureBeforeTransaction</string>
+                    </element>
+                    <element key="magentoDbIsolation">
+                        <string>magentoDbIsolation</string>
+                    </element>
+                    <element key="magentoIndexerDimensionMode">
+                        <string>magentoIndexerDimensionMode</string>
+                    </element>
+                </array>
+            </arguments>
+        </listener>
+        <!-- Run after AllureAdapter to allow it to initialize properly -->
+        <listener class="Magento\TestFramework\Event\PhpUnit"/>
+        <listener class="Magento\TestFramework\ErrorLog\Listener"/>
+    </listeners>
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 </phpunit>

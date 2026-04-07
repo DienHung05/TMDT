@@ -1,6 +1,11 @@
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /* eslint max-nested-callbacks: 0 */
@@ -122,7 +127,10 @@ define([
                 clearLocalStorage();
                 injector.clean();
                 injector.remove();
+<<<<<<< HEAD
                 // eslint-disable-next-line no-unused-vars
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             } catch (e) {
             }
         });
@@ -526,6 +534,7 @@ define([
                 expect(obj.hasOwnProperty('Magento_Customer/js/customer-data')).toBeDefined();
             });
         });
+<<<<<<< HEAD
 
         describe('Customer share scope handling', function () {
             var originalCookieStorage,
@@ -564,5 +573,7 @@ define([
                 expect($.localStorage.get).toHaveBeenCalledWith('mage-customer-login');
             });
         });
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     });
 });

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 return [
     'system' => [
@@ -14,7 +19,11 @@ return [
                     'test_value_3' => 'value3.local_config.default.test',
                     'test_value_4' => 'value4.local_config.default.test',
                 ],
+<<<<<<< HEAD
             ]
+=======
+            ],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ],
         'websites' => [
             'base' => [
@@ -28,6 +37,7 @@ return [
                     ],
                 ],
             ],
+<<<<<<< HEAD
             'SecondWebsite' => [
                 'camelCase' => [
                     'UPPERCASE' => [
@@ -49,6 +59,8 @@ return [
                     ]
                 ]
             ]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ],
         'stores' => [
             'default' => [
@@ -61,6 +73,7 @@ return [
                         'test_value_4' => 'value4.local_config.store_default.test',
                     ],
                 ],
+<<<<<<< HEAD
                 'camelCase' => [
                     'UPPERCASE' => [
                         'snake_case' => 'local_config.store_default.test'
@@ -88,6 +101,9 @@ return [
                     ]
                 ]
             ]
+=======
+            ],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ],
     ]
 ];

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -9,7 +14,10 @@ namespace Magento\TestModuleOverrideConfig\MagentoAdminConfigFixture;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\TestModuleOverrideConfig\AbstractOverridesTest;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class checks that magentoAdminConfigFixtures can be removed using override config
@@ -50,11 +58,19 @@ class RemoveFixtureTest extends AbstractOverridesTest
      * @magentoAdminConfigFixture test_section/test_group/field_2 new_value
      * @magentoAdminConfigFixture test_section/test_group/field_3 new_value
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider testDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $expectedFirstValue
      * @param string $expectedSecondValue
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('datasetDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRemoveFixtureForMethod(string $expectedFirstValue, string $expectedSecondValue): void
     {
         $fistValue = $this->config->getValue(
@@ -72,6 +88,7 @@ class RemoveFixtureTest extends AbstractOverridesTest
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function datasetDataProvider(): array
     {
         return [
@@ -82,6 +99,18 @@ class RemoveFixtureTest extends AbstractOverridesTest
             'second_data_set' => [
                 '2nd field default value',
                 '3rd field default value',
+=======
+    public function testDataProvider(): array
+    {
+        return [
+            'first_data_set' => [
+                'expected_first_config_value' => '2nd field default value',
+                'expected_second_config_value' => 'new_value',
+            ],
+            'second_data_set' => [
+                'expected_first_config_value' => '2nd field default value',
+                'expected_second_config_value' => '3rd field default value',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

@@ -1,12 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Quote\Customer;
 
+<<<<<<< HEAD
 use Magento\Bundle\Test\Fixture\AddProductToCart as AddBundleProductToCart;
 use Magento\Bundle\Test\Fixture\Link as BundleSelectionFixture;
 use Magento\Bundle\Test\Fixture\Option as BundleOptionFixture;
@@ -25,6 +31,11 @@ use Magento\TestFramework\Fixture\Config as ConfigFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorage;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
+=======
+use Magento\Quote\Model\QuoteFactory;
+use Magento\Quote\Model\QuoteIdToMaskedQuoteIdInterface;
+use Magento\Quote\Model\ResourceModel\Quote as QuoteResource;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
 use Magento\Integration\Api\CustomerTokenServiceInterface;
@@ -54,6 +65,7 @@ class MergeCartsTest extends GraphQlAbstract
      */
     private $customerTokenService;
 
+<<<<<<< HEAD
     /**
      * @var DataFixtureStorage
      */
@@ -69,6 +81,8 @@ class MergeCartsTest extends GraphQlAbstract
      */
     private $quoteIdMaskedResource;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     protected function setUp(): void
     {
         $objectManager = Bootstrap::getObjectManager();
@@ -76,9 +90,12 @@ class MergeCartsTest extends GraphQlAbstract
         $this->quoteFactory = $objectManager->get(QuoteFactory::class);
         $this->quoteIdToMaskedId = $objectManager->get(QuoteIdToMaskedQuoteIdInterface::class);
         $this->customerTokenService = $objectManager->get(CustomerTokenServiceInterface::class);
+<<<<<<< HEAD
         $this->fixtures = DataFixtureStorageManager::getStorage();
         $this->quoteIdMaskedFactory = $objectManager->get(\Magento\Quote\Model\QuoteIdMaskFactory::class);
         $this->quoteIdMaskedResource = $objectManager->get(\Magento\Quote\Model\ResourceModel\Quote\QuoteIdMask::class);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     protected function tearDown(): void
@@ -134,6 +151,7 @@ class MergeCartsTest extends GraphQlAbstract
         self::assertEquals(1, $item2['quantity']);
     }
 
+<<<<<<< HEAD
     #[
         DataFixture(ProductFixture::class, ['sku' => 'simple1', 'price' => 10], as:'p1'),
         DataFixture(ProductFixture::class, ['sku' => 'simple2', 'price' => 20], as:'p2'),
@@ -298,6 +316,8 @@ class MergeCartsTest extends GraphQlAbstract
         );
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @magentoApiDataFixture Magento/Checkout/_files/quote_with_virtual_product_saved.php
      * @magentoApiDataFixture Magento/Customer/_files/customer.php

@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Cms\Controller\Adminhtml;
 
 use Magento\TestFramework\TestCase\AbstractBackendController;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Testing seach in grid.
@@ -24,8 +32,13 @@ class FulltextGridSearchTest extends AbstractBackendController
      * @param string $query
      * @param int $expectedRows
      * @param array $expectedTitles
+<<<<<<< HEAD
      */
     #[DataProvider('queryDataProvider')]
+=======
+     * @dataProvider queryDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSearchByTitle(string $query, int $expectedRows, array $expectedTitles)
     {
         $url = 'backend/mui/index/render/?namespace=cms_page_listing&search=' . $query;
@@ -47,7 +60,11 @@ class FulltextGridSearchTest extends AbstractBackendController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function queryDataProvider(): array
+=======
+    public function queryDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

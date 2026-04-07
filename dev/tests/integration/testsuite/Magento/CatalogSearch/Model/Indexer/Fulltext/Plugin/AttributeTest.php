@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -13,7 +18,10 @@ use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
 use Magento\CatalogSearch\Model\Indexer\Fulltext\Processor;
 use Magento\Catalog\Api\Data\EavAttributeInterface;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Check catalogsearch_fulltext index status after create product attribute.
@@ -96,10 +104,17 @@ class AttributeTest extends TestCase
      *
      * @param string $field
      * @return void
+<<<<<<< HEAD
      * @magentoDataFixture Magento/Catalog/_files/dropdown_attribute.php
      * @magentoDbIsolation enabled
      */
     #[DataProvider('searchableAttributesDataProvider')]
+=======
+     * @dataProvider searchableAttributesDataProvider
+     * @magentoDataFixture Magento/Catalog/_files/dropdown_attribute.php
+     * @magentoDbIsolation enabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCheckIndexStatusAfterUpdateNonSearchableAttributeToSearchable(string $field): void
     {
         $this->indexerProcessor->reindexAll();
@@ -113,7 +128,11 @@ class AttributeTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function searchableAttributesDataProvider(): array
+=======
+    public function searchableAttributesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [EavAttributeInterface::IS_SEARCHABLE],

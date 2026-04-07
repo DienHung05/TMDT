@@ -1,12 +1,20 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Framework\View\Model\Layout;
 
 use Magento\Framework\View\Layout\LayoutCacheKeyInterface;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class MergeTest extends \PHPUnit\Framework\TestCase
 {
@@ -70,7 +78,11 @@ class MergeTest extends \PHPUnit\Framework\TestCase
         $link2->setLayoutUpdateId($layoutUpdate2->getId());
         $link2->save();
 
+<<<<<<< HEAD
         $this->layoutCacheKeyMock = $this->createMock(LayoutCacheKeyInterface::class);
+=======
+        $this->layoutCacheKeyMock = $this->getMockForAbstractClass(LayoutCacheKeyInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->layoutCacheKeyMock->expects($this->any())
             ->method('getCacheKeys')
             ->willReturn([]);

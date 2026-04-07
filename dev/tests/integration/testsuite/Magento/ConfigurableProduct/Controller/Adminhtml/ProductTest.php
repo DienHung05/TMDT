@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -21,7 +26,10 @@ use Magento\Framework\Message\MessageInterface;
 use Magento\Framework\Registry;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\TestFramework\TestCase\AbstractBackendController;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Tests for configurable product admin save.
@@ -95,10 +103,17 @@ class ProductTest extends AbstractBackendController
 
     /**
      * @magentoDataFixture Magento/ConfigurableProduct/_files/configurable_attribute.php
+<<<<<<< HEAD
      * @param array $childProducts
      * @return void
      */
     #[DataProvider('saveNewProductDataProvider')]
+=======
+     * @dataProvider saveNewProductDataProvider
+     * @param array $childProducts
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveNewProduct(array $childProducts): void
     {
         $this->serRequestParams($childProducts);
@@ -112,11 +127,19 @@ class ProductTest extends AbstractBackendController
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function saveNewProductDataProvider(): array
     {
         return [
             'with_different_prices_and_qty' => [
                 'childProducts' => [
+=======
+    public function saveNewProductDataProvider(): array
+    {
+        return [
+            'with_different_prices_and_qty' => [
+                'child_products' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple_1' => [
                         'name' => 'simple_1',
                         'sku' => 'simple_1',
@@ -136,7 +159,11 @@ class ProductTest extends AbstractBackendController
                 ],
             ],
             'without_weight' => [
+<<<<<<< HEAD
                 'childProducts' => [
+=======
+                'child_products' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple_1' => [
                         'name' => 'simple_1',
                         'sku' => 'simple_1',
@@ -159,11 +186,18 @@ class ProductTest extends AbstractBackendController
     /**
      * @magentoDataFixture Magento/ConfigurableProduct/_files/configurable_product_with_one_simple.php
      * @magentoDataFixture Magento/ConfigurableProduct/_files/configurable_attribute_2.php
+<<<<<<< HEAD
+=======
+     * @dataProvider saveExistProductDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $childProducts
      * @param array $associatedProducts
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('saveExistProductDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveExistProduct(array $childProducts, array $associatedProducts): void
     {
         $configurableProduct = $this->productRepository->get('configurable');
@@ -181,11 +215,19 @@ class ProductTest extends AbstractBackendController
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function saveExistProductDataProvider(): array
     {
         return [
             'added_new_option' => [
                 'childProducts' => [
+=======
+    public function saveExistProductDataProvider(): array
+    {
+        return [
+            'added_new_option' => [
+                'child_products' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple_2' => [
                         'name' => 'simple_2',
                         'sku' => 'simple_2',
@@ -195,10 +237,17 @@ class ProductTest extends AbstractBackendController
                         'attributes' => ['test_configurable' => 'Option 2'],
                     ],
                 ],
+<<<<<<< HEAD
                 'associatedProducts' => ['simple_1'],
             ],
             'added_new_option_and_delete_old' => [
                 'childProducts' => [
+=======
+                'associated_products' => ['simple_1'],
+            ],
+            'added_new_option_and_delete_old' => [
+                'child_products' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple_2' => [
                         'name' => 'simple_2',
                         'sku' => 'simple_2',
@@ -207,6 +256,7 @@ class ProductTest extends AbstractBackendController
                         'attributes' => ['test_configurable' => 'Option 2'],
                     ],
                 ],
+<<<<<<< HEAD
                 'associatedProducts' => [],
             ],
             'delete_all_options' => [
@@ -215,6 +265,16 @@ class ProductTest extends AbstractBackendController
             ],
             'added_new_attribute' => [
                 'childProducts' => [
+=======
+                'associated_products' => [],
+            ],
+            'delete_all_options' => [
+                'child_products' => [],
+                'associated_products' => [],
+            ],
+            'added_new_attribute' => [
+                'child_products' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple_1_1' => [
                         'name' => 'simple_1_1',
                         'sku' => 'simple_1_1',
@@ -238,10 +298,17 @@ class ProductTest extends AbstractBackendController
                         ],
                     ],
                 ],
+<<<<<<< HEAD
                 'associatedProducts' => [],
             ],
             'added_new_attribute_and_delete_old' => [
                 'childProducts' => [
+=======
+                'associated_products' => [],
+            ],
+            'added_new_attribute_and_delete_old' => [
+                'child_products' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple_2_1' => [
                         'name' => 'simple_2_1',
                         'sku' => 'simple_2_1',
@@ -257,7 +324,11 @@ class ProductTest extends AbstractBackendController
                         'attributes' => ['test_configurable_2' => 'Option 2'],
                     ],
                 ],
+<<<<<<< HEAD
                 'associatedProducts' => [],
+=======
+                'associated_products' => [],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }
@@ -343,7 +414,11 @@ class ProductTest extends AbstractBackendController
             $this->assertEquals($expectedProduct['price'], $product->getPrice());
 
             if (!empty($expectedProduct['weight'])) {
+<<<<<<< HEAD
                 $this->assertEquals($expectedProduct['weight'], (float)$product->getWeight());
+=======
+                $this->assertEquals($expectedProduct['weight'], (double)$product->getWeight());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $this->assertInstanceOf(Simple::class, $product->getTypeInstance());
             } else {
                 $this->assertInstanceOf(Virtual::class, $product->getTypeInstance());
@@ -530,6 +605,10 @@ class ProductTest extends AbstractBackendController
         $reflection = new \ReflectionObject($this);
         foreach ($reflection->getProperties() as $property) {
             if (!$property->isStatic() && 0 !== strpos($property->getDeclaringClass()->getName(), 'PHPUnit')) {
+<<<<<<< HEAD
+=======
+                $property->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $property->setValue($this, null);
             }
         }

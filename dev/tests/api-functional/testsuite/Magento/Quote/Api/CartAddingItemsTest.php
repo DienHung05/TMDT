@@ -1,15 +1,24 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Quote\Api;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 use Magento\Catalog\Model\ResourceModel\Product as ProductResource;
 use Magento\Framework\Exception\AuthenticationException;
+=======
+use Magento\Catalog\Model\ResourceModel\Product as ProductResource;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Webapi\Rest\Request;
 use Magento\Integration\Api\CustomerTokenServiceInterface;
 use Magento\Quote\Model\Quote;
@@ -310,6 +319,7 @@ class CartAddingItemsTest extends WebapiAbstract
             ]
         ];
     }
+<<<<<<< HEAD
 
     /**
      * Test for product name in different store view
@@ -392,4 +402,6 @@ class CartAddingItemsTest extends WebapiAbstract
             ]
         ];
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

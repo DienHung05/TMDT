@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -14,7 +19,10 @@ use Magento\LayeredNavigation\Block\Navigation\AbstractFiltersTest;
 use Magento\Catalog\Model\Layer\Filter\AbstractFilter;
 use Magento\Catalog\Model\Layer\Filter\Item;
 use Magento\Store\Model\Store;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Provides price filter tests for configurable in navigation block on category page.
@@ -48,11 +56,18 @@ class PriceFilterTest extends AbstractFiltersTest
      * @magentoDataFixture Magento/Catalog/_files/category_product.php
      * @magentoConfigFixture current_store catalog/layered_navigation/price_range_calculation manual
      * @magentoConfigFixture current_store catalog/layered_navigation/price_range_step 10
+<<<<<<< HEAD
+=======
+     * @dataProvider getFiltersDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $products
      * @param array $expectation
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('getFiltersDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetFilters(array $products, array $expectation): void
     {
         $this->updateProductData($products);
@@ -62,11 +77,19 @@ class PriceFilterTest extends AbstractFiltersTest
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getFiltersDataProvider(): array
     {
         return [
             'all_children_active' => [
                 'products' => [
+=======
+    public function getFiltersDataProvider(): array
+    {
+        return [
+            'all_children_active' => [
+                'products_data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple333' => ['price' => 60.00],
                 ],
                 'expectation' => [
@@ -83,7 +106,11 @@ class PriceFilterTest extends AbstractFiltersTest
                 ],
             ],
             'one_child_disabled' => [
+<<<<<<< HEAD
                 'products' => [
+=======
+                'products_data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple333' => ['price' => 50.00],
                     'simple_10' => ['status' => Status::STATUS_DISABLED],
                 ],

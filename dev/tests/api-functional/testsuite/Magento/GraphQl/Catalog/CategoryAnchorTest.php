@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -10,7 +15,10 @@ namespace Magento\GraphQl\Catalog;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test is categories anchor or not
@@ -73,8 +81,13 @@ class CategoryAnchorTest extends GraphQlAbstract
      * @param array $category
      * @return void
      * @throws \Exception
+<<<<<<< HEAD
      */
     #[DataProvider('categoryAnchorDataProvider')]
+=======
+     * @dataProvider categoryAnchorDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCategoryAnchor(string $query, string $storeCode, array $category): void
     {
         $response = $this->graphQlQuery($query, [], '', ['store' => $storeCode]);
@@ -91,6 +104,7 @@ class CategoryAnchorTest extends GraphQlAbstract
      *
      * @return array[][]
      */
+<<<<<<< HEAD
     public static function categoryAnchorDataProvider(): array
     {
         return [
@@ -98,6 +112,15 @@ class CategoryAnchorTest extends GraphQlAbstract
                 'query' => self::getQuery(22),
                 'storeCode' => 'default',
                 'category' => [
+=======
+    public function categoryAnchorDataProvider(): array
+    {
+        return [
+            [
+                'query' => $this->getQuery(22),
+                'store' => 'default',
+                'data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'category' => [
                         'id' => 22,
                         'name' => 'Category_Anchor',
@@ -113,9 +136,15 @@ class CategoryAnchorTest extends GraphQlAbstract
                 ],
             ],
             [
+<<<<<<< HEAD
                 'query' => self::getQuery(11),
                 'storeCode' => 'default',
                 'category' => [
+=======
+                'query' => $this->getQuery(11),
+                'store' => 'default',
+                'data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'category' => [
                         'id' => 11,
                         'name' => 'Category_Default',
@@ -138,7 +167,11 @@ class CategoryAnchorTest extends GraphQlAbstract
      * @param int $categoryId
      * @return string
      */
+<<<<<<< HEAD
     private static function getQuery(int $categoryId): string
+=======
+    private function getQuery(int $categoryId): string
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return <<<QUERY
 {

@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Framework\Api;
 
 use Magento\TestModuleExtensionAttributes\Model\Data\FakeRegionFactory;
 use Magento\TestModuleExtensionAttributes\Api\Data\FakeRegionExtension;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for \Magento\Framework\Api\AbstractExtensibleObject
@@ -37,8 +45,13 @@ class AbstractExtensibleObjectTest extends \PHPUnit\Framework\TestCase
      *
      * @param array $expectedDataBefore
      * @param array $expectedDataAfter
+<<<<<<< HEAD
      */
     #[DataProvider('extensionAttributesDataProvider')]
+=======
+     * @dataProvider extensionAttributesDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExtensionAttributes($expectedDataBefore, $expectedDataAfter)
     {
         /** @var \Magento\Framework\Api\ExtensionAttributesFactory $regionExtensionFactory */
@@ -75,7 +88,11 @@ class AbstractExtensibleObjectTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($regionCode, $region->getRegionCode());
     }
 
+<<<<<<< HEAD
     public static function extensionAttributesDataProvider()
+=======
+    public function extensionAttributesDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'boolean' => [

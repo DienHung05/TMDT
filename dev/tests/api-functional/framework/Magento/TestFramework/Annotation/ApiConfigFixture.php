@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -15,11 +20,17 @@ use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\App\ApiMutableScopeConfig;
 use Magento\TestFramework\Config\Model\ConfigStorage;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\TestCase;
 
 /**
  * @inheritDoc
  * @SuppressWarnings(PHPMD.NPathComplexity)
+=======
+
+/**
+ * @inheritDoc
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class ApiConfigFixture extends ConfigFixture
 {
@@ -31,6 +42,7 @@ class ApiConfigFixture extends ConfigFixture
     private $valuesToDeleteFromDatabase = [];
 
     /**
+<<<<<<< HEAD
      * Put Poison Pill
      *
      * @return void
@@ -44,6 +56,8 @@ class ApiConfigFixture extends ConfigFixture
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
@@ -62,6 +76,7 @@ class ApiConfigFixture extends ConfigFixture
     }
 
     /**
+<<<<<<< HEAD
      * @inheritDoc
      */
     protected function _assignConfigData(TestCase $test)
@@ -76,6 +91,8 @@ class ApiConfigFixture extends ConfigFixture
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setGlobalConfigValue($configPathAndValue): void
@@ -117,9 +134,12 @@ class ApiConfigFixture extends ConfigFixture
      */
     protected function _restoreConfigData()
     {
+<<<<<<< HEAD
         $needUpdates = !empty($this->globalConfigValues)
             || !empty($this->storeConfigValues)
             || !empty($this->websiteConfigValues);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         /** @var ConfigResource $configResource */
         $configResource = Bootstrap::getObjectManager()->get(ConfigResource::class);
         /* Restore global values */
@@ -167,9 +187,12 @@ class ApiConfigFixture extends ConfigFixture
             }
         }
         $this->websiteConfigValues = [];
+<<<<<<< HEAD
         if ($needUpdates) {
             $this->putPill();
         }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -184,7 +207,11 @@ class ApiConfigFixture extends ConfigFixture
     /**
      * @inheritdoc
      */
+<<<<<<< HEAD
     protected function getScopeConfigValue(string $configPath, string $scopeType, ?string $scopeCode = null): ?string
+=======
+    protected function getScopeConfigValue(string $configPath, string $scopeType, string $scopeCode = null): ?string
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         /** @var ConfigStorage $configStorage */
         $configStorage = Bootstrap::getObjectManager()->get(ConfigStorage::class);

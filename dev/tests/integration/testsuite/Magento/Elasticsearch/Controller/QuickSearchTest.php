@@ -1,12 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Elasticsearch\Controller;
 
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Catalog\Test\Fixture\SelectAttribute as SelectAttributeFixture;
 use Magento\Store\Model\ScopeInterface;
@@ -16,11 +22,14 @@ use Magento\TestFramework\Fixture\Config;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Fixture\DbIsolation;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\TestCase\AbstractController;
 
 class QuickSearchTest extends AbstractController
 {
     /**
+<<<<<<< HEAD
      * Tests quick search with "Price Navigation Step Calculation" sets to "Automatic (equalize product counts)".
      *
      * @magentoAppArea frontend
@@ -51,22 +60,34 @@ class QuickSearchTest extends AbstractController
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Tests quick search with "Minimum Terms to Match" sets to "100%".
      *
      * @magentoAppArea frontend
      * @magentoDbIsolation disabled
+<<<<<<< HEAD
      * @magentoConfigFixture current_store catalog/search/elasticsearch8_minimum_should_match 100%
      * @magentoConfigFixture current_store catalog/search/opensearch_minimum_should_match 100%
      * @magentoDataFixture Magento/Elasticsearch/_files/products_for_search.php
      * @magentoDataFixture Magento/CatalogSearch/_files/full_reindex.php
      */
     public function testQuickSearchWithMinimumTermsToMatch()
+=======
+     * @magentoConfigFixture current_store catalog/search/elasticsearch7_minimum_should_match 100%
+     * @magentoConfigFixture current_store catalog/search/elasticsearch6_minimum_should_match 100%
+     * @magentoDataFixture Magento/Elasticsearch/_files/products_for_search.php
+     * @magentoDataFixture Magento/CatalogSearch/_files/full_reindex.php
+     */
+    public function testQuickSearchWithImprovedPriceRangeCalculation()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $this->dispatch('/catalogsearch/result/?q=24+MB04');
         $responseBody = $this->getResponse()->getBody();
         $this->assertStringContainsString('search product 2', $responseBody);
         $this->assertStringNotContainsString('search product 1', $responseBody);
     }
+<<<<<<< HEAD
 
     #[
         AppArea('frontend'),
@@ -175,4 +196,6 @@ class QuickSearchTest extends AbstractController
         $this->assertStringNotContainsString($hoodie->getName(), $responseBody);
         $this->assertStringNotContainsString($jacket->getName(), $responseBody);
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

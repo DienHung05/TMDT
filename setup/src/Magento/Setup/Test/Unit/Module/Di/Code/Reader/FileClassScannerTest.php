@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -270,6 +275,10 @@ PHP
 
 namespace This\Is\My\Ns;
 
+<<<<<<< HEAD
+=======
+use stdClass;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class ThisIsMyTest
 {
@@ -332,7 +341,11 @@ PHP
     {
         $scanner = $this->getMockBuilder(FileClassScanner::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['getFileContents'])
+=======
+            ->setMethods(['getFileContents'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
 
         return $scanner;

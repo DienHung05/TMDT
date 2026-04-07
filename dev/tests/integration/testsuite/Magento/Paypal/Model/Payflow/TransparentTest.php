@@ -1,12 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Paypal\Model\Payflow;
 
+<<<<<<< HEAD
 use Laminas\Http\Response;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Checkout\Api\PaymentInformationManagementInterface;
@@ -28,11 +34,20 @@ use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\CartInterface;
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\CustomerCart as CustomerCartFixture;
+=======
+use Magento\Checkout\Api\PaymentInformationManagementInterface;
+use Magento\Framework\Api\SearchCriteriaBuilder;
+use Magento\Paypal\Model\Config;
+use Magento\Paypal\Model\Payflowpro;
+use Magento\Quote\Api\CartRepositoryInterface;
+use Magento\Quote\Api\Data\CartInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Sales\Api\Data\TransactionInterface;
 use Magento\Sales\Api\OrderManagementInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Api\TransactionRepositoryInterface;
 use Magento\Sales\Model\Order;
+<<<<<<< HEAD
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Test\Fixture\Store as StoreFixture;
 use Magento\TestFramework\Fixture\Config as ConfigFixture;
@@ -43,6 +58,10 @@ use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
 use Magento\Vault\Model\Method\Vault;
 use Magento\Vault\Test\Fixture\PaymentToken as PaymentTokenFixture;
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\TestFramework\ObjectManager;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -111,6 +130,7 @@ class TransparentTest extends TestCase
         );
     }
 
+<<<<<<< HEAD
     #[
         DbIsolation(false),
         DataFixture(StoreFixture::class, ['code' => 'test_vault_store'], as: 'store2'),
@@ -183,6 +203,8 @@ class TransparentTest extends TestCase
         $this->assertEquals(TransactionInterface::TYPE_CAPTURE, $transaction->getTxnType());
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Retrieves quote by provided order ID.
      *
@@ -259,6 +281,7 @@ class TransparentTest extends TestCase
 
         return $comment ? $comment->getComment() : '';
     }
+<<<<<<< HEAD
 
     private function mockPaymentGateway(CartInterface $cart): Gateway
     {
@@ -296,4 +319,6 @@ class TransparentTest extends TestCase
         
         return $gatewayMock;
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

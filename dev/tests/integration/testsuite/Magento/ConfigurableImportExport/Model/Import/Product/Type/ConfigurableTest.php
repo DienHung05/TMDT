@@ -1,19 +1,30 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\ConfigurableImportExport\Model\Import\Product\Type;
 
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\Product;
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\CatalogInventory\Api\Data\StockItemInterface;
 use Magento\CatalogInventory\Api\StockConfigurationInterface;
 use Magento\CatalogInventory\Api\StockItemRepositoryInterface;
 use Magento\ConfigurableProduct\Test\Fixture\Attribute as AttributeFixture;
 use Magento\ConfigurableProduct\Test\Fixture\Product as ConfigurableProductFixture;
+=======
+use Magento\CatalogInventory\Api\Data\StockItemInterface;
+use Magento\CatalogInventory\Api\StockConfigurationInterface;
+use Magento\CatalogInventory\Api\StockItemRepositoryInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\EntityManager\EntityMetadata;
 use Magento\Framework\EntityManager\MetadataPool;
@@ -23,12 +34,17 @@ use Magento\ImportExport\Model\Import;
 use Magento\ImportExport\Model\Import\ErrorProcessing\ProcessingErrorAggregatorInterface;
 use Magento\ImportExport\Model\Import\Adapter as ImportAdapter;
 use Magento\CatalogInventory\Api\StockItemCriteriaInterfaceFactory;
+<<<<<<< HEAD
 use Magento\ImportExport\Test\Fixture\CsvFile as CsvFileFixture;
 use Magento\Store\Model\Store;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\Store\Model\Store;
+use Magento\TestFramework\Helper\Bootstrap;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -40,7 +56,11 @@ class ConfigurableTest extends TestCase
     /**
      * Configurable product test Type
      */
+<<<<<<< HEAD
     public const TEST_PRODUCT_TYPE = 'configurable';
+=======
+    const TEST_PRODUCT_TYPE = 'configurable';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var \Magento\CatalogImportExport\Model\Import\Product
@@ -66,6 +86,7 @@ class ConfigurableTest extends TestCase
         $this->productMetadata = $metadataPool->getMetadata(ProductInterface::class);
     }
 
+<<<<<<< HEAD
     /**
      * @magentoDataFixture Magento/ConfigurableProduct/_files/configurable_products.php
      */
@@ -100,6 +121,9 @@ class ConfigurableTest extends TestCase
     }
 
     public static function configurableImportDataProvider()
+=======
+    public function configurableImportDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Configurable 1' => [
@@ -122,8 +146,13 @@ class ConfigurableTest extends TestCase
      * @magentoDataFixture Magento/ConfigurableProduct/_files/configurable_attribute.php
      * @magentoAppArea adminhtml
      * @magentoAppIsolation enabled
+<<<<<<< HEAD
      */
     #[DataProvider('configurableImportDataProvider')]
+=======
+     * @dataProvider configurableImportDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testConfigurableImport($pathToFile, $productName, $optionSkuList)
     {
         $errors = $this->doImport($pathToFile, Import::BEHAVIOR_APPEND);
@@ -243,6 +272,42 @@ class ConfigurableTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @magentoDataFixture Magento/ConfigurableProduct/_files/configurable_products.php
+     */
+    public function testShouldUpdateConfigurableStockStatusIfChildProductsStockStatusChanged(): void
+    {
+        $sku = 'configurable';
+        /** @var ProductRepositoryInterface $productRepository */
+        $productRepository = $this->objectManager->get(ProductRepositoryInterface::class);
+        /** @var ProductInterface $product */
+        $product = $productRepository->get($sku, true, null, true);
+        $stockItem = $this->getStockItem((int) $product->getId());
+        $this->assertNotNull($stockItem);
+        $this->assertTrue($stockItem->getIsInStock());
+
+        // Set all child product out of stock
+        $pathToFile = __DIR__ . '/../../_files/import_configurable_child_products_stock_item_status_out_of_stock.csv';
+        $errors = $this->doImport($pathToFile);
+        $this->assertEquals(0, $errors->getErrorsCount());
+
+        $stockItem = $this->getStockItem((int) $product->getId());
+        $this->assertNotNull($stockItem);
+        $this->assertFalse($stockItem->getIsInStock());
+
+        // Set some child product in stock
+        $pathToFile = __DIR__ . '/../../_files/import_configurable_child_products_stock_item_status_in_stock.csv';
+        $errors = $this->doImport($pathToFile);
+        $this->assertEquals(0, $errors->getErrorsCount());
+
+        $stockItem = $this->getStockItem((int) $product->getId());
+        $this->assertNotNull($stockItem);
+        $this->assertTrue($stockItem->getIsInStock());
+    }
+
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param int $productId
      * @return StockItemInterface|null
      */
@@ -259,6 +324,7 @@ class ConfigurableTest extends TestCase
         return reset($stockItems);
     }
 
+<<<<<<< HEAD
     #[
         DataFixture(ProductFixture::class, ['sku' => 'cp1-10,2cm'], as: 'p1'),
         DataFixture(ProductFixture::class, ['sku' => 'cp1-15,5cm'], as: 'p2'),
@@ -313,6 +379,8 @@ class ConfigurableTest extends TestCase
         $this->assertContains($p2Id, $childIds);
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @param string $file
      * @param string $behavior

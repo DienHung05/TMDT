@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -68,7 +73,11 @@ QUERY;
             'currentPage' => 1.1
         ];
         $this->expectException(\Exception::class);
+<<<<<<< HEAD
         $this->expectExceptionMessage('Variable "$currentPage" got invalid value 1.1; ' .
+=======
+        $this->expectExceptionMessage('Variable "$currentPage" got invalid value 1.1; Expected type Int; ' .
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'Int cannot represent non-integer value: 1.1');
         $this->graphQlQuery($query, $variables);
     }
@@ -192,7 +201,11 @@ MUTATION;
             'quantity' => '5.60'
         ];
         $this->expectException(\Exception::class);
+<<<<<<< HEAD
         $this->expectExceptionMessage('Variable "$sku" got invalid value ["123.78"]; ' .
+=======
+        $this->expectExceptionMessage('Variable "$sku" got invalid value ["123.78"]; Expected type String; ' .
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'String cannot represent a non string value: ["123.78"]');
         $this->graphQlMutation($query, $variables);
     }
@@ -215,8 +228,13 @@ MUTATION;
             'quantity' => 'ten'
         ];
         $this->expectException(\Exception::class);
+<<<<<<< HEAD
         $this->expectExceptionMessage('Variable "$quantity" got invalid value "ten"; ' .
             'Float cannot represent non numeric value: "ten"');
+=======
+        $this->expectExceptionMessage('Variable "$quantity" got invalid value "ten"; Expected type Float; ' .
+            'Float cannot represent non numeric value: ten');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->graphQlMutation($query, $variables);
     }
 

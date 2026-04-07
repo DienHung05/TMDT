@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 use Magento\Tax\Model\Config;
 use Magento\Tax\Model\Sales\Total\Quote\SetupUtil;
 
+<<<<<<< HEAD
 global $fullDiscountIncTax;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 $fullDiscountIncTax = [
         'config_data' => [
                 'config_overrides' => [

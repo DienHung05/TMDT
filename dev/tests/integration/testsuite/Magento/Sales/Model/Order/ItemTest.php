@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
  */
@@ -31,12 +32,25 @@ use PHPUnit\Framework\TestCase;
  * @suppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class ItemTest extends TestCase
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Sales\Model\Order;
+
+class ItemTest extends \PHPUnit\Framework\TestCase
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 {
     /**
      * @param string $options
      * @param array $expectedData
+<<<<<<< HEAD
      */
     #[DataProvider('getProductOptionsDataProvider')]
+=======
+     * @dataProvider getProductOptionsDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetProductOptions($options, $expectedData)
     {
         $model = \Magento\Framework\App\ObjectManager::getInstance()->get(\Magento\Sales\Model\Order\Item::class);
@@ -47,7 +61,11 @@ class ItemTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getProductOptionsDataProvider(): array
+=======
+    public function getProductOptionsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -60,6 +78,7 @@ class ItemTest extends TestCase
             ],
         ];
     }
+<<<<<<< HEAD
 
     /**
      * Test getSimpleQtyToShip method
@@ -127,4 +146,6 @@ class ItemTest extends TestCase
         // Qty to ship = Qty ordered (10) - Qty shipped (2) - Qty refunded (4) = 4
         $this->assertEquals(4, $orderItem->getSimpleQtyToShip(), 'Simple qty to ship should be 4');
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

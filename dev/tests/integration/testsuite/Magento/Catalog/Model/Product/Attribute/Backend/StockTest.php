@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -54,7 +59,11 @@ class StockTest extends TestCase
     public function testValidate(): void
     {
         $this->expectException(LocalizedException::class);
+<<<<<<< HEAD
         $this->expectExceptionMessage((string)__('Please enter a valid number in this field.'));
+=======
+        $this->expectErrorMessage((string)__('Please enter a valid number in this field.'));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $product = $this->productFactory->create();
         $product->setQuantityAndStockStatus(['qty' => 'string']);
         $this->model->validate($product);

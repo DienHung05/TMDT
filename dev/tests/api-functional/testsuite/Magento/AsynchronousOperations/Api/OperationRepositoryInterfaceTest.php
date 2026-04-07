@@ -1,13 +1,19 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
 
 namespace Magento\AsynchronousOperations\Api;
 
+<<<<<<< HEAD
 use Magento\AsynchronousOperations\Model\MassSchedule;
 use Magento\Framework\Webapi\Rest\Request;
 use Magento\TestFramework\TestCase\WebapiAbstract;
@@ -36,6 +42,16 @@ class OperationRepositoryInterfaceTest extends WebapiAbstract
 
         parent::setUp();
     }
+=======
+use Magento\Framework\Webapi\Rest\Request;
+use Magento\TestFramework\TestCase\WebapiAbstract;
+use Magento\Framework\Bulk\OperationInterface;
+
+class OperationRepositoryInterfaceTest extends WebapiAbstract
+{
+    const RESOURCE_PATH = '/V1/bulk';
+    const SERVICE_NAME = 'asynchronousOperationsOperationRepositoryV1';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @magentoApiDataFixture Magento/AsynchronousOperations/_files/operation_searchable.php
@@ -143,6 +159,7 @@ class OperationRepositoryInterfaceTest extends WebapiAbstract
             $this->assertEquals('bulk-uuid-searchable-6', $item['bulk_uuid']);
         }
     }
+<<<<<<< HEAD
 
     /**
      * Check multiple bulk operation inserted followed by search via getList
@@ -222,4 +239,6 @@ class OperationRepositoryInterfaceTest extends WebapiAbstract
             ->setEmail($email);
         return $customer;
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

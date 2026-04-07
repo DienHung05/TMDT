@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -14,7 +19,10 @@ use Magento\Framework\Url\EncoderInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class GetInsertImageContentTest extends TestCase
 {
@@ -52,6 +60,10 @@ class GetInsertImageContentTest extends TestCase
     /**
      * Test for GetInsertImageContent::execute
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider imageDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Store/_files/core_fixturestore.php
      * @param string $filename
      * @param bool $forceStaticPath
@@ -59,7 +71,10 @@ class GetInsertImageContentTest extends TestCase
      * @param string|null $storeCode
      * @param string $expectedResult
      */
+<<<<<<< HEAD
     #[DataProvider('imageDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecute(
         string $filename,
         bool $forceStaticPath,
@@ -95,7 +110,11 @@ class GetInsertImageContentTest extends TestCase
      *
      * @return array[]
      */
+<<<<<<< HEAD
     public static function imageDataProvider(): array
+=======
+    public function imageDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

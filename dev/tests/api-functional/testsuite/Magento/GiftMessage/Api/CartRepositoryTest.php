@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\GiftMessage\Api;
 
@@ -9,9 +14,15 @@ use Magento\TestFramework\TestCase\WebapiAbstract;
 
 class CartRepositoryTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     public const SERVICE_VERSION = 'V1';
     public const SERVICE_NAME = 'giftMessageCartRepositoryV1';
     public const RESOURCE_PATH = '/V1/carts/';
+=======
+    const SERVICE_VERSION = 'V1';
+    const SERVICE_NAME = 'giftMessageCartRepositoryV1';
+    const RESOURCE_PATH = '/V1/carts/';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var \Magento\TestFramework\ObjectManager
@@ -102,10 +113,16 @@ class CartRepositoryTest extends WebapiAbstract
      */
     public function testSave()
     {
+<<<<<<< HEAD
         $this->markTestSkipped('This test relies on system configuration state.');
         // sales/gift_options/allow_order must be set to 1 in system configuration
         // @todo remove above statement when \Magento\TestFramework\TestCase\WebapiAbstract::_updateAppConfig is fixed
         
+=======
+        // sales/gift_options/allow_order must be set to 1 in system configuration
+        // @todo remove next statement when \Magento\TestFramework\TestCase\WebapiAbstract::_updateAppConfig is fixed
+        $this->markTestIncomplete('This test relies on system configuration state.');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         /** @var \Magento\Quote\Model\Quote $quote */
         $quote = $this->objectManager->create(\Magento\Quote\Model\Quote::class);
         $quote->load('test_order_item_with_message', 'reserved_order_id');
@@ -156,9 +173,15 @@ class CartRepositoryTest extends WebapiAbstract
         );
         $token = $customerTokenService->createCustomerAccessToken('customer@example.com', 'password');
 
+<<<<<<< HEAD
         $this->markTestSkipped('This test relies on system configuration state.');
         // sales/gift_options/allow_order must be set to 1 in system configuration
         // @todo remove above statement when \Magento\TestFramework\TestCase\WebapiAbstract::_updateAppConfig is fixed
+=======
+        // sales/gift_options/allow_order must be set to 1 in system configuration
+        // @todo remove next statement when \Magento\TestFramework\TestCase\WebapiAbstract::_updateAppConfig is fixed
+        $this->markTestIncomplete('This test relies on system configuration state.');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $serviceInfo = [
             'rest' => [

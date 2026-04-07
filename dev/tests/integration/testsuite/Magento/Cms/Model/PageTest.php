@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Cms\Model;
 
 use Magento\Cms\Api\PageRepositoryInterface;
 use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\Stdlib\DateTime\DateTime;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea adminhtml
@@ -35,8 +43,13 @@ class PageTest extends \PHPUnit\Framework\TestCase
      * @param array $pageData
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
      */
     #[DataProvider('pageGetByIdentifierDataProvider')]
+=======
+     * @dataProvider testGetByIdentifierDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetByIdentifier(array $pageData)
     {
         $objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
@@ -63,8 +76,13 @@ class PageTest extends \PHPUnit\Framework\TestCase
      * @param array $data
      * @param string $expectedIdentifier
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
      */
     #[DataProvider('generateIdentifierFromTitleDataProvider')]
+=======
+     * @dataProvider generateIdentifierFromTitleDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGenerateIdentifierFromTitle($data, $expectedIdentifier)
     {
         $objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
@@ -104,7 +122,11 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $this->assertLessThanOrEqual($afterTimestamp, $pageTimestamp);
     }
 
+<<<<<<< HEAD
     public static function generateIdentifierFromTitleDataProvider() : array
+=======
+    public function generateIdentifierFromTitleDataProvider() : array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['data' => ['title' => 'Test title', 'stores' => [1]], 'expectedIdentifier' => 'test-title'],
@@ -123,10 +145,17 @@ class PageTest extends \PHPUnit\Framework\TestCase
      * Data provider for "testGetByIdentifier" method
      * @return array
      */
+<<<<<<< HEAD
     public static function pageGetByIdentifierDataProvider() : array
     {
         return [
             ['pageData' => [
+=======
+    public function testGetByIdentifierDataProvider() : array
+    {
+        return [
+            ['data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'title' => 'Test title',
                 'identifier' => 'test-identifier',
                 'page_layout' => '1column',

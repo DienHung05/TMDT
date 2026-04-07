@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -34,7 +39,10 @@ $orders = [
         'base_grand_total' => 120.00,
         'store_id' => 1,
         'website_id' => 1,
+<<<<<<< HEAD
         'created_at' => '2022-09-04'
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ],
     [
         'increment_id' => '100000003',
@@ -46,7 +54,10 @@ $orders = [
         'total_paid' => 130.00,
         'store_id' => 0,
         'website_id' => 0,
+<<<<<<< HEAD
         'created_at' => '2022-09-10'
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ],
     [
         'increment_id' => '100000004',
@@ -57,7 +68,10 @@ $orders = [
         'subtotal' => 140.00,
         'store_id' => 1,
         'website_id' => 1,
+<<<<<<< HEAD
         'created_at' => '2022-09-05'
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ],
     [
         'increment_id' => '100000005',
@@ -69,7 +83,10 @@ $orders = [
         'total_paid' => 150.00,
         'store_id' => 1,
         'website_id' => 1,
+<<<<<<< HEAD
         'created_at' => '2022-09-08'
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ],
     [
         'increment_id' => '100000006',
@@ -81,7 +98,10 @@ $orders = [
         'total_paid' => 160.00,
         'store_id' => 1,
         'website_id' => 1,
+<<<<<<< HEAD
         'created_at' => '2022-09-09'
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ],
 ];
 

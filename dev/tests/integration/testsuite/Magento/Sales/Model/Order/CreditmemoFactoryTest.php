@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Sales\Model\Order;
 
@@ -10,7 +15,10 @@ use Magento\Framework\ObjectManagerInterface;
 use Magento\Sales\Api\InvoiceRepositoryInterface;
 use Magento\Sales\Model\Order;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for CreditmemoFactory class.
@@ -46,10 +54,17 @@ class CreditmemoFactoryTest extends \PHPUnit\Framework\TestCase
      * Checks a case when creditmemo created from the order.
      *
      * @magentoDataFixture Magento/Sales/_files/order_with_bundle_and_invoiced.php
+<<<<<<< HEAD
      * @param array $creditmemoData
      * @param int $expectedQty
      */
     #[DataProvider('createByOrderDataProvider')]
+=======
+     * @dataProvider createByOrderDataProvider
+     * @param array $creditmemoData
+     * @param int $expectedQty
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateByOrder(array $creditmemoData, $expectedQty)
     {
         $order = $this->getOrder('100000001');
@@ -61,7 +76,11 @@ class CreditmemoFactoryTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function createByOrderDataProvider(): array
+=======
+    public function createByOrderDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

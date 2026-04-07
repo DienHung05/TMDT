@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -13,7 +18,10 @@ use Magento\Store\Api\WebsiteRepositoryInterface;
 use Magento\Framework\Data\Form\FormKey;
 use Magento\Framework\Message\MessageInterface;
 use Magento\Framework\Message\ManagerInterface;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\App\Request\Http as HttpRequest;
 
 /**
@@ -107,8 +115,13 @@ class StoreTest extends \Magento\TestFramework\TestCase\AbstractBackendControlle
     /**
      * @param array $post
      * @param string $message
+<<<<<<< HEAD
      */
     #[DataProvider('saveActionWithExistCodeDataProvider')]
+=======
+     * @dataProvider saveActionWithExistCodeDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveActionWithExistCode($post, $message)
     {
         $post['form_key'] = $this->formKey->getFormKey();
@@ -164,7 +177,11 @@ class StoreTest extends \Magento\TestFramework\TestCase\AbstractBackendControlle
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function saveActionWithExistCodeDataProvider()
+=======
+    public function saveActionWithExistCodeDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

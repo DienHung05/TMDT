@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
@@ -29,6 +30,26 @@ use PHPUnit\Framework\Attributes\DataProvider;
  * Test for Magento\Quote\Api\GuestCartItemRepositoryInterface.
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Quote\Api;
+
+use Magento\Catalog\Model\Product;
+use Magento\CatalogInventory\Api\StockRegistryInterface;
+use Magento\CatalogInventory\Model\Stock;
+use Magento\Quote\Model\Quote;
+use Magento\Quote\Model\QuoteIdMask;
+use Magento\Quote\Model\QuoteIdMaskFactory;
+use Magento\Store\Model\StoreManagerInterface;
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\TestFramework\ObjectManager;
+use Magento\TestFramework\TestCase\WebapiAbstract;
+
+/**
+ * Test for Magento\Quote\Api\GuestCartItemRepositoryInterface.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class GuestCartItemRepositoryTest extends WebapiAbstract
 {
@@ -200,9 +221,15 @@ class GuestCartItemRepositoryTest extends WebapiAbstract
      * @magentoApiDataFixture Magento/Checkout/_files/quote_with_items_saved.php
      * @param array $stockData
      * @param string|null $errorMessage
+<<<<<<< HEAD
      */
     #[DataProvider('updateItemDataProvider')]
     public function testUpdateItem(array $stockData, ?string $errorMessage = null)
+=======
+     * @dataProvider updateItemDataProvider
+     */
+    public function testUpdateItem(array $stockData, string $errorMessage = null)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $this->updateStockData('simple_one', $stockData);
         /** @var Quote $quote */
@@ -312,7 +339,11 @@ class GuestCartItemRepositoryTest extends WebapiAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function updateItemDataProvider(): array
+=======
+    public function updateItemDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -348,11 +379,16 @@ class GuestCartItemRepositoryTest extends WebapiAbstract
                     'use_config_backorders' => 0,
                     'backorders' => Stock::BACKORDERS_NO,
                 ],
+<<<<<<< HEAD
                 'Not enough items for sale'
+=======
+                'The requested qty is not available'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ]
         ];
     }
 
+<<<<<<< HEAD
     #[
         DataProvider('addItemWithFileCustomOptionDataProvider'),
         DataFixture(
@@ -721,6 +757,8 @@ class GuestCartItemRepositoryTest extends WebapiAbstract
         return $result;
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Update product stock
      *

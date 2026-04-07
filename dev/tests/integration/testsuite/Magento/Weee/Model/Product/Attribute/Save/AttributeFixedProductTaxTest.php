@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,7 +16,10 @@ use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Eav\Model\Entity\Attribute\Exception;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -43,11 +51,18 @@ class AttributeFixedProductTaxTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider fPTProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $data
      * @param array $expectedData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('fPTProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveProductWithFPTAttribute(array $data, array $expectedData): void
     {
         $product = $this->productRepository->get('simple2');
@@ -59,7 +74,11 @@ class AttributeFixedProductTaxTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function fPTProvider(): array
+=======
+    public function fPTProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -81,7 +100,11 @@ class AttributeFixedProductTaxTest extends TestCase
                         'state' => '',
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedData' => [
+=======
+                'expected_data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     [
                         'website_id' => '0',
                         'country' => 'GB',

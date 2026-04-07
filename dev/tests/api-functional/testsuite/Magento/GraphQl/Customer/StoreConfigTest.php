@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Customer;
 
 use Exception;
+<<<<<<< HEAD
 use Magento\TestFramework\Fixture\Config;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\TestCase\GraphQlAbstract;
 
 /**
@@ -17,6 +25,7 @@ use Magento\TestFramework\TestCase\GraphQlAbstract;
 class StoreConfigTest extends GraphQlAbstract
 {
     /**
+<<<<<<< HEAD
      * @magentoConfigFixture default_store customer/password/autocomplete_on_storefront 1
      * @magentoConfigFixture default_store customer/password/minimum_password_length 6
      * @magentoConfigFixture default_store customer/password/required_character_classes_number 2
@@ -28,18 +37,32 @@ class StoreConfigTest extends GraphQlAbstract
         $minimumPasswordLength = 6;
         $requiredCharacterClassesNumber = 2;
 
+=======
+     * Check type of autocomplete_on_storefront storeConfig value
+     *
+     * @magentoConfigFixture default_store customer/password/autocomplete_on_storefront 1
+     *
+     * @throws Exception
+     */
+    public function testReturnTypeAutocompleteOnStorefrontConfig()
+    {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $query = <<<QUERY
 {
     storeConfig {
         autocomplete_on_storefront
+<<<<<<< HEAD
         minimum_password_length
         required_character_classes_number
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }
 QUERY;
         $response = $this->graphQlQuery($query);
         self::assertArrayHasKey('autocomplete_on_storefront', $response['storeConfig']);
         self::assertTrue($response['storeConfig']['autocomplete_on_storefront']);
+<<<<<<< HEAD
 
         self::assertArrayHasKey('minimum_password_length', $response['storeConfig']);
         self::assertEquals($response['storeConfig']['minimum_password_length'], $minimumPasswordLength);
@@ -83,5 +106,7 @@ QUERY;
         $response = $this->graphQlQuery($query);
         self::assertArrayHasKey('create_account_confirmation', $response['storeConfig']);
         self::assertFalse($response['storeConfig']['create_account_confirmation']);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

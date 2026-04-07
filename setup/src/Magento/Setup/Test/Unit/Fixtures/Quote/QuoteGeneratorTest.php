@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -27,7 +32,10 @@ use Magento\Setup\Fixtures\Quote\QuoteGenerator;
 use Magento\Store\Api\Data\GroupInterface;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Api\Data\WebsiteInterface;
+<<<<<<< HEAD
 use Magento\Framework\TestFramework\Unit\Helper\MockCreationTrait;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Store\Model\StoreManagerInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -39,8 +47,11 @@ use PHPUnit\Framework\TestCase;
  */
 class QuoteGeneratorTest extends TestCase
 {
+<<<<<<< HEAD
     use MockCreationTrait;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @var StoreManagerInterface|MockObject
      */
@@ -96,6 +107,7 @@ class QuoteGeneratorTest extends TestCase
             ->getMock();
         $this->storeManager = $this->getMockBuilder(StoreManagerInterface::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->getMock();
         $this->productRepository = $this->getMockBuilder(ProductRepositoryInterface::class)
             ->disableOriginalConstructor()
@@ -105,10 +117,22 @@ class QuoteGeneratorTest extends TestCase
         ) 
             ->disableOriginalConstructor()
             ->getMock();
+=======
+            ->getMockForAbstractClass();
+        $this->productRepository = $this->getMockBuilder(ProductRepositoryInterface::class)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+        $this->optionRepository = $this->getMockBuilder(
+            OptionRepositoryInterface::class
+        )
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->productCollectionFactory = $this->getMockBuilder(
             \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory::class
         )
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['create'])
             ->getMock();
         $this->linkManagement = $this->getMockBuilder(LinkManagementInterface::class)
@@ -125,6 +149,32 @@ class QuoteGeneratorTest extends TestCase
                 'getFixtureDataFilename', 'getExistsQuoteQuantity'
             ]
         );
+=======
+            ->setMethods(['create'])
+            ->getMock();
+        $this->linkManagement = $this->getMockBuilder(LinkManagementInterface::class)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+        $this->serializer = $this->getMockBuilder(SerializerInterface::class)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+        $this->config = $this->getMockBuilder(QuoteConfiguration::class)
+            ->disableOriginalConstructor()
+            ->setMethods(
+                [
+                    'getSimpleCountTo',
+                    'getSimpleCountFrom',
+                    'getConfigurableCountTo',
+                    'getConfigurableCountFrom',
+                    'getBigConfigurableCountTo',
+                    'getBigConfigurableCountFrom',
+                    'getRequiredQuoteQuantity',
+                    'getFixtureDataFilename',
+                    'getExistsQuoteQuantity',
+                ]
+            )
+            ->getMock();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $objectManager = new ObjectManager($this);
 
         $this->fixture = $objectManager->getObject(
@@ -158,6 +208,7 @@ class QuoteGeneratorTest extends TestCase
         $dir = str_replace('Test/Unit/', '', dirname(__DIR__));
         $store = $this->getMockBuilder(StoreInterface::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->getMock();
         $website = $this->getMockBuilder(WebsiteInterface::class)
             ->disableOriginalConstructor()
@@ -165,6 +216,15 @@ class QuoteGeneratorTest extends TestCase
         $storeGroup = $this->getMockBuilder(GroupInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
+=======
+            ->getMockForAbstractClass();
+        $website = $this->getMockBuilder(WebsiteInterface::class)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+        $storeGroup = $this->getMockBuilder(GroupInterface::class)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $productCollection = $this->getMockBuilder(Collection::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -201,6 +261,7 @@ class QuoteGeneratorTest extends TestCase
         $productCollection->expects($this->atLeastOnce())->method('getSelect')->willReturn($select);
         $select->expects($this->atLeastOnce())
             ->method('where')
+<<<<<<< HEAD
             ->willReturnCallback(function ($arg) use ($select) {
                 if ($arg == 'type_id = \'simple\' ') {
                     return $select;
@@ -232,6 +293,20 @@ class QuoteGeneratorTest extends TestCase
                 }
             });
 
+=======
+            ->withConsecutive(
+                [' type_id = \'simple\' '],
+                [' sku NOT LIKE \'Big%\' '],
+                [' type_id = \'configurable\' '],
+                [' sku NOT LIKE \'Big%\' '],
+                [' type_id = \'configurable\' '],
+                [' sku LIKE \'Big%\' ']
+            )->willReturnSelf();
+        $productCollection->expects($this->atLeastOnce())
+            ->method('getAllIds')
+            ->withConsecutive([2], [1], [1])
+            ->willReturnOnConsecutiveCalls($simpleProductIds, $configurableProductId, $bigConfigurableProductId);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->prepareProducts();
         $this->mockConnection();
         $this->fixture->generateQuotes();
@@ -246,6 +321,7 @@ class QuoteGeneratorTest extends TestCase
     {
         $product = $this->getMockBuilder(ProductInterface::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->getMock();
         $configurableChild = $this->getMockBuilder(ProductInterface::class)
             ->disableOriginalConstructor()
@@ -253,11 +329,21 @@ class QuoteGeneratorTest extends TestCase
         $childProduct = $this->getMockBuilder(ProductInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
+=======
+            ->getMockForAbstractClass();
+        $configurableChild = $this->getMockBuilder(ProductInterface::class)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+        $childProduct = $this->getMockBuilder(ProductInterface::class)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $option = $this->getMockBuilder(Attribute::class)
             ->disableOriginalConstructor()
             ->getMock();
         $optionValue = $this->getMockBuilder(OptionValueInterface::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->getMock();
         $this->productRepository->expects($this->atLeastOnce())
             ->method('getById')
@@ -266,6 +352,13 @@ class QuoteGeneratorTest extends TestCase
                     return $product;
                 }
             });
+=======
+            ->getMockForAbstractClass();
+        $this->productRepository->expects($this->atLeastOnce())
+            ->method('getById')
+            ->withConsecutive([1], [2], [3], [4])
+            ->willReturn($product);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $product->expects($this->atLeastOnce())
             ->method('getSku')->willReturnOnConsecutiveCalls('sku1', 'sku2', 'sku3', 'sku3', 'sku4', 'sku4');
         $product->expects($this->atLeastOnce())
@@ -275,6 +368,7 @@ class QuoteGeneratorTest extends TestCase
             ->willReturn('a:1:{i:10;i:1;}');
         $this->optionRepository->expects($this->atLeastOnce())
             ->method('getList')
+<<<<<<< HEAD
             ->willReturnCallback(function ($arg) use ($option) {
                 if ($arg == 'sku3' || $arg == 'sku4') {
                     return [$option];
@@ -287,16 +381,29 @@ class QuoteGeneratorTest extends TestCase
                     return [$configurableChild];
                 }
             });
+=======
+            ->withConsecutive(['sku3'], ['sku4'])
+            ->willReturn([$option]);
+        $this->linkManagement->expects($this->atLeastOnce())
+            ->method('getChildren')
+            ->withConsecutive(['sku3'], ['sku4'])
+            ->willReturn([$configurableChild]);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $configurableChild->expects($this->atLeastOnce())
             ->method('getSku')
             ->willReturnOnConsecutiveCalls('childSku3', 'childSku3', 'childSku4', 'childSku4');
         $this->productRepository->expects($this->atLeastOnce())
             ->method('get')
+<<<<<<< HEAD
             ->willReturnCallback(function ($arg) use ($childProduct) {
                 if ($arg == 'childSku3' || $arg == 'childSku4') {
                     return $childProduct;
                 }
             });
+=======
+            ->withConsecutive(['childSku3'], ['childSku4'])
+            ->willReturn($childProduct);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $childProduct->expects($this->atLeastOnce())->method('getId')->willReturnOnConsecutiveCalls(10, 11);
         $option->expects($this->atLeastOnce())->method('getLabel')->willReturnOnConsecutiveCalls('label3', 'label4');
         $option->expects($this->atLeastOnce())
@@ -316,13 +423,21 @@ class QuoteGeneratorTest extends TestCase
     {
         $objectManager = $this->getMockBuilder(ObjectManagerInterface::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->getMock();
+=======
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $resource = $this->getMockBuilder(AbstractDb::class)
             ->disableOriginalConstructor()
             ->getMock();
         $connection = $this->getMockBuilder(AdapterInterface::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->getMock();
+=======
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $statement = $this->getMockBuilder(Mysql::class)
             ->disableOriginalConstructor()
             ->getMock();

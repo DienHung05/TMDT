@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -45,7 +50,11 @@ class Amqp
      * @param \Magento\Framework\App\DeploymentConfig $deploymentConfig
      */
     public function __construct(
+<<<<<<< HEAD
         ?\Magento\Framework\App\DeploymentConfig $deploymentConfig = null
+=======
+        \Magento\Framework\App\DeploymentConfig $deploymentConfig = null
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ) {
         $this->deploymentConfig = $deploymentConfig ?? \Magento\TestFramework\Helper\Bootstrap::getObjectManager()
             ->get(\Magento\Framework\App\DeploymentConfig::class);

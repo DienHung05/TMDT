@@ -1,21 +1,36 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\User\Model\ResourceModel;
 
+<<<<<<< HEAD
 use Laminas\Validator\ValidatorInterface;
 use Magento\Authorization\Model\ResourceModel\Role\Collection as UserRoleCollection;
 use Magento\Authorization\Model\ResourceModel\Role\CollectionFactory as UserRoleCollectionFactory;
 use Magento\Authorization\Model\UserContextInterface;
 use Magento\Framework\Math\Random;
+=======
+use Magento\Authorization\Model\ResourceModel\Role\Collection as UserRoleCollection;
+use Magento\Authorization\Model\ResourceModel\Role\CollectionFactory as UserRoleCollectionFactory;
+use Magento\Authorization\Model\UserContextInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\User\Model\ResourceModel\User as UserResourceModel;
 use Magento\User\Model\User;
 use Magento\User\Model\UserFactory;
+<<<<<<< HEAD
+=======
+use Magento\Framework\Math\Random;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea adminhtml
@@ -119,7 +134,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
     public function testGetValidationRulesBeforeSave(): void
     {
         $rules = $this->model->getValidationRulesBeforeSave();
+<<<<<<< HEAD
         $this->assertInstanceOf(ValidatorInterface::class, $rules);
+=======
+        $this->assertInstanceOf('Zend_Validate_Interface', $rules);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -132,7 +151,11 @@ class UserTest extends \PHPUnit\Framework\TestCase
         $token = 'randomstring';
         $username = $this->random->getRandomString(6);
         $email = $username . "@example.com";
+<<<<<<< HEAD
         $password = uniqid() . $this->random->getRandomString(10);
+=======
+        $password = uniqid().$this->random->getRandomString(10);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $userModel = Bootstrap::getObjectManager()->get(User::class);
 
         $userModel->setData(

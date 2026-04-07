@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -15,7 +20,10 @@ use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\Product\Media\Config;
 use Magento\Catalog\Model\ResourceModel\Product as ProductResource;
 use Magento\Catalog\Model\ResourceModel\Product\Gallery;
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Exception\ConfigurationMismatchException;
 use Magento\Framework\Exception\CouldNotSaveException;
@@ -32,6 +40,7 @@ use Magento\Framework\ObjectManagerInterface;
 use Magento\Store\Api\StoreRepositoryInterface;
 use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
+<<<<<<< HEAD
 use Magento\Store\Test\Fixture\Store as StoreFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
@@ -39,6 +48,9 @@ use Magento\TestFramework\Fixture\DbIsolation;
 use Magento\TestFramework\Fixture\ScopeFixture;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -231,12 +243,19 @@ class UpdateHandlerTest extends TestCase
      * Tests updating image roles during product save.
      *
      * @magentoDataFixture Magento/Catalog/_files/product_with_multiple_images.php
+<<<<<<< HEAD
+=======
+     * @dataProvider executeWithTwoImagesAndRolesDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDbIsolation enabled
      * @param array $roles
      * @return void
      * @throws LocalizedException
      */
+<<<<<<< HEAD
     #[DataProvider('executeWithTwoImagesAndRolesDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecuteWithTwoImagesAndDifferentRoles(array $roles): void
     {
         $imageRoles = ['image', 'small_image', 'thumbnail', 'swatch_image'];
@@ -256,6 +275,10 @@ class UpdateHandlerTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_with_multiple_images.php
      * @magentoDataFixture Magento/Store/_files/second_store.php
+<<<<<<< HEAD
+=======
+     * @dataProvider executeWithTwoImagesAndRolesDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDbIsolation enabled
      * @param array $roles
      * @return void
@@ -263,7 +286,10 @@ class UpdateHandlerTest extends TestCase
      * @throws ConfigurationMismatchException
      * @throws NoSuchEntityException
      */
+<<<<<<< HEAD
     #[DataProvider('executeWithTwoImagesAndRolesDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecuteWithTwoImagesAndDifferentRolesOnStoreView(array $roles): void
     {
         $secondStoreId = (int)$this->storeRepository->get('fixture_second_store')->getId();
@@ -302,7 +328,11 @@ class UpdateHandlerTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function executeWithTwoImagesAndRolesDataProvider(): array
+=======
+    public function executeWithTwoImagesAndRolesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'unassign_all_roles' => [
@@ -579,6 +609,10 @@ class UpdateHandlerTest extends TestCase
      * Check that product images should be updated successfully regardless if the existing images exist or not
      *
      * @magentoDataFixture Magento/Catalog/_files/product_with_image.php
+<<<<<<< HEAD
+=======
+     * @dataProvider updateImageDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $newFile
      * @param string $expectedFile
      * @param bool $exist
@@ -587,7 +621,10 @@ class UpdateHandlerTest extends TestCase
      * @throws NoSuchEntityException
      * @throws FileSystemException
      */
+<<<<<<< HEAD
     #[DataProvider('updateImageDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateImage(string $newFile, string $expectedFile, bool $exist): void
     {
         $product = $this->getProduct(Store::DEFAULT_STORE_ID);
@@ -638,7 +675,11 @@ class UpdateHandlerTest extends TestCase
     /**
      * @return array[]
      */
+<<<<<<< HEAD
     public static function updateImageDataProvider(): array
+=======
+    public function updateImageDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -669,6 +710,10 @@ class UpdateHandlerTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_with_image.php
      * @magentoDataFixture Magento/Store/_files/second_store.php
+<<<<<<< HEAD
+=======
+     * @dataProvider addImagesDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $addFromStore
      * @param array $newImages
      * @param string $viewFromStore
@@ -678,7 +723,10 @@ class UpdateHandlerTest extends TestCase
      * @throws LocalizedException
      * @throws NoSuchEntityException
      */
+<<<<<<< HEAD
     #[DataProvider('addImagesDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddImages(
         string $addFromStore,
         array $newImages,
@@ -706,7 +754,11 @@ class UpdateHandlerTest extends TestCase
     /**
      * @return array[]
      */
+<<<<<<< HEAD
     public static function addImagesDataProvider(): array
+=======
+    public function addImagesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -761,6 +813,7 @@ class UpdateHandlerTest extends TestCase
             ]
         ];
     }
+<<<<<<< HEAD
     
     #[
         DataProvider('useDefaultWithMultipleStoresDataProvider'),
@@ -888,6 +941,8 @@ class UpdateHandlerTest extends TestCase
         $this->assertEquals($expected['disabled'], $actual['disabled']);
         $this->assertSame($expected['label'], $actual['label']);
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * Check product image link and product image exist

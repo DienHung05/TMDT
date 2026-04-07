@@ -1,15 +1,23 @@
 <?php
 
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Customer\Ui\Component\Listing\Column;
 
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -44,10 +52,17 @@ class ConfirmationTest extends TestCase
      * @param array $customerDataSource
      * @param array $expectedResult
      * @magentoConfigFixture base_website customer/create_account/confirm 1
+<<<<<<< HEAD
      *
      * @return void
      */
     #[DataProvider('customersDataProvider')]
+=======
+     * @dataProvider customersDataProvider
+     *
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPrepareDataSource(array $customerDataSource, array $expectedResult): void
     {
         $result = $this->confirmation->prepareDataSource($customerDataSource);
@@ -60,7 +75,11 @@ class ConfirmationTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function customersDataProvider(): array
+=======
+    public function customersDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

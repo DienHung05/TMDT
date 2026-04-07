@@ -1,31 +1,55 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
 declare(strict_types=1);
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 namespace Magento\Sales\Service\V1;
 
 use Magento\Sales\Api\Data\CreditmemoCommentInterface as Comment;
 use Magento\TestFramework\TestCase\WebapiAbstract;
 
+<<<<<<< HEAD
+=======
+/**
+ * Class CreditmemoAddCommentTest
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class CreditmemoAddCommentTest extends WebapiAbstract
 {
     /**
      * Service read name
      */
+<<<<<<< HEAD
     public const SERVICE_READ_NAME = 'salesCreditmemoCommentRepositoryV1';
+=======
+    const SERVICE_READ_NAME = 'salesCreditmemoCommentRepositoryV1';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * Service version
      */
+<<<<<<< HEAD
     public const SERVICE_VERSION = 'V1';
+=======
+    const SERVICE_VERSION = 'V1';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * Creditmemo increment id
      */
+<<<<<<< HEAD
     public const CREDITMEMO_INCREMENT_ID = '100000001';
+=======
+    const CREDITMEMO_INCREMENT_ID = '100000001';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var \Magento\Framework\ObjectManagerInterface
@@ -60,7 +84,11 @@ class CreditmemoAddCommentTest extends WebapiAbstract
             Comment::CREATED_AT => null,
             Comment::PARENT_ID => $creditmemo->getId(),
             Comment::IS_VISIBLE_ON_FRONT => 1,
+<<<<<<< HEAD
             Comment::IS_CUSTOMER_NOTIFIED => 1
+=======
+            Comment::IS_CUSTOMER_NOTIFIED => 1,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
 
         $requestData = ['entity' => $commentData];

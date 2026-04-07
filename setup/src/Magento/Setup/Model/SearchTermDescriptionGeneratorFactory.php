@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Setup\Model;
 
@@ -69,11 +74,19 @@ class SearchTermDescriptionGeneratorFactory
     public function __construct(
         ObjectManagerInterface $objectManager,
         FixtureConfig $fixtureConfig,
+<<<<<<< HEAD
         ?DescriptionSentenceGeneratorFactory $descriptionSentenceGeneratorFactory = null,
         ?DescriptionParagraphGeneratorFactory $descriptionParagraphGeneratorFactory = null,
         ?DescriptionGeneratorFactory $descriptionGeneratorFactory = null,
         ?DictionaryFactory $dictionaryFactory = null,
         ?SearchTermManagerFactory $searchTermManagerFactory = null
+=======
+        DescriptionSentenceGeneratorFactory $descriptionSentenceGeneratorFactory = null,
+        DescriptionParagraphGeneratorFactory $descriptionParagraphGeneratorFactory = null,
+        DescriptionGeneratorFactory $descriptionGeneratorFactory = null,
+        DictionaryFactory $dictionaryFactory = null,
+        SearchTermManagerFactory $searchTermManagerFactory = null
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ) {
         $this->objectManager = $objectManager;
         $this->fixtureConfig = $fixtureConfig;

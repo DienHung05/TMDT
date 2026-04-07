@@ -1,4 +1,5 @@
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
  */
@@ -14,6 +15,23 @@ define([
     var obj, originalVarienEvents, originalMediabrowserUtility, originalJqueryMage, requireSpy;
 
     beforeEach(function () {
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+define([
+    'wysiwygAdapter',
+    'underscore',
+    'tinymce'
+], function (wysiwygAdapter, _, tinyMCE) {
+    'use strict';
+
+    var obj;
+
+    beforeEach(function () {
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         /**
          * Dummy constructor to use for instantiation
          * @constructor
@@ -23,6 +41,7 @@ define([
         Constr.prototype = wysiwygAdapter;
 
         obj = new Constr();
+<<<<<<< HEAD
 
         // Store original globals (only if they exist)
         originalVarienEvents = window.varienEvents;
@@ -85,10 +104,15 @@ define([
 
         obj.eventBus = new window.varienEvents();
         obj.initialize('test-id', {
+=======
+        obj.eventBus = new window.varienEvents();
+        obj.initialize(1, {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'store_id': 0,
             'tinymce': {
                 'content_css': ''
             },
+<<<<<<< HEAD
             'files_browser_window_url': 'http://example.com/browser/'
         });
 
@@ -333,5 +357,24 @@ define([
 
             expect(obj.getMediaBrowserOpener()).toBe(mockCallback);
         });
+=======
+            'files_browser_window_url': 'url'
+        });
+        obj.setup();
+    });
+
+    describe('"openFileBrowser" method', function () {
+        it('Opens file browser to given instance', function () {
+            expect(_.size(obj.eventBus.arrEvents['open_browser_callback'])).toBe(1);
+        });
+    });
+
+    describe('"triggerSave" method', function () {
+        it('Check method call.', function () {
+            spyOn(tinyMCE, 'triggerSave');
+            obj.triggerSave();
+            expect(tinyMCE.triggerSave).toHaveBeenCalled();
+        });
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     });
 });

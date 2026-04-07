@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Framework\View\Design\Fallback;
@@ -10,7 +15,10 @@ use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Framework\Filesystem;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Factory Test
@@ -69,8 +77,14 @@ class RulePoolTest extends \PHPUnit\Framework\TestCase
      * @param string $type
      * @param array $overriddenParams
      * @param string $expectedErrorMessage
+<<<<<<< HEAD
      */
     #[DataProvider('getPatternDirsExceptionDataProvider')]
+=======
+     *
+     * @dataProvider getPatternDirsExceptionDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetPatternDirsException($type, array $overriddenParams, $expectedErrorMessage)
     {
         $this->expectException('InvalidArgumentException');
@@ -82,7 +96,11 @@ class RulePoolTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getPatternDirsExceptionDataProvider()
+=======
+    public function getPatternDirsExceptionDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $exceptions = [
             'no theme' => [
@@ -123,8 +141,14 @@ class RulePoolTest extends \PHPUnit\Framework\TestCase
      * @param string $type
      * @param array $overriddenParams
      * @param array $expectedResult
+<<<<<<< HEAD
      */
     #[DataProvider('getPatternDirsDataProvider')]
+=======
+     *
+     * @dataProvider getPatternDirsDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetPatternDirs($type, array $overriddenParams, array $expectedResult)
     {
         $actualResult = $this->model->getRule($type)
@@ -137,7 +161,11 @@ class RulePoolTest extends \PHPUnit\Framework\TestCase
      *
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function getPatternDirsDataProvider()
+=======
+    public function getPatternDirsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $objectManager = Bootstrap::getObjectManager();
         /** @var \Magento\Framework\Component\ComponentRegistrarInterface $componentRegistrar */

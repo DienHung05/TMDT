@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -29,7 +34,11 @@ class SendTest extends AbstractController
     protected function setUp(): void
     {
         parent::setUp();
+<<<<<<< HEAD
         $logger = $this->createMock(LoggerInterface::class);
+=======
+        $logger = $this->getMockForAbstractClass(LoggerInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $session = Bootstrap::getObjectManager()->create(
             Session::class,
             [$logger]

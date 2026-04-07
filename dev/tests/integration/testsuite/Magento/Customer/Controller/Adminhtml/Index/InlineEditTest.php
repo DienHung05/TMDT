@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -20,7 +25,10 @@ use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Store\Api\WebsiteRepositoryInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\AbstractBackendController;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test inline edit action on customers grid.
@@ -106,10 +114,18 @@ class InlineEditTest extends AbstractBackendController
     }
 
     /**
+<<<<<<< HEAD
      * @param array $params
      * @return void
      */
     #[DataProvider('inlineEditParametersDataProvider')]
+=======
+     * @dataProvider inlineEditParametersDataProvider
+     *
+     * @param array $params
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testInlineEditWithWrongParams(array $params): void
     {
         $actual = $this->performInlineEditRequest($params);
@@ -120,6 +136,7 @@ class InlineEditTest extends AbstractBackendController
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function inlineEditParametersDataProvider(): array
     {
         return [
@@ -133,6 +150,17 @@ class InlineEditTest extends AbstractBackendController
                 'params' => [
                     'items' => [],
                 ]
+=======
+    public function inlineEditParametersDataProvider(): array
+    {
+        return [
+            [
+                'items' => [],
+                'isAjax' => true,
+            ],
+            [
+                'items' => [],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

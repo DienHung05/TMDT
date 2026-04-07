@@ -1,6 +1,11 @@
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 define([
     'jquery',
@@ -371,11 +376,33 @@ define([
     describe('Testing validate-emailSender', function () {
         it('validate-emailSender', function () {
             expect($.validator.methods['validate-emailSender']
+<<<<<<< HEAD
                 .call($.validator.prototype, 'Sender Name')).toEqual(true);
             expect($.validator.methods['validate-emailSender']
                 .call($.validator.prototype, 'Sender & Name')).toEqual(true);
             expect($.validator.methods['validate-emailSender']
                 .call($.validator.prototype, 'Sender: Name')).toEqual(false);
+=======
+                .call($.validator.prototype, '')).toEqual(true);
+            expect($.validator.methods['validate-emailSender']
+                .call($.validator.prototype, null)).toEqual(true);
+            expect($.validator.methods['validate-emailSender']
+                .call($.validator.prototype, undefined)).toEqual(true);
+            expect($.validator.methods['validate-emailSender']
+                .call($.validator.prototype, '   ')).toEqual(true);
+            expect($.validator.methods['validate-emailSender']
+                .call($.validator.prototype, '123@123.com')).toEqual(true);
+            expect($.validator.methods['validate-emailSender']
+                .call($.validator.prototype, 'abc@124.en')).toEqual(true);
+            expect($.validator.methods['validate-emailSender']
+                .call($.validator.prototype, 'abc@abc.commmmm')).toEqual(true);
+            expect($.validator.methods['validate-emailSender']
+                .call($.validator.prototype, 'abc.abc.abc@abc.commmmm')).toEqual(true);
+            expect($.validator.methods['validate-emailSender']
+                .call($.validator.prototype, 'abc.abc-abc@abc.commmmm')).toEqual(true);
+            expect($.validator.methods['validate-emailSender']
+                .call($.validator.prototype, 'abc.abc_abc@abc.commmmm')).toEqual(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         });
     });
 
@@ -404,6 +431,7 @@ define([
 
     describe('Testing validate-admin-password', function () {
         it('validate-admin-password', function () {
+<<<<<<< HEAD
             var mockElement = $('<input data-password-min-length="7" />');
 
             expect($.validator.methods['validate-admin-password']
@@ -511,6 +539,26 @@ define([
             // Test 6-character password fails with no class (uses default 7)
             expect($.validator.methods['validate-admin-password']
                 .call($.validator.prototype, 'abc123', mockElementNoClass)).toEqual(false);
+=======
+            expect($.validator.methods['validate-admin-password']
+                .call($.validator.prototype, '')).toEqual(true);
+            expect($.validator.methods['validate-admin-password']
+                .call($.validator.prototype, null)).toEqual(false);
+            expect($.validator.methods['validate-admin-password']
+                .call($.validator.prototype, undefined)).toEqual(false);
+            expect($.validator.methods['validate-admin-password']
+                .call($.validator.prototype, '   ')).toEqual(true);
+            expect($.validator.methods['validate-admin-password']
+                .call($.validator.prototype, '123@123.com')).toEqual(true);
+            expect($.validator.methods['validate-admin-password']
+                .call($.validator.prototype, 'abc')).toEqual(false);
+            expect($.validator.methods['validate-admin-password']
+                .call($.validator.prototype, 'abc       ')).toEqual(false);
+            expect($.validator.methods['validate-admin-password']
+                .call($.validator.prototype, '     abc      ')).toEqual(false);
+            expect($.validator.methods['validate-admin-password']
+                .call($.validator.prototype, 'dddd')).toEqual(false);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         });
     });
 

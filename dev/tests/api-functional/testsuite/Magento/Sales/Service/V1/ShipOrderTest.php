@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -19,8 +24,13 @@ use Magento\Sales\Model\Order;
  */
 class ShipOrderTest extends \Magento\TestFramework\TestCase\WebapiAbstract
 {
+<<<<<<< HEAD
     public const SERVICE_READ_NAME = 'salesShipOrderV1';
     public const SERVICE_VERSION = 'V1';
+=======
+    const SERVICE_READ_NAME = 'salesShipOrderV1';
+    const SERVICE_VERSION = 'V1';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var ObjectManagerInterface
@@ -52,7 +62,11 @@ class ShipOrderTest extends \Magento\TestFramework\TestCase\WebapiAbstract
      */
     public function testConfigurableShipOrder()
     {
+<<<<<<< HEAD
         $this->markTestSkipped('https://github.com/magento-engcom/msi/issues/1335');
+=======
+        $this->markTestIncomplete('https://github.com/magento-engcom/msi/issues/1335');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $productsQuantity = 1;
 
         /** @var Order $existingOrder */
@@ -182,6 +196,7 @@ class ShipOrderTest extends \Magento\TestFramework\TestCase\WebapiAbstract
     }
 
     /**
+<<<<<<< HEAD
      * @magentoApiDataFixture Magento/Sales/_files/order_new.php
      */
     public function testShipOrderWithTypeError()
@@ -202,6 +217,8 @@ class ShipOrderTest extends \Magento\TestFramework\TestCase\WebapiAbstract
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Tests that not providing a tracking number produces the correct error. See MAGETWO-95429
      * @codingStandardsIgnoreStart
      * @codingStandardsIgnoreEnd

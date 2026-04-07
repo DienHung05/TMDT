@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -17,7 +22,10 @@ use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\ResourceModel\Order\CollectionFactory;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for setting payment method and placing order by customer
@@ -100,11 +108,18 @@ class SetPaymentMethodAndPlaceOrderTest extends GraphQlAbstract
      * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_flatrate_shipping_method.php
      * @magentoApiDataFixture Magento/GraphQl/Catalog/_files/set_simple_product_out_of_stock.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider dataProviderSetPaymentOnCartWithException
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $input
      * @param string $message
      * @throws \Exception
      */
+<<<<<<< HEAD
     #[DataProvider('dataProviderSetPaymentOnCartWithException')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSetPaymentOnCartWithException(string $input, string $message)
     {
         $maskedQuoteId = $this->getMaskedQuoteIdByReservedOrderId->execute('test_quote');
@@ -139,11 +154,18 @@ QUERY;
      * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_flatrate_shipping_method.php
      * @magentoApiDataFixture Magento/GraphQl/Catalog/_files/set_simple_product_out_of_stock.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider dataProviderSetPaymentOnCartWithExceptionWithDisabledInventoryCheck
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $input
      * @param string $message
      * @throws \Exception
      */
+<<<<<<< HEAD
     #[DataProvider('dataProviderSetPaymentOnCartWithExceptionWithDisabledInventoryCheck')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSetPaymentOnCartWithExceptionWithDisabledInventoryCheck(string $input, string $message)
     {
         $maskedQuoteId = $this->getMaskedQuoteIdByReservedOrderId->execute('test_quote');
@@ -170,7 +192,11 @@ QUERY;
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function dataProviderSetPaymentOnCartWithException(): array
+=======
+    public function dataProviderSetPaymentOnCartWithException(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'place_order_with_out_of_stock_products' => [
@@ -186,7 +212,11 @@ QUERY;
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function dataProviderSetPaymentOnCartWithExceptionWithDisabledInventoryCheck(): array
+=======
+    public function dataProviderSetPaymentOnCartWithExceptionWithDisabledInventoryCheck(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'place_order_with_out_of_stock_products' => [

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\CatalogRule\Model\Indexer;
 
@@ -9,6 +14,7 @@ use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\Indexer\Product\Price\Processor;
 use Magento\Framework\App\ResourceConnection;
 use Magento\Store\Model\StoreManagerInterface;
+<<<<<<< HEAD
 use Magento\TestFramework\Fixture\AppIsolation;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DbIsolation;
@@ -18,6 +24,10 @@ use Magento\TestFramework\Helper\Bootstrap;
     DbIsolation(false),
     AppIsolation(true),
 ]
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class IndexerBuilderTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -100,6 +110,11 @@ class IndexerBuilderTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @magentoDbIsolation disabled
+     * @magentoAppIsolation enabled
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/CatalogRule/_files/attribute.php
      * @magentoDataFixture Magento/CatalogRule/_files/rule_by_attribute.php
      * @magentoDataFixture Magento/Catalog/_files/product_simple.php
@@ -116,6 +131,11 @@ class IndexerBuilderTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @magentoDbIsolation disabled
+     * @magentoAppIsolation enabled
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/CatalogRule/_files/simple_product_with_catalog_rule_50_percent_off_tomorrow.php
      * @magentoConfigFixture base_website general/locale/timezone Europe/Amsterdam
      * @magentoConfigFixture general/locale/timezone America/Chicago
@@ -142,6 +162,11 @@ class IndexerBuilderTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @magentoDbIsolation disabled
+     * @magentoAppIsolation enabled
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/CatalogRule/_files/attribute.php
      * @magentoDataFixture Magento/CatalogRule/_files/rule_by_attribute.php
      * @magentoDataFixture Magento/Catalog/_files/product_simple.php
@@ -167,6 +192,11 @@ class IndexerBuilderTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @magentoDbIsolation disabled
+     * @magentoAppIsolation enabled
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixtureBeforeTransaction Magento/CatalogRule/_files/attribute.php
      * @magentoDataFixtureBeforeTransaction Magento/CatalogRule/_files/rule_by_attribute.php
      * @magentoDataFixture Magento/Catalog/_files/product_simple.php
@@ -186,6 +216,12 @@ class IndexerBuilderTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Tests restoring triggers on `catalogrule_product_price` table after full reindexing in 'Update by schedule' mode.
+<<<<<<< HEAD
+=======
+     *
+     * @magentoDbIsolation disabled
+     * @magentoAppIsolation enabled
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function testRestoringTriggersAfterFullReindex()
     {
@@ -204,6 +240,7 @@ class IndexerBuilderTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(0, $this->getTriggersCount($tableName));
     }
 
+<<<<<<< HEAD
     #[
         DataFixture('Magento/CatalogRule/_files/simple_product_with_catalog_rule_50_percent_off.php'),
     ]
@@ -240,6 +277,8 @@ class IndexerBuilderTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(25, $rulePrice);
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Returns triggers count.
      *

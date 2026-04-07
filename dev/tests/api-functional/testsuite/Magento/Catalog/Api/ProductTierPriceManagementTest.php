@@ -1,12 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Catalog\Api;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\TestCase\WebapiAbstract;
 
 /**
@@ -20,8 +29,13 @@ class ProductTierPriceManagementTest extends WebapiAbstract
 
     /**
      * @magentoApiDataFixture Magento/Catalog/_files/product_simple.php
+<<<<<<< HEAD
      */
     #[DataProvider('getListDataProvider')]
+=======
+     * @dataProvider getListDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetList($customerGroupId, $count, $value, $qty)
     {
         $productSku = 'simple';
@@ -49,7 +63,11 @@ class ProductTierPriceManagementTest extends WebapiAbstract
         }
     }
 
+<<<<<<< HEAD
     public static function getListDataProvider()
+=======
+    public function getListDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [0, 3, 5, 3],
@@ -62,8 +80,13 @@ class ProductTierPriceManagementTest extends WebapiAbstract
      * @param string|int $customerGroupId
      * @param int $qty
      * @magentoApiDataFixture Magento/Catalog/_files/product_simple.php
+<<<<<<< HEAD
      */
     #[DataProvider('deleteDataProvider')]
+=======
+     * @dataProvider deleteDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDelete($customerGroupId, $qty)
     {
         $productSku = 'simple';
@@ -83,7 +106,11 @@ class ProductTierPriceManagementTest extends WebapiAbstract
         $this->assertTrue($this->_webApiCall($serviceInfo, $requestData, null, "all"));
     }
 
+<<<<<<< HEAD
     public static function deleteDataProvider()
+=======
+    public function deleteDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'delete_tier_price_for_specific_customer_group' => [0, 3],

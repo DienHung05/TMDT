@@ -1,12 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Sales\CustomerOrders;
 
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Checkout\Test\Fixture\PlaceOrder as PlaceOrderFixture;
 use Magento\Checkout\Test\Fixture\SetBillingAddress;
@@ -21,15 +27,24 @@ use Magento\Store\Test\Fixture\Store;
 use Magento\GraphQl\Sales\Fixtures\CustomerPlaceOrder;
 use Magento\Quote\Test\Fixture\AddProductToCart;
 use Magento\Quote\Test\Fixture\CustomerCart;
+=======
+use Magento\Framework\DB\Transaction;
+use Magento\Framework\Registry;
+use Magento\GraphQl\GetCustomerAuthenticationHeader;
+use Magento\GraphQl\Sales\Fixtures\CustomerPlaceOrder;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Shipment;
 use Magento\Sales\Model\Order\ShipmentFactory;
 use Magento\Sales\Model\ResourceModel\Order\Collection as OrderCollection;
+<<<<<<< HEAD
 use Magento\Sales\Test\Fixture\Invoice as InvoiceFixture;
 use Magento\Sales\Test\Fixture\Shipment as ShipmentFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
 
@@ -110,6 +125,7 @@ class OrderShipmentsTest extends GraphQlAbstract
         $this->assertNotEmpty($shipment['comments'][0]['timestamp']);
     }
 
+<<<<<<< HEAD
     #[
         DataFixture(Store::class),
         DataFixture(ProductFixture::class, as: 'product1'),
@@ -150,17 +166,36 @@ class OrderShipmentsTest extends GraphQlAbstract
         $shipment2 = DataFixtureStorageManager::getStorage()->get('shipment2');
         $query = $this->getQuery($order->getIncrementId());
         $authHeader = $this->getCustomerAuthHeader->execute($customer->getEmail(), 'password');
+=======
+    /**
+     * @magentoApiDataFixture Magento/GraphQl/Sales/_files/customer_order_with_multiple_shipments.php
+     */
+    public function testGetOrderShipmentsMultiple()
+    {
+        $query = $this->getQuery('100000555');
+        $authHeader = $this->getCustomerAuthHeader->execute('customer_uk_address@test.com', 'password');
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $result = $this->graphQlQuery($query, [], '', $authHeader);
         $this->assertArrayNotHasKey('errors', $result);
         $order = $result['customer']['orders']['items'][0];
         $shipments = $order['shipments'];
         $this->assertCount(2, $shipments);
+<<<<<<< HEAD
         $this->assertEquals($shipment1->getIncrementId(), $shipments[0]['number']);
         $this->assertCount(1, $shipments[0]['items']);
         $this->assertEquals($shipment2->getIncrementId(), $shipments[1]['number']);
         $this->assertCount(1, $shipments[1]['items']);
     }
     
+=======
+        $this->assertEquals('0000000098', $shipments[0]['number']);
+        $this->assertCount(1, $shipments[0]['items']);
+        $this->assertEquals('0000000099', $shipments[1]['number']);
+        $this->assertCount(1, $shipments[1]['items']);
+    }
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @magentoConfigFixture default_store carriers/ups/active 1
      * @magentoApiDataFixture Magento/GraphQl/Sales/_files/customer_order_with_ups_shipping.php
@@ -257,7 +292,11 @@ class OrderShipmentsTest extends GraphQlAbstract
      * @param string|null $orderId
      * @return string
      */
+<<<<<<< HEAD
     private function getQuery(?string $orderId = null)
+=======
+    private function getQuery(string $orderId = null)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $filter = $orderId ? "(filter:{number:{eq:\"$orderId\"}})" : "";
         return <<<QUERY

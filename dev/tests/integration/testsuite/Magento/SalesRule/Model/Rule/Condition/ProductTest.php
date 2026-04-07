@@ -1,11 +1,17 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\SalesRule\Model\Rule\Condition;
 
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Category as CategoryFixture;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Checkout\Test\Fixture\SetBillingAddress as SetBillingAddressFixture;
@@ -18,6 +24,10 @@ use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\SalesRule\Model\Rule;
 use Magento\SalesRule\Model\Rule\Condition\Product\Found;
 use Magento\SalesRule\Model\Rule\Condition\Product\Subselect;
+=======
+use Magento\Framework\Registry;
+use Magento\SalesRule\Model\Rule;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\SalesRule\Test\Fixture\ProductCondition as ProductConditionFixture;
 use Magento\SalesRule\Test\Fixture\ProductFoundInCartConditions as ProductFoundInCartConditionsFixture;
 use Magento\SalesRule\Test\Fixture\ProductSubselectionInCartConditions as ProductSubselectionInCartConditionsFixture;
@@ -26,7 +36,10 @@ use Magento\TestFramework\Fixture\AppIsolation;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Fixture\DbIsolation;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -46,18 +59,24 @@ class ProductTest extends \PHPUnit\Framework\TestCase
     private $fixtures;
 
     /**
+<<<<<<< HEAD
      * @var QuoteRepository
      */
     private $quote;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritDoc
      */
     protected function setUp(): void
     {
         $this->objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
         $this->fixtures = DataFixtureStorageManager::getStorage();
+<<<<<<< HEAD
         $this->quote = $this->objectManager->get(QuoteRepository::class);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -72,9 +91,15 @@ class ProductTest extends \PHPUnit\Framework\TestCase
      *
      * @magentoDataFixture Magento/ConfigurableProduct/_files/quote_with_configurable_product.php
      * @magentoDataFixture Magento/Catalog/_files/category.php
+<<<<<<< HEAD
      */
     #[
         DataProvider('validateProductConditionDataProvider'),
+=======
+     * @dataProvider validateProductConditionDataProvider
+     */
+    #[
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         AppIsolation(true),
         DbIsolation(false),
         DataFixture(
@@ -141,7 +166,11 @@ class ProductTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function validateProductConditionDataProvider()
+=======
+    public function validateProductConditionDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $validCategoryId = 333;
         $invalidCategoryId = 2;
@@ -202,8 +231,13 @@ class ProductTest extends \PHPUnit\Framework\TestCase
      *
      * @magentoDataFixture Magento/ConfigurableProduct/_files/quote_with_configurable_product.php
      * @magentoDataFixture Magento/SalesRule/_files/rules_parent_category.php
+<<<<<<< HEAD
      */
     #[DataProvider('conditionsDataProvider')]
+=======
+     * @dataProvider conditionsDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testValidateParentCategoryWithConfigurable(array $conditions, bool $expected): void
     {
         $quote = $this->getQuote('test_cart_with_configurable');
@@ -214,7 +248,11 @@ class ProductTest extends \PHPUnit\Framework\TestCase
         $rule->load($ruleId);
         $rule->getConditions()->setConditions([])->loadArray(
             [
+<<<<<<< HEAD
                 'type' => Combine::class,
+=======
+                'type' => \Magento\SalesRule\Model\Rule\Condition\Combine::class,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'attribute' => null,
                 'operator' => null,
                 'value' => '1',
@@ -236,22 +274,37 @@ class ProductTest extends \PHPUnit\Framework\TestCase
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      * @return array
      */
+<<<<<<< HEAD
     public static function conditionsDataProvider(): array
+=======
+    public function conditionsDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'If total quantity  is 1 for a subselection of items in cart matching ALL of these conditions: ' .
             'Category (Parent Only) is not "Default Category"' => [
                 'conditions' => [
                     [
+<<<<<<< HEAD
                         'type' => Subselect::class,
+=======
+                        'type' => \Magento\SalesRule\Model\Rule\Condition\Product\Subselect::class,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         'attribute' => 'qty',
                         'operator' => '==',
                         'value' => '1',
                         'is_value_processed' => null,
                         'aggregator' => 'all',
+<<<<<<< HEAD
                         'conditions' => [
                                 [
                                     'type' => Product::class,
+=======
+                        'conditions' =>
+                            [
+                                [
+                                    'type' => \Magento\SalesRule\Model\Rule\Condition\Product::class,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                                     'attribute' => 'category_ids',
                                     'attribute_scope' => 'parent',
                                     'operator' => '!=',
@@ -267,15 +320,26 @@ class ProductTest extends \PHPUnit\Framework\TestCase
             'Category (Parent Only) is "Default Category"' => [
                 'conditions' => [
                     [
+<<<<<<< HEAD
                         'type' => Subselect::class,
+=======
+                        'type' => \Magento\SalesRule\Model\Rule\Condition\Product\Subselect::class,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         'attribute' => 'qty',
                         'operator' => '==',
                         'value' => '1',
                         'is_value_processed' => null,
                         'aggregator' => 'all',
+<<<<<<< HEAD
                         'conditions' => [
                                 [
                                     'type' => Product::class,
+=======
+                        'conditions' =>
+                            [
+                                [
+                                    'type' => \Magento\SalesRule\Model\Rule\Condition\Product::class,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                                     'attribute' => 'category_ids',
                                     'attribute_scope' => 'parent',
                                     'operator' => '==',
@@ -291,6 +355,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
             'Category (Parent Only) is not "Default Category"' => [
                 'conditions' => [
                     [
+<<<<<<< HEAD
                         'type' => Found::class,
                         'value' => '1',
                         'is_value_processed' => null,
@@ -298,6 +363,16 @@ class ProductTest extends \PHPUnit\Framework\TestCase
                         'conditions' => [
                                 [
                                     'type' => Product::class,
+=======
+                        'type' => \Magento\SalesRule\Model\Rule\Condition\Product\Found::class,
+                        'value' => '1',
+                        'is_value_processed' => null,
+                        'aggregator' => 'all',
+                        'conditions' =>
+                            [
+                                [
+                                    'type' => \Magento\SalesRule\Model\Rule\Condition\Product::class,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                                     'attribute' => 'category_ids',
                                     'attribute_scope' => 'parent',
                                     'operator' => '!=',
@@ -313,6 +388,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
             'Category (Parent Only) is "Default Category"' => [
                 'conditions' => [
                     [
+<<<<<<< HEAD
                         'type' => Found::class,
                         'value' => '1',
                         'is_value_processed' => null,
@@ -320,6 +396,16 @@ class ProductTest extends \PHPUnit\Framework\TestCase
                         'conditions' => [
                                 [
                                     'type' => Product::class,
+=======
+                        'type' => \Magento\SalesRule\Model\Rule\Condition\Product\Found::class,
+                        'value' => '1',
+                        'is_value_processed' => null,
+                        'aggregator' => 'all',
+                        'conditions' =>
+                            [
+                                [
+                                    'type' => \Magento\SalesRule\Model\Rule\Condition\Product::class,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                                     'attribute' => 'category_ids',
                                     'attribute_scope' => 'parent',
                                     'operator' => '==',
@@ -335,6 +421,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
             'Category (Parent Only) is "Default Category"' => [
                 'conditions' => [
                     [
+<<<<<<< HEAD
                         'type' => Found::class,
                         'value' => '0',
                         'is_value_processed' => null,
@@ -342,6 +429,16 @@ class ProductTest extends \PHPUnit\Framework\TestCase
                         'conditions' => [
                                 [
                                     'type' => Product::class,
+=======
+                        'type' => \Magento\SalesRule\Model\Rule\Condition\Product\Found::class,
+                        'value' => '0',
+                        'is_value_processed' => null,
+                        'aggregator' => 'all',
+                        'conditions' =>
+                            [
+                                [
+                                    'type' => \Magento\SalesRule\Model\Rule\Condition\Product::class,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                                     'attribute' => 'category_ids',
                                     'attribute_scope' => 'parent',
                                     'operator' => '==',
@@ -355,6 +452,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
             ],
         ];
     }
+<<<<<<< HEAD
 
     /**
      * Ensure that the coupon code shouldn't get applied as the cart contains products from restricted category
@@ -431,4 +529,6 @@ class ProductTest extends \PHPUnit\Framework\TestCase
 
         $this->assertFalse($rule->validate($quote->getShippingAddress()));
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

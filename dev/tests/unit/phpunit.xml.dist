@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 /**
+<<<<<<< HEAD
  * Copyright 2011 Adobe
  * All Rights Reserved.
  */
 -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/12.5/phpunit.xsd"
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
          colors="true"
          columns="max"
          beStrictAboutTestsThatDoNotTestAnything="false"
          bootstrap="./framework/bootstrap.php">
+<<<<<<< HEAD
     <source>
+=======
+    <coverage>
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         <include>
             <directory suffix=".php">../../../app/code/*</directory>
             <directory suffix=".php">../../../lib/internal/Magento</directory>
@@ -23,7 +36,11 @@
             <directory>../../../lib/internal/*/*/*/Test</directory>
             <directory>../../../setup/src/*/*/Test</directory>
         </exclude>
+<<<<<<< HEAD
     </source>
+=======
+    </coverage>
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     <testsuites>
         <testsuite name="Magento_Unit_Tests_App_Code">
             <directory>../../../app/code/*/*/Test/Unit</directory>
@@ -44,6 +61,7 @@
         </testsuite>
     </testsuites>
     <php>
+<<<<<<< HEAD
         <includePath>.</includePath>
         <ini name="memory_limit" value="-1"/>
         <ini name="date.timezone" value="America/Los_Angeles"/>
@@ -54,4 +72,33 @@
             <parameter name="config" value="allure/allure.config.php" />
         </bootstrap>
     </extensions>
+=======
+        <ini name="memory_limit" value="-1"/>
+        <ini name="date.timezone" value="America/Los_Angeles"/>
+        <ini name="xdebug.max_nesting_level" value="200"/>
+    </php>
+    <listeners>
+        <listener class="Yandex\Allure\PhpUnit\AllurePhpUnit">
+            <arguments>
+                <string>var/allure-results</string> <!-- XML files output directory -->
+                <boolean>true</boolean> <!-- Whether to delete previous results on rerun -->
+                <array> <!-- A list of custom annotations to ignore (optional) -->
+                    <element key="codingStandardsIgnoreStart">
+                        <string>codingStandardsIgnoreStart</string>
+                    </element>
+                    <element key="codingStandardsIgnoreEnd">
+                        <string>codingStandardsIgnoreEnd</string>
+                    </element>
+                    <element key="cover">
+                        <string>cover</string>
+                    </element>
+                    <element key="expectedExceptionMessageRegExp">
+                        <string>expectedExceptionMessageRegExp</string>
+                    </element>
+                </array>
+            </arguments>
+        </listener>
+        <listener class="Magento\Framework\TestFramework\Unit\Listener\ReplaceObjectManager"/>
+    </listeners>
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 </phpunit>

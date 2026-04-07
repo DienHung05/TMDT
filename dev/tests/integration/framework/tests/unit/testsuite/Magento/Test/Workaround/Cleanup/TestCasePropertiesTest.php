@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Test\Workaround\Cleanup;
@@ -36,20 +41,36 @@ class TestCasePropertiesTest extends TestCase
      */
     public function testEndTestSuiteDestruct(): void
     {
+<<<<<<< HEAD
         $phpUnitTestSuite = TestSuite::empty('TestSuite');
+=======
+        $phpUnitTestSuite = new TestSuite();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $phpUnitTestSuite->addTestFile(__DIR__ . '/TestCasePropertiesTest/DummyTestCase.php');
         // Because addTestFile() adds classes from file to tests array, use first testsuite
         /** @var TestSuite $testSuite */
         $testSuite = current($phpUnitTestSuite->tests());
         $testSuite->run();
+<<<<<<< HEAD
 
         $reflectionClass = new \ReflectionClass($testSuite);
+=======
+        /** @var \Magento\Test\Workaround\Cleanup\TestCasePropertiesTest\DummyTestCase $testClass */
+        $testClass = current($testSuite->tests());
+
+        $reflectionClass = new \ReflectionClass($testClass);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $classProperties = $reflectionClass->getProperties();
         $fixturePropertiesNames = array_keys($this->fixtureProperties);
 
         foreach ($classProperties as $property) {
             if (in_array($property->getName(), $fixturePropertiesNames)) {
+<<<<<<< HEAD
                 $value = $property->getValue($testSuite);
+=======
+                $property->setAccessible(true);
+                $value = $property->getValue($testClass);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $this->assertNotNull($value);
             }
         }
@@ -58,7 +79,12 @@ class TestCasePropertiesTest extends TestCase
 
         foreach ($classProperties as $property) {
             if (in_array($property->getName(), $fixturePropertiesNames)) {
+<<<<<<< HEAD
                 $value = $property->getValue($testSuite);
+=======
+                $property->setAccessible(true);
+                $value = $property->getValue($testClass);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $this->assertNull($value);
             }
         }

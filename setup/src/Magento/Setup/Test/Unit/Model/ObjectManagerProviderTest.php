@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -41,7 +46,11 @@ class ObjectManagerProviderTest extends TestCase
 
     protected function setUp(): void
     {
+<<<<<<< HEAD
         $this->serviceLocatorMock = $this->createMock(ServiceLocatorInterface::class);
+=======
+        $this->serviceLocatorMock = $this->getMockForAbstractClass(ServiceLocatorInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->bootstrapMock = $this->createMock(Bootstrap::class);
 
         $this->model = new ObjectManagerProvider($this->serviceLocatorMock, $this->bootstrapMock);
@@ -57,7 +66,11 @@ class ObjectManagerProviderTest extends TestCase
 
         $application = $this->getMockBuilder(Application::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->getMock();
+=======
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->serviceLocatorMock
             ->expects($this->atLeastOnce())
@@ -72,12 +85,20 @@ class ObjectManagerProviderTest extends TestCase
                 ]
             );
 
+<<<<<<< HEAD
         $commandListMock = $this->createMock(CommandListInterface::class);
+=======
+        $commandListMock = $this->getMockForAbstractClass(CommandListInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $commandListMock->expects($this->once())
             ->method('getCommands')
             ->willReturn($commands);
 
+<<<<<<< HEAD
         $objectManagerMock = $this->createMock(ObjectManagerInterface::class);
+=======
+        $objectManagerMock = $this->getMockForAbstractClass(ObjectManagerInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $objectManagerMock->expects($this->once())
             ->method('create')
             ->with(CommandListInterface::class)
@@ -96,6 +117,7 @@ class ObjectManagerProviderTest extends TestCase
             ->method('createObjectManagerFactory')
             ->willReturn($objectManagerFactoryMock);
 
+<<<<<<< HEAD
         $result = $this->model->get();
         $this->assertInstanceOf(ObjectManagerInterface::class, $result);
 
@@ -107,5 +129,12 @@ class ObjectManagerProviderTest extends TestCase
         // foreach ($commands as $command) {
         //     $this->assertSame($application, $command->getApplication());
         // }
+=======
+        $this->assertInstanceOf(ObjectManagerInterface::class, $this->model->get());
+
+        foreach ($commands as $command) {
+            $this->assertSame($application, $command->getApplication());
+        }
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

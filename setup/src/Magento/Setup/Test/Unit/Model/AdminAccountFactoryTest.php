@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -21,16 +26,28 @@ class AdminAccountFactoryTest extends TestCase
     {
         $serviceLocatorMock =
             $this->getMockBuilder(ServiceLocatorInterface::class)
+<<<<<<< HEAD
                 ->onlyMethods(['get', 'has', 'build'])
                 ->getMock();
+=======
+                ->onlyMethods(['get'])
+                ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $serviceLocatorMock
             ->expects($this->once())
             ->method('get')
             ->with(Encryptor::class)
+<<<<<<< HEAD
             ->willReturn($this->createMock(EncryptorInterface::class));
         $adminAccountFactory = new AdminAccountFactory($serviceLocatorMock);
         $adminAccount = $adminAccountFactory->create(
             $this->createMock(AdapterInterface::class),
+=======
+            ->willReturn($this->getMockForAbstractClass(EncryptorInterface::class));
+        $adminAccountFactory = new AdminAccountFactory($serviceLocatorMock);
+        $adminAccount = $adminAccountFactory->create(
+            $this->getMockForAbstractClass(AdapterInterface::class),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             []
         );
         $this->assertInstanceOf(AdminAccount::class, $adminAccount);

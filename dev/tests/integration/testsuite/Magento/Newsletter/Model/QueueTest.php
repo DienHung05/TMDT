@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Newsletter\Model;
 
@@ -32,7 +37,13 @@ class QueueTest extends \PHPUnit\Framework\TestCase
         /** @var $filter \Magento\Newsletter\Model\Template\Filter */
         $filter = $objectManager->get(\Magento\Newsletter\Model\Template\Filter::class);
 
+<<<<<<< HEAD
         $transport = $this->createMock(\Magento\Framework\Mail\TransportInterface::class);
+=======
+        $transport = $this->getMockBuilder(\Magento\Framework\Mail\TransportInterface::class)
+            ->setMethods(['sendMessage'])
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $transport->expects($this->exactly(2))->method('sendMessage')->willReturnSelf();
 
         $builder = $this->createPartialMock(
@@ -68,7 +79,13 @@ class QueueTest extends \PHPUnit\Framework\TestCase
 
         $objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
 
+<<<<<<< HEAD
         $transport = $this->createMock(\Magento\Framework\Mail\TransportInterface::class);
+=======
+        $transport = $this->getMockBuilder(\Magento\Framework\Mail\TransportInterface::class)
+            ->setMethods(['sendMessage'])
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $transport->expects($this->any())
             ->method('sendMessage')
             ->willThrowException(new \Magento\Framework\Exception\MailException(__($errorMsg)));

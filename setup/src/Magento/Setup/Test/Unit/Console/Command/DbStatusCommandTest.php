@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -56,7 +61,11 @@ class DbStatusCommandTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
         /** @var ObjectManagerInterface|Mock $objectManager */
+<<<<<<< HEAD
         $objectManager = $this->createMock(ObjectManagerInterface::class);
+=======
+        $objectManager = $this->getMockForAbstractClass(ObjectManagerInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->deploymentConfig = $this->getMockBuilder(DeploymentConfig::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -104,7 +113,11 @@ class DbStatusCommandTest extends TestCase
             ->willReturn(true);
         $tester = new CommandTester($this->command);
         $tester->execute([]);
+<<<<<<< HEAD
         $this->assertStringMatchesFormat('%AAll modules are up to date.', $tester->getDisplay());
+=======
+        $this->assertStringMatchesFormat('All modules are up to date.', $tester->getDisplay());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertSame(0, $tester->getStatusCode());
     }
 
@@ -117,7 +130,11 @@ class DbStatusCommandTest extends TestCase
         $tester->execute([]);
 
         $this->assertStringMatchesFormat(
+<<<<<<< HEAD
             '%ANo information is available: the Magento application is not installed.%w',
+=======
+            'No information is available: the Magento application is not installed.%w',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $tester->getDisplay()
         );
         $this->assertSame(Cli::RETURN_FAILURE, $tester->getStatusCode());

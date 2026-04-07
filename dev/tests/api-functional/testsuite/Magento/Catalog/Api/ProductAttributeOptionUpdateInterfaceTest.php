@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
  */
@@ -18,6 +19,16 @@ use Magento\TestFramework\Fixture\DataFixtureStorage;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Catalog\Api;
+
+use Magento\Eav\Api\Data\AttributeOptionInterface;
+use Magento\Eav\Api\Data\AttributeOptionLabelInterface;
+use Magento\Framework\Webapi\Rest\Request;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\TestCase\WebapiAbstract;
 
 /**
@@ -31,6 +42,7 @@ class ProductAttributeOptionUpdateInterfaceTest extends WebapiAbstract
     private const RESOURCE_PATH = '/V1/products/attributes';
 
     /**
+<<<<<<< HEAD
      * @var ObjectManager
      */
     private $objectManager;
@@ -51,6 +63,8 @@ class ProductAttributeOptionUpdateInterfaceTest extends WebapiAbstract
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Test to update attribute option
      *
      * @magentoApiDataFixture Magento/Catalog/Model/Product/Attribute/_files/select_attribute.php
@@ -97,6 +111,7 @@ class ProductAttributeOptionUpdateInterfaceTest extends WebapiAbstract
         }
     }
 
+<<<<<<< HEAD
     #[
         DataFixture(WebsiteFixture::class, as: 'website'),
         DataFixture(StoreGroupFixture::class, ['website_id' => '$website.id$'], 'store_group'),
@@ -201,6 +216,8 @@ class ProductAttributeOptionUpdateInterfaceTest extends WebapiAbstract
         );
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Test to update option with already exist exception
      *
@@ -210,7 +227,11 @@ class ProductAttributeOptionUpdateInterfaceTest extends WebapiAbstract
      */
     public function testUpdateWithAlreadyExistsException()
     {
+<<<<<<< HEAD
         $this->expectExceptionMessage("Admin store attribute option label '%1' already exists.");
+=======
+        $this->expectExceptionMessage("Admin store attribute option label '%1' is already exists.");
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $testAttributeCode = 'select_attribute';
 
         $newOptionData = [

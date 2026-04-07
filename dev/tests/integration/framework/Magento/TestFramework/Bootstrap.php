@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
@@ -9,23 +10,46 @@ namespace Magento\TestFramework;
 /**
  * Bootstrap for the integration testing environment
  */
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * Bootstrap for the integration testing environment
+ */
+namespace Magento\TestFramework;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class Bootstrap
 {
     /**#@+
      * Predefined admin user credentials
      */
+<<<<<<< HEAD
     public const ADMIN_NAME = 'user';
     public const ADMIN_PASSWORD = 'password1';
     public const ADMIN_EMAIL = 'admin@example.com';
     public const ADMIN_FIRSTNAME = 'firstname';
     public const ADMIN_LASTNAME = 'lastname';
+=======
+    const ADMIN_NAME = 'user';
+    const ADMIN_PASSWORD = 'password1';
+    const ADMIN_EMAIL = 'admin@example.com';
+    const ADMIN_FIRSTNAME = 'firstname';
+    const ADMIN_LASTNAME = 'lastname';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**#@- */
 
     /**
      * Predefined admin user role name
      */
+<<<<<<< HEAD
     public const ADMIN_ROLE_NAME = 'Administrators';
     public const ADMIN_ROLE_ID = 1;
+=======
+    const ADMIN_ROLE_NAME = 'Administrators';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var \Magento\TestFramework\Bootstrap\Settings

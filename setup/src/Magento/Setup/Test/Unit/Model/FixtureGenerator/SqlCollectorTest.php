@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -12,7 +17,10 @@ use Magento\Framework\DB\Adapter\AdapterInterface;
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use Magento\Setup\Model\FixtureGenerator\SqlCollector;
 use PHPUnit\Framework\MockObject\MockObject;
+<<<<<<< HEAD
 use Magento\Framework\TestFramework\Unit\Helper\MockCreationTrait;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -20,8 +28,11 @@ use PHPUnit\Framework\TestCase;
  */
 class SqlCollectorTest extends TestCase
 {
+<<<<<<< HEAD
     use MockCreationTrait;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @var SqlCollector
      */
@@ -45,7 +56,13 @@ class SqlCollectorTest extends TestCase
 
     public function testGetEmptySql()
     {
+<<<<<<< HEAD
         $connection = $this->createMock(\Magento\Framework\DB\Adapter\Pdo\Mysql::class);
+=======
+        $connection = $this->getMockBuilder(AdapterInterface::class)
+            ->setMethods(['getProfiler'])
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $profiler = $this->getMockBuilder(\Zend_Db_Profiler::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -60,7 +77,13 @@ class SqlCollectorTest extends TestCase
 
     public function testGetEmptySqlWhenSelectQueryProcessed()
     {
+<<<<<<< HEAD
         $connection = $this->createMock(\Magento\Framework\DB\Adapter\Pdo\Mysql::class);
+=======
+        $connection = $this->getMockBuilder(AdapterInterface::class)
+            ->setMethods(['getProfiler'])
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $profiler = $this->getMockBuilder(\Zend_Db_Profiler::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -78,7 +101,13 @@ class SqlCollectorTest extends TestCase
 
     public function testGetSql()
     {
+<<<<<<< HEAD
         $connection = $this->createMock(\Magento\Framework\DB\Adapter\Pdo\Mysql::class);
+=======
+        $connection = $this->getMockBuilder(AdapterInterface::class)
+            ->setMethods(['getProfiler'])
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $profiler = $this->getMockBuilder(\Zend_Db_Profiler::class)
             ->disableOriginalConstructor()
             ->getMock();

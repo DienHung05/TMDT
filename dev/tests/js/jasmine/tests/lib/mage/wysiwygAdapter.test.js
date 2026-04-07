@@ -1,9 +1,17 @@
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
  */
 
 /* eslint-disable */
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/* eslint-disable max-nested-callbacks */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 define([
     'wysiwygAdapter'
 ], function (wysiwygAdapter) {
@@ -33,7 +41,11 @@ define([
          * @param {String} encodedHtml
          */
         function runTests(decodedHtml, encodedHtml) {
+<<<<<<< HEAD
             var encodedHtmlWithForwardSlashInImgSrc = encodedHtml.replace(/src="([^"]+)/, 'src="$1/');
+=======
+            var encodedHtmlWithForwardSlashInImgSrc = encodedHtml.replace(/src="((?:(?!"|\\\?).)*)/, 'src="$1/');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
             describe('"encodeDirectives" method', function () {
                 it('converts media directive img src to directive URL', function () {

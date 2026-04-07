@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -9,7 +14,10 @@ namespace Magento\Customer\Block\Adminhtml\Edit\Tab;
 
 use Magento\Backend\Model\Session\Quote as SessionQuote;
 use Magento\Quote\Model\Quote;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class checks customer's shopping cart block with simple product and simple product with options.
@@ -44,13 +52,20 @@ class CartTest extends AbstractCartTest
      *
      * @magentoDataFixture Magento/Sales/_files/quote_with_two_products_and_customer.php
      * @magentoDataFixture Magento/Customer/_files/customer.php
+<<<<<<< HEAD
+=======
+     * @dataProvider getQuoteDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @param int $customerId
      * @param bool $guest
      * @param bool $contains
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('getQuoteDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testVerifyCollectionWithQuote(int $customerId, bool $guest, bool $contains): void
     {
         $session = $this->objectManager->create(SessionQuote::class);
@@ -79,7 +94,11 @@ class CartTest extends AbstractCartTest
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function getQuoteDataProvider(): array
+=======
+    public function getQuoteDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

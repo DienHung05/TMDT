@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Search\Model;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Search\Model;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * @magentoDataFixture Magento/Search/_files/synonym_reader.php
  * @magentoDbIsolation disabled
@@ -90,8 +98,13 @@ class SynonymAnalyzerTest extends \PHPUnit\Framework\TestCase
     /**
      * @param string $phrase
      * @param array $expectedResult
+<<<<<<< HEAD
      */
     #[DataProvider('loadGetSynonymsForPhraseDataProvider')]
+=======
+     * @dataProvider loadGetSynonymsForPhraseDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetSynonymsForPhrase($phrase, $expectedResult)
     {
         $synonyms = $this->synAnalyzer->getSynonymsForPhrase($phrase);

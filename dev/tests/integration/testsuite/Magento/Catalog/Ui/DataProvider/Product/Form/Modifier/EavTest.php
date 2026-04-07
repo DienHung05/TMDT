@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -12,7 +17,10 @@ use Magento\Eav\Model\AttributeSetRepository;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\TestFramework\Eav\Model\GetAttributeGroupByName;
 use Magento\TestFramework\Eav\Model\ResourceModel\GetEntityIdByAttributeId;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Provides tests for eav modifier used in products admin form data provider.
@@ -54,13 +62,20 @@ class EavTest extends AbstractEavTest
     /**
      * @magentoDataFixture Magento/Catalog/_files/product_text_attribute.php
      * @magentoDataFixture Magento/Catalog/_files/product_simple.php
+<<<<<<< HEAD
+=======
+     * @dataProvider modifyMetaWithAttributeProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $groupName
      * @param string $groupCode
      * @param string $attributeCode
      * @param array $attributeMeta
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('modifyMetaWithAttributeProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testModifyMetaWithAttributeInGroups(
         string $groupName,
         string $groupCode,
@@ -88,7 +103,11 @@ class EavTest extends AbstractEavTest
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function modifyMetaWithAttributeProvider(): array
+=======
+    public function modifyMetaWithAttributeProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $textAttributeMeta = [
             'dataType' => 'textarea',
@@ -119,6 +138,7 @@ class EavTest extends AbstractEavTest
 
         return [
             'new_attribute_in_existing_group' => [
+<<<<<<< HEAD
                 'groupName' => 'Content',
                 'groupCode' => 'content',
                 'attributeCode' => 'text_attribute',
@@ -141,6 +161,30 @@ class EavTest extends AbstractEavTest
                 'groupCode' => 'test',
                 'attributeCode' => 'url_key',
                 'attributeMeta' => array_merge($urlKeyAttributeMeta, ['source' => 'test']),
+=======
+                'group_name' => 'Content',
+                'group_code' => 'content',
+                'attribute_code' => 'text_attribute',
+                'attribute_meta' => $textAttributeMeta,
+            ],
+            'new_attribute_in_new_group' => [
+                'group_name' => 'Test',
+                'group_code' => 'test',
+                'attribute_code' => 'text_attribute',
+                'attribute_meta' => array_merge($textAttributeMeta, ['source' => 'test']),
+            ],
+            'old_attribute_moved_to_existing_group' => [
+                'group_name' => 'Images',
+                'group_code' => 'image-management',
+                'attribute_code' => 'url_key',
+                'attribute_meta' => $urlKeyAttributeMeta,
+            ],
+            'old_attribute_moved_to_new_group' => [
+                'group_name' => 'Test',
+                'group_code' => 'test',
+                'attribute_code' => 'url_key',
+                'attribute_meta' => array_merge($urlKeyAttributeMeta, ['source' => 'test']),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }
@@ -226,9 +270,15 @@ class EavTest extends AbstractEavTest
 
     /**
      * @magentoDataFixture Magento/Catalog/_files/attribute_page_layout_default.php
+<<<<<<< HEAD
      * @return void
      */
     #[DataProvider('attrModifyMetaNewProductPageLayoutDefaultProvider')]
+=======
+     * @dataProvider testModifyMetaNewProductPageLayoutDefaultProvider
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testModifyMetaNewProductPageLayoutDefault($attributesMeta): void
     {
         $defaultLayout = $this->config->getValue('web/default_layouts/default_product_layout');
@@ -246,7 +296,11 @@ class EavTest extends AbstractEavTest
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function attrModifyMetaNewProductPageLayoutDefaultProvider(): array
+=======
+    public function testModifyMetaNewProductPageLayoutDefaultProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'attributes_meta' => [

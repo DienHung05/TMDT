@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -22,7 +27,10 @@ use Magento\TestFramework\Catalog\Model\GetCategoryByName;
 use Magento\TestFramework\Catalog\Model\Product\Price\GetPriceIndexDataByProductId;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -90,13 +98,20 @@ class PriceTest extends TestCase
     /**
      * Test calculation final price for bundle product with tire price in simple product
      * @magentoDataFixture Magento/Bundle/_files/product_with_simple_tier_pricing.php
+<<<<<<< HEAD
+=======
+     * @dataProvider getSelectionFinalTotalPriceWithSimpleTierPriceDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @param float $bundleQty
      * @param float $selectionQty
      * @param float $finalPrice
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('getSelectionFinalTotalPriceWithSimpleTierPriceDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetSelectionFinalTotalPriceWithSimpleTierPrice(
         float $bundleQty,
         float $selectionQty,
@@ -122,7 +137,11 @@ class PriceTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getSelectionFinalTotalPriceWithSimpleTierPriceDataProvider(): array
+=======
+    public function getSelectionFinalTotalPriceWithSimpleTierPriceDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [1, 1, 10],

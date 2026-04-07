@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Test\Integrity\Magento\Widget;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Test\Integrity\Magento\Widget;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * @magentoAppArea frontend
  */
@@ -17,8 +25,13 @@ class TemplateFilesTest extends \PHPUnit\Framework\TestCase
      *
      * @param string $class
      * @param string $template
+<<<<<<< HEAD
      */
     #[DataProvider('widgetTemplatesDataProvider')]
+=======
+     * @dataProvider widgetTemplatesDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testWidgetTemplates($class, $template)
     {
         /** @var $blockFactory \Magento\Framework\View\Element\BlockFactory */
@@ -37,7 +50,11 @@ class TemplateFilesTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function widgetTemplatesDataProvider()
+=======
+    public function widgetTemplatesDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $result = [];
         /** @var $model \Magento\Widget\Model\Widget */

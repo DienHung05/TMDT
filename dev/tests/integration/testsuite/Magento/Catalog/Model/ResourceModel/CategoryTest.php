@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -27,7 +32,10 @@ use Magento\Framework\UrlInterface;
 use Magento\Indexer\Cron\UpdateMview;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -142,10 +150,17 @@ class CategoryTest extends TestCase
      * @magentoDataFixture Magento/Catalog/_files/catalog_category_product_reindex_all.php
      * @magentoDataFixture Magento/Catalog/_files/catalog_product_category_reindex_all.php
      * @magentoDataFixture Magento/Catalog/_files/enable_catalog_product_reindex_schedule.php
+<<<<<<< HEAD
      * @param array $products
      * @return void
      */
     #[DataProvider('catalogProductChangesWithScheduledUpdateDataProvider')]
+=======
+     * @dataProvider catalogProductChangesWithScheduledUpdateDataProvider
+     * @param array $products
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCatalogProductChangesWithScheduledUpdate(array $products): void
     {
         // products are ordered by entity_id DESC because their positions are same and equal to 0
@@ -185,7 +200,11 @@ class CategoryTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function catalogProductChangesWithScheduledUpdateDataProvider(): array
+=======
+    public function catalogProductChangesWithScheduledUpdateDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'change products position' => [
@@ -264,6 +283,7 @@ class CategoryTest extends TestCase
         return $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA)
             . self::BASE_TMP_PATH . DIRECTORY_SEPARATOR . $file;
     }
+<<<<<<< HEAD
 
     /**
      * Test _beforeSave children_count increment logic with category updates
@@ -328,4 +348,6 @@ class CategoryTest extends TestCase
             'Children count should NOT increment when updating EXISTING category'
         );
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

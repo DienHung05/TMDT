@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -33,7 +38,11 @@ use Magento\Catalog\Model\Attribute\Backend\Consumer;
  */
 class ConsumerTest extends TestCase
 {
+<<<<<<< HEAD
     public const BULK_UUID = '5a12c1bd-a8b5-41d4-8c00-3f5bcaa6d3c8';
+=======
+    const BULK_UUID = '5a12c1bd-a8b5-41d4-8c00-3f5bcaa6d3c8';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var Consumer
@@ -71,7 +80,11 @@ class ConsumerTest extends TestCase
     protected function setUp(): void
     {
         $this->objectManager = Bootstrap::getObjectManager();
+<<<<<<< HEAD
         $this->publisherMock = $this->createMock(BulkPublisherInterface::class);
+=======
+        $this->publisherMock = $this->getMockForAbstractClass(BulkPublisherInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->bulkManagement = $this->objectManager->create(
             BulkManagement::class,

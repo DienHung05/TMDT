@@ -1,18 +1,26 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Quote\Api;
 
+<<<<<<< HEAD
 use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\Product\Option;
 use Magento\Catalog\Model\ResourceModel\Product as ProductResource;
 use Magento\Framework\Webapi\Rest\Request;
 use Magento\Quote\Model\Quote;
 use Magento\TestFramework\Helper\Bootstrap;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\TestCase\WebapiAbstract;
 
 /**
@@ -20,15 +28,22 @@ use Magento\TestFramework\TestCase\WebapiAbstract;
  */
 class GuestCartAddingItemsTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     private const SERVICE_VERSION = 'V1';
     private const SERVICE_NAME = 'quoteGuestCartManagementV1';
     private const RESOURCE_PATH = '/V1/guest-carts/';
+=======
+    const SERVICE_VERSION = 'V1';
+    const SERVICE_NAME = 'quoteGuestCartManagementV1';
+    const RESOURCE_PATH = '/V1/guest-carts/';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var \Magento\TestFramework\ObjectManager
      */
     protected $objectManager;
 
+<<<<<<< HEAD
     /**
      * @var ProductResource|mixed
      */
@@ -126,6 +141,11 @@ class GuestCartAddingItemsTest extends WebapiAbstract
 
         $item = $this->_webApiCall($serviceInfoForUpdateProduct, $requestData);
         $this->assertNotEmpty($item);
+=======
+    protected function setUp(): void
+    {
+        $this->objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -140,7 +160,11 @@ class GuestCartAddingItemsTest extends WebapiAbstract
         $serviceInfoForCreatingEmptyCart = [
             'rest' => [
                 'resourcePath' => self::RESOURCE_PATH,
+<<<<<<< HEAD
                 'httpMethod' => Request::HTTP_METHOD_POST,
+=======
+                'httpMethod' => \Magento\Framework\Webapi\Rest\Request::HTTP_METHOD_POST,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             'soap' => [
                 'service' => self::SERVICE_NAME,
@@ -154,7 +178,11 @@ class GuestCartAddingItemsTest extends WebapiAbstract
         $serviceInfoForAddingProduct = [
             'rest' => [
                 'resourcePath' => self::RESOURCE_PATH . $quoteId . '/items',
+<<<<<<< HEAD
                 'httpMethod' => Request::HTTP_METHOD_POST,
+=======
+                'httpMethod' => \Magento\Framework\Webapi\Rest\Request::HTTP_METHOD_POST,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             'soap' => [
                 'service' => GuestCartItemRepositoryTest::SERVICE_NAME,
@@ -176,7 +204,11 @@ class GuestCartAddingItemsTest extends WebapiAbstract
         $serviceInfoForDeleteProduct = [
             'rest' => [
                 'resourcePath' => self::RESOURCE_PATH . $quoteId . '/items/' . $item['item_id'],
+<<<<<<< HEAD
                 'httpMethod' => Request::HTTP_METHOD_DELETE,
+=======
+                'httpMethod' => \Magento\Framework\Webapi\Rest\Request::HTTP_METHOD_DELETE,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             'soap' => [
                 'service' => GuestCartItemRepositoryTest::SERVICE_NAME,
@@ -193,7 +225,11 @@ class GuestCartAddingItemsTest extends WebapiAbstract
         $serviceInfoForAddingProduct = [
             'rest' => [
                 'resourcePath' => self::RESOURCE_PATH . $quoteId . '/items',
+<<<<<<< HEAD
                 'httpMethod' => Request::HTTP_METHOD_POST,
+=======
+                'httpMethod' => \Magento\Framework\Webapi\Rest\Request::HTTP_METHOD_POST,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             'soap' => [
                 'service' => GuestCartItemRepositoryTest::SERVICE_NAME,
@@ -212,8 +248,13 @@ class GuestCartAddingItemsTest extends WebapiAbstract
         $this->assertNotEmpty($item);
         $this->assertEquals($item['price'], 10);
 
+<<<<<<< HEAD
         /** @var Quote $quote */
         $quote = $this->objectManager->create(Quote::class);
+=======
+        /** @var \Magento\Quote\Model\Quote $quote */
+        $quote = $this->objectManager->create(\Magento\Quote\Model\Quote::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $quote->load($quoteId);
         $quote->delete();
     }

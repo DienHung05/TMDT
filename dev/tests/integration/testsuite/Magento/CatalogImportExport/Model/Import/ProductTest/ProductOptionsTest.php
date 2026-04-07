@@ -1,12 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\CatalogImportExport\Model\Import\ProductTest;
 
+<<<<<<< HEAD
 use Magento\Catalog\Api\Data\ProductCustomOptionInterface;
 use Magento\Catalog\Api\ProductCustomOptionRepositoryInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
@@ -25,6 +31,12 @@ use Magento\TestFramework\Fixture\Config;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\Catalog\Api\ProductCustomOptionRepositoryInterface;
+use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\CatalogImportExport\Model\Import\ProductTestBase;
+use Magento\Store\Model\StoreManagerInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Integration test for \Magento\CatalogImportExport\Model\Import\Product class.
@@ -76,6 +88,10 @@ class ProductOptionsTest extends ProductTestBase
      * Tests adding of custom options with existing and new product.
      *
      * @magentoDataFixture Magento/Catalog/_files/product_simple.php
+<<<<<<< HEAD
+=======
+     * @dataProvider getBehaviorDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $importFile
      * @param string $sku
      * @param int $expectedOptionsQty
@@ -84,7 +100,10 @@ class ProductOptionsTest extends ProductTestBase
      *
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('getBehaviorDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveCustomOptions(string $importFile, string $sku, int $expectedOptionsQty): void
     {
         $pathToFile = __DIR__ . '/../_files/' . $importFile;
@@ -95,7 +114,11 @@ class ProductOptionsTest extends ProductTestBase
         $importModel->importData();
 
         /** @var \Magento\Catalog\Api\ProductRepositoryInterface $productRepository */
+<<<<<<< HEAD
         $productRepository = Bootstrap::getObjectManager()->create(
+=======
+        $productRepository = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             \Magento\Catalog\Api\ProductRepositoryInterface::class
         );
         $product = $productRepository->get($sku);
@@ -139,9 +162,13 @@ class ProductOptionsTest extends ProductTestBase
 
         // Make sure that after importing existing options again, option IDs and option value IDs are not changed
         $customOptionValues = $this->getCustomOptionValues($sku);
+<<<<<<< HEAD
         $importModel = $this->createImportModel($pathToFile);
         $importModel->validateData();
         $importModel->importData();
+=======
+        $this->createImportModel($pathToFile)->importData();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertEquals($customOptionValues, $this->getCustomOptionValues($sku));
 
         // Cleanup imported products
@@ -154,6 +181,7 @@ class ProductOptionsTest extends ProductTestBase
     /**
      * Tests adding of custom options with multiple store views
      *
+<<<<<<< HEAD
      * @param string $importFile
      * @param array $expected
      */
@@ -195,11 +223,30 @@ class ProductOptionsTest extends ProductTestBase
         $objectManager = Bootstrap::getObjectManager();
         /** @var StoreManagerInterface $storeManager */
         $storeManager = $objectManager->get(StoreManagerInterface::class);
+=======
+     * @magentoConfigFixture current_store catalog/price/scope 1
+     * @magentoDataFixture Magento/Store/_files/core_second_third_fixturestore.php
+     */
+    public function testSaveCustomOptionsWithMultipleStoreViews()
+    {
+        $objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
+        /** @var StoreManagerInterface $storeManager */
+        $storeManager = $objectManager->get(StoreManagerInterface::class);
+        $storeCodes = [
+            'admin',
+            'default',
+            'secondstore',
+        ];
+        /** @var StoreManagerInterface $storeManager */
+        $importFile = 'product_with_custom_options_and_multiple_store_views.csv';
+        $sku = 'simple';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $pathToFile = __DIR__ . '/../_files/' . $importFile;
         $importModel = $this->createImportModel($pathToFile);
         $errors = $importModel->validateData();
         $this->assertTrue($errors->getErrorsCount() == 0, 'Import File Validation Failed');
         $importModel->importData();
+<<<<<<< HEAD
         /** @var ProductRepositoryInterface $productRepository */
         $productRepository = $objectManager->get(
             ProductRepositoryInterface::class
@@ -290,12 +337,88 @@ class ProductOptionsTest extends ProductTestBase
         array $expected
     ) {
         $this->testSaveCustomOptionsWithMultipleStoreViews($importFile, $expected);
+=======
+        /** @var \Magento\Catalog\Api\ProductRepositoryInterface $productRepository */
+        $productRepository = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(
+            \Magento\Catalog\Api\ProductRepositoryInterface::class
+        );
+        foreach ($storeCodes as $storeCode) {
+            $storeManager->setCurrentStore($storeCode);
+            $product = $productRepository->get($sku);
+            $options = $product->getOptionInstance()->getProductOptions($product);
+            $expectedData = $this->getExpectedOptionsData($pathToFile, $storeCode);
+            $expectedData = $this->mergeWithExistingData($expectedData, $options);
+            $actualData = $this->getActualOptionsData($options);
+            // assert of equal type+titles
+            $expectedOptions = $expectedData['options'];
+            // we need to save key values
+            $actualOptions = $actualData['options'];
+            sort($expectedOptions);
+            sort($actualOptions);
+            $this->assertEquals(
+                $expectedOptions,
+                $actualOptions,
+                'Expected and actual options arrays does not match'
+            );
+
+            // assert of options data
+            $this->assertCount(
+                count($expectedData['data']),
+                $actualData['data'],
+                'Expected and actual data count does not match'
+            );
+            $this->assertCount(
+                count($expectedData['values']),
+                $actualData['values'],
+                'Expected and actual values count does not match'
+            );
+
+            foreach ($expectedData['options'] as $expectedId => $expectedOption) {
+                $elementExist = false;
+                // find value in actual options and values
+                foreach ($actualData['options'] as $actualId => $actualOption) {
+                    if ($actualOption == $expectedOption) {
+                        $elementExist = true;
+                        $this->assertEquals(
+                            $expectedData['data'][$expectedId],
+                            $actualData['data'][$actualId],
+                            'Expected data does not match actual data'
+                        );
+                        if (array_key_exists($expectedId, $expectedData['values'])) {
+                            $this->assertEquals(
+                                $expectedData['values'][$expectedId],
+                                $actualData['values'][$actualId],
+                                'Expected values does not match actual data'
+                            );
+                        }
+                        unset($actualData['options'][$actualId]);
+                        // remove value in case of duplicating key values
+                        break;
+                    }
+                }
+                $this->assertTrue($elementExist, 'Element must exist.');
+            }
+
+            // Make sure that after importing existing options again, option IDs and option value IDs are not changed
+            $customOptionValues = $this->getCustomOptionValues($sku);
+            $this->createImportModel($pathToFile)->importData();
+            $this->assertEquals(
+                $customOptionValues,
+                $this->getCustomOptionValues($sku),
+                'Option IDs changed after second import'
+            );
+        }
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getBehaviorDataProvider(): array
+=======
+    public function getBehaviorDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Append behavior with existing product' => [
@@ -317,6 +440,7 @@ class ProductOptionsTest extends ProductTestBase
     }
 
     /**
+<<<<<<< HEAD
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
@@ -712,6 +836,8 @@ class ProductOptionsTest extends ProductTestBase
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $productSku
      * @return array ['optionId' => ['optionValueId' => 'optionValueTitle', ...], ...]
      */
@@ -940,6 +1066,7 @@ class ProductOptionsTest extends ProductTestBase
 
         return false;
     }
+<<<<<<< HEAD
 
     /**
      * @param array $expected
@@ -1090,4 +1217,6 @@ class ProductOptionsTest extends ProductTestBase
             ],
         ];
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

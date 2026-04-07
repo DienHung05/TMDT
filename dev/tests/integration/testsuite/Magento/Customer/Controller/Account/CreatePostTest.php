@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -24,8 +29,11 @@ use Magento\TestFramework\Mail\Template\TransportBuilderMock;
 use Magento\TestFramework\Request;
 use Magento\TestFramework\TestCase\AbstractController;
 use Magento\Theme\Controller\Result\MessagePlugin;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Mime\Test\Constraint\EmailTextBodyContains;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Tests from customer account create post action.
@@ -178,6 +186,7 @@ class CreatePostTest extends AbstractController
      * @magentoDbIsolation enabled
      * @magentoAppIsolation enabled
      * @magentoConfigFixture current_website customer/create_account/confirm 0
+<<<<<<< HEAD
      * @magentoConfigFixture current_store customer/create_account/default_group 1
      * @magentoConfigFixture current_store customer/create_account/generate_human_friendly_id 0
      *
@@ -209,6 +218,8 @@ class CreatePostTest extends AbstractController
      * @magentoDbIsolation enabled
      * @magentoAppIsolation enabled
      * @magentoConfigFixture current_website customer/create_account/confirm 0
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoConfigFixture current_store customer/create_account/default_group 2
      * @magentoConfigFixture current_store customer/create_account/generate_human_friendly_id 1
      * @return void
@@ -288,13 +299,17 @@ class CreatePostTest extends AbstractController
         $message = 'You must confirm your account.'
             . ' Please check your email for the confirmation link or <a href="%1">click here</a> for a new link.';
         $url = $this->urlBuilder->getUrl('customer/account/confirmation', ['_query' => ['email' => $email]]);
+<<<<<<< HEAD
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertSessionMessages($this->containsEqual((string)__($message, $url)), MessageInterface::TYPE_SUCCESS);
         /** @var CustomerInterface $customer */
         $customer = $this->customerRepository->get($email);
         $confirmation = $customer->getConfirmation();
         $sendMessage = $this->transportBuilderMock->getSentMessage();
         $this->assertNotNull($sendMessage);
+<<<<<<< HEAD
         $rawMessage = quoted_printable_decode($sendMessage->getBody()->bodyToString());
 
         $this->assertStringContainsString(
@@ -306,6 +321,20 @@ class CreatePostTest extends AbstractController
             ),
             $rawMessage
         );
+=======
+        $rawMessage = $sendMessage->getBody()->getParts()[0]->getRawContent();
+        $this->assertStringContainsString(
+            (string)__(
+                'You must confirm your %customer_email email before you can sign in (link is only valid once):',
+                ['customer_email' => $email]
+            ),
+            $rawMessage
+        );
+        $this->assertStringContainsString(
+            sprintf('customer/account/confirm/?id=%s&amp;key=%s', $customer->getId(), $confirmation),
+            $rawMessage
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->resetRequest();
         $this->getRequest()
             ->setParam('id', $customer->getId())
@@ -322,6 +351,7 @@ class CreatePostTest extends AbstractController
     }
 
     /**
+<<<<<<< HEAD
      * Email data provider for testing punycode functionality
      *
      * @return array[]
@@ -341,6 +371,8 @@ class CreatePostTest extends AbstractController
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Fills request with customer data.
      *
      * @param string $email

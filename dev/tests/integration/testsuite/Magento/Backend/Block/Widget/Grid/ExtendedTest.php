@@ -1,15 +1,24 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Backend\Block\Widget\Grid;
 
 use Laminas\Stdlib\Parameters;
 use Magento\Backend\Block\Template\Context;
+<<<<<<< HEAD
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Data\Collection;
 use Magento\Framework\Filesystem;
+=======
+use Magento\Framework\Data\Collection;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\View\LayoutInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
@@ -36,7 +45,11 @@ class ExtendedTest extends TestCase
     {
         parent::setUp();
 
+<<<<<<< HEAD
         $this->_layoutMock = Bootstrap::getObjectManager()->create(
+=======
+        $this->_layoutMock = Bootstrap::getObjectManager()->get(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             LayoutInterface::class
         );
         $context = Bootstrap::getObjectManager()->create(
@@ -124,6 +137,7 @@ class ExtendedTest extends TestCase
         $html = str_replace(["\n", " "], '', $html);
         $this->assertStringEndsWith("</table></div>", $html);
     }
+<<<<<<< HEAD
 
     public function testGetCsvFileStartsWithBOM(): void
     {
@@ -141,4 +155,6 @@ class ExtendedTest extends TestCase
 
         $directory->delete($data['value']);
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

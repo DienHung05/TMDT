@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\ConfigurableImportExport\Model;
 
@@ -12,7 +17,11 @@ class ConfigurableTest extends AbstractProductExportImportTestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function exportImportDataProvider(): array
+=======
+    public function exportImportDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'configurable-product' => [
@@ -106,7 +115,11 @@ class ConfigurableTest extends AbstractProductExportImportTestCase
         $skus,
         $skippedAttributes,
         $usePagination = false,
+<<<<<<< HEAD
         ?string $csvfile = null
+=======
+        string $csvfile = null
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ) {
         $skippedAttributes = array_merge($skippedAttributes, ['_cache_instance_product_set_attributes']);
         parent::executeImportReplaceTest($skus, $skippedAttributes, $usePagination, $csvfile);

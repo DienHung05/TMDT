@@ -1,10 +1,24 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
  */
 namespace Magento\TestFramework\TestCase;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\TestFramework\TestCase;
+
+use Magento\Framework\App\DeploymentConfig\Reader;
+use Magento\Framework\App\DeploymentConfig\Writer\PhpFormatter;
+use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\Config\File\ConfigFilePool;
+use Magento\Framework\Filesystem;
+use Magento\GraphQlCache\Model\CacheId\CacheIdCalculator;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 
 /**
@@ -27,6 +41,29 @@ abstract class GraphQlAbstract extends WebapiAbstract
     private $appCache;
 
     /**
+<<<<<<< HEAD
+=======
+     * @var Filesystem
+     */
+    private $filesystem;
+
+    /**
+     * @var string
+     */
+    private $envConfigPath;
+
+    /**
+     * @var Reader
+     */
+    private $envConfigReader;
+
+    /**
+     * @var PhpFormatter
+     */
+    private $formatter;
+
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Perform GraphQL query call via GET to the system under test.
      *
      * @see \Magento\TestFramework\TestCase\GraphQl\Client::call()
@@ -208,6 +245,7 @@ abstract class GraphQlAbstract extends WebapiAbstract
     }
 
     /**
+<<<<<<< HEAD
      * Tear down test and flush page cache
      *
      * @return void
@@ -219,5 +257,61 @@ abstract class GraphQlAbstract extends WebapiAbstract
         $out = '';
         // phpcs:ignore Magento2.Security.InsecureFunction
         exec("php -f {$appDir}/bin/magento cache:flush full_page", $out);
+=======
+     * If the cache id salt didn't exist in env.php before a GraphQL request it gets added. To prevent test failures
+     * due to a config getting changed (which is normally illegal), the salt needs to be removed from env.php after
+     * a test if it wasn't there before.
+     *
+     * @see \Magento\TestFramework\Isolation\DeploymentConfig
+     *
+     * @inheritdoc
+     */
+    protected function runTest()
+    {
+        /** @var Reader $reader */
+        if (!$this->envConfigPath) {
+            /** @var ConfigFilePool $configFilePool */
+            $configFilePool = Bootstrap::getObjectManager()->get(ConfigFilePool::class);
+            $this->envConfigPath = $configFilePool->getPath(ConfigFilePool::APP_ENV);
+        }
+        $this->envConfigReader = $this->envConfigReader ?: Bootstrap::getObjectManager()->get(Reader::class);
+        $initialConfig = $this->envConfigReader->load(ConfigFilePool::APP_ENV);
+
+        try {
+            return parent::runTest();
+        } finally {
+            $this->formatter = $this->formatter ?: new PhpFormatter();
+            $this->filesystem = $this->filesystem ?: Bootstrap::getObjectManager()->get(Filesystem::class);
+            $cacheSaltPathChunks = explode('/', CacheIdCalculator::SALT_CONFIG_PATH);
+            $currentConfig = $this->envConfigReader->load(ConfigFilePool::APP_ENV);
+            $resetConfig = $this->resetAddedSection($initialConfig, $currentConfig, $cacheSaltPathChunks);
+            $resetFileContents = $this->formatter->format($resetConfig);
+            $directoryWrite = $this->filesystem->getDirectoryWrite(DirectoryList::CONFIG);
+            $directoryWrite->writeFile($this->envConfigPath, $resetFileContents);
+        }
+    }
+
+    /**
+     * Go over the current deployment config and unset a section that was not present in the pre-test deployment config
+     *
+     * @param array $initial
+     * @param array $current
+     * @param string[] $chunks
+     * @return array
+     */
+    private function resetAddedSection(array $initial, array $current, array $chunks): array
+    {
+        if ($chunks) {
+            $chunk = array_shift($chunks);
+            if (!isset($initial[$chunk])) {
+                if (isset($current[$chunk])) {
+                    unset($current[$chunk]);
+                }
+            } elseif (isset($current[$chunk]) && is_array($initial[$chunk]) && is_array($current[$chunk])) {
+                $current[$chunk] = $this->resetAddedSection($initial[$chunk], $current[$chunk], $chunks);
+            }
+        }
+        return $current;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

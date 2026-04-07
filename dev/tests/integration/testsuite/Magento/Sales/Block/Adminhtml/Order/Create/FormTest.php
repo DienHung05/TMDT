@@ -2,8 +2,13 @@
 /**
  * Test class for Form
  *
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Sales\Block\Adminhtml\Order\Create;
 
@@ -47,12 +52,26 @@ class FormTest extends \PHPUnit\Framework\TestCase
 
         $this->session = $this->getMockBuilder(QuoteSession::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['getQuote', 'getStore', '__call'])
             ->getMock();
 
         $store = $this->getMockBuilder(Store::class)
             ->disableOriginalConstructor()
             ->onlyMethods(['getCurrentCurrencyCode'])
+=======
+            ->setMethods(['getCustomerId', 'getQuote', 'getStoreId', 'getStore', 'getQuoteId'])
+            ->getMock();
+        $this->session->method('getCustomerId')
+            ->willReturn(1);
+
+        $this->session->method('getStoreId')
+            ->willReturn(1);
+
+        $store = $this->getMockBuilder(Store::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getCurrentCurrencyCode'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
         $store->method('getCurrentCurrencyCode')
             ->willReturn('USD');
@@ -78,6 +97,7 @@ class FormTest extends \PHPUnit\Framework\TestCase
     public function testOrderDataJson()
     {
         $customerId = 1;
+<<<<<<< HEAD
         $storeId = 1;
         $quote = $this->getQuote('test01');
         $quoteId = $quote->getId();
@@ -92,6 +112,13 @@ class FormTest extends \PHPUnit\Framework\TestCase
                     default => null,
                 };
             });
+=======
+        $quote = $this->getQuote('test01');
+        $this->session->method('getQuote')
+            ->willReturn($quote);
+        $this->session->method('getQuoteId')
+            ->willReturn($quote->getId());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $addressData = $this->getAddressData();
         $addressIds = $this->setUpMockAddress($customerId, $addressData);
         $expected = [

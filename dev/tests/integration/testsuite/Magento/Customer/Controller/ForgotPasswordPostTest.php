@@ -1,12 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Customer\Controller;
 
+<<<<<<< HEAD
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Config\Model\ResourceModel\Config as CoreConfig;
 use Magento\Customer\Model\CustomerRegistry;
@@ -40,13 +46,24 @@ use Magento\TestFramework\TestCase\AbstractController;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Theme\Controller\Result\MessagePlugin;
+=======
+use Magento\Framework\App\Request\Http as HttpRequest;
+use Magento\Framework\Message\MessageInterface;
+use Magento\Framework\ObjectManagerInterface;
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\TestFramework\Mail\Template\TransportBuilderMock;
+use Magento\TestFramework\TestCase\AbstractController;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class checks password forgot scenarios
  *
  * @see \Magento\Customer\Controller\Account\ForgotPasswordPost
  * @magentoDbIsolation enabled
+<<<<<<< HEAD
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class ForgotPasswordPostTest extends AbstractController
 {
@@ -57,6 +74,7 @@ class ForgotPasswordPostTest extends AbstractController
     private $transportBuilderMock;
 
     /**
+<<<<<<< HEAD
      * @var CustomerRepositoryInterface
      */
     private $customerRepository;
@@ -97,6 +115,8 @@ class ForgotPasswordPostTest extends AbstractController
     private $random;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
@@ -105,6 +125,7 @@ class ForgotPasswordPostTest extends AbstractController
 
         $this->objectManager = Bootstrap::getObjectManager();
         $this->transportBuilderMock = $this->objectManager->get(TransportBuilderMock::class);
+<<<<<<< HEAD
         $this->customerRepository = $this->objectManager->get(CustomerRepositoryInterface::class);
         $this->searchCriteriaBuilder = $this->objectManager->get(SearchCriteriaBuilder::class);
         $this->resourceConfig = $this->_objectManager->get(CoreConfig::class);
@@ -139,6 +160,8 @@ class ForgotPasswordPostTest extends AbstractController
         $this->assertRedirect($this->stringContains('customer/account/'));
         $quoteAfter = $checkoutSession->getQuote();
         $this->assertEquals($quoteIdBefore, $quoteAfter->getId());
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -236,6 +259,7 @@ class ForgotPasswordPostTest extends AbstractController
         );
         $this->assertSessionMessages($this->equalTo([$message]), MessageInterface::TYPE_SUCCESS);
     }
+<<<<<<< HEAD
 
     /**
      * @magentoConfigFixture current_store customer/password/password_reset_protection_type 0
@@ -627,4 +651,6 @@ class ForgotPasswordPostTest extends AbstractController
             quoted_printable_decode($sendMessage)
         );
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

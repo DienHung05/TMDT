@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -29,7 +34,10 @@ use Magento\Setup\Model\ModuleUninstaller;
 use Magento\Setup\Model\ObjectManagerProvider;
 use Magento\Setup\Model\UninstallCollector;
 use PHPUnit\Framework\MockObject\MockObject;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Helper\QuestionHelper;
@@ -136,7 +144,16 @@ class ModuleUninstallCommandTest extends TestCase
         $this->fullModuleList = $this->createMock(FullModuleList::class);
         $this->maintenanceMode = $this->createMock(MaintenanceMode::class);
         $objectManagerProvider = $this->createMock(ObjectManagerProvider::class);
+<<<<<<< HEAD
         $objectManager = $this->createMock(ObjectManagerInterface::class);
+=======
+        $objectManager = $this->getMockForAbstractClass(
+            ObjectManagerInterface::class,
+            [],
+            '',
+            false
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->uninstallCollector = $this->createMock(UninstallCollector::class);
         $this->packageInfo = $this->createMock(PackageInfo::class);
         $packageInfoFactory = $this->createMock(PackageInfoFactory::class);
@@ -150,7 +167,16 @@ class ModuleUninstallCommandTest extends TestCase
         $this->cache = $this->createMock(Cache::class);
         $this->cleanupFiles = $this->createMock(CleanupFiles::class);
         $objectManagerProvider->expects($this->any())->method('get')->willReturn($objectManager);
+<<<<<<< HEAD
         $configLoader = $this->createMock(ConfigLoaderInterface::class);
+=======
+        $configLoader = $this->getMockForAbstractClass(
+            ConfigLoaderInterface::class,
+            [],
+            '',
+            false
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->patchApplierMock = $this->getMockBuilder(PatchApplier::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -213,12 +239,19 @@ class ModuleUninstallCommandTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider executeFailedValidationDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $packageInfoMap
      * @param array $fullModuleListMap
      * @param array $input
      * @param array $expect
      */
+<<<<<<< HEAD
     #[DataProvider('executeFailedValidationDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecuteFailedValidation(
         array $packageInfoMap,
         array $fullModuleListMap,
@@ -241,7 +274,11 @@ class ModuleUninstallCommandTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function executeFailedValidationDataProvider()
+=======
+    public function executeFailedValidationDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'one non-composer package' => [
@@ -342,11 +379,18 @@ class ModuleUninstallCommandTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider executeFailedDependenciesDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $dependencies
      * @param array $input
      * @param array $expect
      */
+<<<<<<< HEAD
     #[DataProvider('executeFailedDependenciesDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecuteFailedDependencies(
         array $dependencies,
         array $input,
@@ -365,7 +409,11 @@ class ModuleUninstallCommandTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function executeFailedDependenciesDataProvider()
+=======
+    public function executeFailedDependenciesDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

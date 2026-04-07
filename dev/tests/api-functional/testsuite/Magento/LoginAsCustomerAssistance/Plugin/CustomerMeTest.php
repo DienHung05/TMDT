@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -18,16 +23,25 @@ use Magento\LoginAsCustomerAssistance\Api\IsAssistanceEnabledInterface;
 use Magento\LoginAsCustomerAssistance\Model\ResourceModel\GetLoginAsCustomerAssistanceAllowed;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\WebapiAbstract;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Api test for @see \Magento\LoginAsCustomerAssistance\Plugin\CustomerPlugin::afterSave.
  */
 class CustomerMeTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     public const SERVICE_VERSION = 'V1';
     public const SERVICE_NAME = 'customerCustomerRepositoryV1';
     public const RESOURCE_PATH = '/V1/customers/me';
+=======
+    const SERVICE_VERSION = 'V1';
+    const SERVICE_NAME = 'customerCustomerRepositoryV1';
+    const RESOURCE_PATH = '/V1/customers/me';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var DataObjectProcessor
@@ -71,11 +85,19 @@ class CustomerMeTest extends WebapiAbstract
      * Check that 'assistance_allowed' set as expected.
      *
      * @magentoApiDataFixture Magento/Customer/_files/customer.php
+<<<<<<< HEAD
+=======
+     * @dataProvider assistanceStatesDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param int $state
      * @param bool $expected
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('assistanceStatesDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateSelf(int $state, bool $expected): void
     {
         $customerId = (int)$this->customerRepository->get('customer@example.com')->getId();
@@ -145,7 +167,11 @@ class CustomerMeTest extends WebapiAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function assistanceStatesDataProvider(): array
+=======
+    public function assistanceStatesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Assistance Allowed' => [IsAssistanceEnabledInterface::ALLOWED, true],

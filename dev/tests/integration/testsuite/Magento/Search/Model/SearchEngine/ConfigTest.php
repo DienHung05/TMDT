@@ -1,11 +1,19 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
  */
 namespace Magento\Search\Model\SearchEngine;
 
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Search\Model\SearchEngine;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
@@ -33,7 +41,16 @@ class ConfigTest extends \PHPUnit\Framework\TestCase
         /** @var \Magento\Framework\App\Cache\Manager $cacheManager */
         $cacheManager->clean($cacheManager->getAvailableTypes());
 
+<<<<<<< HEAD
         $fileResolver = $this->createMock(\Magento\Framework\Config\FileResolverInterface::class);
+=======
+        $fileResolver = $this->getMockForAbstractClass(
+            \Magento\Framework\Config\FileResolverInterface::class,
+            [],
+            '',
+            false
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $fileResolver->expects($this->any())->method('get')->willReturn([file_get_contents($xmlPath)]);
 
         $configReader = $objectManager->create(
@@ -85,8 +102,13 @@ class ConfigTest extends \PHPUnit\Framework\TestCase
     /**
      * @param string $searchEngine
      * @param array $expectedResult
+<<<<<<< HEAD
      */
     #[DataProvider('loadGetDeclaredFeaturesDataProvider')]
+=======
+     * @dataProvider loadGetDeclaredFeaturesDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetDeclaredFeatures($searchEngine, $expectedResult)
     {
         $this->assertEquals($expectedResult, $this->config->getDeclaredFeatures($searchEngine));
@@ -159,6 +181,7 @@ class ConfigTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param string $feature
      * @param string $searchEngine
      * @param bool $expectedResult
@@ -167,5 +190,15 @@ class ConfigTest extends \PHPUnit\Framework\TestCase
     public function testIsFeatureSupported($feature, $searchEngine, $expectedResult)
     {
         $this->assertEquals($expectedResult, $this->config->isFeatureSupported($feature, $searchEngine));
+=======
+     * @param string $searchEngine
+     * @param string $feature
+     * @param array $expectedResult
+     * @dataProvider loadIsFeatureSupportedDataProvider
+     */
+    public function testIsFeatureSupported($searchEngine, $feature, $expectedResult)
+    {
+        $this->assertEquals($expectedResult, $this->config->isFeatureSupported($searchEngine, $feature));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

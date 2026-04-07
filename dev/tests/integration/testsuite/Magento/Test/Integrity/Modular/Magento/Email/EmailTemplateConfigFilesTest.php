@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
@@ -7,14 +8,26 @@ namespace Magento\Test\Integrity\Modular\Magento\Email;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Test\Integrity\Modular\Magento\Email;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class EmailTemplateConfigFilesTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Test that email template configuration file matches the format
      *
      * @param string $file
+<<<<<<< HEAD
      */
     #[DataProvider('fileFormatDataProvider')]
+=======
+     * @dataProvider fileFormatDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testFileFormat($file)
     {
         $urnResolver = new \Magento\Framework\Config\Dom\UrnResolver();
@@ -30,7 +43,11 @@ class EmailTemplateConfigFilesTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function fileFormatDataProvider()
+=======
+    public function fileFormatDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return \Magento\Framework\App\Utility\Files::init()->getConfigFiles('email_templates.xml');
     }
@@ -39,8 +56,13 @@ class EmailTemplateConfigFilesTest extends \PHPUnit\Framework\TestCase
      * Test that email template configuration contains references to existing template files
      *
      * @param string $templateId
+<<<<<<< HEAD
      */
     #[DataProvider('templateReferenceDataProvider')]
+=======
+     * @dataProvider templateReferenceDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testTemplateReference($templateId)
     {
         /** @var \Magento\Email\Model\Template\Config $emailConfig */
@@ -64,7 +86,11 @@ class EmailTemplateConfigFilesTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function templateReferenceDataProvider()
+=======
+    public function templateReferenceDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $data = [];
         /** @var \Magento\Email\Model\Template\Config $emailConfig */

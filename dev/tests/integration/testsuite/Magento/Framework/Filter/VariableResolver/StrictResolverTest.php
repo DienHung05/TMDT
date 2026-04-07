@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -13,8 +18,11 @@ use Magento\Framework\Filter\Template;
 use Magento\Framework\Filter\VariableResolverInterface;
 use PHPUnit\Framework\TestCase;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class StrictResolverTest extends TestCase
 {
     /**
@@ -34,6 +42,7 @@ class StrictResolverTest extends TestCase
         $this->filter = $objectManager->get(Template::class);
     }
 
+<<<<<<< HEAD
     #[DataProvider('useCasesProvider')]
     public function testResolve($value, array $variables, $expected)
     {
@@ -42,10 +51,18 @@ class StrictResolverTest extends TestCase
             $variables['store'] = $variables['store']($this);
             $variables['foo']['email'] = $variables['foo']['email']($this);
         }
+=======
+    /**
+     * @dataProvider useCasesProvider
+     */
+    public function testResolve($value, array $variables, $expected)
+    {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $result = $this->variableResolver->resolve($value, $this->filter, $variables);
         self::assertSame($expected, $result);
     }
 
+<<<<<<< HEAD
     private function getMockForStoreClass()
     {
         $storeMock = $this->createMock(\Magento\Store\Model\Store::class);
@@ -63,6 +80,9 @@ class StrictResolverTest extends TestCase
     }
 
     public static function useCasesProvider()
+=======
+    public function useCasesProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $classStub = new class {
             public function doThing()
@@ -86,8 +106,16 @@ class StrictResolverTest extends TestCase
         };
         $dataClassStub->setData('foo', 'bar');
 
+<<<<<<< HEAD
         $storeMock = static fn (self $testCase) => $testCase->getMockForStoreClass();
         $emailTemplate = static fn (self $testCase) => $testCase->getMockForEmailTemplate($storeMock);;
+=======
+        $storeMock = $this->createMock(\Magento\Store\Model\Store::class);
+        $emailTemplate = $this->createMock(\Magento\Email\Model\Template::class);
+        $emailTemplate->method('getUrl')
+            ->with($storeMock, 'some path', ['_query' => ['id' => 'abc', 'token' => 'abc'], 'abc' => '1'])
+            ->willReturn('a url');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         return [
             ['', [], null],

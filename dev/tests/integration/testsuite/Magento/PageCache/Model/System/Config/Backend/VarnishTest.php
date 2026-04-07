@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\PageCache\Model\System\Config\Backend;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\PageCache\Model\System\Config\Backend;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class VarnishTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -37,12 +45,20 @@ class VarnishTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider beforeSaveDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param $value
      * @param $path
      * @param $expected
      * @param $needUpdate
      */
+<<<<<<< HEAD
     #[DataProvider('beforeSaveDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testBeforeSave($value, $path, $expected, $needUpdate)
     {
         if ($needUpdate) {
@@ -58,7 +74,11 @@ class VarnishTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($value, $expected);
     }
 
+<<<<<<< HEAD
     public static function beforeSaveDataProvider(): array
+=======
+    public function beforeSaveDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['localhost', 'access_list', 'localhost', false],
@@ -73,11 +93,19 @@ class VarnishTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider afterLoadDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param $path
      * @param $expected
      * @param $needUpdate
      */
+<<<<<<< HEAD
     #[DataProvider('afterLoadDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAfterLoad($path, $expected, $needUpdate)
     {
         if ($needUpdate) {
@@ -92,7 +120,11 @@ class VarnishTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($value, $expected);
     }
 
+<<<<<<< HEAD
     public static function afterLoadDataProvider(): array
+=======
+    public function afterLoadDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['access_list', 'localhost', true],

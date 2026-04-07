@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -318,6 +323,7 @@ class QueryComplexityLimiterTest extends GraphQlAbstract
                                         percentage_value
                                         website_id
                                       }
+<<<<<<< HEAD
                                       tier_prices {
                                         customer_group_id
                                         qty
@@ -1182,6 +1188,8 @@ class QueryComplexityLimiterTest extends GraphQlAbstract
                                         percentage_value
                                         website_id
                                       }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                                       tier_price
                                       manufacturer
                                       sku
@@ -1267,7 +1275,11 @@ fragment configurableFields on ConfigurableProduct {
 }
 QUERY;
 
+<<<<<<< HEAD
         self::expectExceptionMessageMatches('/Max query complexity should be 1000 but got 1022/');
+=======
+        self::expectExceptionMessageMatches('/Max query complexity should be 300 but got 302/');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         //Use POST request because request uri is too large for some servers
         $this->graphQlMutation($query);
     }

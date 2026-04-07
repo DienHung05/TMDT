@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -18,10 +23,16 @@ use Magento\Framework\Stdlib\ArrayManager;
  */
 class MockResponseBodyLoader
 {
+<<<<<<< HEAD
     private const REST_RESPONSE_FILE_PATTERN = '%s/_files/mock_rest_response_%s_%s.json';
     private const REST_PATH_COUNTRY = 'requestedShipment/recipient/address/countryCode';
     private const REST_PATH_SERVICE_TYPE = 'requestedShipment/serviceType';
     private const REST_AUTH_RESPONSE_FILE = '%s/_files/mock_rest_response_auth.json';
+=======
+    private const RESPONSE_FILE_PATTERN = '%s/_files/mock_response_%s_%s.json';
+    private const PATH_COUNTRY = 'RequestedShipment/Recipient/Address/CountryCode';
+    private const PATH_SERVICE_TYPE = 'RequestedShipment/ServiceType';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var Dir
@@ -54,12 +65,17 @@ class MockResponseBodyLoader
     }
 
     /**
+<<<<<<< HEAD
      * Loads mock json response for a given request
+=======
+     * Loads mock response xml for a given request
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @param array $request
      * @return string
      * @throws NotFoundException
      */
+<<<<<<< HEAD
     public function loadForRestRequest(array $request): string
     {
         $moduleDir = $this->moduleDirectory->getDir('Magento_TestModuleFedex');
@@ -68,12 +84,23 @@ class MockResponseBodyLoader
         $country = strtolower($this->arrayManager->get(static::REST_PATH_COUNTRY, $request) ?? '');
 
         $responsePath = sprintf(static::REST_RESPONSE_FILE_PATTERN, $moduleDir, $type, $country);
+=======
+    public function loadForRequest(array $request): string
+    {
+        $moduleDir = $this->moduleDirectory->getDir('Magento_TestModuleFedex');
+
+        $type = strtolower($this->arrayManager->get(static::PATH_SERVICE_TYPE, $request) ?? 'general');
+        $country = strtolower($this->arrayManager->get(static::PATH_COUNTRY, $request) ?? '');
+
+        $responsePath = sprintf(static::RESPONSE_FILE_PATTERN, $moduleDir, $type, $country);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         if (!$this->fileIo->fileExists($responsePath)) {
             throw new NotFoundException(
                 __('"%1" is not a valid mock response type for country "%2".', $type, $country)
             );
         }
+<<<<<<< HEAD
         return $this->fileIo->read($responsePath);
     }
 
@@ -90,6 +117,9 @@ class MockResponseBodyLoader
                 __('No valid mock response found for Authentication.')
             );
         }
+=======
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         return $this->fileIo->read($responsePath);
     }
 }

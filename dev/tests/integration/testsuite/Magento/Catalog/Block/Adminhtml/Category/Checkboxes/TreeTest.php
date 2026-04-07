@@ -1,17 +1,25 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Catalog\Block\Adminhtml\Category\Checkboxes;
 
 use Magento\Catalog\Helper\DefaultCategory;
+<<<<<<< HEAD
 use Magento\Catalog\Model\CategoryFactory;
 use Magento\Catalog\Model\Category;
 use Magento\Catalog\Model\ResourceModel\Category\Collection;
 use Magento\Framework\App\ResourceConnection;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Framework\View\LayoutInterface;
@@ -68,6 +76,7 @@ class TreeTest extends TestCase
      */
     public function testGetTreeJson(): void
     {
+<<<<<<< HEAD
         $tablePrefix = $this->objectManager->create(ResourceConnection::class)->getTablePrefix();
         $categoryTable = 'catalog_category_product_index';
         $categoryTable = $tablePrefix ? $tablePrefix . $categoryTable : $categoryTable;
@@ -113,6 +122,9 @@ class TreeTest extends TestCase
 
         $jsonTree = $treeObject->getTreeJson();
 
+=======
+        $jsonTree = $this->block->getTreeJson();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertStringContainsString('Default Category (4)', $jsonTree);
         $this->assertStringContainsString('Category 1.1 (2)', $jsonTree);
         $this->assertStringContainsString('Category 1.1.1 (1)', $jsonTree);

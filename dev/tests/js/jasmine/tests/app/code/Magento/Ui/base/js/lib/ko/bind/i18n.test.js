@@ -1,9 +1,16 @@
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
 
 /* eslint-disable */
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 define([
     'ko',
     'jquery',
@@ -47,11 +54,14 @@ define([
             storedConfig = context.config.config;
             $(document.body).append(elWithStaticText);
             $(document.body).append(elWithVariable);
+<<<<<<< HEAD
             // Always override any existing translate function for these tests
             $.mage = $.mage || {};
             $.mage.__ = function(text) {
                 return text; // Return original text for i18n tests
             };
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         });
 
         afterEach(function () {

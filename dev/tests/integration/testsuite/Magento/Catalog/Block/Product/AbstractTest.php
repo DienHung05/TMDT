@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -29,7 +34,11 @@ class AbstractTest extends TestCase
     /**
      * Stub class name for class under test
      */
+<<<<<<< HEAD
     public const STUB_CLASS = AbstractProduct\Stub::class;
+=======
+    const STUB_CLASS = 'Magento_Catalog_Block_Product_AbstractProduct_Stub';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var AbstractProduct
@@ -75,6 +84,15 @@ class AbstractTest extends TestCase
     protected function setUp(): void
     {
         if (!self::$isStubClass) {
+<<<<<<< HEAD
+=======
+            $this->getMockForAbstractClass(
+                AbstractProduct::class,
+                [],
+                self::STUB_CLASS,
+                false
+            );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             self::$isStubClass = true;
         }
         $this->objectManager = Bootstrap::getObjectManager();

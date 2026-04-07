@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -16,7 +21,10 @@ use Magento\UrlRewrite\Block\Catalog\Edit\Form;
 use Magento\UrlRewrite\Block\Link;
 use Magento\UrlRewrite\Block\Selector;
 use Magento\UrlRewrite\Model\UrlRewrite;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -28,13 +36,21 @@ class EditTest extends TestCase
     /**
      * Test prepare layout
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider prepareLayoutDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $blockAttributes
      * @param array $expected
      *
      * @return void
      * @magentoAppIsolation enabled
      */
+<<<<<<< HEAD
     #[DataProvider('prepareLayoutDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPrepareLayout($blockAttributes, $expected): void
     {
         $objectManager = Bootstrap::getObjectManager();
@@ -301,7 +317,11 @@ class EditTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function prepareLayoutDataProvider(): array
+=======
+    public function prepareLayoutDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         /** @var $urlRewrite UrlRewrite */
         $urlRewrite = Bootstrap::getObjectManager()->create(

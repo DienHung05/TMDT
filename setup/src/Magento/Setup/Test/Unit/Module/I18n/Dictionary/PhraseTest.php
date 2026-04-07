@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -9,7 +14,10 @@ namespace Magento\Setup\Test\Unit\Module\I18n\Dictionary;
 
 use Magento\Setup\Module\I18n\Dictionary\Phrase;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class PhraseTest extends TestCase
 {
@@ -17,8 +25,13 @@ class PhraseTest extends TestCase
      * @param array $constructArguments
      * @param string $getter
      * @param string|array $result
+<<<<<<< HEAD
      */
     #[DataProvider('dataProviderPhraseCreation')]
+=======
+     * @dataProvider dataProviderPhraseCreation
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPhraseCreation($constructArguments, $getter, $result)
     {
         $phrase = new Phrase(...array_values($constructArguments));
@@ -28,7 +41,11 @@ class PhraseTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function dataProviderPhraseCreation()
+=======
+    public function dataProviderPhraseCreation()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [['phrase', 'translation'], 'getPhrase', 'phrase'],
@@ -55,8 +72,13 @@ class PhraseTest extends TestCase
     /**
      * @param array $constructArguments
      * @param string $message
+<<<<<<< HEAD
      */
     #[DataProvider('dataProviderWrongParametersWhilePhraseCreation')]
+=======
+     * @dataProvider dataProviderWrongParametersWhilePhraseCreation
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testWrongParametersWhilePhraseCreation($constructArguments, $message)
     {
         $this->expectException('DomainException');
@@ -68,7 +90,11 @@ class PhraseTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function dataProviderWrongParametersWhilePhraseCreation()
+=======
+    public function dataProviderWrongParametersWhilePhraseCreation()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [[null, 'translation'], 'Missed phrase'],
@@ -81,8 +107,13 @@ class PhraseTest extends TestCase
      * @param string $value
      * @param string $setter
      * @param string $getter
+<<<<<<< HEAD
      */
     #[DataProvider('dataProviderAccessorMethods')]
+=======
+     * @dataProvider dataProviderAccessorMethods
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAccessorMethods($value, $setter, $getter)
     {
         $phrase = new Phrase('phrase', 'translation');
@@ -94,7 +125,11 @@ class PhraseTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function dataProviderAccessorMethods()
+=======
+    public function dataProviderAccessorMethods()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['value1', 'setPhrase', 'getPhrase'],

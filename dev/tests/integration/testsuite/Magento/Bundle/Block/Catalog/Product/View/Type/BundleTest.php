@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -15,7 +20,10 @@ use Magento\Framework\Registry;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Framework\View\LayoutInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -89,15 +97,27 @@ class BundleTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider isSalableForStockStatusProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param bool $isSalable
      * @param string $expectedValue
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('isSalableForStockStatusProvider')]
     public function testStockStatusView(bool $isSalable, string $expectedValue): void
     {
         $product = $this->productRepository->get('bundle-product');
         $product->setIsSalable($isSalable);
+=======
+    public function testStockStatusView(bool $isSalable, string $expectedValue): void
+    {
+        $product = $this->productRepository->get('bundle-product');
+        $product->setAllItemsSalable($isSalable);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->block->setTemplate('Magento_Bundle::catalog/product/view/type/bundle.phtml');
         $result = $this->renderBlockHtml($product);
         $this->assertEquals($expectedValue, trim(strip_tags($result)));
@@ -106,6 +126,7 @@ class BundleTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function isSalableForStockStatusProvider(): array
     {
         return [
@@ -116,16 +137,36 @@ class BundleTest extends TestCase
             'is_not_salable' => [
                 'isSalable' => false,
                 'expectedValue' => 'Out of stock',
+=======
+    public function isSalableForStockStatusProvider(): array
+    {
+        return [
+            'is_salable' => [
+                'is_salable' => true,
+                'expected_value' => 'In stock',
+            ],
+            'is_not_salable' => [
+                'is_salable' => false,
+                'expected_value' => 'Out of stock',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider isSalableForCustomizeButtonProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param bool $isSalable
      * @param string $expectedValue
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('isSalableForCustomizeButtonProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCustomizeButton(bool $isSalable, string $expectedValue): void
     {
         $product = $this->productRepository->get('bundle-product');
@@ -138,6 +179,7 @@ class BundleTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function isSalableForCustomizeButtonProvider(): array
     {
         return [
@@ -148,6 +190,18 @@ class BundleTest extends TestCase
             'is_not_salable' => [
                 'isSalable' => false,
                 'expectedValue' => '',
+=======
+    public function isSalableForCustomizeButtonProvider(): array
+    {
+        return [
+            'is_salable' => [
+                'is_salable' => true,
+                'expected_value' => 'Customize and Add to Cart',
+            ],
+            'is_not_salable' => [
+                'is_salable' => false,
+                'expected_value' => '',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

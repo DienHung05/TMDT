@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -11,7 +16,10 @@ namespace Magento\Review\Ui\DataProvider\Product;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 use Magento\Framework\Api\Filter;
 
@@ -46,13 +54,20 @@ class ReviewDataProviderTest extends TestCase
      * Sorting dataProvider test
      *
      * @magentoDataFixture Magento/Review/_files/different_reviews.php
+<<<<<<< HEAD
+=======
+     * @dataProvider sortingDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @param string $field
      * @param string $direction
      * @param array $expectedSortedTitles
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('sortingDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSorting(string $field, string $direction, array $expectedSortedTitles): void
     {
         $request = $this->objectManager->create(RequestInterface::class);
@@ -90,7 +105,11 @@ class ReviewDataProviderTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function sortingDataProvider(): array
+=======
+    public function sortingDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'sort by title field ascending' => [

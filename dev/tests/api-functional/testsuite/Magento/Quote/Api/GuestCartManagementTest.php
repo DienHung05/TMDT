@@ -1,12 +1,17 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2025 Adobe
  * All rights reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  * See COPYING.txt for license details.
  */
 
 namespace Magento\Quote\Api;
 
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Checkout\Helper\Data;
 use Magento\Checkout\Test\Fixture\SetBillingAddress as SetBillingAddressFixture;
@@ -19,10 +24,13 @@ use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\Config;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\TestCase\WebapiAbstract;
 
 class GuestCartManagementTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     private const SERVICE_VERSION = 'V1';
     private const SERVICE_NAME = 'quoteGuestCartManagementV1';
     private const RESOURCE_PATH = '/V1/guest-carts/';
@@ -30,6 +38,12 @@ class GuestCartManagementTest extends WebapiAbstract
     /**
      * @var array
      */
+=======
+    const SERVICE_VERSION = 'V1';
+    const SERVICE_NAME = 'quoteGuestCartManagementV1';
+    const RESOURCE_PATH = '/V1/guest-carts/';
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     protected $createdQuotes = [];
 
     /**
@@ -355,7 +369,11 @@ class GuestCartManagementTest extends WebapiAbstract
     public function testAssignCustomerByGuestUser()
     {
         $this->expectException(\Exception::class);
+<<<<<<< HEAD
         $this->expectExceptionMessage('Enter and try again.');
+=======
+        $this->expectExceptionMessage('You don\'t have the correct permissions to assign the customer to the cart.');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         /** @var $quote \Magento\Quote\Model\Quote */
         $quote = $this->objectManager->create(\Magento\Quote\Model\Quote::class)->load('test01', 'reserved_order_id');
@@ -394,6 +412,7 @@ class GuestCartManagementTest extends WebapiAbstract
 
         $this->_webApiCall($serviceInfo, $requestData);
     }
+<<<<<<< HEAD
 
     #[
         Config(Data::XML_PATH_GUEST_CHECKOUT, 0),
@@ -432,4 +451,6 @@ class GuestCartManagementTest extends WebapiAbstract
         ];
         $this->_webApiCall($serviceInfo, ['cartId' => $cartId]);
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

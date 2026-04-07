@@ -5,8 +5,13 @@
  * Uses OS tools to provide accurate information about factual memory consumption.
  * The PHP standard functions may return incorrect information because the process itself may have leaks.
  *
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\TestFramework\Helper;
 
@@ -91,7 +96,11 @@ class Memory
     {
         $output = $this->_shell->execute('tasklist.exe /fi %s /fo CSV /nh', ["PID eq {$pid}"]);
 
+<<<<<<< HEAD
         $arr = str_getcsv($output, ',', '"', '\\');
+=======
+        $arr = str_getcsv($output);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $memory = $arr[4];
         return self::convertToBytes($memory);
     }

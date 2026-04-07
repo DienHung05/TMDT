@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -18,7 +23,10 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Indexer\IndexerRegistry;
 use Magento\UrlRewrite\Model\ResourceModel\UrlRewrite as UrlRewriteResource;
 use Magento\UrlRewrite\Service\V1\Data\UrlRewrite;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test cases related to save category with enabled category flat.
@@ -83,6 +91,7 @@ class SaveCategoryWithEnabledFlatTest extends AbstractSaveCategoryTest
     protected function tearDown(): void
     {
         parent::tearDown();
+<<<<<<< HEAD
         try {
             $categoryFlatIndexer = $this->indexerRegistry->get(State::INDEXER_ID);
             $categoryFlatIndexer->invalidate();
@@ -97,6 +106,16 @@ class SaveCategoryWithEnabledFlatTest extends AbstractSaveCategoryTest
             } catch (NoSuchEntityException $e) {
                 //Category already deleted.
             }
+=======
+        $categoryFlatIndexer = $this->indexerRegistry->get(State::INDEXER_ID);
+        $categoryFlatIndexer->invalidate();
+        $this->categoryFlatResource->getConnection()->dropTable($this->categoryFlatResource->getMainTable());
+        $this->deleteAllCategoryUrlRewrites();
+        try {
+            $this->categoryRepository->deleteByIdentifier($this->createdCategoryId);
+        } catch (NoSuchEntityException $e) {
+            //Category already deleted.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
         $this->createdCategoryId = null;
     }
@@ -147,13 +166,21 @@ class SaveCategoryWithEnabledFlatTest extends AbstractSaveCategoryTest
     /**
      * Assert that category flat table is created and flat table contains category with expected data.
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider enableCategoryDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoConfigFixture current_store catalog/frontend/flat_catalog_category true
      *
      * @param array $postData
      * @param array $expectedData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('enableCategoryDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveCategoryWithData(array $postData, array $expectedData): void
     {
         $responseData = $this->performSaveCategoryRequest($postData);
@@ -179,7 +206,11 @@ class SaveCategoryWithEnabledFlatTest extends AbstractSaveCategoryTest
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function enableCategoryDataProvider(): array
+=======
+    public function enableCategoryDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'category_is_enabled' => [

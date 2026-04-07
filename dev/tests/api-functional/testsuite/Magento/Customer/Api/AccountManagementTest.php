@@ -1,20 +1,31 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Customer\Api;
 
 use Magento\Customer\Api\Data\CustomerInterface as Customer;
 use Magento\Customer\Model\AccountManagement;
+<<<<<<< HEAD
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\ObjectManager;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Exception\InputException;
 use Magento\Framework\Webapi\Exception as HTTPExceptionCodes;
 use Magento\Newsletter\Model\Subscriber;
 use Magento\Security\Model\Config;
+<<<<<<< HEAD
 use Magento\Store\Model\ScopeInterface;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Helper\Customer as CustomerHelper;
 use Magento\TestFramework\TestCase\WebapiAbstract;
@@ -26,13 +37,20 @@ use Magento\TestFramework\TestCase\WebapiAbstract;
  */
 class AccountManagementTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     public const SERVICE_VERSION = 'V1';
     public const SERVICE_NAME = 'customerAccountManagementV1';
     public const RESOURCE_PATH = '/V1/customers';
+=======
+    const SERVICE_VERSION = 'V1';
+    const SERVICE_NAME = 'customerAccountManagementV1';
+    const RESOURCE_PATH = '/V1/customers';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * Sample values for testing
      */
+<<<<<<< HEAD
     public const ATTRIBUTE_CODE = 'attribute_code';
     public const ATTRIBUTE_VALUE = 'attribute_value';
 
@@ -40,6 +58,10 @@ class AccountManagementTest extends WebapiAbstract
      * @var ObjectManager
      */
     private $objectManager;
+=======
+    const ATTRIBUTE_CODE = 'attribute_code';
+    const ATTRIBUTE_VALUE = 'attribute_value';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var AccountManagementInterface
@@ -94,8 +116,11 @@ class AccountManagementTest extends WebapiAbstract
      */
     protected function setUp(): void
     {
+<<<<<<< HEAD
         $this->objectManager = Bootstrap::getObjectManager();
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->accountManagement = Bootstrap::getObjectManager()->get(
             \Magento\Customer\Api\AccountManagementInterface::class
         );
@@ -108,7 +133,11 @@ class AccountManagementTest extends WebapiAbstract
         $this->filterGroupBuilder = Bootstrap::getObjectManager()->create(
             \Magento\Framework\Api\Search\FilterGroupBuilder::class
         );
+<<<<<<< HEAD
         $this->customerHelper = new CustomerHelper($this->name());
+=======
+        $this->customerHelper = new CustomerHelper();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->dataObjectProcessor = Bootstrap::getObjectManager()->create(
             \Magento\Framework\Reflection\DataObjectProcessor::class
@@ -223,6 +252,7 @@ class AccountManagementTest extends WebapiAbstract
         }
     }
 
+<<<<<<< HEAD
     public function testCreateCustomerWithDateOfBirthInFuture()
     {
         $serviceInfo = [
@@ -269,6 +299,8 @@ class AccountManagementTest extends WebapiAbstract
             }
         }
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateCustomerWithoutOptionalFields()
     {
         $serviceInfo = [
@@ -311,7 +343,10 @@ class AccountManagementTest extends WebapiAbstract
             $customerData[Customer::ID],
             [
                 'id' => $customerData[Customer::ID],
+<<<<<<< HEAD
                 'addresses' => $customerData[Customer::KEY_ADDRESSES],
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'confirmation' => CustomerHelper::CONFIRMATION
             ]
         );
@@ -702,7 +737,10 @@ class AccountManagementTest extends WebapiAbstract
 
     public function testEmailAvailable()
     {
+<<<<<<< HEAD
         $config = $this->objectManager->get(ScopeConfigInterface::class);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $customerData = $this->_createCustomer();
 
         $serviceInfo = [
@@ -720,6 +758,7 @@ class AccountManagementTest extends WebapiAbstract
             'customerEmail' => $customerData[Customer::EMAIL],
             'websiteId' => $customerData[Customer::WEBSITE_ID],
         ];
+<<<<<<< HEAD
 
         $emailSetting = $config->getValue(
             AccountManagement::GUEST_CHECKOUT_LOGIN_OPTION_SYS_CONFIG,
@@ -732,6 +771,9 @@ class AccountManagementTest extends WebapiAbstract
         } else {
             $this->assertFalse($this->_webApiCall($serviceInfo, $requestData));
         }
+=======
+        $this->assertFalse($this->_webApiCall($serviceInfo, $requestData));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     public function testEmailAvailableInvalidEmail()

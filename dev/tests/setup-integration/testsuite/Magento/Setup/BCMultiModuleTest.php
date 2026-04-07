@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Setup;
@@ -14,7 +19,10 @@ use Magento\TestFramework\Deploy\TableData;
 use Magento\TestFramework\Deploy\TestModuleManager;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\SetupTestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * The purpose of this test is to check whether whole declarative installation is work
@@ -201,6 +209,10 @@ class BCMultiModuleTest extends SetupTestCase
 
     /**
      * @moduleName Magento_TestSetupDeclarationModule1
+<<<<<<< HEAD
+=======
+     * @dataProvider firstCleanInstallOneModuleDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $dbPrefix
      * @param string $tableName
      * @param string $indexName
@@ -208,7 +220,10 @@ class BCMultiModuleTest extends SetupTestCase
      * @param string $foreignKeyName
      * @throws \Exception
      */
+<<<<<<< HEAD
     #[DataProvider('firstCleanInstallOneModuleDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testFirstCleanInstallOneModule(
         string $dbPrefix,
         string $tableName,
@@ -244,7 +259,11 @@ class BCMultiModuleTest extends SetupTestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function firstCleanInstallOneModuleDataProvider()
+=======
+    public function firstCleanInstallOneModuleDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Installation without db prefix' => [

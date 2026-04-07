@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -17,7 +22,10 @@ use Magento\Setup\Module\Di\Code\Reader\Decorator\Directory;
 use Magento\Setup\Module\Di\Code\Reader\Decorator\Interceptions;
 use Magento\Setup\Module\Di\Compiler\Log\Log;
 use PHPUnit\Framework\MockObject\MockObject;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 class InterceptionsTest extends TestCase
@@ -54,22 +62,38 @@ class InterceptionsTest extends TestCase
     {
         $this->logMock = $this->getMockBuilder(Log::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['add', 'report'])
+=======
+            ->setMethods(['add', 'report'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
 
         $this->classesScanner = $this->getMockBuilder(ClassesScanner::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['getList'])
+=======
+            ->setMethods(['getList'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
 
         $this->classReaderMock = $this->getMockBuilder(ClassReader::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['getParents'])
+=======
+            ->setMethods(['getParents'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
 
         $this->validatorMock = $this->getMockBuilder(Validator::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['validate', 'add'])
+=======
+            ->setMethods(['validate', 'add'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
 
         $this->model = new Interceptions(
@@ -130,10 +154,17 @@ class InterceptionsTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      *
      * @param $exception
      */
     #[DataProvider('getListExceptionDataProvider')]
+=======
+     * @dataProvider getListExceptionDataProvider
+     *
+     * @param $exception
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetListException(\Exception $exception)
     {
         $path = '/tmp/test';
@@ -167,7 +198,11 @@ class InterceptionsTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function getListExceptionDataProvider()
+=======
+    public function getListExceptionDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [new ValidatorException(new Phrase('Not Valid!'))],

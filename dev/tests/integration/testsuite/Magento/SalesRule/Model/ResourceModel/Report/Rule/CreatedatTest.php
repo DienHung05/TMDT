@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
  */
@@ -83,6 +84,28 @@ class CreatedatTest extends TestCase
     {
         /** @var Order $order */
         $order = $this->objectManager->create(Order::class);
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\SalesRule\Model\ResourceModel\Report\Rule;
+
+/**
+ * Createdat test for check report totals calculate
+ *
+ * @magentoDataFixture Magento/SalesRule/_files/order_with_coupon.php
+ */
+class CreatedatTest extends \PHPUnit\Framework\TestCase
+{
+    /**
+     * @dataProvider orderParamsDataProvider()
+     * @param $orderParams
+     */
+    public function testTotals($orderParams)
+    {
+        /** @var \Magento\Sales\Model\Order $order */
+        $order = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(\Magento\Sales\Model\Order::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $order->loadByIncrementId('100000001')
             ->setBaseGrandTotal($orderParams['base_subtotal'])
             ->setSubtotal($orderParams['base_subtotal'])
@@ -98,8 +121,21 @@ class CreatedatTest extends TestCase
             ->setCreatedAt('2014-10-25 10:10:10')
             ->save();
         // refresh report statistics
+<<<<<<< HEAD
         $this->reportResource->aggregate();
         $salesRuleReportItem = $this->reportCollection->getFirstItem();
+=======
+        /** @var \Magento\SalesRule\Model\ResourceModel\Report\Rule $reportResource */
+        $reportResource = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(
+            \Magento\SalesRule\Model\ResourceModel\Report\Rule::class
+        );
+        $reportResource->aggregate();
+        /** @var \Magento\SalesRule\Model\ResourceModel\Report\Collection $reportCollection */
+        $reportCollection = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(
+            \Magento\SalesRule\Model\ResourceModel\Report\Collection::class
+        );
+        $salesRuleReportItem = $reportCollection->getFirstItem();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertEquals($this->getTotalAmount($order), $salesRuleReportItem['total_amount']);
         $this->assertEquals($this->getTotalAmountActual($order), $salesRuleReportItem['total_amount_actual']);
     }
@@ -107,6 +143,7 @@ class CreatedatTest extends TestCase
     /**
      * Repeat sql formula from \Magento\SalesRule\Model\ResourceModel\Report\Rule\Createdat::_aggregateByOrder
      *
+<<<<<<< HEAD
      * @param Order $order
      * @return float
      */
@@ -120,11 +157,25 @@ class CreatedatTest extends TestCase
                 + ($order->getBaseDiscountTaxCompensationAmount() - $order->getBaseDiscountTaxCompensationRefunded())
                 - abs((float) $order->getShippingDiscountTaxCompensationAmount())
             ) * $order->getBaseToGlobalRate();
+=======
+     * @param \Magento\Sales\Model\Order $order
+     * @return float
+     */
+    private function getTotalAmount(\Magento\Sales\Model\Order $order)
+    {
+        return (
+            ($order->getBaseSubtotal() - $order->getBaseSubtotalCanceled()
+            + ($order->getBaseShippingAmount() - $order->getBaseShippingCanceled()))
+            - (abs((float) $order->getBaseDiscountAmount()) - abs((float) $order->getBaseDiscountCanceled()))
+            + ($order->getBaseTaxAmount() - $order->getBaseTaxCanceled())
+        ) * $order->getBaseToGlobalRate();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
      * Repeat sql formula from \Magento\SalesRule\Model\ResourceModel\Report\Rule\Createdat::_aggregateByOrder
      *
+<<<<<<< HEAD
      * @param Order $order
      * @return float
      */
@@ -138,12 +189,29 @@ class CreatedatTest extends TestCase
                 + ($order->getBaseDiscountTaxCompensationInvoiced() - $order->getBaseDiscountTaxCompensationRefunded())
                 - abs((float) $order->getBaseShippingDiscountTaxCompensationAmnt())
             ) * $order->getBaseToGlobalRate();
+=======
+     * @param \Magento\Sales\Model\Order $order
+     * @return float
+     */
+    private function getTotalAmountActual(\Magento\Sales\Model\Order $order)
+    {
+        return (
+            ($order->getBaseSubtotalInvoiced() - $order->getSubtotalRefunded()
+            + ($order->getBaseShippingInvoiced() - $order->getBaseShippingRefunded()))
+            - abs((float) $order->getBaseDiscountInvoiced()) - abs((float) $order->getBaseDiscountRefunded())
+            + $order->getBaseTaxInvoiced() - $order->getBaseTaxRefunded()
+        ) * $order->getBaseToGlobalRate();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function orderParamsDataProvider()
+=======
+    public function orderParamsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -158,6 +226,7 @@ class CreatedatTest extends TestCase
             ]
         ];
     }
+<<<<<<< HEAD
 
     #[
         DbIsolation(false),
@@ -283,4 +352,6 @@ class CreatedatTest extends TestCase
             round($salesRuleReportItem['total_amount_actual'], 2)
         );
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

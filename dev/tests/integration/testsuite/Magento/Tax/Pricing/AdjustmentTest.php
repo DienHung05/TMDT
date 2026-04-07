@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Tax\Pricing;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class AdjustmentTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -33,8 +41,13 @@ class AdjustmentTest extends \PHPUnit\Framework\TestCase
      * @param bool $isShippingPriceExcludeTax
      * @param bool $expectedResult
      * @magentoConfigFixture current_store tax/calculation/price_includes_tax 1
+<<<<<<< HEAD
      */
     #[DataProvider('isIncludedInBasePricePriceIncludeTaxEnabledDataProvider')]
+=======
+     * @dataProvider isIncludedInBasePricePriceIncludeTaxEnabledDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testIsIncludedInBasePricePriceIncludeTacEnabled($isShippingPriceExcludeTax, $expectedResult)
     {
         $this->isIncludedInBasePricePrice($isShippingPriceExcludeTax, $expectedResult);
@@ -44,8 +57,13 @@ class AdjustmentTest extends \PHPUnit\Framework\TestCase
      * @param bool $isShippingPriceExcludeTax
      * @param bool $expectedResult
      * @magentoConfigFixture current_store tax/calculation/price_includes_tax 0
+<<<<<<< HEAD
      */
     #[DataProvider('isIncludedInBasePricePriceIncludeTaxDisabledDataProvider')]
+=======
+     * @dataProvider isIncludedInBasePricePriceIncludeTaxDisabledDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testIsIncludedInBasePricePriceIncludeTacDisabled($isShippingPriceExcludeTax, $expectedResult)
     {
         $this->isIncludedInBasePricePrice($isShippingPriceExcludeTax, $expectedResult);
@@ -54,7 +72,11 @@ class AdjustmentTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function isIncludedInBasePricePriceIncludeTaxEnabledDataProvider()
+=======
+    public function isIncludedInBasePricePriceIncludeTaxEnabledDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [0, true],
@@ -65,7 +87,11 @@ class AdjustmentTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function isIncludedInBasePricePriceIncludeTaxDisabledDataProvider()
+=======
+    public function isIncludedInBasePricePriceIncludeTaxDisabledDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [0, false],

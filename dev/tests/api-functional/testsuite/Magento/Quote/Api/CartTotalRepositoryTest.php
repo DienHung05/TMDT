@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
@@ -12,25 +13,40 @@ use Magento\Checkout\Test\Fixture\SetGuestEmail as SetGuestEmailFixture;
 use Magento\Checkout\Test\Fixture\SetPaymentMethod as SetPaymentMethodFixture;
 use Magento\Checkout\Test\Fixture\SetShippingAddress as SetShippingAddressFixture;
 use Magento\Quote\Api\Data\AddressInterface;
+=======
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Quote\Api;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Quote\Model\Cart\Totals;
 use Magento\Quote\Model\Cart\Totals\Item as ItemTotals;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\SearchCriteriaBuilder;
+<<<<<<< HEAD
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\Tax\Test\Fixture\TaxRule as TaxRule;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Fixture\Config as Config;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\ObjectManager;
 use Magento\TestFramework\TestCase\WebapiAbstract;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\Quote\Address;
+<<<<<<< HEAD
 use Magento\TestModuleOverrideConfig\Inheritance\Fixtures\FixturesInterface;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
+=======
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class CartTotalRepositoryTest extends WebapiAbstract
 {
     /**
@@ -48,11 +64,14 @@ class CartTotalRepositoryTest extends WebapiAbstract
      */
     private $filterBuilder;
 
+<<<<<<< HEAD
     /**
      * @var FixturesInterface
      */
     private $fixtures;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     protected function setUp(): void
     {
         $this->objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
@@ -62,7 +81,10 @@ class CartTotalRepositoryTest extends WebapiAbstract
         $this->filterBuilder = $this->objectManager->create(
             \Magento\Framework\Api\FilterBuilder::class
         );
+<<<<<<< HEAD
         $this->fixtures = $this->objectManager->get(DataFixtureStorageManager::class)->getStorage();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -95,6 +117,7 @@ class CartTotalRepositoryTest extends WebapiAbstract
         $this->assertEquals($data, $actual);
     }
 
+<<<<<<< HEAD
     #[
         Config('tax/defaults/region_id', '43'),
         Config('tax/defaults/postcode', '10036'),
@@ -177,6 +200,8 @@ class CartTotalRepositoryTest extends WebapiAbstract
         $this->assertEquals($actual['base_grand_total'], $actual['grand_total']);
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      */
     public function testGetTotalsWithAbsentQuote()

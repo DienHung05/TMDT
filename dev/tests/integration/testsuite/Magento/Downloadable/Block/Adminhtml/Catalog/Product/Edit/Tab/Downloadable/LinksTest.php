@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Downloadable\Block\Adminhtml\Catalog\Product\Edit\Tab\Download
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Downloadable\Block\Adminhtml\Catalog\Product\Edit\Tab\Downloadable;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * Class LinksTest
  *
@@ -81,13 +89,20 @@ class LinksTest extends \PHPUnit\Framework\TestCase
      *
      * @magentoConfigFixture current_store catalog/downloadable/links_title Links Title Test
      * @magentoAppIsolation enabled
+<<<<<<< HEAD
+=======
+     * @dataProvider productLinksTitleDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @magentoAppArea adminhtml
      * @param string $productType
      * @param string $linksTitle
      * @param string $expectedResult
      */
+<<<<<<< HEAD
     #[DataProvider('productLinksTitleDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetLinksTitle($productType, $linksTitle, $expectedResult)
     {
         /** @var $objectManager \Magento\TestFramework\ObjectManager */
@@ -111,7 +126,11 @@ class LinksTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function productLinksTitleDataProvider()
+=======
+    public function productLinksTitleDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['simple', null, 'Links Title Test'],

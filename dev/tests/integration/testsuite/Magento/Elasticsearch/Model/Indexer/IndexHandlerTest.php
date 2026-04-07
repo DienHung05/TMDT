@@ -1,11 +1,19 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
 namespace Magento\Elasticsearch\Model\Indexer;
 
 use Magento\AdvancedSearch\Model\Client\ClientInterface;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Elasticsearch\Model\Indexer;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Catalog\Model\Product\Action as ProductAction;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\CatalogInventory\Api\StockRegistryInterface;
@@ -14,10 +22,15 @@ use Magento\CatalogSearch\Model\Indexer\Fulltext as CatalogSearchFulltextIndexer
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Elasticsearch\SearchAdapter\ConnectionManager;
+<<<<<<< HEAD
+=======
+use Magento\Elasticsearch6\Model\Client\Elasticsearch as ElasticsearchClient;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Elasticsearch\Model\Config;
 use Magento\Elasticsearch\SearchAdapter\SearchIndexNameResolver;
 use Magento\Indexer\Model\Indexer;
 use Magento\Framework\Search\EngineResolverInterface;
+<<<<<<< HEAD
 use Magento\TestModuleCatalogSearch\Model\SearchEngineVersionReader;
 use PHPUnit\Framework\TestCase;
 
@@ -25,6 +38,15 @@ use PHPUnit\Framework\TestCase;
  * Important: Please make sure that each integration test file works with unique search index. In order to
  * achieve this, use @magentoConfigFixture to pass unique value for index_prefix for every test
  * method. E.g. '@magentoConfigFixture current_store catalog/search/elasticsearch8_index_prefix indexerhandlertest'
+=======
+use Magento\TestModuleCatalogSearch\Model\ElasticsearchVersionChecker;
+use PHPUnit\Framework\TestCase;
+
+/**
+ * Important: Please make sure that each integration test file works with unique elastic search index. In order to
+ * achieve this, use @magentoConfigFixture to pass unique value for 'elasticsearch_index_prefix' for every test
+ * method. E.g. '@magentoConfigFixture current_store catalog/search/elasticsearch_index_prefix indexerhandlertest'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  *
  * @magentoDbIsolation disabled
  * @magentoDataFixture Magento/Elasticsearch/_files/indexer.php
@@ -33,12 +55,24 @@ use PHPUnit\Framework\TestCase;
 class IndexHandlerTest extends TestCase
 {
     /**
+<<<<<<< HEAD
+=======
+     * @var string
+     */
+    private $searchEngine;
+
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @var ProductRepositoryInterface
      */
     private $productRepository;
 
     /**
+<<<<<<< HEAD
      * @var ClientInterface
+=======
+     * @var ElasticsearchClient
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     private $client;
 
@@ -68,6 +102,17 @@ class IndexHandlerTest extends TestCase
     private $searchIndexNameResolver;
 
     /**
+<<<<<<< HEAD
+=======
+     * Elasticsearch7 engine configuration is also compatible with OpenSearch 1
+     */
+    private const ENGINE_SUPPORTED_VERSIONS = [
+        7 => 'elasticsearch7',
+        1 => 'elasticsearch7',
+    ];
+
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * {@inheritdoc}
      */
     protected function setUp(): void
@@ -94,11 +139,17 @@ class IndexHandlerTest extends TestCase
      */
     protected function assertPreConditions(): void
     {
+<<<<<<< HEAD
         $objectManager = Bootstrap::getObjectManager();
         $currentEngine = $objectManager->get(EngineResolverInterface::class)->getCurrentSearchEngine();
         $installedEngine = $objectManager->get(SearchEngineVersionReader::class)->getFullVersion();
         $this->assertEquals(
             $installedEngine,
+=======
+        $currentEngine = Bootstrap::getObjectManager()->get(EngineResolverInterface::class)->getCurrentSearchEngine();
+        $this->assertEquals(
+            $this->getInstalledSearchEngine(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $currentEngine,
             sprintf(
                 'Search engine configuration "%s" is not compatible with the installed version',
@@ -108,6 +159,10 @@ class IndexHandlerTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @magentoConfigFixture current_store catalog/search/elasticsearch_index_prefix indexerhandlertest
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @return void
      */
     public function testReindexAll(): void
@@ -128,6 +183,10 @@ class IndexHandlerTest extends TestCase
 
     /**
      * @magentoAppIsolation enabled
+<<<<<<< HEAD
+=======
+     * @magentoConfigFixture current_store catalog/search/elasticsearch_index_prefix indexerhandlertest
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @return void
      */
     public function testReindexRowAfterEdit(): void
@@ -151,6 +210,10 @@ class IndexHandlerTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @magentoConfigFixture current_store catalog/search/elasticsearch_index_prefix indexerhandlertest
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @return void
      */
     public function testReindexRowAfterMassAction(): void
@@ -188,6 +251,10 @@ class IndexHandlerTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @magentoConfigFixture current_store catalog/search/elasticsearch_index_prefix indexerhandlertest
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoAppArea adminhtml
      * @return void
      */
@@ -208,6 +275,10 @@ class IndexHandlerTest extends TestCase
     /**
      * @magentoDbIsolation enabled
      * @magentoAppArea adminhtml
+<<<<<<< HEAD
+=======
+     * @magentoConfigFixture current_store catalog/search/elasticsearch_index_prefix indexerhandlertest
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Elasticsearch/_files/configurable_products.php
      * @return void
      */
@@ -236,7 +307,11 @@ class IndexHandlerTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * Search docs in search engine by name.
+=======
+     * Search docs in Elasticsearch by name.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @param string $text
      * @param int $storeId
@@ -270,7 +345,11 @@ class IndexHandlerTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * Search docs in search engine by boolean attribute.
+=======
+     * Search docs in Elasticsearch by boolean attribute.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @param int $value
      * @param int $storeId
@@ -294,4 +373,22 @@ class IndexHandlerTest extends TestCase
         $queryResult = $this->client->query($searchQuery);
         return isset($queryResult['hits']['hits']) ? $queryResult['hits']['hits'] : [];
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * Returns installed on server search service
+     *
+     * @return string
+     */
+    private function getInstalledSearchEngine()
+    {
+        if (!$this->searchEngine) {
+            // phpstan:ignore "Class Magento\TestModuleCatalogSearch\Model\ElasticsearchVersionChecker not found."
+            $version = Bootstrap::getObjectManager()->get(ElasticsearchVersionChecker::class)->getVersion();
+            $this->searchEngine = self::ENGINE_SUPPORTED_VERSIONS[$version] ?? 'elasticsearch' . $version;
+        }
+        return $this->searchEngine;
+    }
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

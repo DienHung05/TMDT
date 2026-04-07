@@ -1,20 +1,33 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\TestFramework\Inspection;
 
 use Magento\Framework\Component\ComponentRegistrar;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class WordsFinderTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @param string $configFile
      * @param string $baseDir
+<<<<<<< HEAD
      */
     #[DataProvider('constructorExceptionDataProvider')]
+=======
+     * @dataProvider constructorExceptionDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testConstructorException($configFile, $baseDir)
     {
         $this->expectException(\Magento\TestFramework\Inspection\Exception::class);
@@ -22,7 +35,11 @@ class WordsFinderTest extends \PHPUnit\Framework\TestCase
         new \Magento\TestFramework\Inspection\WordsFinder($configFile, $baseDir, new ComponentRegistrar());
     }
 
+<<<<<<< HEAD
     public static function constructorExceptionDataProvider()
+=======
+    public function constructorExceptionDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $fixturePath = __DIR__ . '/_files/';
         return [
@@ -38,8 +55,13 @@ class WordsFinderTest extends \PHPUnit\Framework\TestCase
      * @param string|array $configFiles
      * @param string $file
      * @param array $expected
+<<<<<<< HEAD
      */
     #[DataProvider('findWordsDataProvider')]
+=======
+     * @dataProvider findWordsDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testFindWords($configFiles, $file, $expected)
     {
         $wordsFinder = new \Magento\TestFramework\Inspection\WordsFinder(
@@ -54,7 +76,11 @@ class WordsFinderTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function findWordsDataProvider()
+=======
+    public function findWordsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $mainConfig = __DIR__ . '/_files/config.xml';
         $additionalConfig = __DIR__ . '/_files/config_additional.xml';

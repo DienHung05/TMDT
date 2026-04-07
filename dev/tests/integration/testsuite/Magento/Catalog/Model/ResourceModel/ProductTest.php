@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Catalog\Model\ResourceModel;
 
@@ -9,7 +14,10 @@ use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Test\Fixture\Attribute as AttributeFixture;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Framework\ObjectManagerInterface;
+<<<<<<< HEAD
 use Magento\Store\Model\StoreManagerInterface;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Eav\Model\GetAttributeSetByName;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\AppIsolation;
@@ -46,11 +54,14 @@ class ProductTest extends TestCase
     private $objectManager;
 
     /**
+<<<<<<< HEAD
      * @var StoreManagerInterface
      */
     private $storeManager;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
@@ -59,8 +70,11 @@ class ProductTest extends TestCase
 
         $this->productRepository = $this->objectManager->create(ProductRepositoryInterface::class);
         $this->model = $this->objectManager->create(Product::class);
+<<<<<<< HEAD
 
         $this->storeManager = $this->objectManager->create(StoreManagerInterface::class);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -221,6 +235,7 @@ class ProductTest extends TestCase
         $attribute = $this->model->getAttributeRawValue($product->getId(), $attributeCode, 1);
         $this->assertEmpty($attribute);
     }
+<<<<<<< HEAD
 
     /**
      * Test update product custom attributes
@@ -274,4 +289,6 @@ class ProductTest extends TestCase
             (int) $currentTableStatusAfterThirdAttrSave['Auto_increment']
         );
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

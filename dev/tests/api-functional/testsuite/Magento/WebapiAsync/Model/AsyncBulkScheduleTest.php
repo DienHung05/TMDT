@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -9,7 +14,10 @@ declare(strict_types=1);
 namespace Magento\WebapiAsync\Model;
 
 use Magento\Catalog\Api\Data\ProductInterface;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\NotFoundException;
 use Magento\TestFramework\MessageQueue\PreconditionFailedException;
@@ -34,6 +42,7 @@ use Magento\Catalog\Api\ProductRepositoryInterface;
  */
 class AsyncBulkScheduleTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     public const SERVICE_NAME = 'catalogProductRepositoryV1';
     public const SERVICE_VERSION = 'V1';
     public const REST_RESOURCE_PATH = '/V1/products';
@@ -49,6 +58,20 @@ class AsyncBulkScheduleTest extends WebapiAbstract
     /**
      * @var string[]
      */
+=======
+    const SERVICE_NAME = 'catalogProductRepositoryV1';
+    const SERVICE_VERSION = 'V1';
+    const REST_RESOURCE_PATH = '/V1/products';
+    const ASYNC_BULK_RESOURCE_PATH = '/async/bulk/V1/products';
+    const ASYNC_CONSUMER_NAME = 'async.operations.all';
+
+    const KEY_TIER_PRICES = 'tier_prices';
+    const KEY_SPECIAL_PRICE = 'special_price';
+    const KEY_CATEGORY_LINKS = 'category_links';
+
+    const BULK_UUID_KEY = 'bulk_uuid';
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     protected $consumers = [
         self::ASYNC_CONSUMER_NAME,
     ];
@@ -110,8 +133,14 @@ class AsyncBulkScheduleTest extends WebapiAbstract
         parent::setUp();
     }
 
+<<<<<<< HEAD
     /** */
     #[DataProvider('productsArrayCreationProvider')]
+=======
+    /**
+     * @dataProvider productsArrayCreationProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAsyncScheduleBulkMultipleEntities($products)
     {
         $this->_markTestAsRestOnly();
@@ -142,8 +171,14 @@ class AsyncBulkScheduleTest extends WebapiAbstract
         }
     }
 
+<<<<<<< HEAD
     /** */
     #[DataProvider('productSingleCreationProvider')]
+=======
+    /**
+     * @dataProvider productSingleCreationProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAsyncScheduleBulkSingleEntity($products)
     {
         $this->_markTestAsRestOnly();
@@ -170,8 +205,14 @@ class AsyncBulkScheduleTest extends WebapiAbstract
         }
     }
 
+<<<<<<< HEAD
     /** */
     #[DataProvider('wrongProductCreationProvider')]
+=======
+    /**
+     * @dataProvider wrongProductCreationProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAsyncScheduleBulkWrongEntity($products)
     {
         $this->_markTestAsRestOnly();
@@ -185,7 +226,11 @@ class AsyncBulkScheduleTest extends WebapiAbstract
         try {
             $response = $this->saveProductAsync($products);
         } catch (\Exception $e) {
+<<<<<<< HEAD
             $this->assertEquals(400, $e->getCode());
+=======
+            $this->assertEquals(500, $e->getCode());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
         $this->assertNull($response);
         $this->assertEquals(0, $this->checkProductsCreation());
@@ -193,8 +238,14 @@ class AsyncBulkScheduleTest extends WebapiAbstract
 
     /**
      * @param string $sku
+<<<<<<< HEAD
      * @param string|null $storeCode */
     #[DataProvider('productGetDataProvider')]
+=======
+     * @param string|null $storeCode
+     * @dataProvider productGetDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGETRequestToAsyncBulk($sku, $storeCode = null)
     {
         $this->expectException(\Exception::class);
@@ -260,11 +311,19 @@ class AsyncBulkScheduleTest extends WebapiAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function productsArrayCreationProvider()
     {
         $productBuilder = function ($data) {
             return array_replace_recursive(
                 self::getSimpleProductData(),
+=======
+    public function productsArrayCreationProvider()
+    {
+        $productBuilder = function ($data) {
+            return array_replace_recursive(
+                $this->getSimpleProductData(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $data
             );
         };
@@ -294,11 +353,19 @@ class AsyncBulkScheduleTest extends WebapiAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function productSingleCreationProvider()
     {
         $productBuilder = function ($data) {
             return array_replace_recursive(
                 self::getSimpleProductData(),
+=======
+    public function productSingleCreationProvider()
+    {
+        $productBuilder = function ($data) {
+            return array_replace_recursive(
+                $this->getSimpleProductData(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $data
             );
         };
@@ -322,18 +389,30 @@ class AsyncBulkScheduleTest extends WebapiAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function wrongProductCreationProvider()
     {
         $productBuilder = function ($data) {
             return array_replace_recursive(
                 self::getSimpleProductData(),
+=======
+    public function wrongProductCreationProvider()
+    {
+        $productBuilder = function ($data) {
+            return array_replace_recursive(
+                $this->getSimpleProductData(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $data
             );
         };
 
         $wrongProductBuilder = function ($data) {
             return array_replace_recursive(
+<<<<<<< HEAD
                 self::getWrongProductStructureData(),
+=======
+                $this->getWrongProductStructureData(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $data
             );
         };
@@ -370,7 +449,11 @@ class AsyncBulkScheduleTest extends WebapiAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function productGetDataProvider()
+=======
+    public function productGetDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['psku-test-1', null],
@@ -383,7 +466,11 @@ class AsyncBulkScheduleTest extends WebapiAbstract
      * @param array $productData
      * @return array
      */
+<<<<<<< HEAD
     private static function getSimpleProductData($productData = [])
+=======
+    private function getSimpleProductData($productData = [])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ProductInterface::SKU              => isset($productData[ProductInterface::SKU])
@@ -408,7 +495,11 @@ class AsyncBulkScheduleTest extends WebapiAbstract
      * @param array $productData
      * @return array
      */
+<<<<<<< HEAD
     private static function getWrongProductStructureData($productData = [])
+=======
+    private function getWrongProductStructureData($productData = [])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ProductInterface::SKU => isset($productData[ProductInterface::SKU])

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -9,7 +14,10 @@ namespace Magento\UrlRewrite\Controller;
 
 use Magento\TestFramework\TestCase\AbstractController;
 use Magento\Framework\App\Response\Http as HttpResponse;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class to test Match corresponding URL Rewrite
@@ -27,8 +35,14 @@ class UrlRewriteTest extends AbstractController
      * @param string $redirect
      * @param int $expectedCode
      * @return void
+<<<<<<< HEAD
      */
     #[DataProvider('requestDataProvider')]
+=======
+     *
+     * @dataProvider requestDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testMatchUrlRewrite(
         string $request,
         string $redirect,
@@ -52,7 +66,11 @@ class UrlRewriteTest extends AbstractController
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function requestDataProvider(): array
+=======
+    public function requestDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Use Case #1: Rewrite: page-one/ --(301)--> page-a/; Request: page-one/ --(301)--> page-a/' => [

@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\TestFramework\Dependency;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\TestFramework\Dependency;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class LayoutRuleTest extends \PHPUnit\Framework\TestCase
 {
     public function testNonLayoutGetDependencyInfo()
@@ -19,15 +27,24 @@ class LayoutRuleTest extends \PHPUnit\Framework\TestCase
     /**
      * @param string $contents
      * @param array $expected
+<<<<<<< HEAD
      */
     #[DataProvider('getDependencyInfoDataProvider')]
+=======
+     * @dataProvider getDependencyInfoDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetDependencyInfo($contents, array $expected)
     {
         $model = new LayoutRule([], [], []);
         $this->assertEquals($expected, $model->getDependencyInfo('Magento\SomeModule', 'layout', 'any', $contents));
     }
 
+<<<<<<< HEAD
     public static function getDependencyInfoDataProvider()
+=======
+    public function getDependencyInfoDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -115,11 +132,17 @@ class LayoutRuleTest extends \PHPUnit\Framework\TestCase
     /**
      * @param string $contents
      * @param string $type
+<<<<<<< HEAD
      * @param bool $isHandle
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     #[DataProvider('layoutGetDependencyInfoDataProvider')]
     public function testUpdatesRouterGetDependencyInfo($contents, $type, $isHandle)
+=======
+     * @dataProvider layoutGetDependencyInfoDataProvider
+     */
+    public function testUpdatesRouterGetDependencyInfo($contents, $type)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $model = new LayoutRule(['router_name' => ['Magento\RouterModule']], [], []);
         $this->assertEquals([], $model->getDependencyInfo('Magento\RouterModule', 'layout', 'any', $contents));
@@ -132,8 +155,14 @@ class LayoutRuleTest extends \PHPUnit\Framework\TestCase
     /**
      * @param string $contents
      * @param string $type
+<<<<<<< HEAD
      * @param bool $isHandle     */
     #[DataProvider('layoutGetDependencyInfoWithReferenceDataProvider')]
+=======
+     * @param bool $isHandle
+     * @dataProvider layoutGetDependencyInfoWithReferenceDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testLayoutGetDependencyInfo($contents, $type, $isHandle)
     {
         // test one module
@@ -178,27 +207,44 @@ class LayoutRuleTest extends \PHPUnit\Framework\TestCase
         );
     }
 
+<<<<<<< HEAD
     public static function layoutGetDependencyInfoDataProvider()
     {
         return [
             [
                 self::_getLayoutFileContent('layout_handle.xml'),
+=======
+    public function layoutGetDependencyInfoDataProvider()
+    {
+        return [
+            [
+                $this->_getLayoutFileContent('layout_handle.xml'),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 \Magento\Test\Integrity\DependencyTest::TYPE_SOFT,
                 true,
             ],
             [
+<<<<<<< HEAD
                 self::_getLayoutFileContent('layout_handle_parent.xml'),
+=======
+                $this->_getLayoutFileContent('layout_handle_parent.xml'),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 \Magento\Test\Integrity\DependencyTest::TYPE_HARD,
                 true
             ],
             [
+<<<<<<< HEAD
                 self::_getLayoutFileContent('layout_handle_update.xml'),
+=======
+                $this->_getLayoutFileContent('layout_handle_update.xml'),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 \Magento\Test\Integrity\DependencyTest::TYPE_SOFT,
                 true
             ]
         ];
     }
 
+<<<<<<< HEAD
     public static function layoutGetDependencyInfoWithReferenceDataProvider()
     {
         return array_merge(
@@ -206,6 +252,15 @@ class LayoutRuleTest extends \PHPUnit\Framework\TestCase
             [
                 [
                     self::_getLayoutFileContent('layout_reference.xml'),
+=======
+    public function layoutGetDependencyInfoWithReferenceDataProvider()
+    {
+        return array_merge(
+            $this->layoutGetDependencyInfoDataProvider(),
+            [
+                [
+                    $this->_getLayoutFileContent('layout_reference.xml'),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     \Magento\Test\Integrity\DependencyTest::TYPE_SOFT,
                     false,
                 ]
@@ -219,7 +274,11 @@ class LayoutRuleTest extends \PHPUnit\Framework\TestCase
      * @param string $fileName
      * @return string
      */
+<<<<<<< HEAD
     protected static function _getLayoutFileContent($fileName)
+=======
+    protected function _getLayoutFileContent($fileName)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return file_get_contents(str_replace('\\', '/', realpath(__DIR__)) . '/_files/' . $fileName);
     }

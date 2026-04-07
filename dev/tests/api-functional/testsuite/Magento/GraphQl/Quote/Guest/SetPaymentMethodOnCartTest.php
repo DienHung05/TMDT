@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -14,7 +19,10 @@ use Magento\OfflinePayments\Model\Checkmo;
 use Magento\OfflinePayments\Model\Purchaseorder;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for setting payment methods on cart by guest
@@ -154,9 +162,15 @@ class SetPaymentMethodOnCartTest extends GraphQlAbstract
      *
      * @param string $input
      * @param string $message
+<<<<<<< HEAD
      * @throws Exception
      */
     #[DataProvider('dataProviderSetPaymentMethodWithoutRequiredParameters')]
+=======
+     * @dataProvider dataProviderSetPaymentMethodWithoutRequiredParameters
+     * @throws Exception
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSetPaymentMethodWithoutRequiredParameters(string $input, string $message)
     {
         $maskedQuoteId = $this->getMaskedQuoteIdByReservedOrderId->execute('test_quote');
@@ -184,7 +198,11 @@ QUERY;
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function dataProviderSetPaymentMethodWithoutRequiredParameters(): array
+=======
+    public function dataProviderSetPaymentMethodWithoutRequiredParameters(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'missed_cart_id' => [
@@ -225,7 +243,10 @@ QUERY;
     }
 
     /**
+<<<<<<< HEAD
      * @magentoConfigFixture default_store payment/purchaseorder/active 0
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoApiDataFixture Magento/GraphQl/Catalog/_files/simple_product.php
      * @magentoApiDataFixture Magento/GraphQl/Quote/_files/guest/create_empty_cart.php
      * @magentoApiDataFixture Magento/GraphQl/Quote/_files/add_simple_product.php

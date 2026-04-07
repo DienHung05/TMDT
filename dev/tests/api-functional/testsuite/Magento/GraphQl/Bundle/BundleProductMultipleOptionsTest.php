@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -10,7 +15,10 @@ namespace Magento\GraphQl\Bundle;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Helper\CompareArraysRecursively;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Bundle product with multiple options test.
@@ -35,9 +43,15 @@ class BundleProductMultipleOptionsTest extends GraphQlAbstract
      * @magentoApiDataFixture Magento/Bundle/_files/product_with_multiple_options.php
      * @param array $bundleProductDataProvider
      *
+<<<<<<< HEAD
      * @throws \Exception
      */
     #[DataProvider('getBundleProductDataProvider')]
+=======
+     * @dataProvider getBundleProductDataProvider
+     * @throws \Exception
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testBundleProductWithMultipleOptions(array $bundleProductDataProvider): void
     {
         $productSku = 'bundle-product';
@@ -113,11 +127,19 @@ QUERY;
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function getBundleProductDataProvider(): array
     {
         return [
             'products' => [
                 'bundleProductDataProvider' => [
+=======
+    public function getBundleProductDataProvider(): array
+    {
+        return [
+            'products' => [
+                'items' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     [
                         'sku' => 'bundle-product',
                         'type_id' => 'bundle',

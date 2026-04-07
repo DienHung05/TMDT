@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Integration\Model\ResourceModel\Oauth;
@@ -9,7 +14,10 @@ namespace Magento\Integration\Model\ResourceModel\Oauth;
 use Magento\Authorization\Model\UserContextInterface;
 use Magento\Framework\Oauth\Helper\Oauth;
 use Magento\Integration\Model\Oauth\Token;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Integration test for @see \Magento\Integration\Model\ResourceModel\Oauth\Token
@@ -132,9 +140,15 @@ class TokenTest extends \PHPUnit\Framework\TestCase
      * @param array $expectedRemovedTokenNumbers
      * @param array $expectedPreservedTokenNumbers
      *
+<<<<<<< HEAD
      * @covers \Magento\Integration\Cron\CleanExpiredTokens::execute
      */
     #[DataProvider('deleteExpiredTokenUsingObserverDataProvider')]
+=======
+     * @dataProvider deleteExpiredTokenUsingObserverDataProvider
+     * @covers \Magento\Integration\Cron\CleanExpiredTokens::execute
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDeleteExpiredTokenUsingObserver(
         $secondsAfterBaseCreatedTimestamp,
         $expectedRemovedTokenNumbers,
@@ -156,7 +170,11 @@ class TokenTest extends \PHPUnit\Framework\TestCase
         );
     }
 
+<<<<<<< HEAD
     public static function deleteExpiredTokenUsingObserverDataProvider()
+=======
+    public function deleteExpiredTokenUsingObserverDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             "Clean up long before default admin and default customer token life time" => [
@@ -197,9 +215,15 @@ class TokenTest extends \PHPUnit\Framework\TestCase
      * @param $expectedPreservedTokenNumbers
      *
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
      * @covers \Magento\Integration\Model\ResourceModel\Oauth\Token::deleteExpiredTokens
      */
     #[DataProvider('deleteExpiredTokensDataProvider')]
+=======
+     * @dataProvider deleteExpiredTokensDataProvider
+     * @covers \Magento\Integration\Model\ResourceModel\Oauth\Token::deleteExpiredTokens
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDeleteExpiredTokens(
         $secondsAfterBaseCreatedTimestamp,
         $tokenTypesToClean,
@@ -217,7 +241,11 @@ class TokenTest extends \PHPUnit\Framework\TestCase
         );
     }
 
+<<<<<<< HEAD
     public static function deleteExpiredTokensDataProvider()
+=======
+    public function deleteExpiredTokensDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
           "Clean up for admin tokens which were created ('token_lifetime' + 1 second) ago" => [

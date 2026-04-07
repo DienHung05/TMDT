@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -20,7 +25,10 @@ use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use Magento\Setup\Console\Command\DeployStaticContentCommand;
 use Magento\Setup\Model\ObjectManagerProvider;
 use PHPUnit\Framework\MockObject\MockObject as Mock;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 
@@ -77,7 +85,11 @@ class DeployStaticContentCommandTest extends TestCase
         $this->inputValidator = $this->createMock(InputValidator::class);
         $this->consoleLoggerFactory = $this->createMock(ConsoleLoggerFactory::class);
         $this->logger = $this->createMock(ConsoleLogger::class);
+<<<<<<< HEAD
         $this->objectManager = $this->createMock(ObjectManagerInterface::class);
+=======
+        $this->objectManager = $this->getMockForAbstractClass(ObjectManagerInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->appState = $this->createMock(State::class);
         $this->deployService = $this->createMock(DeployStaticContent::class);
 
@@ -96,8 +108,13 @@ class DeployStaticContentCommandTest extends TestCase
     /**
      * @param array $input
      * @see DeployStaticContentCommand::execute()
+<<<<<<< HEAD
      */
     #[DataProvider('executeDataProvider')]
+=======
+     * @dataProvider executeDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecute($input)
     {
         $this->appState->expects($this->once())
@@ -122,7 +139,11 @@ class DeployStaticContentCommandTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function executeDataProvider()
+=======
+    public function executeDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'No options' => [
@@ -167,8 +188,13 @@ class DeployStaticContentCommandTest extends TestCase
     /**
      * @param string $mode
      * @return void
+<<<<<<< HEAD
      */
     #[DataProvider('executionInNonProductionModeDataProvider')]
+=======
+     * @dataProvider executionInNonProductionModeDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecuteInNonProductionMode($mode)
     {
         $this->expectException('Magento\Framework\Exception\LocalizedException');
@@ -182,7 +208,11 @@ class DeployStaticContentCommandTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function executionInNonProductionModeDataProvider()
+=======
+    public function executionInNonProductionModeDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [State::MODE_DEFAULT],

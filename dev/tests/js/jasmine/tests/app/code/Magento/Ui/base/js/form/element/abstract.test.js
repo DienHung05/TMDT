@@ -1,6 +1,11 @@
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /*eslint max-nested-callbacks: 0*/
@@ -23,11 +28,15 @@ define([
                     },
                     create: jasmine.createSpy(),
                     set: jasmine.createSpy(),
+<<<<<<< HEAD
                     async: jasmine.createSpy(),
                     remove: jasmine.createSpy()
                 },
                 'uiRegistry': {
                     remove: jasmine.createSpy()
+=======
+                    async: jasmine.createSpy()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 },
                 '/mage/utils/wrapper': jasmine.createSpy()
             },
@@ -41,17 +50,28 @@ define([
                     template: 'ui/form/element/helper/service'
                 }
             },
+<<<<<<< HEAD
             model, registry;
+=======
+            model;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         beforeEach(function (done) {
             injector.mock(mocks);
             injector.require([
                 'Magento_Ui/js/form/element/abstract',
+<<<<<<< HEAD
                 'uiRegistry',
                 'knockoutjs/knockout-es5'
             ], function (Constr, uiRegistry) {
                 model = new Constr(params);
                 registry = uiRegistry;
+=======
+                'knockoutjs/knockout-es5'
+            ], function (Constr) {
+                model = new Constr(params);
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 done();
             });
         });
@@ -347,6 +367,7 @@ define([
                 expect(model.serviceDisabled()).toBeFalsy();
             });
         });
+<<<<<<< HEAD
         describe('destroy method', function () {
             beforeEach(function () {
                 model.switcherConfig = {
@@ -366,5 +387,7 @@ define([
                 expect(registry.remove).toHaveBeenCalledWith('test_switcher');
             });
         });
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     });
 });

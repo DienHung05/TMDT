@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\PageCache\Model;
 
@@ -34,7 +39,11 @@ class ConfigTest extends \PHPUnit\Framework\TestCase
         /** @var \PHPUnit\Framework\MockObject\MockObject $vclTemplateLocator */
         $vclTemplateLocator = $this->getMockBuilder(\Magento\PageCache\Model\Varnish\VclTemplateLocator::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['getTemplate'])
+=======
+            ->setMethods(['getTemplate'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
         $vclTemplateLocator->expects($this->any())
             ->method('getTemplate')
@@ -43,7 +52,11 @@ class ConfigTest extends \PHPUnit\Framework\TestCase
         /** @var \PHPUnit\Framework\MockObject\MockObject $vclTemplateLocator */
         $vclGeneratorFactory = $this->getMockBuilder(\Magento\PageCache\Model\Varnish\VclGeneratorFactory::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['create'])
+=======
+            ->setMethods(['create'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
         $expectedParams = [
             'backendHost' => 'example.com',
@@ -85,7 +98,11 @@ class ConfigTest extends \PHPUnit\Framework\TestCase
     // @codingStandardsIgnoreEnd
     public function testGetVclFile()
     {
+<<<<<<< HEAD
         $result = $this->config->getVclFile(Config::VARNISH_6_CONFIGURATION_PATH);
+=======
+        $result = $this->config->getVclFile(Config::VARNISH_5_CONFIGURATION_PATH);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertEquals(file_get_contents(__DIR__ . '/_files/result.vcl'), $result);
     }
 }

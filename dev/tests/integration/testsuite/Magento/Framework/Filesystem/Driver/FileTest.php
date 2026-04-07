@@ -1,7 +1,14 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Test for \Magento\Framework\Filesystem\Driver\File
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,7 +18,10 @@ use Magento\Framework\Exception\FileSystemException;
 use PHPUnit\Framework\TestCase;
 
 /**
+<<<<<<< HEAD
  * Test for \Magento\Framework\Filesystem\Driver\File
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  * Verify File class
  */
 class FileTest extends TestCase
@@ -103,7 +113,11 @@ class FileTest extends TestCase
             'foo/bar/file_two.txt',
             'foo/file_three.txt',
         ];
+<<<<<<< HEAD
         $expected = array_map([self::class, 'getTestPath'], $paths);
+=======
+        $expected = array_map(['self', 'getTestPath'], $paths);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $actual = $this->driver->readDirectoryRecursively($this->getTestPath('foo'));
         sort($actual);
         $this->assertEquals($expected, $actual);
@@ -174,6 +188,7 @@ class FileTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * Delete a not existing file
      *
      * @return void
@@ -186,6 +201,8 @@ class FileTest extends TestCase
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Remove generated directories.
      *
      * @throws FileSystemException

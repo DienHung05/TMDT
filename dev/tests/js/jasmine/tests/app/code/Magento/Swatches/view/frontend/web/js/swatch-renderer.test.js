@@ -1,9 +1,16 @@
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
  */
 
 /*eslint-disable max-nested-callbacks*/
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 define([
     'jquery',
     'Magento_Swatches/js/swatch-renderer'
@@ -95,15 +102,22 @@ define([
         });
 
         it('check udate price method', function () {
+<<<<<<< HEAD
             var productBlock, parentsResultMap, findResultMap;
 
             parentsResultMap = {
                 '[data-role=priceBox]': {
+=======
+            var productPriceMock = {
+                find: jasmine.createSpy().and.returnValue({
+                    hide: jasmine.createSpy(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     priceBox: jasmine.createSpy().and.returnValue(''),
                     trigger: jasmine.createSpy(),
                     find: jasmine.createSpy().and.returnValue({
                         toggleClass: jasmine.createSpy()
                     })
+<<<<<<< HEAD
                 },
                 '.normal-price .price-label': {
                     hide: jasmine.createSpy(),
@@ -124,10 +138,13 @@ define([
                 // eslint-disable-next-line max-nested-callbacks
                 find: jasmine.createSpy().and.callFake(function (selector) {
                     return parentsResultMap[selector];
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 })
             };
 
             widget.element =  {
+<<<<<<< HEAD
                 parents: jasmine.createSpy().and.returnValue(productBlock),
                 // eslint-disable-next-line max-nested-callbacks
                 find: jasmine.createSpy().and.callFake(function (selector) {
@@ -144,6 +161,13 @@ define([
             expect(parentsResultMap['.normal-price .price-label'].hide)
                 .toHaveBeenCalledBefore(parentsResultMap['.normal-price .price-label'].show);
             expect(parentsResultMap['.normal-price .price-label'].show).toHaveBeenCalledTimes(1);
+=======
+                parents: jasmine.createSpy().and.returnValue(productPriceMock)
+            };
+            widget._getNewPrices  = jasmine.createSpy().and.returnValue(undefined);
+            widget._UpdatePrice();
+            expect(productPriceMock.find().find.calls.count()).toBe(1);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         });
 
         it('check getSelectedOptionPriceIndex', function () {
@@ -199,6 +223,7 @@ define([
             qtyElement.trigger('input');
             expect(priceBox.trigger).toHaveBeenCalledWith('updatePrice', { prices: {}});
         });
+<<<<<<< HEAD
 
         describe('_addFotoramaVideoEvents', function () {
             let mageAddFotoramaVideoEventsWidget,
@@ -266,5 +291,7 @@ define([
                     });
                 });
         });
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     });
 });

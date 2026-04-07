@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Setup\Console\Command;
 
@@ -19,8 +24,13 @@ abstract class AbstractModuleManageCommand extends AbstractModuleCommand
     /**
      * Names of input arguments or options
      */
+<<<<<<< HEAD
     public const INPUT_KEY_ALL = 'all';
     public const INPUT_KEY_FORCE = 'force';
+=======
+    const INPUT_KEY_ALL = 'all';
+    const INPUT_KEY_FORCE = 'force';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var GeneratedFiles
@@ -33,7 +43,11 @@ abstract class AbstractModuleManageCommand extends AbstractModuleCommand
     protected $deploymentConfig;
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
+=======
+     * {@inheritdoc}
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     protected function configure()
     {
@@ -54,7 +68,11 @@ abstract class AbstractModuleManageCommand extends AbstractModuleCommand
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
+=======
+     * {@inheritdoc}
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     protected function isModuleRequired()
     {
@@ -62,9 +80,15 @@ abstract class AbstractModuleManageCommand extends AbstractModuleCommand
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
+=======
+     * {@inheritdoc}
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $isEnable = $this->isEnable();
         if ($input->getOption(self::INPUT_KEY_ALL)) {
@@ -180,8 +204,12 @@ abstract class AbstractModuleManageCommand extends AbstractModuleCommand
      * Get deployment config
      *
      * @return DeploymentConfig
+<<<<<<< HEAD
      * @deprecated 2.0.6 Use dependency injection instead of this method for accessing DeploymentConfig
      * @see DeploymentConfig Should be injected via constructor dependency injection
+=======
+     * @deprecated 2.0.6
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     private function getDeploymentConfig()
     {
@@ -192,11 +220,18 @@ abstract class AbstractModuleManageCommand extends AbstractModuleCommand
     }
 
     /**
+<<<<<<< HEAD
      * Get generated files service
      *
      * @return GeneratedFiles
      * @deprecated 2.1.0 Use dependency injection instead of this method for accessing GeneratedFiles
      * @see GeneratedFiles Should be injected via constructor dependency injection
+=======
+     * Get deployment config
+     *
+     * @return GeneratedFiles
+     * @deprecated 2.1.0
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     private function getGeneratedFiles()
     {

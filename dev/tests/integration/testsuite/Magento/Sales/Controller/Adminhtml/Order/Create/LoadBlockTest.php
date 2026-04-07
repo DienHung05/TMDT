@@ -1,13 +1,19 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Sales\Controller\Adminhtml\Order\Create;
 
 use Magento\Backend\Model\Session\Quote;
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Framework\App\Request\Http;
@@ -27,6 +33,17 @@ use Magento\TestFramework\Quote\Model\GetQuoteByReservedOrderId;
 use Magento\TestFramework\TestCase\AbstractBackendController;
 use Magento\Wishlist\Model\Wishlist;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\Framework\App\Request\Http;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\View\LayoutInterface;
+use Magento\Quote\Api\CartRepositoryInterface;
+use Magento\Quote\Api\Data\CartInterface;
+use Magento\Store\Model\StoreManagerInterface;
+use Magento\TestFramework\Quote\Model\GetQuoteByReservedOrderId;
+use Magento\TestFramework\TestCase\AbstractBackendController;
+use Magento\Wishlist\Model\Wishlist;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class checks create order load block controller.
@@ -35,7 +52,10 @@ use PHPUnit\Framework\Attributes\DataProvider;
  *
  * @magentoAppArea adminhtml
  * @magentoDbIsolation enabled
+<<<<<<< HEAD
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class LoadBlockTest extends AbstractBackendController
 {
@@ -57,9 +77,12 @@ class LoadBlockTest extends AbstractBackendController
     /** @var array */
     private $quoteIdsToRemove;
 
+<<<<<<< HEAD
     /** @var DataFixtureStorage */
     private $fixtures;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @inheritdoc
      */
@@ -72,7 +95,10 @@ class LoadBlockTest extends AbstractBackendController
         $this->session = $this->_objectManager->get(Quote::class);
         $this->quoteRepository = $this->_objectManager->get(CartRepositoryInterface::class);
         $this->storeManager = $this->_objectManager->get(StoreManagerInterface::class);
+<<<<<<< HEAD
         $this->fixtures = DataFixtureStorageManager::getStorage();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -95,13 +121,21 @@ class LoadBlockTest extends AbstractBackendController
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider responseFlagsProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Checkout/_files/quote_with_customer_without_address.php
      *
      * @param bool $asJson
      * @param bool $asJsVarname
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('responseFlagsProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddProductToOrderFromShoppingCart(bool $asJson, bool $asJsVarname): void
     {
         $oldQuote = $this->getQuoteByReservedOrderId->execute('test_order_with_customer_without_address');
@@ -109,11 +143,18 @@ class LoadBlockTest extends AbstractBackendController
             'json' => $asJson,
             'as_js_varname' => $asJsVarname,
         ]);
+<<<<<<< HEAD
         $itemId = $oldQuote->getItemsCollection()->getFirstItem()->getId();
         $post = $this->hydratePost([
             'sidebar' => [
                 'add_cart_item' => [
                     $itemId => 1,
+=======
+        $post = $this->hydratePost([
+            'sidebar' => [
+                'add_cart_item' => [
+                    $oldQuote->getItemsCollection()->getFirstItem()->getId() => 1,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ],
             ],
         ]);
@@ -121,6 +162,7 @@ class LoadBlockTest extends AbstractBackendController
         $this->dispatchWitParams($params, $post);
 
         $this->checkHandles(explode(',', $params['block']), $asJson);
+<<<<<<< HEAD
 
         $newQuote = $this->session->getQuote();
         $newQuoteItemsCollection = $newQuote->getItemsCollection(false);
@@ -143,11 +185,19 @@ class LoadBlockTest extends AbstractBackendController
             $body = $this->getResponse()->getBody();
         }
         $this->assertStringContainsString("sidebar[add_cart_item][$itemId]", $body);
+=======
+        $this->checkQuotes($oldQuote, 'simple2');
+
+        if ($asJsVarname) {
+            $this->assertRedirect($this->stringContains('sales/order_create/showUpdateResult'));
+        }
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function responseFlagsProvider(): array
     {
         return [
@@ -158,11 +208,24 @@ class LoadBlockTest extends AbstractBackendController
             'as_plain' => [
                 'asJson' => false,
                 'asJsVarname' => true,
+=======
+    public function responseFlagsProvider(): array
+    {
+        return [
+            'as_json' => [
+                'as_json' => true,
+                'as_js_varname' => false,
+            ],
+            'as_plain' => [
+                'as_json' => false,
+                'as_js_varname' => true,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }
 
     /**
+<<<<<<< HEAD
      * Test that JSON response with as_js_varname stores compressed data to prevent session bloat
      *
      * @return void
@@ -241,6 +304,8 @@ class LoadBlockTest extends AbstractBackendController
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Checkout/_files/quote_with_customer_without_address.php
      *
      * @return void
@@ -317,7 +382,10 @@ class LoadBlockTest extends AbstractBackendController
      *
      * @return void
      * @magentoDataFixture Magento/Wishlist/_files/wishlist_with_simple_product.php
+<<<<<<< HEAD
      * @magentoDbIsolation disabled
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function testAddProductToOrderFromWishList(): void
     {
@@ -325,11 +393,15 @@ class LoadBlockTest extends AbstractBackendController
         $wishlist = $this->_objectManager->create(Wishlist::class);
         $wishlistItems = $wishlist->loadByCustomerId(1)->getItemCollection();
         $this->assertCount(1, $wishlistItems);
+<<<<<<< HEAD
         $itemId = $wishlistItems->getFirstItem()->getId();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $post = $this->hydratePost([
             'sidebar' => [
                 'add_wishlist_item' => [
+<<<<<<< HEAD
                     $itemId => 1,
                 ],
             ],
@@ -342,11 +414,23 @@ class LoadBlockTest extends AbstractBackendController
 
         $body = $this->getResponse()->getBody();
         $this->assertStringNotContainsString("sidebar[add_wishlist_item][$itemId]", $body);
+=======
+                    $wishlistItems->getFirstItem()->getId() => 1,
+                ],
+            ],
+        ]);
+        $params = $this->hydrateParams();
+        $this->dispatchWitParams($params, $post);
+
+        $wishlistItems->clear()->load();
+        $this->assertEmpty($wishlistItems);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $quoteItems = $this->session->getQuote()->getItemsCollection();
         $this->assertCount(1, $quoteItems);
     }
 
     /**
+<<<<<<< HEAD
      * Verify that when another product is added from the grid, a previously configured product
      * (with required options) is NOT re-added due to presence of options[files_prefix] only.
      *
@@ -448,6 +532,8 @@ class LoadBlockTest extends AbstractBackendController
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Check that customer notification is NOT disabled after comment is updated.
      *
      * @return void
@@ -482,6 +568,7 @@ class LoadBlockTest extends AbstractBackendController
     }
 
     /**
+<<<<<<< HEAD
      * Check that specific store id is setting into the current stores.
      *
      * @return void
@@ -587,6 +674,8 @@ class LoadBlockTest extends AbstractBackendController
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Check customer quotes
      *
      * @param CartInterface $oldQuote

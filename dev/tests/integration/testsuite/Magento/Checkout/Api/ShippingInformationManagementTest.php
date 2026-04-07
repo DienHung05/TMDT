@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -14,7 +19,10 @@ use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\ShippingAssignmentInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\Framework\Exception\InputException;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -28,6 +36,14 @@ class ShippingInformationManagementTest extends TestCase
     private $management;
 
     /**
+<<<<<<< HEAD
+=======
+     * @var CartRepositoryInterface
+     */
+    private $cartRepo;
+
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @var CustomerRepositoryInterface
      */
     private $customerRepo;
@@ -44,6 +60,10 @@ class ShippingInformationManagementTest extends TestCase
     {
         $objectManager = Bootstrap::getObjectManager();
         $this->management = $objectManager->get(ShippingInformationManagementInterface::class);
+<<<<<<< HEAD
+=======
+        $this->cartRepo = $objectManager->get(CartRepositoryInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->customerRepo = $objectManager->get(CustomerRepositoryInterface::class);
         $this->shippingFactory = $objectManager->get(ShippingInformationInterfaceFactory::class);
     }
@@ -56,12 +76,20 @@ class ShippingInformationManagementTest extends TestCase
      *
      * @magentoDataFixture Magento/Sales/_files/quote_with_customer.php
      * @magentoDataFixture Magento/Customer/_files/customer_with_addresses.php
+<<<<<<< HEAD
      */
     #[DataProvider('getAddressesVariation')]
     public function testDifferentAddresses(bool $swapShipping): void
     {
         $cartRepository = Bootstrap::getObjectManager()->create(CartRepositoryInterface::class);
         $cart = $cartRepository->getForCustomer(1);
+=======
+     * @dataProvider getAddressesVariation
+     */
+    public function testDifferentAddresses(bool $swapShipping): void
+    {
+        $cart = $this->cartRepo->getForCustomer(1);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $otherCustomer = $this->customerRepo->get('customer_with_addresses@test.com');
         $otherAddresses = $otherCustomer->getAddresses();
         $otherAddress = array_pop($otherAddresses);
@@ -100,7 +128,11 @@ class ShippingInformationManagementTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function getAddressesVariation(): array
+=======
+    public function getAddressesVariation(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Shipping address swap' => [true],

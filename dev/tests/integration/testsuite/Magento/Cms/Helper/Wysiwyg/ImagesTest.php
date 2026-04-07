@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -14,7 +19,10 @@ use Magento\Framework\Filesystem;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use stdClass;
 
 class ImagesTest extends TestCase
@@ -58,8 +66,13 @@ class ImagesTest extends TestCase
      * @param bool $renderAsTag
      * @param string|callable $expectedResult - string or callable to make unique assertions on $expectedResult
      * @magentoConfigFixture current_store web/unsecure/base_url http://example.com/
+<<<<<<< HEAD
      */
     #[DataProvider('providerGetImageHtmlDeclaration')]
+=======
+     * @dataProvider providerGetImageHtmlDeclaration
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetImageHtmlDeclaration(
         $isStaticUrlsAllowed,
         $filename,
@@ -99,7 +112,11 @@ class ImagesTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function providerGetImageHtmlDeclaration()
+=======
+    public function providerGetImageHtmlDeclaration()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [true, 'wysiwyg/hello.png', true, '<img src="http://example.com/media/wysiwyg/hello.png" alt="" />'],
@@ -113,7 +130,11 @@ class ImagesTest extends TestCase
                         'e3ttZWRpYSB1cmw9Ind5c2l3eWcvaGVsbG8ucG5nIn19/'
                     );
 
+<<<<<<< HEAD
                     self::assertStringContainsString($expectedResult, parse_url($actualResult, PHP_URL_PATH));
+=======
+                    $this->assertStringContainsString($expectedResult, parse_url($actualResult, PHP_URL_PATH));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 },
             ],
             [true, 'wysiwyg/hello.png', false, 'http://example.com/media/wysiwyg/hello.png'],

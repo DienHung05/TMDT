@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -84,6 +89,7 @@ class StartdateTest extends TestCase
      */
     public function testValidatePastEndWithNoStart(): void
     {
+<<<<<<< HEAD
         $noException = null;
         try{
             $product = $this->productFactory->create();
@@ -93,6 +99,12 @@ class StartdateTest extends TestCase
         {
             $noException = $e->getMessage();
         }
+=======
+        $product = $this->productFactory->create();
+        $actualResult = $this->startDate->validate($product);
+        $this->assertEquals(true, $actualResult);
+        $noException = $this->getExpectedExceptionMessage();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertNull($noException);
     }
 }

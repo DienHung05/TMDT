@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -125,11 +130,14 @@ class ImportExportTableratesTest extends \Magento\TestFramework\TestCase\Abstrac
         $exportCsv = $gridBlock->setWebsiteId($this->websiteId)->setConditionName('package_weight')->getCsvFile();
         $exportCsvContent = $varDirectory->openFile($exportCsv['value'], 'r')->readAll();
 
+<<<<<<< HEAD
         $bom = pack('CCC', 0xef, 0xbb, 0xbf);
         if (substr($exportCsvContent, 0, 3) === $bom) {
             $exportCsvContent = substr($exportCsvContent, 3);
         }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         return $exportCsvContent;
     }
 }

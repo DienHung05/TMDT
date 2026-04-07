@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -17,7 +22,10 @@ use Magento\Quote\Model\Quote;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Quote\Api\CartRepositoryInterface as QuoteRepository;
 use Magento\Framework\Serialize\Serializer\Json;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test class for \Magento\Multishipping\Controller\Checkout
@@ -71,8 +79,13 @@ class CheckItemsTest extends \Magento\TestFramework\TestCase\AbstractController
      *
      * @magentoConfigFixture current_store multishipping/options/checkout_multiple 1
      * @magentoConfigFixture current_store multishipping/options/checkout_multiple_maximum_qty 200
+<<<<<<< HEAD
      */
     #[DataProvider('requestDataProvider')]
+=======
+     * @dataProvider requestDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecute($requestQuantity, $expectedResponse)
     {
         $this->loginCustomer();
@@ -144,23 +157,38 @@ class CheckItemsTest extends \Magento\TestFramework\TestCase\AbstractController
      * Variations of request data.
      * @returns array
      */
+<<<<<<< HEAD
     public static function requestDataProvider(): array
     {
         return [
             [
                 'requestQuantity' => [],
                 'expectedResponse' => [
+=======
+    public function requestDataProvider(): array
+    {
+        return [
+            [
+                'request' => [],
+                'response' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'success' => false,
                     'error_message' => 'We are unable to process your request. Please, try again later.'
                 ]
             ],
             [
+<<<<<<< HEAD
                 'requestQuantity' => ['qty' => 2],
                 'expectedResponse' => [
+=======
+                'request' => ['qty' => 2],
+                'response' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'success' => true,
                 ]
             ],
             [
+<<<<<<< HEAD
                 'requestQuantity' => ['qty' => 101],
                 'expectedResponse' => [
                     'success' => false,
@@ -169,6 +197,16 @@ class CheckItemsTest extends \Magento\TestFramework\TestCase\AbstractController
             [
                 'requestQuantity' => ['qty' => 230],
                 'expectedResponse' => [
+=======
+                'request' => ['qty' => 101],
+                'response' => [
+                    'success' => false,
+                    'error_message' => 'The requested qty is not available']
+            ],
+            [
+                'request' => ['qty' => 230],
+                'response' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'success' => false,
                     'error_message' => 'Maximum qty allowed for Shipping to multiple addresses is 200']
             ],

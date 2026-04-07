@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -13,7 +18,10 @@ use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\MediaGalleryApi\Api\SearchAssetsInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Verify SearchAssets By searchCriteria
@@ -56,9 +64,15 @@ class SearchAssetsTest extends TestCase
     /**
      * Verify search asstes by searching with search criteria
      *
+<<<<<<< HEAD
      * @magentoDataFixture Magento/MediaGallery/_files/media_asset.php
      */
     #[DataProvider('searchCriteriaProvider')]
+=======
+     * @dataProvider searchCriteriaProvider
+     * @magentoDataFixture Magento/MediaGallery/_files/media_asset.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecute(array $searchCriteriaData): void
     {
         $titleFilter = $this->filterBuilder->setField($searchCriteriaData['field'])
@@ -80,7 +94,11 @@ class SearchAssetsTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function searchCriteriaProvider(): array
+=======
+    public function searchCriteriaProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

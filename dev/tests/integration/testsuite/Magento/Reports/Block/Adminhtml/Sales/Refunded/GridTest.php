@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Reports\Block\Adminhtml\Sales\Refunded;
 
 use PHPUnit\Framework\Attributes\Depends;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Reports\Block\Adminhtml\Sales\Refunded;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * @magentoAppArea adminhtml
  */
@@ -48,9 +56,15 @@ class GridTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param  string $normalCollection
      */
     #[Depends('testGetResourceCollectionNameNormal')]
+=======
+     * @depends testGetResourceCollectionNameNormal
+     * @param  string $normalCollection
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetResourceCollectionNameWithFilter($normalCollection)
     {
         $block = $this->_createBlock('created_at_refunded');

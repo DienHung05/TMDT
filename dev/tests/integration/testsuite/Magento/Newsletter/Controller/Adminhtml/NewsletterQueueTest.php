@@ -1,12 +1,20 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Newsletter\Controller\Adminhtml;
 
 use Magento\Framework\App\Request\Http as HttpRequest;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea adminhtml
@@ -47,8 +55,13 @@ class NewsletterQueueTest extends \Magento\TestFramework\TestCase\AbstractBacken
 
     /**
      * @magentoDataFixture Magento/Newsletter/_files/newsletter_sample.php
+<<<<<<< HEAD
      */
     #[DataProvider('postValuesForRequest')]
+=======
+     * @dataProvider postValuesForRequest
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveActionQueueTemplateAndVerifySuccessMessage(array $postForQueue)
     {
         $this->getRequest()->setMethod(HttpRequest::METHOD_POST);
@@ -83,7 +96,11 @@ class NewsletterQueueTest extends \Magento\TestFramework\TestCase\AbstractBacken
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function postValuesForRequest(): array
+=======
+    public function postValuesForRequest(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'start_at_value_is_integer_zero' => [

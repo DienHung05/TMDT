@@ -1,16 +1,25 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Catalog\Model\Product;
 
 use Magento\CatalogSearch\Model\Indexer\Fulltext;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
+=======
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class ActionTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -93,9 +102,15 @@ class ActionTest extends \PHPUnit\Framework\TestCase
      * @magentoAppArea adminhtml
      * @param string $status
      * @param string $productsCount
+<<<<<<< HEAD
      * @magentoDbIsolation disabled
      */
     #[DataProvider('updateAttributesDataProvider')]
+=======
+     * @dataProvider updateAttributesDataProvider
+     * @magentoDbIsolation disabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateAttributes($status, $productsCount)
     {
         /** @var \Magento\Framework\Indexer\IndexerRegistry $indexerRegistry */
@@ -142,16 +157,28 @@ class ActionTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function updateAttributesDataProvider()
+=======
+    public function updateAttributesDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
                 'status' => 2,
+<<<<<<< HEAD
                 'productsCount' => 0
             ],
             [
                 'status' => 1,
                 'productsCount' => 1
+=======
+                'expected_count' => 0
+            ],
+            [
+                'status' => 1,
+                'expected_count' => 1
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Setup\Fixtures;
@@ -75,8 +80,13 @@ class CatalogPriceRulesFixture extends Fixture
         for ($i = 0; $i < $catalogPriceRulesCount; $i++) {
             $ruleName = sprintf('Catalog Price Rule %1$d', $i);
             $data = [
+<<<<<<< HEAD
                 // Guard against null array offsets on PHP 8.1+ by only setting when field names are present
                 // (identifier/link fields can be null depending on metadata implementation)
+=======
+                $idField                => null,
+                $linkField              => null,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'name'                  => $ruleName,
                 'description'           => '',
                 'is_active'             => '1',
@@ -121,12 +131,15 @@ class CatalogPriceRulesFixture extends Fixture
                 'banner_is_enabled'         => '',
                 'related_banners'           => [],
             ];
+<<<<<<< HEAD
             if (!empty($idField)) {
                 $data[$idField] = null;
             }
             if (!empty($linkField)) {
                 $data[$linkField] = null;
             }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             if (isset($data['simple_action']) && $data['simple_action'] == 'by_percent'
                 && isset($data['discount_amount'])
             ) {

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Quote\Api;
 
@@ -11,9 +16,15 @@ use Magento\Quote\Api\Data\AddressInterface;
 
 class GuestShipmentEstimationTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     public const SERVICE_VERSION = 'V1';
     public const SERVICE_NAME = 'quoteGuestShipmentEstimationV1';
     public const RESOURCE_PATH = '/V1/guest-carts/';
+=======
+    const SERVICE_VERSION = 'V1';
+    const SERVICE_NAME = 'quoteGuestShipmentEstimationV1';
+    const RESOURCE_PATH = '/V1/guest-carts/';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var ObjectManager
@@ -26,6 +37,7 @@ class GuestShipmentEstimationTest extends WebapiAbstract
     }
 
     /**
+<<<<<<< HEAD
      * @return void
      */
     public function testNotAuthorized(): void
@@ -53,6 +65,8 @@ class GuestShipmentEstimationTest extends WebapiAbstract
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoApiDataFixture Magento/SalesRule/_files/cart_rule_free_shipping.php
      * @magentoApiDataFixture Magento/Sales/_files/quote.php
      */

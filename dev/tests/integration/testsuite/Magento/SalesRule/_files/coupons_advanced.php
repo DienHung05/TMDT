@@ -1,16 +1,28 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 use Magento\TestFramework\Workaround\Override\Fixture\Resolver;
 
 Resolver::getInstance()->requireDataFixture('Magento/SalesRule/_files/rules_advanced.php');
 
+<<<<<<< HEAD
 $collection = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(
     \Magento\SalesRule\Model\ResourceModel\Rule\Collection::class
 );
 $items = array_values($collection->getItems());
+=======
+$this->_collection = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(
+    \Magento\SalesRule\Model\ResourceModel\Rule\Collection::class
+);
+$items = array_values($this->_collection->getItems());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 // type SPECIFIC with code
 $coupon = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(\Magento\SalesRule\Model\Coupon::class);

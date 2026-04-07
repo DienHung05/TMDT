@@ -1,8 +1,15 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 namespace Magento\TestFramework\Annotation;
 
 use FilesystemIterator;
@@ -97,8 +104,14 @@ class ComponentRegistrarFixture
         } catch (Throwable $exception) {
             ExceptionHandler::handle(
                 'Unable to parse fixtures',
+<<<<<<< HEAD
                 $exception,
                 $test
+=======
+                get_class($test),
+                $test->getName(false),
+                $exception
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             );
         }
         if (!$values) {
@@ -108,7 +121,13 @@ class ComponentRegistrarFixture
         $componentAnnotations = array_unique(array_column($values, 'path'));
         $reflection = new ReflectionClass(self::REGISTRAR_CLASS);
         $paths = $reflection->getProperty(self::PATHS_FIELD);
+<<<<<<< HEAD
         $this->origComponents = $paths->getValue();
+=======
+        $paths->setAccessible(true);
+        $this->origComponents = $paths->getValue();
+        $paths->setAccessible(false);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         foreach ($componentAnnotations as $fixturePath) {
             $fixturesDir = $this->fixtureBaseDir . '/' . $fixturePath;
             if (!file_exists($fixturesDir)) {
@@ -139,7 +158,13 @@ class ComponentRegistrarFixture
         if (null !== $this->origComponents) {
             $reflection = new ReflectionClass(self::REGISTRAR_CLASS);
             $paths = $reflection->getProperty(self::PATHS_FIELD);
+<<<<<<< HEAD
             $paths->setValue(null, $this->origComponents);
+=======
+            $paths->setAccessible(true);
+            $paths->setValue($this->origComponents);
+            $paths->setAccessible(false);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $this->origComponents = null;
         }
     }

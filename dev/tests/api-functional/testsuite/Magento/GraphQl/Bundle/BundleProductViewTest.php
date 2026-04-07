@@ -1,13 +1,19 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Bundle;
 
 use Magento\Bundle\Model\Product\OptionList;
+<<<<<<< HEAD
 use Magento\Bundle\Test\Fixture\Option as BundleOptionFixture;
 use Magento\Bundle\Test\Fixture\Product as BundleProductFixture;
 use Magento\Catalog\Api\Data\ProductInterface;
@@ -19,6 +25,11 @@ use Magento\Store\Test\Fixture\Store as StoreFixture;
 use Magento\Store\Test\Fixture\Website as WebsiteFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DbIsolation;
+=======
+use Magento\Catalog\Api\Data\ProductInterface;
+use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\ObjectManager;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
 use Magento\Store\Model\StoreManagerInterface;
@@ -280,6 +291,7 @@ QUERY;
                 'quantity' => (int)$bundleProductLink->getQty(),
                 'position' => $bundleProductLink->getPosition(),
                 'is_default' => (bool)$bundleProductLink->getIsDefault(),
+<<<<<<< HEAD
                 'price_type' => self::KEY_PRICE_TYPE_FIXED,
                 'can_change_quantity' => $bundleProductLink->getCanChangeQuantity()
             ]
@@ -288,13 +300,24 @@ QUERY;
             $childProduct->getName(),
             $actualResponse['items'][0]['options'][0]['label']
         );
+=======
+                 'price_type' => self::KEY_PRICE_TYPE_FIXED,
+                'can_change_quantity' => $bundleProductLink->getCanChangeQuantity(),
+                'label' => $childProduct->getName()
+            ]
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertResponseFields(
             $actualResponse['items'][0]['options'][0]['product'],
             [
                 'id' => $childProduct->getId(),
                 'name' => $childProduct->getName(),
                 'type_id' => $childProduct->getTypeId(),
+<<<<<<< HEAD
                 'sku' => $childProduct->getSku()
+=======
+                'sku' => $bundleProductLink->getSku()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ]
         );
     }
@@ -445,6 +468,7 @@ QUERY;
         $this->graphQlQuery($query);
     }
 
+<<<<<<< HEAD
     #[
         DbIsolation(false),
         DataFixture(WebsiteFixture::class, as: 'website2'),
@@ -459,6 +483,11 @@ QUERY;
             ['sku' => 'bundle-product', '_options' => ['$opt1$', '$opt2$'], 'website_ids' => [1, '$website2.id$']]
         ),
     ]
+=======
+    /**
+     * @magentoApiDataFixture Magento/Bundle/_files/product_1.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testBundleProductWithDisabledProductOption()
     {
         /** @var StoreManagerInterface $storeManager */
@@ -466,7 +495,11 @@ QUERY;
         $storeIdDefault = $storeManager->getDefaultStoreView()->getId();
         /** @var ProductRepositoryInterface $productRepository */
         $productRepository = ObjectManager::getInstance()->get(ProductRepositoryInterface::class);
+<<<<<<< HEAD
         $simpleProduct = $productRepository->get('p1', true, $storeIdDefault, true);
+=======
+        $simpleProduct = $productRepository->get('simple', false, $storeIdDefault, true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $simpleProduct->setStatus(ProductStatus::STATUS_DISABLED);
         $simpleProduct->setStoreIds([$storeIdDefault]);
         $productRepository->save($simpleProduct);
@@ -521,6 +554,7 @@ QUERY;
 }
 QUERY;
 
+<<<<<<< HEAD
         $response = $this->graphQlQuery($query, [], '', ['Store' => 'default']);
         $this->assertEmpty($response['products']['items']);
         $response = $this->graphQlQuery($query, [], '', ['Store' => 'store2']);
@@ -591,5 +625,9 @@ QUERY;
 
         $response = $this->graphQlQuery($query);
         $this->assertNotEmpty($response['products']['items']);
+=======
+        $response = $this->graphQlQuery($query);
+        $this->assertEmpty($response['products']['items']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

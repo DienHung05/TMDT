@@ -1,11 +1,17 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Bundle\Api;
 
+<<<<<<< HEAD
 use Magento\Bundle\Test\Fixture\Option as BundleOptionFixture;
 use Magento\Bundle\Test\Fixture\Product as BundleProductFixture;
 use Magento\Catalog\Api\Data\ProductInterface;
@@ -14,6 +20,10 @@ use Magento\Framework\Api\ExtensibleDataInterface;
 use Magento\Store\Test\Fixture\Store as StoreFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
+=======
+use Magento\Catalog\Api\Data\ProductInterface;
+use Magento\Framework\Api\ExtensibleDataInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\WebapiAbstract;
 use Magento\Bundle\Api\Data\LinkInterface;
@@ -23,10 +33,17 @@ use Magento\Bundle\Api\Data\LinkInterface;
  */
 class ProductServiceTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     private const SERVICE_NAME = 'catalogProductRepositoryV1';
     private const SERVICE_VERSION = 'V1';
     private const RESOURCE_PATH = '/V1/products';
     private const BUNDLE_PRODUCT_ID = 'sku-test-product-bundle';
+=======
+    const SERVICE_NAME = 'catalogProductRepositoryV1';
+    const SERVICE_VERSION = 'V1';
+    const RESOURCE_PATH = '/V1/products';
+    const BUNDLE_PRODUCT_ID = 'sku-test-product-bundle';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var \Magento\Catalog\Model\ResourceModel\Product\Collection
@@ -34,18 +51,24 @@ class ProductServiceTest extends WebapiAbstract
     protected $productCollection;
 
     /**
+<<<<<<< HEAD
      * @var bool
      */
     private $cleanUpOnTearDown = true;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Execute per test initialization
      */
     protected function setUp(): void
     {
         $objectManager = Bootstrap::getObjectManager();
         $this->productCollection = $objectManager->get(\Magento\Catalog\Model\ResourceModel\Product\Collection::class);
+<<<<<<< HEAD
         $this->cleanUpOnTearDown = true;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -53,9 +76,13 @@ class ProductServiceTest extends WebapiAbstract
      */
     protected function tearDown(): void
     {
+<<<<<<< HEAD
         if ($this->cleanUpOnTearDown) {
             $this->deleteProductBySku(self::BUNDLE_PRODUCT_ID);
         }
+=======
+        $this->deleteProductBySku(self::BUNDLE_PRODUCT_ID);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         parent::tearDown();
     }
 
@@ -283,6 +310,10 @@ class ProductServiceTest extends WebapiAbstract
         $bundleProduct = $this->createFixedPriceBundleProduct();
         $bundleProductOptions = $this->getBundleProductOptions($bundleProduct);
 
+<<<<<<< HEAD
+=======
+        $oldOptionId = $bundleProductOptions[0]['option_id'];
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         //replace current option with a new option
         $bundleProductOptions[0] = [
             'title' => 'new option',
@@ -308,6 +339,7 @@ class ProductServiceTest extends WebapiAbstract
         $this->assertEquals($optionPrice, $bundleOptions[0]['product_links'][0]['price']);
     }
 
+<<<<<<< HEAD
     #[
         DataFixture(StoreFixture::class, as: 'store2'),
         DataFixture(ProductFixture::class, ['price' => 10], 'p1'),
@@ -354,6 +386,8 @@ class ProductServiceTest extends WebapiAbstract
         $this->assertEquals($defaultOptions[1]['title'], $options[1]['title']);
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Get the bundle_product_options custom attribute from product, null if the attribute is not set
      *
@@ -516,7 +550,11 @@ class ProductServiceTest extends WebapiAbstract
      * @param string $productSku
      * @return array the product data
      */
+<<<<<<< HEAD
     protected function getProduct($productSku, ?string $storeCode = null)
+=======
+    protected function getProduct($productSku)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $serviceInfo = [
             'rest' => [
@@ -530,9 +568,16 @@ class ProductServiceTest extends WebapiAbstract
             ],
         ];
 
+<<<<<<< HEAD
         return TESTS_WEB_API_ADAPTER === self::ADAPTER_SOAP
             ? $this->_webApiCall($serviceInfo, ['sku' => $productSku], storeCode: $storeCode)
             : $this->_webApiCall($serviceInfo, storeCode: $storeCode);
+=======
+        $response = (TESTS_WEB_API_ADAPTER == self::ADAPTER_SOAP) ?
+            $this->_webApiCall($serviceInfo, ['sku' => $productSku]) : $this->_webApiCall($serviceInfo);
+
+        return $response;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -588,10 +633,16 @@ class ProductServiceTest extends WebapiAbstract
      * Save product
      *
      * @param array $product
+<<<<<<< HEAD
      * @param string|null $storeCode
      * @return array the created product data
      */
     protected function saveProduct($product, ?string $storeCode = null)
+=======
+     * @return array the created product data
+     */
+    protected function saveProduct($product)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         if (isset($product['custom_attributes'])) {
             $count = count($product['custom_attributes']);
@@ -616,7 +667,11 @@ class ProductServiceTest extends WebapiAbstract
             ],
         ];
         $requestData = ['product' => $product];
+<<<<<<< HEAD
         $response = $this->_webApiCall($serviceInfo, $requestData, storeCode: $storeCode);
+=======
+        $response = $this->_webApiCall($serviceInfo, $requestData);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         return $response;
     }
 }

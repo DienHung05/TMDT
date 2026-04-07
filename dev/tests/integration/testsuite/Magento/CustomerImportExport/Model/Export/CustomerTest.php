@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\CustomerImportExport\Model\Export;
@@ -17,14 +22,20 @@ use Magento\ImportExport\Model\Export\Adapter\Csv;
 use Magento\Customer\Model\Customer as CustomerModel;
 use Magento\Customer\Model\ResourceModel\Attribute\Collection;
 use Magento\Customer\Model\ResourceModel\Customer\Collection as CustomerCollection;
+<<<<<<< HEAD
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Tests for customer export model.
  *
  * @magentoAppArea adminhtml
+<<<<<<< HEAD
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class CustomerTest extends \PHPUnit\Framework\TestCase
 {
@@ -54,11 +65,14 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
     private $attributeCollection;
 
     /**
+<<<<<<< HEAD
      * @var TimezoneInterface
      */
     private $localeDate;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
@@ -66,7 +80,10 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
         $this->objectManager = Bootstrap::getObjectManager();
         $this->_model = $this->objectManager->create(Customer::class);
         $this->attributeCollection = $this->objectManager->create(Collection::class);
+<<<<<<< HEAD
         $this->localeDate = $this->objectManager->create(TimezoneInterface::class);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -162,6 +179,7 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
         $customers = $this->objectManager->create(CustomerCollection::class);
         foreach ($customers as $customer) {
             $data = $this->processCustomerData($customer, $expectedAttributes);
+<<<<<<< HEAD
 
             $data['created_at'] = $this->localeDate
                 ->scopeDate(null, $data['created_at'], true)
@@ -171,6 +189,8 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
                 ->scopeDate(null, $data['updated_at'], true)
                 ->format('Y-m-d H:i:s');
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $exportData = $lines['data'][$data['email']];
             $exportData = $this->unsetDuplicateData($exportData);
 
@@ -261,9 +281,13 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
      */
     private function getAttributeValueById(string $attributeCode, $valueId)
     {
+<<<<<<< HEAD
         // PHP 8.5 Compatibility: Check for null before using as array offset
         if ($valueId !== null
             && isset($this->attributeValues[$attributeCode])
+=======
+        if (isset($this->attributeValues[$attributeCode])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             && isset($this->attributeValues[$attributeCode][$valueId])
         ) {
             return $this->attributeValues[$attributeCode][$valueId];
@@ -349,11 +373,18 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
      * Test for method filterEntityCollection()
      *
      * @magentoDataFixture Magento/Customer/_files/import_export/customers.php
+<<<<<<< HEAD
+=======
+     * @dataProvider filterDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $locale
      * @param int $count
      * @param array $filter
      */
+<<<<<<< HEAD
     #[DataProvider('filterDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testFilterEntityCollection(string $locale, int $count, array $filter)
     {
         $localeResolver = $this->objectManager->get(LocaleResolver::class);
@@ -379,7 +410,11 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function filterDataProvider(): array
+=======
+    public function filterDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['en_US', 1, ['created_at' => ['01/02/1999', '01/03/1999']]],
@@ -408,12 +443,21 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
     {
         $data = ['header' => [], 'data' => []];
 
+<<<<<<< HEAD
         $lines = str_getcsv($content, "\n", '"', '\\');
         foreach ($lines as $index => $line) {
             if ($index == 0) {
                 $data['header'] = str_getcsv($line, ',', '"', '\\');
             } else {
                 $row = array_combine($data['header'], str_getcsv($line, ',', '"', '\\'));
+=======
+        $lines = str_getcsv($content, "\n");
+        foreach ($lines as $index => $line) {
+            if ($index == 0) {
+                $data['header'] = str_getcsv($line);
+            } else {
+                $row = array_combine($data['header'], str_getcsv($line));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 if ($entityId !== null && !empty($row[$entityId])) {
                     $data['data'][$row[$entityId]] = $row;
                 } else {

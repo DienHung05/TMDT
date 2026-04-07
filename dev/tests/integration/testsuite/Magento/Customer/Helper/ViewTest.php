@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Customer\Helper;
 
 use Magento\Customer\Api\CustomerMetadataInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class ViewTest extends \PHPUnit\Framework\TestCase
 {
@@ -33,8 +41,13 @@ class ViewTest extends \PHPUnit\Framework\TestCase
      * @param bool $isPrefixAllowed
      * @param bool $isMiddleNameAllowed
      * @param bool $isSuffixAllowed
+<<<<<<< HEAD
      */
     #[DataProvider('getCustomerNameDataProvider')]
+=======
+     * @dataProvider getCustomerNameDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetCustomerName(
         $customerData,
         $expectedCustomerName,
@@ -67,7 +80,11 @@ class ViewTest extends \PHPUnit\Framework\TestCase
         );
     }
 
+<<<<<<< HEAD
     public static function getCustomerNameDataProvider()
+=======
+    public function getCustomerNameDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         /** @var \Magento\Customer\Api\Data\CustomerInterfaceFactory $customerFactory */
         $customerFactory = Bootstrap::getObjectManager()->create(
@@ -133,7 +150,11 @@ class ViewTest extends \PHPUnit\Framework\TestCase
                 )->setLastname(
                     '<strong>LastName</strong>'
                 ),
+<<<<<<< HEAD
                 '<h1>FirstName</h1> <strong>LastName</strong>',
+=======
+                '&lt;h1&gt;FirstName&lt;/h1&gt; &lt;strong&gt;LastName&lt;/strong&gt;',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

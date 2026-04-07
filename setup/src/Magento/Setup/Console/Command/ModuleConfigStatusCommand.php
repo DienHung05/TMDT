@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -23,7 +28,10 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class ModuleConfigStatusCommand extends Command
 {
+<<<<<<< HEAD
     public const NAME = 'module:config:status';
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Deployment config reader
      *
@@ -55,10 +63,17 @@ class ModuleConfigStatusCommand extends Command
     /**
      * @inheritdoc
      */
+<<<<<<< HEAD
     protected function configure(): void
     {
         $this
             ->setName(self::NAME)
+=======
+    protected function configure()
+    {
+        $this
+            ->setName('module:config:status')
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->setDescription(
                 'Checks the modules configuration in the \'app/etc/config.php\' file '
                 . 'and reports if they are up to date or not'
@@ -70,7 +85,11 @@ class ModuleConfigStatusCommand extends Command
     /**
      * @inheritdoc
      */
+<<<<<<< HEAD
     protected function execute(InputInterface $input, OutputInterface $output): int
+=======
+    protected function execute(InputInterface $input, OutputInterface $output)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         try {
             // the config as currently in app/etc/config.php

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -26,7 +31,10 @@ use Magento\ImportExport\Model\Import\Source\Csv as CsvSource;
 use Magento\ImportExport\Model\Import\Source\CsvFactory;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\MessageQueue\ClearQueueProcessor;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -110,11 +118,18 @@ class ImportWithNotExistImagesTest extends TestCase
 
     /**
      * @magentoDataFixture Magento/Catalog/_files/product_with_image.php
+<<<<<<< HEAD
      * @param string $imagesPath
      * @return void
      */
     #[DataProvider('unexistingImagesDataProvider')]
     public function testImportWithUnexistingImages(string $imagesPath): void
+=======
+     *
+     * @return void
+     */
+    public function testImportWithUnexistingImages(): void
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $cache = $this->objectManager->get(\Magento\Framework\App\Cache::class);
         $cache->clean();
@@ -134,7 +149,11 @@ class ImportWithNotExistImagesTest extends TestCase
         $this->assertTrue($this->directory->isExist($this->filePath), 'Products were not imported to file');
         $fileContent = $this->getCsvData($this->directory->getAbsolutePath($this->filePath));
         $this->assertCount(2, $fileContent);
+<<<<<<< HEAD
         $this->updateFileImagesToInvalidValues($imagesPath);
+=======
+        $this->updateFileImagesToInvalidValues();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $mediaDirectory = $this->fileSystem->getDirectoryWrite(DirectoryList::MEDIA);
         $mediaDirectory->create('import');
         $this->import->setParameters([
@@ -147,6 +166,7 @@ class ImportWithNotExistImagesTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @return array
      */
     public static function unexistingImagesDataProvider(): array
@@ -158,6 +178,8 @@ class ImportWithNotExistImagesTest extends TestCase
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Export products from queue to csv file
      *
      * @return void
@@ -171,10 +193,16 @@ class ImportWithNotExistImagesTest extends TestCase
     /**
      * Change image names in an export file
      *
+<<<<<<< HEAD
      * @param string $imagesPath
      * @return void
      */
     private function updateFileImagesToInvalidValues(string $imagesPath): void
+=======
+     * @return void
+     */
+    private function updateFileImagesToInvalidValues(): void
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $absolutePath = $this->directory->getAbsolutePath($this->filePath);
         $csv = $this->getCsvData($absolutePath);
@@ -185,7 +213,11 @@ class ImportWithNotExistImagesTest extends TestCase
         }
 
         foreach ($imagesPositions as $imagesPosition) {
+<<<<<<< HEAD
             $csv[1][$imagesPosition] = $imagesPath;
+=======
+            $csv[1][$imagesPosition] = '/m/a/invalid_image.jpg';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
 
         $this->appendCsvData($absolutePath, $csv);
@@ -223,6 +255,12 @@ class ImportWithNotExistImagesTest extends TestCase
             RowValidatorInterface::ERROR_MEDIA_URL_NOT_ACCESSIBLE,
             $importError->getErrorCode()
         );
+<<<<<<< HEAD
+=======
+        $errorMsg = (string)__('Imported resource (image) could not be downloaded ' .
+            'from external resource due to timeout or access permissions');
+        $this->assertEquals($errorMsg, $importError->getErrorMessage());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**

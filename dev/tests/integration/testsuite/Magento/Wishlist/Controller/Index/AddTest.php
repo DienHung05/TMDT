@@ -1,9 +1,15 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 declare(strict_types=1);
 
 namespace Magento\Wishlist\Controller\Index;
@@ -11,6 +17,7 @@ namespace Magento\Wishlist\Controller\Index;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Customer\Model\Session;
 use Magento\Framework\App\Request\Http as HttpRequest;
+<<<<<<< HEAD
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Escaper;
 use Magento\Framework\Message\MessageInterface;
@@ -23,6 +30,13 @@ use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\TestFramework\Mail\Template\TransportBuilderMock;
 use Magento\Wishlist\Model\DataSerializer;
 use Magento\Framework\UrlInterface;
+=======
+use Magento\Framework\Escaper;
+use Magento\Framework\Message\MessageInterface;
+use Magento\TestFramework\TestCase\AbstractController;
+use Magento\TestFramework\Wishlist\Model\GetWishlistByCustomerId;
+use Laminas\Stdlib\Parameters;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for add product to wish list.
@@ -30,7 +44,10 @@ use Magento\Framework\UrlInterface;
  * @magentoDbIsolation disabled
  * @magentoAppArea frontend
  * @magentoDataFixture Magento/Customer/_files/customer.php
+<<<<<<< HEAD
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class AddTest extends AbstractController
 {
@@ -46,6 +63,7 @@ class AddTest extends AbstractController
     /** @var Escaper */
     private $escaper;
 
+<<<<<<< HEAD
     /** @var CustomerRepositoryInterface */
     private $customerRepository;
 
@@ -64,6 +82,8 @@ class AddTest extends AbstractController
      */
     private $dataSerializer;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @inheritdoc
      */
@@ -76,10 +96,13 @@ class AddTest extends AbstractController
         $this->productRepository = $this->_objectManager->get(ProductRepositoryInterface::class);
         $this->productRepository->cleanCache();
         $this->escaper = $this->_objectManager->get(Escaper::class);
+<<<<<<< HEAD
         $this->customerRepository = $this->_objectManager->get(CustomerRepositoryInterface::class);
         $this->transportBuilder = $this->_objectManager->get(TransportBuilderMock::class);
         $this->urlBuilder = $this->_objectManager->get(UrlInterface::class);
         $this->dataSerializer = $this->_objectManager->get(DataSerializer::class);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -177,6 +200,7 @@ class AddTest extends AbstractController
     }
 
     /**
+<<<<<<< HEAD
      * Add Product to Wishlist Before Login, Create Customer & Send Confirmation Email
      *
      * @magentoAppArea frontend
@@ -287,6 +311,8 @@ class AddTest extends AbstractController
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Perform request add item to wish list.
      *
      * @param array $params
@@ -327,6 +353,7 @@ class AddTest extends AbstractController
         $parameters->set('HTTP_REFERER', 'http://localhost/test');
         $this->getRequest()->setServer($parameters);
     }
+<<<<<<< HEAD
 
     /**
      * Fills request with customer data.
@@ -344,4 +371,6 @@ class AddTest extends AbstractController
             ->setParam('password', '_Password1')
             ->setParam('password_confirmation', '_Password1');
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

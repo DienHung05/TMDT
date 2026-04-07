@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Bundle\Model\Product;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * @magentoAppArea frontend
  */
@@ -16,11 +24,18 @@ class DynamicBundleWithSpecialPriceCalculatorTest extends BundlePriceAbstract
     /**
      * @param array $strategyModifiers
      * @param array $expectedResults
+<<<<<<< HEAD
+=======
+     * @dataProvider getTestCases
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoAppIsolation enabled
      * @magentoDataFixture Magento/Bundle/_files/PriceCalculator/dynamic_bundle_product_with_special_price.php
      * @magentoDbIsolation disabled
      */
+<<<<<<< HEAD
     #[DataProvider('getTestCases')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPriceForDynamicBundle(array $strategyModifiers, array $expectedResults)
     {
         $this->prepareFixture($strategyModifiers, 'bundle_product');
@@ -74,11 +89,19 @@ class DynamicBundleWithSpecialPriceCalculatorTest extends BundlePriceAbstract
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function getTestCases()
     {
         return [
             '#1 Testing price for dynamic bundle with one required option and special price' => [
                 'strategyModifiers' => self::getBundleConfiguration1(),
+=======
+    public function getTestCases()
+    {
+        return [
+            '#1 Testing price for dynamic bundle with one required option and special price' => [
+                'strategy' => $this->getBundleConfiguration1(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     // 0.5 * 10
                     'minimalPrice' => 5,
@@ -88,7 +111,11 @@ class DynamicBundleWithSpecialPriceCalculatorTest extends BundlePriceAbstract
             ],
 
             '#2 Testing price for dynamic bundle with one non required option and special price' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getBundleConfiguration2(),
+=======
+                'strategy' => $this->getBundleConfiguration2(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     // 0.5 * 2 * 10
                     'minimalPrice' => 10,
@@ -99,10 +126,17 @@ class DynamicBundleWithSpecialPriceCalculatorTest extends BundlePriceAbstract
             ],
 
             '
+<<<<<<< HEAD
                 #3 Testing price for dynamic bundle
                 with one required checkbox type option, two simples and special price
             ' => [
                 'strategyModifiers' => self::getBundleConfiguration3(),
+=======
+                #3 Testing price for dynamic bundle 
+                with one required checkbox type option, two simples and special price
+            ' => [
+                'strategy' => $this->getBundleConfiguration3(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     // 0.5 * 1 * 10
                     'minimalPrice' => 5,
@@ -112,10 +146,17 @@ class DynamicBundleWithSpecialPriceCalculatorTest extends BundlePriceAbstract
             ],
 
             '
+<<<<<<< HEAD
                 #4 Testing price for dynamic bundle
                 with one required multi type option, two simples with special price
             ' => [
                 'strategyModifiers' => self::getBundleConfiguration4(),
+=======
+                #4 Testing price for dynamic bundle 
+                with one required multi type option, two simples with special price
+            ' => [
+                'strategy' => $this->getBundleConfiguration4(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     // 0.5 * (min (1 * 9.9, 2.5 * 4))
                     'minimalPrice' => 4.95,
@@ -125,7 +166,11 @@ class DynamicBundleWithSpecialPriceCalculatorTest extends BundlePriceAbstract
             ],
 
             '#5 Testing price for dynamic bundle with one required option, one non required and special price' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getBundleConfiguration5(),
+=======
+                'strategy' => $this->getBundleConfiguration5(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     // 0.5 * (3 * 2.5)
                     'minimalPrice' => 3.75,
@@ -139,7 +184,11 @@ class DynamicBundleWithSpecialPriceCalculatorTest extends BundlePriceAbstract
             ],
 
             '#6 Testing price for dynamic bundle with one simple product with special price' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getBundleConfiguration6(),
+=======
+                'strategy' => $this->getBundleConfiguration6(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     // 0.5 * min(4 * 2.5, 1 * 9.9)
                     'minimalPrice' => 4.95,
@@ -154,7 +203,11 @@ class DynamicBundleWithSpecialPriceCalculatorTest extends BundlePriceAbstract
      * Dynamic bundle with one required option
      * @return array
      */
+<<<<<<< HEAD
     private static function getBundleConfiguration1()
+=======
+    private function getBundleConfiguration1()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -182,7 +235,11 @@ class DynamicBundleWithSpecialPriceCalculatorTest extends BundlePriceAbstract
      * Dynamic bundle with one non required option and special price
      * @return array
      */
+<<<<<<< HEAD
     private static function getBundleConfiguration2()
+=======
+    private function getBundleConfiguration2()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -210,7 +267,11 @@ class DynamicBundleWithSpecialPriceCalculatorTest extends BundlePriceAbstract
      * Dynamic bundle with one required checkbox type option, two simples and special price
      * @return array
      */
+<<<<<<< HEAD
     private static function getBundleConfiguration3()
+=======
+    private function getBundleConfiguration3()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -242,7 +303,11 @@ class DynamicBundleWithSpecialPriceCalculatorTest extends BundlePriceAbstract
      * Dynamic bundle with one required multi type option, two simples and special price
      * @return array
      */
+<<<<<<< HEAD
     private static function getBundleConfiguration4()
+=======
+    private function getBundleConfiguration4()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -274,7 +339,11 @@ class DynamicBundleWithSpecialPriceCalculatorTest extends BundlePriceAbstract
      * Dynamic bundle with one required option, one non required and special price
      * @return array
      */
+<<<<<<< HEAD
     private static function getBundleConfiguration5()
+=======
+    private function getBundleConfiguration5()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -321,7 +390,11 @@ class DynamicBundleWithSpecialPriceCalculatorTest extends BundlePriceAbstract
      * Dynamic bundle with one simple product with special price
      * @return array
      */
+<<<<<<< HEAD
     private static function getBundleConfiguration6()
+=======
+    private function getBundleConfiguration6()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [

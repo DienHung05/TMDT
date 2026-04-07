@@ -1,8 +1,13 @@
 <?xml version="1.0"?>
 <!--
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 -->
 <config>
@@ -13,6 +18,7 @@
         <add id="Magento_Backend::system_report_magento_invite_general" title="Invite" module="Magento_Backend" sortOrder="20" parent="Magento_Backend::system_report" resource="Magento_Backend::report_magento_invite_general"/>
         <add id="Magento_Backend::system_report_private_sales" title="Private Sales" module="Magento_Backend" sortOrder="10" parent="Magento_Backend::system_report" resource="Magento_Backend::report_private_sales" />
         <add id="Magento_Backend::system_report_magento_invite_customer" title="Invited Customers" module="Magento_Backend" sortOrder="30" parent="Magento_Backend::system_report" resource="Magento_Backend::report_magento_invite_customer"/>
+<<<<<<< HEAD
         <add id="Magento_Cms::test1" title="Test 1"
              translate="title" module="Magento_Cms" sortOrder="100"
              action="test/test/test"
@@ -49,5 +55,7 @@
              translate="title" module="Magento_Cms" sortOrder="100"
              action="test/test/test"
              parent="Magento_Backend::system" resource="Magento_Cms::page"/>
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     </menu>
 </config>

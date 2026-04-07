@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -15,7 +20,10 @@ use Magento\Framework\Filesystem\Directory\WriteInterface;
 use Magento\Framework\Filesystem\DirectoryList;
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\TestFramework\TestCase\AbstractBackendController;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Provide tests for admin product upload image action.
@@ -70,12 +78,19 @@ class UploadTest extends AbstractBackendController
     /**
      * Test upload image on admin product page.
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider uploadActionDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDbIsolation enabled
      * @param array $file
      * @param array $expectation
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('uploadActionDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUploadAction(array $file, array $expectation): void
     {
         $this->copyFileToSysTmpDir($file);
@@ -96,7 +111,11 @@ class UploadTest extends AbstractBackendController
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function uploadActionDataProvider(): array
+=======
+    public function uploadActionDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'upload_image_with_type_jpg' => [
@@ -147,12 +166,19 @@ class UploadTest extends AbstractBackendController
     /**
      * Test upload image on admin product page.
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider uploadActionWithErrorsDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDbIsolation enabled
      * @param array $file
      * @param array $expectation
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('uploadActionWithErrorsDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUploadActionWithErrors(array $file, array $expectation): void
     {
         if (!empty($file['create_file'])) {
@@ -177,7 +203,11 @@ class UploadTest extends AbstractBackendController
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function uploadActionWithErrorsDataProvider(): array
+=======
+    public function uploadActionWithErrorsDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'upload_image_with_invalid_type' => [

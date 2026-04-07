@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Setup;
@@ -13,7 +18,10 @@ use Magento\TestFramework\Deploy\CliCommand;
 use Magento\TestFramework\Deploy\TestModuleManager;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\SetupTestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * The purpose of this test is verifying initial InstallSchema, InstallData scripts.
@@ -101,8 +109,13 @@ class DiffOldSchemaTest extends SetupTestCase
      * @moduleName Magento_TestSetupDeclarationModule1
      * @param string $dbPrefix
      * @throws \Exception
+<<<<<<< HEAD
      */
     #[DataProvider('oldSchemaUpgradeDataProvider')]
+=======
+     * @dataProvider oldSchemaUpgradeDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testOldSchemaUpgrade(string $dbPrefix)
     {
         $this->moduleManager->updateRevision(
@@ -137,7 +150,11 @@ class DiffOldSchemaTest extends SetupTestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function oldSchemaUpgradeDataProvider(): array
+=======
+    public function oldSchemaUpgradeDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Without db prefix' => [

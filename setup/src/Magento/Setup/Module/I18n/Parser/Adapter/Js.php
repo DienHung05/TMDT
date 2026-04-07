@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
@@ -29,6 +30,19 @@ class Js extends AbstractAdapter
         $this->filesystem = $filesystem;
     }
     /**
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Setup\Module\I18n\Parser\Adapter;
+
+/**
+ * Js parser adapter
+ */
+class Js extends AbstractAdapter
+{
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Covers
      * $.mage.__('Example text')
      */
@@ -47,6 +61,7 @@ class Js extends AbstractAdapter
 
     /**
      * @inheritdoc
+<<<<<<< HEAD
      *
      * @throws FileSystemException
      */
@@ -105,5 +120,32 @@ class Js extends AbstractAdapter
             );
         }
         return $result;
+=======
+     */
+    protected function _parse()
+    {
+        $fileHandle = @fopen($this->_file, 'r');
+        $lineNumber = 0;
+        while (!feof($fileHandle)) {
+            $lineNumber++;
+            $fileRow = fgets($fileHandle, 4096);
+            $results = [];
+            $regexes = [
+                static::REGEX_MAGE_TRANSLATE,
+                static::REGEX_TRANSLATE_FUNCTION
+            ];
+
+            foreach ($regexes as $regex) {
+                preg_match_all($regex, $fileRow, $results, PREG_SET_ORDER);
+                for ($i = 0, $count = count($results); $i < $count; $i++) {
+                    if (isset($results[$i][2])) {
+                        $quote = $results[$i][1];
+                        $this->_addPhrase($quote . $results[$i][2] . $quote, $lineNumber);
+                    }
+                }
+            }
+        }
+        fclose($fileHandle);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

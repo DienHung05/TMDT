@@ -1,9 +1,15 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 declare(strict_types=1);
 
 namespace Magento\Sales\Model;
@@ -108,7 +114,11 @@ class InvoiceEmailSenderHandlerTest extends TestCase
                 $invoice->getIncrementId(),
                 $invoice->getOrder()->getIncrementId()
             ),
+<<<<<<< HEAD
             quoted_printable_decode($message->getBody()->bodyToString())
+=======
+            $message->getBody()->getParts()[0]->getRawContent()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
     }
 }

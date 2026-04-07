@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -109,7 +114,11 @@ class DeleteTest extends AbstractBackendController
         $this->deleteAttributeSetByNameAndAssert('new_attribute_set');
         $this->expectExceptionObject(
             new NoSuchEntityException(
+<<<<<<< HEAD
                 __('The product with SKU "simple" does not exist.')
+=======
+                __('The product that was requested doesn\'t exist. Verify the product and try again.')
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             )
         );
         $this->productRepository->get('simple');

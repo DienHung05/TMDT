@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Customer\Api;
 
 use Magento\Customer\Api\Data\GroupInterface;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Customer\Model\Data\Group as CustomerGroup;
 use Magento\Customer\Model\GroupRegistry;
 use Magento\Customer\Model\ResourceModel\GroupRepository;
@@ -27,9 +35,15 @@ use Magento\TestFramework\TestCase\WebapiAbstract;
  */
 class GroupRepositoryTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     private const SERVICE_NAME = "customerGroupRepositoryV1";
     private const SERVICE_VERSION = "V1";
     private const RESOURCE_PATH = "/V1/customerGroups";
+=======
+    const SERVICE_NAME = "customerGroupRepositoryV1";
+    const SERVICE_VERSION = "V1";
+    const RESOURCE_PATH = "/V1/customerGroups";
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var GroupRegistry
@@ -69,8 +83,14 @@ class GroupRepositoryTest extends WebapiAbstract
      * Verify the retrieval of a customer group by Id.
      *
      * @param array $testGroup The group data for the group being retrieved.
+<<<<<<< HEAD
      * */
     #[DataProvider('getGroupDataProvider')]
+=======
+     *
+     * @dataProvider getGroupDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetGroupById($testGroup)
     {
         $groupId = $testGroup[CustomerGroup::ID];
@@ -96,7 +116,11 @@ class GroupRepositoryTest extends WebapiAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function getGroupDataProvider()
+=======
+    public function getGroupDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'NOT LOGGED IN' => [
@@ -171,13 +195,20 @@ class GroupRepositoryTest extends WebapiAbstract
     /**
      * Verify that creating a new group with excluded website as extension attributes works via REST.
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider testExcludedWebsitesRestDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $code
      * @param null|array $excludeWebsitesIds
      * @param null|array $result
      * @throws NoSuchEntityException
      * @throws LocalizedException
      */
+<<<<<<< HEAD
     #[DataProvider('excludedWebsitesRestDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateGroupWithExcludedWebsiteRest(
         string $code,
         array $excludeWebsitesIds,
@@ -223,7 +254,11 @@ class GroupRepositoryTest extends WebapiAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function excludedWebsitesRestDataProvider(): array
+=======
+    public function testExcludedWebsitesRestDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['Create Group No Excludes REST', [], null],
@@ -512,6 +547,7 @@ class GroupRepositoryTest extends WebapiAbstract
 
         self::assertEquals($groupId, $this->_webApiCall($serviceInfo, $requestData)[CustomerGroup::ID]);
 
+<<<<<<< HEAD
         $serviceInfo = [
             'rest' => [
                 'resourcePath' => self::RESOURCE_PATH . "/$groupId",
@@ -528,11 +564,22 @@ class GroupRepositoryTest extends WebapiAbstract
         self::assertEquals(
             $groupData[CustomerGroup::TAX_CLASS_ID],
             $group['tax_class_id'],
+=======
+        $group = $this->groupRepository->getById($groupId);
+        self::assertEquals($groupData[CustomerGroup::CODE], $group->getCode(), 'The group code did not change.');
+        self::assertEquals(
+            $groupData[CustomerGroup::TAX_CLASS_ID],
+            $group->getTaxClassId(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'The group tax class id did not change'
         );
         self::assertEquals(
             ['1'],
+<<<<<<< HEAD
             $group['extension_attributes']['exclude_website_ids'],
+=======
+            $group->getExtensionAttributes()->getExcludeWebsiteIds(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'The group excluded websites do not match.'
         );
     }
@@ -612,13 +659,20 @@ class GroupRepositoryTest extends WebapiAbstract
     /**
      * Verify that creating a new group with excluded website as extension attributes works via SOAP.
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider testExcludedWebsitesSoapDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $code
      * @param array $excludeWebsitesIds
      * @param array|null $result
      * @throws LocalizedException
      * @throws NoSuchEntityException
      */
+<<<<<<< HEAD
     #[DataProvider('excludedWebsitesSoapDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateGroupWithExcludedWebsiteSoap(
         string $code,
         array $excludeWebsitesIds,
@@ -665,7 +719,11 @@ class GroupRepositoryTest extends WebapiAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function excludedWebsitesSoapDataProvider(): array
+=======
+    public function testExcludedWebsitesSoapDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['Create Group No Excludes SOAP', [], null],
@@ -862,6 +920,51 @@ class GroupRepositoryTest extends WebapiAbstract
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Verify that updating an existing group with excluded website works via SOAP.
+     */
+    public function testUpdateGroupWithExcludedWebsiteSoap(): void
+    {
+        $this->_markTestAsSoapOnly();
+        $group = $this->customerGroupFactory->create();
+        $group->setId(null);
+        $group->setCode('New Group with Exclude SOAP');
+        $group->setTaxClassId(3);
+        $groupId = $this->createGroup($group);
+
+        $serviceInfo = [
+            'soap' => [
+                'service' => self::SERVICE_NAME,
+                'serviceVersion' => self::SERVICE_VERSION,
+                'operation' => 'customerGroupRepositoryV1Save',
+            ],
+        ];
+
+        $groupData = [
+            CustomerGroup::ID => $groupId,
+            CustomerGroup::CODE => 'Updated Group with Exclude SOAP',
+            'taxClassId' => 3,
+            'extension_attributes' => ['exclude_website_ids' => ['1']]
+        ];
+        $this->_webApiCall($serviceInfo, ['group' => $groupData]);
+
+        $group = $this->groupRepository->getById($groupId);
+        self::assertEquals($groupData[CustomerGroup::CODE], $group->getCode(), 'The group code did not change.');
+        self::assertEquals(
+            $groupData['taxClassId'],
+            $group->getTaxClassId(),
+            'The group tax class id did not change'
+        );
+        self::assertEquals(
+            ['1'],
+            $group->getExtensionAttributes()->getExcludeWebsiteIds(),
+            'The group excluded websites do not match.'
+        );
+    }
+
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Verify that updating a non-existing group throws an exception via SOAP.
      */
     public function testUpdateGroupNotExistingGroupSoap()
@@ -1092,7 +1195,11 @@ class GroupRepositoryTest extends WebapiAbstract
     /**
      * Data provider for testSearchGroups
      */
+<<<<<<< HEAD
     public static function searchGroupsDataProvider()
+=======
+    public function testSearchGroupsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['tax_class_id', 3, []],
@@ -1147,8 +1254,14 @@ class GroupRepositoryTest extends WebapiAbstract
      * @param string $filterField Customer Group field to filter by
      * @param string $filterValue Value of the field to be filtered by
      * @param array $expectedResult Expected search result
+<<<<<<< HEAD
      * */
     #[DataProvider('searchGroupsDataProvider')]
+=======
+     *
+     * @dataProvider testSearchGroupsDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSearchGroups($filterField, $filterValue, $expectedResult)
     {
         $filterBuilder = Bootstrap::getObjectManager()->create(\Magento\Framework\Api\FilterBuilder::class);
@@ -1246,8 +1359,14 @@ class GroupRepositoryTest extends WebapiAbstract
      * @param string $filterField Customer Group field to filter by
      * @param string $filterValue Value of the field to be filtered by
      * @param array $expectedResult Expected search result
+<<<<<<< HEAD
      * */
     #[DataProvider('searchGroupsDataProvider')]
+=======
+     *
+     * @dataProvider testSearchGroupsDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSearchGroupsWithGET($filterField, $filterValue, $expectedResult)
     {
         $this->_markTestAsRestOnly('SOAP is covered in ');

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -85,6 +90,7 @@ class AttributeSetsFixtureTest extends TestCase
             ['product_attribute_sets_attributes_values', 3, 3],
         ];
 
+<<<<<<< HEAD
         $this->patternMock->expects($this->once())
             ->method('generateAttributeSet')
             ->with(
@@ -95,6 +101,13 @@ class AttributeSetsFixtureTest extends TestCase
                     return is_callable($arg);
                 })
             )
+=======
+        $closure = function () {
+        };
+        $this->patternMock->expects($this->once())
+            ->method('generateAttributeSet')
+            ->with(AttributeSetsFixture::PRODUCT_SET_NAME . 1, 2, 3, $closure)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->willReturn(['some-data']);
         $this->attributeSetsFixtureMock->expects($this->once())
             ->method('createAttributeSet')

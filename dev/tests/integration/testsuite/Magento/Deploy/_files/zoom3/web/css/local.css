@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 /* To make sure the import directive will correctly parse external stylesheets */
 @import url("https://localhost/external-stylesheet.css");
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 p{align:center}

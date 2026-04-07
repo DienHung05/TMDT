@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -12,7 +17,10 @@ use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Quote\Model\ResourceModel\Quote\Item\CollectionFactory;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\TestCase\AbstractBackendController;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Tests for configure quote item in customer shopping cart.
@@ -76,13 +84,20 @@ class ConfigureTest extends AbstractBackendController
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider configureWithQuoteProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @magentoDataFixture Magento/Customer/_files/quote.php
      * @param bool $hasQuoteItem
      * @param string $expectedResponseBody
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('configureWithQuoteProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testConfigureWithQuote(bool $hasQuoteItem, string $expectedResponseBody): void
     {
         $itemsCollection = $this->quoteItemCollectionFactory->create();
@@ -107,6 +122,7 @@ class ConfigureTest extends AbstractBackendController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function configureWithQuoteProvider(): array
     {
         return [
@@ -118,6 +134,19 @@ class ConfigureTest extends AbstractBackendController
             'without_quote_item_id' => [
                 'hasQuoteItem' => false,
                 'expectedResponseBody' => '{"error":true,"message":"The quote items are incorrect.'
+=======
+    public function configureWithQuoteProvider(): array
+    {
+        return [
+            'with_quote_item_id' => [
+                'has_quote_item' => true,
+                'expected_response_body' => '<input id="product_composite_configure_input_qty"'
+                    . ' class="input-text admin__control-text qty" type="text" name="qty" value="1">',
+            ],
+            'without_quote_item_id' => [
+                'has_quote_item' => false,
+                'expected_response_body' => '{"error":true,"message":"The quote items are incorrect.'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     . ' Verify the quote items and try again."}',
             ],
         ];

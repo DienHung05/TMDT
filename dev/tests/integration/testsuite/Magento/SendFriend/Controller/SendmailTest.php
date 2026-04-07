@@ -1,9 +1,15 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 declare(strict_types=1);
 
 namespace Magento\SendFriend\Controller;
@@ -168,7 +174,11 @@ class SendmailTest extends AbstractController
         );
         $message = $this->transportBuilder->getSentMessage();
         $this->assertNotNull($message, 'The message was not sent');
+<<<<<<< HEAD
         $content = quoted_printable_decode($message->getBody()->bodyToString());
+=======
+        $content = $message->getBody()->getParts()[0]->getRawContent();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertEquals(
             1,
             Xpath::getElementsCountForXpath(

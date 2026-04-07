@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -10,7 +15,10 @@ namespace Magento\GraphQl\Catalog;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Product filtering by condition "FROM..TO" for "Price" attribute
@@ -70,9 +78,15 @@ class ProductSearchPriceFilterTest extends GraphQlAbstract
      * @param string $sort
      * @param array $items
      * @return void
+<<<<<<< HEAD
      * @throws \Exception
      */
     #[DataProvider('productSearchPriceDataProvider')]
+=======
+     * @dataProvider productSearchPriceDataProvider
+     * @throws \Exception
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testProductSearchPriceFilter($priceFilter, string $sort, array $items): void
     {
         // expected stuff
@@ -165,11 +179,19 @@ QUERY;
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      * @return array[][]
      */
+<<<<<<< HEAD
     public static function productSearchPriceDataProvider(): array
     {
         return [
             [
                 'priceFilter' => 'from: "0.01" to: "9.99"',
+=======
+    public function productSearchPriceDataProvider(): array
+    {
+        return [
+            [
+                'price_filter' => 'from: "0.01" to: "9.99"',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'sort' => 'price: ASC',
                 'items' => [
                     [
@@ -205,7 +227,11 @@ QUERY;
                 ],
             ],
             [
+<<<<<<< HEAD
                 'priceFilter' => 'from: "5.01" to: "10"',
+=======
+                'price_filter' => 'from: "5.01" to: "10"',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'sort' => 'price: DESC',
                 'items' => [
                     [
@@ -231,7 +257,11 @@ QUERY;
                 ],
             ],
             [
+<<<<<<< HEAD
                 'priceFilter' => 'from: "5"',
+=======
+                'price_filter' => 'from: "5"',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'sort' => 'price: DESC',
                 'items' => [
                     [

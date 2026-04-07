@@ -1,12 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Catalog\Api;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Catalog\Model\ProductRepository;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\WebapiAbstract;
@@ -18,7 +27,11 @@ class ProductCustomOptionRepositoryTest extends WebapiAbstract
      */
     protected $objectManager;
 
+<<<<<<< HEAD
     private const SERVICE_NAME = 'catalogProductCustomOptionRepositoryV1';
+=======
+    const SERVICE_NAME = 'catalogProductCustomOptionRepositoryV1';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var \Magento\Catalog\Model\ProductFactory
@@ -140,9 +153,15 @@ class ProductCustomOptionRepositoryTest extends WebapiAbstract
     /**
      * @magentoApiDataFixture Magento/Catalog/_files/product_without_options.php
      * @magentoAppIsolation enabled
+<<<<<<< HEAD
      * @param array $optionData
      */
     #[DataProvider('optionDataProvider')]
+=======
+     * @dataProvider optionDataProvider
+     * @param array $optionData
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSave($optionData)
     {
         $productSku = 'simple';
@@ -182,7 +201,11 @@ class ProductCustomOptionRepositoryTest extends WebapiAbstract
         }
     }
 
+<<<<<<< HEAD
     public static function optionDataProvider()
+=======
+    public function optionDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $fixtureOptions = [];
         $fixture = include '_files/product_options.php';
@@ -198,8 +221,13 @@ class ProductCustomOptionRepositoryTest extends WebapiAbstract
     /**
      * @magentoApiDataFixture Magento/Catalog/_files/product_without_options.php
      * @magentoAppIsolation enabled
+<<<<<<< HEAD
      */
     #[DataProvider('optionNegativeDataProvider')]
+=======
+     * @dataProvider optionNegativeDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddNegative($optionData)
     {
         $productSku = 'simple';
@@ -232,7 +260,11 @@ class ProductCustomOptionRepositoryTest extends WebapiAbstract
         $this->_webApiCall($serviceInfo, ['option' => $optionDataPost]);
     }
 
+<<<<<<< HEAD
     public static function optionNegativeDataProvider()
+=======
+    public function optionNegativeDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $fixtureOptions = [];
         $fixture = include '_files/product_options_negative.php';
@@ -306,10 +338,16 @@ class ProductCustomOptionRepositoryTest extends WebapiAbstract
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @magentoApiDataFixture Magento/Catalog/_files/product_with_options.php
      * @magentoAppIsolation enabled
+<<<<<<< HEAD
      * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     #[DataProvider('validOptionDataProvider')]
+=======
+     * @dataProvider validOptionDataProvider
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateOptionAddingNewValue($optionType, $includedExisting, $expectedOptionValuesCount)
     {
         $fixtureOption = null;
@@ -336,10 +374,13 @@ class ProductCustomOptionRepositoryTest extends WebapiAbstract
             }
         }
 
+<<<<<<< HEAD
         if (!isset($option) || $fixtureOption === null) {
             $this->markTestSkipped('Product options was not found');
         }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $values = [];
         $values[] = $valueData;
         // Keeps the existing Option Values when adding a new Option Value
@@ -402,7 +443,11 @@ class ProductCustomOptionRepositoryTest extends WebapiAbstract
         }
     }
 
+<<<<<<< HEAD
     public static function validOptionDataProvider()
+=======
+    public function validOptionDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'drop_down including previous values' => ['drop_down', true, 3],
@@ -417,12 +462,21 @@ class ProductCustomOptionRepositoryTest extends WebapiAbstract
     /**
      * @magentoApiDataFixture Magento/Catalog/_files/product_with_options.php
      * @magentoAppIsolation enabled
+<<<<<<< HEAD
      * @param array $optionData
      * @param string $expectedMessage
      * @param int $exceptionCode
      */
     #[DataProvider('optionNegativeUpdateDataProvider')]
     public function testUpdateNegative($optionData, $expectedMessage, $exceptionCode)
+=======
+     * @dataProvider optionNegativeUpdateDataProvider
+     * @param array $optionData
+     * @param string $message
+     * @param int $exceptionCode
+     */
+    public function testUpdateNegative($optionData, $message, $exceptionCode)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $this->_markTestAsRestOnly();
         $productSku = 'simple';
@@ -439,6 +493,7 @@ class ProductCustomOptionRepositoryTest extends WebapiAbstract
             ],
         ];
 
+<<<<<<< HEAD
         try {
             $this->_webApiCall($serviceInfo, ['option' => $optionData]);
         } catch (\SoapFault $e) {
@@ -449,12 +504,22 @@ class ProductCustomOptionRepositoryTest extends WebapiAbstract
             $this->assertEquals($expectedMessage, $errorObj['message']);
             $this->assertEquals($exceptionCode, $e->getCode());
         }
+=======
+        $this->expectException('Exception');
+        $this->expectExceptionMessage($message);
+        $this->expectExceptionCode($exceptionCode);
+        $this->_webApiCall($serviceInfo, ['option' => $optionData]);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function optionNegativeUpdateDataProvider()
+=======
+    public function optionNegativeUpdateDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return include '_files/product_options_update_negative.php';
     }

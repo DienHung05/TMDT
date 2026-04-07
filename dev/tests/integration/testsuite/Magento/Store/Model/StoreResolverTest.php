@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Store\Model;
 
@@ -23,7 +28,13 @@ class StoreResolverTest extends \PHPUnit\Framework\TestCase
     public function testGetStoreData()
     {
         $methodGetStoresData = new \ReflectionMethod(\Magento\Store\Model\StoreResolver::class, 'getStoresData');
+<<<<<<< HEAD
         $methodReadStoresData = new \ReflectionMethod(\Magento\Store\Model\StoreResolver::class, 'readStoresData');
+=======
+        $methodGetStoresData->setAccessible(true);
+        $methodReadStoresData = new \ReflectionMethod(\Magento\Store\Model\StoreResolver::class, 'readStoresData');
+        $methodReadStoresData->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $storeResolver = $this->objectManager->get(\Magento\Store\Model\StoreResolver::class);
 

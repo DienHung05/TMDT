@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Setup\Console\Command;
 
@@ -10,7 +15,10 @@ use Symfony\Component\Console\Tester\CommandTester;
 use Magento\Framework\Console\Cli;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test command that sets indexer mode for catalog_product_price indexer
@@ -68,8 +76,13 @@ class PriceIndexerDimensionsModeSetCommandTest extends \Magento\TestFramework\In
      *
      * @param string $previousMode
      * @param string $currentMode
+<<<<<<< HEAD
      */
     #[DataProvider('modesDataProvider')]
+=======
+     * @dataProvider modesDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSwitchMode($previousMode, $currentMode)
     {
         $this->commandTester->execute(
@@ -96,7 +109,11 @@ class PriceIndexerDimensionsModeSetCommandTest extends \Magento\TestFramework\In
      * Modes data provider
      * @return array
      */
+<<<<<<< HEAD
     public static function modesDataProvider()
+=======
+    public function modesDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [DimensionModeConfiguration::DIMENSION_NONE, DimensionModeConfiguration::DIMENSION_WEBSITE],

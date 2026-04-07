@@ -1,11 +1,17 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Bundle\Model\Product;
 
+<<<<<<< HEAD
 use Magento\Bundle\Api\Data\LinkInterface;
 use Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -13,6 +19,14 @@ use PHPUnit\Framework\Attributes\DataProvider;
 /**
  * Tests fixed bundle product tier price calculation.
  *
+=======
+use \Magento\Bundle\Api\Data\LinkInterface;
+use \Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory;
+
+/**
+ * Class FixedBundleWithTierPRiceCalculatorTest
+ * @package Magento\Bundle\Model\Product
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  * @magentoAppArea frontend
  */
 class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
@@ -29,11 +43,18 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
     /**
      * @param array $strategyModifiers
      * @param array $expectedResults
+<<<<<<< HEAD
+=======
+     * @dataProvider getTestCases
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoAppIsolation enabled
      * @magentoDataFixture Magento/Bundle/_files/PriceCalculator/fixed_bundle_product.php
      * @magentoDbIsolation disabled
      */
+<<<<<<< HEAD
     #[DataProvider('getTestCases')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPriceForFixedBundle(array $strategyModifiers, array $expectedResults)
     {
         $this->prepareFixture($strategyModifiers, 'bundle_product');
@@ -73,14 +94,22 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function getTestCases()
+=======
+    public function getTestCases()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             '
                 #1 Testing product price
                 with tier price and without any sub items and options
             ' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getBundleConfiguration1(),
+=======
+                'strategy' => $this->getBundleConfiguration1(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     // 110 * 0.5
                     'minimalPrice' => 55,
@@ -94,7 +123,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
                 #2 Testing product price
                 with tier price, fixed sub items and fixed options
             ' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductConfiguration2(
+=======
+                'strategy' => $this->getProductConfiguration2(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_FIXED,
                     self::CUSTOM_OPTION_PRICE_TYPE_FIXED
                 ),
@@ -111,7 +144,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
                 #3 Testing product price
                 with tier price, percent sub items and percent options
             ' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductConfiguration2(
+=======
+                'strategy' => $this->getProductConfiguration2(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_PERCENT,
                     self::CUSTOM_OPTION_PRICE_TYPE_PERCENT
                 ),
@@ -128,7 +165,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
                 #4 Testing product price
                 with tier price, fixed sub items and percent options
             ' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductConfiguration2(
+=======
+                'strategy' => $this->getProductConfiguration2(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_FIXED,
                     self::CUSTOM_OPTION_PRICE_TYPE_PERCENT
                 ),
@@ -145,7 +186,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
                 #5 Testing product price
                 with tier price, percent sub items and fixed options
             ' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductConfiguration2(
+=======
+                'strategy' => $this->getProductConfiguration2(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_PERCENT,
                     self::CUSTOM_OPTION_PRICE_TYPE_FIXED
                 ),
@@ -162,7 +207,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
                 #6 Testing product price
                 with tier price, fixed sub items and fixed options
             ' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductConfiguration3(
+=======
+                'strategy' => $this->getProductConfiguration3(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_FIXED,
                     self::CUSTOM_OPTION_PRICE_TYPE_FIXED
                 ),
@@ -176,10 +225,17 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
             ],
 
             '
+<<<<<<< HEAD
                 #7 Testing product price
                 with tier price, percent sub items and percent options
             ' => [
                 'strategyModifiers' => self::getProductConfiguration3(
+=======
+                #7 Testing product price 
+                with tier price, percent sub items and percent options
+            ' => [
+                'strategy' => $this->getProductConfiguration3(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_PERCENT,
                     self::CUSTOM_OPTION_PRICE_TYPE_PERCENT
                 ),
@@ -196,7 +252,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
                 #8 Testing product price
                 with tier price, fixed sub items and percent options
             ' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductConfiguration3(
+=======
+                'strategy' => $this->getProductConfiguration3(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_FIXED,
                     self::CUSTOM_OPTION_PRICE_TYPE_PERCENT
                 ),
@@ -214,7 +274,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
                 #9 Testing product price
                 with tier price, percent sub items and fixed options
             ' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductConfiguration3(
+=======
+                'strategy' => $this->getProductConfiguration3(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_PERCENT,
                     self::CUSTOM_OPTION_PRICE_TYPE_FIXED
                 ),
@@ -231,7 +295,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
                 #10 Testing product price
                 with tier price, fixed sub items and fixed options
             ' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductConfiguration4(
+=======
+                'strategy' => $this->getProductConfiguration4(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_FIXED,
                     self::CUSTOM_OPTION_PRICE_TYPE_FIXED
                 ),
@@ -248,7 +316,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
                 #11 Testing product price
                 with tier price, percent sub items and percent options
             ' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductConfiguration4(
+=======
+                'strategy' => $this->getProductConfiguration4(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_PERCENT,
                     self::CUSTOM_OPTION_PRICE_TYPE_PERCENT
                 ),
@@ -265,7 +337,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
                 #12 Testing product price
                 with tier price, fixed sub items and percent options
             ' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductConfiguration4(
+=======
+                'strategy' => $this->getProductConfiguration4(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_FIXED,
                     self::CUSTOM_OPTION_PRICE_TYPE_PERCENT
                 ),
@@ -282,7 +358,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
                 #13 Testing product price
                 with tier price, percent sub items and fixed options
             ' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductConfiguration4(
+=======
+                'strategy' => $this->getProductConfiguration4(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_PERCENT,
                     self::CUSTOM_OPTION_PRICE_TYPE_FIXED
                 ),
@@ -299,7 +379,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
                 #14 Testing product price
                 with tier price, fixed sub items and fixed options
             ' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductConfiguration5(
+=======
+                'strategy' => $this->getProductConfiguration5(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_FIXED,
                     self::CUSTOM_OPTION_PRICE_TYPE_FIXED
                 ),
@@ -316,7 +400,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
                 #15 Testing product price
                 with tier price, percent sub items and percent options
             ' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductConfiguration5(
+=======
+                'strategy' => $this->getProductConfiguration5(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_PERCENT,
                     self::CUSTOM_OPTION_PRICE_TYPE_PERCENT
                 ),
@@ -333,7 +421,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
                 #16 Testing product price
                 with tier price, fixed sub items and percent options
             ' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductConfiguration5(
+=======
+                'strategy' => $this->getProductConfiguration5(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_FIXED,
                     self::CUSTOM_OPTION_PRICE_TYPE_PERCENT
                 ),
@@ -350,7 +442,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
                 #17 Testing product price
                 with tier price, percent sub items and fixed options
             ' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductConfiguration5(
+=======
+                'strategy' => $this->getProductConfiguration5(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_PERCENT,
                     self::CUSTOM_OPTION_PRICE_TYPE_FIXED
                 ),
@@ -367,7 +463,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
                 #18 Testing product price
                 with tier price, fixed sub items and fixed options
             ' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductConfiguration6(
+=======
+                'strategy' => $this->getProductConfiguration6(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_FIXED,
                     self::CUSTOM_OPTION_PRICE_TYPE_FIXED
                 ),
@@ -384,7 +484,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
                 #19 Testing product price
                 with tier price, percent sub items and percent options
             ' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductConfiguration6(
+=======
+                'strategy' => $this->getProductConfiguration6(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_PERCENT,
                     self::CUSTOM_OPTION_PRICE_TYPE_PERCENT
                 ),
@@ -401,7 +505,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
                 #20 Testing product price
                 with tier price, fixed sub items and percent options
             ' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductConfiguration6(
+=======
+                'strategy' => $this->getProductConfiguration6(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_FIXED,
                     self::CUSTOM_OPTION_PRICE_TYPE_PERCENT
                 ),
@@ -418,7 +526,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
                 #21 Testing product price
                 with tier price, percent sub items and fixed options
             ' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductConfiguration6(
+=======
+                'strategy' => $this->getProductConfiguration6(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_PERCENT,
                     self::CUSTOM_OPTION_PRICE_TYPE_FIXED
                 ),
@@ -435,7 +547,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
                 #22 Testing product price
                 with tier price, fixed sub items and fixed options
             ' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductConfiguration7(
+=======
+                'strategy' => $this->getProductConfiguration7(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_FIXED,
                     self::CUSTOM_OPTION_PRICE_TYPE_FIXED
                 ),
@@ -452,7 +568,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
                 #23 Testing product price
                 with tier price, percent sub items and percent options
             ' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductConfiguration7(
+=======
+                'strategy' => $this->getProductConfiguration7(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_PERCENT,
                     self::CUSTOM_OPTION_PRICE_TYPE_PERCENT
                 ),
@@ -469,7 +589,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
                 #24 Testing product price
                 with tier price, fixed sub items and percent options
             ' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductConfiguration7(
+=======
+                'strategy' => $this->getProductConfiguration7(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_FIXED,
                     self::CUSTOM_OPTION_PRICE_TYPE_PERCENT
                 ),
@@ -486,7 +610,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
                 #25 Testing product price
                 with tier price, percent sub items and fixed options
             ' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductConfiguration7(
+=======
+                'strategy' => $this->getProductConfiguration7(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_PERCENT,
                     self::CUSTOM_OPTION_PRICE_TYPE_FIXED
                 ),
@@ -505,7 +633,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
      * Fixed bundle product without sub items and options and with tier price
      * @return array
      */
+<<<<<<< HEAD
     private static function getBundleConfiguration1()
+=======
+    private function getBundleConfiguration1()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $tierPriceData = [
             'customer_group_id' => \Magento\Customer\Model\Group::NOT_LOGGED_IN_ID,
@@ -528,7 +660,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
      * @param $customOptionsPriceType
      * @return array
      */
+<<<<<<< HEAD
     private static function getProductConfiguration2($selectionsPriceType, $customOptionsPriceType)
+=======
+    private function getProductConfiguration2($selectionsPriceType, $customOptionsPriceType)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -586,7 +722,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
      * @param $customOptionsPriceType
      * @return array
      */
+<<<<<<< HEAD
     private static function getProductConfiguration3($selectionsPriceType, $customOptionsPriceType)
+=======
+    private function getProductConfiguration3($selectionsPriceType, $customOptionsPriceType)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -644,7 +784,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
      * @param $customOptionsPriceType
      * @return array
      */
+<<<<<<< HEAD
     private static function getProductConfiguration4($selectionsPriceType, $customOptionsPriceType)
+=======
+    private function getProductConfiguration4($selectionsPriceType, $customOptionsPriceType)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -708,7 +852,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
      * @param $customOptionsPriceType
      * @return array
      */
+<<<<<<< HEAD
     private static function getProductConfiguration5($selectionsPriceType, $customOptionsPriceType)
+=======
+    private function getProductConfiguration5($selectionsPriceType, $customOptionsPriceType)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -772,7 +920,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
      * @param $customOptionsPriceType
      * @return array
      */
+<<<<<<< HEAD
     private static function getProductConfiguration6($selectionsPriceType, $customOptionsPriceType)
+=======
+    private function getProductConfiguration6($selectionsPriceType, $customOptionsPriceType)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -836,7 +988,11 @@ class FixedBundleWithTierPriceCalculatorTest extends BundlePriceAbstract
      * @param $customOptionsPriceType
      * @return array
      */
+<<<<<<< HEAD
     private static function getProductConfiguration7($selectionsPriceType, $customOptionsPriceType)
+=======
+    private function getProductConfiguration7($selectionsPriceType, $customOptionsPriceType)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [

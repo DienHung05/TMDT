@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Config\Console\Command;
@@ -25,7 +30,10 @@ use Magento\Store\Model\ScopeInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\Framework\App\Config\ReinitableConfigInterface;
 use PHPUnit\Framework\MockObject\MockObject as Mock;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -108,8 +116,15 @@ class ConfigSetCommandTest extends \PHPUnit\Framework\TestCase
         $this->config = $this->loadConfig();
 
         // Mocks for objects.
+<<<<<<< HEAD
         $this->inputMock = $this->createMock(InputInterface::class);
         $this->outputMock = $this->createMock(OutputInterface::class);
+=======
+        $this->inputMock = $this->getMockBuilder(InputInterface::class)
+            ->getMockForAbstractClass();
+        $this->outputMock = $this->getMockBuilder(OutputInterface::class)
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -159,8 +174,13 @@ class ConfigSetCommandTest extends \PHPUnit\Framework\TestCase
      * @param string $scope
      * @param string $scopeCode
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
      */
     #[DataProvider('runLockDataProvider')]
+=======
+     * @dataProvider runLockDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRunLockEnv($path, $value, $scope = ScopeConfigInterface::SCOPE_TYPE_DEFAULT, $scopeCode = null)
     {
         $this->inputMock->expects($this->any())
@@ -178,6 +198,7 @@ class ConfigSetCommandTest extends \PHPUnit\Framework\TestCase
             ]);
         $this->outputMock->expects($this->exactly(2))
             ->method('writeln')
+<<<<<<< HEAD
             ->willReturnCallback(
                 function ($arg1) {
                     if ($arg1 == '<info>Value was saved in app/etc/env.php and locked.</info>' ||
@@ -185,6 +206,11 @@ class ConfigSetCommandTest extends \PHPUnit\Framework\TestCase
                         return null;
                     }
                 }
+=======
+            ->withConsecutive(
+                ['<info>Value was saved in app/etc/env.php and locked.</info>'],
+                ['<info>Value was saved in app/etc/env.php and locked.</info>']
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             );
 
         /** @var ConfigSetCommand $command */
@@ -208,7 +234,11 @@ class ConfigSetCommandTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function runLockDataProvider()
+=======
+    public function runLockDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['general/region/display_all', '1'],
@@ -227,8 +257,13 @@ class ConfigSetCommandTest extends \PHPUnit\Framework\TestCase
      * @param string $scope
      * @param string $scopeCode
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
      */
     #[DataProvider('runExtendedDataProvider')]
+=======
+     * @dataProvider runExtendedDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRunExtended(
         $path,
         $value,
@@ -305,9 +340,15 @@ class ConfigSetCommandTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function runExtendedDataProvider()
     {
         return self::runLockDataProvider();
+=======
+    public function runExtendedDataProvider()
+    {
+        return $this->runLockDataProvider();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -316,9 +357,15 @@ class ConfigSetCommandTest extends \PHPUnit\Framework\TestCase
      * @param string $message Message command output
      * @param string $scope
      * @param $scopeCode string|null
+<<<<<<< HEAD
      * @magentoDbIsolation disabled
      */
     #[DataProvider('configSetValidationErrorDataProvider')]
+=======
+     * @dataProvider configSetValidationErrorDataProvider
+     * @magentoDbIsolation disabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testConfigSetValidationError(
         $path,
         $value,
@@ -334,7 +381,11 @@ class ConfigSetCommandTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function configSetValidationErrorDataProvider()
+=======
+    public function configSetValidationErrorDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             //wrong value for URL - checked by backend model of URL field
@@ -423,6 +474,10 @@ class ConfigSetCommandTest extends \PHPUnit\Framework\TestCase
     /**
      * Saving values with successful validation
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider configSetValidDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDbIsolation enabled
      */
     public function testConfigSetValid()
@@ -437,7 +492,11 @@ class ConfigSetCommandTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function configSetValidDataProvider()
+=======
+    public function configSetValidDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [Custom::XML_PATH_UNSECURE_BASE_URL, 'http://magento2.local/'],

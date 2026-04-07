@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -12,7 +17,10 @@ use Magento\Framework\HTTP\Adapter\FileTransferFactory;
 use Magento\ImportExport\Model\Import;
 use Magento\ImportExport\Model\Import\ErrorProcessing\ProcessingErrorAggregatorInterface;
 use Magento\ImportExport\Controller\Adminhtml\Import\HttpFactoryMock;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for \Magento\ImportExport\Controller\Adminhtml\ImportResult class.
@@ -27,9 +35,15 @@ class ImportResultTest extends \Magento\TestFramework\TestCase\AbstractBackendCo
      * @param string $delimiter
      * @backupGlobals enabled
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
      * @SuppressWarnings(PHPMD.Superglobals)
      */
     #[DataProvider('validationDataProvider')]
+=======
+     * @dataProvider validationDataProvider
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddErrorMessages(string $fileName, string $mimeType, string $delimiter): void
     {
         $validationStrategy = ProcessingErrorAggregatorInterface::VALIDATION_STRATEGY_STOP_ON_ERROR;
@@ -79,12 +93,21 @@ class ImportResultTest extends \Magento\TestFramework\TestCase\AbstractBackendCo
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function validationDataProvider(): array
     {
         return [
             [
                 'fileName' => 'invalid_catalog_products.csv',
                 'mimeType' => 'text/csv',
+=======
+    public function validationDataProvider(): array
+    {
+        return [
+            [
+                'file_name' => 'invalid_catalog_products.csv',
+                'mime-type' => 'text/csv',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'delimiter' => ',',
             ],
         ];

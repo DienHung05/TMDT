@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -171,12 +176,16 @@ class EmailTemplateTest extends AbstractController
     {
         $messageContent = $this->getMessageRawContent($message);
         $emailDom = new \DOMDocument();
+<<<<<<< HEAD
         // PHP 8.5 Compatibility: Use LIBXML options to suppress warnings for email HTML
         // Email templates may have whitespace before DOCTYPE, which triggers warnings in PHP 8.5
         $emailDom->loadHTML(
             $messageContent,
             LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD | LIBXML_NOERROR | LIBXML_NOWARNING
         );
+=======
+        $emailDom->loadHTML($messageContent);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $emailXpath = new \DOMXPath($emailDom);
         $greeting = $emailXpath->query('//p[@class="greeting"]');
@@ -193,7 +202,12 @@ class EmailTemplateTest extends AbstractController
      */
     private function getMessageRawContent(EmailMessage $message): string
     {
+<<<<<<< HEAD
         return  quoted_printable_decode($message->getBody()->bodyToString());
+=======
+        $emailParts = $message->getBody()->getParts();
+        return current($emailParts)->getRawContent();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**

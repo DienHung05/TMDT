@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -9,15 +14,19 @@ namespace Magento\ConfigurableProduct\Block\Adminhtml\Product\Composite\Fieldset
 
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\PriceScope as PriceScopeFixture;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\ConfigurableProduct\Test\Fixture\Attribute as ConfigurableAttributeFixture;
 use Magento\ConfigurableProduct\Test\Fixture\Product as ConfigurableProductFixture;
 use Magento\Directory\Model\Currency;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\Registry;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Framework\View\LayoutInterface;
+<<<<<<< HEAD
 use Magento\Store\Model\Store;
 use Magento\Store\Test\Fixture\Group as GroupFixture;
 use Magento\Store\Test\Fixture\Store as StoreFixture;
@@ -26,6 +35,8 @@ use Magento\TestFramework\Fixture\Config;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Fixture\DbIsolation;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
 
@@ -107,6 +118,7 @@ class ConfigurableTest extends TestCase
         $this->assertTrue($config['stablePrices']);
     }
 
+<<<<<<< HEAD
     #[
         DbIsolation(false),
         Config(Currency::XML_PATH_CURRENCY_DEFAULT, 'EUR', 'store', 'store_view_2_euro'),
@@ -171,6 +183,8 @@ class ConfigurableTest extends TestCase
         $this->assertEquals(5, $config['optionPrices'][$configurableChildProductId]['basePrice']['amount']);
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Register the product
      *
@@ -179,7 +193,10 @@ class ConfigurableTest extends TestCase
      */
     private function registerProduct(ProductInterface $product): void
     {
+<<<<<<< HEAD
         $this->block->unsetData(['product', 'allow_products']);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->registry->unregister('product');
         $this->registry->register('product', $product);
     }

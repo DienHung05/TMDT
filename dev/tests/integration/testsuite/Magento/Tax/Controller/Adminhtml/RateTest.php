@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Tax\Controller\Adminhtml;
 
 use Magento\Framework\App\Request\Http as HttpRequest;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea adminhtml
@@ -15,9 +23,15 @@ use PHPUnit\Framework\Attributes\DataProvider;
 class RateTest extends \Magento\TestFramework\TestCase\AbstractBackendController
 {
     /**
+<<<<<<< HEAD
      * @magentoDbIsolation enabled
      */
     #[DataProvider('ajaxSaveActionDataProvider')]
+=======
+     * @dataProvider ajaxSaveActionDataProvider
+     * @magentoDbIsolation enabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAjaxSaveAction($postData, $expectedData)
     {
         $this->getRequest()->setPostValue($postData)->setMethod('POST');
@@ -53,7 +67,11 @@ class RateTest extends \Magento\TestFramework\TestCase\AbstractBackendController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function ajaxSaveActionDataProvider()
+=======
+    public function ajaxSaveActionDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $postData = ['rate' => '10.0000', 'tax_country_id' => 'US', 'tax_region_id' => '1'];
         return [
@@ -83,9 +101,15 @@ class RateTest extends \Magento\TestFramework\TestCase\AbstractBackendController
     /**
      * Test wrong data conditions
      *
+<<<<<<< HEAD
      * @magentoDbIsolation enabled
      */
     #[DataProvider('ajaxSaveActionDataInvalidDataProvider')]
+=======
+     * @dataProvider ajaxSaveActionDataInvalidDataProvider
+     * @magentoDbIsolation enabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAjaxSaveActionInvalidData($postData, $expectedData)
     {
         $this->getRequest()->setPostValue($postData)->setMethod('POST');
@@ -109,7 +133,11 @@ class RateTest extends \Magento\TestFramework\TestCase\AbstractBackendController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function ajaxSaveActionDataInvalidDataProvider()
+=======
+    public function ajaxSaveActionDataInvalidDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $expectedData = [
             'success' => false,
@@ -190,6 +218,7 @@ class RateTest extends \Magento\TestFramework\TestCase\AbstractBackendController
     }
 
     /**
+<<<<<<< HEAD
      * @magentoDbIsolation enabled
      *
      * @param array $rateClassData
@@ -199,6 +228,15 @@ class RateTest extends \Magento\TestFramework\TestCase\AbstractBackendController
      */
     #[DataProvider('ajaxSaveActionDataProvider')]
     public function testAjaxLoadAction($rateClassData, $expectedData)
+=======
+     * @dataProvider ajaxSaveActionDataProvider
+     * @magentoDbIsolation enabled
+     *
+     * @param array $rateClassData
+     * @SuppressWarnings(PHPMD.NPathComplexity)
+     */
+    public function testAjaxLoadAction($rateClassData)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         /** @var \Magento\Tax\Api\Data\TaxRateInterfaceFactory $rateClassFactory */
         $rateClassFactory = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->get(

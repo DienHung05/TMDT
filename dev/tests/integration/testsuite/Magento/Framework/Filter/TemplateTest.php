@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Framework\Filter;
 
 use Magento\Framework\DataObject;
 use Magento\Store\Model\Store;
 use Magento\TestFramework\ObjectManager;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class TemplateTest extends \PHPUnit\Framework\TestCase
 {
@@ -25,8 +33,13 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     /**
      * @param array $results
      * @param array $value
+<<<<<<< HEAD
      */
     #[DataProvider('getFilterForDataProvider')]
+=======
+     * @dataProvider getFilterForDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testFilterFor($results, $value)
     {
         $this->templateFilter->setVariables(['order' => $this->getOrder(), 'things' => $this->getThings()]);
@@ -64,7 +77,11 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getFilterForDataProvider()
+=======
+    public function getFilterForDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $template = <<<TEMPLATE
 <ul>

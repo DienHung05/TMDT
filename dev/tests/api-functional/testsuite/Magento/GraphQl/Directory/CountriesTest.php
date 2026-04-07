@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -10,6 +15,7 @@ namespace Magento\GraphQl\Directory;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
 
 /**
+<<<<<<< HEAD
  * Test the GraphQL endpoint's Countries query
  */
 class CountriesTest extends GraphQlAbstract
@@ -65,6 +71,15 @@ class CountriesTest extends GraphQlAbstract
     private function getQuery(): string
     {
         return <<<QUERY
+=======
+ * Test the GraphQL endpoint's Coutries query
+ */
+class CountriesTest extends GraphQlAbstract
+{
+    public function testGetCountries()
+    {
+        $query = <<<QUERY
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 query {
     countries {
         id
@@ -80,5 +95,43 @@ query {
     }
 }
 QUERY;
+<<<<<<< HEAD
+=======
+
+        $result = $this->graphQlQuery($query);
+        $this->assertArrayHasKey('countries', $result);
+        $this->assertArrayHasKey('id', $result['countries'][0]);
+        $this->assertArrayHasKey('two_letter_abbreviation', $result['countries'][0]);
+        $this->assertArrayHasKey('three_letter_abbreviation', $result['countries'][0]);
+        $this->assertArrayHasKey('full_name_locale', $result['countries'][0]);
+        $this->assertArrayHasKey('full_name_english', $result['countries'][0]);
+        $this->assertArrayHasKey('available_regions', $result['countries'][0]);
+    }
+
+    public function testCheckCountriesForNullLocale()
+    {
+        $query = <<<QUERY
+query {
+    countries {
+        id
+        two_letter_abbreviation
+        three_letter_abbreviation
+        full_name_locale
+        full_name_english
+        available_regions {
+            id
+            code
+            name
+        }
+    }
+}
+QUERY;
+
+        $result = $this->graphQlQuery($query);
+        $count = count($result['countries']);
+        for ($i=0; $i < $count; $i++) {
+            $this->assertNotNull($result['countries'][$i]['full_name_locale']);
+        }
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -13,7 +18,10 @@ use Magento\CatalogRule\Model\Indexer\Product\ProductRuleIndexer;
 use Magento\CatalogRule\Pricing\Price\CatalogRulePrice;
 use Magento\Framework\Pricing\Price\Factory as PriceFactory;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -50,12 +58,19 @@ class ProductRuleIndexerTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider productsDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $reindexSku
      * @param array $expectedPrices
      * @return void
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
+<<<<<<< HEAD
     #[DataProvider('productsDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecute(string $reindexSku, array $expectedPrices): void
     {
         $product = $this->productRepository->get($reindexSku);
@@ -65,13 +80,20 @@ class ProductRuleIndexerTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider productsDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $reindexSku
      * @param array $expectedPrices
      * @return void
      * @throws \Magento\Framework\Exception\LocalizedException
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
+<<<<<<< HEAD
     #[DataProvider('productsDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecuteRow(string $reindexSku, array $expectedPrices): void
     {
         $product = $this->productRepository->get($reindexSku);
@@ -81,13 +103,20 @@ class ProductRuleIndexerTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider productsDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $reindexSku
      * @param array $expectedPrices
      * @return void
      * @throws \Magento\Framework\Exception\LocalizedException
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
+<<<<<<< HEAD
     #[DataProvider('productsDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecuteList(string $reindexSku, array $expectedPrices): void
     {
         $product = $this->productRepository->get($reindexSku);
@@ -113,7 +142,11 @@ class ProductRuleIndexerTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function productsDataProvider(): array
+=======
+    public function productsDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

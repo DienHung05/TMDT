@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -12,7 +17,10 @@ use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Security\Model\UserExpirationFactory;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\User\Model\ResourceModel\User as UserResource;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -37,11 +45,18 @@ class UserExpirationTest extends TestCase
      * Verify user expiration saved with correct date.
      *
      * @magentoDataFixture Magento/User/_files/dummy_user.php
+<<<<<<< HEAD
      * @magentoAppArea adminhtml
      * @param string $locale
      * @return void
      */
     #[DataProvider('userExpirationSaveDataProvider')]
+=======
+     * @dataProvider userExpirationSaveDataProvider
+     * @magentoAppArea adminhtml
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUserExpirationSave(string $locale): void
     {
         $localeResolver = Bootstrap::getObjectManager()->get(ResolverInterface::class);
@@ -53,9 +68,12 @@ class UserExpirationTest extends TestCase
             \IntlDateFormatter::MEDIUM,
             \IntlDateFormatter::MEDIUM
         );
+<<<<<<< HEAD
         if (version_compare(PHP_VERSION, '8.3', '>=') && $locale === 'uk_UA') {
             $expireDate = str_replace(' р.', ' р.', $expireDate);
         }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $userExpirationFactory = Bootstrap::getObjectManager()->get(UserExpirationFactory::class);
         $userExpiration = $userExpirationFactory->create();
         $userExpiration->setExpiresAt($expireDate);
@@ -72,6 +90,7 @@ class UserExpirationTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function userExpirationSaveDataProvider(): array
     {
         return [
@@ -83,6 +102,19 @@ class UserExpirationTest extends TestCase
             ],
             'non_default_non_english_textual' => [
                 'locale' => 'uk_UA',
+=======
+    public function userExpirationSaveDataProvider(): array
+    {
+        return [
+            'default' => [
+                'locale_code' => 'en_US',
+            ],
+            'non_default_english_textual' => [
+                'locale_code' => 'de_DE',
+            ],
+            'non_default_non_english_textual' => [
+                'locale_code' => 'uk_UA',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

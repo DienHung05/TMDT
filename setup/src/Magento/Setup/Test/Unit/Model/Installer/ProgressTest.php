@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -9,15 +14,23 @@ namespace Magento\Setup\Test\Unit\Model\Installer;
 
 use Magento\Setup\Model\Installer\Progress;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class ProgressTest extends TestCase
 {
     /**
      * @param int $total
      * @param int $current
+<<<<<<< HEAD
      */
     #[DataProvider('constructorExceptionInvalidTotalDataProvider')]
+=======
+     * @dataProvider constructorExceptionInvalidTotalDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testConstructorExceptionInvalidTotal($total, $current)
     {
         $this->expectException('LogicException');
@@ -28,7 +41,11 @@ class ProgressTest extends TestCase
     /**
      * return array
      */
+<<<<<<< HEAD
     public static function constructorExceptionInvalidTotalDataProvider()
+=======
+    public function constructorExceptionInvalidTotalDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [[0,0], [0, 1], [[], 1]];
     }
@@ -77,8 +94,13 @@ class ProgressTest extends TestCase
     /**
      * @param int $total
      * @param int $current
+<<<<<<< HEAD
      */
     #[DataProvider('ratioDataProvider')]
+=======
+     * @dataProvider ratioDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRatio($total, $current)
     {
         $progress = new Progress($total, $current);
@@ -88,7 +110,11 @@ class ProgressTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function ratioDataProvider()
+=======
+    public function ratioDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $data = [];
         for ($i = 10; $i <= 20; $i++) {

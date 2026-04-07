@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Catalog\Block\Adminhtml\Product\Attribute\Edit\Tab;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Catalog\Block\Adminhtml\Product\Attribute\Edit\Tab;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * @magentoAppArea adminhtml
  */
@@ -33,8 +41,13 @@ class FrontTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @param $attributeCode
+<<<<<<< HEAD
      */
     #[DataProvider('toHtmlDataProvider')]
+=======
+     * @dataProvider toHtmlDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testToHtml($attributeCode)
     {
         /** @var \Magento\Catalog\Model\ResourceModel\Eav\Attribute $model */
@@ -46,16 +59,24 @@ class FrontTest extends \PHPUnit\Framework\TestCase
         $coreRegistry->unregister('entity_attribute');
         $coreRegistry->register('entity_attribute', $model);
 
+<<<<<<< HEAD
         $this->assertMatchesRegularExpression(
             '/<select\sid="is_searchable".*disabled="disabled"/',
             $this->block->toHtml()
         );
+=======
+        $this->assertMatchesRegularExpression('/<select\sid="is_searchable".*disabled="disabled"/', $this->block->toHtml());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function toHtmlDataProvider()
+=======
+    public function toHtmlDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['visibility'],

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -13,7 +18,10 @@ use Magento\Cron\Model\Config\Source\Frequency;
 use Magento\Framework\App\Config\ValueFactory;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -35,10 +43,17 @@ class AlertTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param string $frequency
      * @param string $expectedCronExpr
      */
     #[DataProvider('frequencyDataProvider')]
+=======
+     * @dataProvider frequencyDataProvider
+     * @param string $frequency
+     * @param string $expectedCronExpr
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDirectSave(string $frequency, string $expectedCronExpr): void
     {
         $preparedValueFactory = $this->objectManager->get(PreparedValueFactory::class);
@@ -50,10 +65,17 @@ class AlertTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param string $frequency
      * @param string $expectedCronExpr
      */
     #[DataProvider('frequencyDataProvider')]
+=======
+     * @dataProvider frequencyDataProvider
+     * @param string $frequency
+     * @param string $expectedCronExpr
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveFromAdmin(string $frequency, string $expectedCronExpr): void
     {
         $config = $this->objectManager->create(ConfigModel::class);
@@ -76,6 +98,7 @@ class AlertTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function frequencyDataProvider(): array
     {
         return [
@@ -91,6 +114,14 @@ class AlertTest extends TestCase
                 Frequency::CRON_MONTHLY,  // $frequency
                 '0 0 1 * *'  // $expectedCronExpr
             ],
+=======
+    public function frequencyDataProvider(): array
+    {
+        return [
+            'daily' => [Frequency::CRON_DAILY, '0 0 * * *'],
+            'weekly' => [Frequency::CRON_WEEKLY, '0 0 * * 1'],
+            'monthly' => [Frequency::CRON_MONTHLY, '0 0 1 * *'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
     }
 

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Sales\Controller\Adminhtml\Order;
 
@@ -19,7 +24,10 @@ use Magento\Store\Api\Data\WebsiteInterface;
 use Magento\Store\Api\StoreRepositoryInterface;
 use Magento\Store\Api\WebsiteRepositoryInterface;
 use Magento\Store\Model\ScopeInterface;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea adminhtml
@@ -135,8 +143,14 @@ class CreateTest extends \Magento\TestFramework\TestCase\AbstractBackendControll
      *
      * @param string $block Block name.
      * @param string $expected Contains HTML.
+<<<<<<< HEAD
      */
     #[DataProvider('loadBlockActionsDataProvider')]
+=======
+     *
+     * @dataProvider loadBlockActionsDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testLoadBlockActions($block, $expected)
     {
         $this->getRequest()->setMethod(HttpRequest::METHOD_POST);
@@ -150,7 +164,11 @@ class CreateTest extends \Magento\TestFramework\TestCase\AbstractBackendControll
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function loadBlockActionsDataProvider(): array
+=======
+    public function loadBlockActionsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'shipping_method' => ['shipping_method', 'id=\"shipping-method-overlay\"'],
@@ -244,9 +262,15 @@ class CreateTest extends \Magento\TestFramework\TestCase\AbstractBackendControll
      * @param boolean $reordered
      * @param string $expectedResult
      *
+<<<<<<< HEAD
      * @magentoAppIsolation enabled
      */
     #[DataProvider('getAclResourceDataProvider')]
+=======
+     * @dataProvider getAclResourceDataProvider
+     * @magentoAppIsolation enabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetAclResource($actionName, $reordered, $expectedResult)
     {
         $this->_objectManager->get(SessionQuote::class)->setReordered($reordered);
@@ -257,6 +281,10 @@ class CreateTest extends \Magento\TestFramework\TestCase\AbstractBackendControll
         $this->getRequest()->setActionName($actionName);
 
         $method = new \ReflectionMethod(\Magento\Sales\Controller\Adminhtml\Order\Create::class, '_getAclResource');
+<<<<<<< HEAD
+=======
+        $method->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $result = $method->invoke($orderController);
         $this->assertEquals($result, $expectedResult);
     }
@@ -264,7 +292,11 @@ class CreateTest extends \Magento\TestFramework\TestCase\AbstractBackendControll
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getAclResourceDataProvider(): array
+=======
+    public function getAclResourceDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['index', false, 'Magento_Sales::create'],

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 use Magento\Framework\App\Filesystem\DirectoryList;
@@ -141,6 +146,10 @@ function setCustomErrorHandler()
                     E_USER_ERROR => 'User Error',
                     E_USER_WARNING => 'User Warning',
                     E_USER_NOTICE => 'User Notice',
+<<<<<<< HEAD
+=======
+                    E_STRICT => 'Strict',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     E_RECOVERABLE_ERROR => 'Recoverable Error',
                     E_DEPRECATED => 'Deprecated',
                     E_USER_DEPRECATED => 'User Deprecated',

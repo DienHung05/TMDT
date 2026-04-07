@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\TestFramework\Dependency;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\TestFramework\Dependency;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class DbRuleTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -24,14 +32,23 @@ class DbRuleTest extends \PHPUnit\Framework\TestCase
      * @param string $file
      * @param string $contents
      * @param array $expected
+<<<<<<< HEAD
      */
     #[DataProvider('getDependencyInfoDataProvider')]
+=======
+     * @dataProvider getDependencyInfoDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetDependencyInfo($module, $file, $contents, array $expected)
     {
         $this->assertEquals($expected, $this->model->getDependencyInfo($module, 'php', $file, $contents));
     }
 
+<<<<<<< HEAD
     public static function getDependencyInfoDataProvider()
+=======
+    public function getDependencyInfoDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['any', 'non-resource-file-path.php', 'any', []],

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -45,8 +50,18 @@ class PaymentFailuresServiceTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         $this->quote = Bootstrap::getObjectManager()->create(Quote::class);
+<<<<<<< HEAD
         $this->cartRepositoryMock = $this->createMock(CartRepositoryInterface::class);
         $this->localeDateMock = $this->createMock(TimezoneInterface::class);
+=======
+        $this->cartRepositoryMock = $this->getMockBuilder(CartRepositoryInterface::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['get'])
+            ->getMockForAbstractClass();
+        $this->localeDateMock = $this->getMockBuilder(TimezoneInterface::class)
+            ->setMethods(['formatDateTime'])
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->paymentFailures = Bootstrap::getObjectManager()->create(
             PaymentFailuresInterface::class,
@@ -82,6 +97,11 @@ class PaymentFailuresServiceTest extends \PHPUnit\Framework\TestCase
 
         $paymentReflection = new \ReflectionClass($this->paymentFailures);
         $templateVarsMethod = $paymentReflection->getMethod('getTemplateVars');
+<<<<<<< HEAD
+=======
+        $templateVarsMethod->setAccessible(true);
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $templateVars = $templateVarsMethod->invoke($this->paymentFailures, $this->quote, $errorMessage, $checkoutType);
         $expectedVars = [
             'reason' => $errorMessage->render(),
@@ -127,6 +147,11 @@ class PaymentFailuresServiceTest extends \PHPUnit\Framework\TestCase
 
         $paymentReflection = new \ReflectionClass($this->paymentFailures);
         $templateVarsMethod = $paymentReflection->getMethod('getTemplateVars');
+<<<<<<< HEAD
+=======
+        $templateVarsMethod->setAccessible(true);
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $templateVars = $templateVarsMethod->invoke($this->paymentFailures, $this->quote, $errorMessage, $checkoutType);
         $expectedVars = [
             'reason' => $errorMessage->render(),

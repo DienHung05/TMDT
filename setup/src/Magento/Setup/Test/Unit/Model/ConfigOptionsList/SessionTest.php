@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -13,11 +18,15 @@ use Magento\Framework\Setup\Option\SelectConfigOption;
 use Magento\Framework\Setup\Option\TextConfigOption;
 use Magento\Setup\Model\ConfigOptionsList\Session as SessionConfigOptionsList;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
+=======
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class SessionTest extends TestCase
 {
     /**
@@ -37,6 +46,7 @@ class SessionTest extends TestCase
         $this->deploymentConfigMock = $this->createMock(DeploymentConfig::class);
     }
 
+<<<<<<< HEAD
     public function testGetOptions(): void
     {
         $options = $this->configList->getOptions();
@@ -105,6 +115,88 @@ class SessionTest extends TestCase
                 "Option at index $index has incorrect name."
             );
         }
+=======
+    public function testGetOptions()
+    {
+        $options = $this->configList->getOptions();
+        $this->assertCount(23, $options);
+
+        $this->assertArrayHasKey(0, $options);
+        $this->assertInstanceOf(SelectConfigOption::class, $options[0]);
+        $this->assertEquals('session-save', $options[0]->getName());
+
+        $this->assertArrayHasKey(1, $options);
+        $this->assertInstanceOf(TextConfigOption::class, $options[1]);
+        $this->assertEquals('session-save-redis-host', $options[1]->getName());
+
+        $this->assertArrayHasKey(2, $options);
+        $this->assertInstanceOf(TextConfigOption::class, $options[2]);
+        $this->assertEquals('session-save-redis-port', $options[2]->getName());
+
+        $this->assertArrayHasKey(3, $options);
+        $this->assertInstanceOf(TextConfigOption::class, $options[3]);
+        $this->assertEquals('session-save-redis-password', $options[3]->getName());
+
+        $this->assertArrayHasKey(4, $options);
+        $this->assertInstanceOf(TextConfigOption::class, $options[4]);
+        $this->assertEquals('session-save-redis-timeout', $options[4]->getName());
+
+        $this->assertArrayHasKey(5, $options);
+        $this->assertInstanceOf(TextConfigOption::class, $options[5]);
+        $this->assertEquals('session-save-redis-persistent-id', $options[5]->getName());
+
+        $this->assertArrayHasKey(6, $options);
+        $this->assertInstanceOf(TextConfigOption::class, $options[6]);
+        $this->assertEquals('session-save-redis-db', $options[6]->getName());
+
+        $this->assertArrayHasKey(7, $options);
+        $this->assertInstanceOf(TextConfigOption::class, $options[7]);
+        $this->assertEquals('session-save-redis-compression-threshold', $options[7]->getName());
+
+        $this->assertArrayHasKey(8, $options);
+        $this->assertInstanceOf(TextConfigOption::class, $options[8]);
+        $this->assertEquals('session-save-redis-compression-lib', $options[8]->getName());
+
+        $this->assertArrayHasKey(9, $options);
+        $this->assertInstanceOf(TextConfigOption::class, $options[9]);
+        $this->assertEquals('session-save-redis-log-level', $options[9]->getName());
+
+        $this->assertArrayHasKey(10, $options);
+        $this->assertInstanceOf(TextConfigOption::class, $options[10]);
+        $this->assertEquals('session-save-redis-max-concurrency', $options[10]->getName());
+
+        $this->assertArrayHasKey(11, $options);
+        $this->assertInstanceOf(TextConfigOption::class, $options[11]);
+        $this->assertEquals('session-save-redis-break-after-frontend', $options[11]->getName());
+
+        $this->assertArrayHasKey(12, $options);
+        $this->assertInstanceOf(TextConfigOption::class, $options[12]);
+        $this->assertEquals('session-save-redis-break-after-adminhtml', $options[12]->getName());
+
+        $this->assertArrayHasKey(13, $options);
+        $this->assertInstanceOf(TextConfigOption::class, $options[13]);
+        $this->assertEquals('session-save-redis-first-lifetime', $options[13]->getName());
+
+        $this->assertArrayHasKey(14, $options);
+        $this->assertInstanceOf(TextConfigOption::class, $options[14]);
+        $this->assertEquals('session-save-redis-bot-first-lifetime', $options[14]->getName());
+
+        $this->assertArrayHasKey(15, $options);
+        $this->assertInstanceOf(TextConfigOption::class, $options[15]);
+        $this->assertEquals('session-save-redis-bot-lifetime', $options[15]->getName());
+
+        $this->assertArrayHasKey(16, $options);
+        $this->assertInstanceOf(TextConfigOption::class, $options[16]);
+        $this->assertEquals('session-save-redis-disable-locking', $options[16]->getName());
+
+        $this->assertArrayHasKey(17, $options);
+        $this->assertInstanceOf(TextConfigOption::class, $options[17]);
+        $this->assertEquals('session-save-redis-min-lifetime', $options[17]->getName());
+
+        $this->assertArrayHasKey(18, $options);
+        $this->assertInstanceOf(TextConfigOption::class, $options[18]);
+        $this->assertEquals('session-save-redis-max-lifetime', $options[18]->getName());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     public function testCreateConfig()
@@ -127,23 +219,35 @@ class SessionTest extends TestCase
         $this->assertEquals($expectedConfigData, $configData->getData());
     }
 
+<<<<<<< HEAD
     /**
      * @param string $backend
      */
     #[DataProvider('sessionBackendProvider')]
     public function testCreateConfigWithSessionSaveBackend(string $backend)
+=======
+    public function testCreateConfigWithSessionSaveRedis()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $this->deploymentConfigMock->expects($this->any())->method('get')->willReturn('');
 
         $expectedConfigData = [
             'session' => [
+<<<<<<< HEAD
                 'save' => $backend,
                 $backend => [
+=======
+                'save' => 'redis',
+                'redis' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'host' => '',
                     'port' => '',
                     'password' => '',
                     'timeout' => '',
+<<<<<<< HEAD
                     'retries' => '',
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'persistent_identifier' => '',
                     'database' => '',
                     'compression_threshold' => '',
@@ -163,10 +267,18 @@ class SessionTest extends TestCase
                     'sentinel_connect_retries' => '',
                     'sentinel_verify_master' => '',
                 ]
+<<<<<<< HEAD
             ]
         ];
 
         $options = ['session-save' => $backend];
+=======
+
+            ]
+        ];
+
+        $options = ['session-save' => 'redis'];
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $configData = $this->configList->createConfig($options, $this->deploymentConfigMock);
         $this->assertEquals($expectedConfigData, $configData->getData());
@@ -200,7 +312,10 @@ class SessionTest extends TestCase
                     'port' => '',
                     'password' => '',
                     'timeout' => '',
+<<<<<<< HEAD
                     'retries' => '',
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'persistent_identifier' => '',
                     'database' => '',
                     'compression_threshold' => '',
@@ -234,8 +349,13 @@ class SessionTest extends TestCase
      * @param string $option
      * @param string $configArrayKey
      * @param string $optionValue
+<<<<<<< HEAD
      */
     #[DataProvider('redisOptionProvider')]
+=======
+     * @dataProvider redisOptionProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testIndividualOptionsAreSetProperly($option, $configArrayKey, $optionValue)
     {
         $configData = $this->configList->createConfig([$option => $optionValue], $this->deploymentConfigMock);
@@ -261,8 +381,13 @@ class SessionTest extends TestCase
      * @param string $option
      * @param string $invalidInput
      * @param string $errorMessage
+<<<<<<< HEAD
      */
     #[DataProvider('invalidOptionsProvider')]
+=======
+     * @dataProvider invalidOptionsProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testValidationWithInvalidOptions($option, $invalidInput, $errorMessage)
     {
         $errors = $this->configList->validate([$option => $invalidInput], $this->deploymentConfigMock);
@@ -274,7 +399,11 @@ class SessionTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function redisOptionProvider()
+=======
+    public function redisOptionProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['session-save-redis-host', 'host', 'google'],
@@ -301,7 +430,11 @@ class SessionTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function invalidOptionsProvider()
+=======
+    public function invalidOptionsProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['session-save', 'clay-tablet', 'Invalid session handler \'clay-tablet\''],
@@ -309,6 +442,7 @@ class SessionTest extends TestCase
             ['session-save-redis-compression-lib', 'foobar', 'Invalid Redis compression library \'foobar\''],
         ];
     }
+<<<<<<< HEAD
 
     public static function sessionBackendProvider(): array
     {
@@ -317,4 +451,6 @@ class SessionTest extends TestCase
             'Valkey backend' => ['valkey'],
         ];
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

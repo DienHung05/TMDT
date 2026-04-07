@@ -4,8 +4,13 @@
  *
  * Format: array(<constant_name>[, <class_scope> = ''[, <replacement>]])
  *
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 // @codingStandardsIgnoreStart
@@ -133,6 +138,10 @@ return [
     ['TYPE_BINARY', null, 'Magento_DB_Ddl_Table::TYPE_BLOB'],
     ['TYPE_CHAR', null, 'Magento_DB_Ddl_Table::TYPE_TEXT'],
     ['TYPE_CLOB', null, 'Magento_DB_Ddl_Table::TYPE_TEXT'],
+<<<<<<< HEAD
+=======
+    ['TYPE_DOUBLE', null, 'Magento_DB_Ddl_Table::TYPE_FLOAT'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ['TYPE_LONGVARBINARY', null, 'Magento_DB_Ddl_Table::TYPE_BLOB'],
     ['TYPE_LONGVARCHAR', null, 'Magento_DB_Ddl_Table::TYPE_TEXT'],
     ['TYPE_REAL', null, 'Magento_DB_Ddl_Table::TYPE_FLOAT'],

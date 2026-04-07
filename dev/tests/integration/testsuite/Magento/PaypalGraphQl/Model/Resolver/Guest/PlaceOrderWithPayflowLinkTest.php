@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\PaypalGraphQl\Model\Resolver\Guest;
 
+<<<<<<< HEAD
 use Laminas\Http\Exception\RuntimeException;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\App\ProductMetadataInterface;
 use Magento\Framework\DataObject;
 use Magento\Framework\GraphQl\Exception\GraphQlInputException;
@@ -57,17 +65,29 @@ class PlaceOrderWithPayflowLinkTest extends TestCase
         $this->getMaskedQuoteIdByReservedOrderId = $this->objectManager->get(GetMaskedQuoteIdByReservedOrderId::class);
         $this->gateway = $this->getMockBuilder(Gateway::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['postRequest'])
             ->getMock();
 
         $requestFactory = $this->getMockBuilder(RequestFactory::class)
             ->onlyMethods(['create'])
+=======
+            ->setMethods(['postRequest'])
+            ->getMock();
+
+        $requestFactory = $this->getMockBuilder(RequestFactory::class)
+            ->setMethods(['create'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->payflowRequest = $this->getMockBuilder(Request::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['__call','setData'])
+=======
+            ->setMethods(['__call','setData'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
         $this->payflowRequest->method('__call')
             ->willReturnCallback(
@@ -156,11 +176,15 @@ QUERY;
             ->willReturn($payflowLinkResponse);
 
         $this->payflowRequest
+<<<<<<< HEAD
             ->expects($this->any())
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->method('setData')
             ->willReturnMap(
                 [
                     [
+<<<<<<< HEAD
                         [
                             'user' => null,
                             'vendor' => null,
@@ -175,6 +199,20 @@ QUERY;
                     ['USER1', 1, $this->payflowRequest],
                     ['USER2', 'USER2SilentPostHash', $this->payflowRequest]
                 ],
+=======
+                        'user' => null,
+                        'vendor' => null,
+                        'partner' => null,
+                        'pwd' => null,
+                        'verbosity' => null,
+                        'BUTTONSOURCE' => $button,
+                        'tender' => 'C',
+                    ],
+                    $this->returnSelf()
+                ],
+                ['USER1', 1, $this->returnSelf()],
+                ['USER2', 'USER2SilentPostHash', $this->returnSelf()]
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             );
 
         $response = $this->graphQlRequest->send($query);
@@ -246,9 +284,16 @@ QUERY;
 QUERY;
 
         $resultCode = Payflowlink::RESPONSE_CODE_DECLINED_BY_FILTER;
+<<<<<<< HEAD
         $exception = new RuntimeException(__('Declined response message from PayPal gateway')->render());
         //Exception message is transformed into more controlled message
         $expectedErrorCode = 'UNABLE_TO_PLACE_ORDER';
+=======
+        $exception = new \Zend_Http_Client_Exception(__('Declined response message from PayPal gateway'));
+        //Exception message is transformed into more controlled message
+        $expectedExceptionMessage =
+            "Unable to place order: Payment Gateway is unreachable at the moment. Please use another payment option.";
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->payflowRequest->method('setData')
             ->with(
@@ -273,8 +318,15 @@ QUERY;
         $this->assertArrayHasKey('errors', $responseData);
         $actualError = $responseData['errors'][0];
         $this->assertEquals(
+<<<<<<< HEAD
             $expectedErrorCode,
             $actualError['extensions']['error_code']
         );
+=======
+            $expectedExceptionMessage,
+            $actualError['message']
+        );
+        $this->assertEquals(GraphQlInputException::EXCEPTION_CATEGORY, $actualError['extensions']['category']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

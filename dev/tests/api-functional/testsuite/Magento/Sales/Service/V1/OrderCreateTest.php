@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Sales\Service\V1;
 
@@ -13,6 +18,7 @@ use Magento\Catalog\Api\Data\ProductCustomOptionInterface;
  */
 class OrderCreateTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     private const RESOURCE_PATH = '/V1/orders';
 
     private const SERVICE_READ_NAME = 'salesOrderRepositoryV1';
@@ -20,6 +26,15 @@ class OrderCreateTest extends WebapiAbstract
     private const SERVICE_VERSION = 'V1';
 
     private const ORDER_INCREMENT_ID = '100000001';
+=======
+    const RESOURCE_PATH = '/V1/orders';
+
+    const SERVICE_READ_NAME = 'salesOrderRepositoryV1';
+
+    const SERVICE_VERSION = 'V1';
+
+    const ORDER_INCREMENT_ID = '100000001';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var \Magento\Framework\ObjectManagerInterface
@@ -146,6 +161,7 @@ class OrderCreateTest extends WebapiAbstract
                     'stock_id' => null,
                 ]
             ];
+<<<<<<< HEAD
         $orderData['extension_attributes']['taxes'] = [
             [
                 'code' => 'US-NY-*-Rate 1',
@@ -181,6 +197,8 @@ class OrderCreateTest extends WebapiAbstract
                 'taxable_item_type' => 'product',
             ]
         ];
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         return $orderData;
     }
 
@@ -195,7 +213,11 @@ class OrderCreateTest extends WebapiAbstract
 
     /**
      * @param array $orderItem
+<<<<<<< HEAD
      * @return void
+=======
+     * @return array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     protected function addProductOption($orderItem)
     {
@@ -257,6 +279,7 @@ class OrderCreateTest extends WebapiAbstract
                 'operation' => self::SERVICE_READ_NAME . 'save',
             ],
         ];
+<<<<<<< HEAD
         $result = $this->_webApiCall($serviceInfo, ['entity' => $order]);
 
         $getServiceInfo = [
@@ -300,5 +323,21 @@ class OrderCreateTest extends WebapiAbstract
         $this->assertEquals(0.50, $orderItemTaxItem['base_amount']);
         $this->assertEquals(0.50, $orderItemTaxItem['real_amount']);
         $this->assertEquals($result['items'][0]['item_id'], $orderItemTaxItem['item_id']);
+=======
+        $this->assertNotEmpty($this->_webApiCall($serviceInfo, ['entity' => $order]));
+
+        /** @var \Magento\Sales\Model\Order $model */
+        $model = $this->objectManager->get(\Magento\Sales\Model\Order::class);
+        $model->load($order['customer_email'], 'customer_email');
+        $this->assertTrue((bool)$model->getId());
+        $this->assertEquals($order['base_grand_total'], $model->getBaseGrandTotal());
+        $this->assertEquals($order['grand_total'], $model->getGrandTotal());
+        $this->assertNotNull($model->getShippingAddress());
+        $this->assertTrue((bool)$model->getShippingAddress()->getId());
+        $this->assertEquals('Flat Rate - Fixed', $model->getShippingDescription());
+        $shippingMethod = $model->getShippingMethod(true);
+        $this->assertEquals('flatrate', $shippingMethod['carrier_code']);
+        $this->assertEquals('flatrate', $shippingMethod['method']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

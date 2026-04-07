@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Integration\Model;
 
 use Magento\Authorization\Model\UserContextInterface;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Integration authorization service test.
@@ -36,7 +44,11 @@ class AuthorizationServiceTest extends \PHPUnit\Framework\TestCase
             ]
         );
 
+<<<<<<< HEAD
         $this->userContextMock = $this->createMock(
+=======
+        $this->userContextMock = $this->getMockForAbstractClass(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             \Magento\Authorization\Model\UserContextInterface::class
         );
         $this->userContextMock
@@ -74,8 +86,13 @@ class AuthorizationServiceTest extends \PHPUnit\Framework\TestCase
      * @param string[] $initialResources
      * @param string[] $newResources
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
      */
     #[DataProvider('changePermissionsProvider')]
+=======
+     * @dataProvider changePermissionsProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testChangePermissions($integrationId, $initialResources, $newResources)
     {
         $this->_service->grantPermissions($integrationId, $initialResources);
@@ -90,7 +107,11 @@ class AuthorizationServiceTest extends \PHPUnit\Framework\TestCase
         $this->_ensurePermissionsAreNotGranted($integrationId, $initialResources);
     }
 
+<<<<<<< HEAD
     public static function changePermissionsProvider()
+=======
+    public function changePermissionsProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'integration' => [

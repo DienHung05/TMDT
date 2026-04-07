@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -188,6 +193,7 @@ class ProductRepositoryMultiWebsiteTest extends WebapiAbstract
         /** @var ScopeOverriddenValue $scopeOverriddenValue */
         $scopeOverriddenValue = $this->objectManager->get(ScopeOverriddenValue::class);
         $storeId = $store->load('fixture_third_store', 'code')->getId();
+<<<<<<< HEAD
 
         $attributeCodeList = ['visibility', 'tax_class_id', 'status', 'short_description', 'description',
                            'url_key', 'meta_title', 'meta_keywords', 'meta_description'];
@@ -199,6 +205,28 @@ class ProductRepositoryMultiWebsiteTest extends WebapiAbstract
                 $storeId
             ));
         }
+=======
+        $this->assertFalse($scopeOverriddenValue->containsValue(
+            ProductInterface::class,
+            $product,
+            'visibility',
+            $storeId
+        ));
+
+        $this->assertFalse($scopeOverriddenValue->containsValue(
+            ProductInterface::class,
+            $product,
+            'tax_class_id',
+            $storeId
+        ));
+
+        $this->assertFalse($scopeOverriddenValue->containsValue(
+            ProductInterface::class,
+            $product,
+            'status',
+            $storeId
+        ));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**

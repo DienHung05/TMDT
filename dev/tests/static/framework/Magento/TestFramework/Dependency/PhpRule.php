@@ -1,7 +1,14 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Rule for searching php file dependency
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -112,8 +119,13 @@ class PhpRule implements RuleInterface
         ConfigReader $configReader,
         array $pluginMap = [],
         array $whitelists = [],
+<<<<<<< HEAD
         ?ClassScanner $classScanner = null,
         ?RouteMapper $routeMapper = null
+=======
+        ClassScanner $classScanner = null,
+        RouteMapper $routeMapper = null
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ) {
         $this->_mapRouters = $mapRouters;
         $this->_mapLayoutBlocks = $mapLayoutBlocks;
@@ -136,7 +148,11 @@ class PhpRule implements RuleInterface
      */
     public function getDependencyInfo($currentModule, $fileType, $file, &$contents)
     {
+<<<<<<< HEAD
         if (!in_array($fileType, ['php', 'template', 'fixture'])) {
+=======
+        if (!in_array($fileType, ['php', 'template'])) {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             return [];
         }
 
@@ -178,10 +194,18 @@ class PhpRule implements RuleInterface
     private function caseClassesAndIdentifiers($currentModule, $file, &$contents)
     {
         $pattern = '~\b(?<class>(?<module>('
+<<<<<<< HEAD
             .'(?:'
             . implode('|', Files::init()->getNamespaces())
             . ')'
             . '(?<delimiter>[_\\\\]))[A-Z]{1,}[a-zA-Z0-9]{1,})'
+=======
+            . implode(
+                '[_\\\\]|',
+                Files::init()->getNamespaces()
+            )
+            . '(?<delimiter>[_\\\\]))[a-zA-Z0-9]{2,})'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             . '(?<class_inside_module>\\4[a-zA-Z0-9_\\\\]{2,})?)\b'
             . '(?:::(?<module_scoped_key>[A-Za-z0-9_/.]+)[\'"])?~';
 
@@ -538,6 +562,7 @@ class PhpRule implements RuleInterface
      * @param string|null $area
      * @param string $block
      * @return array
+<<<<<<< HEAD
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     protected function _checkDependencyLayoutBlock(string $currentModule, ?string $area, string $block): array
@@ -589,12 +614,45 @@ class PhpRule implements RuleInterface
         }
 
         return $this->_mapLayoutBlocks[$area][$block] ?? [];
+=======
+     */
+    protected function _checkDependencyLayoutBlock(string $currentModule, ?string $area, string $block): array
+    {
+        if (isset($this->_mapLayoutBlocks[$area][$block]) || $area === null) {
+            // CASE 1: No dependencies
+            $modules = [];
+            if ($area === null) {
+                foreach ($this->_mapLayoutBlocks as $blocks) {
+                    if (array_key_exists($block, $blocks)) {
+                        $modules += $blocks[$block];
+                    }
+                }
+            } else {
+                $modules = $this->_mapLayoutBlocks[$area][$block];
+            }
+            if (isset($modules[$currentModule])) {
+                return ['modules' => []];
+            }
+            // CASE 2: Single dependency
+            if (1 == count($modules)) {
+                return ['modules' => $modules];
+            }
+            // CASE 3: Default module dependency
+            $defaultModule = $this->_getDefaultModuleName($area);
+            if (isset($modules[$defaultModule])) {
+                return ['modules' => [$defaultModule]];
+            }
+        }
+        // CASE 4: \Exception - Undefined block
+        return [];
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
      * Retrieve default module name (by area)
      *
      * @param string $area
+<<<<<<< HEAD
      * @return string|null
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
@@ -607,6 +665,14 @@ class PhpRule implements RuleInterface
         }
         if (isset($this->_defaultModules[$normalizedArea])) {
             return $this->_defaultModules[$normalizedArea];
+=======
+     * @return null
+     */
+    protected function _getDefaultModuleName($area = 'default')
+    {
+        if (isset($this->_defaultModules[$area])) {
+            return $this->_defaultModules[$area];
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
         return null;
     }

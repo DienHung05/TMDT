@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Shipping\Model;
 
@@ -10,7 +15,10 @@ use Magento\Framework\ObjectManagerInterface;
 use Magento\Quote\Model\Quote\Address\RateResult\Method;
 use Magento\Shipping\Model\Rate\Result;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\Depends;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Contains list of tests for Shipping model
@@ -68,10 +76,17 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
      * Checks shipping rate details for processed address.
      * @covers \Magento\Shipping\Model\Shipping::collectRatesByAddress
      * @param Result $result
+<<<<<<< HEAD
      * @magentoConfigFixture carriers/flatrate/active 1
      * @magentoConfigFixture carriers/flatrate/price 5.00
      */
     #[Depends('testCollectRatesByAddress')]
+=======
+     * @depends testCollectRatesByAddress
+     * @magentoConfigFixture carriers/flatrate/active 1
+     * @magentoConfigFixture carriers/flatrate/price 5.00
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCollectRates(Result $result)
     {
         $rates = $result->getAllRates();

@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
  */
@@ -9,6 +10,14 @@ use Magento\Framework\MessageQueue\DefaultValueProvider;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestModuleAsyncAmqp\Model\AsyncTestData;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Framework\MessageQueue\UseCase;
+
+use Magento\TestModuleAsyncAmqp\Model\AsyncTestData;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class WildcardTopicTest extends QueueTestCaseAbstract
 {
@@ -23,6 +32,7 @@ class WildcardTopicTest extends QueueTestCaseAbstract
     ];
 
     /**
+<<<<<<< HEAD
      * @var string
      */
     private $connectionType;
@@ -55,6 +65,16 @@ class WildcardTopicTest extends QueueTestCaseAbstract
             This test is AMQP-specific.');
         }
 
+=======
+     * @param string $topic
+     * @param string[] $matchingQueues
+     * @param string[] $nonMatchingQueues
+     *
+     * @dataProvider wildCardTopicsDataProvider
+     */
+    public function testWildCardMatchingTopic($topic, $matchingQueues, $nonMatchingQueues)
+    {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $testObject = $this->generateTestObject();
         $this->publisher->publish($topic, $testObject);
 
@@ -69,7 +89,11 @@ class WildcardTopicTest extends QueueTestCaseAbstract
         }
     }
 
+<<<<<<< HEAD
     public static function wildCardTopicsDataProvider()
+=======
+    public function wildCardTopicsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'segment1.segment2.segment3.wildcard' => [
@@ -87,11 +111,14 @@ class WildcardTopicTest extends QueueTestCaseAbstract
 
     public function testWildCardNonMatchingTopic()
     {
+<<<<<<< HEAD
         if ($this->connectionType === 'stomp') {
             $this->markTestSkipped('AMQP test skipped because STOMP connection is available.
             This test is AMQP-specific.');
         }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $testObject = $this->generateTestObject();
         $this->publisher->publish('not.matching.wildcard.topic', $testObject);
         sleep(2);

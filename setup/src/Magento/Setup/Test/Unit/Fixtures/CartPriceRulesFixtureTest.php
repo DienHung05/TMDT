@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -22,17 +27,24 @@ use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManager;
 use Magento\Store\Model\Website;
 use PHPUnit\Framework\MockObject\MockObject;
+<<<<<<< HEAD
 use Magento\Framework\TestFramework\Unit\Helper\MockCreationTrait;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use PHPUnit\Framework\TestCase;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class CartPriceRulesFixtureTest extends TestCase
 {
+<<<<<<< HEAD
     use MockCreationTrait;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @var MockObject|FixtureModel
      */
@@ -71,9 +83,20 @@ class CartPriceRulesFixtureTest extends TestCase
             ->willReturn('website_id');
 
         $contextMock = $this->createMock(Context::class);
+<<<<<<< HEAD
         $abstractDbMock = $this->createPartialMockWithReflection(
             AbstractDb::class,
             ['getAllChildren', '_construct']
+=======
+        $abstractDbMock = $this->getMockForAbstractClass(
+            AbstractDb::class,
+            [$contextMock],
+            '',
+            true,
+            true,
+            true,
+            ['getAllChildren']
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
         $abstractDbMock->expects($this->once())
             ->method('getAllChildren')
@@ -157,12 +180,21 @@ class CartPriceRulesFixtureTest extends TestCase
      * @param int $ruleId
      * @param array $categoriesArray
      * @param int $ruleCount
+<<<<<<< HEAD
      */
     #[DataProvider('dataProviderGenerateAdvancedCondition')]
+=======
+     * @dataProvider dataProviderGenerateAdvancedCondition
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGenerateAdvancedCondition($ruleId, $categoriesArray, $ruleCount)
     {
         $reflection = new \ReflectionClass($this->model);
         $reflectionProperty = $reflection->getProperty('cartPriceRulesCount');
+<<<<<<< HEAD
+=======
+        $reflectionProperty->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $reflectionProperty->setValue($this->model, $ruleCount);
 
         $result = $this->model->generateAdvancedCondition($ruleId, $categoriesArray);
@@ -256,7 +288,11 @@ class CartPriceRulesFixtureTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function dataProviderGenerateAdvancedCondition()
+=======
+    public function dataProviderGenerateAdvancedCondition()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [1, [[0]], 1],

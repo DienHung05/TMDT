@@ -1,9 +1,15 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 declare(strict_types=1);
 
 namespace Magento\Bundle\Block\Sales\Order\Items;
@@ -12,6 +18,7 @@ use Magento\Bundle\Test\Fixture\Option as BundleOptionFixture;
 use Magento\Bundle\Test\Fixture\OrderItem as OrderItemFixture;
 use Magento\Bundle\Test\Fixture\Product as BundleProductFixture;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
+<<<<<<< HEAD
 use Magento\Config\Model\ResourceModel\Config as CoreConfig;
 use Magento\Customer\Api\AccountManagementInterface;
 use Magento\Customer\Model\Session;
@@ -22,6 +29,12 @@ use Magento\Framework\View\LayoutInterface;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Email\Sender\OrderSender;
 use Magento\Sales\Model\Order\Address as OrderAddress;
+=======
+use Magento\Customer\Model\Session;
+use Magento\Framework\ObjectManagerInterface;
+use Magento\Framework\View\LayoutInterface;
+use Magento\Sales\Model\Order;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Fixture\Config;
 use Magento\TestFramework\Fixture\DataFixture;
@@ -29,12 +42,17 @@ use Magento\TestFramework\Fixture\DataFixtureStorage;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Fixture\DbIsolation;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use Magento\TestFramework\Mail\Template\TransportBuilderMock;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
+=======
+use PHPUnit\Framework\TestCase;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class RendererTest extends TestCase
 {
     /**
@@ -55,6 +73,7 @@ class RendererTest extends TestCase
     private $block;
 
     /**
+<<<<<<< HEAD
      * @var CoreConfig
      */
     protected $resourceConfig;
@@ -70,6 +89,8 @@ class RendererTest extends TestCase
     private $orderSender;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @defaultDoc
      */
     protected function setUp(): void
@@ -78,9 +99,12 @@ class RendererTest extends TestCase
         $layout = $this->objectManager->get(LayoutInterface::class);
         $this->block = $layout->createBlock(Renderer::class);
         $this->fixtures = Bootstrap::getObjectManager()->get(DataFixtureStorageManager::class)->getStorage();
+<<<<<<< HEAD
         $this->resourceConfig = $this->objectManager->get(CoreConfig::class);
         $this->accountManagement = $this->objectManager->get(AccountManagementInterface::class);
         $this->orderSender = $this->objectManager->get(OrderSender::class);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     #[
@@ -128,6 +152,7 @@ class RendererTest extends TestCase
 
         $this->assertStringContainsString("€99", $priceBlockHtml[0]);
     }
+<<<<<<< HEAD
 
     /**
      * @return void
@@ -210,4 +235,6 @@ class RendererTest extends TestCase
             quoted_printable_decode($sentMessage->getBody()->bodyToString())
         );
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

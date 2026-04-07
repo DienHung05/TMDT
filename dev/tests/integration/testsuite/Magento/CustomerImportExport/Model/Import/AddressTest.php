@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -176,6 +181,10 @@ class AddressTest extends TestCase
 
         // invoke _saveAddressEntities
         $saveAddressEntities = new \ReflectionMethod($this->_testClassName, '_saveAddressEntities');
+<<<<<<< HEAD
+=======
+        $saveAddressEntities->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $saveAddressEntities->invoke($entityAdapter, $newEntityData, []);
 
         return [$customerId, $addressId];
@@ -191,6 +200,10 @@ class AddressTest extends TestCase
         $this->markTestSkipped("to test _saveAddressAttributes attribute need to add custom address attribute");
         // get attributes list
         $attributesReflection = new \ReflectionProperty($this->_testClassName, '_attributes');
+<<<<<<< HEAD
+=======
+        $attributesReflection->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $attributes = $attributesReflection->getValue($this->_entityAdapter);
 
         // get some attribute
@@ -212,6 +225,10 @@ class AddressTest extends TestCase
 
         // invoke _saveAddressAttributes
         $saveAttributes = new \ReflectionMethod($this->_testClassName, '_saveAddressAttributes');
+<<<<<<< HEAD
+=======
+        $saveAttributes->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $saveAttributes->invoke($this->_entityAdapter, $attributeArray);
 
         // check DB
@@ -269,6 +286,10 @@ class AddressTest extends TestCase
 
         // invoke _saveCustomerDefaults
         $saveDefaults = new \ReflectionMethod($this->_testClassName, '_saveCustomerDefaults');
+<<<<<<< HEAD
+=======
+        $saveDefaults->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $saveDefaults->invoke($this->_entityAdapter, $defaults);
 
         // check DB
@@ -474,8 +495,12 @@ class AddressTest extends TestCase
     /**
      * Test customer indexer gets invalidated after import when Update on Schedule mode is set
      *
+<<<<<<< HEAD
      * @magentoAppIsolation enabled
      * @magentoDbIsolation disabled
+=======
+     * @magentoDbIsolation enabled
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function testCustomerIndexer(): void
     {

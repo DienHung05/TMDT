@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Framework\Model\ResourceModel\Db\Collection;
 
@@ -21,10 +26,22 @@ class AbstractTest extends \PHPUnit\Framework\TestCase
             ['resource' => $resourceModel]
         );
 
+<<<<<<< HEAD
         $resource = $this->getMockBuilder(\Magento\Framework\Model\ResourceModel\Db\AbstractDb::class)
             ->setConstructorArgs([$context])
             ->onlyMethods(['_construct', 'getMainTable', 'getIdFieldName'])
             ->getMock();
+=======
+        $resource = $this->getMockForAbstractClass(
+            \Magento\Framework\Model\ResourceModel\Db\AbstractDb::class,
+            [$context],
+            '',
+            true,
+            true,
+            true,
+            ['getMainTable', 'getIdFieldName']
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $resource->expects(
             $this->any()
@@ -35,7 +52,11 @@ class AbstractTest extends \PHPUnit\Framework\TestCase
         );
         $resource->expects($this->any())->method('getIdFieldName')->willReturn('website_id');
 
+<<<<<<< HEAD
         $fetchStrategy = $this->createMock(
+=======
+        $fetchStrategy = $this->getMockForAbstractClass(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             \Magento\Framework\Data\Collection\Db\FetchStrategyInterface::class
         );
 
@@ -48,10 +69,17 @@ class AbstractTest extends \PHPUnit\Framework\TestCase
         );
         $logger = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->get(\Psr\Log\LoggerInterface::class);
 
+<<<<<<< HEAD
         $this->_model = $this->getMockBuilder(\Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection::class)
             ->setConstructorArgs([$entityFactory, $logger, $fetchStrategy, $eventManager, null, $resource])
             ->onlyMethods(['_construct'])
             ->getMock();
+=======
+        $this->_model = $this->getMockForAbstractClass(
+            \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection::class,
+            [$entityFactory, $logger, $fetchStrategy, $eventManager, null, $resource]
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     public function testGetAllIds()

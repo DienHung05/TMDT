@@ -1,12 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Quote\Guest;
 
+<<<<<<< HEAD
 use Magento\Framework\Exception\LocalizedException;
 use Magento\GraphQl\Quote\GetMaskedQuoteIdByReservedOrderId;
 use Magento\Quote\Model\ResourceModel\Quote\QuoteIdMask;
@@ -14,6 +20,9 @@ use Magento\Quote\Test\Fixture\GuestCart;
 use Magento\Quote\Test\Fixture\QuoteIdMask as QuoteIdMaskFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
+=======
+use Magento\GraphQl\Quote\GetMaskedQuoteIdByReservedOrderId;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
 
@@ -377,10 +386,13 @@ mutation {
           address: {
             firstname: "John"
             lastname: "Doe"
+<<<<<<< HEAD
             middlename: "test middlename"
             prefix: "Mr."
             suffix: "Jr."
             fax: "5552224455"
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             street: ["6161 West Centinella Avenue"]
             city: "Culver City"
             region: "CA"
@@ -433,10 +445,13 @@ mutation {
           address: {
             firstname: "John"
             lastname: "Doe"
+<<<<<<< HEAD
             middlename: "test middlename"
             prefix: "Mr."
             suffix: "Jr."
             fax: "5552224455"
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             street: ["6161 West Centinella Avenue"]
             city: "Culver City"
             region: "ca"
@@ -471,6 +486,7 @@ QUERY;
     }
 
     /**
+<<<<<<< HEAD
      * Test graphql mutation setting middlename, prefix, suffix and fax in shipping address
      *
      * @throws LocalizedException
@@ -566,6 +582,8 @@ QUERY;
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Verify the all the whitelisted fields for a New Address Object
      *
      * @param array $shippingAddressResponse

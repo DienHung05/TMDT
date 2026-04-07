@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -15,7 +20,10 @@ use Magento\OfflinePayments\Model\Checkmo;
 use Magento\OfflinePayments\Model\Purchaseorder;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for setting offline payment methods on cart
@@ -55,8 +63,13 @@ class SetOfflinePaymentMethodsOnCartTest extends GraphQlAbstract
      *
      * @param string $methodCode
      * @param string $methodTitle
+<<<<<<< HEAD
      */
     #[DataProvider('offlinePaymentMethodDataProvider')]
+=======
+     * @dataProvider offlinePaymentMethodDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSetOfflinePaymentMethod(string $methodCode, string $methodTitle)
     {
         $maskedQuoteId = $this->getMaskedQuoteIdByReservedOrderId->execute('test_quote');
@@ -79,7 +92,11 @@ class SetOfflinePaymentMethodsOnCartTest extends GraphQlAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function offlinePaymentMethodDataProvider(): array
+=======
+    public function offlinePaymentMethodDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'check_mo' => [Checkmo::PAYMENT_METHOD_CHECKMO_CODE, 'Check / Money order'],

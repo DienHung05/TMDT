@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -13,14 +18,20 @@ use Magento\Framework\Config\Data\ConfigData;
 use Magento\Framework\Encryption\KeyValidator;
 use Magento\Framework\Setup\Option\FlagConfigOption;
 use Magento\Framework\Setup\Option\TextConfigOption;
+<<<<<<< HEAD
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Setup\Model\ConfigGenerator;
 use Magento\Setup\Model\ConfigOptionsList;
 use Magento\Setup\Model\ConfigOptionsList\DriverOptions;
 use Magento\Setup\Model\ConfigOptionsList\Lock;
 use Magento\Setup\Validator\DbValidator;
 use PHPUnit\Framework\MockObject\MockObject;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -58,6 +69,7 @@ class ConfigOptionsListTest extends TestCase
      */
     private $driverOptionsMock;
 
+<<<<<<< HEAD
     /**
      * @var array
      */
@@ -70,6 +82,8 @@ class ConfigOptionsListTest extends TestCase
         \Magento\Setup\Model\ConfigOptionsList\BackpressureLogger::class,
     ];
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     protected function setUp(): void
     {
         $this->generator = $this->createMock(ConfigGenerator::class);
@@ -77,6 +91,7 @@ class ConfigOptionsListTest extends TestCase
         $this->dbValidator = $this->createMock(DbValidator::class);
         $this->encryptionKeyValidator = $this->createMock(KeyValidator::class);
         $this->driverOptionsMock = $this->createMock(DriverOptions::class);
+<<<<<<< HEAD
         $objectManagerHelper = new ObjectManager($this);
         $objects = [];
         foreach ($this->configOptionsListClasses as $className) {
@@ -87,6 +102,8 @@ class ConfigOptionsListTest extends TestCase
             $objects[] = [$className,$configOptionClassMock];
         }
         $objectManagerHelper->prepareObjectManager($objects);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->object = new ConfigOptionsList(
             $this->generator,
             $this->dbValidator,
@@ -224,8 +241,13 @@ class ConfigOptionsListTest extends TestCase
     /**
      * @param string $hosts
      * @param bool $expectedError
+<<<<<<< HEAD
      */
     #[DataProvider('validateCacheHostsDataProvider')]
+=======
+     * @dataProvider validateCacheHostsDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testValidateCacheHosts($hosts, $expectedError)
     {
         $options = [
@@ -245,7 +267,11 @@ class ConfigOptionsListTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function validateCacheHostsDataProvider()
+=======
+    public function validateCacheHostsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['localhost', false],

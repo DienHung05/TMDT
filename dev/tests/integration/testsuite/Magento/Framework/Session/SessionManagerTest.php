@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2012 Adobe
  * All rights reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 // @codingStandardsIgnoreStart
 namespace {
@@ -70,8 +75,11 @@ namespace Magento\Framework\Session {
         return call_user_func_array('\session_set_save_handler', func_get_args());
     }
 
+<<<<<<< HEAD
     use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
      */
@@ -124,13 +132,21 @@ namespace Magento\Framework\Session {
         {
             $this->sessionName = 'frontEndSession';
 
+<<<<<<< HEAD
+=======
+            ini_set('session.use_only_cookies', '0');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ini_set('session.name', $this->sessionName);
 
             $this->objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
 
             /** @var \Magento\Framework\Session\SidResolverInterface $sidResolver */
             $this->appState = $this->getMockBuilder(State::class)
+<<<<<<< HEAD
                 ->onlyMethods(['getAreaCode'])
+=======
+                ->setMethods(['getAreaCode'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ->disableOriginalConstructor()
                 ->getMock();
 
@@ -246,6 +262,10 @@ namespace Magento\Framework\Session {
             $this->model->start();
 
             $reflection = new \ReflectionMethod($this->model, '_addHost');
+<<<<<<< HEAD
+=======
+            $reflection->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $reflection->invoke($this->model);
 
             $this->assertFalse($this->model->isValidForHost('test.com'));
@@ -286,21 +306,31 @@ namespace Magento\Framework\Session {
 
         /**
          * @param string $saveMethod
+<<<<<<< HEAD
          *
          * @return void
          */
         #[DataProvider('dataConstructor')]
+=======
+         * @dataProvider dataConstructor
+         *
+         * @return void
+         */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         public function testConstructor(string $saveMethod): void
         {
             global $mockPHPFunctions;
             $mockPHPFunctions = true;
 
+<<<<<<< HEAD
             if ($this->isComposerBaseInstallation()) {
                 $this->markTestSkipped(
                     'Skipping: Composer-based installation, php_ini global method does not invoke the session value.'
                 );
             }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $deploymentConfigMock = $this->createMock(DeploymentConfig::class);
             $deploymentConfigMock->method('get')
                 ->willReturnCallback(function ($configPath) use ($saveMethod) {
@@ -345,6 +375,7 @@ namespace Magento\Framework\Session {
         /**
          * @return array
          */
+<<<<<<< HEAD
         public static function dataConstructor(): array
         {
             return [
@@ -352,6 +383,15 @@ namespace Magento\Framework\Session {
                 ['saveMethod' =>'redis'],
                 ['saveMethod' =>'memcached'],
                 ['saveMethod' =>'user'],
+=======
+        public function dataConstructor(): array
+        {
+            return [
+                [Config::PARAM_SESSION_SAVE_METHOD =>'db'],
+                [Config::PARAM_SESSION_SAVE_METHOD =>'redis'],
+                [Config::PARAM_SESSION_SAVE_METHOD =>'memcached'],
+                [Config::PARAM_SESSION_SAVE_METHOD =>'user'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ];
         }
 
@@ -364,11 +404,14 @@ namespace Magento\Framework\Session {
                 ]
             );
         }
+<<<<<<< HEAD
 
         private function isComposerBaseInstallation(): bool
         {
             $isComposerBased = file_exists(BP . '/vendor/magento/magento2-base');
             return (bool)$isComposerBased;
         }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

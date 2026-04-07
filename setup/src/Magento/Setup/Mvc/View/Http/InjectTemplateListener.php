@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
  */
@@ -16,6 +17,21 @@ use Magento\Framework\Setup\Mvc\MvcEvent;
  * @see we don't use it anymore
  */
 class InjectTemplateListener
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+namespace Magento\Setup\Mvc\View\Http;
+
+use Laminas\Mvc\MvcEvent;
+use Laminas\Mvc\View\Http\InjectTemplateListener as LaminasInjectTemplateListener;
+
+/**
+ * InjectTemplateListener for HTTP request
+ */
+class InjectTemplateListener extends LaminasInjectTemplateListener
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 {
     /**
      * Determine the top-level namespace of the controller
@@ -23,7 +39,11 @@ class InjectTemplateListener
      * @param  string $controller
      * @return string
      */
+<<<<<<< HEAD
     protected function deriveModuleNamespace($controller): string
+=======
+    protected function deriveModuleNamespace($controller)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         if (!strstr($controller, '\\')) {
             return '';
@@ -41,7 +61,11 @@ class InjectTemplateListener
      * @param string $namespace
      * @return string
      */
+<<<<<<< HEAD
     protected function deriveControllerSubNamespace($namespace): string
+=======
+    protected function deriveControllerSubNamespace($namespace)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         if (!strstr($namespace, '\\')) {
             return '';
@@ -64,6 +88,7 @@ class InjectTemplateListener
      *
      * @param  MvcEvent $e
      * @return void
+<<<<<<< HEAD
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     // phpcs:disable
@@ -74,4 +99,12 @@ class InjectTemplateListener
         // This method exists for API compatibility
     }
     // phpcs:disable
+=======
+     */
+    public function injectTemplate(MvcEvent $e)
+    {
+        $e->getRouteMatch()->setParam('action', null);
+        parent::injectTemplate($e);
+    }
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

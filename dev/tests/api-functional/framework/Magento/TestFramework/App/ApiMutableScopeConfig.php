@@ -1,7 +1,14 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Application configuration object. Used to access configuration when application is installed.
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -15,7 +22,11 @@ use Magento\Store\Api\WebsiteRepositoryInterface;
 use Magento\Store\Model\ScopeInterface;
 
 /**
+<<<<<<< HEAD
  * Application configuration object. Used to access configuration when application is installed.
+=======
+ * @inheritdoc
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class ApiMutableScopeConfig implements MutableScopeConfigInterface
 {
@@ -92,12 +103,20 @@ class ApiMutableScopeConfig implements MutableScopeConfigInterface
      * Persist config in database
      *
      * @param string $path
+<<<<<<< HEAD
      * @param string|null $value
+=======
+     * @param string $value
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $scopeType
      * @param string|null $scopeCode
      * @return void
      */
+<<<<<<< HEAD
     private function persistConfig(string $path, ?string $value, string $scopeType, ?string $scopeCode): void
+=======
+    private function persistConfig(string $path, string $value, string $scopeType, ?string $scopeCode): void
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $pathParts = explode('/', $path);
         $store = 0;

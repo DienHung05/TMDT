@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -18,7 +23,10 @@ use Magento\Framework\Jwt\Header\Critical;
 use Magento\Framework\Jwt\Header\KeyId;
 use Magento\Framework\Jwt\Header\PrivateHeaderParameter;
 use Magento\Framework\Jwt\Header\PublicHeaderParameter;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Jwt\Jwe\Jwe;
 use Magento\Framework\Jwt\Jwe\JweEncryptionJwks;
 use Magento\Framework\Jwt\Jwe\JweEncryptionSettingsInterface;
@@ -59,8 +67,14 @@ class JwtManagerTest extends TestCase
      * @param EncryptionSettingsInterface $encryption
      * @param EncryptionSettingsInterface[] $readEncryption
      * @return void
+<<<<<<< HEAD
      */
     #[DataProvider('getTokenVariants')]
+=======
+     *
+     * @dataProvider getTokenVariants
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateRead(
         JwtInterface $jwt,
         EncryptionSettingsInterface $encryption,
@@ -150,7 +164,11 @@ class JwtManagerTest extends TestCase
 
     }
 
+<<<<<<< HEAD
     public static function getTokenVariants(): array
+=======
+    public function getTokenVariants(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         /** @var JwkFactory $jwkFactory */
         $jwkFactory = Bootstrap::getObjectManager()->get(JwkFactory::class);
@@ -360,8 +378,13 @@ class JwtManagerTest extends TestCase
         );
 
         //Keys
+<<<<<<< HEAD
         [$rsaPrivate, $rsaPublic] = self::createRsaKeys();
         $ecKeys = self::createEcKeys();
+=======
+        [$rsaPrivate, $rsaPublic] = $this->createRsaKeys();
+        $ecKeys = $this->createEcKeys();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $sharedSecret = random_bytes(2048);
 
         return [
@@ -727,8 +750,14 @@ class JwtManagerTest extends TestCase
      * @param JwtInterface $tokenData
      * @param EncryptionSettingsInterface $settings
      * @return void
+<<<<<<< HEAD
      */
     #[DataProvider('getJwtsForHeaders')]
+=======
+     *
+     * @dataProvider getJwtsForHeaders
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testReadHeaders(JwtInterface $tokenData, EncryptionSettingsInterface $settings): void
     {
         $token = $this->manager->create($tokenData, $settings);
@@ -760,7 +789,11 @@ class JwtManagerTest extends TestCase
         }
     }
 
+<<<<<<< HEAD
     public static function getJwtsForHeaders(): array
+=======
+    public function getJwtsForHeaders(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
 
         /** @var JwkFactory $jwkFactory */
@@ -986,7 +1019,11 @@ class JwtManagerTest extends TestCase
      *
      * @return string[] With 1st element as private key, second - public.
      */
+<<<<<<< HEAD
     private static function createRsaKeys(): array
+=======
+    private function createRsaKeys(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $rsaPrivateResource = openssl_pkey_new(['private_key_bites' => 512, 'private_key_type' => OPENSSL_KEYTYPE_RSA]);
         if ($rsaPrivateResource === false) {
@@ -996,7 +1033,11 @@ class JwtManagerTest extends TestCase
         if (!openssl_pkey_export($rsaPrivateResource, $rsaPrivate, 'pass')) {
             throw new \RuntimeException('Failed to read RSA private key');
         }
+<<<<<<< HEAD
         self::freeResource($rsaPrivateResource);
+=======
+        $this->freeResource($rsaPrivateResource);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         return [$rsaPrivate, $rsaPublic];
     }
@@ -1006,7 +1047,11 @@ class JwtManagerTest extends TestCase
      *
      * @return array Keys - bits, values contain 2 elements: 0 => private, 1 => public.
      */
+<<<<<<< HEAD
     private static function createEcKeys(): array
+=======
+    private function createEcKeys(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $curveNameMap = [
             256 => 'prime256v1',
@@ -1023,7 +1068,11 @@ class JwtManagerTest extends TestCase
             if (!openssl_pkey_export($privateResource, $esPrivate, 'pass')) {
                 throw new \RuntimeException('Failed to read EC private key');
             }
+<<<<<<< HEAD
             self::freeResource($privateResource);
+=======
+            $this->freeResource($privateResource);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $ecKeys[$bits] = [$esPrivate, $esPublic];
             unset($privateResource, $esPublic, $esPrivate);
         }
@@ -1036,7 +1085,11 @@ class JwtManagerTest extends TestCase
      *
      * @return void
      */
+<<<<<<< HEAD
     private static function freeResource($resource): void
+=======
+    private function freeResource($resource): void
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         if (\is_resource($resource) && (version_compare(PHP_VERSION, '8.0') < 0)) {
             openssl_free_key($resource);

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -10,7 +15,10 @@ namespace Magento\Test\Fixture;
 use Magento\Framework\Component\ComponentRegistrar;
 use Magento\TestFramework\Fixture\LegacyDataFixturePathResolver;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test fixture path resolver for file based data fixture
@@ -60,8 +68,13 @@ class LegacyDataFixturePathResolverTest extends TestCase
      *
      * @param string $fixture
      * @param string $path
+<<<<<<< HEAD
      */
     #[DataProvider('fixtureDataProvider')]
+=======
+     * @dataProvider fixtureDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testResolve(string $fixture, string $path): void
     {
         $path = str_replace('{{basePath}}', static::$basePath, $path);
@@ -71,7 +84,11 @@ class LegacyDataFixturePathResolverTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function fixtureDataProvider(): array
+=======
+    public function fixtureDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

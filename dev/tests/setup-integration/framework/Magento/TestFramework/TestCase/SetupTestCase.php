@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -30,11 +35,16 @@ class SetupTestCase extends \PHPUnit\Framework\TestCase implements MutableDataIn
     private $dbKey;
 
     /**
+<<<<<<< HEAD
      * @var SqlVersionProvider|null
+=======
+     * @var SqlVersionProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     private $sqlVersionProvider;
 
     /**
+<<<<<<< HEAD
      * @var ResourceConnection|null
      */
     private ?ResourceConnection $resourceConnection = null;
@@ -63,6 +73,34 @@ class SetupTestCase extends \PHPUnit\Framework\TestCase implements MutableDataIn
             $this->resourceConnection = Bootstrap::getObjectManager()->get(ResourceConnection::class);
         }
         return $this->resourceConnection;
+=======
+     * @var ResourceConnection
+     */
+    private ResourceConnection $resourceConnection;
+
+    /**
+     * @inheritDoc
+     */
+    public function __construct(
+        $name = null,
+        array $data = [],
+        $dataName = '',
+        ResourceConnection $resourceConnection = null
+    ) {
+        parent::__construct($name, $data, $dataName);
+
+        $objectManager = Bootstrap::getObjectManager();
+        $this->sqlVersionProvider = $objectManager->get(SqlVersionProvider::class);
+        $this->resourceConnection = $resourceConnection ?? $objectManager->get(ResourceConnection::class);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setData(array $data)
+    {
+        $this->data = $data;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -71,7 +109,10 @@ class SetupTestCase extends \PHPUnit\Framework\TestCase implements MutableDataIn
     public function flushData()
     {
         $this->data = [];
+<<<<<<< HEAD
         DataProviderFromFile::setTestObject([]);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -79,11 +120,14 @@ class SetupTestCase extends \PHPUnit\Framework\TestCase implements MutableDataIn
      */
     public function getData()
     {
+<<<<<<< HEAD
         if (empty($this->data)) {
             $testDataObj = DataProviderFromFile::getTestObject();
             $this->data = $testDataObj->providedData();
         }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         if (array_key_exists($this->getDbKey(), $this->data)) {
             return $this->data[$this->getDbKey()];
         }
@@ -99,7 +143,11 @@ class SetupTestCase extends \PHPUnit\Framework\TestCase implements MutableDataIn
      */
     protected function getDatabaseVersion(): string
     {
+<<<<<<< HEAD
         return $this->getSqlVersionProvider()->getSqlVersion();
+=======
+        return $this->sqlVersionProvider->getSqlVersion();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -114,6 +162,7 @@ class SetupTestCase extends \PHPUnit\Framework\TestCase implements MutableDataIn
         }
 
         $this->dbKey = DataProviderFromFile::FALLBACK_VALUE;
+<<<<<<< HEAD
         
         try {
             foreach (DataProviderFromFile::POSSIBLE_SUFFIXES as $possibleVersion => $suffix) {
@@ -133,6 +182,13 @@ class SetupTestCase extends \PHPUnit\Framework\TestCase implements MutableDataIn
             // If database connection is not available yet (e.g., during data provider setup),
             // use the fallback value
             $this->dbKey = DataProviderFromFile::FALLBACK_VALUE;
+=======
+        foreach (DataProviderFromFile::POSSIBLE_SUFFIXES as $possibleVersion => $suffix) {
+            if (strpos($this->getDatabaseVersion(), (string)$possibleVersion) !== false) {
+                $this->dbKey = $suffix;
+                break;
+            }
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
 
         return $this->dbKey;
@@ -147,7 +203,11 @@ class SetupTestCase extends \PHPUnit\Framework\TestCase implements MutableDataIn
     public function isUsingAuroraDb(string $resource = ResourceConnection::DEFAULT_CONNECTION): bool
     {
         try {
+<<<<<<< HEAD
             $this->getResourceConnection()->getConnection($resource)->query('SELECT AURORA_VERSION();');
+=======
+            $this->resourceConnection->getConnection($resource)->query('SELECT AURORA_VERSION();');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             return true;
         } catch (Zend_Db_Statement_Exception $e) {
             return false;

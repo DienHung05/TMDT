@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -44,7 +49,11 @@ class CliProxy implements \Magento\Framework\ObjectManager\NoninterceptableInter
      * @return int|null
      * @throws \Exception
      */
+<<<<<<< HEAD
     public function doRun(InputInterface $input, OutputInterface $output): ?int
+=======
+    public function doRun(InputInterface $input, OutputInterface $output)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return $this->getSubject()->doRun($input, $output);
     }
@@ -58,7 +67,11 @@ class CliProxy implements \Magento\Framework\ObjectManager\NoninterceptableInter
      * @return int
      * @throws \Exception
      */
+<<<<<<< HEAD
     public function run(?InputInterface $input = null, ?OutputInterface $output = null)
+=======
+    public function run(InputInterface $input = null, OutputInterface $output = null)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return $this->getSubject()->run($input, $output);
     }
@@ -88,11 +101,19 @@ class CliProxy implements \Magento\Framework\ObjectManager\NoninterceptableInter
             $object = new \ReflectionObject($cli);
 
             $attribute = $object->getProperty('objectManager');
+<<<<<<< HEAD
+=======
+            $attribute->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
             /** @var ObjectManagerInterface $objectManager */
             $objectManager = $attribute->getValue($cli);
             $objectManager->configure($diPreferences);
 
+<<<<<<< HEAD
+=======
+            $attribute->setAccessible(false);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
 
         return true;

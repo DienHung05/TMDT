@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -37,9 +42,15 @@ class IndexersStatesApplyFixtureTest extends TestCase
 
     public function testExecute()
     {
+<<<<<<< HEAD
         $cacheInterfaceMock = $this->createMock(CacheInterface::class);
         $indexerRegistryMock = $this->createMock(IndexerRegistry::class);
         $indexerMock = $this->createMock(IndexerInterface::class);
+=======
+        $cacheInterfaceMock = $this->getMockForAbstractClass(CacheInterface::class);
+        $indexerRegistryMock = $this->createMock(IndexerRegistry::class);
+        $indexerMock = $this->getMockForAbstractClass(IndexerInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $indexerRegistryMock->expects($this->once())
             ->method('get')
@@ -76,7 +87,11 @@ class IndexersStatesApplyFixtureTest extends TestCase
 
     public function testNoFixtureConfigValue()
     {
+<<<<<<< HEAD
         $cacheInterfaceMock = $this->createMock(CacheInterface::class);
+=======
+        $cacheInterfaceMock = $this->getMockForAbstractClass(CacheInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $cacheInterfaceMock->expects($this->never())->method('clean');
 
         $objectManagerMock = $this->createMock(ObjectManager::class);

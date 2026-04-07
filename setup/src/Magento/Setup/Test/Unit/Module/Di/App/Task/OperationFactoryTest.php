@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -16,7 +21,10 @@ use Magento\Setup\Module\Di\App\Task\OperationException;
 use Magento\Setup\Module\Di\App\Task\OperationFactory;
 use Magento\Setup\Module\Di\App\Task\OperationInterface;
 use PHPUnit\Framework\MockObject\MockObject;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 class OperationFactoryTest extends TestCase
@@ -34,7 +42,12 @@ class OperationFactoryTest extends TestCase
     protected function setUp(): void
     {
         $this->objectManagerMock = $this->getMockBuilder(ObjectManagerInterface::class)
+<<<<<<< HEAD
             ->getMock();
+=======
+            ->setMethods([])
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $objectManagerProviderMock = $this->createMock(ObjectManagerProvider::class);
         $objectManagerProviderMock->expects($this->once())->method('get')->willReturn($this->objectManagerMock);
         $this->factory = new OperationFactory(
@@ -45,8 +58,13 @@ class OperationFactoryTest extends TestCase
     /**
      * @param string $alias
      * @param mixed $arguments
+<<<<<<< HEAD
      */
     #[DataProvider('aliasesDataProvider')]
+=======
+     * @dataProvider aliasesDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateSuccess($alias, $arguments, $instanceName)
     {
         $operationInstance = $this->getMockBuilder(OperationInterface::class)
@@ -73,7 +91,11 @@ class OperationFactoryTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function aliasesDataProvider()
+=======
+    public function aliasesDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return  [
             [OperationFactory::AREA_CONFIG_GENERATOR, [], Area::class],

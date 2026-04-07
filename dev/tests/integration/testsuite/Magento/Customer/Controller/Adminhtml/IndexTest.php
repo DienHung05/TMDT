@@ -1,16 +1,25 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Customer\Controller\Adminhtml;
 
+<<<<<<< HEAD
 use Magento\Backend\Block\Template\Context;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Backend\Model\Session;
 use Magento\Customer\Api\CustomerNameGenerationInterface;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Model\EmailNotification;
+<<<<<<< HEAD
 use Magento\Framework\Acl\Builder;
 use Magento\Framework\App\Area;
 use Magento\Framework\Mail\Template\TransportBuilder;
@@ -21,6 +30,11 @@ use Magento\TestFramework\Helper\Bootstrap as BootstrapHelper;
 use Magento\Framework\App\Request\Http as HttpRequest;
 use Magento\TestFramework\TestCase\AbstractBackendController;
 use PHPUnit\Framework\MockObject\MockObject;
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\Framework\App\Request\Http as HttpRequest;
+use Magento\TestFramework\TestCase\AbstractBackendController;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea adminhtml
@@ -29,6 +43,11 @@ use PHPUnit\Framework\MockObject\MockObject;
 class IndexTest extends AbstractBackendController
 {
     /**
+<<<<<<< HEAD
+=======
+     * Base controller URL
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @var string
      */
     private $baseControllerUrl = 'backend/customer/index/';
@@ -108,7 +127,11 @@ class IndexTest extends AbstractBackendController
         /**
          * Check that no errors were generated and set to session
          */
+<<<<<<< HEAD
         $this->assertSessionMessages($this->isEmpty(), MessageInterface::TYPE_ERROR);
+=======
+        $this->assertSessionMessages($this->isEmpty(), \Magento\Framework\Message\MessageInterface::TYPE_ERROR);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -154,7 +177,11 @@ class IndexTest extends AbstractBackendController
                 'customer_address' => [],
             ],
         ];
+<<<<<<< HEAD
         $context = BootstrapHelper::getObjectManager()->get(Context::class);
+=======
+        $context = Bootstrap::getObjectManager()->get(\Magento\Backend\Block\Template\Context::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $context->getBackendSession()->setCustomerData($customerData);
         $this->testNewAction();
     }
@@ -192,7 +219,11 @@ class IndexTest extends AbstractBackendController
         $this->dispatch('backend/customer/index/resetPassword');
         $this->assertSessionMessages(
             $this->equalTo(['The customer will receive an email with a link to reset password.']),
+<<<<<<< HEAD
             MessageInterface::TYPE_SUCCESS
+=======
+            \Magento\Framework\Message\MessageInterface::TYPE_SUCCESS
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
         $this->assertRedirect($this->stringContains($this->baseControllerUrl . 'edit'));
     }
@@ -214,9 +245,15 @@ class IndexTest extends AbstractBackendController
     public function testAclDeleteActionDeny()
     {
         $resource= 'Magento_Customer::delete';
+<<<<<<< HEAD
         $this->_objectManager->get(Builder::class)
             ->getAcl()
             ->deny(Bootstrap::ADMIN_ROLE_ID, $resource);
+=======
+        $this->_objectManager->get(\Magento\Framework\Acl\Builder::class)
+            ->getAcl()
+            ->deny(null, $resource);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->getRequest()->setParam('id', 1);
         $this->dispatch('backend/customer/index/edit');
         $body = $this->getResponse()->getBody();
@@ -231,7 +268,11 @@ class IndexTest extends AbstractBackendController
      * @param array $sender
      * @param int $customerId
      * @param string|null $newEmail
+<<<<<<< HEAD
      * @return MockObject
+=======
+     * @return \PHPUnit\Framework\MockObject\MockObject
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Customer/_files/customer.php
      */
     protected function prepareEmailMock(
@@ -240,12 +281,18 @@ class IndexTest extends AbstractBackendController
         array $sender,
         int $customerId,
         $newEmail = null
+<<<<<<< HEAD
     ) : MockObject {
         $area = Area::AREA_FRONTEND;
+=======
+    ) : \PHPUnit\Framework\MockObject\MockObject {
+        $area = \Magento\Framework\App\Area::AREA_FRONTEND;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $customer = $this->customerRepository->getById($customerId);
         $storeId = $customer->getStoreId();
         $name = $this->customerViewHelper->getCustomerName($customer);
 
+<<<<<<< HEAD
         $transportMock = $this->getMockBuilder(TransportInterface::class)
             ->onlyMethods(['sendMessage', 'getMessage'])
             ->getMock();
@@ -256,6 +303,16 @@ class IndexTest extends AbstractBackendController
         $transportBuilderMock = $this->getMockBuilder(TransportBuilder::class)
             ->disableOriginalConstructor()
             ->onlyMethods(
+=======
+        $transportMock = $this->getMockBuilder(\Magento\Framework\Mail\TransportInterface::class)
+            ->setMethods(['sendMessage'])
+            ->getMockForAbstractClass();
+        $transportMock->expects($this->exactly($occurrenceNumber))
+            ->method('sendMessage');
+        $transportBuilderMock = $this->getMockBuilder(\Magento\Framework\Mail\Template\TransportBuilder::class)
+            ->disableOriginalConstructor()
+            ->setMethods(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 [
                     'addTo',
                     'setFrom',
@@ -288,11 +345,19 @@ class IndexTest extends AbstractBackendController
     }
 
     /**
+<<<<<<< HEAD
      * @param MockObject $transportBuilderMock
      * @param string $className
      */
     protected function addEmailMockToClass(
         MockObject $transportBuilderMock,
+=======
+     * @param \PHPUnit\Framework\MockObject\MockObject $transportBuilderMock
+     * @param string $className
+     */
+    protected function addEmailMockToClass(
+        \PHPUnit\Framework\MockObject\MockObject $transportBuilderMock,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $className
     ) {
         $mocked = $this->_objectManager->create(

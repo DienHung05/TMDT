@@ -1,8 +1,15 @@
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
  */
 /* eslint-disable */
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+/* eslint-disable max-nested-callbacks */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 define([
     'jquery',
     'mage/backend/bootstrap'
@@ -22,6 +29,7 @@ define([
 
         describe('"sendPostponeRequest" method', function () {
             it('should insert "Error" notification if request failed', function () {
+<<<<<<< HEAD
                 var data = {
                         jqXHR: {
                             responseText: 'error',
@@ -49,6 +57,13 @@ define([
 
                 // Simulate the AJAX error by directly adding the expected error message
                 $('body').append('<div class="message-error">A technical problem with the server created an error</div>');
+=======
+                $pageMainActions.appendTo('body');
+                $('body').notification();
+
+                // eslint-disable-next-line jquery-no-event-shorthand
+                $.ajaxSettings.error();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
                 expect($('.message-error').length).toBe(1);
                 expect(

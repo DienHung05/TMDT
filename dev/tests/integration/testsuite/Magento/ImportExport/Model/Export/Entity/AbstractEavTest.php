@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -40,6 +45,7 @@ class AbstractEavTest extends \PHPUnit\Framework\TestCase
         );
 
         $this->_model = $this->getMockBuilder(\Magento\ImportExport\Model\Export\Entity\AbstractEav::class)
+<<<<<<< HEAD
             ->onlyMethods([
                 'getEntityTypeCode',
                 'getAttributeCollection',
@@ -50,6 +56,11 @@ class AbstractEavTest extends \PHPUnit\Framework\TestCase
             ])
             ->disableOriginalConstructor()
             ->getMock();
+=======
+            ->setMethods(['getEntityTypeCode', 'getAttributeCollection'])
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->_model->expects(
             $this->any()
@@ -99,6 +110,10 @@ class AbstractEavTest extends \PHPUnit\Framework\TestCase
     {
         $this->_model->setParameters($this->_getSkippedAttributes());
         $method = new \ReflectionMethod($this->_model, '_getExportAttributeCodes');
+<<<<<<< HEAD
+=======
+        $method->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $attributes = $method->invoke($this->_model);
         foreach (self::$_skippedAttributes as $code) {
             $this->assertNotContains($code, $attributes);

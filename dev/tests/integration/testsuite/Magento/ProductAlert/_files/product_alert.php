@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
@@ -29,8 +34,11 @@ $price->setCustomerId(
     $product->getPrice()+1
 )->setWebsiteId(
     1
+<<<<<<< HEAD
 )->setStoreId(
     1
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 );
 $price->save();
 
@@ -41,7 +49,10 @@ $stock->setCustomerId(
     $product->getId()
 )->setWebsiteId(
     1
+<<<<<<< HEAD
 )->setStoreId(
     1
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 );
 $stock->save();

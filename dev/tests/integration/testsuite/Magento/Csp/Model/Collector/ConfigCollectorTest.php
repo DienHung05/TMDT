@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -12,7 +17,10 @@ use Magento\Csp\Model\Policy\FetchPolicy;
 use Magento\Csp\Model\Policy\FlagPolicy;
 use Magento\Csp\Model\Policy\PluginTypesPolicy;
 use Magento\Csp\Model\Policy\SandboxPolicy;
+<<<<<<< HEAD
 use Magento\Framework\App\RequestInterface;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 use Magento\TestFramework\Helper\Bootstrap;
 
@@ -27,17 +35,23 @@ class ConfigCollectorTest extends TestCase
     private $collector;
 
     /**
+<<<<<<< HEAD
      * @var RequestInterface
      */
     private $request;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritDoc
      */
     protected function setUp(): void
     {
         $this->collector = Bootstrap::getObjectManager()->get(ConfigCollector::class);
+<<<<<<< HEAD
         $this->request = Bootstrap::getObjectManager()->get(RequestInterface::class);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -75,7 +89,11 @@ class ConfigCollectorTest extends TestCase
             'manifest-src' => new FetchPolicy('manifest-src', false, [], [], true),
             'media-src' => new FetchPolicy('media-src', false, [], [], true),
             'object-src' => new FetchPolicy('object-src', false, [], [], true),
+<<<<<<< HEAD
             'script-src' => new FetchPolicy('script-src', false, [], [], true, true, true, [], [], false, true),
+=======
+            'script-src' => new FetchPolicy('script-src', false, [], [], true, false, false, [], [], false, true),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'style-src' => new FetchPolicy('style-src', false, [], [], true),
             'base-uri' => new FetchPolicy('base-uri', false, [], [], true),
             'plugin-types' => new PluginTypesPolicy(
@@ -179,18 +197,24 @@ class ConfigCollectorTest extends TestCase
      * @magentoConfigFixture default_store csp/policies/storefront/mixed_content/policy_id block-all-mixed-content
      * @magentoConfigFixture default_store csp/policies/storefront/base/policy_id base-uri
      * @magentoConfigFixture default_store csp/policies/storefront/base/inline 0
+<<<<<<< HEAD
      * @magentoConfigFixture default_store csp/policies/storefront_checkout_index_index/scripts/policy_id script-src
      * @magentoConfigFixture default_store csp/policies/storefront_checkout_index_index/scripts/self 1
      * @magentoConfigFixture default_store csp/policies/storefront_checkout_index_index/scripts/inline 1
      * @magentoConfigFixture default_store csp/policies/storefront_checkout_index_index/scripts/eval 1
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoConfigFixture default_store csp/policies/storefront/upgrade/policy_id upgrade-insecure-requests
      * @return void
      */
     public function testCollecting(): void
     {
+<<<<<<< HEAD
         $this->request->setRouteName('checkout');
         $this->request->setControllerName('index');
         $this->request->setActionName('index');
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $policies = $this->collector->collect([new FlagPolicy('upgrade-insecure-requests')]);
         $expectedPolicies = $this->getExpectedPolicies();
         $this->assertNotEmpty($policies);

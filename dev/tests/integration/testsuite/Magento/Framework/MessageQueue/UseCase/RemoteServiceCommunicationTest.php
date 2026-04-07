@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
  */
@@ -7,11 +8,19 @@ namespace Magento\Framework\MessageQueue\UseCase;
 
 use Magento\Framework\MessageQueue\DefaultValueProvider;
 use Magento\TestFramework\Helper\Bootstrap;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Framework\MessageQueue\UseCase;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestModuleSynchronousAmqp\Api\ServiceInterface;
 
 class RemoteServiceCommunicationTest extends QueueTestCaseAbstract
 {
     /**
+<<<<<<< HEAD
      * @var string[]
      */
     protected $consumers = ['RemoteServiceTestConsumer'];
@@ -46,6 +55,16 @@ class RemoteServiceCommunicationTest extends QueueTestCaseAbstract
         $input = 'Input value';
         /** @var ServiceInterface $generatedRemoteService */
         /** @phpstan-ignore-next-line */
+=======
+     * {@inheritdoc}
+     */
+    protected $consumers = ['RemoteServiceTestConsumer'];
+
+    public function testRemoteServiceCommunication()
+    {
+        $input = 'Input value';
+        /** @var ServiceInterface $generatedRemoteService */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $generatedRemoteService = $this->objectManager->get(ServiceInterface::class);
         $response = $generatedRemoteService->execute($input);
         $this->assertEquals($input . ' processed by RPC handler', $response);

@@ -1,9 +1,15 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 declare(strict_types=1);
 
 namespace Magento\Shipping\Controller\Adminhtml\Order\Shipment;
@@ -22,11 +28,14 @@ class SaveTest extends AbstractShipmentControllerTest
     /**
      * @var string
      */
+<<<<<<< HEAD
     protected $resource = 'Magento_Sales::ship';
 
     /**
      * @var string
      */
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     protected $uri = 'backend/admin/order_shipment/save';
 
     /**
@@ -73,7 +82,11 @@ class SaveTest extends AbstractShipmentControllerTest
         );
 
         $this->assertEquals($message->getSubject(), $subject);
+<<<<<<< HEAD
         $this->assertThat(quoted_printable_decode($message->getBody()->bodyToString()), $messageConstraint);
+=======
+        $this->assertThat($message->getBody()->getParts()[0]->getRawContent(), $messageConstraint);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -111,7 +124,12 @@ class SaveTest extends AbstractShipmentControllerTest
             ]
         );
 
+<<<<<<< HEAD
         $this->getRequest()->setPostValue($params);
+=======
+        $data = $params ?? [];
+        $this->getRequest()->setPostValue($data);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         return $order;
     }

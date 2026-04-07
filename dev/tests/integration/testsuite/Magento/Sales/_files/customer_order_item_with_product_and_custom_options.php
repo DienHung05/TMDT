@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 use Magento\TestFramework\Workaround\Override\Fixture\Resolver;
@@ -38,13 +43,22 @@ $optionValuesByType = [
         'day_part' => 'am',
         'date_internal' => '',
     ],
+<<<<<<< HEAD
+=======
+    'drop_down' => '3-1-select',
+    'radio' => '4-1-radio',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 ];
 
 $requestInfo = ['options' => []];
 $productOptions = $product->getOptions();
 foreach ($productOptions as $option) {
+<<<<<<< HEAD
     $requestInfo['options'][$option->getOptionId()] = $optionValuesByType[$option->getType()]
         ?? current($option->getValues())->getOptionTypeId();
+=======
+    $requestInfo['options'][$option->getOptionId()] = $optionValuesByType[$option->getType()];
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }
 
 /** @var \Magento\Sales\Model\Order\Item $orderItem */

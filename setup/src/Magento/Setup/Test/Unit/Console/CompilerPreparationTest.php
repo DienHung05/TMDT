@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -15,7 +20,10 @@ use Magento\Setup\Console\Command\DiCompileCommand;
 use Magento\Setup\Console\CompilerPreparation;
 use Magento\Setup\Mvc\Bootstrap\InitParamListener;
 use PHPUnit\Framework\MockObject\MockObject as Mock;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Input\ArgvInput;
 
@@ -76,12 +84,19 @@ class CompilerPreparationTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider commandNameDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param $commandName
      * @param $isCompileCommand
      * @param $isHelpOption
      * @param bool|null $dirExists
      */
+<<<<<<< HEAD
     #[DataProvider('commandNameDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testClearGenerationDirWhenNeeded($commandName, $isCompileCommand, $isHelpOption, $dirExists = false)
     {
         $this->inputMock->expects($this->once())
@@ -115,7 +130,11 @@ class CompilerPreparationTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function commandNameDataProvider()
+=======
+    public function commandNameDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'ST compiler, directory exists' => [

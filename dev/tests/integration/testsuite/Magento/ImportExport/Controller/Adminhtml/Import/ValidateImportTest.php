@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\ImportExport\Controller\Adminhtml\Import;
@@ -10,7 +15,10 @@ use Magento\Framework\Filesystem\DirectoryList;
 use Magento\Framework\HTTP\Adapter\FileTransferFactory;
 use Magento\ImportExport\Model\Import;
 use Magento\ImportExport\Model\Import\ErrorProcessing\ProcessingErrorAggregatorInterface;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea adminhtml
@@ -18,6 +26,10 @@ use PHPUnit\Framework\Attributes\DataProvider;
 class ValidateImportTest extends \Magento\TestFramework\TestCase\AbstractBackendController
 {
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider validationDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $fileName
      * @param string $mimeType
      * @param string $message
@@ -27,7 +39,10 @@ class ValidateImportTest extends \Magento\TestFramework\TestCase\AbstractBackend
      * @magentoDbIsolation enabled
      * @SuppressWarnings(PHPMD.Superglobals)
      */
+<<<<<<< HEAD
     #[DataProvider('validationDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testValidationReturn(string $fileName, string $mimeType, string $message, string $delimiter): void
     {
         $validationStrategy = ProcessingErrorAggregatorInterface::VALIDATION_STRATEGY_STOP_ON_ERROR;
@@ -82,42 +97,76 @@ class ValidateImportTest extends \Magento\TestFramework\TestCase\AbstractBackend
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function validationDataProvider(): array
     {
         return [
             [
                 'fileName' => 'catalog_product.csv',
                 'mimeType' => 'text/csv',
+=======
+    public function validationDataProvider(): array
+    {
+        return [
+            [
+                'file_name' => 'catalog_product.csv',
+                'mime-type' => 'text/csv',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'message' => 'File is valid',
                 'delimiter' => ',',
             ],
             [
+<<<<<<< HEAD
                 'fileName' => 'test.txt',
                 'mimeType' => 'text/csv',
+=======
+                'file_name' => 'test.txt',
+                'mime-type' => 'text/csv',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'message' => 'The file cannot be uploaded.',
                 'delimiter' => ',',
             ],
             [
+<<<<<<< HEAD
                 'fileName' => 'incorrect_catalog_product_comma.csv',
                 'mimeType' => 'text/csv',
+=======
+                'file_name' => 'incorrect_catalog_product_comma.csv',
+                'mime-type' => 'text/csv',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'message' => 'Download full report',
                 'delimiter' => ',',
             ],
             [
+<<<<<<< HEAD
                 'fileName' => 'incorrect_catalog_product_semicolon.csv',
                 'mimeType' => 'text/csv',
+=======
+                'file_name' => 'incorrect_catalog_product_semicolon.csv',
+                'mime-type' => 'text/csv',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'message' => 'Download full report',
                 'delimiter' => ';',
             ],
             [
+<<<<<<< HEAD
                 'fileName' => 'invalid_catalog_products.zip',
                 'mimeType' => 'application/zip',
+=======
+                'file_name' => 'invalid_catalog_products.zip',
+                'mime-type' => 'application/zip',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'message' => 'Data validation failed.',
                 'delimiter' => ',',
             ],
             [
+<<<<<<< HEAD
                 'fileName' => 'catalog_product.zip',
                 'mimeType' => 'application/zip',
+=======
+                'file_name' => 'catalog_product.zip',
+                'mime-type' => 'application/zip',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'message' => 'File is valid',
                 'delimiter' => ',',
             ],

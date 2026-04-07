@@ -6,8 +6,13 @@
  * Given current name generation logic both are going to be translated to BarSomeBazV1. This test checks such things
  * are not going to happen.
  *
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\AsynchronousOperations\Model;
 
@@ -25,7 +30,10 @@ use Magento\TestFramework\MessageQueue\PreconditionFailedException;
 use Magento\Catalog\Model\ResourceModel\Product\Collection;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\ObjectManagerInterface;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -104,9 +112,15 @@ class MassScheduleTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param ProductInterface[] $products
      */
     #[DataProvider('productDataProvider')]
+=======
+     * @dataProvider productDataProvider
+     * @param ProductInterface[] $products
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testScheduleMass($products)
     {
         try {
@@ -127,9 +141,15 @@ class MassScheduleTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param \Exception $exception
      */
     #[DataProvider('publisherExceptionDataProvider')]
+=======
+     * @dataProvider publisherExceptionDataProvider
+     * @param \Exception $exception
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testScheduleMassWithExceptionDuringPublishing(\Exception $exception)
     {
         $products = [
@@ -166,7 +186,11 @@ class MassScheduleTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function publisherExceptionDataProvider(): array
+=======
+    public function publisherExceptionDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [new \InvalidArgumentException('Unknown publisher type async')],
@@ -246,9 +270,15 @@ class MassScheduleTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param ProductInterface[] $products
      */
     #[DataProvider('productExceptionDataProvider')]
+=======
+     * @dataProvider productExceptionDataProvider
+     * @param ProductInterface[] $products
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testScheduleMassOneEntityFailure($products)
     {
         try {
@@ -298,7 +328,11 @@ class MassScheduleTest extends \PHPUnit\Framework\TestCase
         }
     }
 
+<<<<<<< HEAD
     private static function getProduct()
+=======
+    private function getProduct()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         /** @var $product \Magento\Catalog\Model\Product */
         $product = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()
@@ -319,6 +353,7 @@ class MassScheduleTest extends \PHPUnit\Framework\TestCase
         return $product;
     }
 
+<<<<<<< HEAD
     public static function productDataProvider()
     {
         return [
@@ -328,11 +363,26 @@ class MassScheduleTest extends \PHPUnit\Framework\TestCase
             'multiple_products' => [
                 [
                     ['product' => self::getProduct()
+=======
+    public function productDataProvider()
+    {
+        return [
+            'single_product' => [
+                [['product' => $this->getProduct()]],
+            ],
+            'multiple_products' => [
+                [
+                    ['product' => $this->getProduct()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         ->setName('Simple Product 3')
                         ->setSku('unique-simple-product3')
                         ->setMetaTitle('meta title 3')
                     ],
+<<<<<<< HEAD
                     ['product' => self::getProduct()
+=======
+                    ['product' => $this->getProduct()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         ->setName('Simple Product 2')
                         ->setSku('unique-simple-product2')
                         ->setMetaTitle('meta title 2')
@@ -342,6 +392,7 @@ class MassScheduleTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+<<<<<<< HEAD
     public static function productExceptionDataProvider()
     {
         return [
@@ -352,6 +403,18 @@ class MassScheduleTest extends \PHPUnit\Framework\TestCase
                 [
                     ['product' => self::getProduct()],
                     ['customer' => self::getProduct()]
+=======
+    public function productExceptionDataProvider()
+    {
+        return [
+            'single_product' => [
+                [['product' => $this->getProduct()]],
+            ],
+            'multiple_products' => [
+                [
+                    ['product' => $this->getProduct()],
+                    ['customer' => $this->getProduct()]
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ]
             ],
         ];

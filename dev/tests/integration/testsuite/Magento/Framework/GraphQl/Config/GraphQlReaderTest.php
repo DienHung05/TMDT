@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -194,7 +199,15 @@ QUERY;
         $response = $this->graphQlController->dispatch($request);
         $output = $this->jsonSerializer->unserialize($response->getContent());
         $expectedOutput = require __DIR__ . '/../_files/schema_response_sdl_description.php';
+<<<<<<< HEAD
         $schemaResponseFields = $output['data']['__schema']['types'];
+=======
+
+        $schemaResponseFields = $output['data']['__schema']['types'];
+        $schemaResponseFieldsFirstHalf = array_slice($schemaResponseFields, 0, 25);
+        $schemaResponseFieldsSecondHalf = array_slice($schemaResponseFields, -21, 21);
+        $mergedSchemaResponseFields = array_merge($schemaResponseFieldsFirstHalf, $schemaResponseFieldsSecondHalf);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         foreach ($expectedOutput as $searchTerm) {
             $sortFields = ['inputFields', 'fields'];
@@ -211,7 +224,11 @@ QUERY;
             }
 
             $this->assertTrue(
+<<<<<<< HEAD
                 (in_array($searchTerm, $schemaResponseFields)),
+=======
+                (in_array($searchTerm, $mergedSchemaResponseFields)),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'Missing type in the response'
             );
         }

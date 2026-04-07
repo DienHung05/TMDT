@@ -1,7 +1,16 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2011 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * Implementation of the @magentoAppIsolation DocBlock annotation - isolation of global application objects in memory
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\TestFramework\Annotation;
 
@@ -12,11 +21,14 @@ use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\AbstractController;
 use PHPUnit\Framework\TestCase;
 
+<<<<<<< HEAD
 /**
  * Implementation of the @magentoAppIsolation DocBlock annotation - isolation of global application objects in memory
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class AppIsolation
 {
     /**
@@ -52,6 +64,7 @@ class AppIsolation
     protected function _isolateApp()
     {
         if ($this->hasNonIsolatedTests) {
+<<<<<<< HEAD
             // Clear fixture resolver state before app reinitialization
             try {
                 $resolver = \Magento\TestFramework\Workaround\Override\Fixture\Resolver::getInstance();
@@ -59,6 +72,8 @@ class AppIsolation
             } catch (\RuntimeException $e) {
                 // Resolver not initialized yet, ignore
             }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $this->application->reinitialize();
             $_SESSION = [];
             $_COOKIE = [];
@@ -98,9 +113,16 @@ class AppIsolation
             $values = $this->parse($test);
         } catch (\Throwable $exception) {
             ExceptionHandler::handle(
+<<<<<<< HEAD
                 'Unable to parse annotations',
                 $exception,
                 $test
+=======
+                'Unable to parse fixtures',
+                get_class($test),
+                $test->getName(false),
+                $exception
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             );
         }
         if ($values) {

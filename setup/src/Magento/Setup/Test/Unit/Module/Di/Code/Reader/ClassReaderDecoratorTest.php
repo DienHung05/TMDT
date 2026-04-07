@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,7 +16,10 @@ use Magento\Framework\Code\Reader\ClassReader;
 use Magento\Setup\Module\Di\Code\Reader\ClassReaderDecorator;
 use Magento\Setup\Module\Di\Compiler\ConstructorArgument;
 use PHPUnit\Framework\MockObject\MockObject;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 class ClassReaderDecoratorTest extends TestCase
@@ -30,6 +38,10 @@ class ClassReaderDecoratorTest extends TestCase
     {
         $this->classReaderMock = $this->getMockBuilder(ClassReader::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
+=======
+            ->setMethods([])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
         $this->model = new ClassReaderDecorator($this->classReaderMock);
     }
@@ -38,8 +50,13 @@ class ClassReaderDecoratorTest extends TestCase
      * @param $expectation
      * @param $className
      * @param $willReturn
+<<<<<<< HEAD
      */
     #[DataProvider('getConstructorDataProvider')]
+=======
+     * @dataProvider getConstructorDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetConstructor($expectation, $className, $willReturn)
     {
         $this->classReaderMock->expects($this->once())
@@ -55,7 +72,11 @@ class ClassReaderDecoratorTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getConstructorDataProvider()
+=======
+    public function getConstructorDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [null, 'null', null],

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -16,7 +21,10 @@ use Magento\Framework\Filesystem\Directory\WriteInterface;
 use Magento\Framework\Filesystem\Driver\File;
 use Magento\RemoteStorage\Driver\DriverPool;
 use Magento\RemoteStorage\Model\Filesystem\Directory\WriteFactory;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for \Magento\Cms\Controller\Adminhtml\Wysiwyg\Images\DeleteFiles class.
@@ -128,8 +136,13 @@ class DeleteFilesTest extends \PHPUnit\Framework\TestCase
      *
      * @param string $filename
      * @return void
+<<<<<<< HEAD
      */
     #[DataProvider('executeDataProvider')]
+=======
+     * @dataProvider executeDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecute(string $filename)
     {
         $filePath =  $this->fullDirectoryPath . DIRECTORY_SEPARATOR . $filename;
@@ -153,7 +166,11 @@ class DeleteFilesTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function executeDataProvider(): array
+=======
+    public function executeDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['name with spaces.jpg'],
@@ -162,6 +179,11 @@ class DeleteFilesTest extends \PHPUnit\Framework\TestCase
             ['name with[ bracket.jpg'],
             ['magento_small_image.jpg'],
             ['_.jpg'],
+<<<<<<< HEAD
+=======
+            [' - .jpg'],
+            ['-.jpg'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
     }
 

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,7 +16,10 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magento\TestFramework\Config\Model\ConfigStorage;
 use Magento\TestModuleOverrideConfig\Model\FixtureCallStorage;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class checks that fixtures override config inherited from abstract class and interface.
@@ -54,11 +62,18 @@ class FixturesTest extends FixturesAbstractClass implements FixturesInterface
      * @magentoConfigFixture default_store test_section/test_group/field_3 new_value
      * @magentoApiDataFixture Magento/TestModuleOverrideConfig/_files/fixture2_first_module.php
      * @magentoApiDataFixture Magento/TestModuleOverrideConfig/_files/fixture3_first_module.php
+<<<<<<< HEAD
+=======
+     * @dataProvider interfaceDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $storeConfigs
      * @param array $fixtures
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('interfaceDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testInterfaceInheritance(
         array $storeConfigs,
         array $fixtures
@@ -70,11 +85,18 @@ class FixturesTest extends FixturesAbstractClass implements FixturesInterface
     /**
      * @magentoConfigFixture default_store test_section/test_group/field_2 new_value
      * @magentoApiDataFixture Magento/TestModuleOverrideConfig/_files/fixture2_first_module.php
+<<<<<<< HEAD
+=======
+     * @dataProvider abstractDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $storeConfigs
      * @param array $fixtures
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('abstractDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAbstractInheritance(
         array $storeConfigs,
         array $fixtures
@@ -86,11 +108,19 @@ class FixturesTest extends FixturesAbstractClass implements FixturesInterface
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function interfaceDataProvider(): array
     {
         return [
             'first_data_set' => [
                 [
+=======
+    public function interfaceDataProvider(): array
+    {
+        return [
+            'first_data_set' => [
+                'store_configs' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'test_section/test_group/field_1' => [
                         'value' => 'overridden config fixture value for class',
                         'exists_in_db' => true,
@@ -104,7 +134,11 @@ class FixturesTest extends FixturesAbstractClass implements FixturesInterface
                         'exists_in_db' => true,
                     ],
                 ],
+<<<<<<< HEAD
                 [
+=======
+                'fixtures' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'fixture1_first_module.php' => 1,
                     'fixture2_first_module.php' => 0,
                     'fixture2_second_module.php' => 1,
@@ -112,7 +146,11 @@ class FixturesTest extends FixturesAbstractClass implements FixturesInterface
                 ],
             ],
             'second_data_set' => [
+<<<<<<< HEAD
                 [
+=======
+                'store_configs' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'test_section/test_group/field_1' => [
                         'value' => 'overridden config fixture value for class',
                         'exists_in_db' => true,
@@ -126,7 +164,11 @@ class FixturesTest extends FixturesAbstractClass implements FixturesInterface
                         'exists_in_db' => false,
                     ],
                 ],
+<<<<<<< HEAD
                 [
+=======
+                'fixtures' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'fixture1_first_module.php' => 1,
                     'fixture2_first_module.php' => 0,
                     'fixture2_second_module.php' => 1,
@@ -139,11 +181,19 @@ class FixturesTest extends FixturesAbstractClass implements FixturesInterface
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function abstractDataProvider(): array
     {
         return [
             'first_data_set' => [
                 [
+=======
+    public function abstractDataProvider(): array
+    {
+        return [
+            'first_data_set' => [
+                'store_configs' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'test_section/test_group/field_1' => [
                         'value' => 'overridden config fixture value for class',
                         'exists_in_db' => true,
@@ -157,7 +207,11 @@ class FixturesTest extends FixturesAbstractClass implements FixturesInterface
                         'exists_in_db' => true,
                     ],
                 ],
+<<<<<<< HEAD
                 [
+=======
+                'fixtures' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'fixture1_first_module.php' => 1,
                     'fixture2_first_module.php' => 0,
                     'fixture2_second_module.php' => 0,
@@ -165,7 +219,11 @@ class FixturesTest extends FixturesAbstractClass implements FixturesInterface
                 ],
             ],
             'second_data_set' => [
+<<<<<<< HEAD
                 [
+=======
+                'store_configs' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'test_section/test_group/field_1' => [
                         'value' => 'overridden config fixture value for data set from abstract',
                         'exists_in_db' => true,
@@ -179,7 +237,11 @@ class FixturesTest extends FixturesAbstractClass implements FixturesInterface
                         'exists_in_db' => false,
                     ],
                 ],
+<<<<<<< HEAD
                 [
+=======
+                'fixtures' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'fixture1_first_module.php' => 0,
                     'fixture2_first_module.php' => 0,
                     'fixture1_second_module.php' => 1,

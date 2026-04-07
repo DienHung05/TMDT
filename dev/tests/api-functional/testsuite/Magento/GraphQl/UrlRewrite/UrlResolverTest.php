@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -15,7 +20,10 @@ use Magento\UrlRewrite\Model\ResourceModel\UrlRewrite as UrlRewriteResourceModel
 use Magento\UrlRewrite\Model\UrlFinderInterface;
 use Magento\UrlRewrite\Model\UrlRewrite as UrlRewriteModel;
 use Magento\UrlRewrite\Service\V1\Data\UrlRewrite as UrlRewriteService;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test the GraphQL endpoint's URLResolver query to verify canonical URL's are correctly returned.
@@ -64,10 +72,17 @@ QUERY;
      * @magentoApiDataFixture Magento/Catalog/_files/product_with_category.php
      * @magentoApiDataFixture Magento/Cms/_files/pages.php
      *
+<<<<<<< HEAD
      * @param string $requestPath
      * @throws AlreadyExistsException
      */
     #[DataProvider('urlRewriteEntitiesDataProvider')]
+=======
+     * @dataProvider urlRewriteEntitiesDataProvider
+     * @param string $requestPath
+     * @throws AlreadyExistsException
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUrlRewriteCleansCacheOnChange(string $requestPath)
     {
 
@@ -106,7 +121,11 @@ QUERY;
         $urlRewriteResourceModel->save($urlRewrite);
     }
 
+<<<<<<< HEAD
     public static function urlRewriteEntitiesDataProvider(): array
+=======
+    public function urlRewriteEntitiesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -227,4 +246,8 @@ QUERY;
 
         return $urlRewrite;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

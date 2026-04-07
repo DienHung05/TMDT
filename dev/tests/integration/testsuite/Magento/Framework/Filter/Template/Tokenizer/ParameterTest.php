@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -14,18 +19,29 @@ use PHPUnit\Framework\TestCase;
 /**
  * Test for \Magento\Framework\Filter\Template\Tokenizer\Parameter.
  */
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class ParameterTest extends TestCase
 {
     /**
      * Test for getValue
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider getValueDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $string
      * @param array $values
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('getValueDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetValue($string, $values): void
     {
         $objectManager = Bootstrap::getObjectManager();
@@ -41,11 +57,19 @@ class ParameterTest extends TestCase
     /**
      * Test for tokenize
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider tokenizeDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $string
      * @param array $params
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('tokenizeDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testTokenize(string $string, array $params): void
     {
         $objectManager = Bootstrap::getObjectManager();
@@ -60,7 +84,11 @@ class ParameterTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function tokenizeDataProvider(): array
+=======
+    public function tokenizeDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -101,7 +129,11 @@ class ParameterTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getValueDataProvider()
+=======
+    public function getValueDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

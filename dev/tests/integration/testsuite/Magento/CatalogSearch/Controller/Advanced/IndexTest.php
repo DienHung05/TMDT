@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2022 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -9,7 +14,10 @@ namespace Magento\CatalogSearch\Controller\Advanced;
 
 use Magento\TestFramework\TestCase\AbstractController;
 use Laminas\Stdlib\Parameters;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test cases for catalog advanced index using params.
@@ -23,11 +31,18 @@ class IndexTest extends AbstractController
      * Advanced index test by params with the array in params.
      *
      * @magentoAppArea frontend
+<<<<<<< HEAD
+=======
+     * @dataProvider fromParamsInArrayDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @param array $searchParams
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('fromParamsInArrayDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecuteWithArrayInParams(array $searchParams): void
     {
         $this->getRequest()->setQuery(
@@ -48,7 +63,11 @@ class IndexTest extends AbstractController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function fromParamsInArrayDataProvider(): array
+=======
+    public function fromParamsInArrayDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'from_data_with_from_param_is_array' => [

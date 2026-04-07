@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -27,7 +32,11 @@ class CompositePolicyCollectorTest extends TestCase
      */
     private function createMockCollectors(): array
     {
+<<<<<<< HEAD
         $mockCollector1 = $this->createMock(PolicyCollectorInterface::class);
+=======
+        $mockCollector1 = $this->getMockForAbstractClass(PolicyCollectorInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $mockCollector1->method('collect')
             ->willReturnCallback(
                 function (array $prevPolicies) {
@@ -55,7 +64,11 @@ class CompositePolicyCollectorTest extends TestCase
                     );
                 }
             );
+<<<<<<< HEAD
         $mockCollector2 = $this->createMock(PolicyCollectorInterface::class);
+=======
+        $mockCollector2 = $this->getMockForAbstractClass(PolicyCollectorInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $mockCollector2->method('collect')
             ->willReturnCallback(
                 function (array $prevPolicies) {

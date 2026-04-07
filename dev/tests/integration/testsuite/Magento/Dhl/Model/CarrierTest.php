@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -23,7 +28,10 @@ use Magento\Shipping\Model\Tracking\Result\Status;
 use Magento\Store\Model\ScopeInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\HTTP\AsyncClientInterfaceMock;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -95,8 +103,13 @@ class CarrierTest extends TestCase
      * @param string $responseXml
      * @param array $expectedTrackingData
      * @param string $expectedRequestXml
+<<<<<<< HEAD
      */
     #[DataProvider('trackingDataProvider')]
+=======
+     * @dataProvider trackingDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetTracking(
         $trackingNumbers,
         string $responseXml,
@@ -116,7 +129,11 @@ class CarrierTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function trackingDataProvider() : array
+=======
+    public function trackingDataProvider() : array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         // phpcs:disable Magento2.Functions.DiscouragedFunction
         $expectedMultiAWBRequestXml = file_get_contents(__DIR__ . '/../_files/TrackingRequest_MultipleAWB.xml');
@@ -256,10 +273,16 @@ class CarrierTest extends TestCase
      * Test sending shipping requests.
      *
      * @magentoConfigFixture default_store carriers/dhl/id some ID
+<<<<<<< HEAD
      * @magentoConfigFixture default_store carriers/dhl/type DHL_XML
      * @magentoConfigFixture default_store carriers/dhl/password some password
      * @magentoConfigFixture default_store carriers/dhl/account 1234567890
      * @magentoConfigFixture default_store carriers/dhl/gateway_xml_url https://xmlpi-ea.dhl.com/XMLShippingServlet
+=======
+     * @magentoConfigFixture default_store carriers/dhl/password some password
+     * @magentoConfigFixture default_store carriers/dhl/account 1234567890
+     * @magentoConfigFixture default_store carriers/dhl/gateway_url https://xmlpi-ea.dhl.com/XMLShippingServlet
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoConfigFixture default_store carriers/dhl/content_type N
      * @magentoConfigFixture default_store carriers/dhl/nondoc_methods 1,3,4,8,P,Q,E,F,H,J,M,V,Y
      * @magentoConfigFixture default_store carriers/dhl/unit_of_measure C
@@ -268,8 +291,13 @@ class CarrierTest extends TestCase
      * @param string $destCountryId
      * @param bool|null $isProductNameContainsSpecialChars
      * @return void
+<<<<<<< HEAD
      */
     #[DataProvider('requestToShipmentDataProvider')]
+=======
+     * @dataProvider requestToShipmentDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRequestToShip(
         string $origCountryId,
         string $expectedRegionCode,
@@ -282,19 +310,26 @@ class CarrierTest extends TestCase
             'store',
             null
         );
+<<<<<<< HEAD
         $convmap = [0x80, 0x10FFFF, 0, 0x1FFFFF];
         $content = mb_encode_numericentity(
             file_get_contents(__DIR__ . '/../_files/response_shipping_label.xml'),
             $convmap,
             'UTF-8'
         );
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         //phpcs:disable Magento2.Functions.DiscouragedFunction
         $this->httpClient->nextResponses(
             [
                 new Response(
                     200,
                     [],
+<<<<<<< HEAD
                     $content
+=======
+                    utf8_encode(file_get_contents(__DIR__ . '/../_files/response_shipping_label.xml'))
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 )
             ]
         );
@@ -318,9 +353,12 @@ class CarrierTest extends TestCase
                         'items' => [
                             'item1' => [
                                 'name' => $productName,
+<<<<<<< HEAD
                                 'qty' => 1,
                                 'weight' => '0.454000000001',
                                 'price' => '10.00',
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                             ],
                         ],
                     ],
@@ -374,7 +412,11 @@ class CarrierTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function requestToShipmentDataProvider(): array
+=======
+    public function requestToShipmentDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -427,6 +469,7 @@ class CarrierTest extends TestCase
         $expectedRequestElement->Shipper->CountryName = $countryNames[$origCountryId];
         $expectedRequestElement->RegionCode = $regionCode;
 
+<<<<<<< HEAD
         if ($origCountryId !== $destCountryId) {
             $expectedRequestElement->ExportDeclaration->ExportLineItem->ManufactureCountryCode = $origCountryId;
         }
@@ -434,6 +477,10 @@ class CarrierTest extends TestCase
         if ($isProductNameContainsSpecialChars) {
             $expectedRequestElement->ShipmentDetails->Pieces->Piece->PieceContents = self::PRODUCT_NAME_SPECIAL_CHARS;
             $expectedRequestElement->ExportDeclaration->ExportLineItem->Description = self::PRODUCT_NAME_SPECIAL_CHARS;
+=======
+        if ($isProductNameContainsSpecialChars) {
+            $expectedRequestElement->ShipmentDetails->Pieces->Piece->PieceContents = self::PRODUCT_NAME_SPECIAL_CHARS;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
 
         return $expectedRequestElement->asXML();
@@ -453,13 +500,20 @@ class CarrierTest extends TestCase
      * Tests that valid rates are returned when sending a quotes request.
      *
      * @magentoConfigFixture default_store carriers/dhl/active 1
+<<<<<<< HEAD
      * @magentoConfigFixture default_store carriers/dhl/type DHL_XML
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoConfigFixture default_store carriers/dhl/id some ID
      * @magentoConfigFixture default_store carriers/dhl/shipment_days Mon,Tue,Wed,Thu,Fri,Sat
      * @magentoConfigFixture default_store carriers/dhl/intl_shipment_days Mon,Tue,Wed,Thu,Fri,Sat
      * @magentoConfigFixture default_store carriers/dhl/allowed_methods IE
      * @magentoConfigFixture default_store carriers/dhl/international_service IE
+<<<<<<< HEAD
      * @magentoConfigFixture default_store carriers/dhl/gateway_xml_url https://xmlpi-ea.dhl.com/XMLShippingServlet
+=======
+     * @magentoConfigFixture default_store carriers/dhl/gateway_url https://xmlpi-ea.dhl.com/XMLShippingServlet
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoConfigFixture default_store carriers/dhl/id some ID
      * @magentoConfigFixture default_store carriers/dhl/password some password
      * @magentoConfigFixture default_store carriers/dhl/content_type N
@@ -509,6 +563,7 @@ class CarrierTest extends TestCase
      * @param string|null $width
      * @param string|null $depth
      * @magentoConfigFixture default_store carriers/dhl/active 1
+<<<<<<< HEAD
      * @magentoConfigFixture default_store carriers/dhl/type DHL_XML
      */
     #[DataProvider('collectRatesWithoutDimensionsDataProvider')]
@@ -516,6 +571,13 @@ class CarrierTest extends TestCase
     {
         $this->setDhlConfig(['size' => $size, 'height' => $height, 'width' => $width, 'depth' => $depth]);
         $this->setNextResponse(__DIR__ . '/../_files/dhl_quote_response.xml');
+=======
+     * @dataProvider collectRatesWithoutDimensionsDataProvider
+     */
+    public function testCollectRatesWithoutDimensions(?string $size, ?string $height, ?string $width, ?string $depth)
+    {
+        $this->setDhlConfig(['size' => $size, 'height' => $height, 'width' => $width, 'depth' => $depth]);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $request = $this->createRequest();
         $this->dhlCarrier = Bootstrap::getObjectManager()->create(Carrier::class);
@@ -533,13 +595,22 @@ class CarrierTest extends TestCase
      * Test get carriers rates if has HttpException.
      *
      * @magentoConfigFixture default_store carriers/dhl/active 1
+<<<<<<< HEAD
      * @magentoConfigFixture default_store carriers/dhl/type DHL_XML
      *
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function testGetRatesWithHttpException(): void
     {
         $this->setDhlConfig(['showmethod' => 1]);
+<<<<<<< HEAD
         $deferredResponse = $this->createMock(HttpResponseDeferredInterface::class);
+=======
+        $deferredResponse = $this->getMockBuilder(HttpResponseDeferredInterface::class)
+            ->onlyMethods(['get'])
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $exception = new HttpException('Exception message');
         $deferredResponse->method('get')->willThrowException($exception);
         $this->httpClient->setDeferredResponseMock($deferredResponse);
@@ -557,7 +628,11 @@ class CarrierTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function collectRatesWithoutDimensionsDataProvider()
+=======
+    public function collectRatesWithoutDimensionsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['size' => '0', 'height' => '1.1', 'width' => '0.6', 'depth' => '0.7'],
@@ -593,13 +668,20 @@ class CarrierTest extends TestCase
      * @param array $addRequestData
      * @param bool $freeShippingExpects
      * @magentoConfigFixture default_store carriers/dhl/active 1
+<<<<<<< HEAD
      * @magentoConfigFixture default_store carriers/dhl/type DHL_XML
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoConfigFixture default_store carriers/dhl/id some ID
      * @magentoConfigFixture default_store carriers/dhl/shipment_days Mon,Tue,Wed,Thu,Fri,Sat
      * @magentoConfigFixture default_store carriers/dhl/intl_shipment_days Mon,Tue,Wed,Thu,Fri,Sat
      * @magentoConfigFixture default_store carriers/dhl/allowed_methods IE
      * @magentoConfigFixture default_store carriers/dhl/international_service IE
+<<<<<<< HEAD
      * @magentoConfigFixture default_store carriers/dhl/gateway_xml_url https://xmlpi-ea.dhl.com/XMLShippingServlet
+=======
+     * @magentoConfigFixture default_store carriers/dhl/gateway_url https://xmlpi-ea.dhl.com/XMLShippingServlet
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoConfigFixture default_store carriers/dhl/id some ID
      * @magentoConfigFixture default_store carriers/dhl/password some password
      * @magentoConfigFixture default_store carriers/dhl/content_type N
@@ -618,8 +700,13 @@ class CarrierTest extends TestCase
      * @magentoConfigFixture default_store carriers/dhl/free_shipping_subtotal 25
      * @magentoConfigFixture default_store shipping/origin/country_id GB
      * @magentoAppIsolation enabled
+<<<<<<< HEAD
      */
     #[DataProvider('collectRatesWithFreeShippingDataProvider')]
+=======
+     * @dataProvider collectRatesWithFreeShippingDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCollectRatesWithFreeShipping(array $addRequestData, bool $freeShippingExpects): void
     {
         $this->setNextResponse(__DIR__ . '/../_files/dhl_quote_response.xml');
@@ -641,7 +728,11 @@ class CarrierTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function collectRatesWithFreeShippingDataProvider(): array
+=======
+    public function collectRatesWithFreeShippingDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -692,8 +783,11 @@ class CarrierTest extends TestCase
             'dhl_id' => 'MAGEN_8501',
             'dhl_password' => 'QR2GO1U74X',
             'dhl_account' => '799909537',
+<<<<<<< HEAD
             'dhl_api_key' => 'ab01cD2eF3gH4j',
             'dhl_api_secret' => 'A!1bC@3dE#4fG$5h',
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'dhl_shipping_intl_key' => '54233F2B2C4E5C4B4C5E5A59565530554B405641475D5659',
             'girth' => null,
             'height' => null,
@@ -745,6 +839,7 @@ class CarrierTest extends TestCase
 
         return Bootstrap::getObjectManager()->create(RateRequest::class, ['data' => $requestData]);
     }
+<<<<<<< HEAD
 
     /**
      * Tests that valid rates are returned when sending a quotes request.
@@ -1081,4 +1176,6 @@ class CarrierTest extends TestCase
             }
         }
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

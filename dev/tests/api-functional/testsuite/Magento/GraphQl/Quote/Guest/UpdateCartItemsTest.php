@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -9,6 +14,7 @@ namespace Magento\GraphQl\Quote\Guest;
 
 use Exception;
 use Magento\Catalog\Api\ProductRepositoryInterface;
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Catalog\Test\Fixture\ProductStock as ProductStockFixture;
 use Magento\ConfigurableProduct\Test\Fixture\AddProductToCart as AddConfigurableProductToCartFixture;
@@ -33,6 +39,16 @@ use PHPUnit\Framework\Attributes\DataProvider;
  * Test for updating/removing shopping cart items
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+use Magento\Quote\Model\QuoteFactory;
+use Magento\Quote\Model\QuoteIdToMaskedQuoteIdInterface;
+use Magento\Quote\Model\ResourceModel\Quote as QuoteResource;
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\TestFramework\TestCase\GraphQlAbstract;
+
+/**
+ * Test for updating/removing shopping cart items
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class UpdateCartItemsTest extends GraphQlAbstract
 {
@@ -56,11 +72,14 @@ class UpdateCartItemsTest extends GraphQlAbstract
      */
     private $productRepository;
 
+<<<<<<< HEAD
     /**
      * @var DataFixtureStorage
      */
     private $fixtures;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     protected function setUp(): void
     {
         $objectManager = Bootstrap::getObjectManager();
@@ -68,7 +87,10 @@ class UpdateCartItemsTest extends GraphQlAbstract
         $this->quoteFactory = $objectManager->get(QuoteFactory::class);
         $this->quoteIdToMaskedId = $objectManager->get(QuoteIdToMaskedQuoteIdInterface::class);
         $this->productRepository = $objectManager->get(ProductRepositoryInterface::class);
+<<<<<<< HEAD
         $this->fixtures = DataFixtureStorageManager::getStorage();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -157,6 +179,7 @@ class UpdateCartItemsTest extends GraphQlAbstract
         $maskedQuoteId = $this->quoteIdToMaskedId->execute((int)$quote->getId());
         $notExistentItemId = 999;
 
+<<<<<<< HEAD
         $query = $this->getQuery($maskedQuoteId, $notExistentItemId, 2);
         $response = $this->graphQlMutation($query);
 
@@ -169,6 +192,12 @@ class UpdateCartItemsTest extends GraphQlAbstract
             $responseError['message']
         );
         $this->assertEquals('COULD_NOT_FIND_CART_ITEM', $responseError['code']);
+=======
+        $this->expectExceptionMessage("Could not find cart item with id: {$notExistentItemId}.");
+
+        $query = $this->getQuery($maskedQuoteId, $notExistentItemId, 2);
+        $this->graphQlMutation($query);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -191,6 +220,7 @@ class UpdateCartItemsTest extends GraphQlAbstract
             ->getItemByProduct($this->productRepository->get('virtual-product'))
             ->getId();
 
+<<<<<<< HEAD
         $query = $this->getQuery($firstQuoteMaskedId, $secondQuoteItemId, 2);
         $response = $this->graphQlMutation($query);
 
@@ -203,6 +233,12 @@ class UpdateCartItemsTest extends GraphQlAbstract
             $responseError['message']
         );
         $this->assertEquals('COULD_NOT_FIND_CART_ITEM', $responseError['code']);
+=======
+        $this->expectExceptionMessage("Could not find cart item with id: {$secondQuoteItemId}.");
+
+        $query = $this->getQuery($firstQuoteMaskedId, $secondQuoteItemId, 2);
+        $this->graphQlMutation($query);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -224,11 +260,18 @@ class UpdateCartItemsTest extends GraphQlAbstract
     /**
      * @param string $input
      * @param string $message
+<<<<<<< HEAD
      * @param string $errorCode
      * @magentoApiDataFixture Magento/Checkout/_files/quote_with_simple_product_saved.php
      */
     #[DataProvider('dataProviderUpdateWithMissedRequiredParameters')]
     public function testUpdateWithMissedItemRequiredParameters(string $input, string $message, string $errorCode)
+=======
+     * @dataProvider dataProviderUpdateWithMissedRequiredParameters
+     * @magentoApiDataFixture Magento/Checkout/_files/quote_with_simple_product_saved.php
+     */
+    public function testUpdateWithMissedItemRequiredParameters(string $input, string $message)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $quote = $this->quoteFactory->create();
         $this->quoteResource->load($quote, 'test_order_with_simple_product_without_address', 'reserved_order_id');
@@ -246,6 +289,7 @@ mutation {
         quantity
       }
     }
+<<<<<<< HEAD
     errors {
       message
       code
@@ -261,18 +305,33 @@ QUERY;
         $responseError = $response['updateCartItems']['errors'][0];
         $this->assertEquals($message, $responseError['message']);
         $this->assertEquals($errorCode, $responseError['code']);
+=======
+  }
+}
+QUERY;
+        $this->expectExceptionMessage($message);
+        $this->graphQlMutation($query);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function dataProviderUpdateWithMissedRequiredParameters(): array
+=======
+    public function dataProviderUpdateWithMissedRequiredParameters(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'missed_cart_item_qty' => [
                 'cart_items: [{ cart_item_id: 1 }]',
+<<<<<<< HEAD
                 'Required parameter "quantity" for "cart_items" is missing.',
                 'REQUIRED_PARAMETER_MISSING'
+=======
+                'Required parameter "quantity" for "cart_items" is missing.'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }
@@ -302,10 +361,13 @@ mutation {
         quantity
       }
     }
+<<<<<<< HEAD
     errors {
       message
       code
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
   }
 }
 QUERY;
@@ -374,6 +436,7 @@ QUERY;
         }
     }
 
+<<<<<<< HEAD
     #[
         DataFixture(ProductFixture::class, as: 'configProd1'),
         DataFixture(ProductFixture::class, as: 'configProd2'),
@@ -456,6 +519,8 @@ QUERY;
         return (int)$quoteItem->getId();
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     private function getUpdateGiftMessageQuery(string $messageTo, string $messageFrom, string $message)
     {
         $quote = $this->quoteFactory->create();

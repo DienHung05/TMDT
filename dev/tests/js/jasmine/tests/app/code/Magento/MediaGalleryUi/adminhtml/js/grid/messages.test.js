@@ -1,6 +1,11 @@
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 define([
@@ -65,8 +70,12 @@ define([
         });
 
         it('prepare message to be rendered as HTML', function () {
+<<<<<<< HEAD
             var escapedMessage = 'escaped message',
                 originalEscapeHtml = escaperInstance.escapeHtml;
+=======
+            var escapedMessage = 'escaped message';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
             // eslint-disable-next-line max-nested-callbacks
             escaperInstance.escapeHtml = jasmine.createSpy().and.callFake(function () {
@@ -74,9 +83,12 @@ define([
             });
 
             expect(messagesInstance.prepareMessageUnsanitizedHtml(messageText)).toEqual(escapedMessage);
+<<<<<<< HEAD
 
             // Restore original function to avoid test interference
             escaperInstance.escapeHtml = originalEscapeHtml;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         });
     });
 });

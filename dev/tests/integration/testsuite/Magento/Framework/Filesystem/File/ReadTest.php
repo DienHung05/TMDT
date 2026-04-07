@@ -2,13 +2,21 @@
 /**
  * Test for \Magento\Framework\Filesystem\File\Read
  *
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Framework\Filesystem\File;
 
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class ReadTest extends \PHPUnit\Framework\TestCase
 {
@@ -25,9 +33,15 @@ class ReadTest extends \PHPUnit\Framework\TestCase
      * Test for assertValid method
      * Expected exception for file that does not exist and file without access
      *
+<<<<<<< HEAD
      * @param string $path
      */
     #[DataProvider('providerNotValidFiles')]
+=======
+     * @dataProvider providerNotValidFiles
+     * @param string $path
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAssertValid($path)
     {
         $this->expectException(\Magento\Framework\Exception\FileSystemException::class);
@@ -40,7 +54,11 @@ class ReadTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function providerNotValidFiles()
+=======
+    public function providerNotValidFiles()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [['invalid.csv']]; //File does not exist
     }
@@ -48,11 +66,18 @@ class ReadTest extends \PHPUnit\Framework\TestCase
     /**
      * Test for read method
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider providerRead
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $path
      * @param int $length
      * @param string $expectedResult
      */
+<<<<<<< HEAD
     #[DataProvider('providerRead')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRead($path, $length, $expectedResult)
     {
         $file = $this->getFileInstance($path);
@@ -65,7 +90,11 @@ class ReadTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function providerRead()
+=======
+    public function providerRead()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [['popup.csv', 10, 'var myData'], ['popup.csv', 15, 'var myData = 5;']];
     }
@@ -73,10 +102,17 @@ class ReadTest extends \PHPUnit\Framework\TestCase
     /**
      * Test readAll
      *
+<<<<<<< HEAD
      * @param string $path
      * @param string $content
      */
     #[DataProvider('readAllProvider')]
+=======
+     * @dataProvider readAllProvider
+     * @param string $path
+     * @param string $content
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testReadAll($path, $content)
     {
         $file = $this->getFileInstance($path);
@@ -88,7 +124,11 @@ class ReadTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function readAllProvider()
+=======
+    public function readAllProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['popup.csv', 'var myData = 5;'],
@@ -99,11 +139,18 @@ class ReadTest extends \PHPUnit\Framework\TestCase
     /**
      * Test readLine
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider readLineProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $path
      * @param array $lines
      * @param int $length
      */
+<<<<<<< HEAD
     #[DataProvider('readLineProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testReadLine($path, $lines, $length)
     {
         $file = $this->getFileInstance($path);
@@ -117,7 +164,11 @@ class ReadTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function readLineProvider()
+=======
+    public function readLineProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['popup.csv', ['var myData = 5;'], 999],
@@ -130,9 +181,15 @@ class ReadTest extends \PHPUnit\Framework\TestCase
     /**
      * Test for stat method
      *
+<<<<<<< HEAD
      * @param string $path
      */
     #[DataProvider('statProvider')]
+=======
+     * @dataProvider statProvider
+     * @param string $path
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testStat($path)
     {
         $file = $this->getFileInstance($path);
@@ -162,7 +219,11 @@ class ReadTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function statProvider()
+=======
+    public function statProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [['popup.csv'], ['foo/file_three.txt']];
     }
@@ -170,6 +231,10 @@ class ReadTest extends \PHPUnit\Framework\TestCase
     /**
      * Test for readCsv method
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider providerCsv
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $path
      * @param int $length
      * @param string $delimiter
@@ -178,7 +243,10 @@ class ReadTest extends \PHPUnit\Framework\TestCase
      * @param array $expectedRow1
      * @param array $expectedRow2
      */
+<<<<<<< HEAD
     #[DataProvider('providerCsv')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testReadCsv($path, $length, $delimiter, $enclosure, $escape, $expectedRow1, $expectedRow2)
     {
         $file = $this->getFileInstance($path);
@@ -193,7 +261,11 @@ class ReadTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function providerCsv()
+=======
+    public function providerCsv()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [['data.csv', 0, ',', '"', '\\', ['field1', 'field2'], ['field3', 'field4']]];
     }
@@ -201,10 +273,17 @@ class ReadTest extends \PHPUnit\Framework\TestCase
     /**
      * Test for tell method
      *
+<<<<<<< HEAD
      * @param string $path
      * @param int $position
      */
     #[DataProvider('providerPosition')]
+=======
+     * @dataProvider providerPosition
+     * @param string $path
+     * @param int $position
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testTell($path, $position)
     {
         $file = $this->getFileInstance($path);
@@ -217,7 +296,11 @@ class ReadTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function providerPosition()
+=======
+    public function providerPosition()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [['popup.csv', 5], ['popup.csv', 10]];
     }
@@ -225,12 +308,19 @@ class ReadTest extends \PHPUnit\Framework\TestCase
     /**
      * Test for seek method
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider providerSeek
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $path
      * @param int $position
      * @param int $whence
      * @param int $tell
      */
+<<<<<<< HEAD
     #[DataProvider('providerSeek')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSeek($path, $position, $whence, $tell)
     {
         $file = $this->getFileInstance($path);
@@ -243,7 +333,11 @@ class ReadTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function providerSeek()
+=======
+    public function providerSeek()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['popup.csv', 5, SEEK_SET, 5],
@@ -255,12 +349,20 @@ class ReadTest extends \PHPUnit\Framework\TestCase
     /**
      * Test for eof method
      *
+<<<<<<< HEAD
      * @param string $path
      * @param int $position
      * @param bool $expected
      */
     #[DataProvider('providerEof')]
     public function testEofFalse($path, $position, $expected)
+=======
+     * @dataProvider providerEof
+     * @param string $path
+     * @param int $position
+     */
+    public function testEofFalse($path, $position)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $file = $this->getFileInstance($path);
         $file->seek($position);
@@ -272,7 +374,11 @@ class ReadTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function providerEof()
+=======
+    public function providerEof()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [['popup.csv', 5, false], ['popup.csv', 10, false]];
     }

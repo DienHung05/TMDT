@@ -1,4 +1,5 @@
 app/design/adminhtml/Magento/backend/Magento_Backend/web/css/source/_module-old.less
+<<<<<<< HEAD
 app/design/adminhtml/Magento/backend/Magento_Backend/web/css/source/module/_header.less
 app/design/adminhtml/Magento/backend/Magento_Backend/web/css/source/module/_menu.less
 app/design/adminhtml/Magento/backend/Magento_Backend/web/css/source/module/header/_headings-group.less
@@ -47,6 +48,23 @@ app/design/adminhtml/Magento/backend/web/css/source/utilities/_grid-framework.le
 app/design/adminhtml/Magento/backend/web/css/source/utilities/_spinner.less
 app/design/adminhtml/Magento/backend/web/css/source/variables/_components.less
 app/design/adminhtml/Magento/backend/web/css/source/variables/_structure.less
+=======
+app/design/adminhtml/Magento/backend/Magento_Catalog/web/css/source/_module-old.less
+app/design/adminhtml/Magento/backend/Magento_ConfigurableProduct/web/css/source/_module-old.less
+app/design/adminhtml/Magento/backend/Magento_Developer/web/css/source/_module-old.less
+app/design/adminhtml/Magento/backend/Magento_Enterprise/web/css/source/_module-old.less
+app/design/adminhtml/Magento/backend/Magento_Msrp/web/css/source/_module-old.less
+app/design/adminhtml/Magento/backend/Magento_Sales/web/css/source/module/_order.less
+app/design/adminhtml/Magento/backend/Magento_Tax/web/css/source/_module-old.less
+app/design/adminhtml/Magento/backend/Magento_Theme/web/css/source/_module-old.less
+app/design/adminhtml/Magento/backend/Magento_Ui/web/css/source/_module-old.less
+app/design/adminhtml/Magento/backend/web/app/setup/styles/less/lib/utilities/_grid-framework.less
+app/design/adminhtml/Magento/backend/web/css/source/_grid.less
+app/design/adminhtml/Magento/backend/web/css/source/components/_popups-old.less
+app/design/adminhtml/Magento/backend/web/css/source/utilities/_grid-framework.less
+app/design/adminhtml/Magento/backend/web/css/source/utilities/_spinner.less
+app/design/adminhtml/Magento/backend/web/css/source/utilities/_spinner.less
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 app/design/adminhtml/Magento/backend/web/css/styles-old.less
 app/design/adminhtml/Magento/backend/web/mui/clearless/_all.less
 app/design/adminhtml/Magento/backend/web/mui/clearless/_arrows.less
@@ -56,6 +74,7 @@ app/design/adminhtml/Magento/backend/web/mui/clearless/_settings.less
 app/design/adminhtml/Magento/backend/web/mui/clearless/_sprites.less
 app/design/adminhtml/Magento/backend/web/mui/styles/_abstract.less
 app/design/adminhtml/Magento/backend/web/mui/styles/_table.less
+<<<<<<< HEAD
 app/design/adminhtml/Magento/backend/web/mui/styles/_vars.less
 app/design/frontend/Magento/blank/Magento_Catalog/web/css/source/_widgets.less
 app/design/frontend/Magento/blank/Magento_Catalog/web/css/source/module/_listings.less
@@ -68,3 +87,6 @@ app/design/frontend/Magento/luma/Magento_Checkout/web/css/source/module/checkout
 app/design/frontend/Magento/luma/Magento_Checkout/web/css/source/module/checkout/_shipping.less
 app/design/frontend/Magento/luma/Magento_Checkout/web/css/source/module/checkout/fields/_file-uploader.less
 app/design/frontend/Magento/luma/Magento_Sales/web/css/source/_module.less
+=======
+app/design/adminhtml/Magento/backend/web/mui/styles/_vars.less
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f

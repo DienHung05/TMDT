@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Sales\Model\ResourceModel\Report\Bestsellers;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Sales\Model\ResourceModel\Report\Bestsellers;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class CollectionTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -38,12 +46,20 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider tableForPeriodDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param $period
      * @param $expectedTable
      * @param $dateFrom
      * @param $dateTo
      */
+<<<<<<< HEAD
     #[DataProvider('tableForPeriodDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testTableSelection($period, $expectedTable, $dateFrom, $dateTo)
     {
         $dbTableName = $this->_collection->getTable($expectedTable);
@@ -65,13 +81,18 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function tableForPeriodDataProvider(): array
+=======
+    public function tableForPeriodDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $dateNow = date('Y-m-d', time());
         $dateYearAgo = date('Y-m-d', strtotime($dateNow . ' -1 year'));
         return [
             [
                 'period'    => 'year',
+<<<<<<< HEAD
                 'expectedTable'     => 'sales_bestsellers_aggregated_yearly',
                 'dateFrom' => null,
                 'dateTo'   => null,
@@ -117,6 +138,53 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
                 'expectedTable'     => 'sales_bestsellers_aggregated_yearly',
                 'dateFrom' => null,
                 'dateTo'   => null
+=======
+                'table'     => 'sales_bestsellers_aggregated_yearly',
+                'date_from' => null,
+                'date_to'   => null,
+            ],
+            [
+                'period'    => 'month',
+                'table'     => 'sales_bestsellers_aggregated_monthly',
+                'date_from' => null,
+                'date_to'   => null
+            ],
+            [
+                'period'    => 'day',
+                'table'     => 'sales_bestsellers_aggregated_daily',
+                'date_from' => null,
+                'date_to'   => null
+            ],
+            [
+                'period'    => 'undefinedPeriod',
+                'table'     => 'sales_bestsellers_aggregated_daily',
+                'date_from' => null,
+                'date_to'   => null
+            ],
+            [
+                'period'    => null,
+                'table'     => 'sales_bestsellers_aggregated_daily',
+                'date_from' => $dateYearAgo,
+                'date_to'   => $dateNow
+            ],
+            [
+                'period'    => null,
+                'table'     => 'sales_bestsellers_aggregated_daily',
+                'date_from' => $dateNow,
+                'date_to'   => $dateNow
+            ],
+            [
+                'period'    => null,
+                'table'     => 'sales_bestsellers_aggregated_daily',
+                'date_from' => $dateYearAgo,
+                'date_to'   => $dateYearAgo
+            ],
+            [
+                'period'    => null,
+                'table'     => 'sales_bestsellers_aggregated_yearly',
+                'date_from' => null,
+                'date_to'   => null
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

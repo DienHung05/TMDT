@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Framework\View\Layout;
 
 use Magento\Framework\App\State;
 use Magento\Framework\Phrase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -83,6 +91,7 @@ class MergeTest extends \PHPUnit\Framework\TestCase
         foreach ($fileDriver->readDirectory(__DIR__ . '/_mergeFiles/layout/') as $filename) {
             $files[] = new \Magento\Framework\View\File($filename, 'Magento_Widget');
         }
+<<<<<<< HEAD
         $fileSource = $this->createMock(\Magento\Framework\View\File\CollectorInterface::class);
         $fileSource->expects($this->any())->method('getFiles')->willReturn($files);
 
@@ -94,6 +103,19 @@ class MergeTest extends \PHPUnit\Framework\TestCase
         $this->scope = $this->createMock(\Magento\Framework\Url\ScopeInterface::class);
         $this->scope->expects($this->any())->method('getId')->willReturn(20);
         $scopeResolver = $this->createMock(\Magento\Framework\Url\ScopeResolverInterface::class);
+=======
+        $fileSource = $this->getMockForAbstractClass(\Magento\Framework\View\File\CollectorInterface::class);
+        $fileSource->expects($this->any())->method('getFiles')->willReturn($files);
+
+        $pageLayoutFileSource = $this->getMockForAbstractClass(\Magento\Framework\View\File\CollectorInterface::class);
+        $pageLayoutFileSource->expects($this->any())->method('getFiles')->willReturn([]);
+
+        $design = $this->getMockForAbstractClass(\Magento\Framework\View\DesignInterface::class);
+
+        $this->scope = $this->createMock(\Magento\Framework\Url\ScopeInterface::class);
+        $this->scope->expects($this->any())->method('getId')->willReturn(20);
+        $scopeResolver = $this->getMockForAbstractClass(\Magento\Framework\Url\ScopeResolverInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $scopeResolver->expects($this->once())->method('getScope')->with(null)->willReturn($this->scope);
 
         $this->_resource = $this->createMock(\Magento\Widget\Model\ResourceModel\Layout\Update::class);
@@ -104,9 +126,15 @@ class MergeTest extends \PHPUnit\Framework\TestCase
 
         $this->_layoutValidator = $this->createMock(\Magento\Framework\View\Model\Layout\Update\Validator::class);
 
+<<<<<<< HEAD
         $this->_cache = $this->createMock(\Magento\Framework\Cache\FrontendInterface::class);
 
         $this->_serializer = $this->createMock(\Magento\Framework\Serialize\SerializerInterface::class);
+=======
+        $this->_cache = $this->getMockForAbstractClass(\Magento\Framework\Cache\FrontendInterface::class);
+
+        $this->_serializer = $this->getMockForAbstractClass(\Magento\Framework\Serialize\SerializerInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->_theme = $this->createMock(\Magento\Theme\Model\Theme::class);
         $this->_theme->expects($this->any())->method('isPhysical')->willReturn(true);
@@ -132,7 +160,11 @@ class MergeTest extends \PHPUnit\Framework\TestCase
                 }
             );
 
+<<<<<<< HEAD
         $this->layoutCacheKeyMock = $this->createMock(LayoutCacheKeyInterface::class);
+=======
+        $this->layoutCacheKeyMock = $this->getMockForAbstractClass(LayoutCacheKeyInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->layoutCacheKeyMock->expects($this->any())
             ->method('getCacheKeys')
             ->willReturn([]);
@@ -219,14 +251,23 @@ class MergeTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      */
     #[DataProvider('pageHandleExistsDataProvider')]
+=======
+     * @dataProvider pageHandleExistsDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPageHandleExists($inputPageHandle, $expectedResult)
     {
         $this->assertSame($expectedResult, $this->_model->pageHandleExists($inputPageHandle));
     }
 
+<<<<<<< HEAD
     public static function pageHandleExistsDataProvider()
+=======
+    public function pageHandleExistsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'non-existing handle' => ['non_existing_handle', false],
@@ -291,6 +332,7 @@ class MergeTest extends \PHPUnit\Framework\TestCase
 
         $this->_cache
             ->method('load')
+<<<<<<< HEAD
             ->willReturnCallback(
                 function ($arg1) use ($cacheValue) {
                     if ($arg1 == 'LAYOUT_area_STORE20_100c6a4ccd050e33acef0553f24ef399961_page_layout_merged') {
@@ -298,6 +340,10 @@ class MergeTest extends \PHPUnit\Framework\TestCase
                     }
                 }
             );
+=======
+            ->withConsecutive(['LAYOUT_area_STORE20_100c6a4ccd050e33acef0553f24ef399961_page_layout_merged'])
+            ->willReturnOnConsecutiveCalls(json_encode($cacheValue));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->_serializer->expects($this->once())->method('unserialize')->willReturn($cacheValue);
 

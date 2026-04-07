@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Catalog\Model;
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\App\Filesystem\DirectoryList;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Tests product model:
@@ -130,10 +138,17 @@ class ProductGettersTest extends \PHPUnit\Framework\TestCase
      * @covers \Magento\Catalog\Model\Product::getSpecialToDate
      * @covers \Magento\Catalog\Model\Product::getRequestPath
      * @covers \Magento\Catalog\Model\Product::getGiftMessageAvailable
+<<<<<<< HEAD
      * @param string $key
      * @param string $method
      */
     #[DataProvider('getObsoleteGettersDataProvider')]
+=======
+     * @dataProvider getObsoleteGettersDataProvider
+     * @param string $key
+     * @param string $method
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetObsoleteGetters($key, $method)
     {
         $value = uniqid();
@@ -142,7 +157,11 @@ class ProductGettersTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($value, $this->_model->{$method}());
     }
 
+<<<<<<< HEAD
     public static function getObsoleteGettersDataProvider()
+=======
+    public function getObsoleteGettersDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['calculated_final_price', 'getCalculatedFinalPrice'],

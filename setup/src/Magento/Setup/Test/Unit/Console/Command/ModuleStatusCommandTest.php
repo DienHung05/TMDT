@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -20,7 +25,11 @@ class ModuleStatusCommandTest extends TestCase
     public function testExecute()
     {
         $objectManagerProvider = $this->createMock(ObjectManagerProvider::class);
+<<<<<<< HEAD
         $objectManager = $this->createMock(ObjectManagerInterface::class);
+=======
+        $objectManager = $this->getMockForAbstractClass(ObjectManagerInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $objectManagerProvider->expects($this->any())
             ->method('get')
             ->willReturn($objectManager);

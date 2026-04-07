@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -125,7 +130,11 @@ class CartItemPersisterTest extends TestCase
         $item->setSku('not_existing_product_sku')->setQty(1);
         $this->expectExceptionObject(
             new NoSuchEntityException(
+<<<<<<< HEAD
                 __('The product with SKU "not_existing_product_sku" does not exist.')
+=======
+                __('The product that was requested doesn\'t exist. Verify the product and try again.')
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             )
         );
         $this->model->save($quote, $item);
@@ -166,7 +175,11 @@ class CartItemPersisterTest extends TestCase
         $quoteItem = current($quote->getItems());
         $item = $this->itemFactory->create();
         $item->setQty(9999)->setSku($quoteItem->getSku())->setItemId($quoteItem->getItemId());
+<<<<<<< HEAD
         $this->expectExceptionObject(new LocalizedException(__('Not enough items for sale')));
+=======
+        $this->expectExceptionObject(new LocalizedException(__('The requested qty is not available')));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->model->save($quote, $item);
     }
 }

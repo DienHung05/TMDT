@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Setup\Model\ConfigOptionsList;
@@ -19,6 +24,7 @@ use Magento\Framework\Setup\Option\TextConfigOption;
  */
 class Session implements ConfigOptionsListInterface
 {
+<<<<<<< HEAD
     public const INPUT_KEY_SESSION_REDIS_HOST = 'session-save-redis-host';
     public const INPUT_KEY_SESSION_REDIS_PORT = 'session-save-redis-port';
     public const INPUT_KEY_SESSION_REDIS_PASSWORD = 'session-save-redis-password';
@@ -114,6 +120,54 @@ class Session implements ConfigOptionsListInterface
     public const CONFIG_PATH_SESSION_VALKEY_SENTINEL_MASTER = 'session/valkey/sentinel_master';
     public const CONFIG_PATH_SESSION_VALKEY_SENTINEL_VERIFY_MASTER = 'session/valkey/sentinel_verify_master';
     public const CONFIG_PATH_SESSION_VALKEY_SENTINEL_CONNECT_RETRIES = 'session/valkey/sentinel_connect_retries';
+=======
+    const INPUT_KEY_SESSION_REDIS_HOST = 'session-save-redis-host';
+    const INPUT_KEY_SESSION_REDIS_PORT = 'session-save-redis-port';
+    const INPUT_KEY_SESSION_REDIS_PASSWORD = 'session-save-redis-password';
+    const INPUT_KEY_SESSION_REDIS_TIMEOUT = 'session-save-redis-timeout';
+    const INPUT_KEY_SESSION_REDIS_PERSISTENT_IDENTIFIER = 'session-save-redis-persistent-id';
+    const INPUT_KEY_SESSION_REDIS_DATABASE = 'session-save-redis-db';
+    const INPUT_KEY_SESSION_REDIS_COMPRESSION_THRESHOLD = 'session-save-redis-compression-threshold';
+    const INPUT_KEY_SESSION_REDIS_COMPRESSION_LIBRARY = 'session-save-redis-compression-lib';
+    const INPUT_KEY_SESSION_REDIS_LOG_LEVEL = 'session-save-redis-log-level';
+    const INPUT_KEY_SESSION_REDIS_MAX_CONCURRENCY = 'session-save-redis-max-concurrency';
+    const INPUT_KEY_SESSION_REDIS_BREAK_AFTER_FRONTEND = 'session-save-redis-break-after-frontend';
+    const INPUT_KEY_SESSION_REDIS_BREAK_AFTER_ADMINHTML = 'session-save-redis-break-after-adminhtml';
+    const INPUT_KEY_SESSION_REDIS_FIRST_LIFETIME = 'session-save-redis-first-lifetime';
+    const INPUT_KEY_SESSION_REDIS_BOT_FIRST_LIFETIME = 'session-save-redis-bot-first-lifetime';
+    const INPUT_KEY_SESSION_REDIS_BOT_LIFETIME = 'session-save-redis-bot-lifetime';
+    const INPUT_KEY_SESSION_REDIS_DISABLE_LOCKING = 'session-save-redis-disable-locking';
+    const INPUT_KEY_SESSION_REDIS_MIN_LIFETIME = 'session-save-redis-min-lifetime';
+    const INPUT_KEY_SESSION_REDIS_MAX_LIFETIME = 'session-save-redis-max-lifetime';
+    const INPUT_KEY_SESSION_REDIS_SENTINEL_SERVERS = 'session-save-redis-sentinel-servers';
+    const INPUT_KEY_SESSION_REDIS_SENTINEL_MASTER = 'session-save-redis-sentinel-master';
+    const INPUT_KEY_SESSION_REDIS_SENTINEL_VERIFY_MASTER = 'session-save-redis-sentinel-verify-master';
+    const INPUT_KEY_SESSION_REDIS_SENTINEL_CONNECT_RETRIES = 'session-save-redis-sentinel-connect-retries';
+
+    const CONFIG_PATH_SESSION_REDIS = 'session/redis';
+    const CONFIG_PATH_SESSION_REDIS_HOST = 'session/redis/host';
+    const CONFIG_PATH_SESSION_REDIS_PORT = 'session/redis/port';
+    const CONFIG_PATH_SESSION_REDIS_PASSWORD = 'session/redis/password';
+    const CONFIG_PATH_SESSION_REDIS_TIMEOUT = 'session/redis/timeout';
+    const CONFIG_PATH_SESSION_REDIS_PERSISTENT_IDENTIFIER = 'session/redis/persistent_identifier';
+    const CONFIG_PATH_SESSION_REDIS_DATABASE = 'session/redis/database';
+    const CONFIG_PATH_SESSION_REDIS_COMPRESSION_THRESHOLD = 'session/redis/compression_threshold';
+    const CONFIG_PATH_SESSION_REDIS_COMPRESSION_LIBRARY = 'session/redis/compression_library';
+    const CONFIG_PATH_SESSION_REDIS_LOG_LEVEL = 'session/redis/log_level';
+    const CONFIG_PATH_SESSION_REDIS_MAX_CONCURRENCY = 'session/redis/max_concurrency';
+    const CONFIG_PATH_SESSION_REDIS_BREAK_AFTER_FRONTEND = 'session/redis/break_after_frontend';
+    const CONFIG_PATH_SESSION_REDIS_BREAK_AFTER_ADMINHTML = 'session/redis/break_after_adminhtml';
+    const CONFIG_PATH_SESSION_REDIS_FIRST_LIFETIME = 'session/redis/first_lifetime';
+    const CONFIG_PATH_SESSION_REDIS_BOT_FIRST_LIFETIME = 'session/redis/bot_first_lifetime';
+    const CONFIG_PATH_SESSION_REDIS_BOT_LIFETIME = 'session/redis/bot_lifetime';
+    const CONFIG_PATH_SESSION_REDIS_DISABLE_LOCKING = 'session/redis/disable_locking';
+    const CONFIG_PATH_SESSION_REDIS_MIN_LIFETIME = 'session/redis/min_lifetime';
+    const CONFIG_PATH_SESSION_REDIS_MAX_LIFETIME = 'session/redis/max_lifetime';
+    const CONFIG_PATH_SESSION_REDIS_SENTINEL_SERVERS = 'session/redis/sentinel_servers';
+    const CONFIG_PATH_SESSION_REDIS_SENTINEL_MASTER = 'session/redis/sentinel_master';
+    const CONFIG_PATH_SESSION_REDIS_SENTINEL_VERIFY_MASTER = 'session/redis/sentinel_verify_master';
+    const CONFIG_PATH_SESSION_REDIS_SENTINEL_CONNECT_RETRIES = 'session/redis/sentinel_connect_retries';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var array
@@ -124,7 +178,10 @@ class Session implements ConfigOptionsListInterface
         self::INPUT_KEY_SESSION_REDIS_PORT => '6379',
         self::INPUT_KEY_SESSION_REDIS_PASSWORD => '',
         self::INPUT_KEY_SESSION_REDIS_TIMEOUT => '2.5',
+<<<<<<< HEAD
         self::INPUT_KEY_SESSION_REDIS_RETRIES => '0',
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         self::INPUT_KEY_SESSION_REDIS_PERSISTENT_IDENTIFIER => '',
         self::INPUT_KEY_SESSION_REDIS_DATABASE => '2',
         self::INPUT_KEY_SESSION_REDIS_COMPRESSION_THRESHOLD => '2048',
@@ -141,6 +198,7 @@ class Session implements ConfigOptionsListInterface
         self::INPUT_KEY_SESSION_REDIS_MAX_LIFETIME => '2592000',
         self::INPUT_KEY_SESSION_REDIS_SENTINEL_VERIFY_MASTER => '0',
         self::INPUT_KEY_SESSION_REDIS_SENTINEL_CONNECT_RETRIES => '5',
+<<<<<<< HEAD
         self::INPUT_KEY_SESSION_VALKEY_HOST => '127.0.0.1',
         self::INPUT_KEY_SESSION_VALKEY_PORT => '6379',
         self::INPUT_KEY_SESSION_VALKEY_PASSWORD => '',
@@ -162,6 +220,8 @@ class Session implements ConfigOptionsListInterface
         self::INPUT_KEY_SESSION_VALKEY_MAX_LIFETIME => '2592000',
         self::INPUT_KEY_SESSION_VALKEY_SENTINEL_VERIFY_MASTER => '0',
         self::INPUT_KEY_SESSION_VALKEY_SENTINEL_CONNECT_RETRIES => '5',
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ];
 
     /**
@@ -170,8 +230,12 @@ class Session implements ConfigOptionsListInterface
     private $validSaveHandlers = [
         ConfigOptionsListConstants::SESSION_SAVE_FILES,
         ConfigOptionsListConstants::SESSION_SAVE_DB,
+<<<<<<< HEAD
         ConfigOptionsListConstants::SESSION_SAVE_REDIS,
         ConfigOptionsListConstants::SESSION_SAVE_VALKEY
+=======
+        ConfigOptionsListConstants::SESSION_SAVE_REDIS
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ];
 
     /**
@@ -189,7 +253,10 @@ class Session implements ConfigOptionsListInterface
         self::INPUT_KEY_SESSION_REDIS_PORT => self::CONFIG_PATH_SESSION_REDIS_PORT,
         self::INPUT_KEY_SESSION_REDIS_PASSWORD => self::CONFIG_PATH_SESSION_REDIS_PASSWORD,
         self::INPUT_KEY_SESSION_REDIS_TIMEOUT => self::CONFIG_PATH_SESSION_REDIS_TIMEOUT,
+<<<<<<< HEAD
         self::INPUT_KEY_SESSION_REDIS_RETRIES => self::CONFIG_PATH_SESSION_REDIS_RETRIES,
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         self::INPUT_KEY_SESSION_REDIS_PERSISTENT_IDENTIFIER => self::CONFIG_PATH_SESSION_REDIS_PERSISTENT_IDENTIFIER,
         self::INPUT_KEY_SESSION_REDIS_DATABASE => self::CONFIG_PATH_SESSION_REDIS_DATABASE,
         self::INPUT_KEY_SESSION_REDIS_COMPRESSION_THRESHOLD => self::CONFIG_PATH_SESSION_REDIS_COMPRESSION_THRESHOLD,
@@ -207,11 +274,16 @@ class Session implements ConfigOptionsListInterface
         self::INPUT_KEY_SESSION_REDIS_SENTINEL_MASTER => self::CONFIG_PATH_SESSION_REDIS_SENTINEL_MASTER,
         self::INPUT_KEY_SESSION_REDIS_SENTINEL_SERVERS => self::CONFIG_PATH_SESSION_REDIS_SENTINEL_SERVERS,
         self::INPUT_KEY_SESSION_REDIS_SENTINEL_CONNECT_RETRIES =>
+<<<<<<< HEAD
         self::CONFIG_PATH_SESSION_REDIS_SENTINEL_CONNECT_RETRIES,
+=======
+            self::CONFIG_PATH_SESSION_REDIS_SENTINEL_CONNECT_RETRIES,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         self::INPUT_KEY_SESSION_REDIS_SENTINEL_VERIFY_MASTER => self::CONFIG_PATH_SESSION_REDIS_SENTINEL_VERIFY_MASTER,
     ];
 
     /**
+<<<<<<< HEAD
      * Associates input keys with config paths for Redis settings
      *
      * @var array
@@ -245,11 +317,14 @@ class Session implements ConfigOptionsListInterface
     ];
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     public function getOptions()
     {
+<<<<<<< HEAD
         return array_merge(
             $this->getSessionSaveOption(),
             $this->getRedisOptions(),
@@ -264,6 +339,8 @@ class Session implements ConfigOptionsListInterface
      */
     private function getSessionSaveOption(): array
     {
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         return [
             new SelectConfigOption(
                 ConfigOptionsListConstants::INPUT_KEY_SESSION_SAVE,
@@ -272,6 +349,7 @@ class Session implements ConfigOptionsListInterface
                 ConfigOptionsListConstants::CONFIG_PATH_SESSION_SAVE,
                 'Session save handler',
                 $this->getDefaultConfigValue(ConfigOptionsListConstants::INPUT_KEY_SESSION_SAVE)
+<<<<<<< HEAD
             )
         ];
     }
@@ -285,6 +363,9 @@ class Session implements ConfigOptionsListInterface
     private function getRedisOptions(): array
     {
         return [
+=======
+            ),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             new TextConfigOption(
                 self::INPUT_KEY_SESSION_REDIS_HOST,
                 TextConfigOption::FRONTEND_WIZARD_TEXT,
@@ -310,12 +391,15 @@ class Session implements ConfigOptionsListInterface
                 'Connection timeout, in seconds'
             ),
             new TextConfigOption(
+<<<<<<< HEAD
                 self::INPUT_KEY_SESSION_REDIS_RETRIES,
                 TextConfigOption::FRONTEND_WIZARD_TEXT,
                 self::CONFIG_PATH_SESSION_REDIS_RETRIES,
                 'Redis connection retries.'
             ),
             new TextConfigOption(
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 self::INPUT_KEY_SESSION_REDIS_PERSISTENT_IDENTIFIER,
                 TextConfigOption::FRONTEND_WIZARD_TEXT,
                 self::CONFIG_PATH_SESSION_REDIS_PERSISTENT_IDENTIFIER,
@@ -427,6 +511,7 @@ class Session implements ConfigOptionsListInterface
     }
 
     /**
+<<<<<<< HEAD
      * Retrieve configuration options for Valkey session storage.
      *
      * @return array
@@ -577,16 +662,24 @@ class Session implements ConfigOptionsListInterface
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     public function createConfig(array $options, DeploymentConfig $deploymentConfig)
     {
+<<<<<<< HEAD
         $inputToConfigMap = [];
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $configData = new ConfigData(ConfigFilePool::APP_ENV);
 
         //Set session-save option
         if (isset($options[ConfigOptionsListConstants::INPUT_KEY_SESSION_SAVE])) {
+<<<<<<< HEAD
             $configData->setOverrideWhenSave(true);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $configData->set(
                 ConfigOptionsListConstants::CONFIG_PATH_SESSION_SAVE,
                 $options[ConfigOptionsListConstants::INPUT_KEY_SESSION_SAVE]
@@ -596,6 +689,7 @@ class Session implements ConfigOptionsListInterface
                 == ConfigOptionsListConstants::SESSION_SAVE_REDIS
             ) {
                 $this->setDefaultRedisConfig($deploymentConfig, $configData);
+<<<<<<< HEAD
             } elseif ($options[ConfigOptionsListConstants::INPUT_KEY_SESSION_SAVE]
                 == ConfigOptionsListConstants::SESSION_SAVE_VALKEY) {
                 $this->setDefaultValkeyConfig($deploymentConfig, $configData);
@@ -611,6 +705,13 @@ class Session implements ConfigOptionsListInterface
         }
 
         foreach ($inputToConfigMap as $inputKey => $configPath) {
+=======
+            }
+        }
+
+        //Set all Redis options that are specified
+        foreach ($this->redisInputKeyToConfigPathMap as $inputKey => $configPath) {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             if (isset($options[$inputKey])) {
                 $configData->set($configPath, $options[$inputKey]);
             }
@@ -636,6 +737,7 @@ class Session implements ConfigOptionsListInterface
         ) {
             $errors[] = "Invalid Redis compression library "
                 . "'{$options[self::INPUT_KEY_SESSION_REDIS_COMPRESSION_LIBRARY]}'";
+<<<<<<< HEAD
         } elseif (isset($options[self::INPUT_KEY_SESSION_VALKEY_COMPRESSION_LIBRARY])
             && !in_array($options[self::INPUT_KEY_SESSION_VALKEY_COMPRESSION_LIBRARY], $this->validCompressionLibraries)
         ) {
@@ -657,16 +759,23 @@ class Session implements ConfigOptionsListInterface
     {
         $errors = [];
 
+=======
+        }
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         if (isset($options[self::INPUT_KEY_SESSION_REDIS_LOG_LEVEL])) {
             $level = $options[self::INPUT_KEY_SESSION_REDIS_LOG_LEVEL];
             if (($level < 0) || ($level > 7)) {
                 $errors[] = "Invalid Redis log level '{$level}'. Valid range is 0-7, inclusive.";
             }
+<<<<<<< HEAD
         } elseif (isset($options[self::INPUT_KEY_SESSION_VALKEY_LOG_LEVEL])) {
             $level = $options[self::INPUT_KEY_SESSION_VALKEY_LOG_LEVEL];
             if (($level < 0) || ($level > 7)) {
                 $errors[] = "Invalid Valkey log level '{$level}'. Valid range is 0-7, inclusive.";
             }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
 
         return $errors;
@@ -689,6 +798,7 @@ class Session implements ConfigOptionsListInterface
     }
 
     /**
+<<<<<<< HEAD
      * Set the session Valkey config based on defaults
      *
      * @param DeploymentConfig $deploymentConfig
@@ -705,6 +815,8 @@ class Session implements ConfigOptionsListInterface
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Get the default value for input key
      *
      * @param string $inputKey
@@ -731,6 +843,7 @@ class Session implements ConfigOptionsListInterface
 
         return 'Redis compression library. Values: ' . $default . ' (default), ' . implode(', ', $otherLibs);
     }
+<<<<<<< HEAD
 
     /**
      * Format the description for compression lib option
@@ -744,4 +857,6 @@ class Session implements ConfigOptionsListInterface
 
         return 'Valkey compression library. Values: ' . $default . ' (default), ' . implode(', ', $otherLibs);
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

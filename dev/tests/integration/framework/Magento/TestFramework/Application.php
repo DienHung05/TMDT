@@ -1,9 +1,15 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
  */
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 namespace Magento\TestFramework;
 
 use Magento\Framework\App\DeploymentConfig;
@@ -12,9 +18,13 @@ use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Autoload\AutoloaderInterface;
 use Magento\Framework\Config\ConfigOptionsListConstants;
 use Magento\Framework\Filesystem\Glob;
+<<<<<<< HEAD
 use Magento\Framework\Indexer\IndexerRegistry;
 use Magento\Framework\Mail;
 use Magento\Indexer\Model\Indexer\Collection;
+=======
+use Magento\Framework\Mail;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework;
 use Magento\TestFramework\Fixture\Data\ProcessorInterface;
 use Psr\Log\LoggerInterface;
@@ -367,7 +377,11 @@ class Application
                             'filePath' => $this->installDir
                         ]
                     ),
+<<<<<<< HEAD
                     'debug' => $objectManager->create(
+=======
+                    'debug'  => $objectManager->create(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         \Magento\Framework\Logger\Handler\Debug::class,
                         ['filePath' => $this->installDir]
                     ),
@@ -376,8 +390,11 @@ class Application
         );
         $objectManager->removeSharedInstance(LoggerInterface::class, true);
         $objectManager->addSharedInstance($logger, LoggerInterface::class, true);
+<<<<<<< HEAD
         $objectManager->removeSharedInstance(TestFramework\ErrorLog\Logger::class, true);
         $objectManager->addSharedInstance($logger, TestFramework\ErrorLog\Logger::class, true);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         return $logger;
     }
 
@@ -528,7 +545,11 @@ class Application
          * @see \Magento\Setup\Mvc\Bootstrap\InitParamListener::BOOTSTRAP_PARAM
          */
         $this->_shell->execute(
+<<<<<<< HEAD
             PHP_BINARY . ' -f %s setup:uninstall --no-interaction -vvv -n --magento-init-params=%s',
+=======
+            PHP_BINARY . ' -f %s setup:uninstall -vvv -n --magento-init-params=%s',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             [BP . '/bin/magento', $this->getInitParamsQuery()]
         );
     }
@@ -554,7 +575,10 @@ class Application
         $this->copyGlobalConfigFile();
 
         $installParams = $this->getInstallCliParams();
+<<<<<<< HEAD
         $installParams['--no-interaction'] = true;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         // performance optimization: restore DB from last good dump to make installation on top of it (much faster)
         // do not restore from the database if the cleanup option is set to ensure we have a clean DB to test on
@@ -570,21 +594,40 @@ class Application
         );
 
         $this->runPostInstallCommands();
+<<<<<<< HEAD
         $this->makeIndexStatusRealtime();
 
         // enable only specified list of caches
         $initParamsQuery = $this->getInitParamsQuery();
 
+=======
+
+        // enable only specified list of caches
+        $initParamsQuery = $this->getInitParamsQuery();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->_shell->execute(
             PHP_BINARY . ' -f %s cache:disable -vvv --bootstrap=%s',
             [BP . '/bin/magento', $initParamsQuery]
         );
+<<<<<<< HEAD
 
         $enabledCaches = $this->getEnabledCaches();
 
         $this->_shell->execute(
             PHP_BINARY . ' -f %s cache:enable -vvv ' . str_repeat('%s ', count($enabledCaches)) . ' --bootstrap=%s',
             [BP . '/bin/magento', ...$enabledCaches, $initParamsQuery]
+=======
+        $this->_shell->execute(
+            PHP_BINARY . ' -f %s cache:enable -vvv %s %s %s %s --bootstrap=%s',
+            [
+                BP . '/bin/magento',
+                \Magento\Framework\App\Cache\Type\Config::TYPE_IDENTIFIER,
+                \Magento\Framework\App\Cache\Type\Layout::TYPE_IDENTIFIER,
+                \Magento\Framework\App\Cache\Type\Translate::TYPE_IDENTIFIER,
+                \Magento\Eav\Model\Cache\Type::TYPE_IDENTIFIER,
+                $initParamsQuery,
+            ]
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
 
         // right after a clean installation, store DB dump for future reuse in tests or running the test suite again
@@ -594,6 +637,7 @@ class Application
     }
 
     /**
+<<<<<<< HEAD
      * Caches that should be enabled during the Integration Tests execution
      *
      * @return array<string>
@@ -610,6 +654,8 @@ class Application
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Run commands after installation configured in post-install-setup-command-config.php
      *
      * @throws \Magento\Framework\Exception\LocalizedException
@@ -627,9 +673,13 @@ class Application
             $command = $postInstallSetupCommand['command'];
             $argumentsAndOptions = $postInstallSetupCommand['config'];
 
+<<<<<<< HEAD
             $argumentsAndOptionsPlaceholders = [
                 '--no-interaction'
             ];
+=======
+            $argumentsAndOptionsPlaceholders = [];
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
             foreach (array_keys($argumentsAndOptions) as $key) {
                 $isArgument = is_numeric($key);
@@ -762,7 +812,11 @@ class Application
             // phpcs:ignore Magento2.Functions.DiscouragedFunction
             mkdir($dir, 0777, true);
             umask($old);
+<<<<<<< HEAD
             // phpcs:ignore Magento2.Functions.DiscouragedFunction
+=======
+        // phpcs:ignore Magento2.Functions.DiscouragedFunction
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         } elseif (!is_dir($dir)) {
             throw new \Magento\Framework\Exception\LocalizedException(__("'%1' is not a directory.", $dir));
         }
@@ -842,6 +896,7 @@ class Application
         ];
         return $customDirs;
     }
+<<<<<<< HEAD
 
     /**
      * Initialize the application and set the index status to realtime.
@@ -928,4 +983,6 @@ class Application
             }
         }
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

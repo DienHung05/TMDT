@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Framework\Mview\View;
 
@@ -107,6 +112,7 @@ class ChangelogTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @return void
      * @throws ChangelogTableNotExistsException
      */
@@ -167,6 +173,23 @@ class ChangelogTest extends \PHPUnit\Framework\TestCase
         );
 
         return $changelog;
+=======
+     * Test for clear() method
+     *
+     * @return void
+     * @throws ChangelogTableNotExistsException
+     * @throws \Magento\Framework\Exception\RuntimeException
+     */
+    public function testClear()
+    {
+        $this->assertEquals(0, $this->model->getVersion());
+        //the same that a table is empty
+        $changelogName = $this->resource->getTableName($this->model->getName());
+        $this->connection->insert($changelogName, ['version_id' => 1, 'entity_id' => 1]);
+        $this->assertEquals(1, $this->model->getVersion());
+        $this->model->clear(1);
+        $this->assertEquals(1, $this->model->getVersion()); //the same that a table is empty
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**

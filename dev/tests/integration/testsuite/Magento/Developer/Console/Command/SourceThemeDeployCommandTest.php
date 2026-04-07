@@ -1,15 +1,23 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Developer\Console\Command;
 
 use Magento\TestFramework\Helper\Bootstrap;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+<<<<<<< HEAD
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Filesystem;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class SourceThemeDeployCommandTest
@@ -50,10 +58,13 @@ class SourceThemeDeployCommandTest extends \PHPUnit\Framework\TestCase
     {
         global $installDir;
 
+<<<<<<< HEAD
         $installDir = Bootstrap::getObjectManager()->create(
             Filesystem::class
         )->getDirectoryRead(DirectoryList::ROOT)->getAbsolutePath();
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->pubStatic = $installDir . DIRECTORY_SEPARATOR . self::PUB_STATIC_DIRECTORY;
         $this->command = Bootstrap::getObjectManager()->get(SourceThemeDeployCommand::class);
     }
@@ -66,7 +77,12 @@ class SourceThemeDeployCommandTest extends \PHPUnit\Framework\TestCase
         $error = [];
 
         /** @var OutputInterface|\PHPUnit\Framework\MockObject\MockObject $outputMock */
+<<<<<<< HEAD
         $outputMock = $this->createMock(OutputInterface::class);
+=======
+        $outputMock = $this->getMockBuilder(OutputInterface::class)
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->clearStaticDirectory();
 
@@ -123,7 +139,12 @@ class SourceThemeDeployCommandTest extends \PHPUnit\Framework\TestCase
      */
     private function getInputMock()
     {
+<<<<<<< HEAD
         $inputMock = $this->createMock(InputInterface::class);
+=======
+        $inputMock = $this->getMockBuilder(InputInterface::class)
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $inputMock->expects(self::exactly(4))
             ->method('getOption')

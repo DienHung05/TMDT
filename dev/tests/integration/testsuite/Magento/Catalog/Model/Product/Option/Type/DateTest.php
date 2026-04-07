@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Catalog\Model\Product\Option\Type;
 
 use Magento\Catalog\Model\Product\Option;
 use Magento\Framework\DataObject;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for customizable product option with "Date" type
@@ -39,12 +47,19 @@ class DateTest extends \PHPUnit\Framework\TestCase
     /**
      * Check if option value for request is the same as expected
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider prepareOptionValueForRequestDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $optionValue
      * @param array $infoBuyRequest
      * @param array $expectedOptionValueForRequest
      * @param array $productOptionData
      */
+<<<<<<< HEAD
     #[DataProvider('prepareOptionValueForRequestDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPrepareOptionValueForRequest(
         array $optionValue,
         array $infoBuyRequest,
@@ -78,7 +93,11 @@ class DateTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function prepareOptionValueForRequestDataProvider()
+=======
+    public function prepareOptionValueForRequestDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             // Variation 1
@@ -120,6 +139,10 @@ class DateTest extends \PHPUnit\Framework\TestCase
     /**
      * Check date in prepareForCart method with javascript calendar and Asia/Singapore timezone
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider testPrepareForCartDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $dateData
      * @param array $productOptionData
      * @param array $requestData
@@ -127,7 +150,10 @@ class DateTest extends \PHPUnit\Framework\TestCase
      * @magentoConfigFixture current_store catalog/custom_options/use_calendar 1
      * @magentoConfigFixture current_store general/locale/timezone Asia/Singapore
      */
+<<<<<<< HEAD
     #[DataProvider('datePrepareForCartDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPrepareForCart(
         array $dateData,
         array $productOptionData,
@@ -155,7 +181,11 @@ class DateTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function datePrepareForCartDataProvider()
+=======
+    public function testPrepareForCartDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

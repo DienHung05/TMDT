@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -44,6 +49,10 @@ class CollectionTest extends TestCase
             Collection::class,
             '_getMapper'
         );
+<<<<<<< HEAD
+=======
+        $mapper->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $map = $mapper->invoke($gridCollection);
 
         self::assertIsArray($map);
@@ -68,6 +77,7 @@ class CollectionTest extends TestCase
         $timeZone = $this->objectManager->get(TimezoneInterface::class);
         /** @var Collection $gridCollection */
         $gridCollection = $this->objectManager->get(Collection::class);
+<<<<<<< HEAD
         $filterDate = new \DateTime($filterDate);
         $filterDate->setTimezone(new \DateTimeZone($timeZone->getConfigTimezone()));
         $convertedDate = $timeZone->convertConfigTimeToUtc($filterDate);
@@ -76,6 +86,11 @@ class CollectionTest extends TestCase
             'created_at',
             ['qteq' => $filterDate->format('Y-m-d H:i:s')]
         );
+=======
+        $convertedDate = $timeZone->convertConfigTimeToUtc($filterDate);
+
+        $collection = $gridCollection->addFieldToFilter('created_at', ['qteq' => $filterDate]);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $expectedSelect = "SELECT `main_table`.* FROM `sales_order_grid` AS `main_table` " .
             "WHERE (((`main_table`.`created_at` = '{$convertedDate}')))";
 

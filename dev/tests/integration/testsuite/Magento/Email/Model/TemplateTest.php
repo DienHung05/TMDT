@@ -1,20 +1,33 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Email\Model;
 
 use Magento\Backend\App\Area\FrontNameResolver as BackendFrontNameResolver;
 use Magento\Framework\App\Area;
 use Magento\Framework\App\Filesystem\DirectoryList;
+<<<<<<< HEAD
 use Magento\Framework\App\TemplateTypesInterface;
 use Magento\Framework\ObjectManagerInterface;
+=======
+use Magento\Framework\App\ObjectManager;
+use Magento\Framework\App\TemplateTypesInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\View\DesignInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\Store;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -27,7 +40,16 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     protected $model;
 
     /**
+<<<<<<< HEAD
      * @var ObjectManagerInterface
+=======
+     * @var \Zend_Mail|\PHPUnit\Framework\MockObject\MockObject
+     */
+    protected $mail;
+
+    /**
+     * @var \Magento\Framework\ObjectManagerInterface
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     protected $objectManager;
 
@@ -42,7 +64,17 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
             $filesystem = $this->objectManager->create(\Magento\Framework\Filesystem::class);
         }
 
+<<<<<<< HEAD
         $this->model = $this->getMockBuilder(\Magento\Email\Model\Template::class)
+=======
+        $this->mail = $this->getMockBuilder(\Zend_Mail::class)
+            ->setMethods(['send', 'addTo', 'addBcc', 'setReturnPath', 'setReplyTo'])
+            ->setConstructorArgs(['utf-8'])
+            ->getMock();
+
+        $this->model = $this->getMockBuilder(\Magento\Email\Model\Template::class)
+            ->setMethods(['_getMail'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->setConstructorArgs(
                 [
                     $this->objectManager->get(\Magento\Framework\Model\Context::class),
@@ -60,10 +92,18 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
                     $this->objectManager->get(\Magento\Email\Model\Template\FilterFactory::class),
                 ]
             )
+<<<<<<< HEAD
             ->onlyMethods([])
             ->getMock();
 
         $this->objectManager->get(\Magento\Framework\App\State::class)->setAreaCode('frontend');
+=======
+            ->getMock();
+
+        $this->objectManager->get(\Magento\Framework\App\State::class)->setAreaCode('frontend');
+
+        $this->model->expects($this->any())->method('_getMail')->willReturnCallback([$this, 'getMail']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->model
             ->setSenderName('sender')
             ->setSenderEmail('sender@example.com')
@@ -71,6 +111,19 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
             ->setTemplateId('abc');
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * Return a disposable \Zend_Mail instance
+     *
+     * @return \PHPUnit\Framework\MockObject\MockObject|\Zend_Mail
+     */
+    public function getMail()
+    {
+        return clone $this->mail;
+    }
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSetGetTemplateFilter()
     {
         $this->mockModel();
@@ -138,8 +191,13 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
      * @magentoComponentsDir Magento/Email/Model/_files/design
      * @magentoAppIsolation enabled
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
      */
     #[DataProvider('templateFallbackDataProvider')]
+=======
+     * @dataProvider templateFallbackDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testTemplateFallback($area, $templateId, $expectedOutput, $mockThemeFallback = false)
     {
         $this->mockModel();
@@ -158,7 +216,11 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function templateFallbackDataProvider()
+=======
+    public function templateFallbackDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Template from module - admin' => [
@@ -207,6 +269,10 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
      * @magentoComponentsDir Magento/Email/Model/_files/design
      * @magentoAppIsolation enabled
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
+=======
+     * @dataProvider templateDirectiveDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @param string $area
      * @param int $templateType
@@ -216,7 +282,10 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
      * @param string $storeConfigPath
      * @param bool $mockAdminTheme
      */
+<<<<<<< HEAD
     #[DataProvider('templateDirectiveDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testTemplateDirective(
         $area,
         $templateType,
@@ -262,7 +331,11 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function templateDirectiveDataProvider()
+=======
+    public function templateDirectiveDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Template from module folder - adminhtml' => [
@@ -440,13 +513,20 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
      * @magentoComponentsDir Magento/Email/Model/_files/design
      * @magentoAppIsolation enabled
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
+=======
+     * @dataProvider templateStylesVariableDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @param string $area
      * @param string $expectedOutput
      * @param array $unexpectedOutputs
      * @param array $templateForDatabase
      */
+<<<<<<< HEAD
     #[DataProvider('templateStylesVariableDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testTemplateStylesVariable($area, $expectedOutput, $unexpectedOutputs, $templateForDatabase = [])
     {
         if (count($templateForDatabase)) {
@@ -462,7 +542,18 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         } else {
             // <!--@styles @--> parsing only via the loadDefault method. Since email template files won't contain
             // @styles comments by default, it is necessary to mock an object to return testable contents
+<<<<<<< HEAD
             $themeDirectory = $this->createMock(\Magento\Framework\Filesystem\Directory\ReadInterface::class);
+=======
+            $themeDirectory = $this->getMockBuilder(\Magento\Framework\Filesystem\Directory\ReadInterface::class)
+                ->disableOriginalConstructor()
+                ->setMethods(
+                    [
+                        'readFile',
+                    ]
+                )
+                ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
             $themeDirectory->expects($this->once())
                 ->method('readFile')
@@ -470,7 +561,11 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
             $filesystem = $this->getMockBuilder(\Magento\Framework\Filesystem::class)
                 ->disableOriginalConstructor()
+<<<<<<< HEAD
                 ->onlyMethods(['getDirectoryRead'])
+=======
+                ->setMethods(['getDirectoryRead'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ->getMock();
 
             $filesystem->expects($this->once())
@@ -495,7 +590,11 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function templateStylesVariableDataProvider()
+=======
+    public function templateStylesVariableDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Styles from <!--@styles @--> comment - adminhtml' => [
@@ -708,8 +807,13 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @param $config
+<<<<<<< HEAD
      */
     #[DataProvider('setDesignConfigExceptionDataProvider')]
+=======
+     * @dataProvider setDesignConfigExceptionDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSetDesignConfigException($config)
     {
         $this->expectException(\Magento\Framework\Exception\LocalizedException::class);
@@ -719,7 +823,11 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $model->setDesignConfig($config);
     }
 
+<<<<<<< HEAD
     public static function setDesignConfigExceptionDataProvider()
+=======
+    public function setDesignConfigExceptionDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $storeId = Bootstrap::getObjectManager()->get(\Magento\Store\Model\StoreManagerInterface::class)
             ->getStore()
@@ -751,7 +859,11 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     public function testGetTypeNonExistentType()
     {
         $this->expectException(\UnexpectedValueException::class);
+<<<<<<< HEAD
         $this->expectExceptionMessage('Email template is not defined.');
+=======
+        $this->expectExceptionMessage('Email template \'foo\' is not defined.');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->mockModel();
         $this->model->setId('foo');

@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Paypal\Model\Report;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Paypal\Model\Report;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class SettlementTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -27,8 +35,13 @@ class SettlementTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @param array $config
+<<<<<<< HEAD
      */
     #[DataProvider('createConnectionExceptionDataProvider')]
+=======
+     * @dataProvider createConnectionExceptionDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateConnectionException($config)
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -40,6 +53,11 @@ class SettlementTest extends \PHPUnit\Framework\TestCase
      * @param array $automaticMode
      * @param array $expectedResult
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider createAutomaticModeDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoConfigFixture default_store paypal/fetch_reports/active 0
      * @magentoConfigFixture default_store paypal/fetch_reports/ftp_ip 192.168.0.1
      * @magentoConfigFixture current_store paypal/fetch_reports/active 1
@@ -50,7 +68,10 @@ class SettlementTest extends \PHPUnit\Framework\TestCase
      * @magentoConfigFixture current_store paypal/fetch_reports/ftp_sandbox 0
      * @magentoDbIsolation enabled
      */
+<<<<<<< HEAD
     #[DataProvider('createAutomaticModeDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetSftpCredentials($automaticMode, $expectedResult)
     {
         /** @var $model \Magento\Paypal\Model\Report\Settlement; */
@@ -66,7 +87,11 @@ class SettlementTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function createConnectionExceptionDataProvider(): array
+=======
+    public function createConnectionExceptionDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [[]],
@@ -80,7 +105,11 @@ class SettlementTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function createAutomaticModeDataProvider(): array
+=======
+    public function createAutomaticModeDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

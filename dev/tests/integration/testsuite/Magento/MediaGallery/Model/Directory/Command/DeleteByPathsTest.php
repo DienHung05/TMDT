@@ -1,7 +1,13 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -12,7 +18,10 @@ use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Filesystem;
 use Magento\MediaGalleryApi\Api\DeleteDirectoriesByPathsInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for DeleteDirectoriesByPathsInterface
@@ -87,8 +96,13 @@ class DeleteByPathsTest extends \PHPUnit\Framework\TestCase
     /**
      * @param array $paths
      * @throws \Magento\Framework\Exception\CouldNotDeleteException
+<<<<<<< HEAD
      */
     #[DataProvider('notAllowedPathsProvider')]
+=======
+     * @dataProvider notAllowedPathsProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDeleteDirectoryThatIsNotAllowed(array $paths): void
     {
         $this->expectException(\Magento\Framework\Exception\CouldNotDeleteException::class);
@@ -101,7 +115,11 @@ class DeleteByPathsTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function notAllowedPathsProvider(): array
+=======
+    public function notAllowedPathsProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

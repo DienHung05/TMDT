@@ -1,11 +1,19 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
  */
 namespace Magento\TestFramework\Integrity\Library\PhpParser;
 
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\TestFramework\Integrity\Library\PhpParser;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -35,8 +43,14 @@ class StaticCallsTest extends TestCase
 
     /**
      * Test get static call dependencies
+<<<<<<< HEAD
      */
     #[DataProvider('tokensDataProvider')]
+=======
+     *
+     * @dataProvider tokensDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetDependencies(array $tokens)
     {
         $this->tokens->method('getPreviousToken')
@@ -77,7 +91,11 @@ class StaticCallsTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function tokensDataProvider(): array
+=======
+    public function tokensDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'PHP 7' => [

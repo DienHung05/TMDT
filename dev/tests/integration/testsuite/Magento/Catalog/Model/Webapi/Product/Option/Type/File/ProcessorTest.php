@@ -1,12 +1,20 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Catalog\Model\Webapi\Product\Option\Type\File;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class ProcessorTest extends \PHPUnit\Framework\TestCase
 {
@@ -21,8 +29,13 @@ class ProcessorTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      */
     #[DataProvider('pathConfigDataProvider')]
+=======
+     * @dataProvider pathConfigDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testProcessFileContent($pathConfig)
     {
         $model = $this->getModel($pathConfig);
@@ -59,7 +72,11 @@ class ProcessorTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($directory->isExist($filePath));
     }
 
+<<<<<<< HEAD
     public static function pathConfigDataProvider()
+=======
+    public function pathConfigDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             // default config

@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 //  /**
 //  * Copyright 2015 Adobe
 //  * All Rights Reserved.
+=======
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 //  */
 
 //
@@ -14,7 +20,11 @@
 .lib-font-size-value(
     @_value
 ) when not (@_value = false) and not (@_value = '') and (@font-size-unit-convert) {
+<<<<<<< HEAD
     @fontValue: (unit(((@_value) * 1), @font-size-unit) / @font-size-unit-ratio);
+=======
+    @fontValue: unit(((@_value) * 1), @font-size-unit) / @font-size-unit-ratio;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }
 .lib-font-size-value(
     @_value

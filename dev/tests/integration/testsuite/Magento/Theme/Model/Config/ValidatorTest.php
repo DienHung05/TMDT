@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Theme\Model\Config;
@@ -73,16 +78,28 @@ class ValidatorTest extends \PHPUnit\Framework\TestCase
 
         $designConfigMock = $this->getMockBuilder(\Magento\Theme\Api\Data\DesignConfigInterface::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods([])
+=======
+            ->setMethods([])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
         $designConfigExtensionMock =
             $this->getMockBuilder(\Magento\Theme\Api\Data\DesignConfigExtensionInterface::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods([])
             ->getMock();
         $designElementMock = $this->getMockBuilder(\Magento\Theme\Model\Data\Design\Config\Data::class)
             ->disableOriginalConstructor()
             ->onlyMethods(['getFieldConfig','getPath','getValue'])
+=======
+            ->setMethods([])
+            ->getMock();
+        $designElementMock = $this->getMockBuilder(\Magento\Theme\Model\Data\Design\Config\Data::class)
+            ->disableOriginalConstructor()
+            ->setMethods([])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
 
         $designConfigMock->expects($this->once())
@@ -120,16 +137,28 @@ class ValidatorTest extends \PHPUnit\Framework\TestCase
 
         $designConfigMock = $this->getMockBuilder(\Magento\Theme\Api\Data\DesignConfigInterface::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods([])
+=======
+            ->setMethods([])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
         $designConfigExtensionMock =
             $this->getMockBuilder(\Magento\Theme\Api\Data\DesignConfigExtensionInterface::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods([])
             ->getMock();
         $designElementMock = $this->getMockBuilder(\Magento\Theme\Model\Data\Design\Config\Data::class)
             ->disableOriginalConstructor()
             ->onlyMethods(['getFieldConfig', 'getPath', 'getValue'])
+=======
+            ->setMethods([])
+            ->getMock();
+        $designElementMock = $this->getMockBuilder(\Magento\Theme\Model\Data\Design\Config\Data::class)
+            ->disableOriginalConstructor()
+            ->setMethods([])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
 
         $designConfigMock->expects($this->once())

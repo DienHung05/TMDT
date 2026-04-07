@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -25,7 +30,10 @@ use Magento\Catalog\Model\Product\Type;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\Category;
 use Magento\Catalog\Model\Product\Attribute\Repository as ProductAttributeRepository;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test class for Product adminhtml actions
@@ -255,13 +263,20 @@ class ProductTest extends AbstractBackendController
     /**
      * Test create product with already existing url key.
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider saveActionWithAlreadyExistingUrlKeyDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/product_image.php
      * @magentoDataFixture Magento/Catalog/_files/product_simple.php
      * @magentoDbIsolation disabled
      * @param array $postData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('saveActionWithAlreadyExistingUrlKeyDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveActionWithAlreadyExistingUrlKey(array $postData)
     {
         $this->getRequest()->setPostValue($postData);
@@ -291,11 +306,19 @@ class ProductTest extends AbstractBackendController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function saveActionWithAlreadyExistingUrlKeyDataProvider()
     {
         return [
             [
                 'postData' => [
+=======
+    public function saveActionWithAlreadyExistingUrlKeyDataProvider()
+    {
+        return [
+            [
+                'post_data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'product' =>
                         [
                             'attribute_set_id' => '4',
@@ -347,12 +370,19 @@ class ProductTest extends AbstractBackendController
     /**
      * Test product save with selected tier price
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider saveActionTierPriceDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $postData
      * @param array $tierPrice
      * @magentoDataFixture Magento/Catalog/_files/product_has_tier_price_show_as_low_as.php
      * @magentoConfigFixture current_store catalog/price/scope 1
      */
+<<<<<<< HEAD
     #[DataProvider('saveActionTierPriceDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveActionTierPrice(array $postData, array $tierPrice)
     {
         $postData['product'] = $this->getProductData($tierPrice);
@@ -370,11 +400,19 @@ class ProductTest extends AbstractBackendController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function saveActionTierPriceDataProvider()
     {
         return [
             [
                 'postData' => [
+=======
+    public function saveActionTierPriceDataProvider()
+    {
+        return [
+            [
+                'post_data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'id' => '1',
                     'type' => 'simple',
                     'store' => '0',
@@ -391,7 +429,11 @@ class ProductTest extends AbstractBackendController
                     'configurable_matrix_serialized' => '[]',
                     'associated_product_ids_serialized' => '[]'
                 ],
+<<<<<<< HEAD
                 'tierPrice' => [
+=======
+                'tier_price_for_request' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     [
                         'price_id' => '1',
                         'website_id' => '0',
@@ -482,10 +524,14 @@ class ProductTest extends AbstractBackendController
         //Trying to update product's design settings without proper permissions.
         //Expected list of sessions messages collected throughout the controller calls.
         $sessionMessages = ['Not allowed to edit the product\'s design attributes'];
+<<<<<<< HEAD
         $this->aclBuilder->getAcl()->deny(
             \Magento\TestFramework\Bootstrap::ADMIN_ROLE_ID,
             'Magento_Catalog::edit_product_design'
         );
+=======
+        $this->aclBuilder->getAcl()->deny(null, 'Magento_Catalog::edit_product_design');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $requestData['product']['custom_design'] = '1';
         $this->getRequest()->setMethod(HttpRequest::METHOD_POST);
         $this->getRequest()->setPostValue($requestData);
@@ -496,10 +542,14 @@ class ProductTest extends AbstractBackendController
         );
 
         //Trying again with the permissions.
+<<<<<<< HEAD
         $this->aclBuilder->getAcl()->allow(
             \Magento\TestFramework\Bootstrap::ADMIN_ROLE_ID,
             ['Magento_Catalog::products', 'Magento_Catalog::edit_product_design']
         );
+=======
+        $this->aclBuilder->getAcl()->allow(null, ['Magento_Catalog::products', 'Magento_Catalog::edit_product_design']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->getRequest()->setDispatched(false);
         $this->dispatch($uri);
         /** @var ProductRepository $repo */
@@ -548,10 +598,14 @@ class ProductTest extends AbstractBackendController
         $uri = 'backend/catalog/product/save';
 
         //Updating product's design settings without proper permissions.
+<<<<<<< HEAD
         $this->aclBuilder->getAcl()->deny(
             \Magento\TestFramework\Bootstrap::ADMIN_ROLE_ID,
             'Magento_Catalog::edit_product_design'
         );
+=======
+        $this->aclBuilder->getAcl()->deny(null, 'Magento_Catalog::edit_product_design');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         //Testing that special "No Update" value is treated as no change.
         $requestData['product']['custom_layout_update_file'] = LayoutUpdate::VALUE_NO_UPDATE;
         $this->getRequest()->setMethod(HttpRequest::METHOD_POST);
@@ -649,11 +703,19 @@ class ProductTest extends AbstractBackendController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function saveActionWithInvalidUrlKeyDataProvider()
     {
         return [
             [
                 'postData' => [
+=======
+    public function saveActionWithInvalidUrlKeyDataProvider()
+    {
+        return [
+            [
+                'post_data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'product' =>
                         [
                             'attribute_set_id' => '4',
@@ -683,11 +745,18 @@ class ProductTest extends AbstractBackendController
     /**
      * Test create product with invalid existing url key.
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider saveActionWithInvalidUrlKeyDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDbIsolation disabled
      * @param array $postData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('saveActionWithInvalidUrlKeyDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveActionWithInvalidUrlKey(array $postData)
     {
         $identifier = 'graphql';

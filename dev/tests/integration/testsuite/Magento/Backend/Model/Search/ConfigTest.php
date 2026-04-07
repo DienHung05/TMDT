@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Backend\Model\Search;
@@ -15,7 +20,10 @@ use Magento\Framework\AuthorizationInterface;
 use Magento\Framework\Config\FileIteratorFactory;
 use Magento\Framework\Config\ScopeInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea adminhtml
@@ -25,9 +33,15 @@ use PHPUnit\Framework\Attributes\DataProvider;
 class ConfigTest extends \PHPUnit\Framework\TestCase
 {
     /**
+<<<<<<< HEAD
      * @magentoConfigFixture current_store general/store_information/name Foo
      */
     #[DataProvider('loadDataProvider')]
+=======
+     * @dataProvider loadDataProvider
+     * @magentoConfigFixture current_store general/store_information/name Foo
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testLoad($query, $expectedResult)
     {
         /** @var \Magento\Backend\Model\Search\Config $configSearch */

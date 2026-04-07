@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Setup\Console\Command;
 
@@ -27,12 +32,22 @@ class RollbackCommand extends AbstractSetupCommand
     /**
      * Name of input arguments or options
      */
+<<<<<<< HEAD
     public const INPUT_KEY_CODE_BACKUP_FILE = 'code-file';
     public const INPUT_KEY_MEDIA_BACKUP_FILE = 'media-file';
     public const INPUT_KEY_DB_BACKUP_FILE = 'db-file';
     public const NAME = 'setup:rollback';
 
     /**
+=======
+    const INPUT_KEY_CODE_BACKUP_FILE = 'code-file';
+    const INPUT_KEY_MEDIA_BACKUP_FILE = 'media-file';
+    const INPUT_KEY_DB_BACKUP_FILE = 'db-file';
+
+    /**
+     * Object Manager
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @var ObjectManagerInterface
      */
     private $objectManager;
@@ -68,7 +83,11 @@ class RollbackCommand extends AbstractSetupCommand
         ObjectManagerProvider $objectManagerProvider,
         MaintenanceMode $maintenanceMode,
         DeploymentConfig $deploymentConfig,
+<<<<<<< HEAD
         ?MaintenanceModeEnabler $maintenanceModeEnabler = null
+=======
+        MaintenanceModeEnabler $maintenanceModeEnabler = null
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ) {
         $this->objectManager = $objectManagerProvider->get();
         $this->backupRollbackFactory = $this->objectManager->get(\Magento\Framework\Setup\BackupRollbackFactory::class);
@@ -103,7 +122,11 @@ class RollbackCommand extends AbstractSetupCommand
                 'Basename of the db backup file in var/backups'
             ),
         ];
+<<<<<<< HEAD
         $this->setName(self::NAME)
+=======
+        $this->setName('setup:rollback')
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->setDescription('Rolls back Magento Application codebase, media and database')
             ->setDefinition($options);
         parent::configure();
@@ -112,7 +135,11 @@ class RollbackCommand extends AbstractSetupCommand
     /**
      * @inheritDoc
      */
+<<<<<<< HEAD
     protected function execute(InputInterface $input, OutputInterface $output): int
+=======
+    protected function execute(InputInterface $input, OutputInterface $output)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         if (!$this->deploymentConfig->isAvailable() && ($input->getOption(self::INPUT_KEY_MEDIA_BACKUP_FILE)
                 || $input->getOption(self::INPUT_KEY_DB_BACKUP_FILE))

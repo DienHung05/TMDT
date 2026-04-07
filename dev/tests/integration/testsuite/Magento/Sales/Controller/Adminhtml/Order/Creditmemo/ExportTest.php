@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -10,7 +15,10 @@ namespace Magento\Sales\Controller\Adminhtml\Order\Creditmemo;
 use Magento\Sales\Api\Data\CreditmemoInterface;
 use Magento\Sales\Model\ResourceModel\Order\Creditmemo\CollectionFactory;
 use Magento\Sales\Controller\Adminhtml\Order\ExportBase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Tests for creditmemo export via admin grids.
@@ -37,12 +45,19 @@ class ExportTest extends ExportBase
      * @magentoConfigFixture general/locale/timezone America/Chicago
      * @magentoConfigFixture test_website general/locale/timezone America/Adak
      * @magentoDataFixture Magento/Sales/_files/order_with_invoice_shipment_creditmemo_on_second_website.php
+<<<<<<< HEAD
+=======
+     * @dataProvider exportCreditmemoDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $format
      * @param bool $addIdToUrl
      * @param string $namespace
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('exportCreditmemoDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExportCreditmemo(
         string $format,
         bool $addIdToUrl,
@@ -71,27 +86,47 @@ class ExportTest extends ExportBase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function exportCreditmemoDataProvider(): array
+=======
+    public function exportCreditmemoDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'creditmemo_grid_in_csv' => [
                 'format' => ExportBase::CSV_FORMAT,
+<<<<<<< HEAD
                 'addIdToUrl' => false,
+=======
+                'add_id_to_url' => false,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'namespace' => 'sales_order_creditmemo_grid',
             ],
             'creditmemo_grid_in_csv_from_order_view' => [
                 'format' => ExportBase::CSV_FORMAT,
+<<<<<<< HEAD
                 'addIdToUrl' => true,
+=======
+                'add_id_to_url' => true,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'namespace' => 'sales_order_view_creditmemo_grid',
             ],
             'creditmemo_grid_in_xml' => [
                 'format' => ExportBase::XML_FORMAT,
+<<<<<<< HEAD
                 'addIdToUrl' => false,
+=======
+                'add_id_to_url' => false,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'namespace' => 'sales_order_creditmemo_grid',
             ],
             'creditmemo_grid_in_xml_from_order_view' => [
                 'format' => ExportBase::XML_FORMAT,
+<<<<<<< HEAD
                 'addIdToUrl' => true,
+=======
+                'add_id_to_url' => true,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'namespace' => 'sales_order_view_creditmemo_grid',
             ],
         ];

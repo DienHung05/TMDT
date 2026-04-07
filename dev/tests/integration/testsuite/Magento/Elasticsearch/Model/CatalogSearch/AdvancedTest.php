@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -17,7 +22,11 @@ use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
 
 /**
+<<<<<<< HEAD
  * Check catalog Advanced Search
+=======
+ * Check catalog Advanced Search process with Elasticsearch enabled.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class AdvancedTest extends TestCase
 {
@@ -58,6 +67,10 @@ class AdvancedTest extends TestCase
      * Check that Advanced Search does NOT return products that do NOT have search visibility.
      *
      * @magentoDbIsolation disabled
+<<<<<<< HEAD
+=======
+     * @magentoConfigFixture default/catalog/search/engine elasticsearch7
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/ConfigurableProduct/_files/configurable_product_with_two_child_products.php
      * @return void
      */
@@ -75,7 +88,11 @@ class AdvancedTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * Do search query and assert results.
+=======
+     * Do Elasticsearch query and assert results.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @param int $count
      * @return void

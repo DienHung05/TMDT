@@ -1,11 +1,17 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
 
 // phpcs:ignoreFile -- this is not a core file
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 declare(strict_types=1);
 
 namespace Magento\Test\Php;
@@ -19,7 +25,11 @@ use Magento\TestFramework\CodingStandard\Tool\PhpCompatibility;
 use Magento\TestFramework\CodingStandard\Tool\PhpStan;
 use Magento\TestFramework\Utility\AddedFiles;
 use Magento\TestFramework\Utility\FilesSearch;
+<<<<<<< HEAD
 use PHPMD\TextUI\ExitCode;
+=======
+use PHPMD\TextUI\Command;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Set of tests for static code analysis, e.g. code style, code complexity, copy paste detecting, etc.
@@ -291,9 +301,14 @@ class LiveCodeTest extends \PHPUnit\Framework\TestCase
             $output = file_get_contents($reportFile);
         }
 
+<<<<<<< HEAD
         $successCode = class_exists(ExitCode::class) ? ExitCode::Success : 0;
         $this->assertEquals(
             $successCode,
+=======
+        $this->assertEquals(
+            Command::EXIT_SUCCESS,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $result,
             "PHP Code Mess has found error(s):" . PHP_EOL . $output
         );

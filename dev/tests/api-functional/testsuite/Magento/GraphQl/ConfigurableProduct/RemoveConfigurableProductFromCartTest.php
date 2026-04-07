@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -14,7 +19,10 @@ use Magento\Quote\Model\QuoteFactory;
 use Magento\Quote\Model\ResourceModel\Quote as QuoteResource;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Remove configurable product from cart testcases
@@ -56,9 +64,15 @@ class RemoveConfigurableProductFromCartTest extends GraphQlAbstract
     /**
      * @param string $itemArgName
      * @param string $reservedOrderId
+<<<<<<< HEAD
      * @magentoApiDataFixture Magento/ConfigurableProduct/_files/quote_with_configurable_product.php
      */
     #[DataProvider('removeConfigurableProductFromCartDataProvider')]
+=======
+     * @dataProvider removeConfigurableProductFromCartDataProvider
+     * @magentoApiDataFixture Magento/ConfigurableProduct/_files/quote_with_configurable_product.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRemoveConfigurableProductFromCart(string $itemArgName, string $reservedOrderId)
     {
         $configurableOptionSku = 'simple_10';
@@ -80,7 +94,11 @@ class RemoveConfigurableProductFromCartTest extends GraphQlAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function removeConfigurableProductFromCartDataProvider(): array
+=======
+    public function removeConfigurableProductFromCartDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['cart_item_id', 'test_cart_with_configurable'],
@@ -136,6 +154,9 @@ QUERY;
                 return $item->getId();
             }
         }
+<<<<<<< HEAD
         throw new \RuntimeException("Quote item with SKU '{$sku}' not found");
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

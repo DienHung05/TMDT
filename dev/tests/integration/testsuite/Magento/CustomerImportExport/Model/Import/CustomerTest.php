@@ -1,13 +1,19 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\CustomerImportExport\Model\Import;
 
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
+<<<<<<< HEAD
 use Magento\Customer\Model\Indexer\Processor;
 use Magento\Customer\Model\ResourceModel\Customer\Collection as CustomerCollection;
 use Magento\Framework\App\Filesystem\DirectoryList;
@@ -23,6 +29,15 @@ use Magento\TestFramework\Helper\Bootstrap;
 
 /**
  * Test for class Customer which covers validation logic
+=======
+use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\ImportExport\Model\Import;
+use Magento\Framework\Indexer\StateInterface;
+
+/**
+ * Test for class \Magento\CustomerImportExport\Model\Import\Customer which covers validation logic
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)
@@ -32,6 +47,7 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
     /**
      * Model object which used for tests
      *
+<<<<<<< HEAD
      * @var ObjectManagerInterface
      */
     private $objectManager;
@@ -40,25 +56,42 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
      * Model object which used for tests
      *
      * @var Customer&\PHPUnit\Framework\MockObject\MockObject
+=======
+     * @var Customer|\PHPUnit\Framework\MockObject\MockObject
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     protected $_model;
 
     /**
+<<<<<<< HEAD
+=======
+     * Customer data
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @var array
      */
     protected $_customerData;
 
     /**
+<<<<<<< HEAD
      * @var DirectoryWrite
+=======
+     * @var \Magento\Framework\Filesystem\Directory\Write
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     protected $directoryWrite;
 
     /**
+<<<<<<< HEAD
      * @var Processor
+=======
+     * @var \Magento\Customer\Model\Indexer\Processor
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     private $indexerProcessor;
 
     /**
+<<<<<<< HEAD
      * @var CsvFactory
      */
     private $csvFactory;
@@ -68,17 +101,33 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
      */
     private $writeFactory;
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Create all necessary data for tests
      */
     protected function setUp(): void
     {
         parent::setUp();
+<<<<<<< HEAD
         $this->objectManager = Bootstrap::getObjectManager();
         $this->_model = $this->objectManager->create(Customer::class);
         $this->_model->setParameters(['behavior' => Import::BEHAVIOR_ADD_UPDATE]);
         $this->indexerProcessor = $this->objectManager->create(\Magento\Customer\Model\Indexer\Processor::class);
         $propertyAccessor = new \ReflectionProperty($this->_model, 'errorMessageTemplates');
         $propertyAccessor->setValue($this->_model, []);
+=======
+
+        $this->_model = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()
+            ->create(\Magento\CustomerImportExport\Model\Import\Customer::class);
+        $this->_model->setParameters(['behavior' => Import::BEHAVIOR_ADD_UPDATE]);
+        $this->indexerProcessor = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()
+            ->create(\Magento\Customer\Model\Indexer\Processor::class);
+
+        $propertyAccessor = new \ReflectionProperty($this->_model, 'errorMessageTemplates');
+        $propertyAccessor->setAccessible(true);
+        $propertyAccessor->setValue($this->_model, []);
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->_customerData = [
             'firstname' => 'Firstname',
             'lastname' => 'Lastname',
@@ -90,6 +139,7 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
             'website_id' => 1,
             'password' => 'password',
         ];
+<<<<<<< HEAD
         $filesystem = $this->objectManager->create(\Magento\Framework\Filesystem::class);
         $this->directoryWrite = $filesystem->getDirectoryWrite(DirectoryList::ROOT);
         $this->writeFactory = $this->objectManager->get(WriteFactory::class);
@@ -112,6 +162,13 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
             $registry->register('isSecureArea', false);
         }
         parent::tearDown();
+=======
+
+        $filesystem = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()
+            ->create(\Magento\Framework\Filesystem::class);
+        $this->directoryWrite = $filesystem
+            ->getDirectoryWrite(DirectoryList::ROOT);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -132,9 +189,15 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
 
         $existingCustomer = $this->getCustomer('CharlesTAlston@teleworm.us', 1);
 
+<<<<<<< HEAD
         /** @var $customersCollection CustomerCollection */
         $customersCollection = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(
             CustomerCollection::class
+=======
+        /** @var $customersCollection \Magento\Customer\Model\ResourceModel\Customer\Collection */
+        $customersCollection = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(
+            \Magento\Customer\Model\ResourceModel\Customer\Collection::class
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
         $customersCollection->addAttributeToSelect('firstname', 'inner')->addAttributeToSelect('lastname', 'inner');
 
@@ -176,11 +239,14 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
             $updatedCustomer->getCreatedAt(),
             'Creation date must be changed'
         );
+<<<<<<< HEAD
         $this->assertNotEquals(
             $existingCustomer->getDisableAutoGroupChange(),
             $updatedCustomer->getDisableAutoGroupChange(),
             'Disable automatic group change based on VAT ID must be changed'
         );
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertEquals(
             $existingCustomer->getGender(),
             $updatedCustomer->getGender(),
@@ -189,6 +255,7 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * Decompresses if gz compressed, stores in memory or temp file, and loads CSV adapter
      *
      * @param string $importData
@@ -276,6 +343,8 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Tests importData() method.
      *
      * @magentoDataFixture Magento/Customer/_files/import_export/customer.php
@@ -295,9 +364,15 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
         $existingCustomer->setWebsiteId(1);
         $existingCustomer = $existingCustomer->loadByEmail('CharlesTAlston@teleworm.us');
 
+<<<<<<< HEAD
         /** @var $customersCollection CustomerCollection */
         $customersCollection = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(
             CustomerCollection::class
+=======
+        /** @var $customersCollection \Magento\Customer\Model\ResourceModel\Customer\Collection */
+        $customersCollection = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(
+            \Magento\Customer\Model\ResourceModel\Customer\Collection::class
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
         $customersCollection->resetData();
         $customersCollection->clear();
@@ -365,9 +440,15 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
             $this->directoryWrite
         );
 
+<<<<<<< HEAD
         /** @var $customerCollection CustomerCollection */
         $customerCollection = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(
             CustomerCollection::class
+=======
+        /** @var $customerCollection \Magento\Customer\Model\ResourceModel\Customer\Collection */
+        $customerCollection = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(
+            \Magento\Customer\Model\ResourceModel\Customer\Collection::class
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
         $this->assertEquals(3, $customerCollection->count(), 'Count of existing customers are invalid');
 
@@ -514,9 +595,13 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
     /**
      * Test customer indexer gets invalidated after import when Update on Schedule mode is set
      *
+<<<<<<< HEAD
      * @magentoAppIsolation enabled
      * @magentoDbIsolation disabled
      * @magentoDataFixture deleteAllCustomers
+=======
+     * @magentoDbIsolation enabled
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @return void
      */
     public function testCustomerIndexer(): void
@@ -530,6 +615,7 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(StateInterface::STATUS_INVALID, $statusAfterImport);
     }
 
+<<<<<<< HEAD
     public static function deleteAllCustomers(): void
     {
         //Do nothing. we just need the rollback method to be called
@@ -564,6 +650,8 @@ class CustomerTest extends \PHPUnit\Framework\TestCase
         }
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Gets customer entity.
      *

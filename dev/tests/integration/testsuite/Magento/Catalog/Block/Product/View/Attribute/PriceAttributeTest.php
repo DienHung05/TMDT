@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Catalog\Block\Product\View\Attribute;
 
 use Magento\Directory\Model\PriceCurrency;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class checks price attribute displaying on frontend
@@ -33,10 +41,17 @@ class PriceAttributeTest extends AbstractAttributeTest
     }
 
     /**
+<<<<<<< HEAD
      * @param string $price
      * @return void
      */
     #[DataProvider('pricesDataProvider')]
+=======
+     * @dataProvider pricesDataProvider
+     * @param string $price
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAttributeView(string $price): void
     {
         $this->processAttributeView('simple2', $price, $this->priceCurrency->convertAndFormat($price));
@@ -45,7 +60,11 @@ class PriceAttributeTest extends AbstractAttributeTest
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function pricesDataProvider(): array
+=======
+    public function pricesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'zero_price' => [

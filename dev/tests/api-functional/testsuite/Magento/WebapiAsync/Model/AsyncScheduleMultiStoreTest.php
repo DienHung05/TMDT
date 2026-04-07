@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
 
 namespace Magento\WebapiAsync\Model;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\ResourceModel\Product\Collection;
@@ -34,6 +42,7 @@ use Magento\TestFramework\TestCase\WebapiAbstract;
  */
 class AsyncScheduleMultiStoreTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     public const SERVICE_NAME = 'catalogProductRepositoryV1';
     public const SERVICE_VERSION = 'V1';
     public const REST_RESOURCE_PATH = '/V1/products';
@@ -50,11 +59,27 @@ class AsyncScheduleMultiStoreTest extends WebapiAbstract
      * @var string[]
      */
     private static $stores = [
+=======
+    const SERVICE_NAME = 'catalogProductRepositoryV1';
+    const SERVICE_VERSION = 'V1';
+    const REST_RESOURCE_PATH = '/V1/products';
+    const ASYNC_RESOURCE_PATH = '/async/V1/products';
+    const ASYNC_CONSUMER_NAME = 'async.operations.all';
+
+    const STORE_CODE_FROM_FIXTURE = 'fixturestore';
+    const STORE_NAME_FROM_FIXTURE = 'Fixture Store';
+
+    const STORE_CODE_ALL = 'all';
+    const STORE_CODE_DEFAULT = 'default';
+
+    private $stores = [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         self::STORE_CODE_DEFAULT,
         self::STORE_CODE_ALL,
         self::STORE_CODE_FROM_FIXTURE,
     ];
 
+<<<<<<< HEAD
     public const KEY_TIER_PRICES = 'tier_prices';
     public const KEY_SPECIAL_PRICE = 'special_price';
     public const KEY_CATEGORY_LINKS = 'category_links';
@@ -64,6 +89,14 @@ class AsyncScheduleMultiStoreTest extends WebapiAbstract
     /**
      * @var string[]
      */
+=======
+    const KEY_TIER_PRICES = 'tier_prices';
+    const KEY_SPECIAL_PRICE = 'special_price';
+    const KEY_CATEGORY_LINKS = 'category_links';
+
+    const BULK_UUID_KEY = 'bulk_uuid';
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     protected $consumers = [
         self::ASYNC_CONSUMER_NAME,
     ];
@@ -126,11 +159,18 @@ class AsyncScheduleMultiStoreTest extends WebapiAbstract
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider storeProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoApiDataFixture Magento/Store/_files/core_fixturestore.php
      * @param string|null $storeCode
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('storeProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAsyncScheduleBulkMultistore(?string $storeCode): void
     {
         $product = $this->getProductData();
@@ -197,7 +237,11 @@ class AsyncScheduleMultiStoreTest extends WebapiAbstract
 
         $requestData = ['id' => $sku, 'sku' => $sku];
 
+<<<<<<< HEAD
         foreach (self::$stores as $checkingStore) {
+=======
+        foreach ($this->stores as $checkingStore) {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $serviceInfo = [
                 'rest' => [
                     'resourcePath' => self::REST_RESOURCE_PATH . '/' . $sku,
@@ -303,10 +347,17 @@ class AsyncScheduleMultiStoreTest extends WebapiAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function storeProvider(): array
     {
         $dataSets = [];
         foreach (self::$stores as $store) {
+=======
+    public function storeProvider(): array
+    {
+        $dataSets = [];
+        foreach ($this->stores as $store) {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $dataSets[$store] = [$store];
         }
 

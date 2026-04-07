@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -13,9 +18,13 @@ use Magento\Catalog\Api\ProductCustomOptionRepositoryInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\App\Request\Http as HttpRequest;
 use Magento\Framework\Message\MessageInterface;
+<<<<<<< HEAD
 use Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\Field;
 use Magento\TestFramework\TestCase\AbstractBackendController;
 use PHPUnit\Framework\Attributes\DataProviderExternal;
+=======
+use Magento\TestFramework\TestCase\AbstractBackendController;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Base test cases for delete product custom option with type "field".
@@ -32,6 +41,7 @@ class DeleteCustomOptionsTest extends AbstractBackendController
      */
     protected $productSku = 'simple';
 
+<<<<<<< HEAD
     /**
      * Test delete custom option with type "field".
      *
@@ -39,6 +49,17 @@ class DeleteCustomOptionsTest extends AbstractBackendController
      * @return void
      */
     #[DataProviderExternal(Field::class, 'getDataForCreateOptions')]
+=======
+
+    /**
+     * Test delete custom option with type "field".
+     *
+     * @dataProvider \Magento\TestFramework\Catalog\Model\Product\Option\DataProvider\Type\Field::getDataForCreateOptions
+     *
+     * @param array $optionData
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDeleteCustomOptionWithTypeField(array $optionData): void
     {
         $productRepository = $this->_objectManager->get(ProductRepositoryInterface::class);
@@ -71,6 +92,10 @@ class DeleteCustomOptionsTest extends AbstractBackendController
         $reflection = new \ReflectionObject($this);
         foreach ($reflection->getProperties() as $property) {
             if (!$property->isStatic() && 0 !== strpos($property->getDeclaringClass()->getName(), 'PHPUnit')) {
+<<<<<<< HEAD
+=======
+                $property->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $property->setValue($this, null);
             }
         }

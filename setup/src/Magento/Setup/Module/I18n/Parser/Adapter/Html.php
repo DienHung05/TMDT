@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -22,7 +27,11 @@ class Html extends AbstractAdapter
      * @deprecated Not used anymore because of newly introduced constants
      * @see self::REGEX_I18N_BINDING and self::REGEX_TRANSLATE_TAG_OR_ATTR
      */
+<<<<<<< HEAD
     public const HTML_FILTER = "/i18n:\s?'(?<value>[^'\\\\]*(?:\\\\.[^'\\\\]*)*)'/";
+=======
+    const HTML_FILTER = "/i18n:\s?'(?<value>[^'\\\\]*(?:\\\\.[^'\\\\]*)*)'/";
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * Covers
@@ -50,6 +59,7 @@ class Html extends AbstractAdapter
             throw new Exception('Failed to load file from disk.');
         }
 
+<<<<<<< HEAD
         $this->extractPhrasesFromTransDirective($data);
         $this->extractPhrases(self::REGEX_I18N_BINDING, $data, 2, 1);
         $this->extractPhrases(self::REGEX_TRANSLATE_TAG_OR_ATTR, $data, 3, 2);
@@ -65,6 +75,8 @@ class Html extends AbstractAdapter
      */
     private function extractPhrasesFromTransDirective(string $data): void
     {
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $results = [];
         preg_match_all(Filter::CONSTRUCTION_PATTERN, $data, $results, PREG_SET_ORDER);
         for ($i = 0, $count = count($results); $i < $count; $i++) {
@@ -76,6 +88,7 @@ class Html extends AbstractAdapter
 
                 $quote = $directive[1];
                 $this->_addPhrase($quote . $directive[2] . $quote);
+<<<<<<< HEAD
             } elseif (in_array($results[$i][1], ['depend', 'if'], true) && isset($results[$i][3])) {
                 // make sure to process trans directives nested inside depend / if directives
                 $this->extractPhrasesFromTransDirective($results[$i][3]);
@@ -86,6 +99,17 @@ class Html extends AbstractAdapter
     /**
      * Extracts all phrases with the given regex in the given string.
      *
+=======
+            }
+        }
+
+        $this->extractPhrases(self::REGEX_I18N_BINDING, $data, 2, 1);
+        $this->extractPhrases(self::REGEX_TRANSLATE_TAG_OR_ATTR, $data, 3, 2);
+        $this->extractPhrases(Js::REGEX_TRANSLATE_FUNCTION, $data, 3, 2);
+    }
+
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $regex
      * @param string $data
      * @param int $expectedGroupsCount

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -31,7 +36,10 @@ use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Item;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -92,8 +100,13 @@ class PayflowproVoidTest extends TestCase
      * @param DataObject $response
      * @magentoDataFixture Magento/Paypal/_files/order_payflowpro.php
      * @magentoConfigFixture current_store payment/payflowpro/active 1
+<<<<<<< HEAD
      */
     #[DataProvider('orderCancelSuccessDataProvider')]
+=======
+     * @dataProvider orderCancelSuccessDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testOrderCancelSuccess(DataObject $response): void
     {
         $order = $this->getOrder();
@@ -109,7 +122,11 @@ class PayflowproVoidTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function orderCancelSuccessDataProvider(): array
+=======
+    public function orderCancelSuccessDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Authorization has expired' => [
@@ -171,6 +188,10 @@ class PayflowproVoidTest extends TestCase
 
         $payment = $order->getPayment();
         $canVoidLookupProperty = new \ReflectionProperty(get_class($payment), '_canVoidLookup');
+<<<<<<< HEAD
+=======
+        $canVoidLookupProperty->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $canVoidLookupProperty->setValue($payment, true);
 
         return $order;
@@ -212,7 +233,11 @@ class PayflowproVoidTest extends TestCase
 
         /** @var Payflowpro|MockObject $instance */
         $instance = $this->getMockBuilder(Payflowpro::class)
+<<<<<<< HEAD
             ->onlyMethods(['setStore', 'getInfoInstance'])
+=======
+            ->setMethods(['setStore', 'getInfoInstance'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->setConstructorArgs(
                 [
                     $this->objectManager->get(Context::class),

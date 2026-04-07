@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Test;
@@ -20,7 +25,10 @@ use Magento\TestFramework\Application;
 use Magento\TestFramework\Helper\Bootstrap as TestFrameworkBootstrap;
 use Magento\TestFramework\Db\Mysql;
 use ReflectionClass;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Provides tests for \Magento\TestFramework\Application.
@@ -58,6 +66,7 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
     private $appMode;
 
     /**
+<<<<<<< HEAD
      * @var \Magento\TestFramework\ObjectManagerFactory|\PHPUnit\Framework\MockObject\MockObject
      */
     private $factoryMock;
@@ -78,6 +87,8 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
     private $objectManager;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
@@ -99,6 +110,7 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
             $this->appMode,
             $this->autoloadWrapper
         );
+<<<<<<< HEAD
 
         $this->factoryMock = $this->getMockBuilder(\Magento\TestFramework\ObjectManagerFactory::class)
             ->disableOriginalConstructor()
@@ -112,6 +124,8 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
         $this->objectManager = $this->getMockBuilder(\Magento\TestFramework\ObjectManager::class)
             ->disableOriginalConstructor()
             ->getMock();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -146,8 +160,13 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
      * @param string|null $postInstallSetupCommandsFilePath
      * @param array $expectedShellExecutionCalls
      * @param bool $isExceptionExpected
+<<<<<<< HEAD
      */
     #[DataProvider('installDataProvider')]
+=======
+     * @dataProvider installDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testInstall(
         string $installConfigFilePath,
         string $globalConfigFilePath,
@@ -170,16 +189,24 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
         );
 
         // bypass db dump logic
+<<<<<<< HEAD
         $reflectionProperty = new \ReflectionProperty($subject, '_factory');
         $reflectionProperty->setValue($subject, $this->factoryMock);
         $this->_factory = $this->factoryMock;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $dbMock = $this->getMockBuilder(Mysql::class)->disableOriginalConstructor()->getMock();
 
         $reflectionSubject = new ReflectionClass($subject);
         $dbProperty = $reflectionSubject->getProperty('_db');
+<<<<<<< HEAD
         $dbProperty->setValue($subject, $dbMock);
         $property = $reflectionSubject->getProperty('canLoadArea');
         $property->setValue($subject, false);
+=======
+        $dbProperty->setAccessible(true);
+        $dbProperty->setValue($subject, $dbMock);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $dbMock
             ->expects($this->any())
@@ -188,6 +215,10 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
                 false,
                 true
             );
+<<<<<<< HEAD
+=======
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $withArgs = [];
         // Add expected shell execution calls
         foreach ($expectedShellExecutionCalls as $expectedShellExecutionArguments) {
@@ -205,6 +236,7 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
         }
         $this->shell
             ->method('execute')
+<<<<<<< HEAD
             ->willReturnCallback(function (...$withArgs) {
                 if (!empty($withArgs)) {
                     return null;
@@ -225,6 +257,9 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
                 [\Magento\Indexer\Model\Indexer\Collection::class] => $this->collectionMock,
                 default => ''
             });
+=======
+            ->withConsecutive(...$withArgs);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $subject->install(false);
     }
@@ -234,12 +269,20 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function installDataProvider()
+=======
+    public function installDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $installShellCommandExpectation = [
             PHP_BINARY . ' -f %s setup:install -vvv ' .
             '--db-host=%s --db-user=%s --db-password=%s --db-name=%s --db-prefix=%s ' .
+<<<<<<< HEAD
             '--use-secure=%s --use-secure-admin=%s --magento-init-params=%s --no-interaction',
+=======
+            '--use-secure=%s --use-secure-admin=%s --magento-init-params=%s',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             [
                 BP . '/bin/magento',
                 '/tmp/mysql.sock',
@@ -249,8 +292,12 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
                 '',
                 '0',
                 '0',
+<<<<<<< HEAD
                 self::getInitParamsQuery(sys_get_temp_dir()),
                 true
+=======
+                $this->getInitParamsQuery(sys_get_temp_dir()),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ]
         ];
 
@@ -270,7 +317,11 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
                 [
                     $installShellCommandExpectation,
                     [
+<<<<<<< HEAD
                         PHP_BINARY . ' -f %s %s -vvv --no-interaction ' .
+=======
+                        PHP_BINARY . ' -f %s %s -vvv ' .
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         '--host=%s --dbname=%s --username=%s --password=%s --magento-init-params=%s',
                         [
                             BP . '/bin/magento',
@@ -279,7 +330,11 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
                             'magento_replica',
                             'root',
                             'secret',
+<<<<<<< HEAD
                             self::getInitParamsQuery(sys_get_temp_dir()),
+=======
+                            $this->getInitParamsQuery(sys_get_temp_dir()),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         ]
                     ]
                 ]
@@ -291,7 +346,11 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
                 [
                     $installShellCommandExpectation,
                     [
+<<<<<<< HEAD
                         PHP_BINARY . ' -f %s %s -vvv --no-interaction %s %s --option1=%s -option2=%s --magento-init-params=%s', // phpcs:ignore
+=======
+                        PHP_BINARY . ' -f %s %s -vvv %s %s --option1=%s -option2=%s --magento-init-params=%s',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         [
                             BP . '/bin/magento',
                             'fake:command',
@@ -299,7 +358,11 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
                             'bar',
                             'baz',
                             'qux',
+<<<<<<< HEAD
                             self::getInitParamsQuery(sys_get_temp_dir()),
+=======
+                            $this->getInitParamsQuery(sys_get_temp_dir()),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         ]
                     ]
                 ]
@@ -318,10 +381,18 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Test \Magento\TestFramework\Application will correctly load specified areas.
+<<<<<<< HEAD
      * @param string $areaCode
      * @return void
      */
     #[DataProvider('partialLoadAreaDataProvider')]
+=======
+     *
+     * @dataProvider partialLoadAreaDataProvider
+     * @param string $areaCode
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPartialLoadArea(string $areaCode)
     {
         $configScope = $this->getMockBuilder(Scope::class)
@@ -357,7 +428,11 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
         /** @var ObjectManagerInterface|\PHPUnit\Framework\MockObject\MockObject $objectManager */
         $objectManager = $this->getMockBuilder(ObjectManagerInterface::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->getMock();
+=======
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $objectManager->expects($this->once())
             ->method('configure')
             ->with($this->identicalTo([]));
@@ -379,6 +454,7 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function partialLoadAreaDataProvider()
     {
         return [
@@ -396,6 +472,25 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
             ],
             [
                 'areaCode' => Area::AREA_GRAPHQL,
+=======
+    public function partialLoadAreaDataProvider()
+    {
+        return [
+            [
+                'area_code' => Area::AREA_GLOBAL,
+            ],
+            [
+                'area_code' => Area::AREA_WEBAPI_REST,
+            ],
+            [
+                'area_code' => Area::AREA_WEBAPI_SOAP,
+            ],
+            [
+                'area_code' => Area::AREA_CRONTAB,
+            ],
+            [
+                'area_code' => Area::AREA_GRAPHQL,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }
@@ -406,7 +501,11 @@ class ApplicationTest extends \PHPUnit\Framework\TestCase
      * @param string $dir The base application directory
      * @return string
      */
+<<<<<<< HEAD
     private static function getInitParamsQuery(string $dir)
+=======
+    private function getInitParamsQuery(string $dir)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return str_replace(
             '%s',

@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Downloadable\Model\Url;
 
 use Magento\Downloadable\Model\DomainManager;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\Framework\App\DeploymentConfig;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for Magento\Downloadable\Model\Url\DomainValidator
@@ -55,8 +63,13 @@ class DomainValidatorTest extends \PHPUnit\Framework\TestCase
      * @magentoConfigFixture current_store web/secure/base_url https://secure.example.com/
      * @magentoConfigFixture fixture_second_store_store web/unsecure/base_url http://example2.com/
      * @magentoConfigFixture fixture_second_store_store web/secure/base_url https://secure.example2.com/
+<<<<<<< HEAD
      */
     #[DataProvider('isValidDataProvider')]
+=======
+     * @dataProvider isValidDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testIsValid(string $urlInput, array $envDomainWhitelist, bool $isValid)
     {
         $this->deploymentConfig
@@ -73,7 +86,11 @@ class DomainValidatorTest extends \PHPUnit\Framework\TestCase
         );
     }
 
+<<<<<<< HEAD
     public static function isValidDataProvider()
+=======
+    public function isValidDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['http://example.com', ['example.co'], false],

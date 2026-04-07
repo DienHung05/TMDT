@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Framework\View\Asset;
 
@@ -23,7 +28,10 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Filesystem;
 use Magento\Framework\Filesystem\Directory\WriteInterface;
 use Magento\TestFramework\App\State;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
 use Magento\Theme\Model\Theme\Registration;
@@ -142,7 +150,13 @@ class MinifierTest extends TestCase
         $request->setRequestUri($requestedUri);
         $request->setParam('resource', $requestedUri);
 
+<<<<<<< HEAD
         $response = $this->createMock(FileInterface::class);
+=======
+        $response = $this->getMockBuilder(FileInterface::class)
+            ->setMethods(['setFilePath'])
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $response
             ->expects($this->any())
             ->method('setFilePath')

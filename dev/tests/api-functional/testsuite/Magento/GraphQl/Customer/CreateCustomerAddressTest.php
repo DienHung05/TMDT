@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -13,7 +18,10 @@ use Magento\Customer\Api\Data\AddressInterface;
 use Magento\Integration\Api\CustomerTokenServiceInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Create customer address tests
@@ -341,7 +349,11 @@ MUTATION;
     public function testCreateCustomerAddressWithMissingAttribute()
     {
         $this->expectException(\Exception::class);
+<<<<<<< HEAD
         $this->expectExceptionMessage('"firstname" is required. Enter and try again.');
+=======
+        $this->expectExceptionMessage('Required parameters are missing: firstname');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $mutation
             = <<<MUTATION
@@ -467,8 +479,12 @@ MUTATION;
     public function testCreateCustomerAddressWithOptionalZipCode()
     {
         $newAddress = [
+<<<<<<< HEAD
             'country_code' => 'VA',
             'postcode' => '00120',
+=======
+            'country_code' => 'UA',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'street' => ['Line 1 Street', 'Line 2'],
             'company' => 'Company name',
             'telephone' => '123456789',
@@ -489,7 +505,10 @@ MUTATION;
 mutation {
   createCustomerAddress(input: {
     country_code: {$newAddress['country_code']}
+<<<<<<< HEAD
     postcode: "{$newAddress['postcode']}"
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     street: ["{$newAddress['street'][0]}","{$newAddress['street'][1]}"]
     company: "{$newAddress['company']}"
     telephone: "{$newAddress['telephone']}"
@@ -525,11 +544,18 @@ MUTATION;
      * Create new address with invalid input
      *
      * @magentoApiDataFixture Magento/Customer/_files/customer_without_addresses.php
+<<<<<<< HEAD
+=======
+     * @dataProvider invalidInputDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $input
      * @param $exceptionMessage
      * @throws Exception
      */
+<<<<<<< HEAD
     #[DataProvider('invalidInputDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateCustomerAddressWithInvalidInput($input, $exceptionMessage)
     {
         $mutation
@@ -808,12 +834,21 @@ MUTATION;
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function invalidInputDataProvider()
     {
         return [
             ['', 'Syntax Error: Expected Name, found )'],
             ['input: ""', 'Expected value of type "CustomerAddressInput", found "".'],
             ['input: "foo"', 'Expected value of type "CustomerAddressInput", found "foo".']
+=======
+    public function invalidInputDataProvider()
+    {
+        return [
+            ['', 'Syntax Error: Expected Name, found )'],
+            ['input: ""', 'requires type CustomerAddressInput!, found "".'],
+            ['input: "foo"', 'requires type CustomerAddressInput!, found "foo".']
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
     }
 

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Setup\Console\Command;
 
@@ -28,7 +33,13 @@ class I18nCollectPhrasesCommandTest extends \PHPUnit\Framework\TestCase
     protected function tearDown(): void
     {
         $property = new \ReflectionProperty(\Magento\Setup\Module\I18n\ServiceLocator::class, '_dictionaryGenerator');
+<<<<<<< HEAD
         $property->setValue(null, null);
+=======
+        $property->setAccessible(true);
+        $property->setValue(null);
+        $property->setAccessible(false);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     public function testExecuteConsoleOutput()

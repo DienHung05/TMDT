@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Sales\Helper;
 
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Tests \Magento\Sales\Helper\Admin
@@ -33,8 +41,14 @@ class AdminTest extends \PHPUnit\Framework\TestCase
      * @param string $expected
      * @param null|array $allowedTags
      * @return void
+<<<<<<< HEAD
      */
     #[DataProvider('escapeHtmlWithLinksDataProvider')]
+=======
+     *
+     * @dataProvider escapeHtmlWithLinksDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testEscapeHtmlWithLinks(string $data, string $expected, $allowedTags = null): void
     {
         $actual = $this->helper->escapeHtmlWithLinks($data, $allowedTags);
@@ -44,7 +58,11 @@ class AdminTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function escapeHtmlWithLinksDataProvider(): array
+=======
+    public function escapeHtmlWithLinksDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -76,7 +94,11 @@ class AdminTest extends \PHPUnit\Framework\TestCase
             ],
             [
                 '<a href=\"#\">Foo</a>',
+<<<<<<< HEAD
                 '<a href="%5C&quot;#%5C&quot;">Foo</a>',
+=======
+                '<a href="#">Foo</a>',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'allowedTags' => ['a'],
             ],
             [
@@ -86,7 +108,11 @@ class AdminTest extends \PHPUnit\Framework\TestCase
             ],
             [
                 "<a href=\"javascript&colon;alert(59)\">Foo</a>",
+<<<<<<< HEAD
                 '<a href="javascript&amp;colon;alert(59)">Foo</a>',
+=======
+                '<a href="#">Foo</a>',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'allowedTags' => ['a'],
             ],
             [

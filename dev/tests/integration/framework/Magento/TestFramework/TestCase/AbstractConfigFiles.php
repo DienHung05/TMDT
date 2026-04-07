@@ -3,13 +3,21 @@
  * Abstract class that helps in writing tests that validate config xml files
  * are valid both individually and when merged.
  *
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\TestFramework\TestCase;
 
 use Magento\Framework\Component\ComponentRegistrar;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 abstract class AbstractConfigFiles extends \PHPUnit\Framework\TestCase
 {
@@ -36,11 +44,19 @@ abstract class AbstractConfigFiles extends \PHPUnit\Framework\TestCase
     /**
      * @var ComponentRegistrar
      */
+<<<<<<< HEAD
     protected static $componentRegistrar;
 
     protected function setUp(): void
     {
         self::$componentRegistrar = new ComponentRegistrar();
+=======
+    protected $componentRegistrar;
+
+    protected function setUp(): void
+    {
+        $this->componentRegistrar = new ComponentRegistrar();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->_objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
         $xmlFiles = $this->getXmlConfigFiles();
         if (!empty($xmlFiles)) {
@@ -72,7 +88,13 @@ abstract class AbstractConfigFiles extends \PHPUnit\Framework\TestCase
         $this->_objectManager->removeSharedInstance($this->_getReaderClassName());
     }
 
+<<<<<<< HEAD
     #[DataProvider('xmlConfigFileProvider')]
+=======
+    /**
+     * @dataProvider xmlConfigFileProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testXmlConfigFile($file, $skip = false)
     {
         if ($skip) {
@@ -119,9 +141,15 @@ abstract class AbstractConfigFiles extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function xmlConfigFileProvider()
     {
         $fileList = self::getXmlConfigFiles();
+=======
+    public function xmlConfigFileProvider()
+    {
+        $fileList = $this->getXmlConfigFiles();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $result = [];
         foreach ($fileList as $fileContent) {
             $result[] = [$fileContent];
@@ -134,14 +162,22 @@ abstract class AbstractConfigFiles extends \PHPUnit\Framework\TestCase
      *
      * @return \Magento\Framework\Config\FileIterator
      */
+<<<<<<< HEAD
     public static function getXmlConfigFiles()
+=======
+    public function getXmlConfigFiles()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
         /** @var $moduleDirSearch \Magento\Framework\Component\DirSearch */
         $moduleDirSearch = $objectManager->get(\Magento\Framework\Component\DirSearch::class);
 
         return $objectManager->get(\Magento\Framework\Config\FileIteratorFactory::class)
+<<<<<<< HEAD
             ->create($moduleDirSearch->collectFiles(ComponentRegistrar::MODULE, static::_getConfigFilePathGlob()));
+=======
+            ->create($moduleDirSearch->collectFiles(ComponentRegistrar::MODULE, $this->_getConfigFilePathGlob()));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -158,12 +194,20 @@ abstract class AbstractConfigFiles extends \PHPUnit\Framework\TestCase
      *
      * @return string
      */
+<<<<<<< HEAD
     abstract protected static function _getConfigFilePathGlob();
+=======
+    abstract protected function _getConfigFilePathGlob();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * Returns an absolute path to the XSD file corresponding to the XML files specified in _getConfigFilePathGlob
      *
      * @return string
      */
+<<<<<<< HEAD
     abstract protected static function _getXsdPath();
+=======
+    abstract protected function _getXsdPath();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

@@ -1,13 +1,20 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
  */
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 declare(strict_types=1);
 
 namespace Magento\SalesRule\Model\Quote;
 
+<<<<<<< HEAD
 use Magento\Bundle\Test\Fixture\AddProductToCart as AddBundleProductToCart;
 use Magento\Bundle\Test\Fixture\Link as BundleSelectionFixture;
 use Magento\Bundle\Test\Fixture\Option as BundleOptionFixture;
@@ -34,19 +41,33 @@ use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\SalesRule\Model\Rule;
 use Magento\SalesRule\Model\Rule\Condition\Combine as CombineCondition;
 use Magento\SalesRule\Model\Rule\Condition\Product as ProductCondition;
+=======
+use Magento\Framework\Api\SearchCriteriaBuilder;
+use Magento\Framework\ObjectManagerInterface;
+use Magento\Quote\Api\CartRepositoryInterface;
+use Magento\Quote\Model\Quote;
+use Magento\Quote\Model\Quote\Item;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\SalesRule\Test\Fixture\ProductCondition as ProductConditionFixture;
 use Magento\SalesRule\Test\Fixture\Rule as RuleFixture;
 use Magento\TestFramework\Fixture\AppIsolation;
 use Magento\TestFramework\Fixture\DataFixture;
+<<<<<<< HEAD
 use Magento\TestFramework\Fixture\DataFixtureStorage;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
  * Test discount totals calculation model
+<<<<<<< HEAD
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class DiscountTest extends TestCase
 {
@@ -64,6 +85,7 @@ class DiscountTest extends TestCase
     private $quoteRepository;
 
     /**
+<<<<<<< HEAD
      * @var DataFixtureStorage
      */
     private $fixtures;
@@ -99,6 +121,8 @@ class DiscountTest extends TestCase
     private $total;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritDoc
      */
     protected function setUp(): void
@@ -106,6 +130,7 @@ class DiscountTest extends TestCase
         parent::setUp();
         $this->objectManager = Bootstrap::getObjectManager();
         $this->criteriaBuilder = $this->objectManager->get(SearchCriteriaBuilder::class);
+<<<<<<< HEAD
         $this->quoteRepository = $this->objectManager->create(CartRepositoryInterface::class);
         $this->fixtures = DataFixtureStorageManager::getStorage();
         $this->discountCollector = $this->objectManager->create(Discount::class);
@@ -184,16 +209,42 @@ class DiscountTest extends TestCase
         DataFixture(
             ProductConditionFixture::class,
             ['attribute' => 'sku', 'value' => '$bundle.sku$'],
+=======
+        $this->quoteRepository = $this->objectManager->get(CartRepositoryInterface::class);
+    }
+
+    /**
+     * @magentoDataFixture Magento/Checkout/_files/quote_with_bundle_product_with_dynamic_price.php
+     * @dataProvider bundleProductWithDynamicPriceAndCartPriceRuleDataProvider
+     * @param string $coupon
+     * @param array $discounts
+     * @param float $totalDiscount
+     * @return void
+     */
+    #[
+        AppIsolation(true),
+        DataFixture(
+            ProductConditionFixture::class,
+            ['attribute' => 'sku', 'value' => 'bundle_product_with_dynamic_price'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'cond1'
         ),
         DataFixture(
             ProductConditionFixture::class,
+<<<<<<< HEAD
             ['attribute' => 'sku', 'value' => '$simple1.sku$'],
+=======
+            ['attribute' => 'sku', 'value' => 'simple1'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'cond2'
         ),
         DataFixture(
             ProductConditionFixture::class,
+<<<<<<< HEAD
             ['attribute' => 'sku', 'value' => '$simple2.sku$'],
+=======
+            ['attribute' => 'sku', 'value' => 'simple2'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'cond3'
         ),
         DataFixture(
@@ -211,6 +262,7 @@ class DiscountTest extends TestCase
             ['coupon_code' => 'simple2_cc', 'discount_amount' => 50, 'actions' => ['$cond3$']],
             'rule3'
         ),
+<<<<<<< HEAD
         DataFixture(GuestCartFixture::class, as: 'cart'),
         DataFixture(
             AddBundleProductToCart::class,
@@ -221,18 +273,25 @@ class DiscountTest extends TestCase
                 'qty' => 1
             ],
         )
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ]
     public function testBundleProductWithDynamicPriceAndCartPriceRule(
         string $coupon,
         array $discounts,
         float $totalDiscount
     ): void {
+<<<<<<< HEAD
         $quote = $this->quoteRepository->get($this->fixtures->get('cart')->getId());
+=======
+        $quote = $this->getQuote('quote_with_bundle_product_with_dynamic_price');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $quote->setCouponCode($coupon);
         $quote->collectTotals();
         $this->quoteRepository->save($quote);
         $this->assertEquals(21.98, $quote->getBaseSubtotal());
         $this->assertEquals($totalDiscount, $quote->getShippingAddress()->getDiscountAmount());
+<<<<<<< HEAD
         $actual = [];
         $fixtures = [];
         $items = $quote->getAllItems();
@@ -405,19 +464,43 @@ class DiscountTest extends TestCase
             $actual[$fixtures[$item->getProductId()]] = $item->getDiscountAmount();
         }
         $this->assertEquals($discounts, $actual);
+=======
+        $items = $quote->getAllItems();
+        $this->assertCount(3, $items);
+        /** @var Item $item*/
+        $item = array_shift($items);
+        $this->assertEquals('bundle_product_with_dynamic_price-simple1-simple2', $item->getSku());
+        $this->assertEquals($discounts[$item->getSku()], $item->getDiscountAmount());
+        $item = array_shift($items);
+        $this->assertEquals('simple1', $item->getSku());
+        $this->assertEquals(5.99, $item->getPrice());
+        $this->assertEquals($discounts[$item->getSku()], $item->getDiscountAmount());
+        $item = array_shift($items);
+        $this->assertEquals('simple2', $item->getSku());
+        $this->assertEquals(15.99, $item->getPrice());
+        $this->assertEquals($discounts[$item->getSku()], $item->getDiscountAmount());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function bundleProductWithDynamicPriceAndCartPriceRuleDataProvider(): array
+=======
+    public function bundleProductWithDynamicPriceAndCartPriceRuleDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
                 'bundle_cc',
                 [
+<<<<<<< HEAD
                     // bundle with dynamic price does not have discount on its own, instead it's distributed to children
                     'bundle' => 0,
+=======
+                    'bundle_product_with_dynamic_price-simple1-simple2' => 0,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple1' => 3,
                     'simple2' => 7.99,
                 ],
@@ -426,7 +509,11 @@ class DiscountTest extends TestCase
             [
                 'simple1_cc',
                 [
+<<<<<<< HEAD
                     'bundle' => 0,
+=======
+                    'bundle_product_with_dynamic_price-simple1-simple2' => 0,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple1' => 3,
                     'simple2' => 0,
                 ],
@@ -435,7 +522,11 @@ class DiscountTest extends TestCase
             [
                 'simple2_cc',
                 [
+<<<<<<< HEAD
                     'bundle' => 0,
+=======
+                    'bundle_product_with_dynamic_price-simple1-simple2' => 0,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple1' => 0,
                     'simple2' => 8,
                 ],
@@ -445,6 +536,7 @@ class DiscountTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @return void
      * @throws NoSuchEntityException
      */
@@ -1159,5 +1251,17 @@ class DiscountTest extends TestCase
 
         $this->assertEmpty($items[$p3Id]->getAppliedRuleIds());
         $this->assertEquals(0, $items[$p3Id]->getBaseDiscountAmount());
+=======
+     * @param string $reservedOrderId
+     * @return Quote
+     */
+    private function getQuote(string $reservedOrderId): Quote
+    {
+        $searchCriteria = $this->criteriaBuilder->addFilter('reserved_order_id', $reservedOrderId)
+            ->create();
+        $carts = $this->quoteRepository->getList($searchCriteria)
+            ->getItems();
+        return array_shift($carts);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2012 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Sales\Model\AdminOrder;
 
@@ -17,12 +22,17 @@ use Magento\Sales\Api\Data\OrderAddressExtensionInterface;
 use Magento\Sales\Api\Data\OrderAddressExtensionInterfaceFactory;
 use Magento\Sales\Api\OrderManagementInterface;
 use Magento\Sales\Model\Order;
+<<<<<<< HEAD
 use Magento\Sales\Model\AdminOrder\EmailSender;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\HttpFoundation\Response;
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\TestFramework\ObjectManager;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -42,11 +52,14 @@ class CreateTest extends \PHPUnit\Framework\TestCase
     private $messageManager;
 
     /**
+<<<<<<< HEAD
      * @var EmailSender|MockObject
      */
     private $emailSenderMock;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @var ObjectManager
      */
     private $objectManager;
@@ -55,6 +68,7 @@ class CreateTest extends \PHPUnit\Framework\TestCase
     {
         $this->objectManager = Bootstrap::getObjectManager();
         $this->messageManager = $this->objectManager->get(ManagerInterface::class);
+<<<<<<< HEAD
         $this->emailSenderMock = $this->getMockBuilder(EmailSender::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -62,6 +76,9 @@ class CreateTest extends \PHPUnit\Framework\TestCase
             Create::class,
             ['messageManager' => $this->messageManager, 'emailSender' => $this->emailSenderMock]
         );
+=======
+        $this->model =$this->objectManager->create(Create::class, ['messageManager' => $this->messageManager]);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -144,7 +161,10 @@ class CreateTest extends \PHPUnit\Framework\TestCase
             ['additional_option_key' => 'additional_option_value'],
             $newOrderItem->getProductOptionByCode('additional_options')
         );
+<<<<<<< HEAD
         Response::closeOutputBuffers(1, false);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -478,10 +498,17 @@ class CreateTest extends \PHPUnit\Framework\TestCase
      * @magentoDataFixture Magento/Catalog/_files/product_simple.php
      * @magentoDbIsolation disabled
      * @magentoAppIsolation enabled
+<<<<<<< HEAD
      * @param string $customerEmailFirstAttempt
      * @param string $customerEmailSecondAttempt
      */
     #[DataProvider('createOrderNewCustomerWithFailedFirstPlaceOrderActionDataProvider')]
+=======
+     * @dataProvider createOrderNewCustomerWithFailedFirstPlaceOrderActionDataProvider
+     * @param string $customerEmailFirstAttempt
+     * @param string $customerEmailSecondAttempt
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateOrderNewCustomerWithFailedFirstPlaceOrderAction(
         $customerEmailFirstAttempt,
         $customerEmailSecondAttempt
@@ -512,7 +539,11 @@ class CreateTest extends \PHPUnit\Framework\TestCase
         );
 
         // Emulates failing place order action
+<<<<<<< HEAD
         $orderManagement = $this->createMock(OrderManagementInterface::class);
+=======
+        $orderManagement = $this->getMockForAbstractClass(OrderManagementInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $orderManagement->method('place')
             ->willThrowException(new \Exception('Can\'t place order'));
         $this->objectManager->addSharedInstance($orderManagement, OrderManagementInterface::class);
@@ -546,7 +577,11 @@ class CreateTest extends \PHPUnit\Framework\TestCase
      * @case #2 Changed after failed first place order action.
      * @return array
      */
+<<<<<<< HEAD
     public static function createOrderNewCustomerWithFailedFirstPlaceOrderActionDataProvider(): array
+=======
+    public function createOrderNewCustomerWithFailedFirstPlaceOrderActionDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             1 => ['customer@email.com', 'customer@email.com'],
@@ -647,6 +682,7 @@ class CreateTest extends \PHPUnit\Framework\TestCase
 
         $this->model->getQuote()->setCustomer($customerMock);
         $order = $this->model->createOrder();
+<<<<<<< HEAD
         if ($this->model->getSendConfirmation() && !$order->getEmailSent()) {
             $this->emailSenderMock->expects($this->once())
                 ->method('send')
@@ -654,6 +690,8 @@ class CreateTest extends \PHPUnit\Framework\TestCase
         } else {
             $this->emailSenderMock->expects($this->never())->method('send');
         }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->verifyCreatedOrder($order, $shippingMethod);
     }
 
@@ -699,7 +737,10 @@ class CreateTest extends \PHPUnit\Framework\TestCase
         /** @var SessionQuote $session */
         $session = $this->objectManager->create(SessionQuote::class);
         $session->setCustomerId($fixtureCustomerId);
+<<<<<<< HEAD
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         /** @var $quoteFixture Quote */
         $quoteFixture = $this->objectManager->create(Quote::class);
         $quoteFixture->load('test01', 'reserved_order_id');
@@ -707,12 +748,18 @@ class CreateTest extends \PHPUnit\Framework\TestCase
 
         $customerQuote = $this->model->getCustomerCart();
         $item = $customerQuote->getAllVisibleItems()[0];
+<<<<<<< HEAD
         $session->setTransferredItems(['cart' => [$item->getId()]]);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->model->moveQuoteItem($item, 'cart', 3);
         self::assertEquals(4, $item->getQty(), 'Number of Qty isn\'t correct for Quote item.');
         self::assertEquals(3, $item->getQtyToAdd(), 'Number of added qty isn\'t correct for Quote item.');
+<<<<<<< HEAD
         self::assertEquals($session->getTransferredItems(), ['cart' => []]);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -732,9 +779,13 @@ class CreateTest extends \PHPUnit\Framework\TestCase
         /** SUT execution */
         $customerQuote = $this->model->getCustomerCart();
         self::assertInstanceOf(Quote::class, $customerQuote);
+<<<<<<< HEAD
         // Verify it's a new cart: no saved entity_id and no items
         self::assertNull($customerQuote->getId(), 'New cart should not have an entity ID');
         self::assertEmpty($customerQuote->getAllItems(), 'New cart should have no items');
+=======
+        self::assertEmpty($customerQuote->getData());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -784,12 +835,15 @@ class CreateTest extends \PHPUnit\Framework\TestCase
             $session->setCustomerId(0);
         }
 
+<<<<<<< HEAD
         /** Save changes and reload the quote to make sure future changes to the quote trigger collectTotals */
         $quoteRepository = $this->objectManager->create(\Magento\Quote\Api\CartRepositoryInterface::class);
         $quoteRepository->save($this->model->getQuote());
         $quote = $quoteRepository->get($this->model->getQuote()->getId(), [$this->model->getQuote()->getStoreId()]);
         $this->model->setQuote($quote);
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         /** Emulate availability of shipping method (all are disabled by default) */
         /** @var $rate Quote\Address\Rate */
         $rate = $this->objectManager->create(Quote\Address\Rate::class);
@@ -997,7 +1051,11 @@ class CreateTest extends \PHPUnit\Framework\TestCase
     {
         $customerMock = $this->getMockBuilder(\Magento\Customer\Model\Data\Customer::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(
+=======
+            ->setMethods(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 [
                     'getId',
                     'getGroupId',

@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Integration\Model;
 
 use Magento\Authorization\Model\UserContextInterface;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Customer\Api\AccountManagementInterface;
 use Magento\Framework\Webapi\Rest\Request;
 use Magento\Integration\Api\UserTokenReaderInterface;
@@ -19,7 +27,10 @@ use Magento\Framework\Webapi\Exception as HTTPExceptionCodes;
 use Magento\Integration\Model\ResourceModel\Oauth\Token\CollectionFactory;
 use Magento\Integration\Model\Oauth\Token\RequestLog\Config as TokenThrottlerConfig;
 use Magento\Integration\Api\CustomerTokenServiceInterface;
+<<<<<<< HEAD
 use Magento\Customer\Model\CustomerFactory;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * api-functional test for \Magento\Integration\Model\CustomerTokenService.
@@ -28,9 +39,15 @@ use Magento\Customer\Model\CustomerFactory;
  */
 class CustomerTokenServiceTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     private const SERVICE_NAME = "integrationCustomerTokenServiceV1";
     private const SERVICE_VERSION = "V1";
     private const RESOURCE_PATH_CUSTOMER_TOKEN = "/V1/integration/customer/token";
+=======
+    const SERVICE_NAME = "integrationCustomerTokenServiceV1";
+    const SERVICE_VERSION = "V1";
+    const RESOURCE_PATH_CUSTOMER_TOKEN = "/V1/integration/customer/token";
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var CustomerTokenServiceInterface
@@ -63,11 +80,14 @@ class CustomerTokenServiceTest extends WebapiAbstract
     private $tokenReader;
 
     /**
+<<<<<<< HEAD
      * @var CustomerFactory
      */
     private $customerFactory;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Setup CustomerTokenService
      */
     protected function setUp(): void
@@ -88,17 +108,29 @@ class CustomerTokenServiceTest extends WebapiAbstract
         $tokenThrottlerConfig = Bootstrap::getObjectManager()->get(TokenThrottlerConfig::class);
         $this->attemptsCountToLockAccount = $tokenThrottlerConfig->getMaxFailuresCount();
         $this->tokenReader = Bootstrap::getObjectManager()->get(UserTokenReaderInterface::class);
+<<<<<<< HEAD
         $this->customerFactory = Bootstrap::getObjectManager()->get(CustomerFactory::class);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
      * Create customer access token
      *
+<<<<<<< HEAD
      * @magentoApiDataFixture Magento/Customer/_files/customer.php
      * @param string|null $store
      * @return void
      */
     #[DataProvider('storesDataProvider')]
+=======
+     * @dataProvider storesDataProvider
+     * @magentoApiDataFixture Magento/Customer/_files/customer.php
+     *
+     * @param string|null $store
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateCustomerAccessToken(?string $store): void
     {
         $userName = 'customer@example.com';
@@ -110,6 +142,7 @@ class CustomerTokenServiceTest extends WebapiAbstract
                 'httpMethod' => Request::HTTP_METHOD_POST,
             ],
         ];
+<<<<<<< HEAD
 
         $invalidCredentials = [
             'username' => $userName,
@@ -130,6 +163,11 @@ class CustomerTokenServiceTest extends WebapiAbstract
             ->loadByEmail($customerData->getEmail());
         $this->assertEquals(0, $customer->getFailuresNum());
         $this->assertNull($customer->getFirstFailure());
+=======
+        $requestData = ['username' => $userName, 'password' => $password];
+        $accessToken = $this->_webApiCall($serviceInfo, $requestData, null, $store);
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertToken($accessToken, $userName, $password);
     }
 
@@ -138,7 +176,11 @@ class CustomerTokenServiceTest extends WebapiAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function storesDataProvider(): array
+=======
+    public function storesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'default store' => [null],
@@ -146,8 +188,14 @@ class CustomerTokenServiceTest extends WebapiAbstract
         ];
     }
 
+<<<<<<< HEAD
     /** */
     #[DataProvider('validationDataProvider')]
+=======
+    /**
+     * @dataProvider validationDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateCustomerAccessTokenEmptyOrNullCredentials($username, $password)
     {
         $noExceptionOccurred = false;
@@ -197,7 +245,11 @@ class CustomerTokenServiceTest extends WebapiAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function validationDataProvider()
+=======
+    public function validationDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Check for empty credentials' => ['', ''],

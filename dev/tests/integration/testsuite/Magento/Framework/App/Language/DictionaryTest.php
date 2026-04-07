@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Framework\App\Language;
 
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class DictionaryTest extends \PHPUnit\Framework\TestCase
 {
@@ -43,9 +51,15 @@ class DictionaryTest extends \PHPUnit\Framework\TestCase
     /**
      * @param string $languageCode
      * @param array $expectation
+<<<<<<< HEAD
      * @magentoComponentsDir Magento/Framework/App/Language/_files
      */
     #[DataProvider('dictionaryDataProvider')]
+=======
+     * @dataProvider dictionaryDataProvider
+     * @magentoComponentsDir Magento/Framework/App/Language/_files
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDictionaryGetter($languageCode, $expectation)
     {
         $this->model = $this->objectManager->create(
@@ -56,6 +70,7 @@ class DictionaryTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($expectation, $result);
     }
 
+<<<<<<< HEAD
     public static function dictionaryDataProvider()
     {
         return [
@@ -67,17 +82,38 @@ class DictionaryTest extends \PHPUnit\Framework\TestCase
             'a case with circular inheritance' => self::getDataCircularInheritance(),
             // Fourth case with multiple inheritance from dev docs
             'a case with multiple inheritance from dev docs' => self::getDataMultipleInheritanceFromDevDocs()
+=======
+    public function dictionaryDataProvider()
+    {
+        return [
+            // First case with multiple inheritance, the obtained dictionary is en_AU
+            'a case with multiple inheritance' => $this->getDataMultipleInheritance(),
+            // Second case with inheritance of package with the same language code
+            'a case with inheritance similar language code' => $this->getDataInheritanceWitSimilarCode(),
+            // Third case with circular inheritance, when two packages depend on each other
+            'a case with circular inheritance' => $this->getDataCircularInheritance(),
+            // Fourth case with multiple inheritance from dev docs
+            'a case with multiple inheritance from dev docs' => $this->getDataMultipleInheritanceFromDevDocs()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
     }
 
     /**
      * @return array
      */
+<<<<<<< HEAD
     private static function getDataMultipleInheritance()
     {
         return [
             // Dictionary that will be requested
             'languageCode' => 'en_AU',
+=======
+    private function getDataMultipleInheritance()
+    {
+        return [
+            // Dictionary that will be requested
+            'language_code' => 'en_AU',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             // Expected merged dictionary data
             'expectation' => [
                 'one' => '1.0',
@@ -95,11 +131,19 @@ class DictionaryTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     private static function getDataInheritanceWitSimilarCode()
     {
         return [
             // Dictionary that will be requested
             'languageCode' => 'ru_RU',
+=======
+    private function getDataInheritanceWitSimilarCode()
+    {
+        return [
+            // Dictionary that will be requested
+            'language_code' => 'ru_RU',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             // Expected merged dictionary data
             'expectation' => [
                 'one' => '1.0',
@@ -112,11 +156,19 @@ class DictionaryTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     private static function getDataCircularInheritance()
     {
         return [
             // Dictionary that will be requested
             'languageCode' => 'en_AZ',
+=======
+    private function getDataCircularInheritance()
+    {
+        return [
+            // Dictionary that will be requested
+            'language_code' => 'en_AZ',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             // Expected merged dictionary data
             'expectation' => [
                 'one' => '1.0',
@@ -151,11 +203,19 @@ class DictionaryTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     private static function getDataMultipleInheritanceFromDevDocs()
     {
         return [
             // Dictionary that will be requested
             'languageCode' => 'en_AK',
+=======
+    private function getDataMultipleInheritanceFromDevDocs()
+    {
+        return [
+            // Dictionary that will be requested
+            'language_code' => 'en_AK',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             // Expected merged dictionary data
             'expectation' => [
                 'one' => 'en_us_package_one',

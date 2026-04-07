@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Email\Model\Template;
 
@@ -12,7 +17,10 @@ use Magento\Framework\Phrase;
 use Magento\Framework\View\Asset\ContentProcessorInterface;
 use Magento\Setup\Module\I18n\Locale;
 use Magento\Theme\Block\Html\Footer;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppIsolation enabled
@@ -98,12 +106,19 @@ class FilterTest extends \PHPUnit\Framework\TestCase
      * @magentoComponentsDir Magento/Email/Model/_files/design
      * @magentoAppIsolation enabled
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
+=======
+     * @dataProvider layoutDirectiveDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @param string $area
      * @param string $directiveParams
      * @param string $expectedOutput
      */
+<<<<<<< HEAD
     #[DataProvider('layoutDirectiveDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testLayoutDirective($area, $directiveParams, $expectedOutput)
     {
         /** @var \Magento\Theme\Model\Theme\Registration $registration */
@@ -126,7 +141,11 @@ class FilterTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function layoutDirectiveDataProvider()
+=======
+    public function layoutDirectiveDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $result = [
             'area parameter - omitted' => [
@@ -161,15 +180,24 @@ class FilterTest extends \PHPUnit\Framework\TestCase
      * @internal param $translatorData
      * @magentoConfigFixture default_store dev/translate_inline/active 1
      * @magentoAppArea frontend
+<<<<<<< HEAD
      */
     #[DataProvider('transDirectiveDataProvider')]
+=======
+     * @dataProvider transDirectiveDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testTransDirective($directive, $translations, $expectedResult, $variables = [])
     {
         $renderer = Phrase::getRenderer();
 
         $translator = $this->getMockBuilder(\Magento\Framework\Translate::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['getData'])
+=======
+            ->setMethods(['getData'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
 
         $translator->method('getData')
@@ -191,7 +219,11 @@ class FilterTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function transDirectiveDataProvider()
+=======
+    public function transDirectiveDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -273,12 +305,19 @@ class FilterTest extends \PHPUnit\Framework\TestCase
      * @magentoComponentsDir Magento/Email/Model/_files/design
      * @magentoAppIsolation enabled
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
+=======
+     * @dataProvider cssDirectiveDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @param int $templateType
      * @param string $directiveParams
      * @param string $expectedOutput
      */
+<<<<<<< HEAD
     #[DataProvider('cssDirectiveDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCssDirective($templateType, $directiveParams, $expectedOutput)
     {
         /** @var \Magento\Theme\Model\Theme\Registration $registration */
@@ -302,7 +341,11 @@ class FilterTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function cssDirectiveDataProvider()
+=======
+    public function cssDirectiveDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'CSS from theme' => [
@@ -352,6 +395,10 @@ class FilterTest extends \PHPUnit\Framework\TestCase
      * @magentoAppIsolation enabled
      * @magentoDbIsolation enabled
      * @magentoConfigFixture default_store dev/static/sign 0
+<<<<<<< HEAD
+=======
+     * @dataProvider inlinecssDirectiveDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @param string $templateText
      * @param string $expectedOutput
@@ -359,7 +406,10 @@ class FilterTest extends \PHPUnit\Framework\TestCase
      * @param bool $plainTemplateMode
      * @param bool $isChildTemplateMode
      */
+<<<<<<< HEAD
     #[DataProvider('inlinecssDirectiveDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testInlinecssDirective(
         $templateText,
         $expectedOutput,
@@ -386,7 +436,11 @@ class FilterTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function inlinecssDirectiveDataProvider()
+=======
+    public function inlinecssDirectiveDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'CSS from theme' => [
@@ -436,10 +490,17 @@ class FilterTest extends \PHPUnit\Framework\TestCase
      * @magentoComponentsDir Magento/Email/Model/_files/design
      * @magentoAppIsolation enabled
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
      *
      * @param string $templateText
      */
     #[DataProvider('inlinecssDirectiveThrowsExceptionWhenMissingParameterDataProvider')]
+=======
+     * @dataProvider inlinecssDirectiveThrowsExceptionWhenMissingParameterDataProvider
+     *
+     * @param string $templateText
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testInlinecssDirectiveThrowsExceptionWhenMissingParameter($templateText)
     {
         /** @var \Magento\Theme\Model\Theme\Registration $registration */
@@ -455,7 +516,11 @@ class FilterTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function inlinecssDirectiveThrowsExceptionWhenMissingParameterDataProvider()
+=======
+    public function inlinecssDirectiveThrowsExceptionWhenMissingParameterDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Missing "file" parameter' => [

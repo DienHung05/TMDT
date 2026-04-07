@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 // @codingStandardsIgnoreStart
@@ -39,8 +44,11 @@ namespace Magento\Framework\Session {
 
     // @codingStandardsIgnoreEnd
 
+<<<<<<< HEAD
     use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @magentoAppIsolation enabled
      */
@@ -119,8 +127,13 @@ namespace Magento\Framework\Session {
         }
 
         /**
+<<<<<<< HEAD
          */
         #[DataProvider('optionsProvider')]
+=======
+         * @dataProvider optionsProvider
+         */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         public function testSetOptions($option, $getter, $value)
         {
             $model = $this->getModel();
@@ -129,7 +142,11 @@ namespace Magento\Framework\Session {
             $this->assertSame($value, $model->{$getter}());
         }
 
+<<<<<<< HEAD
         public static function optionsProvider()
+=======
+        public function optionsProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         {
             return [
                 ['save_path', 'getSavePath', __DIR__],
@@ -313,8 +330,13 @@ namespace Magento\Framework\Session {
          * @param $expectedSavePath
          * @param $givenSaveHandler
          * @param $expectedSaveHandler
+<<<<<<< HEAD
          */
         #[DataProvider('constructorDataProvider')]
+=======
+         * @dataProvider constructorDataProvider
+         */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         public function testConstructor(
             $mockPHPFunctionNum,
             $givenSavePath,
@@ -353,14 +375,21 @@ namespace Magento\Framework\Session {
                 \Magento\Framework\Session\Config::class,
                 ['deploymentConfig' => $deploymentConfigMock]
             );
+<<<<<<< HEAD
             $expectedSavePath = $model->getOption('save_path') ? $expectedSavePath : null;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $this->assertEquals($expectedSavePath, $model->getOption('save_path'));
             $this->assertEquals($expectedSaveHandler, $model->getOption('session.save_handler'));
             global $mockPHPFunctions;
             $mockPHPFunctions = false;
         }
 
+<<<<<<< HEAD
         public static function constructorDataProvider()
+=======
+        public function constructorDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         {
             // preset value (null = not set), input value (null = not set), expected value
             $savePathGiven = 'explicit_save_path';

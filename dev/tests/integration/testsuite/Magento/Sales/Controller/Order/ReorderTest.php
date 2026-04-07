@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -108,7 +113,17 @@ class ReorderTest extends AbstractController
         $order = $this->orderFactory->create()->loadByIncrementId('55555555');
         $this->customerSession->setCustomerId($order->getCustomerId());
         $this->dispatchReorderRequest((int)$order->getId());
+<<<<<<< HEAD
         $this->assertRedirect($this->stringContains('checkout/cart'));
+=======
+        $origMessage = (string)__('The requested qty is not available');
+        $message = $this->escaper->escapeHtml(
+            __('Could not add the product with SKU "%1" to the shopping cart: %2', 'simple-1', $origMessage)
+        );
+        $constraint = $this->logicalOr($this->containsEqual($origMessage), $this->containsEqual($message));
+        $this->assertThat($this->getMessages(MessageInterface::TYPE_ERROR), $constraint);
+        $this->quote = $this->checkoutSession->getQuote();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**

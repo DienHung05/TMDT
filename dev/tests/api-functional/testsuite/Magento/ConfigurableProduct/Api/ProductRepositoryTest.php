@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\ConfigurableProduct\Api;
@@ -24,10 +29,17 @@ use Magento\TestFramework\TestCase\WebapiAbstract;
  */
 class ProductRepositoryTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     private const SERVICE_NAME = 'catalogProductRepositoryV1';
     private const SERVICE_VERSION = 'V1';
     private const RESOURCE_PATH = '/V1/products';
     private const CONFIGURABLE_PRODUCT_SKU = 'configurable-product-sku';
+=======
+    const SERVICE_NAME = 'catalogProductRepositoryV1';
+    const SERVICE_VERSION = 'V1';
+    const RESOURCE_PATH = '/V1/products';
+    const CONFIGURABLE_PRODUCT_SKU = 'configurable-product-sku';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var Config
@@ -383,7 +395,11 @@ class ProductRepositoryTest extends WebapiAbstract
             $nonExistingId,
         ];
 
+<<<<<<< HEAD
         $expectedMessage = 'The product with ID "%1" does not exist.';
+=======
+        $expectedMessage = 'The product that was requested doesn\'t exist. Verify the product and try again.';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         try {
             $this->saveProduct($response);
             $this->fail("Expected exception");
@@ -461,7 +477,11 @@ class ProductRepositoryTest extends WebapiAbstract
             $productId2,
         ];
 
+<<<<<<< HEAD
         $expectedMessage = 'The product with ID "%1" does not exist.';
+=======
+        $expectedMessage = 'The product that was requested doesn\'t exist. Verify the product and try again.';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         try {
             $this->saveProduct($response);
             $this->fail("Expected exception");

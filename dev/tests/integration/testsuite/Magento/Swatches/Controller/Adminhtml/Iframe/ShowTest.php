@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Swatches\Controller\Adminhtml\Iframe;
 
+<<<<<<< HEAD
 use Magento\TestFramework\Bootstrap;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * @magentoAppArea adminhtml
  */
@@ -23,10 +31,14 @@ class ShowTest extends \Magento\TestFramework\TestCase\AbstractBackendController
             ->get(\Magento\Framework\Acl\Builder::class)
             ->getAcl();
 
+<<<<<<< HEAD
         $acl->allow(
             Bootstrap::ADMIN_ROLE_ID,
             \Magento\Swatches\Controller\Adminhtml\Iframe\Show::ADMIN_RESOURCE
         );
+=======
+        $acl->allow(null, \Magento\Swatches\Controller\Adminhtml\Iframe\Show::ADMIN_RESOURCE);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->dispatch('backend/swatches/iframe/show/');
 
@@ -47,10 +59,14 @@ class ShowTest extends \Magento\TestFramework\TestCase\AbstractBackendController
             ->get(\Magento\Framework\Acl\Builder::class)
             ->getAcl();
 
+<<<<<<< HEAD
         $acl->deny(
             Bootstrap::ADMIN_ROLE_ID,
             \Magento\Swatches\Controller\Adminhtml\Iframe\Show::ADMIN_RESOURCE
         );
+=======
+        $acl->deny(null, \Magento\Swatches\Controller\Adminhtml\Iframe\Show::ADMIN_RESOURCE);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->dispatch('backend/swatches/iframe/show/');
 

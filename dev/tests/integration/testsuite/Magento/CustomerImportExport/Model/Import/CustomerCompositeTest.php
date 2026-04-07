@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\CustomerImportExport\Model\Import;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\ImportExport\Model\Import\ErrorProcessing\ProcessingErrorAggregatorInterface;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for CustomerComposite import class
@@ -17,18 +25,30 @@ class CustomerCompositeTest extends \PHPUnit\Framework\TestCase
     /**#@+
      * Attributes used in test assertions
      */
+<<<<<<< HEAD
     public const ATTRIBUTE_CODE_FIRST_NAME = 'firstname';
 
     public const ATTRIBUTE_CODE_LAST_NAME = 'lastname';
+=======
+    const ATTRIBUTE_CODE_FIRST_NAME = 'firstname';
+
+    const ATTRIBUTE_CODE_LAST_NAME = 'lastname';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**#@-*/
 
     /**#@+
      * Source *.csv file names for different behaviors
      */
+<<<<<<< HEAD
     public const UPDATE_FILE_NAME = 'customer_composite_update.csv';
 
     public const DELETE_FILE_NAME = 'customer_composite_delete.csv';
+=======
+    const UPDATE_FILE_NAME = 'customer_composite_update.csv';
+
+    const DELETE_FILE_NAME = 'customer_composite_delete.csv';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**#@-*/
 
@@ -58,7 +78,11 @@ class CustomerCompositeTest extends \PHPUnit\Framework\TestCase
      *
      * @var array
      */
+<<<<<<< HEAD
     protected static $_beforeImport = [
+=======
+    protected $_beforeImport = [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         'betsyparker@example.com' => [
             'addresses' => ['19107', '72701'],
             'data' => [self::ATTRIBUTE_CODE_FIRST_NAME => 'Betsy', self::ATTRIBUTE_CODE_LAST_NAME => 'Parker'],
@@ -70,7 +94,11 @@ class CustomerCompositeTest extends \PHPUnit\Framework\TestCase
      *
      * @var array
      */
+<<<<<<< HEAD
     protected static $_afterImport = [
+=======
+    protected $_afterImport = [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         'betsyparker@example.com' => [
             'addresses' => ['19107', '72701', '19108'],
             'data' => [
@@ -140,8 +168,14 @@ class CustomerCompositeTest extends \PHPUnit\Framework\TestCase
      *
      * @magentoDataFixture Magento/Customer/_files/import_export/customers_for_address_import.php
      * @magentoAppIsolation enabled
+<<<<<<< HEAD
      */
     #[DataProvider('importDataDataProvider')]
+=======
+     *
+     * @dataProvider importDataDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testImportData(
         $behavior,
         $sourceFile,
@@ -200,6 +234,7 @@ class CustomerCompositeTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function importDataDataProvider()
     {
         $filesDirectory = __DIR__ . '/_files/';
@@ -240,6 +275,33 @@ class CustomerCompositeTest extends \PHPUnit\Framework\TestCase
                 0,  // $deletedItemsCount
                 []  // $errors
             ]
+=======
+    public function importDataDataProvider()
+    {
+        $filesDirectory = __DIR__ . '/_files/';
+        $sourceData = [
+            'delete_behavior' => [
+                '$behavior' => \Magento\ImportExport\Model\Import::BEHAVIOR_DELETE,
+                '$sourceFile' => $filesDirectory . self::DELETE_FILE_NAME,
+                '$dataBefore' => $this->_beforeImport,
+                '$dataAfter' => [],
+                '$updatedItemsCount' => 0,
+                '$createdItemsCount' => 0,
+                '$deletedItemsCount' => 1,
+                '$errors' => [],
+            ],
+        ];
+
+        $sourceData['add_update_behavior'] = [
+            '$behavior' => \Magento\ImportExport\Model\Import::BEHAVIOR_ADD_UPDATE,
+            '$sourceFile' => $filesDirectory . self::UPDATE_FILE_NAME,
+            '$dataBefore' => $this->_beforeImport,
+            '$dataAfter' => $this->_afterImport,
+            '$updatedItemsCount' => 1,
+            '$createdItemsCount' => 3,
+            '$deletedItemsCount' => 0,
+            '$errors' => [],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
 
         return $sourceData;

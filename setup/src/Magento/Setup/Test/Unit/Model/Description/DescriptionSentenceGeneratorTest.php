@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -45,6 +50,7 @@ class DescriptionSentenceGeneratorTest extends TestCase
 
     public function testSentenceGeneration()
     {
+<<<<<<< HEAD
         $words = ['Lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing'];
         $callCount = 0;
         $this->dictionaryMock
@@ -53,6 +59,20 @@ class DescriptionSentenceGeneratorTest extends TestCase
             ->willReturnCallback(function() use (&$callCount, $words) {
                 return $words[$callCount++];
             });
+=======
+        $this->dictionaryMock
+            ->expects($this->exactly(7))
+            ->method('getRandWord')
+            ->will($this->onConsecutiveCalls(
+                'Lorem',
+                'ipsum',
+                'dolor',
+                'sit',
+                'amet',
+                'consectetur',
+                'adipiscing'
+            ));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertEquals(
             'Lorem ipsum dolor sit amet consectetur adipiscing.',

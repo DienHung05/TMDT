@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\ConfigurableProduct\Ui\DataProvider\Product\Form\Modifier\Data;
 
@@ -10,7 +15,10 @@ use Magento\Ui\Component\Filters\FilterModifier;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\ConfigurableProduct\Ui\DataProvider\Product\Form\Modifier\ConfigurablePanel;
 use Magento\Framework\App\RequestInterface;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -40,11 +48,18 @@ class AssociatedProductsTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider getProductMatrixDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $interfaceLocale
      * @magentoDataFixture Magento/ConfigurableProduct/_files/product_configurable.php
      * @magentoAppArea adminhtml
      */
+<<<<<<< HEAD
     #[DataProvider('getProductMatrixDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetProductMatrix($interfaceLocale)
     {
         $productSku = 'configurable';
@@ -60,7 +75,13 @@ class AssociatedProductsTest extends TestCase
         $store->load('admin');
         $this->registry->register('current_store', $store);
         /** @var \Magento\Framework\Locale\ResolverInterface|\PHPUnit\Framework\MockObject\MockObject $localeResolver */
+<<<<<<< HEAD
         $localeResolver = $this->createMock(\Magento\Framework\Locale\ResolverInterface::class);
+=======
+        $localeResolver = $this->getMockBuilder(\Magento\Framework\Locale\ResolverInterface::class)
+            ->setMethods(['getLocale'])
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $localeResolver->expects($this->any())->method('getLocale')->willReturn($interfaceLocale);
         $localeCurrency = $this->objectManager->create(
             \Magento\Framework\Locale\CurrencyInterface::class,
@@ -126,6 +147,7 @@ class AssociatedProductsTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * Test that ASSOCIATED_PRODUCT_LISTING component uses POST to retrieve data
      *
      * @return void
@@ -168,6 +190,11 @@ class AssociatedProductsTest extends TestCase
      * @return array
      */
     public static function getProductMatrixDataProvider()
+=======
+     * @return array
+     */
+    public function getProductMatrixDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['en_US'],

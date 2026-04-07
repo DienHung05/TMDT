@@ -1,13 +1,19 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Customer;
 
 use Exception;
+<<<<<<< HEAD
 use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Customer\Model\CustomerAuthUpdate;
 use Magento\Customer\Test\Fixture\Customer;
@@ -15,12 +21,18 @@ use Magento\Framework\Exception\AuthenticationException;
 use Magento\Integration\Api\CustomerTokenServiceInterface;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
+=======
+use Magento\Customer\Model\CustomerAuthUpdate;
+use Magento\Framework\Exception\AuthenticationException;
+use Magento\Integration\Api\CustomerTokenServiceInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
 
 /**
  * Tests for update customer
  */
+<<<<<<< HEAD
 #[
     DataFixture(
         Customer::class,
@@ -30,6 +42,8 @@ use Magento\TestFramework\TestCase\GraphQlAbstract;
         'customer'
     )
 ]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class UpdateCustomerTest extends GraphQlAbstract
 {
     /**
@@ -47,11 +61,14 @@ class UpdateCustomerTest extends GraphQlAbstract
      */
     private $lockCustomer;
 
+<<<<<<< HEAD
     /**
      * @var CustomerInterface|null
      */
     private $customer;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     protected function setUp(): void
     {
         parent::setUp();
@@ -59,12 +76,25 @@ class UpdateCustomerTest extends GraphQlAbstract
         $this->customerTokenService = Bootstrap::getObjectManager()->get(CustomerTokenServiceInterface::class);
         $this->customerAuthUpdate = Bootstrap::getObjectManager()->get(CustomerAuthUpdate::class);
         $this->lockCustomer = Bootstrap::getObjectManager()->get(LockCustomer::class);
+<<<<<<< HEAD
         $this->customer = DataFixtureStorageManager::getStorage()->get('customer');
     }
 
     public function testUpdateCustomer()
     {
         $currentPassword = 'password';
+=======
+    }
+
+    /**
+     * @magentoApiDataFixture Magento/Customer/_files/customer.php
+     */
+    public function testUpdateCustomer()
+    {
+        $currentEmail = 'customer@example.com';
+        $currentPassword = 'password';
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $newPrefix = 'Dr';
         $newFirstname = 'Richard';
         $newMiddlename = 'Riley';
@@ -109,7 +139,11 @@ QUERY;
             $query,
             [],
             '',
+<<<<<<< HEAD
             $this->getCustomerAuthHeaders($this->customer->getEmail(), $currentPassword)
+=======
+            $this->getCustomerAuthHeaders($currentEmail, $currentPassword)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
 
         $this->assertEquals($newPrefix, $response['updateCustomer']['customer']['prefix']);
@@ -123,11 +157,21 @@ QUERY;
         $this->assertEquals($newGender, $response['updateCustomer']['customer']['gender']);
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * @magentoApiDataFixture Magento/Customer/_files/customer.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateCustomerIfInputDataIsEmpty()
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('"input" value should be specified');
 
+<<<<<<< HEAD
+=======
+        $currentEmail = 'customer@example.com';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $currentPassword = 'password';
 
         $query = <<<QUERY
@@ -143,6 +187,7 @@ mutation {
     }
 }
 QUERY;
+<<<<<<< HEAD
         $this->graphQlMutation(
             $query,
             [],
@@ -151,6 +196,13 @@ QUERY;
         );
     }
 
+=======
+        $this->graphQlMutation($query, [], '', $this->getCustomerAuthHeaders($currentEmail, $currentPassword));
+    }
+
+    /**
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateCustomerIfUserIsNotAuthorized()
     {
         $this->expectException(Exception::class);
@@ -174,13 +226,25 @@ QUERY;
         $this->graphQlMutation($query);
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * @magentoApiDataFixture Magento/Customer/_files/customer.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateCustomerIfAccountIsLocked()
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('The account is locked.');
 
+<<<<<<< HEAD
         $this->lockCustomer->execute((int)$this->customer->getId());
 
+=======
+        $this->lockCustomer->execute(1);
+
+        $currentEmail = 'customer@example.com';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $currentPassword = 'password';
         $newFirstname = 'Richard';
 
@@ -197,6 +261,7 @@ mutation {
     }
 }
 QUERY;
+<<<<<<< HEAD
         $this->graphQlMutation(
             $query,
             [],
@@ -205,11 +270,23 @@ QUERY;
         );
     }
 
+=======
+        $this->graphQlMutation($query, [], '', $this->getCustomerAuthHeaders($currentEmail, $currentPassword));
+    }
+
+    /**
+     * @magentoApiDataFixture Magento/Customer/_files/customer.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateEmailIfPasswordIsMissed()
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Provide the current "password" to change "email".');
 
+<<<<<<< HEAD
+=======
+        $currentEmail = 'customer@example.com';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $currentPassword = 'password';
         $newEmail = 'customer_updated@example.com';
 
@@ -226,6 +303,7 @@ mutation {
     }
 }
 QUERY;
+<<<<<<< HEAD
         $this->graphQlMutation(
             $query,
             [],
@@ -234,11 +312,23 @@ QUERY;
         );
     }
 
+=======
+        $this->graphQlMutation($query, [], '', $this->getCustomerAuthHeaders($currentEmail, $currentPassword));
+    }
+
+    /**
+     * @magentoApiDataFixture Magento/Customer/_files/customer.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateEmailIfPasswordIsInvalid()
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid login or password.');
 
+<<<<<<< HEAD
+=======
+        $currentEmail = 'customer@example.com';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $currentPassword = 'password';
         $invalidPassword = 'invalid_password';
         $newEmail = 'customer_updated@example.com';
@@ -257,6 +347,7 @@ mutation {
     }
 }
 QUERY;
+<<<<<<< HEAD
         $this->graphQlMutation(
             $query,
             [],
@@ -281,6 +372,14 @@ QUERY;
             'customer2'
         )
     ]
+=======
+        $this->graphQlMutation($query, [], '', $this->getCustomerAuthHeaders($currentEmail, $currentPassword));
+    }
+
+    /**
+     * @magentoApiDataFixture Magento/Customer/_files/two_customers.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateEmailIfEmailAlreadyExists()
     {
         $this->expectException(Exception::class);
@@ -288,8 +387,14 @@ QUERY;
             'A customer with the same email address already exists in an associated website.'
         );
 
+<<<<<<< HEAD
         $currentPassword = 'password';
         $existedEmail = DataFixtureStorageManager::getStorage()->get('customer2')->getEmail();
+=======
+        $currentEmail = 'customer@example.com';
+        $currentPassword = 'password';
+        $existedEmail = 'customer_two@example.com';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $firstname = 'Richard';
         $lastname = 'Rowe';
 
@@ -309,6 +414,7 @@ mutation {
     }
 }
 QUERY;
+<<<<<<< HEAD
         $this->graphQlMutation(
             $query,
             [],
@@ -319,6 +425,17 @@ QUERY;
 
     public function testUpdateEmailIfEmailIsInvalid()
     {
+=======
+        $this->graphQlMutation($query, [], '', $this->getCustomerAuthHeaders($currentEmail, $currentPassword));
+    }
+
+    /**
+     * @magentoApiDataFixture Magento/Customer/_files/customer.php
+     */
+    public function testUpdateEmailIfEmailIsInvalid()
+    {
+        $currentEmail = 'customer@example.com';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $currentPassword = 'password';
         $invalidEmail = 'customer.example.com';
 
@@ -340,6 +457,7 @@ QUERY;
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('"' . $invalidEmail . '" is not a valid email address.');
 
+<<<<<<< HEAD
         $this->graphQlMutation(
             $query,
             [],
@@ -353,13 +471,31 @@ QUERY;
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('"First Name" is a required value.');
 
+=======
+        $this->graphQlMutation($query, [], '', $this->getCustomerAuthHeaders($currentEmail, $currentPassword));
+    }
+
+    /**
+     * @magentoApiDataFixture Magento/Customer/_files/customer.php
+     */
+    public function testEmptyCustomerName()
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Required parameters are missing: First Name');
+
+        $currentEmail = 'customer@example.com';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $currentPassword = 'password';
 
         $query = <<<QUERY
 mutation {
     updateCustomer(
         input: {
+<<<<<<< HEAD
             email: "{$this->customer->getEmail()}"
+=======
+            email: "{$currentEmail}"
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             password: "{$currentPassword}"
             firstname: ""
         }
@@ -370,6 +506,7 @@ mutation {
     }
 }
 QUERY;
+<<<<<<< HEAD
         $this->graphQlMutation(
             $query,
             [],
@@ -378,6 +515,14 @@ QUERY;
         );
     }
 
+=======
+        $this->graphQlMutation($query, [], '', $this->getCustomerAuthHeaders($currentEmail, $currentPassword));
+    }
+
+    /**
+     * @magentoApiDataFixture Magento/Customer/_files/customer.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testEmptyCustomerLastName()
     {
         $query = <<<QUERY
@@ -395,6 +540,7 @@ mutation {
 QUERY;
 
         $this->expectException(Exception::class);
+<<<<<<< HEAD
         $this->expectExceptionMessage('"Last Name" is a required value.');
 
         $this->graphQlMutation(
@@ -405,6 +551,16 @@ QUERY;
         );
     }
 
+=======
+        $this->expectExceptionMessage('Required parameters are missing: Last Name');
+
+        $this->graphQlMutation($query, [], '', $this->getCustomerAuthHeaders('customer@example.com', 'password'));
+    }
+
+    /**
+     * @magentoApiDataFixture Magento/Customer/_files/customer.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateCustomerWithIncorrectGender()
     {
         $gender = 5;
@@ -425,6 +581,7 @@ mutation {
     }
 }
 QUERY;
+<<<<<<< HEAD
         $this->graphQlMutation(
             $query,
             [],
@@ -433,6 +590,14 @@ QUERY;
         );
     }
 
+=======
+        $this->graphQlMutation($query, [], '', $this->getCustomerAuthHeaders('customer@example.com', 'password'));
+    }
+
+    /**
+     * @magentoApiDataFixture Magento/Customer/_files/customer.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateCustomerIfDobIsInvalid()
     {
         $invalidDob = 'bla-bla-bla';
@@ -454,12 +619,16 @@ QUERY;
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid date');
 
+<<<<<<< HEAD
         $this->graphQlMutation(
             $query,
             [],
             '',
             $this->getCustomerAuthHeaders($this->customer->getEmail(), 'password')
         );
+=======
+        $this->graphQlMutation($query, [], '', $this->getCustomerAuthHeaders('customer@example.com', 'password'));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**

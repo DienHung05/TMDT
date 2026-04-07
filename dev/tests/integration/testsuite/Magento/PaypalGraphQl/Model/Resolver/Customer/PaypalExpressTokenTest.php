@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -12,7 +17,10 @@ use Magento\Paypal\Model\Api\Nvp;
 use Magento\PaypalGraphQl\PaypalExpressAbstractTest;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Quote\Model\QuoteIdToMaskedQuoteId;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test createPaypalExpressToken graphql endpoint for customer
@@ -43,6 +51,10 @@ class PaypalExpressTokenTest extends PaypalExpressAbstractTest
      * Test create paypal token for customer
      *
      * @param string $paymentMethod
+<<<<<<< HEAD
+=======
+     * @dataProvider getPaypalCodesProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoConfigFixture default_store paypal/wpp/sandbox_flag 1
      * @magentoDataFixture Magento/Sales/_files/default_rollback.php
      * @magentoDataFixture Magento/Customer/_files/customer.php
@@ -53,7 +65,10 @@ class PaypalExpressTokenTest extends PaypalExpressAbstractTest
      * @magentoDataFixture Magento/GraphQl/Quote/_files/set_new_billing_address.php
      * @magentoDataFixture Magento/GraphQl/Quote/_files/set_flatrate_shipping_method.php
      */
+<<<<<<< HEAD
     #[DataProvider('getPaypalCodesProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testResolve($paymentMethod): void
     {
         $this->enablePaymentMethod($paymentMethod);
@@ -107,7 +122,11 @@ class PaypalExpressTokenTest extends PaypalExpressAbstractTest
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function getPaypalCodesProvider(): array
+=======
+    public function getPaypalCodesProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['paypal_express'],

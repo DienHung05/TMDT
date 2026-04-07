@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -132,6 +137,7 @@ class OrderGetTest extends WebapiAbstract
         $appliedTaxes = $result['extension_attributes']['item_applied_taxes'];
         self::assertEquals($expectedTax['type'], $appliedTaxes[0]['type']);
         self::assertNotEmpty($appliedTaxes[0]['applied_taxes']);
+<<<<<<< HEAD
         self::assertFalse($result['extension_attributes']['converting_from_quote']);
         self::assertArrayHasKey('payment_additional_info', $result['extension_attributes']);
         self::assertNotEmpty($result['extension_attributes']['payment_additional_info']);
@@ -147,6 +153,11 @@ class OrderGetTest extends WebapiAbstract
         $this->assertEquals(45, $shippingTaxItem['real_amount']);
         $this->assertEquals('shipping', $shippingTaxItem['taxable_item_type']);
         $this->assertEquals('US-NY-*-Rate 1', $shippingTaxItem['tax_code']);
+=======
+        self::assertTrue($result['extension_attributes']['converting_from_quote']);
+        self::assertArrayHasKey('payment_additional_info', $result['extension_attributes']);
+        self::assertNotEmpty($result['extension_attributes']['payment_additional_info']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**

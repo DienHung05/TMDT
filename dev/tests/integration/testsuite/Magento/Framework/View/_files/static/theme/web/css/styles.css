@@ -1,6 +1,11 @@
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 /* FrameworkViewMinifier/frontend */
 table > caption {
@@ -1444,8 +1449,13 @@ fieldset[disabled] .pager .action-next {
   margin-bottom: 25px;
 }
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 .sales-order-create-index .order-errors .notice {
   color: #ed4f2e;

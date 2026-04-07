@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -184,7 +189,11 @@ class Config implements ConfigInterface
      */
     public function getMethodConfig(TestCase $test, ?string $fixtureType = null): array
     {
+<<<<<<< HEAD
         $config = $this->getClassConfig($test)[$test->name()] ?? [];
+=======
+        $config = $this->getClassConfig($test)[$test->getName(false)] ?? [];
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         if ($fixtureType) {
             $config = $config[$fixtureType] ?? [];
@@ -198,7 +207,11 @@ class Config implements ConfigInterface
      */
     public function getDataSetConfig(TestCase $test, ?string $fixtureType = null): array
     {
+<<<<<<< HEAD
         $config = $this->getClassConfig($test)[$test->name()][(string)$test->dataName()] ?? [];
+=======
+        $config = $this->getClassConfig($test)[$test->getName(false)][(string)$test->dataName()] ?? [];
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         if ($fixtureType) {
             $config = $config[$fixtureType] ?? [];
         }

@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
  */
@@ -7,12 +8,21 @@ declare(strict_types=1);
 
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Newsletter\Model\Subscriber;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+declare(strict_types=1);
+
+use Magento\Newsletter\Model\SubscriberFactory;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Workaround\Override\Fixture\Resolver;
 
 Resolver::getInstance()->requireDataFixture('Magento/Customer/_files/three_customers.php');
 
 $objectManager = Bootstrap::getObjectManager();
+<<<<<<< HEAD
 $customerRepository = $objectManager->create(CustomerRepositoryInterface::class);
 
 $customer1 = $customerRepository->get('customer@search.example.com');
@@ -38,3 +48,10 @@ $subscriber3->setStoreId($customer3->getStoreId())
     ->setSubscriberEmail('customer3@search.example.com')
     ->setSubscriberStatus(Subscriber::STATUS_SUBSCRIBED)
     ->save();
+=======
+$subscriberFactory = $objectManager->get(SubscriberFactory::class);
+
+$subscriberFactory->create()->subscribe('customer@search.example.com');
+$subscriberFactory->create()->subscribe('customer2@search.example.com');
+$subscriberFactory->create()->subscribe('customer3@search.example.com');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f

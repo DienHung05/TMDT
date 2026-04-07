@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -20,7 +25,10 @@ use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Provides tests for filters block on category page.
@@ -99,11 +107,18 @@ class CategoryTest extends TestCase
 
     /**
      * @magentoDataFixture Magento/Catalog/_files/category_with_different_price_products.php
+<<<<<<< HEAD
+=======
+     * @dataProvider canShowBlockWithDisplayModeDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $displayMode
      * @param bool $canShow
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('canShowBlockWithDisplayModeDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCanShowBlockWithDisplayMode(string $displayMode, bool $canShow): void
     {
         $this->updateCategoryDisplayMode('Category 999', $displayMode);
@@ -114,24 +129,40 @@ class CategoryTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function canShowBlockWithDisplayModeDataProvider(): array
     {
         return [
             'with_mode_products' => ['displayMode' => CategoryModel::DM_PRODUCT, 'canShow' => true],
             'with_mode_cms_block' => ['displayMode' => CategoryModel::DM_PAGE, 'canShow' => false],
             'with_mode_cms_block_and_products' => ['displayMode' => CategoryModel::DM_MIXED, 'canShow' => true],
+=======
+    public function canShowBlockWithDisplayModeDataProvider(): array
+    {
+        return [
+            'with_mode_products' => ['mode' => CategoryModel::DM_PRODUCT, 'can_show' => true],
+            'with_mode_cms_block' => ['mode' => CategoryModel::DM_PAGE, 'can_show' => false],
+            'with_mode_cms_block_and_products' => ['mode' => CategoryModel::DM_MIXED, 'can_show' => true],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
     }
 
     /**
      * @magentoDataFixture Magento/Store/_files/second_store.php
      * @magentoDataFixture Magento/Catalog/_files/category_with_different_price_products.php
+<<<<<<< HEAD
+=======
+     * @dataProvider canShowBlockWithDisplayModeDataProviderOnStoreView
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $defaultMode
      * @param string $storeMode
      * @param bool $canShow
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('canShowBlockWithDisplayModeDataProviderOnStoreView')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCanShowBlockWithDisplayModeOnStoreView(
         string $defaultMode,
         string $storeMode,
@@ -147,6 +178,7 @@ class CategoryTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function canShowBlockWithDisplayModeDataProviderOnStoreView(): array
     {
         return [
@@ -164,6 +196,25 @@ class CategoryTest extends TestCase
                 'defaultMode' => CategoryModel::DM_PAGE,
                 'storeMode' => CategoryModel::DM_MIXED,
                 'canShow' => true
+=======
+    public function canShowBlockWithDisplayModeDataProviderOnStoreView(): array
+    {
+        return [
+            'with_mode_products' => [
+                'default_mode' => CategoryModel::DM_PAGE,
+                'store_mode' => CategoryModel::DM_PRODUCT,
+                'can_show' => true,
+            ],
+            'with_mode_cms_block' => [
+                'default_mode' => CategoryModel::DM_PRODUCT,
+                'store_mode' => CategoryModel::DM_PAGE,
+                'can_show' => false
+            ],
+            'with_mode_cms_block_and_products' => [
+                'default_mode' => CategoryModel::DM_PAGE,
+                'store_mode' => CategoryModel::DM_MIXED,
+                'can_show' => true
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

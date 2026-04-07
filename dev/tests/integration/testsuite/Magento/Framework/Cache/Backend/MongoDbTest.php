@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
  */
@@ -19,6 +20,17 @@ class MongoDbTest extends \PHPUnit\Framework\TestCase
     /**
      * @var string
      */
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Framework\Cache\Backend;
+
+class MongoDbTest extends \PHPUnit\Framework\TestCase
+{
+    protected $_connectionString;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     protected $_dbName = 'magento_integration_test';
 
     /**
@@ -57,7 +69,11 @@ class MongoDbTest extends \PHPUnit\Framework\TestCase
      */
     public function testConstructorException()
     {
+<<<<<<< HEAD
         $this->expectException(CacheException::class);
+=======
+        $this->expectException(\Zend_Cache_Exception::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->expectExceptionMessage('\'db\' option is not specified');
 
         new \Magento\Framework\Cache\Backend\MongoDb();
@@ -81,7 +97,13 @@ class MongoDbTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $actual);
     }
 
+<<<<<<< HEAD
     #[DataProvider('getIdsMatchingTagsDataProvider')]
+=======
+    /**
+     * @dataProvider getIdsMatchingTagsDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetIdsMatchingTags($searchTags, $expectedIds)
     {
         $this->_prepareCollection();
@@ -89,7 +111,11 @@ class MongoDbTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expectedIds, $actualIds);
     }
 
+<<<<<<< HEAD
     public static function getIdsMatchingTagsDataProvider()
+=======
+    public function getIdsMatchingTagsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'one tag' => [['tag1'], ['test1', 'test2', 'test3']],
@@ -97,7 +123,13 @@ class MongoDbTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+<<<<<<< HEAD
     #[DataProvider('getIdsNotMatchingTagsDataProvider')]
+=======
+    /**
+     * @dataProvider getIdsNotMatchingTagsDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetIdsNotMatchingTags($searchTags, $expectedIds)
     {
         $this->_prepareCollection();
@@ -105,7 +137,11 @@ class MongoDbTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expectedIds, $actualIds);
     }
 
+<<<<<<< HEAD
     public static function getIdsNotMatchingTagsDataProvider()
+=======
+    public function getIdsNotMatchingTagsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'one tag' => [['tag2'], ['test2', 'test4', 'test5']],
@@ -113,7 +149,13 @@ class MongoDbTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+<<<<<<< HEAD
     #[DataProvider('getIdsMatchingAnyTagsDataProvider')]
+=======
+    /**
+     * @dataProvider getIdsMatchingAnyTagsDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetIdsMatchingAnyTags($searchTags, $expectedIds)
     {
         $this->_prepareCollection();
@@ -121,7 +163,11 @@ class MongoDbTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expectedIds, $actualIds);
     }
 
+<<<<<<< HEAD
     public static function getIdsMatchingAnyTagsDataProvider()
+=======
+    public function getIdsMatchingAnyTagsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'no tags' => [[], []],
@@ -145,8 +191,13 @@ class MongoDbTest extends \PHPUnit\Framework\TestCase
     /**
      * @param int $extraLifeTime
      * @param \PHPUnit\Framework\Constraint\Constraint $constraint
+<<<<<<< HEAD
      */
     #[DataProvider('touchDataProvider')]
+=======
+     * @dataProvider touchDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testTouch($extraLifeTime, \PHPUnit\Framework\Constraint\Constraint $constraint)
     {
         $cacheId = 'test';
@@ -157,11 +208,19 @@ class MongoDbTest extends \PHPUnit\Framework\TestCase
         $this->assertThat($this->_model->test($cacheId), $constraint);
     }
 
+<<<<<<< HEAD
     public static function touchDataProvider()
     {
         return [
             'not enough extra lifetime' => [0, self::isFalse()],
             'enough extra lifetime' => [1000, self::logicalNot(self::isFalse())]
+=======
+    public function touchDataProvider()
+    {
+        return [
+            'not enough extra lifetime' => [0, $this->isFalse()],
+            'enough extra lifetime' => [1000, $this->logicalNot($this->isFalse())]
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
     }
 
@@ -170,8 +229,13 @@ class MongoDbTest extends \PHPUnit\Framework\TestCase
      * @param int|bool|null $lifetime
      * @param bool $doNotTestValidity
      * @param string|bool $expected
+<<<<<<< HEAD
      */
     #[DataProvider('loadDataProvider')]
+=======
+     * @dataProvider loadDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testLoad($data, $lifetime, $doNotTestValidity, $expected)
     {
         $cacheId = 'test';
@@ -180,7 +244,11 @@ class MongoDbTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($expected, $actualData);
     }
 
+<<<<<<< HEAD
     public static function loadDataProvider()
+=======
+    public function loadDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'infinite lifetime with validity' => ['test data', null, false, 'test data'],
@@ -220,7 +288,13 @@ class MongoDbTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($this->_model->test($cacheId), "Cache with id '{$cacheId}' has not been removed");
     }
 
+<<<<<<< HEAD
     #[DataProvider('cleanDataProvider')]
+=======
+    /**
+     * @dataProvider cleanDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testClean($mode, $tags, $expectedIds)
     {
         $this->_prepareCollection();
@@ -230,22 +304,39 @@ class MongoDbTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expectedIds, $actualIds);
     }
 
+<<<<<<< HEAD
     public static function cleanDataProvider()
     {
         return [
             'clean all cache' => [CacheConstants::CLEANING_MODE_ALL, [], []],
             'clean cache matching all tags' => [
                 CacheConstants::CLEANING_MODE_MATCHING_TAG,
+=======
+    public function cleanDataProvider()
+    {
+        return [
+            'clean all cache' => [\Zend_Cache::CLEANING_MODE_ALL, [], []],
+            'clean cache matching all tags' => [
+                \Zend_Cache::CLEANING_MODE_MATCHING_TAG,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ['tag1', 'tag2'],
                 ['test2', 'test4', 'test5'],
             ],
             'clean cache not matching tags' => [
+<<<<<<< HEAD
                 CacheConstants::CLEANING_MODE_NOT_MATCHING_TAG,
+=======
+                \Zend_Cache::CLEANING_MODE_NOT_MATCHING_TAG,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ['tag1', 'tag2'],
                 ['test1', 'test2', 'test3'],
             ],
             'clean cache matching any tags' => [
+<<<<<<< HEAD
                 CacheConstants::CLEANING_MODE_MATCHING_ANY_TAG,
+=======
+                \Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ['tag1', 'tag2'],
                 ['test4', 'test5'],
             ]
@@ -257,7 +348,11 @@ class MongoDbTest extends \PHPUnit\Framework\TestCase
         $this->_model->save('long-living entity', 'long', [], 1000);
         $this->_model->save('infinite-living entity', 'infinite', [], null);
         $this->_model->save('short-living entity', 'short', [], 0);
+<<<<<<< HEAD
         $this->_model->clean(CacheConstants::CLEANING_MODE_OLD);
+=======
+        $this->_model->clean(\Zend_Cache::CLEANING_MODE_OLD);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $expectedIds = ['long', 'infinite'];
         $actualIds = $this->_model->getIds();
         $this->assertSame($expectedIds, $actualIds);

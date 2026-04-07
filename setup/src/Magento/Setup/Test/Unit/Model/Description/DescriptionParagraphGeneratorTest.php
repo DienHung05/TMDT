@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -55,6 +60,7 @@ class DescriptionParagraphGeneratorTest extends TestCase
         ];
         // @codingStandardsIgnoreEnd
 
+<<<<<<< HEAD
         $callCount = 0;
         $this->sentenceGeneratorMock
             ->expects($this->exactly(4))
@@ -62,6 +68,17 @@ class DescriptionParagraphGeneratorTest extends TestCase
             ->willReturnCallback(function() use (&$callCount, $consecutiveSentences) {
                 return $consecutiveSentences[$callCount++];
             });
+=======
+        $this->sentenceGeneratorMock
+            ->expects($this->exactly(4))
+            ->method('generate')
+            ->will($this->onConsecutiveCalls(
+                $consecutiveSentences[0],
+                $consecutiveSentences[1],
+                $consecutiveSentences[2],
+                $consecutiveSentences[3]
+            ));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertEquals(
             implode(' ', $consecutiveSentences),

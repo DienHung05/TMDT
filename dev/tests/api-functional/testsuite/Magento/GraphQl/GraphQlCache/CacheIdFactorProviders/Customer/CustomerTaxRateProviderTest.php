@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -78,7 +83,11 @@ QUERY;
         $response = $this->graphQlQueryWithResponseHeaders($query, [], '', $this->getHeaderMap());
         $this->assertArrayHasKey(CacheIdCalculator::CACHE_ID_HEADER, $response['headers']);
         $cacheId = $response['headers'][CacheIdCalculator::CACHE_ID_HEADER];
+<<<<<<< HEAD
         $this->assertTrue((bool)preg_match('/^[0-9a-f]{64}$/i', $cacheId));
+=======
+        $this->assertTrue((boolean)preg_match('/^[0-9a-f]{64}$/i', $cacheId));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         //Change tax rate to different value
         /** @var Rate $rate */
         $rate = $this->taxRate->loadByCode('US-AL-*-Rate-1');
@@ -88,7 +97,11 @@ QUERY;
         $this->assertArrayHasKey(CacheIdCalculator::CACHE_ID_HEADER, $responseAfterTaxRateChange['headers']);
         $cacheIdTaxRateChange = $responseAfterTaxRateChange['headers'][CacheIdCalculator::CACHE_ID_HEADER];
         // Verify that the the cache id generated is a 64 character long
+<<<<<<< HEAD
         $this->assertTrue((bool)preg_match('/^[0-9a-f]{64}$/i', $cacheId));
+=======
+        $this->assertTrue((boolean)preg_match('/^[0-9a-f]{64}$/i', $cacheId));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         // check that the cache ids generated before and after tax rate changes are not equal
         $this->assertNotEquals($cacheId, $cacheIdTaxRateChange);
 

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -76,12 +81,24 @@ class ReaderTest extends \PHPUnit\Framework\TestCase
         $this->objectManager = Bootstrap::getObjectManager();
         $this->fileUtility = Files::init();
 
+<<<<<<< HEAD
         $this->validationStateMock = $this->createMock(ValidationStateInterface::class);
         $this->schemaLocatorMock = $this->getMockBuilder(SchemaLocator::class)
             ->disableOriginalConstructor()
             ->onlyMethods(['getPerFileSchema'])
             ->getMock();
         $this->fileResolverMock = $this->createMock(FileResolverInterface::class);
+=======
+        $this->validationStateMock = $this->getMockBuilder(ValidationStateInterface::class)
+            ->setMethods(['isValidationRequired'])
+            ->getMockForAbstractClass();
+        $this->schemaLocatorMock = $this->getMockBuilder(SchemaLocator::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getPerFileSchema'])
+            ->getMock();
+        $this->fileResolverMock = $this->getMockBuilder(FileResolverInterface::class)
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->validationStateMock->expects($this->atLeastOnce())
             ->method('isValidationRequired')
@@ -93,7 +110,14 @@ class ReaderTest extends \PHPUnit\Framework\TestCase
         $this->converter = $this->objectManager->create(ConverterStub::class);
 
         //Isolate test from actual configuration, and leave only sample data.
+<<<<<<< HEAD
         $this->compiler = $this->createMock(CompilerInterface::class);
+=======
+        $this->compiler = $this->getMockBuilder(CompilerInterface::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['compile'])
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->reader = $this->objectManager->create(
             ReaderStub::class,

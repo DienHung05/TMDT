@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
@@ -8,6 +9,13 @@ namespace Magento\Reports\Block\Adminhtml\Sales\Sales;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Depends;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Reports\Block\Adminhtml\Sales\Sales;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * @magentoAppArea adminhtml
  */
@@ -49,9 +57,15 @@ class GridTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param  string $normalCollection
      */
     #[Depends('testGetResourceCollectionNameNormal')]
+=======
+     * @depends testGetResourceCollectionNameNormal
+     * @param  string $normalCollection
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetResourceCollectionNameWithFilter($normalCollection)
     {
         $block = $this->_createBlock('updated_at_order');
@@ -68,9 +82,15 @@ class GridTest extends \PHPUnit\Framework\TestCase
      * @param $to string
      * @param $expectedResult bool
      *
+<<<<<<< HEAD
      * @magentoDataFixture Magento/Reports/_files/orders.php
      */
     #[DataProvider('getCountTotalsDataProvider')]
+=======
+     * @dataProvider getCountTotalsDataProvider
+     * @magentoDataFixture Magento/Reports/_files/orders.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetCountTotals($from, $to, $expectedResult)
     {
         $block = $this->_createBlock();
@@ -91,7 +111,11 @@ class GridTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function getCountTotalsDataProvider()
+=======
+    public function getCountTotalsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $time = time();
         return [

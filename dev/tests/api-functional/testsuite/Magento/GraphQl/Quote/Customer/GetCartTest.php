@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -131,8 +136,12 @@ class GetCartTest extends GraphQlAbstract
     public function testGetCartIfCartIdIsMissed()
     {
         $this->expectException(\Exception::class);
+<<<<<<< HEAD
         $message = 'Field "cart" argument "cart_id" of type "String!" is required but not provided.';
         $this->expectExceptionMessage($message);
+=======
+        $this->expectExceptionMessage('Field "cart" argument "cart_id" of type "String!" is required but not provided.');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $query = <<<QUERY
 {
@@ -202,8 +211,12 @@ QUERY;
     public function testGetCartWithWrongStore()
     {
         $this->expectException(\Exception::class);
+<<<<<<< HEAD
         $message = 'The account sign-in was incorrect or your account is disabled temporarily.';
         $this->expectExceptionMessage($message.' Please wait and try again later.');
+=======
+        $this->expectExceptionMessage('The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $maskedQuoteId = $this->getMaskedQuoteIdByReservedOrderId->execute('test_order_1');
         $query = $this->getQuery($maskedQuoteId);
@@ -240,7 +253,11 @@ QUERY;
      */
     public function testGetCartForLockedCustomer()
     {
+<<<<<<< HEAD
         $this->markTestSkipped('https://github.com/magento/graphql-ce/issues/750');
+=======
+        $this->markTestIncomplete('https://github.com/magento/graphql-ce/issues/750');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         /* lock customer */
         $customerSecure = $this->customerRegistry->retrieveSecureData(1);

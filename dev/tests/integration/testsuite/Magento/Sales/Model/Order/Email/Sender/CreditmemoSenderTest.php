@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Sales\Model\Order\Email\Sender;
@@ -15,7 +20,10 @@ use Magento\Sales\Model\Order\Email\Container\CreditmemoIdentity;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use Magento\TestFramework\ErrorLog\Logger;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class CreditmemoSenderTest extends TestCase
 {
@@ -28,18 +36,22 @@ class CreditmemoSenderTest extends TestCase
      */
     private $customerRepository;
 
+<<<<<<< HEAD
     /** @var Logger */
     private $logger;
 
     /** @var int */
     private $minErrorDefaultValue;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @inheritDoc
      */
     protected function setUp(): void
     {
         $this->customerRepository = Bootstrap::getObjectManager()->get(CustomerRepositoryInterface::class);
+<<<<<<< HEAD
         $this->logger = Bootstrap::getObjectManager()->get(Logger::class);
 
         $reflection = new \ReflectionClass(get_class($this->logger));
@@ -47,6 +59,8 @@ class CreditmemoSenderTest extends TestCase
         $this->minErrorDefaultValue = $reflectionProperty->getValue($this->logger);
         $reflectionProperty->setValue($this->logger, 400);
         $this->logger->clearMessages();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -66,7 +80,10 @@ class CreditmemoSenderTest extends TestCase
 
         $creditmemoSender = Bootstrap::getObjectManager()->create(CreditmemoSender::class);
         $result = $creditmemoSender->send($creditmemo, true);
+<<<<<<< HEAD
         $this->assertEmpty($this->logger->getMessages());
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertTrue($result);
         $this->assertNotEmpty($creditmemo->getEmailSent());
@@ -92,7 +109,10 @@ class CreditmemoSenderTest extends TestCase
         $craditmemoIdentity = $this->createCreditMemoIdentity();
         $creditmemoSender = $this->createCreditMemoSender($craditmemoIdentity);
         $result = $creditmemoSender->send($creditmemo, true);
+<<<<<<< HEAD
         $this->assertEmpty($this->logger->getMessages());
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertEquals(self::NEW_CUSTOMER_EMAIL, $craditmemoIdentity->getCustomerEmail());
         $this->assertTrue($result);
@@ -115,7 +135,10 @@ class CreditmemoSenderTest extends TestCase
         $craditmemoIdentity = $this->createCreditMemoIdentity();
         $creditmemoSender = $this->createCreditMemoSender($craditmemoIdentity);
         $result = $creditmemoSender->send($creditmemo, true);
+<<<<<<< HEAD
         $this->assertEmpty($this->logger->getMessages());
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertEquals(self::OLD_CUSTOMER_EMAIL, $craditmemoIdentity->getCustomerEmail());
         $this->assertTrue($result);
@@ -138,7 +161,10 @@ class CreditmemoSenderTest extends TestCase
         $creditmemoIdentity = $this->createCreditMemoIdentity();
         $creditmemoSender = $this->createCreditMemoSender($creditmemoIdentity);
         $result = $creditmemoSender->send($creditmemo, true);
+<<<<<<< HEAD
         $this->assertEmpty($this->logger->getMessages());
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertEquals(self::ORDER_EMAIL, $creditmemoIdentity->getCustomerEmail());
         $this->assertTrue($result);
@@ -166,7 +192,10 @@ class CreditmemoSenderTest extends TestCase
         $creditmemo->setOrder($order);
         $creditmemoSender = Bootstrap::getObjectManager()->create(CreditmemoSender::class);
         $result = $creditmemoSender->send($creditmemo);
+<<<<<<< HEAD
         $this->assertEmpty($this->logger->getMessages());
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertFalse($result);
         $this->assertTrue($creditmemo->getSendEmail());
     }
@@ -201,6 +230,7 @@ class CreditmemoSenderTest extends TestCase
                 ]
             );
     }
+<<<<<<< HEAD
 
     /**
      * @inheritdoc
@@ -210,4 +240,6 @@ class CreditmemoSenderTest extends TestCase
         $reflectionProperty = new \ReflectionProperty(get_class($this->logger), 'minimumErrorLevel');
         $reflectionProperty->setValue($this->logger, $this->minErrorDefaultValue);
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

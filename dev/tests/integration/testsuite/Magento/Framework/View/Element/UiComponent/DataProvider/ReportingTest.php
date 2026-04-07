@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -14,7 +19,10 @@ use Magento\Framework\Api\Search\SearchCriteriaInterface;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Represents FilterPool methods test class
@@ -37,10 +45,17 @@ class ReportingTest extends TestCase
     /**
      * @magentoDataFixture Magento/Customer/_files/five_repository_customers.php
      * @magentoDbIsolation disabled
+<<<<<<< HEAD
      * @param array $filters
      * @param int $expectedCount
      */
     #[DataProvider('filtersDataProvider')]
+=======
+     * @dataProvider filtersDataProvider
+     * @param array $filters
+     * @param int $expectedCount
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSearchItemsByOrCondition(array $filters, int $expectedCount): void
     {
         $filterGroups = [];
@@ -78,7 +93,11 @@ class ReportingTest extends TestCase
     /**
      * @return array[]
      */
+<<<<<<< HEAD
     public static function filtersDataProvider()
+=======
+    public function filtersDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'variation 1 (filter OR filter) AND filter' => [
@@ -99,7 +118,11 @@ class ReportingTest extends TestCase
                         'condition_type' => 'eq',
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedCount' => 2,
+=======
+                'expected_count' => 2,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             'variation 2 (filter OR filter) AND filter' => [
                 'filters' => [
@@ -119,7 +142,11 @@ class ReportingTest extends TestCase
                         'condition_type' => 'like',
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedCount' => 5,
+=======
+                'expected_count' => 5,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             'variation 3 (filter OR filter) AND filter' => [
                 'filters' => [
@@ -139,7 +166,11 @@ class ReportingTest extends TestCase
                         'condition_type' => 'eq',
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedCount' => 1,
+=======
+                'expected_count' => 1,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             'variation (filter OR filter) AND filter AND (filter OR filter)' => [
                 'filters' => [
@@ -169,7 +200,11 @@ class ReportingTest extends TestCase
                         'condition_type' => 'like',
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedCount' => 1,
+=======
+                'expected_count' => 1,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

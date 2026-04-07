@@ -2,8 +2,13 @@
 /**
  * Magento console installer options for Web API functional tests. Are used in functional tests bootstrap.
  *
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 return [
     'language'                     => 'en_US',
@@ -27,7 +32,13 @@ return [
     'sales-order-increment-prefix' => time(),
     'session-save'                 => 'db',
     'cleanup-database'             => true,
+<<<<<<< HEAD
     'search-engine'                => 'opensearch',
     'opensearch-host'           => 'localhost',
     'opensearch-port'           => 9200,
+=======
+    'search-engine'                => 'elasticsearch7',
+    'elasticsearch-host'           => 'localhost',
+    'elasticsearch-port'           => 9200,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 ];

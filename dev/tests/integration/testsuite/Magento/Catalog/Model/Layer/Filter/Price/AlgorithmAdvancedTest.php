@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Catalog\Model\Layer\Filter\Price;
 
@@ -93,7 +98,11 @@ class AlgorithmAdvancedTest extends \PHPUnit\Framework\TestCase
      */
     public function testWithLimits()
     {
+<<<<<<< HEAD
         $this->markTestSkipped('Bug MAGE-6561');
+=======
+        $this->markTestIncomplete('Bug MAGE-6561');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $layer = $this->createLayer();
         $priceResource = $this->createPriceResource($layer);

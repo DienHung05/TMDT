@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -22,6 +27,7 @@ class FileLockTest extends \PHPUnit\Framework\TestCase
      */
     private $objectManager;
 
+<<<<<<< HEAD
     /** @var string */
     private string $lockPath;
 
@@ -32,6 +38,14 @@ class FileLockTest extends \PHPUnit\Framework\TestCase
         $this->model = $this->objectManager->create(
             \Magento\Framework\Lock\Backend\FileLock::class,
             ['path' => $this->lockPath]
+=======
+    protected function setUp(): void
+    {
+        $this->objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
+        $this->model = $this->objectManager->create(
+            \Magento\Framework\Lock\Backend\FileLock::class,
+            ['path' => '/tmp']
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
     }
 
@@ -56,6 +70,7 @@ class FileLockTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($this->model->isLocked($name));
         $this->assertFalse($this->model->unlock($name));
     }
+<<<<<<< HEAD
 
     public function testCleanupOldFile()
     {
@@ -80,4 +95,6 @@ class FileLockTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(0, $this->model->cleanupOldLocks());
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

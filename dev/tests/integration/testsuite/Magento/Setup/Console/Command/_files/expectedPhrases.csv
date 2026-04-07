@@ -18,7 +18,10 @@
 "string with escaped ""double quotes""","string with escaped ""double quotes"""
 "string with placeholder in escaped double quotes ""%1""","string with placeholder in escaped double quotes ""%1"""
 "string that's got an unclosed single quote in it","string that's got an unclosed single quote in it"
+<<<<<<< HEAD
 "Thank you for your order from %store_name.","Thank you for your order from %store_name."
 "Our hours are <span class=""no-link"">%store_hours</span>.","Our hours are <span class=""no-link"">%store_hours</span>."
 "Translation inside if directive","Translation inside if directive"
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 "Test di text","Test di text"

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -26,14 +31,22 @@ class WordsFinder
      *
      * @var string
      */
+<<<<<<< HEAD
     protected $copyrightString = 'Adobe';
+=======
+    protected $copyrightString = 'Copyright © Magento, Inc. All rights reserved.';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * Copying string which must be present in every non-binary file right after copyright string
      *
      * @var string
      */
+<<<<<<< HEAD
     protected $copyingString = 'All Rights Reserved.';
+=======
+    protected $copyingString = 'See COPYING.txt for license details.';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * List of extensions for which copyright check must be skipped

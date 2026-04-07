@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -12,7 +17,10 @@ use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use Magento\Setup\Module\I18n\Dictionary\Options\Resolver;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class ResolverTest extends TestCase
 {
@@ -20,8 +28,13 @@ class ResolverTest extends TestCase
      * @param string $directory
      * @param bool $withContext
      * @param array $result
+<<<<<<< HEAD
      */
     #[DataProvider('getOptionsDataProvider')]
+=======
+     * @dataProvider getOptionsDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetOptions($directory, $withContext, $result)
     {
         $objectManagerHelper = new ObjectManager($this);
@@ -53,7 +66,11 @@ class ResolverTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getOptionsDataProvider()
+=======
+    public function getOptionsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $sourceFirst = __DIR__ . '/_files/source';
         $sourceSecond = __DIR__ . '/_files/source';
@@ -119,8 +136,13 @@ class ResolverTest extends TestCase
      * @param string $directory
      * @param bool $withContext
      * @param string $message
+<<<<<<< HEAD
      */
     #[DataProvider('getOptionsWrongDirDataProvider')]
+=======
+     * @dataProvider getOptionsWrongDirDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetOptionsWrongDir($directory, $withContext, $message)
     {
         $componentRegistrar = $this->createMock(ComponentRegistrar::class);
@@ -148,7 +170,11 @@ class ResolverTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getOptionsWrongDirDataProvider()
+=======
+    public function getOptionsWrongDirDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['not_exist', true, 'Specified path is not a Magento root directory'],

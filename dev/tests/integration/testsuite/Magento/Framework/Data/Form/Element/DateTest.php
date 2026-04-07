@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Framework\Data\Form\Element;
 
 use Magento\Framework\Data\Form\ElementFactory;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Tests for \Magento\Framework\Data\Form\Element\Date
@@ -35,8 +43,13 @@ class DateTest extends \PHPUnit\Framework\TestCase
      * @param array $data
      * @param string $expect
      * @return void
+<<<<<<< HEAD
      */
     #[DataProvider('getValueDataProvider')]
+=======
+     * @dataProvider getValueDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetValue(array $data, string $expect): void
     {
         /** @var $date Date */
@@ -49,7 +62,11 @@ class DateTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function getValueDataProvider(): array
+=======
+    public function getValueDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $stringDates = ['2020-05-18 12:08:16', '1920-10-25 10:10:10', '2122-01-11 10:30:00'];
         $testTimestamps = [strtotime($stringDates[0]), strtotime($stringDates[1]), strtotime($stringDates[2])];

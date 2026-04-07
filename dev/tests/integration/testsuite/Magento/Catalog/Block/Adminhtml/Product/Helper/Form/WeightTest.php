@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Catalog\Block\Adminhtml\Product\Helper\Form;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Catalog\Block\Adminhtml\Product\Helper\Form;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class WeightTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -27,8 +35,13 @@ class WeightTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @param string $type
+<<<<<<< HEAD
      */
     #[DataProvider('virtualTypesDataProvider')]
+=======
+     * @dataProvider virtualTypesDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testProductWithoutWeight($type)
     {
         /** @var $currentProduct \Magento\Catalog\Model\Product */
@@ -60,8 +73,13 @@ class WeightTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @param string $type
+<<<<<<< HEAD
      */
     #[DataProvider('physicalTypesDataProvider')]
+=======
+     * @dataProvider physicalTypesDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testProductHasWeight($type)
     {
         /** @var $currentProduct \Magento\Catalog\Model\Product */

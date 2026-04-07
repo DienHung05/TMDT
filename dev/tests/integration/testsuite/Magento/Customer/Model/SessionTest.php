@@ -1,20 +1,32 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
 namespace Magento\Customer\Model;
 
 use Magento\Eav\Model\Cache\Type as EavCacheType;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Customer\Model;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\App\PageCache\FormKey;
 use Magento\Framework\App\Response\Http as HttpResponse;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Session\SidResolverInterface;
 use Magento\Framework\Stdlib\Cookie\CookieMetadataFactory;
 use Magento\Framework\Stdlib\Cookie\PublicCookieMetadata;
+<<<<<<< HEAD
 use Magento\TestFramework\Fixture\Cache as CacheAlias;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoDataFixture Magento/Customer/_files/customer.php
@@ -69,6 +81,7 @@ class SessionTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($this->_customerSession->isLoggedIn());
     }
 
+<<<<<<< HEAD
     /**
      * @param bool $expectedResult
      * @param bool $isCustomerIdValid
@@ -105,6 +118,8 @@ class SessionTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testLoginByIdCustomerDataLoadedCorrectly()
     {
         $fixtureCustomerId = 1;
@@ -170,6 +185,7 @@ class SessionTest extends \PHPUnit\Framework\TestCase
         $this->assertNotEmpty($location);
         $this->assertStringNotContainsString(SidResolverInterface::SESSION_ID_QUERY_PARAM . '=', $location);
     }
+<<<<<<< HEAD
 
     #[
         CacheAlias(EavCacheType::TYPE_IDENTIFIER, false),
@@ -179,4 +195,6 @@ class SessionTest extends \PHPUnit\Framework\TestCase
         $result = $this->_customerSession->checkCustomerId(1);
         $this->assertTrue($result);
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

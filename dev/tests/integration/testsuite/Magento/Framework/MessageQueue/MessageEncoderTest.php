@@ -1,12 +1,20 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Framework\MessageQueue;
 
+<<<<<<< HEAD
 use Magento\Framework\Exception\LocalizedException;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\MessageQueue\MessageEncoder;
 use Magento\Framework\Communication\Config;
@@ -120,9 +128,16 @@ class MessageEncoderTest extends \PHPUnit\Framework\TestCase
      */
     public function testDecodeInvalidMessage()
     {
+<<<<<<< HEAD
         $this->expectException(LocalizedException::class);
 
         $message = 'customer.created" must be an instance of "Magento\Customer\Api\Data\CustomerInterface".';
+=======
+        $this->expectException(\LogicException::class);
+
+        $message = 'Property "NotExistingField" does not have accessor method "getNotExistingField" in class '
+            . '"Magento\Customer\Api\Data\CustomerInterface".';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->expectExceptionMessage($message);
         $this->encoder->decode('customer.created', '{"not_existing_field": "value"}');
     }
@@ -223,6 +238,10 @@ JSON;
     {
         $reflection = new \ReflectionClass(get_class($object));
         $reflectionProperty = $reflection->getProperty($propertyName);
+<<<<<<< HEAD
+=======
+        $reflectionProperty->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $reflectionProperty->setValue($object, $propertyValue);
     }
 }

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Backend\Block\Widget\Grid\Column\Renderer;
 
@@ -11,7 +16,10 @@ use Magento\Backend\Block\Widget\Grid\Column;
 use Magento\Framework\DataObject;
 use Magento\Framework\Phrase;
 use Magento\Framework\Phrase\RendererInterface;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class TextTest extends \PHPUnit\Framework\TestCase
 {
@@ -30,7 +38,11 @@ class TextTest extends \PHPUnit\Framework\TestCase
         $this->objectManager = Bootstrap::getObjectManager();
         $this->origRenderer = Phrase::getRenderer();
         /** @var RendererInterface|PHPUnit\Framework\MockObject_MockObject $rendererMock */
+<<<<<<< HEAD
         $rendererMock = $this->createMock(RendererInterface::class);
+=======
+        $rendererMock = $this->getMockForAbstractClass(RendererInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $rendererMock->expects($this->any())
             ->method('render')
             ->willReturnCallback(
@@ -50,8 +62,13 @@ class TextTest extends \PHPUnit\Framework\TestCase
      * @param array $columnData
      * @param array $rowData
      * @param string $expected
+<<<<<<< HEAD
      */
     #[DataProvider('renderDataProvider')]
+=======
+     * @dataProvider renderDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRender($columnData, $rowData, $expected)
     {
         /** @var Text $renderer */
@@ -79,7 +96,11 @@ class TextTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function renderDataProvider()
+=======
+    public function renderDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

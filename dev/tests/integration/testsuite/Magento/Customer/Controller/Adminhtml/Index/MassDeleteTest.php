@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -15,7 +20,10 @@ use Magento\Framework\Message\MessageInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\Framework\App\Request\Http as HttpRequest;
 use Magento\TestFramework\TestCase\AbstractBackendController;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea adminhtml
@@ -69,8 +77,13 @@ class MassDeleteTest extends AbstractBackendController
      * @param string|null $messageType
      * @magentoDataFixture Magento/Customer/_files/five_repository_customers.php
      * @magentoDbIsolation disabled
+<<<<<<< HEAD
      */
     #[DataProvider('failedRequestDataProvider')]
+=======
+     * @dataProvider failedRequestDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testFailedMassDeleteAction($ids, Constraint $constraint, $messageType)
     {
         $this->massDeleteAssertions($ids, $constraint, $messageType);
@@ -84,8 +97,13 @@ class MassDeleteTest extends AbstractBackendController
      * @param string $messageType
      * @magentoDataFixture Magento/Customer/_files/five_repository_customers.php
      * @magentoDbIsolation disabled
+<<<<<<< HEAD
      */
     #[DataProvider('successRequestDataProvider')]
+=======
+     * @dataProvider successRequestDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSuccessMassDeleteAction(array $emails, Constraint $constraint, string $messageType)
     {
         $ids = [];
@@ -130,7 +148,11 @@ class MassDeleteTest extends AbstractBackendController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function failedRequestDataProvider(): array
+=======
+    public function failedRequestDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -156,16 +178,28 @@ class MassDeleteTest extends AbstractBackendController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function successRequestDataProvider(): array
     {
         return [
             [
                 'emails' => ['customer1@example.com'],
+=======
+    public function successRequestDataProvider(): array
+    {
+        return [
+            [
+                'customerEmails' => ['customer1@example.com'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'constraint' => self::equalTo(['A total of 1 record(s) were deleted.']),
                 'messageType' => MessageInterface::TYPE_SUCCESS,
             ],
             [
+<<<<<<< HEAD
                 'emails' => ['customer2@example.com', 'customer3@example.com'],
+=======
+                'customerEmails' => ['customer2@example.com', 'customer3@example.com'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'constraint' => self::equalTo(['A total of 2 record(s) were deleted.']),
                 'messageType' => MessageInterface::TYPE_SUCCESS,
             ],

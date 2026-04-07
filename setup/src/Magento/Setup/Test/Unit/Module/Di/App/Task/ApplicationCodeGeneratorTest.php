@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -13,7 +18,10 @@ use Magento\Setup\Module\Di\Code\Scanner;
 use Magento\Setup\Module\Di\Code\Scanner\DirectoryScanner;
 use Magento\Setup\Module\Di\Code\Scanner\PhpScanner;
 use PHPUnit\Framework\MockObject\MockObject;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 class ApplicationCodeGeneratorTest extends TestCase
@@ -50,8 +58,13 @@ class ApplicationCodeGeneratorTest extends TestCase
     /**
      * @param array $data
      *
+<<<<<<< HEAD
      */
     #[DataProvider('doOperationWrongDataDataProvider')]
+=======
+     * @dataProvider doOperationWrongDataDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDoOperationWrongData($data)
     {
         $model = new ApplicationCodeGenerator(
@@ -74,7 +87,11 @@ class ApplicationCodeGeneratorTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function doOperationWrongDataDataProvider()
+=======
+    public function doOperationWrongDataDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [[]],

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -11,8 +16,12 @@ namespace Magento\Test\Integrity\Magento\Payment;
 
 use Magento\Framework\App\State;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\TestStatus\TestStatus;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
@@ -21,10 +30,17 @@ class MethodsTest extends \PHPUnit\Framework\TestCase
     /**
      * @param string $methodClass
      * @param string $code
+<<<<<<< HEAD
      * @magentoAppArea frontend
      * @throws \Exception on various assertion failures
      */
     #[DataProvider('paymentMethodDataProvider')]
+=======
+     * @dataProvider paymentMethodDataProvider
+     * @magentoAppArea frontend
+     * @throws \Exception on various assertion failures
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPaymentMethod($code, $methodClass)
     {
         if (in_array($code, ['free', 'substitution', 'vault', 'payflowpro_cc_vault', 'fake_vault'])) {
@@ -49,7 +65,11 @@ class MethodsTest extends \PHPUnit\Framework\TestCase
         if ($code == \Magento\Payment\Model\Method\Substitution::CODE) {
             $paymentInfo = $this->getMockBuilder(
                 \Magento\Payment\Model\Info::class
+<<<<<<< HEAD
             )->disableOriginalConstructor()->onlyMethods(
+=======
+            )->disableOriginalConstructor()->setMethods(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 []
             )->getMock();
             $paymentInfo->expects(
@@ -103,6 +123,7 @@ class MethodsTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function paymentMethodDataProvider()
     {
         /** @var $helper \Magento\Payment\Helper\Data */
@@ -112,6 +133,16 @@ class MethodsTest extends \PHPUnit\Framework\TestCase
         foreach ($helper->getPaymentMethods() as $code => $method) {
             if (!isset($method['model'])) {
                 TestStatus::warning(
+=======
+    public function paymentMethodDataProvider()
+    {
+        /** @var $helper \Magento\Payment\Helper\Data */
+        $helper = Bootstrap::getObjectManager()->get(\Magento\Payment\Helper\Data::class);
+        $result = [];
+        foreach ($helper->getPaymentMethods() as $code => $method) {
+            if (!isset($method['model'])) {
+                $this->addWarning(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'The `model` node must be provided for payment method configuration with code: ' . $code
                 );
                 continue;

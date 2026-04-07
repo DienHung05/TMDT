@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -38,7 +43,10 @@ class CmsBlockTest extends GraphQlAbstract
     /**
      * Verify the fields of CMS Block selected by identifiers
      *
+<<<<<<< HEAD
      * @magentoConfigFixture default_store web/seo/use_rewrites 1
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoApiDataFixture Magento/Cms/_files/blocks.php
      */
     public function testGetCmsBlock()
@@ -72,7 +80,10 @@ QUERY;
     /**
      * Verify the fields of CMS Block selected by block_id
      *
+<<<<<<< HEAD
      * @magentoConfigFixture default_store web/seo/use_rewrites 1
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoApiDataFixture Magento/Cms/_files/blocks.php
      */
     public function testGetCmsBlockByBlockId()

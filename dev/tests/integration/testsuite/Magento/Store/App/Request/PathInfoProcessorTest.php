@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Store\App\Request;
 
 use Magento\Framework\App\RequestInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class PathInfoProcessorTest extends TestCase
 {
@@ -25,9 +33,15 @@ class PathInfoProcessorTest extends TestCase
     /**
      * @covers \Magento\Store\App\Request\PathInfoProcessor::process
      * @magentoConfigFixture web/url/use_store 1
+<<<<<<< HEAD
      * @param string $pathInfo
      */
     #[DataProvider('notValidStoreCodeDataProvider')]
+=======
+     * @dataProvider notValidStoreCodeDataProvider
+     * @param string $pathInfo
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testProcessNotValidStoreCode(string $pathInfo)
     {
         $request = Bootstrap::getObjectManager()->create(RequestInterface::class);
@@ -35,6 +49,7 @@ class PathInfoProcessorTest extends TestCase
         $this->assertEquals($pathInfo, $info);
     }
 
+<<<<<<< HEAD
     public static function notValidStoreCodeDataProvider(): array
     {
         return [
@@ -63,6 +78,16 @@ class PathInfoProcessorTest extends TestCase
                     'pathInfo' => '/'
                 ]
             ,
+=======
+    public function notValidStoreCodeDataProvider(): array
+    {
+        return [
+            ['default store id' => '/0/m/c/a'],
+            ['main store id' => '/1/m/c/a'],
+            ['nonexistent store code' => '/test_string/m/c/a'],
+            ['admin store code' => '/admin/m/c/a'],
+            ['empty path' => '/'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
     }
 

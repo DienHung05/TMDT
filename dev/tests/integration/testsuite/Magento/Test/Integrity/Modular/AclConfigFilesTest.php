@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Test\Integrity\Modular;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Test\Integrity\Modular;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class AclConfigFilesTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -32,8 +40,13 @@ class AclConfigFilesTest extends \PHPUnit\Framework\TestCase
     /**
      * Test each acl configuration file
      * @param string $file
+<<<<<<< HEAD
      */
     #[DataProvider('aclConfigFileDataProvider')]
+=======
+     * @dataProvider aclConfigFileDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAclConfigFile($file)
     {
         $validationStateMock = $this->createMock(\Magento\Framework\Config\ValidationStateInterface::class);
@@ -51,7 +64,11 @@ class AclConfigFilesTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function aclConfigFileDataProvider()
+=======
+    public function aclConfigFileDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return \Magento\Framework\App\Utility\Files::init()->getConfigFiles('acl.xml');
     }

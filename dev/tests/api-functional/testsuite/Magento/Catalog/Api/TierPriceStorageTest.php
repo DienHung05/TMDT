@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Catalog\Api;
 
@@ -9,9 +14,12 @@ use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\Data\TierPriceInterface;
 use Magento\Framework\Webapi\Rest\Request;
 use Magento\TestFramework\TestCase\WebapiAbstract;
+<<<<<<< HEAD
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Customer\Model\Group;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test all API calls for tier price storage.
@@ -21,10 +29,13 @@ class TierPriceStorageTest extends WebapiAbstract
     private const SERVICE_NAME = 'catalogTierPriceStorageV1';
     private const SERVICE_VERSION = 'V1';
     private const SIMPLE_PRODUCT_SKU = 'simple';
+<<<<<<< HEAD
     private const CUSTOMER_ALL_GROUPS_NAME ='ALL GROUPS';
     private const CUSTOMER_GENERAL_GROUP_NAME ='General';
     private const CUSTOMER_NOT_LOGGED_IN_GROUP_NAME ='NOT LOGGED IN';
     private const WRONG_CUSTOMER_GROUP_NAME ='general';
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var \Magento\TestFramework\ObjectManager
@@ -96,7 +107,11 @@ class TierPriceStorageTest extends WebapiAbstract
             'price_type' => TierPriceInterface::PRICE_TYPE_DISCOUNT,
             'website_id' => 0,
             'sku' => self::SIMPLE_PRODUCT_SKU,
+<<<<<<< HEAD
             'customer_group' => self::CUSTOMER_ALL_GROUPS_NAME,
+=======
+            'customer_group' => 'ALL GROUPS',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'quantity' => 7778
         ];
         $updatedPrice = [
@@ -104,7 +119,11 @@ class TierPriceStorageTest extends WebapiAbstract
             'price_type' => TierPriceInterface::PRICE_TYPE_FIXED,
             'website_id' => 0,
             'sku' => self::SIMPLE_PRODUCT_SKU,
+<<<<<<< HEAD
             'customer_group' => self::CUSTOMER_NOT_LOGGED_IN_GROUP_NAME,
+=======
+            'customer_group' => 'not logged in',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'quantity' => $tierPrice->getQty()
         ];
         $response = $this->_webApiCall($serviceInfo, ['prices' => [$updatedPrice, $newPrice]]);
@@ -185,7 +204,11 @@ class TierPriceStorageTest extends WebapiAbstract
                 'price_type' => TierPriceInterface::PRICE_TYPE_DISCOUNT,
                 'website_id' => 0,
                 'sku' => self::SIMPLE_PRODUCT_SKU,
+<<<<<<< HEAD
                 'customer_group' => self::CUSTOMER_GENERAL_GROUP_NAME,
+=======
+                'customer_group' => 'general',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'quantity' => 7778
             ],
             [
@@ -193,7 +216,11 @@ class TierPriceStorageTest extends WebapiAbstract
                 'price_type' => TierPriceInterface::PRICE_TYPE_FIXED,
                 'website_id' => 0,
                 'sku' => self::SIMPLE_PRODUCT_SKU,
+<<<<<<< HEAD
                 'customer_group' => self::CUSTOMER_NOT_LOGGED_IN_GROUP_NAME,
+=======
+                'customer_group' => 'not logged in',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'quantity' => 33
             ]
         ];
@@ -229,7 +256,11 @@ class TierPriceStorageTest extends WebapiAbstract
                 'price_type' => TierPriceInterface::PRICE_TYPE_FIXED,
                 'website_id' => 0,
                 'sku' => self::SIMPLE_PRODUCT_SKU,
+<<<<<<< HEAD
                 'customer_group' => self::WRONG_CUSTOMER_GROUP_NAME,
+=======
+                'customer_group' => 'general',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'quantity' => 2
             ],
             [
@@ -237,7 +268,11 @@ class TierPriceStorageTest extends WebapiAbstract
                 'price_type' => TierPriceInterface::PRICE_TYPE_FIXED,
                 'website_id' => 0,
                 'sku' => self::SIMPLE_PRODUCT_SKU,
+<<<<<<< HEAD
                 'customer_group' => self::WRONG_CUSTOMER_GROUP_NAME,
+=======
+                'customer_group' => 'general',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'quantity' => 2
             ]
         ];
@@ -271,8 +306,13 @@ class TierPriceStorageTest extends WebapiAbstract
                 ? TierPriceInterface::PRICE_TYPE_DISCOUNT
                 : TierPriceInterface::PRICE_TYPE_FIXED;
             $customerGroup = $tierPrice->getCustomerGroupId() == \Magento\Customer\Model\Group::NOT_LOGGED_IN_ID
+<<<<<<< HEAD
                 ? self::CUSTOMER_NOT_LOGGED_IN_GROUP_NAME
                 : self::CUSTOMER_ALL_GROUPS_NAME;
+=======
+                ? 'NOT LOGGED IN'
+                : 'ALL GROUPS';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $pricesToDelete[] = [
                 'price' => $tierPriceValue,
                 'price_type' => $priceType,
@@ -304,6 +344,7 @@ class TierPriceStorageTest extends WebapiAbstract
     }
 
     /**
+<<<<<<< HEAD
      * Test to validate the incorrect website id.
      */
     #[
@@ -402,6 +443,8 @@ class TierPriceStorageTest extends WebapiAbstract
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Check prise exists and is correct.
      *
      * @param array $price

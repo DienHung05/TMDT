@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -22,7 +27,10 @@ use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Store\Model\Store;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -114,11 +122,18 @@ class HelperTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_image.php
      * @magentoDataFixture Magento/ConfigurableProduct/_files/product_configurable.php
+<<<<<<< HEAD
+=======
+     * @dataProvider initializeDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $childProducts
      * @param array $expectedImages
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('initializeDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testInitialize(array $childProducts, array $expectedImages): void
     {
         $this->setRequestParams($childProducts);
@@ -131,11 +146,18 @@ class HelperTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_image.php
      * @magentoDataFixture Magento/ConfigurableProduct/_files/product_configurable.php
+<<<<<<< HEAD
+=======
+     * @dataProvider initializeWithExistingChildImagesDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $childProducts
      * @param array $expectedImages
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('initializeWithExistingChildImagesDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testInitializeWithExistingChildImages(array $childProducts, array $expectedImages): void
     {
         $this->updateChildProductsImages(
@@ -152,6 +174,7 @@ class HelperTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function initializeDataProvider(): array
     {
         return [
@@ -159,18 +182,35 @@ class HelperTest extends TestCase
                 'childProducts' => [
                     'simple_10' => [
                         'media_gallery' => self::getMediaGallery(['ben062bdw2v' => '/m/a/magento_image.jpg.tmp']),
+=======
+    public function initializeDataProvider(): array
+    {
+        return [
+            'children_with_same_image_and_roles' => [
+                'child_products' => [
+                    'simple_10' => [
+                        'media_gallery' => $this->getMediaGallery(['ben062bdw2v' => '/m/a/magento_image.jpg.tmp']),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         'images' => [
                             '/m/a/magento_image.jpg.tmp' => ['swatch_image', 'small_image', 'image', 'thumbnail'],
                         ],
                     ],
                     'simple_20' => [
+<<<<<<< HEAD
                         'media_gallery' => self::getMediaGallery(['ben062bdw2v' => '/m/a/magento_image.jpg.tmp']),
+=======
+                        'media_gallery' => $this->getMediaGallery(['ben062bdw2v' => '/m/a/magento_image.jpg.tmp']),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         'images' => [
                             '/m/a/magento_image.jpg.tmp' => ['swatch_image', 'small_image', 'image', 'thumbnail'],
                         ],
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedImages' => [
+=======
+                'expected_images' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple_10' => [
                         '/m/a/magento_image_1.jpg' => ['swatch_image', 'small_image', 'image', 'thumbnail'],
                     ],
@@ -180,15 +220,25 @@ class HelperTest extends TestCase
                 ],
             ],
             'children_with_different_images' => [
+<<<<<<< HEAD
                 'childProducts' => [
                     'simple_10' => [
                         'media_gallery' => self::getMediaGallery(['ben062bdw2v' => '/m/a/magento_image.jpg.tmp']),
+=======
+                'child_products' => [
+                    'simple_10' => [
+                        'media_gallery' => $this->getMediaGallery(['ben062bdw2v' => '/m/a/magento_image.jpg.tmp']),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         'images' => [
                             '/m/a/magento_image.jpg.tmp' => ['swatch_image', 'small_image', 'image', 'thumbnail'],
                         ],
                     ],
                     'simple_20' => [
+<<<<<<< HEAD
                         'media_gallery' => self::getMediaGallery(
+=======
+                        'media_gallery' => $this->getMediaGallery(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                             ['lrwuv5ukisn' => '/m/a/magento_small_image.jpg.tmp']
                         ),
                         'images' => [
@@ -196,7 +246,11 @@ class HelperTest extends TestCase
                         ],
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedImages' => [
+=======
+                'expected_images' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple_10' => [
                         '/m/a/magento_image_1.jpg' => ['swatch_image', 'small_image', 'image', 'thumbnail'],
                     ],
@@ -206,9 +260,15 @@ class HelperTest extends TestCase
                 ],
             ],
             'children_with_different_image_roles' => [
+<<<<<<< HEAD
                 'childProducts' => [
                     'simple_10' => [
                         'media_gallery' => self::getMediaGallery(
+=======
+                'child_products' => [
+                    'simple_10' => [
+                        'media_gallery' => $this->getMediaGallery(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                             [
                                 'ben062bdw2v' => '/m/a/magento_image.jpg.tmp',
                                 'lrwuv5ukisn' => '/m/a/magento_small_image.jpg.tmp',
@@ -220,7 +280,11 @@ class HelperTest extends TestCase
                         ],
                     ],
                     'simple_20' => [
+<<<<<<< HEAD
                         'media_gallery' => self::getMediaGallery(
+=======
+                        'media_gallery' => $this->getMediaGallery(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                             [
                                 'ben062bdw2v' => '/m/a/magento_image.jpg.tmp',
                                 'lrwuv5ukisn' => '/m/a/magento_small_image.jpg.tmp',
@@ -232,7 +296,11 @@ class HelperTest extends TestCase
                         ],
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedImages' => [
+=======
+                'expected_images' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple_10' => [
                         '/m/a/magento_image_1.jpg' => ['swatch_image', 'small_image'],
                         '/m/a/magento_small_image_1.jpg' => ['image', 'thumbnail'],
@@ -249,9 +317,15 @@ class HelperTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function initializeWithExistingChildImagesDataProvider(): array
     {
         $dataProvider = self::initializeDataProvider();
+=======
+    public function initializeWithExistingChildImagesDataProvider(): array
+    {
+        $dataProvider = $this->initializeDataProvider();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         unset($dataProvider['children_with_different_images'], $dataProvider['children_with_different_image_roles']);
 
         return array_values($dataProvider);
@@ -329,7 +403,11 @@ class HelperTest extends TestCase
      * @param array $imageNames
      * @return array
      */
+<<<<<<< HEAD
     private static function getMediaGallery(array $imageNames): array
+=======
+    private function getMediaGallery(array $imageNames): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $images = [];
         foreach ($imageNames as $key => $item) {
@@ -377,6 +455,10 @@ class HelperTest extends TestCase
         $reflection = new \ReflectionObject($this);
         foreach ($reflection->getProperties() as $property) {
             if (!$property->isStatic() && 0 !== strpos($property->getDeclaringClass()->getName(), 'PHPUnit')) {
+<<<<<<< HEAD
+=======
+                $property->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $property->setValue($this, null);
             }
         }

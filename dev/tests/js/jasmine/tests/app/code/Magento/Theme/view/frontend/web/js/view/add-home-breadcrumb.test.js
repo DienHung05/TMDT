@@ -1,6 +1,11 @@
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 /* eslint-disable max-nested-callbacks, no-undef */
 define([
@@ -14,7 +19,11 @@ define([
             'Magento_Theme/js/model/breadcrumb-list': jasmine.createSpyObj(['unshift'])
         };
 
+<<<<<<< HEAD
     describe('Magento_Theme/js/view/add-home-breadcrumb', function () {
+=======
+    describe('Magento_Theme/js/view/breadcrumbs', function () {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         var breadcrumbs,
             mixin,
             defaultContext = require.s.contexts._;
@@ -41,8 +50,12 @@ define([
             try {
                 injector.clean();
                 injector.remove();
+<<<<<<< HEAD
             } catch (e) { // eslint-disable-line no-unused-vars
             }
+=======
+            } catch (e) {}
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         });
 
         it('mixin is applied to Magento_Theme/js/view/breadcrumbs', function () {

@@ -1,11 +1,17 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\CatalogRule\Model\Indexer;
 
+<<<<<<< HEAD
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\AppIsolation;
 use Magento\TestFramework\Fixture\DataFixture;
@@ -13,6 +19,9 @@ use Magento\TestFramework\Fixture\DataFixtureBeforeTransaction;
 use Magento\TestFramework\Fixture\DbIsolation;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppIsolation enabled
@@ -65,6 +74,7 @@ class BatchIndexTest extends \PHPUnit\Framework\TestCase
         parent::tearDown();
     }
 
+<<<<<<< HEAD
     #[
         DbIsolation(false),
         AppIsolation(true),
@@ -73,6 +83,16 @@ class BatchIndexTest extends \PHPUnit\Framework\TestCase
         DataFixtureBeforeTransaction('Magento/CatalogRule/_files/two_rules.php'),
         DataFixture('Magento/Catalog/_files/product_simple.php'),
     ]
+=======
+    /**
+     * @magentoDbIsolation disabled
+     * @dataProvider dataProvider
+     * @magentoAppIsolation enabled
+     * @magentoAppArea adminhtml
+     * @magentoDataFixtureBeforeTransaction Magento/CatalogRule/_files/two_rules.php
+     * @magentoDataFixture Magento/Catalog/_files/product_simple.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPriceForSmallBatch($batchCount, $price, $expectedPrice)
     {
         $productIds = $this->prepareProducts($price);
@@ -109,16 +129,28 @@ class BatchIndexTest extends \PHPUnit\Framework\TestCase
             ->setSku(uniqid($this->product->getSku() . '-'))
             ->setName(uniqid($this->product->getName() . '-'))
             ->setWebsiteIds([1])
+<<<<<<< HEAD
             ->setPrice($price)
             ->save();
+=======
+            ->save();
+        $productSecond->setPrice($price);
+        $this->productRepository->save($productSecond);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $productThird = clone $this->product;
         $productThird->setId(null)
             ->setUrlKey(null)
             ->setSku(uniqid($this->product->getSku() . '--'))
             ->setName(uniqid($this->product->getName() . '--'))
             ->setWebsiteIds([1])
+<<<<<<< HEAD
             ->setPrice($price)
             ->save();
+=======
+            ->save();
+        $productThird->setPrice($price);
+        $this->productRepository->save($productThird);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         return [
             $productSecond->getEntityId(),
@@ -129,7 +161,11 @@ class BatchIndexTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function dataProvider()
+=======
+    public function dataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [1, 20, 17],

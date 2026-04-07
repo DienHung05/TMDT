@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Framework\Encryption;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Framework\Encryption;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class EncryptorTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -29,14 +37,23 @@ class EncryptorTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @param string $key
+<<<<<<< HEAD
      */
     #[DataProvider('validEncryptionKeyDataProvider')]
+=======
+     * @dataProvider validEncryptionKeyDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testValidateKey($key)
     {
         $this->encryptor->validateKey($key);
     }
 
+<<<<<<< HEAD
     public static function validEncryptionKeyDataProvider()
+=======
+    public function validEncryptionKeyDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             '32 numbers' => ['12345678901234567890123456789012'],
@@ -47,9 +64,16 @@ class EncryptorTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param string $key
      */
     #[DataProvider('invalidEncryptionKeyDataProvider')]
+=======
+     *
+     * @param string $key
+     * @dataProvider invalidEncryptionKeyDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testValidateKeyInvalid($key)
     {
         $this->expectException(\Exception::class);
@@ -58,7 +82,11 @@ class EncryptorTest extends \PHPUnit\Framework\TestCase
         $this->encryptor->validateKey($key);
     }
 
+<<<<<<< HEAD
     public static function invalidEncryptionKeyDataProvider()
+=======
+    public function invalidEncryptionKeyDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'empty string' => [''],

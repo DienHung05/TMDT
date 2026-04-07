@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 // @codingStandardsIgnoreFile
@@ -11,6 +16,7 @@ namespace Magento\ConfigurableProduct\Model\Product\Type;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\Product;
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\ConfigurableProduct\Test\Fixture\Attribute as AttributeFixture;
 use Magento\ConfigurableProduct\Test\Fixture\Product as ConfigurableProductFixture;
@@ -18,6 +24,8 @@ use Magento\Store\Test\Fixture\Store as StoreFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Fixture\DbIsolation;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\Catalog\Api\Data\ProductCustomOptionInterfaceFactory;
 use PHPUnit\Framework\TestCase;
@@ -663,7 +671,11 @@ class ConfigurableTest extends TestCase
      */
     public function testAddCustomOptionToConfigurableChildProduct(): void
     {
+<<<<<<< HEAD
         $this->expectExceptionMessage(
+=======
+        $this->expectErrorMessage(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'Required custom options cannot be added to a simple product that is a part of a composite product.'
         );
 
@@ -680,6 +692,7 @@ class ConfigurableTest extends TestCase
         $product = $this->productRepository->get($sku);
         $this->assertEmpty($product->getOptions());
     }
+<<<<<<< HEAD
 
     /**
      * Test getProductByAttributes method returns child product with correct store view data
@@ -738,4 +751,6 @@ class ConfigurableTest extends TestCase
             ->getProductByAttributes($attributes, $configurableProduct);
         $this->assertEquals($nameInStoreView3, $childProduct->getName());
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

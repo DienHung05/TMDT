@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -28,7 +33,11 @@ class DeleteTest extends AbstractBackendController
         $this->getRequest()->setPostValue(['id' => $incorrectId]);
         $this->dispatch('backend/catalog/category/delete');
         $this->assertSessionMessages(
+<<<<<<< HEAD
             $this->equalTo([(string)__('No such entity with id = %1', $incorrectId)]),
+=======
+            $this->equalTo([(string)__(sprintf('No such entity with id = %s', $incorrectId))]),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             MessageInterface::TYPE_ERROR
         );
     }

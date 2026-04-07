@@ -1,12 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Integration\Model;
 
 use Magento\Customer\Api\AccountManagementInterface;
+<<<<<<< HEAD
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Framework\Exception\EmailNotConfirmedException;
 use Magento\Framework\Exception\InputException;
@@ -16,6 +22,11 @@ use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\Framework\Exception\InputException;
+use Magento\Integration\Model\Oauth\Token as TokenModel;
+use Magento\TestFramework\Helper\Bootstrap;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test class for \Magento\Integration\Model\CustomerTokenService.
@@ -62,7 +73,13 @@ class CustomerTokenServiceTest extends \PHPUnit\Framework\TestCase
         $this->assertNotNull($accessToken);
     }
 
+<<<<<<< HEAD
     #[DataProvider('validationDataProvider')]
+=======
+    /**
+     * @dataProvider validationDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateCustomerAccessTokenEmptyOrNullCredentials($username, $password)
     {
         try {
@@ -88,6 +105,7 @@ class CustomerTokenServiceTest extends \PHPUnit\Framework\TestCase
         );
     }
 
+<<<<<<< HEAD
     #[
         Config('customer/create_account/confirm', 1, 'website'),
         DataFixture(
@@ -111,12 +129,18 @@ class CustomerTokenServiceTest extends \PHPUnit\Framework\TestCase
         );
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Provider to test input validation
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function validationDataProvider()
+=======
+    public function validationDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Check for empty credentials' => ['', ''],

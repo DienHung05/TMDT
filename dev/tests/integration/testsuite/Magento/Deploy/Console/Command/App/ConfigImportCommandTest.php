@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
  */
@@ -17,15 +18,40 @@ use Magento\Framework\Filesystem;
 use Magento\Framework\Flag;
 use Magento\Framework\FlagFactory;
 use Magento\Framework\ObjectManagerInterface;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Deploy\Console\Command\App;
+
+use Magento\Framework\App\CacheInterface;
+use Magento\Framework\App\DeploymentConfig;
+use Magento\Framework\Config\File\ConfigFilePool;
+use Magento\Framework\Flag;
+use Magento\Framework\FlagFactory;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Store\Model\GroupFactory;
 use Magento\Store\Model\StoreFactory;
 use Magento\Store\Model\WebsiteFactory;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use Symfony\Component\Console\Tester\CommandTester;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  * phpcs:disable
+=======
+use Magento\Framework\ObjectManagerInterface;
+use Magento\Framework\Console\Cli;
+use Magento\Framework\Filesystem;
+use Magento\Framework\App\Filesystem\DirectoryList;
+use Symfony\Component\Console\Tester\CommandTester;
+use Magento\Deploy\Model\DeploymentConfig\Hash;
+use Magento\Framework\App\Config\ReinitableConfigInterface;
+
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class ConfigImportCommandTest extends \PHPUnit\Framework\TestCase
 {
@@ -162,7 +188,11 @@ class ConfigImportCommandTest extends \PHPUnit\Framework\TestCase
         $command = $this->objectManager->create(ConfigImportCommand::class);
         $commandTester = new CommandTester($command);
 
+<<<<<<< HEAD
         $this->runConfigImportCommand($commandTester, 'Stores were processed');
+=======
+        $this->runConfigImportCommand($commandTester);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         /** @var StoreFactory $storeFactory */
         $storeFactory = $this->objectManager->get(StoreFactory::class);
@@ -191,7 +221,11 @@ class ConfigImportCommandTest extends \PHPUnit\Framework\TestCase
             require __DIR__ . '/../../../_files/scopes/config_with_changed_stores.php'
         );
 
+<<<<<<< HEAD
         $this->runConfigImportCommand($commandTester, 'Stores were processed');
+=======
+        $this->runConfigImportCommand($commandTester);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $store = $storeFactory->create();
         $store->getResource()->load($store, 'test', 'code');
@@ -214,7 +248,11 @@ class ConfigImportCommandTest extends \PHPUnit\Framework\TestCase
             require __DIR__ . '/../../../_files/scopes/config_with_removed_stores.php'
         );
 
+<<<<<<< HEAD
         $this->runConfigImportCommand($commandTester, 'Stores were processed');
+=======
+        $this->runConfigImportCommand($commandTester);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $group = $groupFactory->create();
         $group->getResource()->load($group, 'test_website_store', 'code');
@@ -344,6 +382,7 @@ class ConfigImportCommandTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @magentoDbIsolation disabled
      */
     public function testImportCurrencyImportSchedule()
@@ -401,6 +440,8 @@ class ConfigImportCommandTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Saves new data.
      *
      * @param array $originalData
@@ -452,7 +493,11 @@ class ConfigImportCommandTest extends \PHPUnit\Framework\TestCase
      *
      * @param $commandTester
      */
+<<<<<<< HEAD
     private function runConfigImportCommand($commandTester, $assertPartialString)
+=======
+    private function runConfigImportCommand($commandTester)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $this->appConfig->reinit();
         $commandTester->execute([], ['interactive' => false]);
@@ -461,7 +506,11 @@ class ConfigImportCommandTest extends \PHPUnit\Framework\TestCase
             'Processing configurations data from configuration file...',
             $commandTester->getDisplay()
         );
+<<<<<<< HEAD
         $this->assertStringContainsString($assertPartialString, $commandTester->getDisplay());
+=======
+        $this->assertStringContainsString('Stores were processed', $commandTester->getDisplay());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertSame(Cli::RETURN_SUCCESS, $commandTester->getStatusCode());
     }
 }

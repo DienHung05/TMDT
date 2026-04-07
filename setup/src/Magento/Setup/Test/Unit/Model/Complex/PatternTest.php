@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -9,7 +14,10 @@ namespace Magento\Setup\Test\Unit\Model\Complex;
 
 use Magento\Setup\Model\Complex\Pattern;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class PatternTest extends TestCase
 {
@@ -33,7 +41,11 @@ class PatternTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function patternDataProvider()
+=======
+    public function patternDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $result = [
             0 => [
@@ -52,7 +64,11 @@ class PatternTest extends TestCase
                         'name' => 'yyy %s'
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedRowsCount'      => 3,
+=======
+                'expectedCount'      => 3,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedRowsResult' => [
                     ['id' => '1', 'name' => 'Static', 'calculated' => 10],
                     ['id' => '',  'name' => 'xxx 1',  'calculated' => ''],
@@ -67,7 +83,11 @@ class PatternTest extends TestCase
                         'calculated' => 'calc %s',
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedRowsCount' => 1,
+=======
+                'expectedCount' => 1,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedRowsResult' => [
                     ['id' => '1', 'name' => 'Dynamic 1', 'calculated' => 'calc 1'],
                 ],
@@ -83,11 +103,18 @@ class PatternTest extends TestCase
      * @param int $expectedRowsCount
      * @param array $expectedRowsResult
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider patternDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @test
      *
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('patternDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPattern($patternData, $expectedRowsCount, $expectedRowsResult)
     {
         $pattern = $this->getPattern($patternData);

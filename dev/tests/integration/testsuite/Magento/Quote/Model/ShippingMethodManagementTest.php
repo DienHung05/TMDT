@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Quote\Model;
 
@@ -44,6 +49,7 @@ use Magento\TestFramework\Quote\Model\GetQuoteByReservedOrderId;
 use PHPUnit\Framework\TestCase;
 use Magento\Quote\Api\CouponManagementInterface;
 use Magento\Customer\Model\Session;
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Category as CategoryFixture;
 use Magento\OfflineShipping\Test\Fixture\TablerateFixture as TablerateFixture;
 use Magento\Quote\Test\Fixture\CustomerCart as CustomerCartFixture;
@@ -53,6 +59,8 @@ use Magento\Tax\Test\Fixture\TaxRate;
 use Magento\Tax\Test\Fixture\TaxRule;
 use Magento\Tax\Test\Fixture\CustomerTaxClass;
 use Magento\Tax\Test\Fixture\ProductTaxClass;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for shipping methods management
@@ -88,7 +96,77 @@ class ShippingMethodManagementTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @magentoDbIsolation enabled
+=======
+     * @magentoDataFixture Magento/SalesRule/_files/cart_rule_100_percent_off.php
+     * @magentoDataFixture Magento/Sales/_files/quote_with_customer.php
+     * @return void
+     * @throws NoSuchEntityException
+     */
+    public function testRateAppliedToShipping(): void
+    {
+        $objectManager = Bootstrap::getObjectManager();
+
+        /** @var CartRepositoryInterface $quoteRepository */
+        $quoteRepository = $objectManager->create(CartRepositoryInterface::class);
+        $customerQuote = $quoteRepository->getForCustomer(1);
+        $this->assertEquals(0, $customerQuote->getBaseGrandTotal());
+    }
+
+    /**
+     * @magentoConfigFixture current_store carriers/tablerate/active 1
+     * @magentoConfigFixture current_store carriers/flatrate/active 0
+     * @magentoConfigFixture current_store carriers/freeshipping/active 0
+     * @magentoConfigFixture current_store carriers/tablerate/condition_name package_qty
+     * @magentoDataFixture Magento/SalesRule/_files/cart_rule_free_shipping_by_cart.php
+     * @magentoDataFixture Magento/Sales/_files/quote.php
+     * @magentoDataFixture Magento/OfflineShipping/_files/tablerates.php
+     * @return void
+     */
+    public function testTableRateFreeShipping()
+    {
+        $objectManager = Bootstrap::getObjectManager();
+        /** @var Quote $quote */
+        $quote = $objectManager->get(Quote::class);
+        $quote->load('test01', 'reserved_order_id');
+        $cartId = $quote->getId();
+        if (!$cartId) {
+            $this->fail('quote fixture failed');
+        }
+        /** @var QuoteIdMask $quoteIdMask */
+        $quoteIdMask = Bootstrap::getObjectManager()
+            ->create(QuoteIdMaskFactory::class)
+            ->create();
+        $quoteIdMask->load($cartId, 'quote_id');
+        //Use masked cart Id
+        $cartId = $quoteIdMask->getMaskedId();
+        $data = [
+            'data' => [
+                'country_id' => "US",
+                'postcode' => null,
+                'region' => null,
+                'region_id' => null
+            ]
+        ];
+        /** @var EstimateAddressInterface $address */
+        $address = $objectManager->create(EstimateAddressInterface::class, $data);
+        /** @var  GuestShippingMethodManagementInterface $shippingEstimation */
+        $shippingEstimation = $objectManager->get(GuestShippingMethodManagementInterface::class);
+        $result = $shippingEstimation->estimateByAddress($cartId, $address);
+        $this->assertNotEmpty($result);
+        $expectedResult = [
+            'method_code' => 'bestway',
+            'amount' => 0
+        ];
+        foreach ($result as $rate) {
+            $this->assertEquals($expectedResult['amount'], $rate->getAmount());
+            $this->assertEquals($expectedResult['method_code'], $rate->getMethodCode());
+        }
+    }
+
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/OfflineShipping/_files/tablerates_price.php
      * @return void
      * @throws NoSuchEntityException
@@ -140,6 +218,7 @@ class ShippingMethodManagementTest extends TestCase
 
     /**
      * Test table rate amount for the cart that contains some items with free shipping applied.
+<<<<<<< HEAD
      * @magentoDbIsolation enabled
      * @return void
      */
@@ -275,6 +354,19 @@ class ShippingMethodManagementTest extends TestCase
             ]
         )
     ]
+=======
+     *
+     * @magentoConfigFixture current_store carriers/tablerate/active 1
+     * @magentoConfigFixture current_store carriers/flatrate/active 0
+     * @magentoConfigFixture current_store carriers/freeshipping/active 0
+     * @magentoConfigFixture current_store carriers/tablerate/condition_name package_value_with_discount
+     * @magentoDataFixture Magento/Catalog/_files/categories.php
+     * @magentoDataFixture Magento/SalesRule/_files/cart_rule_free_shipping_by_category.php
+     * @magentoDataFixture Magento/Sales/_files/quote_with_multiple_products.php
+     * @magentoDataFixture Magento/OfflineShipping/_files/tablerates_price.php
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testTableRateWithCartRuleForFreeShipping()
     {
         $objectManager = Bootstrap::getObjectManager();
@@ -301,13 +393,18 @@ class ShippingMethodManagementTest extends TestCase
         $rate = reset($result);
         $expectedResult = [
             'method_code' => 'bestway',
+<<<<<<< HEAD
             'amount' => 5
+=======
+            'amount' => 10
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
         $this->assertEquals($expectedResult['method_code'], $rate->getMethodCode());
         $this->assertEquals($expectedResult['amount'], $rate->getAmount());
     }
 
     /**
+<<<<<<< HEAD
      * Verify 100% off rule applied to shipping and items using new fixtures
      * @return void
      * @throws NoSuchEntityException
@@ -414,6 +511,8 @@ class ShippingMethodManagementTest extends TestCase
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Retrieves quote by reserved order id.
      *
      * @param string $reservedOrderId
@@ -434,6 +533,7 @@ class ShippingMethodManagementTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * Estimate by address with cart price rule by item using new fixtures
      * @return void
      */
@@ -464,12 +564,22 @@ class ShippingMethodManagementTest extends TestCase
             ]
         ),
     ]
+=======
+     * @magentoConfigFixture current_store carriers/tablerate/active 1
+     * @magentoConfigFixture current_store carriers/tablerate/condition_name package_qty
+     * @magentoDataFixture Magento/SalesRule/_files/cart_rule_free_shipping.php
+     * @magentoDataFixture Magento/Sales/_files/quote.php
+     * @magentoDataFixture Magento/OfflineShipping/_files/tablerates.php
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testEstimateByAddressWithCartPriceRuleByItem()
     {
         $this->executeTestFlow(0, 0);
     }
 
     /**
+<<<<<<< HEAD
      * Estimate by address with cart price rule by shipment using new fixtures
      * @return void
      */
@@ -497,6 +607,15 @@ class ShippingMethodManagementTest extends TestCase
             ]
         ]),
     ]
+=======
+     * @magentoConfigFixture current_store carriers/tablerate/active 1
+     * @magentoConfigFixture current_store carriers/tablerate/condition_name package_qty
+     * @magentoDataFixture Magento/SalesRule/_files/cart_rule_free_shipping_by_cart.php
+     * @magentoDataFixture Magento/Sales/_files/quote.php
+     * @magentoDataFixture Magento/OfflineShipping/_files/tablerates.php
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testEstimateByAddressWithCartPriceRuleByShipment()
     {
         $this->markTestSkipped('According to MAGETWO-69940 it is an incorrect behavior');
@@ -506,6 +625,7 @@ class ShippingMethodManagementTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * Estimate by address using new fixtures
      * @return void
      */
@@ -519,6 +639,14 @@ class ShippingMethodManagementTest extends TestCase
         DataFixture(SetShippingAddressFixture::class, ['cart_id' => '$q4.id$']),
         DataFixture(TablerateFixture::class, ['price' => 10]),
     ]
+=======
+     * @magentoConfigFixture current_store carriers/tablerate/active 1
+     * @magentoConfigFixture current_store carriers/tablerate/condition_name package_qty
+     * @magentoDataFixture Magento/Sales/_files/quote.php
+     * @magentoDataFixture Magento/OfflineShipping/_files/tablerates.php
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testEstimateByAddress()
     {
         $this->executeTestFlow(5, 10);
@@ -582,6 +710,7 @@ class ShippingMethodManagementTest extends TestCase
      * Test for estimate shipping with tax and changed VAT customer group
      *
      * @magentoDbIsolation disabled
+<<<<<<< HEAD
      */
     #[
         // Shipping: only Flat Rate, base/net price 5.00
@@ -642,6 +771,18 @@ class ShippingMethodManagementTest extends TestCase
         DataFixture(ProductFixture::class, ['sku' => 'vat-simple', 'price' => 10], 'p1'),
         DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$p1.id$']),
     ]
+=======
+     * @magentoDataFixture Magento/Tax/_files/tax_classes_de.php
+     * @magentoDataFixture Magento/Sales/_files/quote_with_customer.php
+     * @magentoDataFixture Magento/Customer/_files/customer_group.php
+     * @magentoDataFixture Magento/Customer/_files/customer_address.php
+     * @magentoConfigFixture current_store customer/create_account/tax_calculation_address_type shipping
+     * @magentoConfigFixture current_store customer/create_account/default_group 1
+     * @magentoConfigFixture current_store customer/create_account/auto_group_assign 1
+     * @magentoConfigFixture current_store tax/calculation/price_includes_tax 1
+     * @magentoConfigFixture current_store tax/calculation/shipping_includes_tax 1
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testEstimateByAddressWithInclExclTaxAndVATGroup()
     {
         /** @var GroupInterface $customerGroup */
@@ -650,13 +791,17 @@ class ShippingMethodManagementTest extends TestCase
 
         $customerGroup->setTaxClassId($this->getTaxClass('CustomerTaxClass')->getClassId());
         $this->groupRepository->save($customerGroup);
+<<<<<<< HEAD
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         /** @var CustomerRepositoryInterface $customerRepository */
         $customerRepository = $this->objectManager->get(CustomerRepositoryInterface::class);
         $customer = $customerRepository->get('customer@example.com');
         $customer->setGroupId($customerGroup->getId());
         $customer->setTaxvat('12');
         $customerRepository->save($customer);
+<<<<<<< HEAD
 
         // Set shipping tax class to ProductTaxClass
         $this->setConfig($customerGroup->getId(), $this->getTaxClass('ProductTaxClass')->getClassId());
@@ -672,6 +817,16 @@ class ShippingMethodManagementTest extends TestCase
         $address->setIsDefaultShipping(true);
         $customer->setAddresses([$address]);
 
+=======
+        $this->setConfig($customerGroup->getId(), $this->getTaxClass('ProductTaxClass')->getClassId());
+        $this->changeCustomerAddress($customer->getDefaultShipping());
+
+        $quote = $this->objectManager->get(GetQuoteByReservedOrderId::class)->execute('test01');
+        $addressRepository = $this->objectManager->get(AddressRepositoryInterface::class);
+        $address = $addressRepository->getById(1);
+        $address->setIsDefaultShipping(true);
+        $customer->setAddresses([$address]);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $customerSession = $this->objectManager->get(Session::class);
         $customerSession->loginById($customer->getId());
 
@@ -808,6 +963,7 @@ class ShippingMethodManagementTest extends TestCase
      * Test table rate with zero amount is available for the cart when discount coupon cart price rule to all items
      * and freeshipping cart price rule is applied when order subtotal is greater than specified amount.
      *
+<<<<<<< HEAD
      * @return void
      */
     #[
@@ -824,6 +980,17 @@ class ShippingMethodManagementTest extends TestCase
         DataFixture(AddProductToCartFixture::class, ['cart_id' => '$tquote.id$', 'product_id' => '$tp3.id$']),
         DataFixture(SetBillingAddressFixture::class, ['cart_id' => '$tquote.id$']),
         DataFixture(SetShippingAddressFixture::class, ['cart_id' => '$tquote.id$']),
+=======
+     * @magentoConfigFixture default_store carriers/tablerate/active 1
+     * @magentoConfigFixture default_store carriers/flatrate/active 0
+     * @magentoConfigFixture default_store carriers/freeshipping/active 0
+     * @magentoConfigFixture default_store carriers/tablerate/condition_name package_value_with_discount
+     * @magentoDataFixture Magento/Sales/_files/quote_with_multiple_products.php
+     * @magentoDataFixture Magento/OfflineShipping/_files/tablerates_price.php
+     * @return void
+     */
+    #[
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         DataFixture(
             AddressConditionFixture::class,
             ['attribute' => 'base_subtotal', 'operator' => '>=', 'value' => 30],
@@ -832,11 +999,16 @@ class ShippingMethodManagementTest extends TestCase
         DataFixture(
             RuleFixture::class,
             ['stop_rules_processing' => 0, 'simple_free_shipping' => 1, 'conditions' => ['$c1$']],
+<<<<<<< HEAD
             'r_free_ship'
+=======
+            'r1'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ),
         DataFixture(
             RuleFixture::class,
             ['stop_rules_processing' => 0, 'coupon_code' => '123', 'discount_amount' => 20],
+<<<<<<< HEAD
             'r_discount'
         ),
         DataFixture(
@@ -862,6 +1034,9 @@ class ShippingMethodManagementTest extends TestCase
                 'condition_value' => 100.00,
                 'price' => 5
             ]
+=======
+            'r1'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ),
     ]
     public function testTableRateWithZeroPriceShownWhenDiscountCouponAndFreeShippingCartRuleApplied()

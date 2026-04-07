@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -14,7 +19,10 @@ use Magento\Sales\Api\Data\OrderInterfaceFactory;
 use Magento\Sales\Api\OrderAddressRepositoryInterface;
 use Magento\Sales\Model\Order\Address as AddressType;
 use Magento\TestFramework\TestCase\AbstractBackendController;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class check address save action
@@ -44,12 +52,20 @@ class AddressSaveTest extends AbstractBackendController
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider addressTypeProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Sales/_files/order.php
      *
      * @param string $type
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('addressTypeProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSave(string $type): void
     {
         $data = [
@@ -80,7 +96,11 @@ class AddressSaveTest extends AbstractBackendController
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function addressTypeProvider(): array
+=======
+    public function addressTypeProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'billing_address' => [
@@ -93,11 +113,19 @@ class AddressSaveTest extends AbstractBackendController
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider wrongRequestDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $params
      * @param array $post
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('wrongRequestDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testInvalidRequest(array $params, array $post = []): void
     {
         $this->dispatchWithParams($params, $post);
@@ -107,7 +135,11 @@ class AddressSaveTest extends AbstractBackendController
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function wrongRequestDataProvider(): array
+=======
+    public function wrongRequestDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'empty_post' => [

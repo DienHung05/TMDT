@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -34,7 +39,11 @@ $category
     ->setMetaKeywords('Category_en Meta Keywords')
     ->setMetaDescription('Category_en Meta Description')
     ->setParentId(2)
+<<<<<<< HEAD
     ->setPath('1/2/10')
+=======
+    ->setPath('1/2/3')
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ->setLevel(2)
     ->setIsActive(true)
     ->setPosition(1);

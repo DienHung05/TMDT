@@ -1,14 +1,23 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Customer\Block\Address;
 
+<<<<<<< HEAD
 use Magento\Framework\TestFramework\Unit\Helper\MockCreationTrait;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Integration tests for the \Magento\Customer\Block\Address\Grid class
@@ -16,7 +25,10 @@ use PHPUnit\Framework\Attributes\DataProvider;
  */
 class GridTest extends \PHPUnit\Framework\TestCase
 {
+<<<<<<< HEAD
     use MockCreationTrait;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @var \Magento\Framework\View\LayoutInterface
      */
@@ -29,10 +41,19 @@ class GridTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp(): void
     {
+<<<<<<< HEAD
         $blockMock = $this->createPartialMockWithReflection(
             \Magento\Framework\View\Element\BlockInterface::class,
             ['setTitle', 'toHtml']
         );
+=======
+        /** @var \PHPUnit\Framework\MockObject\MockObject $blockMock */
+        $blockMock = $this->getMockBuilder(
+            \Magento\Framework\View\Element\BlockInterface::class
+        )->disableOriginalConstructor()->setMethods(
+            ['setTitle', 'toHtml']
+        )->getMock();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $blockMock->expects($this->any())->method('setTitle');
 
         $this->currentCustomer = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()
@@ -83,9 +104,15 @@ class GridTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @magentoDataFixture Magento/Customer/_files/customer_no_address.php
+<<<<<<< HEAD
      * @magentoAppIsolation enabled
      */
     #[DataProvider('getAdditionalAddressesDataProvider')]
+=======
+     * @dataProvider getAdditionalAddressesDataProvider
+     * @magentoAppIsolation enabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetAdditionalAddressesNegative($customerId, $expected)
     {
         $gridBlock = $this->createBlockForCustomer($customerId);
@@ -93,7 +120,11 @@ class GridTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $gridBlock->getAdditionalAddresses());
     }
 
+<<<<<<< HEAD
     public static function getAdditionalAddressesDataProvider()
+=======
+    public function getAdditionalAddressesDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return ['5' => [5, []]];
     }

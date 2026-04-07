@@ -1,12 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Sales\Controller\Adminhtml\Order\Create;
 
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Checkout\Test\Fixture\PlaceOrder as PlaceOrderFixture;
 use Magento\Checkout\Test\Fixture\SetBillingAddress;
@@ -38,6 +44,25 @@ use Magento\TestFramework\Fixture\DbIsolation;
 use Magento\TestFramework\Helper\Xpath;
 use Magento\TestFramework\Request;
 use Magento\TestFramework\TestCase\AbstractBackendController;
+=======
+use Magento\Framework\Api\SearchCriteriaBuilder;
+use Magento\Quote\Api\CartRepositoryInterface;
+use Magento\Quote\Api\Data\CartInterface;
+use Magento\Sales\Api\Data\OrderInterfaceFactory;
+use Magento\TestFramework\Request;
+use Magento\TestFramework\TestCase\AbstractBackendController;
+use Magento\Customer\Api\AccountManagementInterface;
+use Magento\Customer\Api\Data\CustomerInterface;
+use Magento\Customer\Api\Data\CustomerInterfaceFactory;
+use Magento\Framework\App\Request\Http;
+use Magento\Sales\Api\OrderRepositoryInterface;
+use Magento\Sales\Model\Order;
+use Magento\Sales\Model\OrderFactory;
+use Magento\TestFramework\Helper\Xpath;
+use Magento\Sales\Api\Data\OrderInterface;
+use Magento\Customer\Api\CustomerRepositoryInterface;
+use Magento\Framework\Exception\NoSuchEntityException;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for reorder controller.
@@ -83,6 +108,7 @@ class ReorderTest extends AbstractBackendController
     private $accountManagement;
 
     /**
+<<<<<<< HEAD
      * @var AddressRepositoryInterface
      */
     private $addressRepository;
@@ -93,6 +119,8 @@ class ReorderTest extends AbstractBackendController
     private $fixtures;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
@@ -104,8 +132,11 @@ class ReorderTest extends AbstractBackendController
         $this->customerFactory = $this->_objectManager->get(CustomerInterfaceFactory::class);
         $this->accountManagement = $this->_objectManager->get(AccountManagementInterface::class);
         $this->customerRepository = $this->_objectManager->get(CustomerRepositoryInterface::class);
+<<<<<<< HEAD
         $this->fixtures = $this->_objectManager->get(DataFixtureStorageManager::class)->getStorage();
         $this->addressRepository = $this->_objectManager->get(AddressRepositoryInterface::class);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -137,7 +168,14 @@ class ReorderTest extends AbstractBackendController
     public function testReorderAfterJSCalendarEnabled(): void
     {
         $order = $this->orderFactory->create()->loadByIncrementId('100000001');
+<<<<<<< HEAD
         $this->reorder($order, 'customer@example.com');
+=======
+        $this->dispatchReorderRequest((int)$order->getId());
+        $this->assertRedirect($this->stringContains('backend/sales/order_create'));
+        $this->quote = $this->getQuote('customer@example.com');
+        $this->assertTrue(!empty($this->quote));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -231,6 +269,7 @@ class ReorderTest extends AbstractBackendController
 
         return array_pop($items);
     }
+<<<<<<< HEAD
 
     /**
      * Verify that the updated customer's addresses have been populated for the quote's billing and shipping addresses
@@ -331,4 +370,6 @@ class ReorderTest extends AbstractBackendController
         $this->quote = $this->getQuote($customerEmail);
         $this->assertNotEmpty($this->quote);
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

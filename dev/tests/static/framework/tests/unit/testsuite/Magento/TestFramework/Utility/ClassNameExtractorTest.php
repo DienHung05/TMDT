@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
  */
@@ -7,13 +8,25 @@ namespace Magento\TestFramework\Utility;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\TestFramework\Utility;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class ClassNameExtractorTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @param string $file
      * @param string $className
+<<<<<<< HEAD
      */
     #[DataProvider('getNameWithNamespaceDataProvider')]
+=======
+     * @dataProvider getNameWithNamespaceDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetNameWithNamespace($file, $className)
     {
         $classNameExtractor = new \Magento\TestFramework\Utility\ClassNameExtractor();
@@ -26,7 +39,11 @@ class ClassNameExtractorTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getNameWithNamespaceDataProvider()
+=======
+    public function getNameWithNamespaceDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -63,8 +80,13 @@ class ClassNameExtractorTest extends \PHPUnit\Framework\TestCase
     /**
      * @param string $file
      * @param string $className
+<<<<<<< HEAD
      */
     #[DataProvider('getNameDataProvider')]
+=======
+     * @dataProvider getNameDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetName($file, $className)
     {
         $classNameExtractor = new \Magento\TestFramework\Utility\ClassNameExtractor();
@@ -77,7 +99,11 @@ class ClassNameExtractorTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getNameDataProvider()
+=======
+    public function getNameDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -102,8 +128,13 @@ class ClassNameExtractorTest extends \PHPUnit\Framework\TestCase
     /**
      * @param string $file
      * @param string $className
+<<<<<<< HEAD
      */
     #[DataProvider('getNamespaceDataProvider')]
+=======
+     * @dataProvider getNamespaceDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetNamespace($file, $className)
     {
         $classNameExtractor = new \Magento\TestFramework\Utility\ClassNameExtractor();
@@ -116,7 +147,11 @@ class ClassNameExtractorTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getNamespaceDataProvider()
+=======
+    public function getNamespaceDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

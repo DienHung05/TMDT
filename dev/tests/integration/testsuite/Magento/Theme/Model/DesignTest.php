@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Theme\Model;
 
 use Magento\Backend\Block\Widget\Grid\Serializer;
 use Magento\Framework\Serialize\SerializerInterface;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class DesignTest extends \PHPUnit\Framework\TestCase
 {
@@ -157,8 +165,13 @@ class DesignTest extends \PHPUnit\Framework\TestCase
     /**
      * @magentoAppIsolation enabled
      * @magentoDataFixture Magento/Theme/_files/design_change_timezone.php
+<<<<<<< HEAD
      */
     #[DataProvider('loadChangeTimezoneDataProvider')]
+=======
+     * @dataProvider loadChangeTimezoneDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testLoadChangeTimezone($storeCode, $storeTimezone, $storeUtcOffset)
     {
         if (date_default_timezone_get() != 'UTC') {
@@ -212,7 +225,11 @@ class DesignTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expectedDesign, $actualDesign);
     }
 
+<<<<<<< HEAD
     public static function loadChangeTimezoneDataProvider(): array
+=======
+    public function loadChangeTimezoneDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         /**
          * Depending on the current UTC time, either UTC-12:00, or UTC+12:00 timezone points to the different date.

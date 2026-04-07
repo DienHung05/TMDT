@@ -1,9 +1,15 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
 declare(strict_types=1);
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 namespace Magento\Store\Model;
 
@@ -16,7 +22,10 @@ use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Session\SidResolverInterface;
 use Magento\Framework\UrlInterface;
 use Magento\Store\Api\StoreRepositoryInterface;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -76,7 +85,11 @@ class StoreTest extends \PHPUnit\Framework\TestCase
         ];
 
         return $this->getMockBuilder(\Magento\Store\Model\Store::class)
+<<<<<<< HEAD
             ->onlyMethods(['getUrl'])
+=======
+            ->setMethods(['getUrl'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->setConstructorArgs($this->modelParams)
             ->getMock();
     }
@@ -89,8 +102,13 @@ class StoreTest extends \PHPUnit\Framework\TestCase
     /**
      * @param $loadId
      * @param $expectedId
+<<<<<<< HEAD
      */
     #[DataProvider('loadDataProvider')]
+=======
+     * @dataProvider loadDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testLoad($loadId, $expectedId)
     {
         $this->model->load($loadId);
@@ -100,7 +118,11 @@ class StoreTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function loadDataProvider()
+=======
+    public function loadDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [[1, 1], ['default', 1], ['nostore', null]];
     }
@@ -134,9 +156,15 @@ class StoreTest extends \PHPUnit\Framework\TestCase
      * @param bool $useRewrites
      * @param bool $useStoreCode
      * @param string $expected
+<<<<<<< HEAD
      * @magentoAppIsolation enabled
      */
     #[DataProvider('getBaseUrlDataProvider')]
+=======
+     * @dataProvider getBaseUrlDataProvider
+     * @magentoAppIsolation enabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetBaseUrl($type, $useRewrites, $useStoreCode, $expected)
     {
         /* config operations require store to be loaded */
@@ -147,7 +175,11 @@ class StoreTest extends \PHPUnit\Framework\TestCase
 
         \Magento\TestFramework\Helper\Bootstrap::getObjectManager()
             ->get(\Magento\Framework\App\Config\MutableScopeConfigInterface::class)
+<<<<<<< HEAD
             ->setValue(Store::XML_PATH_STORE_IN_URL, $useStoreCode);
+=======
+            ->setValue(Store::XML_PATH_STORE_IN_URL, $useStoreCode, ScopeInterface::SCOPE_STORE);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $actual = $this->model->getBaseUrl($type);
         $this->assertEquals($expected, $actual);
@@ -156,7 +188,11 @@ class StoreTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getBaseUrlDataProvider()
+=======
+    public function getBaseUrlDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [UrlInterface::URL_TYPE_WEB, false, false, 'http://localhost/'],
@@ -209,9 +245,15 @@ class StoreTest extends \PHPUnit\Framework\TestCase
      * @param bool $useCustomEntryPoint
      * @param bool $useStoreCode
      * @param string $expected
+<<<<<<< HEAD
      * @magentoAppIsolation enabled
      */
     #[DataProvider('getBaseUrlForCustomEntryPointDataProvider')]
+=======
+     * @dataProvider getBaseUrlForCustomEntryPointDataProvider
+     * @magentoAppIsolation enabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetBaseUrlForCustomEntryPoint($type, $useCustomEntryPoint, $useStoreCode, $expected)
     {
         /* config operations require store to be loaded */
@@ -222,7 +264,11 @@ class StoreTest extends \PHPUnit\Framework\TestCase
 
         \Magento\TestFramework\Helper\Bootstrap::getObjectManager()
             ->get(\Magento\Framework\App\Config\MutableScopeConfigInterface::class)
+<<<<<<< HEAD
             ->setValue(Store::XML_PATH_STORE_IN_URL, $useStoreCode);
+=======
+            ->setValue(Store::XML_PATH_STORE_IN_URL, $useStoreCode, ScopeInterface::SCOPE_STORE);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         // emulate custom entry point
         $_SERVER['SCRIPT_FILENAME'] = 'custom_entry.php';
@@ -232,6 +278,10 @@ class StoreTest extends \PHPUnit\Framework\TestCase
 
         if ($useCustomEntryPoint) {
             $property = new \ReflectionProperty($this->model, '_isCustomEntryPoint');
+<<<<<<< HEAD
+=======
+            $property->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $property->setValue($this->model, $useCustomEntryPoint);
         }
         $actual = $this->model->getBaseUrl($type);
@@ -241,7 +291,11 @@ class StoreTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getBaseUrlForCustomEntryPointDataProvider()
+=======
+    public function getBaseUrlForCustomEntryPointDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [UrlInterface::URL_TYPE_LINK, false, false, 'http://localhost/custom_entry.php/'],
@@ -295,7 +349,11 @@ class StoreTest extends \PHPUnit\Framework\TestCase
     {
         $objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
         $objectManager->get(\Magento\Framework\App\Config\MutableScopeConfigInterface::class)
+<<<<<<< HEAD
             ->setValue('web/url/use_store', 1);
+=======
+            ->setValue('web/url/use_store', true, ScopeInterface::SCOPE_STORE, 'secondstore');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->model->load('admin');
         $this->model
@@ -347,7 +405,11 @@ class StoreTest extends \PHPUnit\Framework\TestCase
     {
         $objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
         $objectManager->get(\Magento\Framework\App\Config\ReinitableConfigInterface::class)
+<<<<<<< HEAD
             ->setValue('web/url/use_store', 0);
+=======
+            ->setValue('web/url/use_store', false, ScopeInterface::SCOPE_STORE, 'default');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         /** @var \Magento\Store\Model\Store $secondStore */
         $secondStore = $objectManager->get(StoreRepositoryInterface::class)->get('secondstore');
@@ -410,11 +472,18 @@ class StoreTest extends \PHPUnit\Framework\TestCase
     /**
      * @param array $badStoreData
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider saveValidationDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoAppIsolation enabled
      * @magentoAppArea adminhtml
      * @magentoDbIsolation enabled
      */
+<<<<<<< HEAD
     #[DataProvider('saveValidationDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveValidation($badStoreData)
     {
         $this->expectException(\Magento\Framework\Exception\LocalizedException::class);
@@ -435,7 +504,11 @@ class StoreTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function saveValidationDataProvider()
+=======
+    public function saveValidationDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'empty store name' => [['name' => '']],
@@ -447,11 +520,18 @@ class StoreTest extends \PHPUnit\Framework\TestCase
     /**
      * @param $storeInUrl
      * @param $disableStoreInUrl
+<<<<<<< HEAD
      * @param $singleStoreModeEnabled
      * @param $expectedResult
      */
     #[DataProvider('isUseStoreInUrlDataProvider')]
     public function testIsUseStoreInUrl($storeInUrl, $disableStoreInUrl, $singleStoreModeEnabled, $expectedResult)
+=======
+     * @param $expectedResult
+     * @dataProvider isUseStoreInUrlDataProvider
+     */
+    public function testIsUseStoreInUrl($storeInUrl, $disableStoreInUrl, $expectedResult)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
         $configMock = $this->createMock(\Magento\Framework\App\Config\ReinitableConfigInterface::class);
@@ -461,6 +541,7 @@ class StoreTest extends \PHPUnit\Framework\TestCase
         $params['context'] = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()
             ->create(\Magento\Framework\Model\Context::class, ['appState' => $appStateMock]);
 
+<<<<<<< HEAD
         $configMock
             ->method('isSetFlag')
             ->willReturnCallback(
@@ -470,6 +551,12 @@ class StoreTest extends \PHPUnit\Framework\TestCase
                     default => null
                 }
             );
+=======
+        $configMock->expects($this->any())
+            ->method('getValue')
+            ->with($this->stringContains(Store::XML_PATH_STORE_IN_URL))
+            ->willReturn($storeInUrl);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $params['config'] = $configMock;
         $model = $objectManager->create(\Magento\Store\Model\Store::class, $params);
@@ -481,6 +568,7 @@ class StoreTest extends \PHPUnit\Framework\TestCase
      * @return array
      * @see self::testIsUseStoreInUrl;
      */
+<<<<<<< HEAD
     public static function isUseStoreInUrlDataProvider()
     {
         return [
@@ -492,16 +580,33 @@ class StoreTest extends \PHPUnit\Framework\TestCase
             [false, null, true, false],
             [true, true, true, false],
             [true, false, true, false]
+=======
+    public function isUseStoreInUrlDataProvider()
+    {
+        return [
+            [true, null, true],
+            [false, null, false],
+            [true, true, false],
+            [true, false, true]
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider isCurrentlySecureDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param bool $expected
      * @param array $serverValues
      * @magentoConfigFixture current_store web/secure/offloader_header X_FORWARDED_PROTO
      * @magentoConfigFixture current_store web/secure/base_url https://example.com:80
      */
+<<<<<<< HEAD
     #[DataProvider('isCurrentlySecureDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testIsCurrentlySecure($expected, $serverValues)
     {
         $objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
@@ -514,7 +619,11 @@ class StoreTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $model->isCurrentlySecure());
     }
 
+<<<<<<< HEAD
     public static function isCurrentlySecureDataProvider()
+=======
+    public function isCurrentlySecureDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [true, ['HTTPS' => 'on']],

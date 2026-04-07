@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -16,6 +21,7 @@ use Magento\Framework\Setup\Option\TextConfigOption;
  */
 class SearchConfigOptionsList
 {
+<<<<<<< HEAD
     public const INPUT_KEY_SEARCH_ENGINE = 'search-engine';
 
     /**
@@ -38,6 +44,19 @@ class SearchConfigOptionsList
     public const INPUT_KEY_OPENSEARCH_PASSWORD = 'opensearch-password';
     public const INPUT_KEY_OPENSEARCH_INDEX_PREFIX = 'opensearch-index-prefix';
     public const INPUT_KEY_OPENSEARCH_TIMEOUT = 'opensearch-timeout';
+=======
+    /**
+     * Input key for the options
+     */
+    const INPUT_KEY_SEARCH_ENGINE = 'search-engine';
+    const INPUT_KEY_ELASTICSEARCH_HOST = 'elasticsearch-host';
+    const INPUT_KEY_ELASTICSEARCH_PORT = 'elasticsearch-port';
+    const INPUT_KEY_ELASTICSEARCH_ENABLE_AUTH = 'elasticsearch-enable-auth';
+    const INPUT_KEY_ELASTICSEARCH_USERNAME = 'elasticsearch-username';
+    const INPUT_KEY_ELASTICSEARCH_PASSWORD = 'elasticsearch-password';
+    const INPUT_KEY_ELASTICSEARCH_INDEX_PREFIX = 'elasticsearch-index-prefix';
+    const INPUT_KEY_ELASTICSEARCH_TIMEOUT = 'elasticsearch-timeout';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * Get options list for search engine configuration
@@ -95,6 +114,7 @@ class SearchConfigOptionsList
                 TextConfigOption::FRONTEND_WIZARD_TEXT,
                 '',
                 'Elasticsearch server timeout.'
+<<<<<<< HEAD
             ),
             new TextConfigOption(
                 self::INPUT_KEY_OPENSEARCH_HOST,
@@ -137,6 +157,8 @@ class SearchConfigOptionsList
                 TextConfigOption::FRONTEND_WIZARD_TEXT,
                 '',
                 'OpenSearch server timeout.'
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             )
         ];
     }
@@ -149,8 +171,14 @@ class SearchConfigOptionsList
     public function getAvailableSearchEngineList(): array
     {
         return [
+<<<<<<< HEAD
             'elasticsearch8' => 'Elasticsearch 8.x (deprecated)',
             'opensearch' => 'OpenSearch'
+=======
+            'elasticsearch5' => 'Elasticsearch 5.x (deprecated)',
+            'elasticsearch6' => 'Elasticsearch 6.x',
+            'elasticsearch7' => 'Elasticsearch 7.x'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
     }
 }

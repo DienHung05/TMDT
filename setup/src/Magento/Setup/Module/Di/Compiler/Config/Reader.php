@@ -1,15 +1,24 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Setup\Module\Di\Compiler\Config;
 
 use Magento\Framework\App;
+<<<<<<< HEAD
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\ObjectManager\ConfigInterface;
 use Magento\Framework\Phrase;
+=======
+use Magento\Framework\ObjectManager\ConfigInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Setup\Module\Di\Code\Reader\ClassReaderDecorator;
 use Magento\Setup\Module\Di\Code\Reader\Type;
 use Magento\Setup\Module\Di\Compiler\ArgumentsResolverFactory;
@@ -93,6 +102,7 @@ class Reader
         foreach ($definitionsCollection->getInstancesNamesList() as $instanceName) {
             $preference = $areaConfig->getPreference($instanceName);
             if ($instanceName !== $preference) {
+<<<<<<< HEAD
                 if (array_key_exists($preference, $areaConfig->getVirtualTypes())) {
                     // Special handling is required for virtual types.
                     $config['preferences'][$instanceName] = $preference;
@@ -129,6 +139,8 @@ class Reader
                     ));
                 }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $config['preferences'][$instanceName] = $preference;
             }
         }

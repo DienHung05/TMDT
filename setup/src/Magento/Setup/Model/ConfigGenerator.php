@@ -1,11 +1,17 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Setup\Model;
 
+<<<<<<< HEAD
 use Magento\Framework\App\DeploymentConfig;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\State;
@@ -14,6 +20,15 @@ use Magento\Framework\Config\Data\ConfigData;
 use Magento\Framework\Config\Data\ConfigDataFactory;
 use Magento\Framework\Config\File\ConfigFilePool;
 use Magento\Framework\DB\Helper\InitStatementsCleanup;
+=======
+use Magento\Framework\App\ObjectManager;
+use Magento\Framework\Config\Data\ConfigData;
+use Magento\Framework\Config\Data\ConfigDataFactory;
+use Magento\Framework\Config\File\ConfigFilePool;
+use Magento\Framework\App\DeploymentConfig;
+use Magento\Framework\Config\ConfigOptionsListConstants;
+use Magento\Framework\App\State;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Math\Random;
 use Magento\Setup\Model\ConfigOptionsList\DriverOptions;
 
@@ -21,7 +36,10 @@ use Magento\Setup\Model\ConfigOptionsList\DriverOptions;
  * Creates deployment config data based on user input array
  *
  * This class introduced to break down {@see \Magento\Setup\Model\ConfigOptionsList::createConfig}
+<<<<<<< HEAD
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class ConfigGenerator
 {
@@ -51,8 +69,12 @@ class ConfigGenerator
 
     /**
      * @var Random
+<<<<<<< HEAD
      * @deprecated 100.2.0 CryptKeyGenerator should be used instead for generating encryption keys
      * @see CryptKeyGeneratorInterface
+=======
+     * @deprecated 100.2.0
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     protected $random;
 
@@ -72,11 +94,14 @@ class ConfigGenerator
     private $driverOptions;
 
     /**
+<<<<<<< HEAD
      * @var InitStatementsCleanup
      */
     private $initStatementsCleanup;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Constructor
      *
      * @param Random $random Deprecated since 100.2.0
@@ -84,23 +109,35 @@ class ConfigGenerator
      * @param ConfigDataFactory|null $configDataFactory
      * @param CryptKeyGeneratorInterface|null $cryptKeyGenerator
      * @param DriverOptions|null $driverOptions
+<<<<<<< HEAD
      * @param InitStatementsCleanup|null $initStatementsCleanup
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function __construct(
         Random $random,
         DeploymentConfig $deploymentConfig,
+<<<<<<< HEAD
         ?ConfigDataFactory $configDataFactory = null,
         ?CryptKeyGeneratorInterface $cryptKeyGenerator = null,
         ?DriverOptions $driverOptions = null,
         ?InitStatementsCleanup $initStatementsCleanup = null
+=======
+        ConfigDataFactory $configDataFactory = null,
+        CryptKeyGeneratorInterface $cryptKeyGenerator = null,
+        DriverOptions $driverOptions = null
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ) {
         $this->random = $random;
         $this->deploymentConfig = $deploymentConfig;
         $this->configDataFactory = $configDataFactory ?? ObjectManager::getInstance()->get(ConfigDataFactory::class);
         $this->cryptKeyGenerator = $cryptKeyGenerator ?? ObjectManager::getInstance()->get(CryptKeyGenerator::class);
         $this->driverOptions = $driverOptions ?? ObjectManager::getInstance()->get(DriverOptions::class);
+<<<<<<< HEAD
         $this->initStatementsCleanup = $initStatementsCleanup
             ?? ObjectManager::getInstance()->get(InitStatementsCleanup::class);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -153,8 +190,12 @@ class ConfigGenerator
      *
      * @param array $data
      * @return ConfigData|null
+<<<<<<< HEAD
      * @deprecated 2.2.0 Definitions are no longer used and config generation is not required. Method returns null.
      * @see This method is not replaced; definitions functionality was removed entirely.
+=======
+     * @deprecated 2.2.0
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function createDefinitionsConfig(array $data)
@@ -193,6 +234,7 @@ class ConfigGenerator
 
         foreach ($optional as $key) {
             if (isset($data[$key])) {
+<<<<<<< HEAD
                 $value = $data[$key];
                 
                 // Clean up deprecated 'SET NAMES utf8;' from initStatements
@@ -205,6 +247,9 @@ class ConfigGenerator
                 }
                 
                 $configData->set($dbConnectionPrefix . self::$paramMap[$key], $value);
+=======
+                $configData->set($dbConnectionPrefix . self::$paramMap[$key], $data[$key]);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             }
         }
 

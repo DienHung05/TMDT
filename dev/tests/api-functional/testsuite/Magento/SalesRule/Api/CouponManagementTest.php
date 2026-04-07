@@ -1,16 +1,26 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
 namespace Magento\SalesRule\Api;
 
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\SalesRule\Api;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\WebapiAbstract;
 
 class CouponManagementTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     public const SERVICE_NAME = 'salesRuleCouponManagementV1';
     public const RESOURCE_PATH = '/V1/coupons';
     public const SERVICE_VERSION = "V1";
@@ -18,15 +28,30 @@ class CouponManagementTest extends WebapiAbstract
     public const SERVICE_NAME_COUPON = 'salesRuleCouponRepositoryV1';
     public const RESOURCE_PATH_COUPON = '/V1/coupons';
     public const SERVICE_VERSION_COUPON = "V1";
+=======
+    const SERVICE_NAME = 'salesRuleCouponManagementV1';
+    const RESOURCE_PATH = '/V1/coupons';
+    const SERVICE_VERSION = "V1";
+
+    const SERVICE_NAME_COUPON = 'salesRuleCouponRepositoryV1';
+    const RESOURCE_PATH_COUPON = '/V1/coupons';
+    const SERVICE_VERSION_COUPON = "V1";
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @param int $count
      * @param int $length
      * @param string $format
      * @param string $regex
+<<<<<<< HEAD
      * @magentoApiDataFixture Magento/SalesRule/_files/rules_autogeneration.php
      */
     #[DataProvider('dataProviderForTestGenerate')]
+=======
+     * @dataProvider dataProviderForTestGenerate
+     * @magentoApiDataFixture Magento/SalesRule/_files/rules_autogeneration.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testManagement($count, $length, $format, $regex)
     {
         /** @var $registry \Magento\Framework\Registry */
@@ -79,7 +104,11 @@ class CouponManagementTest extends WebapiAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function dataProviderForTestGenerate()
+=======
+    public function dataProviderForTestGenerate()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

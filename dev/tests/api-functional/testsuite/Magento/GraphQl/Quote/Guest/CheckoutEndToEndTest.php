@@ -1,9 +1,15 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
  */
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Quote\Guest;
@@ -16,9 +22,12 @@ use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\ResourceModel\Order\CollectionFactory;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
+<<<<<<< HEAD
 use Magento\TestFramework\Fixture\Config;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * End to checkout tests for guest
@@ -69,7 +78,10 @@ class CheckoutEndToEndTest extends GraphQlAbstract
     }
 
     /**
+<<<<<<< HEAD
      * @magentoConfigFixture default_store checkout/options/guest_checkout 1
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoApiDataFixture Magento/Catalog/_files/products_with_layered_navigation_attribute.php
      */
     public function testCheckoutWorkflow()
@@ -91,6 +103,7 @@ class CheckoutEndToEndTest extends GraphQlAbstract
     }
 
     /**
+<<<<<<< HEAD
      * Test checkout workflow with null second street in shipping address
      * Validates that null values in street array are properly filtered and don't cause errors
      */
@@ -117,6 +130,8 @@ class CheckoutEndToEndTest extends GraphQlAbstract
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @return string
      */
     private function findProduct(): string
@@ -199,7 +214,11 @@ QUERY;
     private function addProductToCart(string $cartId, float $quantity, string $sku): void
     {
         $query = <<<QUERY
+<<<<<<< HEAD
 mutation {
+=======
+mutation {  
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
   addSimpleProductsToCart(
     input: {
       cart_id: "{$cartId}"
@@ -341,7 +360,11 @@ QUERY;
         $query = <<<QUERY
 mutation {
   setShippingMethodsOnCart(input:  {
+<<<<<<< HEAD
     cart_id: "{$cartId}",
+=======
+    cart_id: "{$cartId}", 
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     shipping_methods: [
       {
          carrier_code: "{$method['carrier_code']}"
@@ -427,6 +450,7 @@ QUERY;
         self::assertNotEmpty($response['placeOrder']['order']['order_number']);
     }
 
+<<<<<<< HEAD
     /**
      * Set shipping address with null second street in address
      *
@@ -513,6 +537,8 @@ QUERY;
         return $availableShippingMethod;
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     protected function tearDown(): void
     {
         $this->deleteQuote();

@@ -1,12 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\CatalogInventory;
 
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Config\Model\ResourceModel\Config;
 use Magento\ConfigurableProduct\Test\Fixture\Attribute as AttributeFixture;
@@ -25,10 +31,19 @@ use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\ObjectManager;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\Config\Model\ResourceModel\Config;
+use Magento\Framework\App\Config\ReinitableConfigInterface;
+use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\TestFramework\ObjectManager;
+use Magento\TestFramework\TestCase\GraphQlAbstract;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\CatalogInventory\Model\Configuration;
 
 /**
  * Test for the product only x left in stock
+<<<<<<< HEAD
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
@@ -38,6 +53,11 @@ class ProductOnlyXLeftInStockTest extends GraphQlAbstract
 
     private const SKU = 'simple_10';
 
+=======
+ */
+class ProductOnlyXLeftInStockTest extends GraphQlAbstract
+{
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @var ProductRepositoryInterface
      */
@@ -48,7 +68,11 @@ class ProductOnlyXLeftInStockTest extends GraphQlAbstract
     private $resourceConfig;
 
     /**
+<<<<<<< HEAD
      * @var ApiMutableScopeConfig
+=======
+     * @var ScopeConfigInterface
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     private $scopeConfig;
 
@@ -58,11 +82,14 @@ class ProductOnlyXLeftInStockTest extends GraphQlAbstract
     private $reinitConfig;
 
     /**
+<<<<<<< HEAD
      * @var DataFixtureStorage
      */
     private $fixtures;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
@@ -72,9 +99,14 @@ class ProductOnlyXLeftInStockTest extends GraphQlAbstract
         $objectManager = ObjectManager::getInstance();
         $this->productRepository = $objectManager->create(ProductRepositoryInterface::class);
         $this->resourceConfig = $objectManager->get(Config::class);
+<<<<<<< HEAD
         $this->scopeConfig = $objectManager->get(ApiMutableScopeConfig::class);
         $this->reinitConfig = $objectManager->get(ReinitableConfigInterface::class);
         $this->fixtures = DataFixtureStorageManager::getStorage();
+=======
+        $this->scopeConfig = $objectManager->get(ScopeConfigInterface::class);
+        $this->reinitConfig = $objectManager->get(ReinitableConfigInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -115,7 +147,11 @@ QUERY;
             products(filter: {sku: {eq: "{$productSku}"}})
             {
                 items {
+<<<<<<< HEAD
                     only_x_left_in_stock
+=======
+                    only_x_left_in_stock            
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 }
             }
         }
@@ -142,13 +178,21 @@ QUERY;
         // need to resave product to reindex it with new configuration.
         $product = $this->productRepository->get($productSku);
         $this->productRepository->save($product);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $query = <<<QUERY
         {
             products(filter: {sku: {eq: "{$productSku}"}})
             {
                 items {
+<<<<<<< HEAD
                     only_x_left_in_stock
+=======
+                    only_x_left_in_stock            
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 }
             }
         }
@@ -162,6 +206,7 @@ QUERY;
         $this->assertArrayHasKey('only_x_left_in_stock', $response['products']['items'][0]);
         $this->assertEquals(0, $response['products']['items'][0]['only_x_left_in_stock']);
     }
+<<<<<<< HEAD
 
     #[
         DataFixture(ProductFixture::class, ['sku' => self::SKU], as: 'product'),
@@ -264,4 +309,6 @@ mutation {
 }
 QUERY;
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

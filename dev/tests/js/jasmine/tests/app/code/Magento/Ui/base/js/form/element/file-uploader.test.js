@@ -1,6 +1,11 @@
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /*eslint max-nested-callbacks: 0*/
@@ -33,6 +38,7 @@ define([
             },
             component,
             dataScope = 'dataScope',
+<<<<<<< HEAD
             originalJQuery = jQuery.fn,
             params = {
                 provider: 'provName',
@@ -40,6 +46,9 @@ define([
                 index: '',
                 dataScope: dataScope
             };
+=======
+            originalJQuery = jQuery.fn;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         beforeEach(function (done) {
             injector.mock(mocks);
@@ -47,7 +56,16 @@ define([
                 'Magento_Ui/js/form/element/file-uploader',
                 'knockoutjs/knockout-es5'
             ], function (Constr) {
+<<<<<<< HEAD
                 component = new Constr(params);
+=======
+                component = new Constr({
+                    provider: 'provName',
+                    name: '',
+                    index: '',
+                    dataScope: dataScope
+                });
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
                 done();
             });
@@ -58,6 +76,7 @@ define([
         });
 
         describe('initUploader method', function () {
+<<<<<<< HEAD
             let uppyMock;
 
             beforeEach(function () {
@@ -121,6 +140,17 @@ define([
                 expect(component.getInitialValue).toHaveBeenCalled();
                 component.setImageSize(initialValue);
                 expect(component.value().size).toEqual(expectedValue[0].size);
+=======
+            it('creates instance of file uploader', function () {
+                var elem = document.createElement('input');
+
+                spyOn(jQuery.fn, 'fileupload');
+
+                component.initUploader(elem);
+
+                expect(jQuery.fn.fileupload).toHaveBeenCalled();
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             });
         });
 
@@ -402,6 +432,7 @@ define([
         });
 
         describe('onElementRender handler', function () {
+<<<<<<< HEAD
             it('invokes initUploader and bindFileBrowserTriggers methods', function () {
                 let input = document.createElement('input');
 
@@ -424,10 +455,17 @@ define([
                 spyOn(component, 'initUploader');
                 spyOn(component, 'bindFileBrowserTriggers').and.callThrough();
                 spyOn(component, 'triggerFileBrowser');
+=======
+            it('invokes initUploader method', function () {
+                var input = document.createElement('input');
+
+                spyOn(component, 'initUploader');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
                 component.onElementRender(input);
 
                 expect(component.initUploader).toHaveBeenCalledWith(input);
+<<<<<<< HEAD
                 expect(component.bindFileBrowserTriggers).toHaveBeenCalledWith(input.id);
 
                 button.dispatchEvent(clickEvent);
@@ -447,6 +485,8 @@ define([
                 expect(arg2[0]).toBe($fileUploaderArea[0]);
 
                 $dropZone.remove();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             });
         });
 

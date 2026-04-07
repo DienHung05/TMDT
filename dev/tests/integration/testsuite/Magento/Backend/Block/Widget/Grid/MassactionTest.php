@@ -1,12 +1,20 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Backend\Block\Widget\Grid;
 
 use Magento\TestFramework\App\State;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea adminhtml
@@ -91,8 +99,13 @@ class MassactionTest extends \PHPUnit\Framework\TestCase
     /**
      * @param string $mageMode
      * @param int $expectedCount
+<<<<<<< HEAD
      */
     #[DataProvider('getCountDataProvider')]
+=======
+     * @dataProvider getCountDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetCount($mageMode, $expectedCount)
     {
         $this->loadLayout($mageMode);
@@ -102,7 +115,11 @@ class MassactionTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getCountDataProvider()
+=======
+    public function getCountDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -123,8 +140,13 @@ class MassactionTest extends \PHPUnit\Framework\TestCase
     /**
      * @param string $itemId
      * @param array $expectedItem
+<<<<<<< HEAD
      */
     #[DataProvider('getItemsDataProvider')]
+=======
+     * @dataProvider getItemsDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetItems($itemId, $expectedItem)
     {
         $this->loadLayout();
@@ -144,7 +166,11 @@ class MassactionTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getItemsDataProvider()
+=======
+    public function getItemsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Customer\Block\Adminhtml\Grid\Renderer;
 
 use Magento\Framework\DataObject;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class checks multiaction block rendering with simple product and simple product with options.
@@ -18,10 +26,17 @@ use PHPUnit\Framework\Attributes\DataProvider;
 class MultiactionTest extends AbstractMultiactionTest
 {
     /**
+<<<<<<< HEAD
      * @param array $columnData
      * @return void
      */
     #[DataProvider('renderEmptyProvider')]
+=======
+     * @dataProvider renderEmptyProvider
+     * @param array $columnData
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRenderEmpty(array $columnData): void
     {
         /** @var DataObject $row */
@@ -39,6 +54,7 @@ class MultiactionTest extends AbstractMultiactionTest
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function renderEmptyProvider(): array
     {
         return [
@@ -50,6 +66,19 @@ class MultiactionTest extends AbstractMultiactionTest
             ],
             'empty_actions_element' => [
                 'columnData' => [
+=======
+    public function renderEmptyProvider(): array
+    {
+        return [
+            'empty_actions' => [
+                'column_data' => ['actions' => []],
+            ],
+            'not_array_actions' => [
+                'column_data' => ['actions' => 'actions'],
+            ],
+            'empty_actions_element' => [
+                'column_data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'actions' => [
                         'action_1' => 'actions',
                     ],

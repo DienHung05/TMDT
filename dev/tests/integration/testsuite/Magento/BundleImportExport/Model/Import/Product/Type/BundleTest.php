@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
  */
@@ -8,11 +9,21 @@ namespace Magento\BundleImportExport\Model\Import\Product\Type;
 use Magento\Bundle\Test\Fixture\Link as BundleSelectionFixture;
 use Magento\Bundle\Test\Fixture\Option as BundleOptionFixture;
 use Magento\Bundle\Test\Fixture\Product as BundleProductFixture;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\BundleImportExport\Model\Import\Product\Type;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\ResourceModel\Product as ProductResource;
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\CatalogInventory\Api\Data\StockItemInterface;
 use Magento\CatalogInventory\Api\StockConfigurationInterface;
 use Magento\CatalogInventory\Api\StockItemCriteriaInterfaceFactory;
@@ -23,6 +34,7 @@ use Magento\ImportExport\Model\Import;
 use Magento\ImportExport\Model\Import\Adapter as ImportAdapter;
 use Magento\ImportExport\Model\Import\ErrorProcessing\ProcessingErrorAggregatorInterface;
 use Magento\ImportExport\Model\Import\Source\Csv;
+<<<<<<< HEAD
 use Magento\ImportExport\Test\Fixture\CsvFile as CsvFileFixture;
 use Magento\Store\Model\ScopeInterface;
 use Magento\TestFramework\Fixture\Config;
@@ -33,6 +45,10 @@ use Magento\TestFramework\Fixture\DbIsolation;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\TestFramework\Fixture\ScopeFixture;
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\Framework\App\Filesystem\DirectoryList;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea adminhtml
@@ -52,6 +68,14 @@ class BundleTest extends \Magento\TestFramework\Indexer\TestCase
     private const TEST_PRODUCT_TYPE = 'bundle';
 
     /**
+<<<<<<< HEAD
+=======
+     * @var \Magento\CatalogImportExport\Model\Import\Product
+     */
+    protected $model;
+
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @var \Magento\Framework\ObjectManagerInterface
      */
     protected $objectManager;
@@ -84,6 +108,10 @@ class BundleTest extends \Magento\TestFramework\Indexer\TestCase
     protected function setUp(): void
     {
         $this->objectManager = Bootstrap::getObjectManager();
+<<<<<<< HEAD
+=======
+        $this->model = $this->objectManager->create(\Magento\CatalogImportExport\Model\Import\Product::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -142,13 +170,21 @@ class BundleTest extends \Magento\TestFramework\Indexer\TestCase
     /**
      * Test that Bundle options are updated correctly by import
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider valuesDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoAppArea adminhtml
      * @magentoDbIsolation enabled
      * @magentoAppIsolation enabled
      * @param array $expectedValues
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('valuesDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testBundleImportUpdateValues(array $expectedValues): void
     {
         // import data from CSV file
@@ -278,7 +314,11 @@ class BundleTest extends \Magento\TestFramework\Indexer\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function valuesDataProvider(): array
+=======
+    public function valuesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -302,13 +342,20 @@ class BundleTest extends \Magento\TestFramework\Indexer\TestCase
 
     /**
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
+=======
+     * @dataProvider shouldUpdateBundleStockStatusIfChildProductsStockStatusChangedDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param bool $isOption1Required
      * @param bool $isOption2Required
      * @param string $outOfStockImportFile
      * @param string $inStockImportFile
      * @throws NoSuchEntityException
      */
+<<<<<<< HEAD
     #[DataProvider('shouldUpdateBundleStockStatusIfChildProductsStockStatusChangedDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testShouldUpdateBundleStockStatusIfChildProductsStockStatusChanged(
         bool $isOption1Required,
         bool $isOption2Required,
@@ -355,24 +402,39 @@ class BundleTest extends \Magento\TestFramework\Indexer\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function shouldUpdateBundleStockStatusIfChildProductsStockStatusChangedDataProvider(): array
+=======
+    public function shouldUpdateBundleStockStatusIfChildProductsStockStatusChangedDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'all options are required' => [
                 true,
                 true,
+<<<<<<< HEAD
                 'outOfStockImportFile' => 'import_bundle_set_option1_products_out_of_stock.csv',
                 'inStockImportFile' => 'import_bundle_set_option1_products_in_stock.csv'
+=======
+                'out-of-stock' => 'import_bundle_set_option1_products_out_of_stock.csv',
+                'in-stock' => 'import_bundle_set_option1_products_in_stock.csv'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             'all options are optional' => [
                 false,
                 false,
+<<<<<<< HEAD
                 'outOfStockImportFile' => 'import_bundle_set_all_products_out_of_stock.csv',
                 'inStockImportFile' => 'import_bundle_set_option1_products_in_stock.csv'
+=======
+                'out-of-stock' => 'import_bundle_set_all_products_out_of_stock.csv',
+                'in-stock' => 'import_bundle_set_option1_products_in_stock.csv'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ]
         ];
     }
 
+<<<<<<< HEAD
     #[
         DbIsolation(false),
         Config(\Magento\Catalog\Helper\Data::XML_PATH_PRICE_SCOPE, 1, ScopeInterface::SCOPE_STORE, 'default'),
@@ -441,6 +503,8 @@ class BundleTest extends \Magento\TestFramework\Indexer\TestCase
         $this->assertEquals(1, $options[1]->getProductLinks()[0]->getPriceType());
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @param int $productId
      * @return StockItemInterface|null
@@ -470,6 +534,7 @@ class BundleTest extends \Magento\TestFramework\Indexer\TestCase
         bool $validateOnly = false
     ): ProcessingErrorAggregatorInterface {
         /** @var Filesystem $filesystem */
+<<<<<<< HEAD
         $filesystem = $this->objectManager->create(Filesystem::class);
         $directoryWrite = $filesystem->getDirectoryWrite(DirectoryList::ROOT);
         $source = ImportAdapter::findAdapterFor($file, $directoryWrite);
@@ -479,6 +544,17 @@ class BundleTest extends \Magento\TestFramework\Indexer\TestCase
         $errors = $model->validateData();
         if (!$validateOnly && !$errors->getAllErrors()) {
             $model->importData();
+=======
+        $filesystem =$this->objectManager->create(Filesystem::class);
+        $directoryWrite = $filesystem->getDirectoryWrite(DirectoryList::ROOT);
+        $source = ImportAdapter::findAdapterFor($file, $directoryWrite);
+        $errors = $this->model
+            ->setParameters(['behavior' => $behavior, 'entity' => 'catalog_product'])
+            ->setSource($source)
+            ->validateData();
+        if (!$validateOnly && !$errors->getAllErrors()) {
+            $this->model->importData();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
         return $errors;
     }

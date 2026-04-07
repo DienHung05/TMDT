@@ -1,11 +1,19 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
  */
 namespace Magento\Catalog\Api;
 
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Catalog\Api;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Api\SortOrder;
@@ -15,19 +23,32 @@ use Magento\TestFramework\TestCase\WebapiAbstract;
 
 class ProductRenderListInterfaceTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     public const SERVICE_NAME = 'catalogProductRenderListV1';
     public const SERVICE_VERSION = 'V1';
     public const RESOURCE_PATH = '/V1/products-render-info/';
+=======
+    const SERVICE_NAME = 'catalogProductRenderListV1';
+    const SERVICE_VERSION = 'V1';
+    const RESOURCE_PATH = '/V1/products-render-info/';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * Test get list of products render information: prices, buttons data, etc...
      *
      * @magentoApiDataFixture Magento/Catalog/_files/product_virtual.php
      * @magentoApiDataFixture Magento/Catalog/_files/product_special_price.php
+<<<<<<< HEAD
      * @param array $expectedRenderInfo
      * @return void
      */
     #[DataProvider('productRenderInfoProvider')]
+=======
+     * @dataProvider productRenderInfoProvider
+     * @param array $expectedRenderInfo
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetList(array $expectedRenderInfo)
     {
         $expectedIds = [21, 31];
@@ -89,7 +110,11 @@ class ProductRenderListInterfaceTest extends WebapiAbstract
      * Provider for parts of product information
      * @return array
      */
+<<<<<<< HEAD
     public static function productRenderInfoProvider()
+=======
+    public function productRenderInfoProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'simple_products_variation' => [

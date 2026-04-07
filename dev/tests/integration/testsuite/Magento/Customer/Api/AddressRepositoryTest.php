@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Customer\Api;
 
 use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\NoSuchEntityException;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Integration test for service layer \Magento\Customer\Model\ResourceModel\AddressRepository
@@ -343,11 +351,19 @@ class AddressRepositoryTest extends \PHPUnit\Framework\TestCase
      * @param \Magento\Framework\Api\Filter[] $filterGroup
      * @param array $expectedResult array of expected results indexed by ID
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider searchAddressDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture  Magento/Customer/_files/customer.php
      * @magentoDataFixture  Magento/Customer/_files/customer_two_addresses.php
      * @magentoAppIsolation enabled
      */
+<<<<<<< HEAD
     #[DataProvider('searchAddressDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSearchAddresses($filters, $filterGroup, $expectedResult)
     {
         /** @var \Magento\Framework\Api\SearchCriteriaBuilder $searchBuilder */
@@ -381,7 +397,11 @@ class AddressRepositoryTest extends \PHPUnit\Framework\TestCase
         }
     }
 
+<<<<<<< HEAD
     public static function searchAddressDataProvider()
+=======
+    public function searchAddressDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         /**
          * @var \Magento\Framework\Api\FilterBuilder $filterBuilder

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -29,16 +34,27 @@ class SearchConfigOptionsListTest extends TestCase
     public function testGetOptionsList()
     {
         $optionsList = $this->searchConfigOptionsList->getOptionsList();
+<<<<<<< HEAD
         $this->assertCount(15, $optionsList);
+=======
+        $this->assertCount(8, $optionsList);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertArrayHasKey(0, $optionsList);
         $this->assertInstanceOf(SelectConfigOption::class, $optionsList[0]);
         $this->assertEquals('search-engine', $optionsList[0]->getName());
+<<<<<<< HEAD
 
         $selectOptions = $optionsList[0]->getSelectOptions();
         $this->assertCount(2, $selectOptions);
         $this->assertContains('elasticsearch8', $selectOptions);
         $this->assertContains('opensearch', $selectOptions);
+=======
+        $this->assertCount(3, $optionsList[0]->getSelectOptions());
+        $this->assertContains('elasticsearch5', $optionsList[0]->getSelectOptions());
+        $this->assertContains('elasticsearch6', $optionsList[0]->getSelectOptions());
+        $this->assertContains('elasticsearch7', $optionsList[0]->getSelectOptions());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertArrayHasKey(1, $optionsList);
         $this->assertInstanceOf(TextConfigOption::class, $optionsList[1]);
@@ -67,6 +83,7 @@ class SearchConfigOptionsListTest extends TestCase
         $this->assertArrayHasKey(7, $optionsList);
         $this->assertInstanceOf(TextConfigOption::class, $optionsList[7]);
         $this->assertEquals('elasticsearch-timeout', $optionsList[7]->getName());
+<<<<<<< HEAD
 
         $this->assertArrayHasKey(8, $optionsList);
         $this->assertInstanceOf(TextConfigOption::class, $optionsList[8]);
@@ -95,5 +112,7 @@ class SearchConfigOptionsListTest extends TestCase
         $this->assertArrayHasKey(14, $optionsList);
         $this->assertInstanceOf(TextConfigOption::class, $optionsList[14]);
         $this->assertEquals('opensearch-timeout', $optionsList[14]->getName());
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

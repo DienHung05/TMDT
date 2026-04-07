@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 //  /**
 //  * Copyright 2015 Adobe
 //  * All Rights Reserved.
+=======
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 //  */
 
 //
@@ -27,11 +33,19 @@
 
 & when (@media-target = 'mobile'), (@media-target = 'all') {
 
+<<<<<<< HEAD
     @media only screen and (max-width: @screen__m) {
         .media-width('max', (@screen__m + 1));
     }
 
     @media only screen and (max-width: (@screen__m - 1)) {
+=======
+    @media only screen and (max-width: (@screen__m + 1)) {
+        .media-width('max', (@screen__m + 1));
+    }
+
+    @media only screen and (max-width: @screen__m) {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         .media-width('max', @screen__m);
     }
 
@@ -59,22 +73,34 @@
 
 & when (@media-target = 'desktop'), (@media-target = 'all') {
 
+<<<<<<< HEAD
     @media all and (min-width: @screen__m),
     print {
         .media-width('min', @screen__m);
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     @media all and (min-width: (@screen__m + 1)),
     print {
         .media-width('min', (@screen__m + 1));
     }
 
+<<<<<<< HEAD
     @media all and (max-width: (@screen__l - 1)),
     print {
         .media-width('max', @screen__l);
     }
 
     @media all and (min-width: (@screen__l)),
+=======
+    @media all and (min-width: (@screen__m + 1)),
+    print {
+        .media-width('min', (@screen__m));
+    }
+
+    @media all and (min-width: @screen__l),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     print {
         .media-width('min', @screen__l);
     }

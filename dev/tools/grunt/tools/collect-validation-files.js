@@ -1,6 +1,11 @@
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 'use strict';
@@ -47,8 +52,11 @@ module.exports = {
     },
 
     getFiles: function (file) {
+<<<<<<< HEAD
         var files;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         if (file) {
             return file.split(',');
         }
@@ -57,11 +65,15 @@ module.exports = {
             fst.write(pc.static.tmp, this.getFilesForValidate());
         }
 
+<<<<<<< HEAD
         files = fst.getData(pc.static.tmp);
         if (files.length === 1 && files[0] === '') {
             files = [];
         }
 
         return files;
+=======
+        return fst.getData(pc.static.tmp);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 };

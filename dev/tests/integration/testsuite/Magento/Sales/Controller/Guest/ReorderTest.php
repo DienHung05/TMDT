@@ -1,26 +1,38 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 declare(strict_types=1);
 
 namespace Magento\Sales\Controller\Guest;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Model\Session;
+<<<<<<< HEAD
 use Magento\Framework\Exception\LocalizedException;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Message\MessageInterface;
 use Magento\Framework\Stdlib\CookieManagerInterface;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Sales\Api\Data\OrderInterfaceFactory;
 use Magento\Sales\Helper\Guest;
+<<<<<<< HEAD
 use Magento\Sales\Model\Order\Email\Sender\CreditmemoSender;
 use Magento\Sales\Model\Order\Creditmemo;
 use Magento\Sales\Model\Order\Creditmemo\Item;
 use Magento\TestFramework\Mail\Template\TransportBuilderMock;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Request;
 use Magento\TestFramework\TestCase\AbstractController;
 
@@ -28,7 +40,10 @@ use Magento\TestFramework\TestCase\AbstractController;
  * Test for guest reorder controller.
  *
  * @see \Magento\Sales\Controller\Guest\Reorder
+<<<<<<< HEAD
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  * @magentoAppArea frontend
  * @magentoDbIsolation enabled
  */
@@ -50,6 +65,7 @@ class ReorderTest extends AbstractController
     private $quoteRepository;
 
     /**
+<<<<<<< HEAD
      * @var TransportBuilderMock
      */
     private $transportBuilder;
@@ -60,6 +76,8 @@ class ReorderTest extends AbstractController
     protected $creditmemoSender;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
@@ -71,8 +89,11 @@ class ReorderTest extends AbstractController
         $this->cookieManager = $this->_objectManager->get(CookieManagerInterface::class);
         $this->customerSession = $this->_objectManager->get(Session::class);
         $this->quoteRepository = $this->_objectManager->get(CartRepositoryInterface::class);
+<<<<<<< HEAD
         $this->transportBuilder = $this->_objectManager->get(TransportBuilderMock::class);
         $this->creditmemoSender = $this->_objectManager->get(CreditmemoSender::class);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -155,6 +176,7 @@ class ReorderTest extends AbstractController
         $this->getRequest()->setMethod(Request::METHOD_POST);
         $this->dispatch('sales/guest/reorder/');
     }
+<<<<<<< HEAD
 
     /**
      * @magentoDbIsolation disabled
@@ -218,4 +240,6 @@ class ReorderTest extends AbstractController
             quoted_printable_decode($message->getBody()->bodyToString())
         );
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

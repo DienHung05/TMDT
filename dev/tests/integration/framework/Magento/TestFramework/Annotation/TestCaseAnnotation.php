@@ -1,15 +1,24 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\TestFramework\Annotation;
 
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use ReflectionClass;
 use ReflectionMethod;
+=======
+use PHPUnit\Util\Test as TestUtil;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Returns annotations for given testcase.
@@ -40,6 +49,7 @@ class TestCaseAnnotation
      */
     public function getAnnotations(TestCase $testCase): array
     {
+<<<<<<< HEAD
         $className = get_class($testCase);
         $methodName = $testCase->name();
 
@@ -102,5 +112,11 @@ class TestCaseAnnotation
         }
 
         return $annotations;
+=======
+        return TestUtil::parseTestMethodAnnotations(
+            get_class($testCase),
+            $testCase->getName(false)
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

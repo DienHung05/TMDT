@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -13,7 +18,10 @@ use Magento\Setup\Module\Dependency\Report\Data\ConfigInterface;
 use Magento\Setup\Module\Dependency\Report\WriterInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class AbstractBuilderTest extends TestCase
 {
@@ -34,6 +42,7 @@ class AbstractBuilderTest extends TestCase
 
     protected function setUp(): void
     {
+<<<<<<< HEAD
         $this->dependenciesParserMock = $this->createMock(ParserInterface::class);
         $this->reportWriterMock = $this->createMock(WriterInterface::class);
 
@@ -41,12 +50,26 @@ class AbstractBuilderTest extends TestCase
             ->setConstructorArgs([$this->dependenciesParserMock, $this->reportWriterMock])
             ->onlyMethods(['buildData'])
             ->getMock();
+=======
+        $this->dependenciesParserMock = $this->getMockForAbstractClass(ParserInterface::class);
+        $this->reportWriterMock = $this->getMockForAbstractClass(WriterInterface::class);
+
+        $this->builder = $this->getMockForAbstractClass(
+            AbstractBuilder::class,
+            ['dependenciesParser' => $this->dependenciesParserMock, 'reportWriter' => $this->reportWriterMock]
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
      * @param array $options
+<<<<<<< HEAD
      */
     #[DataProvider('dataProviderWrongParseOptions')]
+=======
+     * @dataProvider dataProviderWrongParseOptions
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testBuildWithWrongParseOptions($options)
     {
         $this->expectException('InvalidArgumentException');
@@ -57,15 +80,24 @@ class AbstractBuilderTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function dataProviderWrongParseOptions()
+=======
+    public function dataProviderWrongParseOptions()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [[['write' => [1, 2]]], [['parse' => [], 'write' => [1, 2]]]];
     }
 
     /**
      * @param array $options
+<<<<<<< HEAD
      */
     #[DataProvider('dataProviderWrongWriteOptions')]
+=======
+     * @dataProvider dataProviderWrongWriteOptions
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testBuildWithWrongWriteOptions($options)
     {
         $this->expectException('InvalidArgumentException');
@@ -76,7 +108,11 @@ class AbstractBuilderTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function dataProviderWrongWriteOptions()
+=======
+    public function dataProviderWrongWriteOptions()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [[['parse' => [1, 2]]], [['parse' => [1, 2], 'write' => []]]];
     }
@@ -89,7 +125,11 @@ class AbstractBuilderTest extends TestCase
         ];
 
         $parseResult = ['foo', 'bar', 'baz'];
+<<<<<<< HEAD
         $configMock = $this->createMock(ConfigInterface::class);
+=======
+        $configMock = $this->getMockForAbstractClass(ConfigInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->dependenciesParserMock->expects(
             $this->once()

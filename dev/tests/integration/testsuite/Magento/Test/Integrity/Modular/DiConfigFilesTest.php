@@ -1,21 +1,32 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Test\Integrity\Modular;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
+<<<<<<< HEAD
 use Magento\Framework\Config\FileResolverInterface;
 use Magento\Framework\TestFramework\Unit\Helper\MockCreationTrait;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class DiConfigFilesTest extends \PHPUnit\Framework\TestCase
 {
+<<<<<<< HEAD
     use MockCreationTrait;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Primary DI configs from app/etc
      * @var array
@@ -34,7 +45,11 @@ class DiConfigFilesTest extends \PHPUnit\Framework\TestCase
      */
     protected static $_moduleAreaFiles = [];
 
+<<<<<<< HEAD
     protected static function _prepareFiles()
+=======
+    protected function _prepareFiles()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         //init primary configs
         $objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
@@ -65,8 +80,13 @@ class DiConfigFilesTest extends \PHPUnit\Framework\TestCase
      * @param string $filePath
      * @param string $xml
      * @throws \Exception
+<<<<<<< HEAD
      */
     #[DataProvider('linearFilesProvider')]
+=======
+     * @dataProvider linearFilesProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDiConfigFileWithoutMerging($filePath, $xml)
     {
         /** @var \Magento\Framework\ObjectManager\Config\SchemaLocator $schemaLocator */
@@ -89,10 +109,17 @@ class DiConfigFilesTest extends \PHPUnit\Framework\TestCase
         }
     }
 
+<<<<<<< HEAD
     public static function linearFilesProvider()
     {
         if (empty(self::$_primaryFiles)) {
             self::_prepareFiles();
+=======
+    public function linearFilesProvider()
+    {
+        if (empty(self::$_primaryFiles)) {
+            $this->_prepareFiles();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
 
         $common = array_merge(self::$_primaryFiles->toArray(), self::$_moduleGlobalFiles->toArray());
@@ -111,6 +138,7 @@ class DiConfigFilesTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @param array $files
+<<<<<<< HEAD
      */
     #[DataProvider('mixedFilesProvider')]
     public function testMergedDiConfig(array $files)
@@ -122,6 +150,16 @@ class DiConfigFilesTest extends \PHPUnit\Framework\TestCase
             FileResolverInterface::class,
             ['get', 'read']
         );
+=======
+     * @dataProvider mixedFilesProvider
+     */
+    public function testMergedDiConfig(array $files)
+    {
+        $mapperMock = $this->createMock(\Magento\Framework\ObjectManager\Config\Mapper\Dom::class);
+        $fileResolverMock = $this->getMockBuilder(\Magento\Framework\Config\FileResolverInterface::class)
+            ->setMethods(['read'])
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $fileResolverMock->expects($this->any())->method('read')->willReturn($files);
         $validationStateMock = $this->createPartialMock(
             \Magento\Framework\Config\ValidationStateInterface::class,
@@ -142,10 +180,17 @@ class DiConfigFilesTest extends \PHPUnit\Framework\TestCase
         );
     }
 
+<<<<<<< HEAD
     public static function mixedFilesProvider()
     {
         if (empty(self::$_primaryFiles)) {
             self::_prepareFiles();
+=======
+    public function mixedFilesProvider()
+    {
+        if (empty(self::$_primaryFiles)) {
+            $this->_prepareFiles();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
         foreach (self::$_primaryFiles->toArray() as $file) {
             $primaryFiles[] = [[$file]];

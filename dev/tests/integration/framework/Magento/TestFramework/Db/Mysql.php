@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -16,6 +21,7 @@ class Mysql extends \Magento\TestFramework\Db\AbstractDb
     /**
      * Mysql default Port.
      */
+<<<<<<< HEAD
     public const DEFAULT_PORT = 3306;
 
     /**
@@ -42,11 +48,18 @@ class Mysql extends \Magento\TestFramework\Db\AbstractDb
      * Mysql Dump command.
      */
     public const MYSQL_DUMP_COMMAND = 'mysqldump';
+=======
+    const DEFAULT_PORT = 3306;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * Name of configuration file.
      */
+<<<<<<< HEAD
     public const DEFAULTS_EXTRA_FILE_NAME = 'defaults_extra.cnf';
+=======
+    const DEFAULTS_EXTRA_FILE_NAME = 'defaults_extra.cnf';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * MySQL DB dump file
@@ -80,11 +93,14 @@ class Mysql extends \Magento\TestFramework\Db\AbstractDb
     private $isUsingAuroraDb;
 
     /**
+<<<<<<< HEAD
      * @var bool
      */
     private $isMariaDB;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * {@inheritdoc}
      *
      * @param string $host
@@ -112,11 +128,17 @@ class Mysql extends \Magento\TestFramework\Db\AbstractDb
      */
     public function cleanup()
     {
+<<<<<<< HEAD
         $dbCommand = $this->getDbCommand();
 
         $this->ensureDefaultsExtraFile();
         $this->_shell->execute(
             "{$dbCommand} --defaults-file=%s --host=%s --port=%s %s -e %s",
+=======
+        $this->ensureDefaultsExtraFile();
+        $this->_shell->execute(
+            'mysql --defaults-file=%s --host=%s --port=%s %s -e %s',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             [
                 $this->_defaultsExtraFile,
                 $this->_host,
@@ -152,7 +174,10 @@ class Mysql extends \Magento\TestFramework\Db\AbstractDb
      */
     public function storeDbDump()
     {
+<<<<<<< HEAD
         $dumpCommand = $this->getDbDumpCommand();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->ensureDefaultsExtraFile();
         $additionalArguments = [];
 
@@ -166,7 +191,11 @@ class Mysql extends \Magento\TestFramework\Db\AbstractDb
 
         $format = sprintf(
             '%s %s %s %s',
+<<<<<<< HEAD
             "{$dumpCommand} --defaults-file=%s --host=%s --port=%s",
+=======
+            'mysqldump --defaults-file=%s --host=%s --port=%s',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             '--no-tablespaces',
             implode(' ', $additionalArguments),
             '%s > %s'
@@ -195,6 +224,7 @@ class Mysql extends \Magento\TestFramework\Db\AbstractDb
         if (!$this->isDbDumpExists()) {
             throw new \LogicException("DB dump file does not exist: " . $this->getSetupDbDumpFilename());
         }
+<<<<<<< HEAD
 
         $dbCommand = $this->getDbCommand();
 
@@ -202,6 +232,11 @@ class Mysql extends \Magento\TestFramework\Db\AbstractDb
             "{$dbCommand} --defaults-file=%s --host=%s --port=%s %s < %s",
             [$this->_defaultsExtraFile, $this->_host, $this->_port,
                 $this->_schema, $this->getSetupDbDumpFilename()]
+=======
+        $this->_shell->execute(
+            'mysql --defaults-file=%s --host=%s --port=%s %s < %s',
+            [$this->_defaultsExtraFile, $this->_host, $this->_port, $this->_schema, $this->getSetupDbDumpFilename()]
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
     }
 
@@ -278,6 +313,7 @@ class Mysql extends \Magento\TestFramework\Db\AbstractDb
 
         return $this->isUsingAuroraDb;
     }
+<<<<<<< HEAD
 
     /**
      * Check is mariadb.
@@ -329,4 +365,6 @@ class Mysql extends \Magento\TestFramework\Db\AbstractDb
     {
         return $this->isMariaDB() ? self::MARIADB_DUMP_COMMAND : self::MYSQL_DUMP_COMMAND;
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -29,8 +34,13 @@ class CompositeScannerTest extends TestCase
         $configFiles = ['one/file/config', 'two/file/config'];
         $files = ['php' => $phpFiles, 'config' => $configFiles];
 
+<<<<<<< HEAD
         $scannerPhp = $this->createMock(ScannerInterface::class);
         $scannerXml = $this->createMock(ScannerInterface::class);
+=======
+        $scannerPhp = $this->getMockForAbstractClass(ScannerInterface::class);
+        $scannerXml = $this->getMockForAbstractClass(ScannerInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $scannerPhpExpected = ['Model_OneProxy', 'Model_TwoFactory'];
         $scannerXmlExpected = ['Model_OneProxy', 'Model_ThreeFactory'];

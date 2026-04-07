@@ -1,12 +1,20 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Paypal\Block\Bml;
 
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class BannersTest extends \PHPUnit\Framework\TestCase
 {
@@ -18,10 +26,17 @@ class BannersTest extends \PHPUnit\Framework\TestCase
      * @param bool $isEmptyHtml
      * @param string $methodWppBml
      * @param string $methodWppPeBml
+<<<<<<< HEAD
      * @magentoAppIsolation enabled
      * @magentoAppArea frontend
      */
     #[DataProvider('toHtmlDataProvider')]
+=======
+     * @dataProvider toHtmlDataProvider
+     * @magentoAppIsolation enabled
+     * @magentoAppArea frontend
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testToHtml(
         $publisherId,
         $display,
@@ -76,7 +91,11 @@ class BannersTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function toHtmlDataProvider()
+=======
+    public function toHtmlDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

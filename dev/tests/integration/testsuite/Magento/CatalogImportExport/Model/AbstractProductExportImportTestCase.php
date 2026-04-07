@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\CatalogImportExport\Model;
 
@@ -13,7 +18,10 @@ use Magento\Framework\Filesystem\Driver\File;
 use Magento\Store\Model\Store;
 use Magento\TestFramework\Annotation\DataFixture;
 use Magento\TestFramework\Workaround\Override\Fixture\Resolver;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Abstract class for testing product export and import scenarios
@@ -91,9 +99,13 @@ abstract class AbstractProductExportImportTestCase extends \PHPUnit\Framework\Te
      */
     protected function tearDown(): void
     {
+<<<<<<< HEAD
         if ($this->fixtures !== null) {
             $this->executeFixtures($this->fixtures, true);
         }
+=======
+        $this->executeFixtures($this->fixtures, true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         if ($this->csvFile !== null) {
             $directoryWrite = $this->fileSystem->getDirectoryWrite(DirectoryList::VAR_IMPORT_EXPORT);
@@ -112,8 +124,13 @@ abstract class AbstractProductExportImportTestCase extends \PHPUnit\Framework\Te
      * @param string[] $skus
      * @param string[] $skippedAttributes
      * @return void
+<<<<<<< HEAD
      */
     #[DataProvider('exportImportDataProvider')]
+=======
+     * @dataProvider exportImportDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testImportExport(array $fixtures, array $skus, array $skippedAttributes = []): void
     {
         $this->csvFile = null;
@@ -137,9 +154,15 @@ abstract class AbstractProductExportImportTestCase extends \PHPUnit\Framework\Te
      * @param array $fixtures
      * @param string[] $skus
      * @param string[] $skippedAttributes
+<<<<<<< HEAD
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     #[DataProvider('exportImportDataProvider')]
+=======
+     * @dataProvider exportImportDataProvider
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testImportExportWithPagination(array $fixtures, array $skus, array $skippedAttributes = [])
     {
         $this->fixtures = $fixtures;
@@ -154,7 +177,11 @@ abstract class AbstractProductExportImportTestCase extends \PHPUnit\Framework\Te
      *
      * @return array
      */
+<<<<<<< HEAD
     abstract public static function exportImportDataProvider(): array;
+=======
+    abstract public function exportImportDataProvider(): array;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * Modify data.
@@ -256,7 +283,11 @@ abstract class AbstractProductExportImportTestCase extends \PHPUnit\Framework\Te
      * @param string|null $csvFile
      * @return void
      */
+<<<<<<< HEAD
     protected function executeImportDeleteTest(array $skus, ?string $csvFile = null): void
+=======
+    protected function executeImportDeleteTest(array $skus, string $csvFile = null): void
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $csvFile = $csvFile ?? $this->exportProducts();
         $this->importProducts($csvFile, \Magento\ImportExport\Model\Import::BEHAVIOR_DELETE);
@@ -336,7 +367,11 @@ abstract class AbstractProductExportImportTestCase extends \PHPUnit\Framework\Te
         $skus,
         $skippedAttributes,
         $usePagination = false,
+<<<<<<< HEAD
         ?string $csvfile = null
+=======
+        string $csvfile = null
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ) {
         $replacedAttributes = [
             'row_id',
@@ -362,6 +397,10 @@ abstract class AbstractProductExportImportTestCase extends \PHPUnit\Framework\Te
         if ($usePagination) {
             /** @var \ReflectionProperty $itemsPerPageProperty */
             $itemsPerPageProperty = new \ReflectionProperty(Product::class, '_itemsPerPage');
+<<<<<<< HEAD
+=======
+            $itemsPerPageProperty->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $itemsPerPageProperty->setValue($exportProduct, 1);
         }
 
@@ -406,10 +445,18 @@ abstract class AbstractProductExportImportTestCase extends \PHPUnit\Framework\Te
      * @param Product|null $exportProduct
      * @return string Return exported file
      */
+<<<<<<< HEAD
     private function exportProducts(?Product $exportProduct = null)
     {
         $csvfile = uniqid('importexport_') . '.csv';
         $this->csvFile = $csvfile;
+=======
+    private function exportProducts(Product $exportProduct = null)
+    {
+        $csvfile = uniqid('importexport_') . '.csv';
+        $this->csvFile = $csvfile;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $exportProduct = $exportProduct ?: $this->objectManager->create(
             Product::class
         );
@@ -420,8 +467,15 @@ abstract class AbstractProductExportImportTestCase extends \PHPUnit\Framework\Te
         $exportProduct->setWriter($writer);
         $content = $exportProduct->export();
         $this->assertNotEmpty($content);
+<<<<<<< HEAD
         $directory = $this->fileSystem->getDirectoryWrite(DirectoryList::VAR_IMPORT_EXPORT);
         $directory->getDriver()->filePutContents($directory->getAbsolutePath($csvfile), $content);
+=======
+
+        $directory = $this->fileSystem->getDirectoryWrite(DirectoryList::VAR_IMPORT_EXPORT);
+        $directory->getDriver()->filePutContents($directory->getAbsolutePath($csvfile), $content);
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         return $csvfile;
     }
 
@@ -446,12 +500,23 @@ abstract class AbstractProductExportImportTestCase extends \PHPUnit\Framework\Te
                 'directory' => $directory
             ]
         );
+<<<<<<< HEAD
+=======
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $appParams = \Magento\TestFramework\Helper\Bootstrap::getInstance()->getBootstrap()
             ->getApplication()
             ->getInitParams()[Bootstrap::INIT_PARAM_FILESYSTEM_DIR_PATHS];
         $mediaDirectory = $this->fileSystem->getDirectoryWrite(DirectoryList::MEDIA);
+<<<<<<< HEAD
         $mediaDir = $mediaDirectory->getDriver() instanceof File ?
             $appParams[DirectoryList::MEDIA][DirectoryList::PATH] : 'media';
+=======
+
+        $mediaDir = $mediaDirectory->getDriver() instanceof File ?
+            $appParams[DirectoryList::MEDIA][DirectoryList::PATH] : 'media';
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $mediaDirectory->create('catalog/product');
         $mediaDirectory->create('import');
         $importModel->setParameters(
@@ -462,6 +527,7 @@ abstract class AbstractProductExportImportTestCase extends \PHPUnit\Framework\Te
         $uploader = $importModel->getUploader();
         $this->assertTrue($uploader->setDestDir($mediaDir . '/catalog/product'));
         $this->assertTrue($uploader->setTmpDir($mediaDir . '/import'));
+<<<<<<< HEAD
         $importModel->setParameters([
             'behavior' => $behavior,
             'entity' => 'catalog_product',
@@ -469,6 +535,19 @@ abstract class AbstractProductExportImportTestCase extends \PHPUnit\Framework\Te
         $importModel->setSource($source);
         $errors = $importModel->validateData();
         $errorMessage = $this->extractErrorMessage($errors->getAllErrors());
+=======
+
+        $errors = $importModel->setParameters(
+            [
+                'behavior' => $behavior,
+                'entity' => 'catalog_product',
+            ]
+        )->setSource(
+            $source
+        )->validateData();
+        $errorMessage = $this->extractErrorMessage($errors->getAllErrors());
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertEmpty(
             $errorMessage,
             'Product import from file ' . $csvfile . ' validation errors: ' . $errorMessage
@@ -494,6 +573,10 @@ abstract class AbstractProductExportImportTestCase extends \PHPUnit\Framework\Te
         foreach ($errors as $error) {
             $errorMessage = "\n" . $error->getErrorMessage();
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         return $errorMessage;
     }
 

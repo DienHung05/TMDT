@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Setup\Module\I18n\Parser\Adapter;
@@ -16,6 +21,7 @@ namespace Magento\Setup\Module\I18n\Parser\Adapter;
 class Xml extends AbstractAdapter
 {
     /**
+<<<<<<< HEAD
      * @inheritdoc
      */
     protected function _parse()
@@ -30,6 +36,19 @@ class Xml extends AbstractAdapter
                 $this->_addPhrase((string)$element);
             } elseif ($key === 'title') {
                 $this->_addPhrase((string)$element->title);
+=======
+     * {@inheritdoc}
+     */
+    protected function _parse()
+    {
+        foreach ($this->_getNodes($this->_file) as $element) {
+            if (!$element instanceof \SimpleXMLElement) {
+                continue;
+            }
+            $attributes = $element->attributes();
+            if ((string)$attributes['translate'] === 'true' || (string)$attributes['translatable'] === 'true') {
+                $this->_addPhrase((string)$element);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             } else {
                 $this->parseTranslatableNodes($attributes, $element);
             }
@@ -49,12 +68,17 @@ class Xml extends AbstractAdapter
         libxml_use_internal_errors(false);
         if ($xml) {
             $nodes = $xml->xpath('//*[@translate|@translatable]');
+<<<<<<< HEAD
             /* To add title of all xml files in translation csv */
             if ($xml->head) {
                 $nodes['title'] =  $xml->head;
             }
 
             unset($xml);
+=======
+            unset($xml);
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             return is_array($nodes) ? $nodes : [];
         }
 

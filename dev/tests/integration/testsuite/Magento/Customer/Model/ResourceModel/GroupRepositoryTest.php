@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Customer\Model\ResourceModel;
 
 use Magento\Customer\Api\Data\GroupInterface;
 use Magento\Framework\Api\SortOrder;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Integration test for \Magento\Customer\Model\ResourceModel\GroupRepository
@@ -46,8 +54,13 @@ class GroupRepositoryTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @param array $testGroup
+<<<<<<< HEAD
      */
     #[DataProvider('getGroupsDataProvider')]
+=======
+     * @dataProvider getGroupsDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetGroup($testGroup)
     {
         $group = $this->groupRepository->getById($testGroup[GroupInterface::ID]);
@@ -59,7 +72,11 @@ class GroupRepositoryTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getGroupsDataProvider()
+=======
+    public function getGroupsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [[GroupInterface::ID => 0, GroupInterface::CODE => 'NOT LOGGED IN', GroupInterface::TAX_CLASS_ID => 3]],
@@ -197,8 +214,14 @@ class GroupRepositoryTest extends \PHPUnit\Framework\TestCase
      * @param array $filters
      * @param array $filterGroup
      * @param array $expectedResult array of expected results indexed by ID
+<<<<<<< HEAD
      */
     #[DataProvider('searchGroupsDataProvider')]
+=======
+     *
+     * @dataProvider searchGroupsDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetList($filters, $filterGroup, $expectedResult)
     {
         foreach ($filters as $filter) {
@@ -218,7 +241,11 @@ class GroupRepositoryTest extends \PHPUnit\Framework\TestCase
         }
     }
 
+<<<<<<< HEAD
     public static function searchGroupsDataProvider()
+=======
+    public function searchGroupsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $builder = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()
             ->create(\Magento\Framework\Api\FilterBuilder::class);
@@ -281,8 +308,14 @@ class GroupRepositoryTest extends \PHPUnit\Framework\TestCase
      * @param string, $direction
      * @param string, $methodName
      * @param array $expectedResult
+<<<<<<< HEAD
      */
     #[DataProvider('sortOrderDataProvider')]
+=======
+     *
+     * @dataProvider sortOrderDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetListSortOrder($field, $direction, $methodName, $expectedResult)
     {
         /** @var SortOrder $sortOrder */
@@ -308,7 +341,11 @@ class GroupRepositoryTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function sortOrderDataProvider()
+=======
+    public function sortOrderDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

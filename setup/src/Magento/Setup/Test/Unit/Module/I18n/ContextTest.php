@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -10,7 +15,10 @@ namespace Magento\Setup\Test\Unit\Module\I18n;
 use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Setup\Module\I18n\Context;
 use PHPUnit\Framework\MockObject\MockObject;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 class ContextTest extends TestCase
@@ -34,8 +42,13 @@ class ContextTest extends TestCase
      * @param array $context
      * @param string $path
      * @param array $pathValues
+<<<<<<< HEAD
      */
     #[DataProvider('dataProviderContextByPath')]
+=======
+     * @dataProvider dataProviderContextByPath
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetContextByPath($context, $path, $pathValues)
     {
         $this->componentRegistrar->expects($this->any())
@@ -48,7 +61,11 @@ class ContextTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function dataProviderContextByPath()
+=======
+    public function dataProviderContextByPath()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -96,8 +113,13 @@ class ContextTest extends TestCase
      * @param string $path
      * @param array $context
      * @param array $registrar
+<<<<<<< HEAD
      */
     #[DataProvider('dataProviderPathToLocaleDirectoryByContext')]
+=======
+     * @dataProvider dataProviderPathToLocaleDirectoryByContext
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testBuildPathToLocaleDirectoryByContext($path, $context, $registrar)
     {
         $paths = [];
@@ -114,7 +136,11 @@ class ContextTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function dataProviderPathToLocaleDirectoryByContext()
+=======
+    public function dataProviderPathToLocaleDirectoryByContext()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

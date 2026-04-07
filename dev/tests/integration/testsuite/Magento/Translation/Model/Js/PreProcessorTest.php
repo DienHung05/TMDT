@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -14,7 +19,10 @@ use Magento\Framework\Translate;
 use Magento\Framework\App\AreaList;
 use Magento\Framework\Phrase;
 use Magento\Framework\Phrase\RendererInterface;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class for testing translation.
@@ -75,17 +83,34 @@ class PreProcessorTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Test for backend translation strategy.
+<<<<<<< HEAD
      */
     #[DataProvider('contentForTranslateDataProvider')]
     public function testProcess(string $content, string $translation): void
+=======
+     *
+     * @param string $content
+     * @param string $translation
+     * @return void
+     * @dataProvider contentForTranslateDataProvider
+     */
+    public function testProcess(string $content, string $translation)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $this->assertEquals($translation, $this->model->translate($content));
     }
 
     /**
      * Data provider for translation.
+<<<<<<< HEAD
      */
     public static function contentForTranslateDataProvider(): array
+=======
+     *
+     * @return array
+     */
+    public function contentForTranslateDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'i18n_js_file_error' => [

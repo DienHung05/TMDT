@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -141,7 +146,10 @@ class SessionTest extends TestCase
         $this->checkoutSession->setCustomerData($customer);
         $quote = $this->checkoutSession->getQuote();
         $this->validateCustomerDataInQuote($quote);
+<<<<<<< HEAD
         $this->quoteRepository->delete($quote);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -159,7 +167,10 @@ class SessionTest extends TestCase
         $this->customerSession->setCustomerDataObject($customer);
         $quote = $this->checkoutSession->getQuote();
         $this->validateCustomerDataInQuote($quote);
+<<<<<<< HEAD
         $this->quoteRepository->delete($quote);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**

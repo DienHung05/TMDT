@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,9 +16,13 @@ use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\Product\Media\ConfigInterface;
 use Magento\Catalog\Model\ResourceModel\Product as ProductResource;
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\AttributeSet as AttributeSetFixture;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Customer\Model\Group;
+=======
+use Magento\Catalog\Test\Fixture\Product as ProductFixture;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Exception\CouldNotSaveException;
@@ -35,7 +44,10 @@ use Magento\TestFramework\Fixture\DataFixtureStorage;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Fixture\DbIsolation;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -182,8 +194,13 @@ class ProductRepositoryTest extends TestCase
      * @param string $sku
      * @return void
      * @magentoDataFixture Magento/Catalog/_files/product_simple.php
+<<<<<<< HEAD
      */
     #[DataProvider('skuDataProvider')]
+=======
+     * @dataProvider skuDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetProduct(string $sku): void
     {
         $expectedSku = 'simple';
@@ -196,7 +213,11 @@ class ProductRepositoryTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function skuDataProvider(): array
+=======
+    public function skuDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['sku' => 'simple'],
@@ -308,7 +329,11 @@ class ProductRepositoryTest extends TestCase
     private function assertProductNotExist(string $sku): void
     {
         $this->expectExceptionObject(new NoSuchEntityException(
+<<<<<<< HEAD
             __('The product with SKU "' . $sku . '" does not exist.')
+=======
+            __("The product that was requested doesn't exist. Verify the product and try again.")
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ));
         $this->productRepository->get($sku);
     }
@@ -316,13 +341,20 @@ class ProductRepositoryTest extends TestCase
     /**
      * Tests product repository update
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider productUpdateDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/product_simple.php
      * @param int $storeId
      * @param int $checkStoreId
      * @param string $expectedNameStore
      * @param string $expectedNameCheckedStore
      */
+<<<<<<< HEAD
     #[DataProvider('productUpdateDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testProductUpdate(
         int $storeId,
         int $checkStoreId,
@@ -346,7 +378,11 @@ class ProductRepositoryTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function productUpdateDataProvider(): array
+=======
+    public function productUpdateDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Updating for global store' => [
@@ -430,6 +466,7 @@ class ProductRepositoryTest extends TestCase
         $this->assertEquals($product2Store1Price, $product2->getPrice());
     }
 
+<<<<<<< HEAD
     #[
         AppArea('adminhtml'),
         DataFixture(AttributeSetFixture::class, as: 'attribute_set2'),
@@ -518,6 +555,8 @@ class ProductRepositoryTest extends TestCase
         );
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Get Simple Product Data
      *

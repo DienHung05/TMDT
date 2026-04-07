@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Setup\Console\Command;
 
@@ -20,10 +25,19 @@ abstract class AbstractModuleCommand extends AbstractSetupCommand
     /**
      * Names of input arguments or options
      */
+<<<<<<< HEAD
     public const INPUT_KEY_MODULES = 'module';
     public const INPUT_KEY_CLEAR_STATIC_CONTENT = 'clear-static-content';
 
     /**
+=======
+    const INPUT_KEY_MODULES = 'module';
+    const INPUT_KEY_CLEAR_STATIC_CONTENT = 'clear-static-content';
+
+    /**
+     * Object manager
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @var ObjectManagerInterface
      */
     protected $objectManager;
@@ -40,7 +54,11 @@ abstract class AbstractModuleCommand extends AbstractSetupCommand
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
+=======
+     * {@inheritdoc}
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     protected function configure()
     {
@@ -73,7 +91,11 @@ abstract class AbstractModuleCommand extends AbstractSetupCommand
      * @param OutputInterface $output
      * @return void
      */
+<<<<<<< HEAD
     protected function cleanup(InputInterface $input, OutputInterface $output): void
+=======
+    protected function cleanup(InputInterface $input, OutputInterface $output)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         /** @var \Magento\Framework\App\Cache $cache */
         $cache = $this->objectManager->get(\Magento\Framework\App\Cache::class);

@@ -1,9 +1,15 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
 declare(strict_types=1);
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 namespace Magento\Sales\Service\V1;
 
@@ -16,11 +22,19 @@ use Magento\TestFramework\TestCase\WebapiAbstract;
  */
 class ShipmentCreateTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     public const RESOURCE_PATH = '/V1/shipment';
 
     public const SERVICE_READ_NAME = 'salesShipmentRepositoryV1';
 
     public const SERVICE_VERSION = 'V1';
+=======
+    const RESOURCE_PATH = '/V1/shipment';
+
+    const SERVICE_READ_NAME = 'salesShipmentRepositoryV1';
+
+    const SERVICE_VERSION = 'V1';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var \Magento\Framework\ObjectManagerInterface

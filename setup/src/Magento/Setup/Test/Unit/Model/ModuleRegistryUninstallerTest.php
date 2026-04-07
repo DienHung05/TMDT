@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -59,7 +64,11 @@ class ModuleRegistryUninstallerTest extends TestCase
         $this->dataSetup = $this->createMock(DataSetup::class);
         $dataSetupFactory = $this->createMock(DataSetupFactory::class);
         $dataSetupFactory->expects($this->any())->method('create')->willReturn($this->dataSetup);
+<<<<<<< HEAD
         $this->output = $this->createMock(OutputInterface::class);
+=======
+        $this->output = $this->getMockForAbstractClass(OutputInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->moduleRegistryUninstaller = new ModuleRegistryUninstaller(
             $dataSetupFactory,
             $this->deploymentConfig,

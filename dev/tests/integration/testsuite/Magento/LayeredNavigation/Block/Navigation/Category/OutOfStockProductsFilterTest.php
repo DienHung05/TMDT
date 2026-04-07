@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -14,7 +19,10 @@ use Magento\Framework\App\ScopeInterface;
 use Magento\LayeredNavigation\Block\Navigation\AbstractFiltersTest;
 use Magento\Catalog\Model\Layer\Filter\AbstractFilter;
 use Magento\Store\Model\ScopeInterface as StoreScope;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Provides tests for select filter in navigation block on category page with out of stock products
@@ -44,13 +52,24 @@ class OutOfStockProductsFilterTest extends AbstractFiltersTest
      * @magentoDataFixture Magento/Catalog/_files/product_dropdown_attribute.php
      * @magentoDataFixture Magento/Catalog/_files/out_of_stock_product_with_category.php
      * @magentoDataFixture Magento/Catalog/_files/product_with_category.php
+<<<<<<< HEAD
+=======
+     * @dataProvider getFiltersWithOutOfStockProduct
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param int $showOutOfStock
      * @param array $expectation
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('getFiltersWithOutOfStockProduct')]
     public function testGetFiltersWithOutOfStockProduct(int $showOutOfStock, array $expectation): void
     {
+=======
+    public function testGetFiltersWithOutOfStockProduct(int $showOutOfStock, array $expectation): void
+    {
+        $this->markTestSkipped('Unskip after fixing ACP2E-748.');
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->updateConfigShowOutOfStockFlag($showOutOfStock);
         $this->getCategoryFiltersAndAssert(
             ['out-of-stock-product' => 'Option 1', 'in-stock-product' => 'Option 2'],
@@ -63,6 +82,7 @@ class OutOfStockProductsFilterTest extends AbstractFiltersTest
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getFiltersWithOutOfStockProduct(): array
     {
         return [
@@ -72,6 +92,17 @@ class OutOfStockProductsFilterTest extends AbstractFiltersTest
             ],
             'not_show_out_of_stock' => [
                 'showOutOfStock' => 0,
+=======
+    public function getFiltersWithOutOfStockProduct(): array
+    {
+        return [
+            'show_out_of_stock' => [
+                'show_out_of_stock' => 1,
+                'expectation' => [['label' => 'Option 1', 'count' => 1], ['label' => 'Option 2', 'count' => 1]],
+            ],
+            'not_show_out_of_stock' => [
+                'show_out_of_stock' => 0,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectation' => [['label' => 'Option 2', 'count' => 1]],
             ],
         ];

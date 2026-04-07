@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\PageCache\Model\System\Config\Backend;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\PageCache\Model\System\Config\Backend;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class TtlTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -28,16 +36,28 @@ class TtlTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param $value
      * @param $path
      */
     #[DataProvider('beforeSaveDataProvider')]
+=======
+     * @dataProvider beforeSaveDataProvider
+     *
+     * @param $value
+     * @param $path
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testBeforeSave($value, $path)
     {
         $this->_prepareData($value, $path);
     }
 
+<<<<<<< HEAD
     public static function beforeSaveDataProvider(): array
+=======
+    public function beforeSaveDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [125, 'ttl_1'],
@@ -46,17 +66,29 @@ class TtlTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param $value
      * @param $path
      */
     #[DataProvider('beforeSaveDataProviderWithException')]
+=======
+     * @dataProvider beforeSaveDataProviderWithException
+     *
+     * @param $value
+     * @param $path
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testBeforeSaveWithException($value, $path)
     {
         $this->expectException(\Magento\Framework\Exception\LocalizedException::class);
         $this->_prepareData($value, $path);
     }
 
+<<<<<<< HEAD
     public static function beforeSaveDataProviderWithException(): array
+=======
+    public function beforeSaveDataProviderWithException()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['', 'ttl_3'],

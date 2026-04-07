@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Tax\Model\ResourceModel\Calculation\Rule;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Tax\Model\ResourceModel\Calculation\Rule;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class CollectionTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -25,8 +33,14 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
      * @param $classType
      * @param $elementId
      * @param $expected
+<<<<<<< HEAD
      */
     #[DataProvider('setClassTypeFilterDataProvider')]
+=======
+     *
+     * @dataProvider setClassTypeFilterDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSetClassTypeFilter($classType, $elementId, $expected)
     {
         $collection = $this->_objectManager->create(
@@ -36,7 +50,11 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
         $this->assertMatchesRegularExpression($expected, (string)$collection->getSelect());
     }
 
+<<<<<<< HEAD
     public static function setClassTypeFilterDataProvider()
+=======
+    public function setClassTypeFilterDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

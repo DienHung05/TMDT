@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -19,7 +24,10 @@ use Magento\Framework\View\LayoutInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\Theme\Block\Html\Topmenu;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -78,10 +86,17 @@ class TopMenuTest extends TestCase
     /**
      * Checks that menu item is not displayed if the category is disabled or include in menu is disabled.
      *
+<<<<<<< HEAD
      * @param array $data
      * @return void
      */
     #[DataProvider('invisibilityDataProvider')]
+=======
+     * @dataProvider invisibilityDataProvider
+     * @param array $data
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testTopMenuItemInvisibility(array $data): void
     {
         $category = $this->categoryFactory->create();
@@ -94,7 +109,11 @@ class TopMenuTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function invisibilityDataProvider(): array
+=======
+    public function invisibilityDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'include_in_menu_disable' => [
@@ -119,13 +138,20 @@ class TopMenuTest extends TestCase
     /**
      * Check category visibility in the category tree in the menu
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider categoriesVisibleInTreeProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/category_tree.php
      * @magentoAppIsolation enabled
      * @param array $categories
      * @param array $expectedCategories
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('categoriesVisibleInTreeProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCategoriesInTreeVisible(array $categories, array $expectedCategories): void
     {
         $this->updateCategories($categories);
@@ -142,7 +168,11 @@ class TopMenuTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function categoriesVisibleInTreeProvider(): array
+=======
+    public function categoriesVisibleInTreeProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'add_in_tree_visible' => [
@@ -189,13 +219,20 @@ class TopMenuTest extends TestCase
     /**
      * Check invisibility of a category in the category tree in the menu
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider categoriesInTreeInvisibleProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/category_tree.php
      * @magentoAppIsolation enabled
      * @param array $categories
      * @param array $expectedCategories
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('categoriesInTreeInvisibleProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCategoriesInTreeInvisible(array $categories, array $expectedCategories): void
     {
         $this->updateCategories($categories);
@@ -212,7 +249,11 @@ class TopMenuTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function categoriesInTreeInvisibleProvider(): array
+=======
+    public function categoriesInTreeInvisibleProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'add_in_tree_category_disable' => [
@@ -276,13 +317,20 @@ class TopMenuTest extends TestCase
     /**
      * Check menu structure after moving category or changing position
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider menuStructureProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/categories_no_products_with_two_tree.php
      * @magentoAppIsolation enabled
      * @param array $moveCategory
      * @param array $expectedMenuTree
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('menuStructureProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testMenuStructure(array $moveCategory, array $expectedMenuTree): void
     {
         /** @var Category $category */
@@ -308,7 +356,11 @@ class TopMenuTest extends TestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function menuStructureProvider(): array
+=======
+    public function menuStructureProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'move_to_default' => [
@@ -416,6 +468,10 @@ class TopMenuTest extends TestCase
     /**
      * Test the display of category in menu on different websites
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider multipleWebsitesCategoryDisplayProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/category.php
      * @magentoDataFixture Magento/Catalog/_files/category_in_second_root_category.php
      * @param string $storeCode
@@ -423,7 +479,10 @@ class TopMenuTest extends TestCase
      * @param string $notExpectedCategory
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('multipleWebsitesCategoryDisplayProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testMultipleWebsitesCategoryDisplay(
         string $storeCode,
         string $expectedCategory,
@@ -448,7 +507,11 @@ class TopMenuTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function multipleWebsitesCategoryDisplayProvider(): array
+=======
+    public function multipleWebsitesCategoryDisplayProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'first_website' => [

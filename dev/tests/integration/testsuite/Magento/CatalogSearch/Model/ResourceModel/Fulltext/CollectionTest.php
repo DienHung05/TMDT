@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\CatalogSearch\Model\ResourceModel\Fulltext;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\CatalogSearch\Model\ResourceModel\Fulltext;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * Test class for \Magento\CatalogSearch\Model\ResourceModel\Fulltext\Collection.
  * @magentoDbIsolation disabled
@@ -19,11 +27,18 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider filtersDataProviderSearch
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Framework/Search/_files/products.php
      * @magentoDataFixture Magento/CatalogSearch/_files/full_reindex.php
      * @magentoAppIsolation enabled
      */
+<<<<<<< HEAD
     #[DataProvider('filtersDataProviderSearch')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testLoadWithFilterSearch($request, $filters, $expectedCount)
     {
         $objManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
@@ -44,10 +59,17 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @magentoDataFixture Magento/Framework/Search/_files/products.php
      * @magentoAppIsolation enabled
      */
     #[DataProvider('filtersDataProviderQuickSearch')]
+=======
+     * @dataProvider filtersDataProviderQuickSearch
+     * @magentoDataFixture Magento/Framework/Search/_files/products.php
+     * @magentoAppIsolation enabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testLoadWithFilterQuickSearch($filters, $expectedCount)
     {
         $objManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
@@ -66,10 +88,17 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @magentoDataFixture Magento/Framework/Search/_files/products.php
      * @magentoAppIsolation enabled
      */
     #[DataProvider('filtersDataProviderCatalogView')]
+=======
+     * @dataProvider filtersDataProviderCatalogView
+     * @magentoDataFixture Magento/Framework/Search/_files/products.php
+     * @magentoAppIsolation enabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testLoadWithFilterCatalogView($filters, $expectedCount)
     {
         $objManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
@@ -122,7 +151,11 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
         }
     }
 
+<<<<<<< HEAD
     public static function filtersDataProviderSearch()
+=======
+    public function filtersDataProviderSearch()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['quick_search_container', ['search_term' => '  shorts'], 2],
@@ -134,7 +167,11 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+<<<<<<< HEAD
     public static function filtersDataProviderQuickSearch()
+=======
+    public function filtersDataProviderQuickSearch()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [['search_term' => '  shorts'], 2],
@@ -142,7 +179,11 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+<<<<<<< HEAD
     public static function filtersDataProviderCatalogView()
+=======
+    public function filtersDataProviderCatalogView()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [['category_ids' => 2], 5],
@@ -158,12 +199,19 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
      * @magentoDataFixture Magento/CatalogSearch/_files/product_configurable_two_options.php
      * @magentoDataFixture Magento/CatalogSearch/_files/full_reindex.php
      * @magentoAppIsolation enabled
+<<<<<<< HEAD
+=======
+     * @dataProvider configurableProductWithMultipleOptionsDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $filters
      * @param bool $found
      * @param array $outOfStock
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
+<<<<<<< HEAD
     #[DataProvider('configurableProductWithMultipleOptionsDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testConfigurableProductWithMultipleOptions(array $filters, bool $found, array $outOfStock = [])
     {
         $objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
@@ -207,7 +255,11 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function configurableProductWithMultipleOptionsDataProvider(): array
+=======
+    public function configurableProductWithMultipleOptionsDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

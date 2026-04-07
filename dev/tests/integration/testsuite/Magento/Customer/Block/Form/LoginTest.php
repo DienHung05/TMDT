@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -9,10 +14,17 @@ namespace Magento\Customer\Block\Form;
 
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\View\LayoutInterface;
+<<<<<<< HEAD
 use Magento\Framework\View\Element\ButtonLockManager;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Helper\Xpath;
 use PHPUnit\Framework\TestCase;
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\TestFramework\Helper\Xpath;
+use PHPUnit\Framework\TestCase;
+use Magento\Customer\ViewModel\LoginButton;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class checks login form view
@@ -47,6 +59,7 @@ class LoginTest extends TestCase
     {
         $this->objectManager = Bootstrap::getObjectManager();
         $this->layout = $this->objectManager->get(LayoutInterface::class);
+<<<<<<< HEAD
 
         $code = 'customer_login_form_submit';
         $buttonLock = $this->getMockBuilder(\Magento\ReCaptchaUi\Model\ButtonLock::class)
@@ -63,6 +76,11 @@ class LoginTest extends TestCase
         $this->block = $this->layout->createBlock(Login::class);
         $this->block->setTemplate('Magento_Customer::form/login.phtml');
         $this->block->setButtonLockManager($buttonLockManager);
+=======
+        $this->block = $this->layout->createBlock(Login::class);
+        $this->block->setTemplate('Magento_Customer::form/login.phtml');
+        $this->block->setLoginButtonViewModel($this->objectManager->get(LoginButton::class));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         parent::setUp();
     }

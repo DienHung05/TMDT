@@ -1,11 +1,17 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\ConfigurableProduct\Pricing\Render\FinalPriceBox;
 
 use Magento\Catalog\Api\Data\ProductInterface;
+<<<<<<< HEAD
 use Magento\Catalog\Api\ProductAttributeRepositoryInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\Product;
@@ -19,6 +25,15 @@ use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DbIsolation;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Catalog\Model\Product;
+use Magento\Catalog\Pricing\Price\FinalPrice;
+use Magento\Catalog\Pricing\Render\FinalPriceBox;
+use Magento\Framework\Pricing\Render\Amount;
+use Magento\Framework\Pricing\Render\RendererPool;
+use Magento\TestFramework\Helper\Bootstrap;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test price rendering according to is_product_list flag for Configurable product
@@ -47,10 +62,13 @@ class RenderingBasedOnIsProductListFlagTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp(): void
     {
+<<<<<<< HEAD
         /** @var  \Magento\Framework\App\Cache\StateInterface $cacheState */
         $cacheState = Bootstrap::getObjectManager()->get(\Magento\Framework\App\Cache\StateInterface::class);
         $cacheState->setEnabled(\Magento\Framework\App\Cache\Type\Collection::TYPE_IDENTIFIER, true);
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $productRepository = Bootstrap::getObjectManager()->get(ProductRepositoryInterface::class);
         $this->product = $productRepository->get('configurable');
         $this->finalPrice = Bootstrap::getObjectManager()->create(FinalPrice::class, [
@@ -70,7 +88,11 @@ class RenderingBasedOnIsProductListFlagTest extends \PHPUnit\Framework\TestCase
         $this->finalPriceBox = Bootstrap::getObjectManager()->create(FinalPriceBox::class, [
             'saleableItem' => $this->product,
             'price' => $this->finalPrice,
+<<<<<<< HEAD
             'rendererPool' => $this->rendererPool
+=======
+            'rendererPool' => $this->rendererPool,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ]);
         $this->finalPriceBox->setTemplate('Magento_ConfigurableProduct::product/price/final_price.phtml');
 
@@ -107,6 +129,7 @@ class RenderingBasedOnIsProductListFlagTest extends \PHPUnit\Framework\TestCase
         );
     }
 
+<<<<<<< HEAD
     #[
         DataFixture('Magento/ConfigurableProduct/_files/product_configurable.php'),
         AppArea(Area::AREA_FRONTEND),
@@ -127,24 +150,41 @@ class RenderingBasedOnIsProductListFlagTest extends \PHPUnit\Framework\TestCase
         }
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Test when is_product_list flag is specified
      *
      * Special price should be valid
+<<<<<<< HEAD
      * Regular price for Configurable product should be rendered for is_product_list = false (product page)
+=======
+     * FinalPriceBox::hasSpecialPrice should not be call
+     * Regular price for Configurable product should be rendered for is_product_list = false (product page), but not be
+     * for for is_product_list = true (list of products)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @param bool $flag
      * @param int|bool $count
      * @magentoDataFixture Magento/ConfigurableProduct/_files/product_configurable.php
      * @magentoAppArea frontend
+<<<<<<< HEAD
      * @magentoDbIsolation disabled
      */
     #[DataProvider('isProductListDataProvider')]
+=======
+     * @dataProvider isProductListDataProvider
+     * @magentoDbIsolation disabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRenderingAccordingToIsProductListFlag($flag, $count)
     {
         $this->finalPriceBox->setData('is_product_list', $flag);
         $html = $this->finalPriceBox->toHtml();
+<<<<<<< HEAD
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         self::assertStringContainsString('5.99', $html);
         $this->assertEquals(
             1,
@@ -165,7 +205,11 @@ class RenderingBasedOnIsProductListFlagTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function isProductListDataProvider()
+=======
+    public function isProductListDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'is_not_product_list' => [false, 1],

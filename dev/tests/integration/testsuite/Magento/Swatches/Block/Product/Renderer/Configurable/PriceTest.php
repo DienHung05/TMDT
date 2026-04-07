@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -17,7 +22,10 @@ use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Framework\View\Result\Page;
 use Magento\Swatches\Block\Product\Renderer\Configurable;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -70,6 +78,10 @@ class PriceTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider childProductsDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Swatches/_files/configurable_product_visual_swatch_attribute.php
      * @magentoCache config disabled
      *
@@ -77,7 +89,10 @@ class PriceTest extends TestCase
      * @param array $expectedData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('childProductsDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testConfigurableOptionPrices(array $updateData, array $expectedData): void
     {
         $this->updateProducts($updateData);
@@ -92,11 +107,19 @@ class PriceTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function childProductsDataProvider(): array
     {
         return [
             [
                 'updateData' => [
+=======
+    public function childProductsDataProvider(): array
+    {
+        return [
+            [
+                'update_data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple_option_1' => [
                         'special_price' => 50,
                     ],
@@ -115,7 +138,11 @@ class PriceTest extends TestCase
                         ],
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedData' => [
+=======
+                'expected_data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     [
                         'baseOldPrice' => ['amount' => 150],
                         'oldPrice' => ['amount' => 150],

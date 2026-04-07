@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
  */
@@ -20,10 +21,21 @@ class WebsiteTest extends \PHPUnit\Framework\TestCase
     private $objectManager;
 
     /**
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Store\Model;
+
+class WebsiteTest extends \PHPUnit\Framework\TestCase
+{
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @var \Magento\Store\Model\Website
      */
     protected $_model;
 
+<<<<<<< HEAD
     /**
      * @var TypeListInterface
      */
@@ -34,6 +46,13 @@ class WebsiteTest extends \PHPUnit\Framework\TestCase
         $this->objectManager = Bootstrap::getObjectManager();
         $this->typeList = $this->objectManager->create(TypeListInterface::class);
         $this->_model = $this->objectManager->create(\Magento\Store\Model\Website::class);
+=======
+    protected function setUp(): void
+    {
+        $this->_model = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(
+            \Magento\Store\Model\Website::class
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->_model->load(1);
     }
 
@@ -66,7 +85,13 @@ class WebsiteTest extends \PHPUnit\Framework\TestCase
     public function testSetGroupsAndStores()
     {
         /* Groups */
+<<<<<<< HEAD
         $expectedGroup = $this->objectManager->create(\Magento\Store\Model\Group::class);
+=======
+        $expectedGroup = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(
+            \Magento\Store\Model\Group::class
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $expectedGroup->setId(123);
         $this->_model->setDefaultGroupId($expectedGroup->getId());
         $this->_model->setGroups([$expectedGroup]);
@@ -75,7 +100,13 @@ class WebsiteTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($expectedGroup, reset($groups));
 
         /* Stores */
+<<<<<<< HEAD
         $expectedStore = $this->objectManager->create(\Magento\Store\Model\Store::class);
+=======
+        $expectedStore = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(
+            \Magento\Store\Model\Store::class
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $expectedStore->setId(456);
         $expectedGroup->setDefaultStoreId($expectedStore->getId());
         $this->_model->setStores([$expectedStore]);
@@ -199,6 +230,7 @@ class WebsiteTest extends \PHPUnit\Framework\TestCase
         $collection = $this->_model->getCollection()->joinGroupAndStore()->addIdFilter(1);
         $this->assertCount(1, $collection->getItems());
     }
+<<<<<<< HEAD
 
     /**
      * @magentoDataFixture Magento/Store/_files/website.php
@@ -275,4 +307,6 @@ class WebsiteTest extends \PHPUnit\Framework\TestCase
             );
         }
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

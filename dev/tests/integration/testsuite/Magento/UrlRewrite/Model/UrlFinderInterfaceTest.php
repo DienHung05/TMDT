@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -9,7 +14,10 @@ namespace Magento\UrlRewrite\Model;
 
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\UrlRewrite\Service\V1\Data\UrlRewrite;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoDataFixture Magento/UrlRewrite/_files/url_rewrites.php
@@ -30,11 +38,18 @@ class UrlFinderInterfaceTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider findOneDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $requestPath
      * @param string $targetPath
      * @param int $redirectType
      */
+<<<<<<< HEAD
     #[DataProvider('findOneDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testFindOneByData(string $requestPath, string $targetPath, int $redirectType)
     {
         $data = [
@@ -48,7 +63,11 @@ class UrlFinderInterfaceTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function findOneDataProvider(): array
+=======
+    public function findOneDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['string', 'test_page1', 0],

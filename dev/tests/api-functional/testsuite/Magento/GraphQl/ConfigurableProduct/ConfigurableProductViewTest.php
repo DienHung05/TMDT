@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -490,6 +495,7 @@ QUERY;
         $configurableAttributeOptions = $product->getExtensionAttributes()->getConfigurableProductOptions();
         $configurableAttributeOptionsData = [];
         foreach ($configurableAttributeOptions as $option) {
+<<<<<<< HEAD
             $configurableAttributeOptionsData[$option->getId() ?? ''] = $option->getData();
             $configurableAttributeOptionsData[$option->getId() ?? '']['id'] = $option->getId();
             $configurableAttributeOptionsData[$option->getId() ?? '']['attribute_code']
@@ -498,6 +504,16 @@ QUERY;
             foreach ($option->getValues() as $value) {
                 $configurableAttributeOptionsData[$option->getId() ?? '']['values'][$value->getId() ?? ''] = $value->getData();
                 $configurableAttributeOptionsData[$option->getId() ?? '']['values'][$value->getId() ?? '']['label']
+=======
+            $configurableAttributeOptionsData[$option->getId()] = $option->getData();
+            $configurableAttributeOptionsData[$option->getId()]['id'] = $option->getId();
+            $configurableAttributeOptionsData[$option->getId()]['attribute_code']
+                = $option->getProductAttribute()->getAttributeCode();
+            unset($configurableAttributeOptionsData[$option->getId()]['values']);
+            foreach ($option->getValues() as $value) {
+                $configurableAttributeOptionsData[$option->getId()]['values'][$value->getId()] = $value->getData();
+                $configurableAttributeOptionsData[$option->getId()]['values'][$value->getId()]['label']
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     = $value->getLabel();
             }
         }

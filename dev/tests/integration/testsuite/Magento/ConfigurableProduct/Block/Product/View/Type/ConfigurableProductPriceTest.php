@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -102,7 +107,11 @@ class ConfigurableProductPriceTest extends TestCase
     {
         $this->executeInStoreContext->execute('fixture_second_store', [$this, 'assertPrice'], 'configurable', 10.00);
         $this->resetPageLayout();
+<<<<<<< HEAD
         $this->assertAmount('configurable', 150.00);
+=======
+        $this->assertPrice('configurable', 150.00);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -112,7 +121,11 @@ class ConfigurableProductPriceTest extends TestCase
      */
     public function testConfigurablePriceWithDisabledFirstChild(): void
     {
+<<<<<<< HEAD
         $this->assertAmount('configurable', 20.00);
+=======
+        $this->assertPrice('configurable', 20.00);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -122,7 +135,11 @@ class ConfigurableProductPriceTest extends TestCase
      */
     public function testConfigurablePriceWithOutOfStockFirstChild(): void
     {
+<<<<<<< HEAD
         $this->assertAmount('configurable', 20.00);
+=======
+        $this->assertPrice('configurable', 20.00);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -254,6 +271,7 @@ class ConfigurableProductPriceTest extends TestCase
     {
         return $this->productRepository->get($sku, false, $this->storeManager->getStore()->getId(), true);
     }
+<<<<<<< HEAD
 
     /**
      * Assert that html contain expected final price amount.
@@ -271,4 +289,6 @@ class ConfigurableProductPriceTest extends TestCase
             $priceBlockHtml
         );
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

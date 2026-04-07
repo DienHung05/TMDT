@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
@@ -23,6 +24,13 @@ use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Fixture\DbIsolation;
 use Magento\TestFramework\Fixture\ScopeFixture;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\BundleImportExport\Model\Export;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * @magentoAppArea adminhtml
  */
@@ -32,13 +40,18 @@ class RowCustomizerTest extends \PHPUnit\Framework\TestCase
      * @var \Magento\BundleImportExport\Model\Export\RowCustomizer
      */
     private $model;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @var \Magento\Framework\ObjectManagerInterface
      */
     private $objectManager;
 
     /**
+<<<<<<< HEAD
      * @var \Magento\Catalog\Api\ProductRepositoryInterface
      */
     private $productRepository;
@@ -54,6 +67,8 @@ class RowCustomizerTest extends \PHPUnit\Framework\TestCase
     private $currentStoreId;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
@@ -62,6 +77,7 @@ class RowCustomizerTest extends \PHPUnit\Framework\TestCase
         $this->model = $this->objectManager->create(
             \Magento\BundleImportExport\Model\Export\RowCustomizer::class
         );
+<<<<<<< HEAD
         $this->productRepository = $this->objectManager->get(
             \Magento\Catalog\Api\ProductRepositoryInterface::class
         );
@@ -73,6 +89,8 @@ class RowCustomizerTest extends \PHPUnit\Framework\TestCase
     {
         $this->storeManager->setCurrentStore($this->currentStoreId);
         parent::tearDown();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -158,6 +176,7 @@ class RowCustomizerTest extends \PHPUnit\Framework\TestCase
 
         self::assertSame($expectedNames, $actualNames);
     }
+<<<<<<< HEAD
 
     #[
         // export is performed in global scope
@@ -228,4 +247,6 @@ class RowCustomizerTest extends \PHPUnit\Framework\TestCase
         $actual = $this->model->addData([], $product->getId());
         $this->assertEquals($expected, array_intersect_key($actual, $expected));
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

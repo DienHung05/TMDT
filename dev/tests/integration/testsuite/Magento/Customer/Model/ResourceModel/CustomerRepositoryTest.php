@@ -1,13 +1,19 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Customer\Model\ResourceModel;
 
 use Magento\Customer\Api\AccountManagementInterface;
 use Magento\Customer\Api\CustomerRepositoryInterface;
+<<<<<<< HEAD
 use Magento\Customer\Api\Data\AddressInterface;
 use Magento\Customer\Api\Data\AddressInterfaceFactory;
 use Magento\Customer\Api\Data\CustomerInterface;
@@ -38,12 +44,38 @@ use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+=======
+use Magento\Customer\Api\Data\CustomerInterfaceFactory;
+use Magento\Customer\Api\Data\AddressInterfaceFactory;
+use Magento\Customer\Api\Data\RegionInterfaceFactory;
+use Magento\Framework\Api\ExtensibleDataObjectConverter;
+use Magento\Framework\Api\DataObjectHelper;
+use Magento\Framework\Encryption\EncryptorInterface;
+use Magento\Customer\Api\Data\CustomerInterface;
+use Magento\Customer\Model\CustomerRegistry;
+use Magento\Framework\Api\SortOrder;
+use Magento\Framework\Config\CacheInterface;
+use Magento\Framework\ObjectManagerInterface;
+use Magento\Sales\Api\Data\InvoiceInterface;
+use Magento\Sales\Api\Data\OrderInterface;
+use Magento\Sales\Api\InvoiceOrderInterface;
+use Magento\Sales\Api\InvoiceRepositoryInterface;
+use Magento\Sales\Api\OrderRepositoryInterface;
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\Customer\Api\Data\AddressInterface;
+use Magento\Framework\Api\SearchCriteriaBuilder;
+use Magento\Framework\Api\FilterBuilder;
+use Magento\Framework\Api\SortOrderBuilder;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Customer\Model\Customer;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Checks Customer insert, update, search with repository
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
+<<<<<<< HEAD
 class CustomerRepositoryTest extends TestCase
 {
     private const NEW_CUSTOMER_EMAIL = 'new.customer@example.com';
@@ -52,6 +84,11 @@ class CustomerRepositoryTest extends TestCase
 
     private const CUSTOM_ORDER_EMAIL = 'custom.order@example.com';
 
+=======
+class CustomerRepositoryTest extends \PHPUnit\Framework\TestCase
+{
+    private const NEW_CUSTOMER_EMAIL = 'new.customer@example.com';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     private const CUSTOMER_ID = 1;
 
     /** @var AccountManagementInterface */
@@ -72,6 +109,12 @@ class CustomerRepositoryTest extends TestCase
     /** @var AddressInterfaceFactory */
     private $addressFactory;
 
+<<<<<<< HEAD
+=======
+    /** @var RegionInterfaceFactory */
+    private $regionFactory;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /** @var ExtensibleDataObjectConverter */
     private $converter;
 
@@ -85,6 +128,7 @@ class CustomerRepositoryTest extends TestCase
     protected $customerRegistry;
 
     /**
+<<<<<<< HEAD
      * @var DataFixtureStorage
      */
     private $fixtures;
@@ -95,6 +139,8 @@ class CustomerRepositoryTest extends TestCase
     private $searchCriteriaBuilder;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
@@ -104,14 +150,21 @@ class CustomerRepositoryTest extends TestCase
         $this->orderRepository = $this->objectManager->create(OrderRepositoryInterface::class);
         $this->customerFactory = $this->objectManager->create(CustomerInterfaceFactory::class);
         $this->addressFactory = $this->objectManager->create(AddressInterfaceFactory::class);
+<<<<<<< HEAD
+=======
+        $this->regionFactory = $this->objectManager->create(RegionInterfaceFactory::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->accountManagement = $this->objectManager->create(AccountManagementInterface::class);
         $this->converter = $this->objectManager->create(ExtensibleDataObjectConverter::class);
         $this->dataObjectHelper = $this->objectManager->create(DataObjectHelper::class);
         $this->encryptor = $this->objectManager->create(EncryptorInterface::class);
         $this->customerRegistry = $this->objectManager->create(CustomerRegistry::class);
+<<<<<<< HEAD
         $this->searchCriteriaBuilder = $this->objectManager->create(SearchCriteriaBuilder::class);
 
         $this->fixtures = DataFixtureStorageManager::getStorage();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         /** @var CacheInterface $cache */
         $cache = $this->objectManager->create(CacheInterface::class);
@@ -124,6 +177,7 @@ class CustomerRepositoryTest extends TestCase
     protected function tearDown(): void
     {
         $objectManager = Bootstrap::getObjectManager();
+<<<<<<< HEAD
         /** @var CustomerRegistry $customerRegistry */
         $customerRegistry = $objectManager->get(CustomerRegistry::class);
         /** @var ResourceConnection $resource */
@@ -140,6 +194,11 @@ class CustomerRepositoryTest extends TestCase
                 // Continue cleanup even if removal fails
             }
         }
+=======
+        /** @var \Magento\Customer\Model\CustomerRegistry $customerRegistry */
+        $customerRegistry = $objectManager->get(CustomerRegistry::class);
+        $customerRegistry->remove(1);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -210,6 +269,7 @@ class CustomerRepositoryTest extends TestCase
     /**
      * Test update customer
      *
+<<<<<<< HEAD
      * @magentoAppArea frontend
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @magentoDataFixture Magento/Customer/_files/customer_address.php
@@ -219,6 +279,15 @@ class CustomerRepositoryTest extends TestCase
      */
     #[DataProvider('updateCustomerDataProvider')]
     public function testUpdateCustomer($defaultBilling, $defaultShipping, $defaultAddressId)
+=======
+     * @dataProvider updateCustomerDataProvider
+     * @magentoAppArea frontend
+     * @magentoDataFixture Magento/Customer/_files/customer.php
+     * @param int|null $defaultBilling
+     * @param int|null $defaultShipping
+     */
+    public function testUpdateCustomer($defaultBilling, $defaultShipping)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $existingCustomerId = 1;
         $email = 'savecustomer@example.com';
@@ -228,6 +297,7 @@ class CustomerRepositoryTest extends TestCase
         $newPasswordHash = $this->encryptor->getHash($newPassword, true);
         $customerBefore = $this->customerRepository->getById($existingCustomerId);
         $customerData = array_merge($customerBefore->__toArray(), [
+<<<<<<< HEAD
             'id' => 1,
             'email' => $email,
             'firstname' => $firstName,
@@ -237,6 +307,17 @@ class CustomerRepositoryTest extends TestCase
             'default_billing' => $defaultBilling,
             'default_shipping' => $defaultShipping
         ]);
+=======
+                'id' => 1,
+                'email' => $email,
+                'firstname' => $firstName,
+                'lastname' => $lastName,
+                'created_in' => 'Admin',
+                'password' => 'notsaved',
+                'default_billing' => $defaultBilling,
+                'default_shipping' => $defaultShipping
+            ]);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $customerDetails = $this->customerFactory->create();
         $this->dataObjectHelper->populateWithArray(
             $customerDetails,
@@ -248,12 +329,21 @@ class CustomerRepositoryTest extends TestCase
         $this->assertEquals($email, $customerAfter->getEmail());
         $this->assertEquals($firstName, $customerAfter->getFirstname());
         $this->assertEquals($lastName, $customerAfter->getLastname());
+<<<<<<< HEAD
         $this->assertEquals($defaultAddressId, $customerAfter->getDefaultBilling());
         $this->assertEquals($defaultAddressId, $customerAfter->getDefaultShipping());
         $this->expectedDefaultShippingsInCustomerModelAttributes(
             $existingCustomerId,
             $defaultAddressId,
             $defaultAddressId
+=======
+        $this->assertEquals($defaultBilling, $customerAfter->getDefaultBilling());
+        $this->assertEquals($defaultShipping, $customerAfter->getDefaultShipping());
+        $this->expectedDefaultShippingsInCustomerModelAttributes(
+            $existingCustomerId,
+            $defaultBilling,
+            $defaultShipping
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
         $this->assertEquals('Admin', $customerAfter->getCreatedIn());
         $this->accountManagement->authenticate($customerAfter->getEmail(), $newPassword);
@@ -270,15 +360,33 @@ class CustomerRepositoryTest extends TestCase
         // ignore 'updated_at'
         unset($attributesBefore['updated_at']);
         unset($attributesAfter['updated_at']);
+<<<<<<< HEAD
         $inAfterOnly = array_diff_assoc($attributesAfter, $attributesBefore);
         // Verify that the customer data was updated correctly
         $this->assertEquals($firstName, $customerAfter->getFirstname());
         $this->assertEquals($lastName, $customerAfter->getLastname());
         $this->assertEquals($email, $customerAfter->getEmail());
+=======
+        $inBeforeOnly = array_diff_assoc($attributesBefore, $attributesAfter);
+        $inAfterOnly = array_diff_assoc($attributesAfter, $attributesBefore);
+        $expectedInBefore = [
+            'firstname',
+            'lastname',
+            'email',
+        ];
+        foreach ($expectedInBefore as $key) {
+            $this->assertContains($key, array_keys($inBeforeOnly));
+        }
+        $this->assertContains('created_in', array_keys($inAfterOnly));
+        $this->assertContains('firstname', array_keys($inAfterOnly));
+        $this->assertContains('lastname', array_keys($inAfterOnly));
+        $this->assertContains('email', array_keys($inAfterOnly));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertNotContains('password_hash', array_keys($inAfterOnly));
     }
 
     /**
+<<<<<<< HEAD
      * Test update customer custom attributes
      *
      * @magentoDataFixture Magento/Customer/_files/attribute_user_defined_custom_attribute.php
@@ -310,6 +418,8 @@ class CustomerRepositoryTest extends TestCase
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Test update customer address
      *
      * @magentoAppArea frontend
@@ -452,6 +562,7 @@ class CustomerRepositoryTest extends TestCase
     /**
      * Test search customers
      *
+<<<<<<< HEAD
      * @param Filter[] $filters
      * @param Filter[] $filterGroup
      * @param array $expectedResult array of expected results indexed by ID
@@ -460,6 +571,17 @@ class CustomerRepositoryTest extends TestCase
      * @magentoDbIsolation enabled
      */
     #[DataProvider('searchCustomersDataProvider')]
+=======
+     * @param \Magento\Framework\Api\Filter[] $filters
+     * @param \Magento\Framework\Api\Filter[] $filterGroup
+     * @param array $expectedResult array of expected results indexed by ID
+     *
+     * @dataProvider searchCustomersDataProvider
+     *
+     * @magentoDataFixture Magento/Customer/_files/three_customers.php
+     * @magentoDbIsolation enabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSearchCustomers($filters, $filterGroup, $expectedResult)
     {
         /** @var SearchCriteriaBuilder $searchBuilder */
@@ -567,17 +689,28 @@ class CustomerRepositoryTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function updateCustomerDataProvider()
+=======
+    public function updateCustomerDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Customer remove default shipping and billing' => [
                 null,
+<<<<<<< HEAD
                 null,
                 1
             ],
             'Customer update default shipping and billing' => [
                 1,
                 1,
+=======
+                null
+            ],
+            'Customer update default shipping and billing' => [
+                1,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 1
             ],
         ];
@@ -588,7 +721,11 @@ class CustomerRepositoryTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function searchCustomersDataProvider()
+=======
+    public function searchCustomersDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $builder = Bootstrap::getObjectManager()->create(FilterBuilder::class);
         return [
@@ -643,7 +780,11 @@ class CustomerRepositoryTest extends TestCase
          * @var Customer $customer
          */
         $customer = $this->objectManager->create(Customer::class);
+<<<<<<< HEAD
         /** @var Customer $customer */
+=======
+        /** @var \Magento\Customer\Model\Customer $customer */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $customer->load($customerId);
         $this->assertEquals(
             $defaultBilling,
@@ -747,6 +888,7 @@ class CustomerRepositoryTest extends TestCase
             $this->assertEquals('customer@example.com', $customerOrder->getCustomerEmail());
         }
     }
+<<<<<<< HEAD
 
     public function testSaveCustomerWithInvalidAttrValue(): void
     {
@@ -877,4 +1019,6 @@ class CustomerRepositoryTest extends TestCase
         $this->assertSame(self::NEW_CUSTOMER_EMAIL, $updatedDefaultOrder->getCustomerEmail());
         $this->assertSame(self::CUSTOM_ORDER_EMAIL, $unchangedCustomOrder->getCustomerEmail());
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

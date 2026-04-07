@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 use Magento\Customer\Api\AccountManagementInterface;
 use Magento\Customer\Api\CustomerMetadataInterface;
+<<<<<<< HEAD
 use Magento\Customer\Api\Data\AddressInterfaceFactory;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Customer\Model\Data\CustomerFactory;
 use Magento\Customer\Model\GroupManagement;
 use Magento\Eav\Model\AttributeRepository;
@@ -29,6 +37,7 @@ $defaultStoreId = $website->getDefaultStore()->getId();
 $attributeRepository = $objectManager->get(AttributeRepository::class);
 $gender = $attributeRepository->get(CustomerMetadataInterface::ENTITY_TYPE_CUSTOMER, 'gender')
     ->getSource()->getOptionId('Male');
+<<<<<<< HEAD
 
 /** @var AddressInterfaceFactory $addressFactory */
 $addressFactory = $objectManager->get(AddressInterfaceFactory::class);
@@ -44,6 +53,8 @@ $address->setFirstname('John')
     ->setIsDefaultBilling(true)
     ->setIsDefaultShipping(true);
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 $customer = $customerFactory->create();
 $customer->setWebsiteId($website->getId())
     ->setEmail('new_customer@example.com')
@@ -54,6 +65,12 @@ $customer->setWebsiteId($website->getId())
     ->setMiddlename('A')
     ->setLastname('Smith')
     ->setSuffix('Esq.')
+<<<<<<< HEAD
     ->setGender($gender)
     ->setAddresses([$address]);
+=======
+    ->setDefaultBilling(1)
+    ->setDefaultShipping(1)
+    ->setGender($gender);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 $accountManagement->createAccount($customer, 'Qwert12345');

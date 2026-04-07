@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 /**
+<<<<<<< HEAD
   * Copyright 2020 Adobe
   * All Rights Reserved.
   */
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 -->
 <!-- These are the settings for legacy testing of Magento 2 Community Edition -->
 <config>
@@ -75,6 +81,7 @@
             <word>rma</word>
         </item>
         <item>
+<<<<<<< HEAD
             <path>lib/web/hugerte/plugins/help/plugin.js</path>
             <word>CHANGELOG</word>
         </item>
@@ -92,6 +99,25 @@
         </item>
         <item>
             <path>lib/web/hugerte/plugins/emoticons/js/emojiimages.js</path>
+=======
+            <path>lib/web/tiny_mce_5/plugins/help/plugin.min.js</path>
+            <word>CHANGELOG</word>
+        </item>
+        <item>
+            <path>lib/web/tiny_mce_5/plugins/emoticons/js/emojis.min.js</path>
+            <word>Enterprise</word>
+        </item>
+        <item>
+            <path>lib/web/tiny_mce_5/plugins/emoticons/js/emojis.js</path>
+            <word>Enterprise</word>
+        </item>
+        <item>
+            <path>lib/web/tiny_mce_5/plugins/emoticons/js/emojiimages.min.js</path>
+            <word>Enterprise</word>
+        </item>
+        <item>
+            <path>lib/web/tiny_mce_5/plugins/emoticons/js/emojiimages.js</path>
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             <word>Enterprise</word>
         </item>
         <item>

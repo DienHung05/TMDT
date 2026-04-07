@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Eav\Model\ResourceModel\UpdateHandler;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Catalog\Model\Product;
 use Magento\Eav\Model\ResourceModel\UpdateHandler;
 use Magento\Eav\Model\ResourceModel\UpdateHandlerAbstract;
@@ -22,13 +30,20 @@ class ExecuteProcessForAllStoresTest extends UpdateHandlerAbstract
     /**
      * @covers \Magento\Eav\Model\ResourceModel\UpdateHandler::execute
      * @magentoDataFixture Magento/Catalog/_files/product_simple.php
+<<<<<<< HEAD
+=======
+     * @dataProvider getAllStoresDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param $code
      * @param $snapshotValue
      * @param $newValue
      * @param $expected
      * @magentoDbIsolation disabled
      */
+<<<<<<< HEAD
     #[DataProvider('getAllStoresDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecuteProcessForAllStores($code, $snapshotValue, $newValue, $expected)
     {
         if ($snapshotValue !== '-') {
@@ -57,7 +72,11 @@ class ExecuteProcessForAllStoresTest extends UpdateHandlerAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getAllStoresDataProvider()
+=======
+    public function getAllStoresDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['description', '', 'not_empty_value', 'not_empty_value'],                  //0

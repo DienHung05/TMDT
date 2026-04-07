@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -19,7 +24,10 @@ use Magento\Widget\Model\Template\FilterEmulate;
 class CategoryBlockTest extends GraphQlAbstract
 {
     /**
+<<<<<<< HEAD
      * @magentoConfigFixture default_store web/seo/use_rewrites 1
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoApiDataFixture Magento/Catalog/_files/category_tree.php
      * @magentoApiDataFixture Magento/Cms/_files/block.php
      */

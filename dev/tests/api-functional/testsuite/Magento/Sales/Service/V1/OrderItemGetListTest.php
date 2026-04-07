@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Sales\Service\V1;
 
@@ -9,12 +14,21 @@ use Magento\TestFramework\TestCase\WebapiAbstract;
 
 class OrderItemGetListTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     private const RESOURCE_PATH = '/V1/orders/items';
 
     private const SERVICE_VERSION = 'V1';
     private const SERVICE_NAME = 'salesOrderItemRepositoryV1';
 
     private const ORDER_INCREMENT_ID = '100000001';
+=======
+    const RESOURCE_PATH = '/V1/orders/items';
+
+    const SERVICE_VERSION = 'V1';
+    const SERVICE_NAME = 'salesOrderItemRepositoryV1';
+
+    const ORDER_INCREMENT_ID = '100000001';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var \Magento\TestFramework\ObjectManager

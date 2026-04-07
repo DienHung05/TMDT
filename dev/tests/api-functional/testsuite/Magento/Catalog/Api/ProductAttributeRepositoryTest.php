@@ -1,11 +1,20 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
 namespace Magento\Catalog\Api;
 
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Catalog\Api;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Webapi\Exception as HTTPExceptionCodes;
 
 /**
@@ -13,9 +22,15 @@ use Magento\Framework\Webapi\Exception as HTTPExceptionCodes;
  */
 class ProductAttributeRepositoryTest extends \Magento\TestFramework\TestCase\WebapiAbstract
 {
+<<<<<<< HEAD
     public const SERVICE_NAME = 'catalogProductAttributeRepositoryV1';
     public const SERVICE_VERSION = 'V1';
     public const RESOURCE_PATH = '/V1/products/attributes';
+=======
+    const SERVICE_NAME = 'catalogProductAttributeRepositoryV1';
+    const SERVICE_VERSION = 'V1';
+    const RESOURCE_PATH = '/V1/products/attributes';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var array
@@ -89,11 +104,18 @@ class ProductAttributeRepositoryTest extends \Magento\TestFramework\TestCase\Web
     /**
      * Test create attribute
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider attributeCodeDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoApiDataFixture Magento/Catalog/Model/Product/Attribute/_files/create_attribute_service.php
      * @param string $attributeCode
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('attributeCodeDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreate(string $attributeCode): void
     {
         $attribute = $this->createAttribute($attributeCode);
@@ -127,7 +149,11 @@ class ProductAttributeRepositoryTest extends \Magento\TestFramework\TestCase\Web
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function attributeCodeDataProvider(): array
+=======
+    public function attributeCodeDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [str_repeat('az_7', 15)],

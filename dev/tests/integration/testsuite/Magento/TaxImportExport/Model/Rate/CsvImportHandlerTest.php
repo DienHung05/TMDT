@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\TaxImportExport\Model\Rate;
 
@@ -39,7 +44,11 @@ class CsvImportHandlerTest extends \PHPUnit\Framework\TestCase
             'US-CA-*-Rate Import Test'
         );
         $this->assertNotEmpty($importedRuleCA->getId());
+<<<<<<< HEAD
         $this->assertEquals(8.25, (float)$importedRuleCA->getRate());
+=======
+        $this->assertEquals(8.25, (double)$importedRuleCA->getRate());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertEquals('US', $importedRuleCA->getTaxCountryId());
         $this->assertEquals('*', $importedRuleCA->getTaxPostcode());
 
@@ -49,7 +58,11 @@ class CsvImportHandlerTest extends \PHPUnit\Framework\TestCase
             'US-FL-*-Rate Import Test'
         );
         $this->assertNotEmpty($importedRuleFL->getId());
+<<<<<<< HEAD
         $this->assertEquals(15, (float)$importedRuleFL->getRate());
+=======
+        $this->assertEquals(15, (double)$importedRuleFL->getRate());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertEquals('US', $importedRuleFL->getTaxCountryId());
         $this->assertNull($importedRuleFL->getTaxPostcode());
     }

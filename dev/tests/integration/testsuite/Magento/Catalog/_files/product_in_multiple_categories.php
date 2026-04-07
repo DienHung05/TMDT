@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -16,7 +21,11 @@ $category->setId(
 )->setParentId(
     2
 )->setPath(
+<<<<<<< HEAD
     '1/2/333'
+=======
+    '1/2/3'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 )->setLevel(
     2
 )->setAvailableSortBy(

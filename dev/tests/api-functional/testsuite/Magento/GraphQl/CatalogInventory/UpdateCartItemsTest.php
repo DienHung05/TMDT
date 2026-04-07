@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -47,6 +52,7 @@ class UpdateCartItemsTest extends GraphQlAbstract
         $itemId = $this->getQuoteItemIdByReservedQuoteIdAndSku->execute('test_quote', 'simple_product');
 
         $quantity = 0.5;
+<<<<<<< HEAD
         $query = $this->getMutation($maskedQuoteId, $itemId, $quantity);
         $response = $this->graphQlMutation($query);
 
@@ -59,6 +65,13 @@ class UpdateCartItemsTest extends GraphQlAbstract
             $responseError['message']
         );
         $this->assertEquals('INVALID_PARAMETER_VALUE', $responseError['code']);
+=======
+        $this->expectExceptionMessage(
+            "Could not update the product with SKU simple_product: The fewest you may purchase is 1"
+        );
+        $query = $this->getQuery($maskedQuoteId, $itemId, $quantity);
+        $this->graphQlMutation($query);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -72,6 +85,7 @@ class UpdateCartItemsTest extends GraphQlAbstract
         $itemId = $this->getQuoteItemIdByReservedQuoteIdAndSku->execute('test_quote', 'simple_product');
 
         $quantity = 100;
+<<<<<<< HEAD
         $query = $this->getMutation($maskedQuoteId, $itemId, $quantity);
         $response = $this->graphQlMutation($query);
         $this->assertArrayHasKey('updateCartItems', $response);
@@ -83,6 +97,13 @@ class UpdateCartItemsTest extends GraphQlAbstract
             $responseError['message']
         );
         $this->assertEquals('INSUFFICIENT_STOCK', $responseError['code']);
+=======
+        $this->expectExceptionMessage(
+            "Could not update the product with SKU simple_product: The requested qty is not available"
+        );
+        $query = $this->getQuery($maskedQuoteId, $itemId, $quantity);
+        $this->graphQlMutation($query);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -91,9 +112,15 @@ class UpdateCartItemsTest extends GraphQlAbstract
      * @param float $quantity
      * @return string
      */
+<<<<<<< HEAD
     private function getMutation(string $maskedQuoteId, int $itemId, float $quantity): string
     {
         return <<<MUTATION
+=======
+    private function getQuery(string $maskedQuoteId, int $itemId, float $quantity): string
+    {
+        return <<<QUERY
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 mutation {
   updateCartItems(input: {
     cart_id: "{$maskedQuoteId}"
@@ -110,6 +137,7 @@ mutation {
         quantity
       }
     }
+<<<<<<< HEAD
     errors {
       message
       code
@@ -117,5 +145,10 @@ mutation {
   }
 }
 MUTATION;
+=======
+  }
+}
+QUERY;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

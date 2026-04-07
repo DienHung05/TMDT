@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -17,12 +22,18 @@ use Magento\Framework\Filesystem;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test that initial scopes config are loaded if database is available
  * @magentoAppIsolation enabled
+<<<<<<< HEAD
  * @magentoCache config disabled
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class InitialConfigSourceTest extends TestCase
 {
@@ -97,8 +108,13 @@ class InitialConfigSourceTest extends TestCase
      * @param string $defaultWebsite
      * @param bool $offline
      * @throws LocalizedException
+<<<<<<< HEAD
      */
     #[DataProvider('getDefaultDataProvider')]
+=======
+     * @dataProvider getDefaultDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetWebsites(array $websites, string $defaultWebsite, bool $offline = false): void
     {
         if ($offline) {
@@ -113,7 +129,11 @@ class InitialConfigSourceTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getDefaultDataProvider(): array
+=======
+    public function getDefaultDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

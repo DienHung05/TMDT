@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -19,7 +24,10 @@ use Magento\Framework\ObjectManagerInterface;
 use Magento\TestFramework\Eav\Model\GetAttributeGroupByName;
 use Magento\TestFramework\Eav\Model\ResourceModel\GetEntityIdByAttributeId;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Provides tests for attribute set model saving.
@@ -93,11 +101,18 @@ class SetTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @magentoDataFixture Magento/Eav/_files/attribute_with_options.php
+<<<<<<< HEAD
+=======
+     * @dataProvider addAttributeToSetDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $groupName
      * @param string $attributeCode
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('addAttributeToSetDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveWithGroupsAndAttributes(string $groupName, string $attributeCode): void
     {
         $set = $this->setRepository->get($this->defaultSetId);
@@ -128,6 +143,7 @@ class SetTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function addAttributeToSetDataProvider(): array
     {
         return [
@@ -146,6 +162,26 @@ class SetTest extends \PHPUnit\Framework\TestCase
             'move_to_new_group' => [
                 'groupName' => 'Test',
                 'attributeCode' => 'description',
+=======
+    public function addAttributeToSetDataProvider(): array
+    {
+        return [
+            'add_to_existing_group' => [
+                'group_name' => 'Content',
+                'attribute_code' => 'zzz',
+            ],
+            'add_to_new_group' => [
+                'group_name' => 'Test',
+                'attribute_code' => 'zzz',
+            ],
+            'move_to_existing_group' => [
+                'group_name' => 'Images',
+                'attribute_code' => 'description',
+            ],
+            'move_to_new_group' => [
+                'group_name' => 'Test',
+                'attribute_code' => 'description',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

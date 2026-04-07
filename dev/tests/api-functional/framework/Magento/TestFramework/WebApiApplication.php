@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\TestFramework;
 
@@ -50,6 +55,7 @@ class WebApiApplication extends Application
             }
             $this->_shell->execute($installCmd, $installArgs);
         }
+<<<<<<< HEAD
         /* Set Indexer mode as "Update on Save" & Reindex all the Indexers */
         $this->_shell->execute(
             'php -f ' . BP . '/bin/magento indexer:set-mode realtime -vvv'
@@ -57,6 +63,8 @@ class WebApiApplication extends Application
         $this->_shell->execute(
             'php -f ' . BP . '/bin/magento indexer:reindex -vvv'
         );
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->runPostInstallCommands();
     }

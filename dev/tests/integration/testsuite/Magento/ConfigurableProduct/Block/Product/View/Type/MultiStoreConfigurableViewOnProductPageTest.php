@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -17,7 +22,10 @@ use Magento\Framework\View\LayoutInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Store\ExecuteInStoreContext;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -68,11 +76,19 @@ class MultiStoreConfigurableViewOnProductPageTest extends TestCase
     /**
      * @magentoDataFixture Magento/ConfigurableProduct/_files/configurable_product_different_option_labeles_per_stores.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider expectedLabelsDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $expectedStoreData
      * @param array $expectedSecondStoreData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('expectedLabelsDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testMultiStoreLabelView(array $expectedStoreData, array $expectedSecondStoreData): void
     {
         $this->executeInStoreContext->execute('default', [$this, 'assertProductLabel'], $expectedStoreData);
@@ -82,11 +98,19 @@ class MultiStoreConfigurableViewOnProductPageTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function expectedLabelsDataProvider(): array
     {
         return [
             [
                 'expectedStoreData' => [
+=======
+    public function expectedLabelsDataProvider(): array
+    {
+        return [
+            [
+                'options_first_store' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple_option_1_default_store' => [
                         'label' => 'Option 1 Default Store',
                     ],
@@ -97,7 +121,11 @@ class MultiStoreConfigurableViewOnProductPageTest extends TestCase
                         'label' => 'Option 3 Default Store',
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedSecondStoreData' => [
+=======
+                'options_second_store' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple_option_1_default_store' => [
                         'label' => 'Option 1 Second Store',
                     ],
@@ -129,11 +157,19 @@ class MultiStoreConfigurableViewOnProductPageTest extends TestCase
     /**
      * @magentoDataFixture Magento/ConfigurableProduct/_files/configurable_product_two_websites.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider expectedProductDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $expectedProducts
      * @param array $expectedSecondStoreProducts
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('expectedProductDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testMultiStoreOptionsView(array $expectedProducts, array $expectedSecondStoreProducts): void
     {
         $this->prepareConfigurableProduct('configurable', 'fixture_second_store');
@@ -148,12 +184,21 @@ class MultiStoreConfigurableViewOnProductPageTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function expectedProductDataProvider(): array
     {
         return [
             [
                 'expectedProducts' => ['simple_option_1', 'simple_option_2'],
                 'expectedSecondStoreProducts' => ['simple_option_2'],
+=======
+    public function expectedProductDataProvider(): array
+    {
+        return [
+            [
+                'expected_store_products' => ['simple_option_1', 'simple_option_2'],
+                'expected_second_store_products' => ['simple_option_2'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

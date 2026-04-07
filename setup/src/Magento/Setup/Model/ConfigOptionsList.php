@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -54,7 +59,10 @@ class ConfigOptionsList implements ConfigOptionsListInterface
         \Magento\Setup\Model\ConfigOptionsList\PageCache::class,
         \Magento\Setup\Model\ConfigOptionsList\Lock::class,
         \Magento\Setup\Model\ConfigOptionsList\Directory::class,
+<<<<<<< HEAD
         \Magento\Setup\Model\ConfigOptionsList\BackpressureLogger::class,
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ];
 
     /**
@@ -73,8 +81,13 @@ class ConfigOptionsList implements ConfigOptionsListInterface
     public function __construct(
         ConfigGenerator $configGenerator,
         DbValidator $dbValidator,
+<<<<<<< HEAD
         ?KeyValidator $encryptionKeyValidator = null,
         ?DriverOptions $driverOptions = null
+=======
+        KeyValidator $encryptionKeyValidator = null,
+        DriverOptions $driverOptions = null
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ) {
         $this->configGenerator = $configGenerator;
         $this->dbValidator = $dbValidator;
@@ -160,6 +173,10 @@ class ConfigOptionsList implements ConfigOptionsListInterface
                 ConfigOptionsListConstants::CONFIG_PATH_DB_CONNECTION_DEFAULT .
                 '/' . ConfigOptionsListConstants::KEY_INIT_STATEMENTS,
                 'Database  initial set of commands',
+<<<<<<< HEAD
+=======
+                'SET NAMES utf8;'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ),
             new FlagConfigOption(
                 ConfigOptionsListConstants::INPUT_KEY_SKIP_DB_VALIDATION,

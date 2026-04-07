@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\User\Controller\Adminhtml;
 
@@ -9,7 +14,10 @@ use Magento\Framework\Intl\DateTimeFactory;
 use Magento\Framework\Stdlib\DateTime;
 use Magento\TestFramework\Mail\Template\TransportBuilderMock;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test class for \Magento\User\Controller\Adminhtml\Auth
@@ -165,11 +173,18 @@ class AuthTest extends \Magento\TestFramework\TestCase\AbstractBackendController
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider resetPasswordDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @covers \Magento\User\Controller\Adminhtml\Auth\ResetPasswordPost::execute
      * @covers \Magento\User\Controller\Adminhtml\Auth\ResetPasswordPost::_validateResetPasswordLinkToken
      * @magentoDataFixture Magento/User/_files/dummy_user.php
      */
+<<<<<<< HEAD
     #[DataProvider('resetPasswordDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testResetPasswordPostAction($password, $passwordConfirmation, $isPasswordChanged)
     {
         $objectManager = Bootstrap::getObjectManager();
@@ -226,7 +241,11 @@ class AuthTest extends \Magento\TestFramework\TestCase\AbstractBackendController
         }
     }
 
+<<<<<<< HEAD
     public static function resetPasswordDataProvider()
+=======
+    public function resetPasswordDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $password = uniqid('123q');
         return [
@@ -317,13 +336,21 @@ class AuthTest extends \Magento\TestFramework\TestCase\AbstractBackendController
     protected function prepareEmailMock($occurrenceNumber, $templateId, $sender)
     {
         $transportMock = $this->getMockBuilder(\Magento\Framework\Mail\TransportInterface::class)
+<<<<<<< HEAD
             ->onlyMethods(['sendMessage'])
+=======
+            ->setMethods(['sendMessage'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMockForAbstractClass();
         $transportMock->expects($this->exactly($occurrenceNumber))
             ->method('sendMessage');
         $transportBuilderMock = $this->getMockBuilder(\Magento\Framework\Mail\Template\TransportBuilder::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(
+=======
+            ->setMethods(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 [
                     'setTemplateModel',
                     'addTo',
@@ -373,7 +400,11 @@ class AuthTest extends \Magento\TestFramework\TestCase\AbstractBackendController
         );
         $factoryMock = $this->getMockBuilder(\Magento\User\Model\UserFactory::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(
+=======
+            ->setMethods(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 [
                     'create'
                 ]

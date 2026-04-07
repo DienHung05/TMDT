@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -204,7 +209,11 @@ class CookieAndSessionMisuse extends AbstractRule implements ClassAware
      * @param ClassNode|ASTClass $node
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
+<<<<<<< HEAD
     public function apply(AbstractNode $node): void
+=======
+    public function apply(AbstractNode $node)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         try {
             $class = new \ReflectionClass($node->getFullQualifiedName());

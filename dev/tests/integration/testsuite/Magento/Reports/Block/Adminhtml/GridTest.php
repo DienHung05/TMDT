@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Reports\Block\Adminhtml;
 
@@ -9,7 +14,10 @@ use Magento\TestFramework\Helper\Bootstrap;
 use Magento\Framework\Locale\ResolverInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Reports\Model\ResourceModel\Product\Sold\Collection\Initial;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test class for \Magento\Reports\Block\Adminhtml\Grid
@@ -45,8 +53,13 @@ class GridTest extends \PHPUnit\Framework\TestCase
      * @param string $period
      * @param string $locale
      * @param int $expected
+<<<<<<< HEAD
      */
     #[DataProvider('getSalesRepresentativeIdDataProvider')]
+=======
+     * @dataProvider getSalesRepresentativeIdDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetPreparedCollection($from, $to, $period, $locale, $expected)
     {
         $encodedFilter = base64_encode('report_from='. $from . '&report_to=' . $to . '&report_period=' . $period);
@@ -78,7 +91,11 @@ class GridTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function getSalesRepresentativeIdDataProvider()
+=======
+    public function getSalesRepresentativeIdDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Data for US locale' =>             ['08/15/2018', '08/20/2018', 'day', 'en_US', 6],

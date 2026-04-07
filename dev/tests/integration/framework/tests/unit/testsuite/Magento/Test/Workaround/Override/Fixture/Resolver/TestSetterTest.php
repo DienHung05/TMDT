@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -63,11 +68,20 @@ class TestSetterTest extends TestCase
     {
         $mock = $this->getMockBuilder(Resolver::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['setCurrentTest'])
             ->getMock();
         $reflection = new \ReflectionClass(Resolver::class);
         $reflectionProperty = $reflection->getProperty('instance');
         $reflectionProperty->setValue(null, $mock);
+=======
+            ->setMethods(['setCurrentTest'])
+            ->getMock();
+        $reflection = new \ReflectionClass(Resolver::class);
+        $reflectionProperty = $reflection->getProperty('instance');
+        $reflectionProperty->setAccessible(true);
+        $reflectionProperty->setValue(Resolver::class, $mock);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         return $mock;
     }

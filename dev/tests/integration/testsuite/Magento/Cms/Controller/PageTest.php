@@ -1,13 +1,19 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Cms\Controller;
 
 use Magento\Cms\Api\GetPageByIdentifierInterface;
 use Magento\Cms\Model\Page\CustomLayoutManagerInterface;
+<<<<<<< HEAD
 use Magento\Framework\App\Cache\Type\Block;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -16,6 +22,11 @@ use Magento\TestFramework\Cms\Model\CustomLayoutManager;
 use Magento\Cms\Api\PageRepositoryInterface;
 use Magento\TestFramework\TestCase\AbstractController;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\Framework\View\LayoutInterface;
+use Magento\TestFramework\Cms\Model\CustomLayoutManager;
+use Magento\TestFramework\TestCase\AbstractController;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for \Magento\Cms\Controller\Page\View class.
@@ -128,11 +139,18 @@ class PageTest extends AbstractController
      * Tests page renders even with unavailable custom page layout.
      *
      * @magentoDataFixture Magento/Cms/Fixtures/page_list.php
+<<<<<<< HEAD
      * @param string $pageIdentifier
      * @return void
      * @throws NoSuchEntityException
      */
     #[DataProvider('pageLayoutDataProvider')]
+=======
+     * @dataProvider pageLayoutDataProvider
+     * @param string $pageIdentifier
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPageWithCustomLayout(string $pageIdentifier): void
     {
         $page = $this->pageRetriever->execute($pageIdentifier, 0);
@@ -146,13 +164,18 @@ class PageTest extends AbstractController
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function pageLayoutDataProvider(): array
+=======
+    public function pageLayoutDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Page with 1column layout' => ['page-with-1column-layout'],
             'Page with unavailable layout' => ['page-with-unavailable-layout']
         ];
     }
+<<<<<<< HEAD
 
     /**
      * Tests page renders with changed layout
@@ -187,4 +210,6 @@ class PageTest extends AbstractController
             $blockHtmlCache->test($cacheKey)
         );
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

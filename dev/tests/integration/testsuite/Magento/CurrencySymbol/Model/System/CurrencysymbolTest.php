@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\CurrencySymbol\Model\System;
@@ -20,9 +25,12 @@ class CurrencysymbolTest extends \PHPUnit\Framework\TestCase
      */
     protected $currencySymbolModel;
 
+<<<<<<< HEAD
     /**
      * @inheritDoc
      */
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     protected function setUp(): void
     {
         $this->currencySymbolModel = Bootstrap::getObjectManager()->create(
@@ -30,9 +38,12 @@ class CurrencysymbolTest extends \PHPUnit\Framework\TestCase
         );
     }
 
+<<<<<<< HEAD
     /**
      * @inheritDoc
      */
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     protected function tearDown(): void
     {
         $this->currencySymbolModel = null;
@@ -40,11 +51,14 @@ class CurrencysymbolTest extends \PHPUnit\Framework\TestCase
         Bootstrap::getObjectManager()->create(\Magento\Store\Model\StoreManagerInterface::class)->reinitStores();
     }
 
+<<<<<<< HEAD
     /**
      * Test that getCurrencySymbolsData method returns valid data
      *
      * @return void
      */
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetCurrencySymbolsData()
     {
         $currencySymbolsData = $this->currencySymbolModel->getCurrencySymbolsData();
@@ -91,15 +105,19 @@ class CurrencysymbolTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('@', $this->currencySymbolModel->getCurrencySymbol('EUR'), 'Symbol not set correctly.');
     }
 
+<<<<<<< HEAD
     /**
      * Test that method returns valid data
      *
      * @return void
      */
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetCurrencySymbolNonExistent()
     {
         $this->assertFalse($this->currencySymbolModel->getCurrencySymbol('AUD'));
     }
+<<<<<<< HEAD
 
     /**
      * Test that default symbol can be set to use explicitly in the system
@@ -124,4 +142,6 @@ class CurrencysymbolTest extends \PHPUnit\Framework\TestCase
             'Symbol\'s inheritance was not correctly set.'
         );
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

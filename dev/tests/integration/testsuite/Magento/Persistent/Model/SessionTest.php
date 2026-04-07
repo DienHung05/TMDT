@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Persistent\Model;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Persistent\Model;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class SessionTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -63,8 +71,13 @@ class SessionTest extends \PHPUnit\Framework\TestCase
     /**
      * @param int $duration
      * @param string $cookieValue
+<<<<<<< HEAD
      */
     #[DataProvider('renewPersistentCookieDataProvider')]
+=======
+     * @dataProvider renewPersistentCookieDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRenewPersistentCookie($duration, $cookieValue = 'cookieValue')
     {
         $_COOKIE[Session::COOKIE_NAME] = $cookieValue;
@@ -72,7 +85,11 @@ class SessionTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($cookieValue, $_COOKIE[Session::COOKIE_NAME]);
     }
 
+<<<<<<< HEAD
     public static function renewPersistentCookieDataProvider()
+=======
+    public function renewPersistentCookieDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'no duration' => [null],

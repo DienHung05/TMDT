@@ -1,12 +1,20 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Customer\Block\Address\Renderer;
 
 use Magento\Eav\Model\AttributeDataFactory;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * DefaultRenderer
@@ -25,7 +33,13 @@ class DefaultRendererTest extends \PHPUnit\Framework\TestCase
         );
     }
 
+<<<<<<< HEAD
     #[DataProvider('renderArrayDataProvider')]
+=======
+    /**
+     * @dataProvider renderArrayDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRenderArray($addressAttributes, $format, $expected)
     {
         /** @var DefaultRenderer $renderer */
@@ -34,7 +48,11 @@ class DefaultRendererTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $actual);
     }
 
+<<<<<<< HEAD
     public static function renderArrayDataProvider()
+=======
+    public function renderArrayDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $addressAttributes = [
             'city' => 'CityM',
@@ -70,7 +88,13 @@ class DefaultRendererTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+<<<<<<< HEAD
     #[DataProvider('renderDataProvider')]
+=======
+    /**
+     * @dataProvider renderDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRender($address, $format, $expected)
     {
         /** @var DefaultRenderer $renderer */
@@ -79,7 +103,11 @@ class DefaultRendererTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $actual);
     }
 
+<<<<<<< HEAD
     public static function renderDataProvider()
+=======
+    public function renderDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $data = [
             'city' => 'CityM',

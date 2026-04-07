@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Weee;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\App\Config\ReinitableConfigInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Config\Storage\WriterInterface;
@@ -102,6 +110,10 @@ class CartItemPricesWithFPTTest extends GraphQlAbstract
      * @return void
      *
      * @throws \Magento\Framework\Exception\NoSuchEntityException
+<<<<<<< HEAD
+=======
+     * @dataProvider cartItemFixedProductTaxDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoApiDataFixture Magento/GraphQl/Tax/_files/tax_rule_for_region_1.php
      * @magentoApiDataFixture Magento/Weee/_files/product_with_two_fpt.php
      * @magentoApiDataFixture Magento/GraphQl/Weee/_files/add_fpt_for_region_1.php
@@ -110,7 +122,10 @@ class CartItemPricesWithFPTTest extends GraphQlAbstract
      * @magentoApiDataFixture Magento/GraphQl/Weee/_files/add_simple_product_with_fpt_to_cart.php
      * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_new_shipping_address.php
      */
+<<<<<<< HEAD
     #[DataProvider('cartItemFixedProductTaxDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCartItemFixedProductTax(array $taxSettings, array $expectedFtps): void
     {
         $this->writeConfig($taxSettings);
@@ -127,7 +142,11 @@ class CartItemPricesWithFPTTest extends GraphQlAbstract
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function cartItemFixedProductTaxDataProvider(): array
+=======
+    public function cartItemFixedProductTaxDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

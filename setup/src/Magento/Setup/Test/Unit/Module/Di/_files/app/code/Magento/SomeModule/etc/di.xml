@@ -1,8 +1,13 @@
 <?xml version='1.0' encoding="utf-8" ?>
 <!--
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
@@ -13,6 +18,7 @@
     </virtualType>
     <type name="Magento\SomeModule\Model\Test">
         <arguments>
+<<<<<<< HEAD
             <!-- non-existing class proxy - inline -->
             <argument name="proxy" xsi:type="object">\Magento\SomeModule\Model\Element\Proxy</argument>
             <argument name="proxy2" xsi:type="object">Magento\SomeModule\Model\Element\Proxy</argument>
@@ -55,6 +61,11 @@
                 <!-- existing class proxy - inline -->
                 <item name="proxy7" xsi:type="object">\Magento\SomeModule\NestedElement\Proxy</item>
                 <item name="proxy8" xsi:type="object">Magento\SomeModule\NestedElement\Proxy</item>
+=======
+            <argument name="proxy" xsi:type="object">\Magento\SomeModule\Model\Element\Proxy</argument>
+            <argument name="array" xsi:type="array">
+                <item name="proxy" xsi:type="object">\Magento\SomeModule\Model\Nested\Element\Proxy</item>
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             </argument>
         </arguments>
     </type>

@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
@@ -10,6 +11,18 @@ use PHPUnit\Framework\Attributes\DataProvider;
 class SkinFilesTest extends \PHPUnit\Framework\TestCase
 {
     #[DataProvider('widgetPlaceholderImagesDataProvider')]
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Test\Integrity\Magento\Widget;
+
+class SkinFilesTest extends \PHPUnit\Framework\TestCase
+{
+    /**
+     * @dataProvider widgetPlaceholderImagesDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testWidgetPlaceholderImages($skinImage)
     {
         /** @var \Magento\Framework\View\Asset\Repository $assetRepo */
@@ -23,7 +36,11 @@ class SkinFilesTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function widgetPlaceholderImagesDataProvider()
+=======
+    public function widgetPlaceholderImagesDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $result = [];
         /** @var $model \Magento\Widget\Model\Widget */

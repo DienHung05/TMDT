@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Paypal\Controller;
 
@@ -13,7 +18,10 @@ use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
+<<<<<<< HEAD
 use PHPUnit\Framework\Constraint\LogicalOr;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoDataFixture Magento/Sales/_files/order.php
@@ -102,7 +110,12 @@ class PayflowTest extends \Magento\TestFramework\TestCase\AbstractController
         foreach ($this->getResponse()->getHeaders() as $header) {
             $headerConstraints[] = new \PHPUnit\Framework\Constraint\IsEqual($header->getFieldName());
         }
+<<<<<<< HEAD
         $constraint = LogicalOr::fromConstraints(...$headerConstraints);
+=======
+        $constraint = new \PHPUnit\Framework\Constraint\LogicalOr();
+        $constraint->setConstraints($headerConstraints);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertThat('P3P', $constraint);
     }
 

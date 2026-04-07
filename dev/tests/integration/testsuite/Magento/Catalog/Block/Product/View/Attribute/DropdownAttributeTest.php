@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Catalog\Block\Product\View\Attribute;
 
 use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class checks dropdown attribute displaying on frontend
@@ -42,6 +50,10 @@ class DropdownAttributeTest extends AbstractAttributeTest
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider attributeWithTagsProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoAppArea frontend
      * @magentoDataFixture Magento/Catalog/_files/dropdown_attribute_with_html.php
      * @magentoDataFixture Magento/Catalog/_files/second_product_simple.php
@@ -50,7 +62,10 @@ class DropdownAttributeTest extends AbstractAttributeTest
      * @param string $expectedAttributeValue
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('attributeWithTagsProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAttributeWithHtmlTags(
         bool $allowHtmlTags,
         string $attributeValue,
@@ -64,6 +79,7 @@ class DropdownAttributeTest extends AbstractAttributeTest
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function attributeWithTagsProvider(): array
     {
         return [
@@ -76,6 +92,20 @@ class DropdownAttributeTest extends AbstractAttributeTest
                 'allowHtmlTags' => false,
                 'attributeValue' => '<h2>Option 2</h2>',
                 'expectedAttributeValue' => '&lt;h2&gt;Option 2&lt;/h2&gt;',
+=======
+    public function attributeWithTagsProvider(): array
+    {
+        return [
+            'allow_html_tags' => [
+                'allow_html_tags' => true,
+                'attribute_value' => '<h2>Option 2</h2>',
+                'expected_attribute_value' => '<h2>Option 2</h2>',
+            ],
+            'disallow_html_tags' => [
+                'allow_html_tags' => false,
+                'attribute_value' => '<h2>Option 2</h2>',
+                'expected_attribute_value' => '&lt;h2&gt;Option 2&lt;/h2&gt;',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

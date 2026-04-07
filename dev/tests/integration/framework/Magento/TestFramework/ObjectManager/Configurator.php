@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\TestFramework\ObjectManager;
 
@@ -10,8 +15,13 @@ use Magento\Framework\Stdlib\CookieManagerInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\App\MutableScopeConfig;
 use Magento\Framework\App\ReinitableConfig;
+<<<<<<< HEAD
 use Magento\Backend\App\Config as BackendConfig;
 use Magento\TestFramework\ScopeSwitcherInterface;
+=======
+use Magento\Framework\App\Config as AppConfig;
+use Magento\Backend\App\Config as BackendConfig;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class which hold configurations (preferences, etc...) of integration test framework
@@ -36,6 +46,7 @@ class Configurator implements \Magento\Framework\ObjectManager\DynamicConfigInte
                 BackendConfig::class => \Magento\TestFramework\Backend\App\Config::class,
                 ReinitableConfig::class => \Magento\TestFramework\App\ReinitableConfig::class,
                 MutableScopeConfig::class => \Magento\TestFramework\App\MutableScopeConfig::class,
+<<<<<<< HEAD
                 ScopeSwitcherInterface::class => \Magento\TestFramework\Store\ScopeSwitcher::class,
             ],
             \Magento\TestFramework\Store\ScopeSwitcher::class => [
@@ -45,6 +56,8 @@ class Configurator implements \Magento\Framework\ObjectManager\DynamicConfigInte
                         'instance' => \Magento\Store\Model\StoreManagerInterface\Proxy::class
                     ]
                 ]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ]
         ];
     }

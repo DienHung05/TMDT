@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -24,7 +29,10 @@ use Magento\Quote\Model\ResourceModel\Quote\Item\CollectionFactory;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Quote\Model\GetQuoteByReservedOrderId;
 use Magento\TestFramework\TestCase\AbstractBackendController;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
@@ -107,13 +115,20 @@ class UpdateTest extends AbstractBackendController
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider updateWithQuoteProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @magentoDataFixture Magento/Customer/_files/quote.php
      * @param bool $hasQuoteItem
      * @param array $expectedUpdateResult
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('updateWithQuoteProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateWithQuote(bool $hasQuoteItem, array $expectedUpdateResult): void
     {
         $itemsCollection = $this->quoteItemCollectionFactory->create();
@@ -144,19 +159,33 @@ class UpdateTest extends AbstractBackendController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function updateWithQuoteProvider(): array
     {
         return [
             'with_quote_item_id' => [
                 'hasQuoteItem' => true,
                 'expectedUpdateResult' => [
+=======
+    public function updateWithQuoteProvider(): array
+    {
+        return [
+            'with_quote_item_id' => [
+                'has_quote_item' => true,
+                'expected_update_result' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'ok' => true,
                     'js_var_name' => 'iFrameResponse',
                 ],
             ],
             'without_quote_item_id' => [
+<<<<<<< HEAD
                 'hasQuoteItem' => false,
                 'expectedUpdateResult' => [
+=======
+                'has_quote_item' => false,
+                'expected_update_result' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'error' => true,
                     'message' => (string)__('The quote items are incorrect. Verify the quote items and try again.'),
                     'js_var_name' => 'iFrameResponse',
@@ -210,11 +239,18 @@ class UpdateTest extends AbstractBackendController
      *
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @magentoDataFixture Magento/Checkout/_files/quote_with_bundle_product.php
+<<<<<<< HEAD
+=======
+     * @dataProvider bundleOptionQuantityProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $quantity
      * @param string|null $message
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('bundleOptionQuantityProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateBundleOptionQuantity(string $quantity, ?string $message): void
     {
         $productRepository = $this->_objectManager->get(ProductRepositoryInterface::class);
@@ -258,7 +294,11 @@ class UpdateTest extends AbstractBackendController
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function bundleOptionQuantityProvider(): array
+=======
+    public function bundleOptionQuantityProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Quantity, less than allowed in the Shopping Cart' => [
@@ -271,7 +311,11 @@ class UpdateTest extends AbstractBackendController
             ],
             'Quantity, greater than available' => [
                 '1000',
+<<<<<<< HEAD
                 'Not enough items for sale',
+=======
+                'The requested qty is not available',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             'Quantity, greater than allowed in the Shopping Cart' => [
                 '100000',

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -9,7 +14,11 @@ namespace Magento\Setup\Test\Unit\Module\I18n\Parser\Adapter\Php;
 
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use Magento\Setup\Module\I18n\Parser\Adapter\Php\Tokenizer;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\RequiresPhp;
+=======
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -61,9 +70,15 @@ class TokenizerTest extends TestCase
     /**
      * Test getting next Real token for PHP > 8, where namespaced names are treated as single token.
      *
+<<<<<<< HEAD
      * @return void
      */
     #[RequiresPhp('>=8.0')]
+=======
+     * @requires PHP >= 8.0
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetNextRealTokenWhenNamespaceIsSingleToken(): void
     {
         $this->parseFile();
@@ -77,10 +92,16 @@ class TokenizerTest extends TestCase
 
     /**
      * @covers \Magento\Setup\Module\I18n\Parser\Adapter\Php\Tokenizer::getNextRealToken
+<<<<<<< HEAD
      * @return void
      */
     #[RequiresPhp('<8.0')]
     public function testGetNextRealToken(): void
+=======
+     * @requires PHP < 8.0
+     */
+    public function testGetNextRealToken()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $this->parseFile();
         $this->assertEquals('new', $this->tokenizer->getNextRealToken()->getValue());
@@ -98,6 +119,7 @@ class TokenizerTest extends TestCase
 
     /**
      * @covers \Magento\Setup\Module\I18n\Parser\Adapter\Php\Tokenizer::isEndOfLoop
+<<<<<<< HEAD
      * @return void
      */
     #[RequiresPhp('<8.0')]
@@ -134,6 +156,19 @@ class TokenizerTest extends TestCase
             $this->tokenizer->getNextRealToken();
         }
         
+=======
+     * @requires PHP < 8.0
+     */
+    public function testIsEndOfLoop()
+    {
+        $this->parseFile();
+        //We have 27 total tokens in objectsCode.php file (excluding whitespaces)
+        //So the isEndOfLoop function should return true after we pick 28th non-existent token
+        for ($i = 0; $i < 28; $i++) {
+            $this->assertFalse($this->tokenizer->isEndOfLoop());
+            $this->tokenizer->getNextRealToken();
+        }
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertTrue($this->tokenizer->isEndOfLoop());
     }
 

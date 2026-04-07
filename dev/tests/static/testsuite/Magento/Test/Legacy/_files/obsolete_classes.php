@@ -1,13 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2011 Adobe
  * All Rights Reserved.
  *
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  * Obsolete classes
  *
  * Format: array(<class_name>[, <replacement>])
  *
  * @codingStandardsIgnoreFile
+<<<<<<< HEAD
+=======
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 return [
     ['Mage_Admin_Helper_Data', 'Magento\Backend\Helper\Data'],
@@ -2845,7 +2854,11 @@ return [
     ['Magento\Framework\Stdlib\CookieManager', 'Magento\Framework\Stdlib\CookieManagerInterface'],
     ['Magento\Framework\Interception\PluginList', 'Magento\Framework\Interception\PluginListInterface'],
     ['Magento\Framework\Interception\Config', 'Magento\Framework\Interception\ConfigInterface'],
+<<<<<<< HEAD
     ['Magento\Framework\Interception\Chain'],
+=======
+    ['Magento\Framework\Interception\Chain', 'Magento\Framework\Interception\ChainInterface'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ['Magento\Framework\Interception\Definition', 'Magento\Framework\Interception\DefinitionInterface'],
     ['Magento\Framework\ObjectManager\Factory', 'Magento\Framework\ObjectManager\FactoryInterface'],
     ['Magento\Framework\ObjectManager\Config', 'Magento\Framework\ObjectManager\ConfigInterface'],
@@ -4245,9 +4258,12 @@ return [
     ['Zend_Feed', 'Laminas\Feed'],
     ['Zend_Uri', 'Laminas\Uri\Uri'],
     ['Zend_Mime', 'Magento\Framework\HTTP\Mime'],
+<<<<<<< HEAD
     ['Zend_Mail'],
     ['Zend_Json'],
     ['Zend_Currency', 'Magento\Framework\Currency'],
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ['Magento\Framework\Encryption\Crypt', 'Magento\Framework\Encryption\EncryptionAdapterInterface'],
     ['Magento\Wishlist\Setup\Patch\Schema\AddProductIdConstraint'],
     ['Magento\Elasticsearch\Block\Adminhtml\System\Config\TestConnection'],
@@ -4256,10 +4272,17 @@ return [
     ['Magento\Elasticsearch\Model\Adapter\FieldMapper\ProductFieldMapper'],
     ['Magento\Elasticsearch\Model\Client\Elasticsearch'],
     ['Magento\Elasticsearch\SearchAdapter\Aggregation\Interval'],
+<<<<<<< HEAD
     ['Magento\Elasticsearch\ElasticAdapter\Model\Adapter\FieldType'],
     ['Magento\Elasticsearch\Model\Adapter\DataMapperInterface'],
     ['Magento\Elasticsearch\ElasticAdapter\Model\Adapter\DataMapper\ProductDataMapperProxy'],
     ['Magento\Elasticsearch\ElasticAdapter\Model\Adapter\DataMapper\ProductDataMapper'],
+=======
+    ['Magento\Elasticsearch\Elasticsearch5\Model\Adapter\FieldType'],
+    ['Magento\Elasticsearch\Model\Adapter\DataMapperInterface'],
+    ['Magento\Elasticsearch\Elasticsearch5\Model\Adapter\DataMapper\ProductDataMapperProxy'],
+    ['Magento\Elasticsearch\Elasticsearch5\Model\Adapter\DataMapper\ProductDataMapper'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ['Magento\Elasticsearch\Model\Adapter\DataMapper\DataMapperResolver'],
     ['Magento\Elasticsearch\Model\Adapter\Container\Attribute'],
     ['PHPUnit_Framework_MockObject_MockObject', 'PHPUnit\Framework\MockObject\MockObject'],
@@ -4328,8 +4351,12 @@ return [
     [
         'Magento\Elasticsearch\Test\Unit\SearchAdapter\Query\Builder\MatchTest',
         'Magento\Elasticsearch\Test\Unit\SearchAdapter\Query\Builder\MatchQueryTest'
+<<<<<<< HEAD
     ],
     ['Magento\Elasticsearch\Test\Unit\Model\DataProvider\Base\SuggestionsTest'],
     ['Zend_Measure_Length', 'Magento\Framework\Measure\Length'],
     ['Zend_Measure_Weight', 'Magento\Framework\Measure\Weight'],
+=======
+    ]
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 ];

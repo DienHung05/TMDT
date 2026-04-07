@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\TestFramework\Event;
@@ -26,6 +31,7 @@ class Magento implements ObserverInterface
     protected $_eventManager;
 
     /**
+<<<<<<< HEAD
      * @var $_eventObject
      */
     protected static $_eventObject;
@@ -70,16 +76,23 @@ class Magento implements ObserverInterface
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Assign default event manager instance
      *
      * @param \Magento\TestFramework\EventManager $eventManager
      */
+<<<<<<< HEAD
     public static function setDefaultEventManager(?\Magento\TestFramework\EventManager $eventManager = null)
+=======
+    public static function setDefaultEventManager(\Magento\TestFramework\EventManager $eventManager = null)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         self::$_defaultEventManager = $eventManager;
     }
 
     /**
+<<<<<<< HEAD
      * Get Default Event Manager
      */
     public static function getDefaultEventManager()
@@ -88,6 +101,8 @@ class Magento implements ObserverInterface
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Constructor
      *
      * @param \Magento\TestFramework\EventManager $eventManager

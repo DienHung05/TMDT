@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -16,7 +21,10 @@ use Magento\Quote\Api\CartManagementInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Quote\Model\GetQuoteByReservedOrderId;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 class QuoteManagementWithInventoryCheckDisabledTest extends TestCase
@@ -63,8 +71,13 @@ class QuoteManagementWithInventoryCheckDisabledTest extends TestCase
      * @return void
      * @magentoDataFixture Magento/Sales/_files/quote_with_purchase_order.php
      * @magentoConfigFixture cataloginventory/options/enable_inventory_check 0
+<<<<<<< HEAD
      */
     #[DataProvider('getQtyAndStockStatusProvider')]
+=======
+     * @dataProvider getQtyAndStockStatusProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPlaceOrderWithDisabledInventoryCheck(int $qty, int $stockStatus): void
     {
         $quote = $this->getQuoteByReservedOrderId->execute('test_order_1');
@@ -91,7 +104,11 @@ class QuoteManagementWithInventoryCheckDisabledTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getQtyAndStockStatusProvider(): array
+=======
+    public function getQtyAndStockStatusProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [0, 0],

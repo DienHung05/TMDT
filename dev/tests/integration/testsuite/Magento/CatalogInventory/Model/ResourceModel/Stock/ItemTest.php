@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -20,7 +25,10 @@ use Magento\Framework\ObjectManagerInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -73,6 +81,10 @@ class ItemTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider updateSetOutOfStockDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/product_simple_duplicated.php
      * @magentoDataFixture Magento/Catalog/_files/product_simple_backorders_no.php
      * @magentoConfigFixture current_store cataloginventory/item_options/min_qty 105
@@ -82,7 +94,10 @@ class ItemTest extends TestCase
      * @param array $expectedStockItems
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('updateSetOutOfStockDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateSetOutOfStock(int $backorders, array $expectedStockItems): void
     {
         $this->stockIndexerProcessor->reindexAll();
@@ -99,12 +114,20 @@ class ItemTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function updateSetOutOfStockDataProvider(): array
+=======
+    public function updateSetOutOfStockDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'backorders_no' => [
                 'backorders' => Stock::BACKORDERS_NO,
+<<<<<<< HEAD
                 'expectedStockItems' => [
+=======
+                'expected_stock_items' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple-1' => [
                         'is_in_stock' => Stock::STOCK_OUT_OF_STOCK,
                         'stock_status_changed_auto' => 1,
@@ -117,7 +140,11 @@ class ItemTest extends TestCase
             ],
             'backorders_yes' => [
                 'backorders' => Stock::BACKORDERS_YES_NONOTIFY,
+<<<<<<< HEAD
                 'expectedStockItems' => [
+=======
+                'expected_stock_items' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple-1' => [
                         'is_in_stock' => Stock::STOCK_IN_STOCK,
                         'stock_status_changed_auto' => 0,
@@ -132,6 +159,10 @@ class ItemTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider updateUpdateSetInStockDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/out_of_stock_product_with_category.php
      * @magentoDataFixture Magento/Catalog/_files/product_simple_out_of_stock.php
      * @magentoConfigFixture current_store cataloginventory/item_options/min_qty 50
@@ -140,7 +171,10 @@ class ItemTest extends TestCase
      * @param array $expectedStockItems
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('updateUpdateSetInStockDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateSetInStock(int $manageStock, array $expectedStockItems): void
     {
         $this->updateProductsStockItem([
@@ -169,12 +203,21 @@ class ItemTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function updateUpdateSetInStockDataProvider(): array
     {
         return [
             'manage_stock_yes' => [
                 'manageStock' => 1,
                 'expectedStockItems' => [
+=======
+    public function updateUpdateSetInStockDataProvider(): array
+    {
+        return [
+            'manage_stock_yes' => [
+                'manage_stock' => 1,
+                'expected_stock_items' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'out-of-stock-product' => [
                         'is_in_stock' => Stock::STOCK_IN_STOCK,
                     ],
@@ -184,8 +227,13 @@ class ItemTest extends TestCase
                 ],
             ],
             'manage_stock_no' => [
+<<<<<<< HEAD
                 'manageStock' => 0,
                 'expectedStockItems' => [
+=======
+                'manage_stock' => 0,
+                'expected_stock_items' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'out-of-stock-product' => [
                         'is_in_stock' => Stock::STOCK_OUT_OF_STOCK,
                     ],
@@ -198,12 +246,19 @@ class ItemTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider updateLowStockDateDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/product_simple_with_url_key.php
      * @param int $manageStock
      * @param array $expectedLowStockDate
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('updateLowStockDateDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testLowStockDate(int $manageStock, array $expectedLowStockDate): void
     {
         $this->updateProductsStockItem([
@@ -223,12 +278,21 @@ class ItemTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function updateLowStockDateDataProvider(): array
     {
         return [
             'manage_stock_yes' => [
                 'manageStock' => 1,
                 'expectedLowStockDate' => [
+=======
+    public function updateLowStockDateDataProvider(): array
+    {
+        return [
+            'manage_stock_yes' => [
+                'manage_stock' => 1,
+                'expected_low_stock_date' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple1' => [
                         'is_low_stock_date_null' => false,
                     ],
@@ -238,8 +302,13 @@ class ItemTest extends TestCase
                 ],
             ],
             'manage_stock_no' => [
+<<<<<<< HEAD
                 'manageStock' => 0,
                 'expectedLowStockDate' => [
+=======
+                'manage_stock' => 0,
+                'expected_low_stock_date' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'simple1' => [
                         'is_low_stock_date_null' => true,
                     ],

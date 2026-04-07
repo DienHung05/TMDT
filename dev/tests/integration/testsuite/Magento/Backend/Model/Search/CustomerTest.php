@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Backend\Model\Search;
 
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea adminhtml
@@ -17,8 +25,13 @@ use PHPUnit\Framework\Attributes\DataProvider;
 class CustomerTest extends \PHPUnit\Framework\TestCase
 {
     /**
+<<<<<<< HEAD
      */
     #[DataProvider('loadDataProvider')]
+=======
+     * @dataProvider loadDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testLoad($query, $limit, $start, $expectedResult)
     {
         /** Preconditions */

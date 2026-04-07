@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Webapi\Routing;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Webapi\Routing;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class ServiceVersionV2Test extends \Magento\Webapi\Routing\BaseService
 {
     /**
@@ -77,8 +85,14 @@ class ServiceVersionV2Test extends \Magento\Webapi\Routing\BaseService
      * Test fetching items when filters are applied
      *
      * @param string[] $filters
+<<<<<<< HEAD
      * @param array $expectedResult */
     #[DataProvider('itemsWithFiltersDataProvider')]
+=======
+     * @param array $expectedResult
+     * @dataProvider itemsWithFiltersDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testItemsWithFilters($filters, $expectedResult)
     {
         $restFilter = '';
@@ -106,7 +120,11 @@ class ServiceVersionV2Test extends \Magento\Webapi\Routing\BaseService
         $this->assertEquals($expectedResult, $item, 'Filtration does not seem to work correctly.');
     }
 
+<<<<<<< HEAD
     public static function itemsWithFiltersDataProvider()
+=======
+    public function itemsWithFiltersDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $firstItem = ['id' => 1, 'name' => 'testProduct1', 'price' => 1];
         $secondItem = ['id' => 2, 'name' => 'testProduct2', 'price' => 2];

@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
  */
@@ -12,6 +13,17 @@ class MultipleTopicsPerQueueTest extends QueueTestCaseAbstract
 {
     /**
      * @var string[]
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Framework\MessageQueue\UseCase;
+
+class MultipleTopicsPerQueueTest extends QueueTestCaseAbstract
+{
+    /**
+     * {@inheritdoc}
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     protected $consumers = [
         'queue.for.multiple.topics.test.a',
@@ -19,6 +31,7 @@ class MultipleTopicsPerQueueTest extends QueueTestCaseAbstract
     ];
 
     /**
+<<<<<<< HEAD
      * @var string
      */
     private $connectionType;
@@ -39,6 +52,8 @@ class MultipleTopicsPerQueueTest extends QueueTestCaseAbstract
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Verify that Queue Framework supports multiple topics per queue.
      *
      * Current test is not test of Web API framework itself,
@@ -46,11 +61,14 @@ class MultipleTopicsPerQueueTest extends QueueTestCaseAbstract
      */
     public function testSynchronousRpcCommunication()
     {
+<<<<<<< HEAD
         if ($this->connectionType === 'stomp') {
             $this->markTestSkipped('AMQP test skipped because STOMP connection is available.
             This test is AMQP-specific.');
         }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         foreach (['multi.topic.queue.topic.a', 'multi.topic.queue.topic.b'] as $topic) {
             $input = "Input value for topic '{$topic}'";
             $response = $this->publisher->publish($topic, $input);

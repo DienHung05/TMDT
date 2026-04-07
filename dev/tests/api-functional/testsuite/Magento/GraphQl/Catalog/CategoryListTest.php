@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -12,7 +17,10 @@ use Magento\Framework\ObjectManagerInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test CategoryList GraphQl query
@@ -31,12 +39,19 @@ class CategoryListTest extends GraphQlAbstract
 
     /**
      * @magentoApiDataFixture Magento/Catalog/_files/categories.php
+<<<<<<< HEAD
+=======
+     * @dataProvider filterSingleCategoryDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $field
      * @param string $condition
      * @param string $value
      * @param array $expectedResult
      */
+<<<<<<< HEAD
     #[DataProvider('filterSingleCategoryDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testFilterSingleCategoryByField($field, $condition, $value, $expectedResult)
     {
         $query = <<<QUERY
@@ -61,12 +76,19 @@ QUERY;
 
     /**
      * @magentoApiDataFixture Magento/Catalog/_files/categories.php
+<<<<<<< HEAD
+=======
+     * @dataProvider filterMultipleCategoriesDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param $field
      * @param $condition
      * @param $value
      * @param $expectedResult
      */
+<<<<<<< HEAD
     #[DataProvider('filterMultipleCategoriesDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testFilterMultipleCategoriesByField($field, $condition, $value, $expectedResult)
     {
         $query = <<<QUERY
@@ -539,7 +561,11 @@ QUERY;
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function filterSingleCategoryDataProvider(): array
+=======
+    public function filterSingleCategoryDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -608,7 +634,11 @@ QUERY;
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      * @return array
      */
+<<<<<<< HEAD
     public static function filterMultipleCategoriesDataProvider(): array
+=======
+    public function filterMultipleCategoriesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return[
             //Filter by multiple IDs
@@ -920,6 +950,7 @@ QUERY;
         $this->assertArrayNotHasKey('errors', $result);
         $this->assertCount(1, $result['categoryList']);
     }
+<<<<<<< HEAD
 
     /**
      * @magentoApiDataFixture Magento/Catalog/_files/categories.php
@@ -1034,4 +1065,6 @@ QUERY;
         $this->assertEquals('Movable', $baseCategory['name']);
         $this->assertCount(0, $baseCategory['children']);
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

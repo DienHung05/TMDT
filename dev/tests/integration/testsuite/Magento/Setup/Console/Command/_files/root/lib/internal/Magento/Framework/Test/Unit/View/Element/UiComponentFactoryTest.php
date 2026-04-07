@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Framework\Test\Unit\View\Element;
 
@@ -34,6 +39,7 @@ class UiComponentFactoryTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp(): void
     {
+<<<<<<< HEAD
         $this->objectManagerMock = $this->createMock(\Magento\Framework\ObjectManagerInterface::class);
         $this->interpreterMock = $this->createMock(\Magento\Framework\Data\Argument\InterpreterInterface::class);
         $this->contextFactoryMock = $this
@@ -43,6 +49,19 @@ class UiComponentFactoryTest extends \PHPUnit\Framework\TestCase
             ->getMock();
         $this->dataInterfaceFactoryMock = $this->getMockBuilder(\Magento\Framework\Config\DataInterfaceFactory::class)
             ->onlyMethods(['create'])
+=======
+        $this->objectManagerMock = $this->getMockBuilder(\Magento\Framework\ObjectManagerInterface::class)
+            ->getMockForAbstractClass();
+        $this->interpreterMock = $this->getMockBuilder(\Magento\Framework\Data\Argument\InterpreterInterface::class)
+            ->getMockForAbstractClass();
+        $this->contextFactoryMock = $this
+            ->getMockBuilder(\Magento\Framework\View\Element\UiComponent\ContextFactory::class)
+            ->setMethods(['create'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->dataInterfaceFactoryMock = $this->getMockBuilder(\Magento\Framework\Config\DataInterfaceFactory::class)
+            ->setMethods(['create'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->disableOriginalConstructor()
             ->getMock();
         $this->dataMock = $this->createMock(\Magento\Framework\Config\DataInterface::class);

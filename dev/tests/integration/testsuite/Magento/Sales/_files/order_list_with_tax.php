@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -60,12 +65,21 @@ foreach ($orderList as $order) {
     $salesOrderTaxItem = $salesOrderFactory->create();
     $salesOrderTaxItem->setTaxId($tax->getId())
         ->setTaxPercent(8.37)
+<<<<<<< HEAD
         ->setAmount($amount)
+=======
+        ->setTaxAmount($amount)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ->setBaseAmount($amount)
         ->setRealAmount($amount)
         ->setRealBaseAmount($amount)
         ->setAppliedTaxes([$tax])
+<<<<<<< HEAD
         ->setTaxableItemType('shipping');
+=======
+        ->setTaxableItemType('shipping')
+        ->setItemId($salesOrderItem->getId());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     $taxItemCollection = $objectManager->create(\Magento\Sales\Model\ResourceModel\Order\Tax\Item::class);
     $taxItemCollection->save($salesOrderTaxItem);

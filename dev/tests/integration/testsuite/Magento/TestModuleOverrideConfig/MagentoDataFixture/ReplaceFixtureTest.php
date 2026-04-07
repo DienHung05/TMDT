@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -9,7 +14,10 @@ namespace Magento\TestModuleOverrideConfig\MagentoDataFixture;
 
 use Magento\TestModuleOverrideConfig\AbstractOverridesTest;
 use Magento\TestModuleOverrideConfig\Model\FixtureCallStorage;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class check that magentoDataFixtures can be replaced using override config
@@ -47,12 +55,20 @@ class ReplaceFixtureTest extends AbstractOverridesTest
     /**
      * Checks that fixture can be replaced in method and data set nodes
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider replacedFixturesProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/TestModuleOverrideConfig/_files/fixture1_first_module.php
      *
      * @param string $fixture
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('replacedFixturesProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testReplaceFixturesForMethod(string $fixture): void
     {
         $this->assertEquals(0, $this->fixtureCallStorage->getFixturesCount('fixture1_first_module.php'));
@@ -62,7 +78,11 @@ class ReplaceFixtureTest extends AbstractOverridesTest
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function replacedFixturesProvider(): array
+=======
+    public function replacedFixturesProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'first_data_set' => [
@@ -77,12 +97,20 @@ class ReplaceFixtureTest extends AbstractOverridesTest
     /**
      * Checks that replace config from last loaded file will be applied
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider dataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/TestModuleOverrideConfig/_files/fixture1_first_module.php
      *
      * @param string $fixture
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('dataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testReplaceFixtureViaThirdModule(string $fixture): void
     {
         $this->assertEquals(0, $this->fixtureCallStorage->getFixturesCount('fixture1_first_module.php'));
@@ -92,7 +120,11 @@ class ReplaceFixtureTest extends AbstractOverridesTest
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function dataProvider(): array
+=======
+    public function dataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'first_data_set' => [

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -49,12 +54,24 @@ class Resolver implements ResolverInterface
     private $currentFixtureType = null;
 
     /**
+<<<<<<< HEAD
+=======
+     * @var DataFixtureSetup
+     */
+    private $dataFixtureSetup;
+
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param ConfigInterface $config
      */
     public function __construct(ConfigInterface $config)
     {
         $this->config = $config;
         $this->objectManager = Bootstrap::getObjectManager();
+<<<<<<< HEAD
+=======
+        $this->dataFixtureSetup = $this->objectManager->create(DataFixtureSetup::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -116,8 +133,12 @@ class Resolver implements ResolverInterface
         }
         /** @var DataFixtureApplier $dataFixtureApplier */
         $dataFixtureApplier = $this->getApplier($this->getCurrentTest(), $this->currentFixtureType);
+<<<<<<< HEAD
         $dataFixtureSetup = $this->objectManager->create(DataFixtureSetup::class);
         $dataFixtureSetup->apply(['factory' => $dataFixtureApplier->replace($path)]);
+=======
+        $this->dataFixtureSetup->apply(['factory' => $dataFixtureApplier->replace($path)]);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -10,7 +15,10 @@ namespace Magento\Setup\Test\Unit\Module\Dependency\Report\Framework;
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use Magento\Setup\Module\Dependency\Report\Framework\Builder;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class BuilderTest extends TestCase
 {
@@ -29,8 +37,13 @@ class BuilderTest extends TestCase
 
     /**
      * @param array $options
+<<<<<<< HEAD
      */
     #[DataProvider('dataProviderWrongOptionConfigFiles')]
+=======
+     * @dataProvider dataProviderWrongOptionConfigFiles
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testBuildWithWrongOptionConfigFiles($options)
     {
         $this->expectException('InvalidArgumentException');
@@ -41,7 +54,11 @@ class BuilderTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function dataProviderWrongOptionConfigFiles()
+=======
+    public function dataProviderWrongOptionConfigFiles()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

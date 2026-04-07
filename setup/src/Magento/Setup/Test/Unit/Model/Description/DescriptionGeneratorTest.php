@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -59,6 +64,7 @@ class DescriptionGeneratorTest extends TestCase
     {
         $this->descriptionParagraphGeneratorMock =
             $this->createMock(DescriptionParagraphGenerator::class);
+<<<<<<< HEAD
         $callCount = 0;
         $this->descriptionParagraphGeneratorMock
             ->expects($this->exactly(3))
@@ -66,6 +72,16 @@ class DescriptionGeneratorTest extends TestCase
             ->willReturnCallback(function() use (&$callCount) {
                 return $this->paragraphs[$callCount++];
             });
+=======
+        $this->descriptionParagraphGeneratorMock
+            ->expects($this->exactly(3))
+            ->method('generate')
+            ->will($this->onConsecutiveCalls(
+                $this->paragraphs[0],
+                $this->paragraphs[1],
+                $this->paragraphs[2]
+            ));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->mixinManagerMock = $this->createMock(MixinManager::class);
     }

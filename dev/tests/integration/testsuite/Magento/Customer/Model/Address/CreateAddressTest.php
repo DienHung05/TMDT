@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -22,7 +27,10 @@ use Magento\Framework\Exception\InputException;
 use Magento\TestFramework\Directory\Model\GetRegionIdByName;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface as PsrLogger;
 
@@ -133,12 +141,20 @@ class CreateAddressTest extends TestCase
      *
      * @magentoDataFixture Magento/Customer/_files/customer_no_address.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider createDefaultAddressesDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $addressData
      * @param bool $isShippingDefault
      * @param bool $isBillingDefault
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('createDefaultAddressesDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateDefaultAddress(
         array $addressData,
         bool $isShippingDefault,
@@ -165,7 +181,11 @@ class CreateAddressTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function createDefaultAddressesDataProvider(): array
+=======
+    public function createDefaultAddressesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'any_addresses_are_default' => [self::STATIC_CUSTOMER_ADDRESS_DATA, false, false],
@@ -180,11 +200,19 @@ class CreateAddressTest extends TestCase
      *
      * @magentoDataFixture Magento/Customer/_files/customer_no_address.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider createAddressesDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $addressData
      * @param array $expectedData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('createAddressesDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddressCreatedWithProperData(array $addressData, array $expectedData): void
     {
         if (isset($expectedData['custom_region_name'])) {
@@ -207,7 +235,11 @@ class CreateAddressTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function createAddressesDataProvider(): array
+=======
+    public function createAddressesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'required_fields_valid_data' => [
@@ -279,11 +311,19 @@ class CreateAddressTest extends TestCase
      *
      * @magentoDataFixture Magento/Customer/_files/customer_no_address.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider createWrongAddressesDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $addressData
      * @param \Exception $expectException
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('createWrongAddressesDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExceptionThrownDuringCreateAddress(array $addressData, \Exception $expectException): void
     {
         $customer = $this->customerRepository->get('customer5@example.com');
@@ -296,7 +336,11 @@ class CreateAddressTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function createWrongAddressesDataProvider(): array
+=======
+    public function createWrongAddressesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'required_field_empty_telephone' => [
@@ -502,7 +546,11 @@ class CreateAddressTest extends TestCase
                     $this->objectManager->get(PsrLogger::class)
                 ]
             )
+<<<<<<< HEAD
             ->onlyMethods(['checkVatNumber'])
+=======
+            ->setMethods(['checkVatNumber'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
         $customerVat->method('checkVatNumber')->willReturn($gatewayResponse);
         $this->objectManager->removeSharedInstance(Vat::class);

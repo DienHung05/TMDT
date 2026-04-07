@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2012 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Test\Annotation;
 
@@ -26,9 +31,15 @@ class DbIsolationTest extends \PHPUnit\Framework\TestCase
     {
         /** @var ObjectManagerInterface|MockObject $objectManager */
         $objectManager = $this->getMockBuilder(ObjectManagerInterface::class)
+<<<<<<< HEAD
             ->onlyMethods(['get', 'create', 'configure'])
             ->disableOriginalConstructor()
             ->getMock();
+=======
+            ->onlyMethods(['get', 'create'])
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $sharedInstances = [
             DbIsolation::class => $this->createConfiguredMock(DbIsolation::class, ['parse' => []])

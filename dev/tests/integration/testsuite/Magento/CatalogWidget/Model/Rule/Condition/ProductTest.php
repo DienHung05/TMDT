@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\CatalogWidget\Model\Rule\Condition;
 
 use Magento\Catalog\Api\Data\ProductInterface;
+<<<<<<< HEAD
 use Magento\Catalog\Model\ResourceModel\Product as ProductResource;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class ProductTest extends \PHPUnit\Framework\TestCase
 {
@@ -44,7 +52,11 @@ class ProductTest extends \PHPUnit\Framework\TestCase
         $this->assertArrayHasKey(ProductInterface::SKU, $options);
         $this->assertArrayHasKey(ProductInterface::ATTRIBUTE_SET_ID, $options);
         $this->assertArrayHasKey('category_ids', $options);
+<<<<<<< HEAD
         $this->assertArrayHasKey(ProductInterface::STATUS, $options);
+=======
+        $this->assertArrayNotHasKey(ProductInterface::STATUS, $options);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         foreach ($options as $code => $label) {
             $this->assertNotEmpty($label);
             $this->assertNotEmpty($code);
@@ -54,6 +66,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
     /**
      * @return void
      */
+<<<<<<< HEAD
     public function testLoadAttributeOptionsContainsTextAttributes()
     {
         $this->conditionProduct->loadAttributeOptions();
@@ -78,6 +91,8 @@ class ProductTest extends \PHPUnit\Framework\TestCase
     /**
      * @return void
      */
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddGlobalAttributeToCollection()
     {
         $collection = $this->objectManager->create(\Magento\Catalog\Model\ResourceModel\Product\Collection::class);
@@ -102,11 +117,19 @@ class ProductTest extends \PHPUnit\Framework\TestCase
         $this->conditionProduct->addToCollection($collection);
         $collectedAttributes = $this->conditionProduct->getRule()->getCollectedAttributes();
         $this->assertArrayHasKey('visibility', $collectedAttributes);
+<<<<<<< HEAD
         $this->assertEquals(0, $collection->getSize());
         $this->assertStringContainsString('visibility', (string)$this->conditionProduct->getMappedSqlField());
         $this->assertFalse($this->conditionProduct->hasValueParsed());
         $this->assertTrue($this->conditionProduct->hasValue());
         $this->assertEquals('4', $this->conditionProduct->getValue());
+=======
+        $query = (string)$collection->getSelect();
+        $this->assertStringNotContainsString('visibility', $query);
+        $this->assertEquals('', $this->conditionProduct->getMappedSqlField());
+        $this->assertFalse($this->conditionProduct->hasValueParsed());
+        $this->assertFalse($this->conditionProduct->hasValue());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -121,11 +144,17 @@ class ProductTest extends \PHPUnit\Framework\TestCase
         $this->conditionProduct->addToCollection($collection);
         $collectedAttributes = $this->conditionProduct->getRule()->getCollectedAttributes();
         $this->assertArrayHasKey('visibility', $collectedAttributes);
+<<<<<<< HEAD
         $this->assertEquals(1, $collection->getSize());
         $this->assertStringContainsString('visibility', (string)$this->conditionProduct->getMappedSqlField());
         $this->assertFalse($this->conditionProduct->hasValueParsed());
         $this->assertTrue($this->conditionProduct->hasValue());
         $this->assertEquals('4', $this->conditionProduct->getValue());
+=======
+        $query = (string)$collection->getSelect();
+        $this->assertStringNotContainsString('visibility', $query);
+        $this->assertEquals('e.entity_id', $this->conditionProduct->getMappedSqlField());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**

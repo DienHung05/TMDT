@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Integration\Model;
 
 use Magento\Framework\Exception\InputException;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Integration\Model\Oauth\Token as TokenModel;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\WebapiAbstract;
@@ -21,9 +29,15 @@ use Magento\Integration\Model\Oauth\Token\RequestLog\Config as TokenThrottlerCon
  */
 class AdminTokenServiceTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     public const SERVICE_NAME = "integrationAdminTokenServiceV1";
     public const SERVICE_VERSION = "V1";
     public const RESOURCE_PATH_ADMIN_TOKEN = "/V1/integration/admin/token";
+=======
+    const SERVICE_NAME = "integrationAdminTokenServiceV1";
+    const SERVICE_VERSION = "V1";
+    const RESOURCE_PATH_ADMIN_TOKEN = "/V1/integration/admin/token";
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var \Magento\Integration\Api\AdminTokenServiceInterface
@@ -86,7 +100,11 @@ class AdminTokenServiceTest extends WebapiAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function validationDataProvider()
+=======
+    public function validationDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Check for empty credentials' => ['', ''],
@@ -94,8 +112,15 @@ class AdminTokenServiceTest extends WebapiAbstract
         ];
     }
 
+<<<<<<< HEAD
     #[DataProvider('validationDataProvider')]
     public function testCreateAdminAccessTokenEmptyOrNullCredentials($username, $password)
+=======
+    /**
+     * @dataProvider validationDataProvider
+     */
+    public function testCreateAdminAccessTokenEmptyOrNullCredentials()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $noExceptionOccurred = false;
         try {
@@ -105,7 +130,11 @@ class AdminTokenServiceTest extends WebapiAbstract
                     'httpMethod' => \Magento\Framework\Webapi\Rest\Request::HTTP_METHOD_POST,
                 ],
             ];
+<<<<<<< HEAD
             $requestData = ['username' => $username, 'password' => $password];
+=======
+            $requestData = ['username' => '', 'password' => ''];
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $this->_webApiCall($serviceInfo, $requestData);
             $noExceptionOccurred = true;
         } catch (\Exception $exception) {

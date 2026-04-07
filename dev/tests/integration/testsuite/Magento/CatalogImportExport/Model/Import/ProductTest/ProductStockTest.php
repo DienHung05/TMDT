@@ -1,21 +1,32 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\CatalogImportExport\Model\Import\ProductTest;
 
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\CatalogImportExport\Model\Import\ProductTestBase;
 use Magento\CatalogInventory\Model\Stock;
 use Magento\CatalogInventory\Model\StockRegistry;
 use Magento\CatalogInventory\Model\StockRegistryStorage;
 use Magento\Framework\App\Filesystem\DirectoryList;
+<<<<<<< HEAD
 use Magento\ImportExport\Test\Fixture\CsvFile as CsvFileFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Integration test for \Magento\CatalogImportExport\Model\Import\Product class.
@@ -47,6 +58,7 @@ class ProductStockTest extends ProductTestBase
         $this->stockRegistry = $this->objectManager->get(StockRegistry::class);
     }
 
+<<<<<<< HEAD
     #[
         DataFixture(
             ProductFixture::class,
@@ -91,6 +103,8 @@ class ProductStockTest extends ProductTestBase
         $this->assertTrue($stockItem->getIsInStock());
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Test if stock item quantity properly saved after import
      *
@@ -202,6 +216,7 @@ class ProductStockTest extends ProductTestBase
      *
      * @magentoDataFixture mediaImportImageFixture
      * @magentoDataFixture Magento/Catalog/_files/product_simple.php
+<<<<<<< HEAD
      * @magentoDbIsolation disabled
      */
     public function testProductStockStatusShouldBeUpdated()
@@ -215,6 +230,17 @@ class ProductStockTest extends ProductTestBase
         $this->assertEquals(Stock::STOCK_OUT_OF_STOCK, $status->getStockStatus());
         $this->importDataForMediaTest('enable_product.csv');
         $this->stockRegistryStorage->clean();
+=======
+     */
+    public function testProductStockStatusShouldBeUpdated()
+    {
+        $status = $this->stockRegistry->getStockStatusBySku('simple');
+        $this->assertEquals(Stock::STOCK_IN_STOCK, $status->getStockStatus());
+        $this->importFile('disable_product.csv');
+        $status = $this->stockRegistry->getStockStatusBySku('simple');
+        $this->assertEquals(Stock::STOCK_OUT_OF_STOCK, $status->getStockStatus());
+        $this->importDataForMediaTest('enable_product.csv');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $status = $this->stockRegistry->getStockStatusBySku('simple');
         $this->assertEquals(Stock::STOCK_IN_STOCK, $status->getStockStatus());
     }
@@ -223,25 +249,41 @@ class ProductStockTest extends ProductTestBase
      * Test that product stock status is updated after import on schedule
      *
      * @magentoDataFixture mediaImportImageFixture
+<<<<<<< HEAD
      * @magentoDataFixture Magento/CatalogImportExport/_files/cataloginventory_stock_item_update_by_schedule.php
      * @magentoDataFixture Magento/Catalog/_files/product_simple.php
+=======
+     * @magentoDataFixture Magento/Catalog/_files/product_simple.php
+     * @magentoDataFixture Magento/CatalogImportExport/_files/cataloginventory_stock_item_update_by_schedule.php
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDbIsolation disabled
      */
     public function testProductStockStatusShouldBeUpdatedOnSchedule()
     {
+<<<<<<< HEAD
         $indexProcessor = $this->objectManager->create(\Magento\Indexer\Model\Processor::class);
         $indexProcessor->updateMview();
         $this->stockRegistryStorage->clean();
+=======
+        /** * @var $indexProcessor \Magento\Indexer\Model\Processor */
+        $indexProcessor = $this->objectManager->create(\Magento\Indexer\Model\Processor::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $status = $this->stockRegistry->getStockStatusBySku('simple');
         $this->assertEquals(Stock::STOCK_IN_STOCK, $status->getStockStatus());
         $this->importDataForMediaTest('disable_product.csv');
         $indexProcessor->updateMview();
+<<<<<<< HEAD
         $this->stockRegistryStorage->clean();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $status = $this->stockRegistry->getStockStatusBySku('simple');
         $this->assertEquals(Stock::STOCK_OUT_OF_STOCK, $status->getStockStatus());
         $this->importDataForMediaTest('enable_product.csv');
         $indexProcessor->updateMview();
+<<<<<<< HEAD
         $this->stockRegistryStorage->clean();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $status = $this->stockRegistry->getStockStatusBySku('simple');
         $this->assertEquals(Stock::STOCK_IN_STOCK, $status->getStockStatus());
     }

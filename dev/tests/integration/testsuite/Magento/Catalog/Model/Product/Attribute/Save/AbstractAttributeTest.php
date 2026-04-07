@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -15,7 +20,10 @@ use Magento\Eav\Model\Entity\Attribute\Exception;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Base class for text product attributes
@@ -47,10 +55,17 @@ abstract class AbstractAttributeTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param $productSku
      * @return void
      */
     #[DataProvider('productProvider')]
+=======
+     * @dataProvider productProvider
+     * @param $productSku
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveAttribute(string $productSku): void
     {
         $product = $this->setAttributeValueAndValidate($productSku, $this->getDefaultAttributeValue());
@@ -59,6 +74,7 @@ abstract class AbstractAttributeTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param string $productSku
      * @return void
      */
@@ -69,16 +85,35 @@ abstract class AbstractAttributeTest extends TestCase
         $messageFormat = 'The "%1" attribute value is empty. Set the attribute and try again.';
         $this->expectExceptionMessage(
             (string)__($messageFormat, $this->getAttribute()->getDefaultFrontendLabel())
+=======
+     * @dataProvider productProvider
+     * @param string $productSku
+     * @return void
+     */
+    public function testRequiredAttribute(string $productSku): void
+    {
+        $this->expectException(Exception::class);
+        $messageFormat = 'The "%s" attribute value is empty. Set the attribute and try again.';
+        $this->expectExceptionMessage(
+            (string)__(sprintf($messageFormat, $this->getAttribute()->getDefaultFrontendLabel()))
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
         $this->prepareAttribute(['is_required' => true]);
         $this->unsetAttributeValueAndValidate($productSku);
     }
 
     /**
+<<<<<<< HEAD
      * @param string $productSku
      * @return void
      */
     #[DataProvider('productProvider')]
+=======
+     * @dataProvider productProvider
+     * @param string $productSku
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDefaultValue(string $productSku): void
     {
         $this->prepareAttribute(['default_value' => $this->getDefaultAttributeValue()]);
@@ -88,10 +123,15 @@ abstract class AbstractAttributeTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider uniqueAttributeValueProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $firstSku
      * @param string $secondSku
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('uniqueAttributeValueProvider')]
     public function testUniqueAttribute(string $firstSku, string $secondSku): void
     {
@@ -99,6 +139,14 @@ abstract class AbstractAttributeTest extends TestCase
         $messageFormat = 'The value of the "%1" attribute isn\'t unique. Set a unique value and try again.';
         $this->expectExceptionMessage(
             (string)__($messageFormat, $this->getAttribute()->getDefaultFrontendLabel())
+=======
+    public function testUniqueAttribute(string $firstSku, string $secondSku): void
+    {
+        $this->expectException(Exception::class);
+        $messageFormat = 'The value of the "%s" attribute isn\'t unique. Set a unique value and try again.';
+        $this->expectExceptionMessage(
+            (string)__(sprintf($messageFormat, $this->getAttribute()->getDefaultFrontendLabel()))
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
         $this->prepareAttribute(['is_unique' => 1]);
         $product = $this->setAttributeValueAndValidate($firstSku, $this->getDefaultAttributeValue());
@@ -186,12 +234,20 @@ abstract class AbstractAttributeTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     abstract public static function productProvider(): array;
+=======
+    abstract public function productProvider(): array;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * Provider for unique attribute tests
      *
      * @return array
      */
+<<<<<<< HEAD
     abstract public static function uniqueAttributeValueProvider(): array;
+=======
+    abstract public function uniqueAttributeValueProvider(): array;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

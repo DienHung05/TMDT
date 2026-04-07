@@ -1,6 +1,11 @@
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /*jscs:disable jsDoc*/
@@ -20,18 +25,26 @@ define([
 
     var injector = new Squire(),
         rates = 'flatrate',
+<<<<<<< HEAD
         totals = {
             tax: 0.1,
             totals: 10
         },
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         mocks = {
             'Magento_Checkout/js/model/quote': {
                 shippingAddress: ko.observable(),
                 isVirtual: function () {},
                 billingAddress: ko.observable(),
+<<<<<<< HEAD
                 shippingMethod: ko.observable(),
                 setTotals: function () {},
                 getTotals: function () {}
+=======
+                shippingMethod: ko.observable()
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             },
             'Magento_Checkout/js/model/shipping-rate-processor/new-address': {
                 getRates: jasmine.createSpy()
@@ -41,14 +54,21 @@ define([
             },
             'Magento_Checkout/js/model/shipping-service': {
                 setShippingRates: function () {},
+<<<<<<< HEAD
                 isLoading: ko.observable(),
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 getShippingRates: function () {
                     return ko.observable(rates);
                 }
             },
             'Magento_Checkout/js/model/cart/cache': {
                 isChanged: function () {},
+<<<<<<< HEAD
                 get: jasmine.createSpy().and.returnValues(rates, rates, totals),
+=======
+                get: jasmine.createSpy().and.returnValue(rates),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 set: jasmine.createSpy()
             },
             'Magento_Customer/js/customer-data': {
@@ -94,10 +114,15 @@ define([
 
         it('test subscribe when shipping address wasn\'t changed for not virtual quote', function () {
             spyOn(mocks['Magento_Checkout/js/model/quote'], 'isVirtual').and.returnValue(false);
+<<<<<<< HEAD
             spyOn(mocks['Magento_Checkout/js/model/quote'], 'getTotals').and.returnValue(false);
             spyOn(mocks['Magento_Checkout/js/model/cart/cache'], 'isChanged').and.returnValues(false, false);
             spyOn(mocks['Magento_Checkout/js/model/shipping-service'], 'setShippingRates');
             spyOn(mocks['Magento_Checkout/js/model/quote'], 'setTotals');
+=======
+            spyOn(mocks['Magento_Checkout/js/model/cart/cache'], 'isChanged').and.returnValue(false);
+            spyOn(mocks['Magento_Checkout/js/model/shipping-service'], 'setShippingRates');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             mocks['Magento_Checkout/js/model/quote'].shippingAddress({
                 id: 2,
                 getType: function () {
@@ -105,11 +130,18 @@ define([
                 }
             });
             expect(mocks['Magento_Checkout/js/model/shipping-service'].setShippingRates).toHaveBeenCalledWith(rates);
+<<<<<<< HEAD
             expect(mocks['Magento_Checkout/js/model/quote'].setTotals).toHaveBeenCalledWith(totals);
             expect(mocks['Magento_Checkout/js/model/cart/totals-processor/default'].estimateTotals)
                 .not.toHaveBeenCalled();
             expect(mocks['Magento_Checkout/js/model/shipping-rate-processor/new-address'].getRates)
                 .toHaveBeenCalled();
+=======
+            expect(mocks['Magento_Checkout/js/model/cart/totals-processor/default'].estimateTotals).not
+                .toHaveBeenCalled();
+            expect(mocks['Magento_Checkout/js/model/shipping-rate-processor/new-address'].getRates)
+                .not.toHaveBeenCalled();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         });
 
         it('test subscribe when shipping address was changed for virtual quote', function () {
@@ -123,7 +155,11 @@ define([
             expect(mocks['Magento_Checkout/js/model/cart/totals-processor/default'].estimateTotals)
                 .toHaveBeenCalled();
             expect(mocks['Magento_Checkout/js/model/shipping-rate-processor/new-address'].getRates)
+<<<<<<< HEAD
                 .toHaveBeenCalled();
+=======
+                .not.toHaveBeenCalled();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         });
 
         it('test subscribe when shipping address was changed for not virtual quote', function () {
@@ -142,8 +178,11 @@ define([
                 .not.toHaveBeenCalledWith(rates);
             expect(mocks['Magento_Checkout/js/model/cart/cache'].set).not.toHaveBeenCalled();
             expect(mocks['Magento_Checkout/js/model/shipping-rate-processor/new-address'].getRates).toHaveBeenCalled();
+<<<<<<< HEAD
             expect(mocks['Magento_Checkout/js/model/cart/totals-processor/default'].estimateTotals)
                 .toHaveBeenCalled();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         });
 
         it('test subscribe when shipping method was changed', function () {

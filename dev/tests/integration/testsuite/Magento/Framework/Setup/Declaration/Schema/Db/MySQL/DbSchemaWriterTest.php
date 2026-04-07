@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Framework\Setup\Declaration\Schema\Db\MySQL;
 
 use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\DB\Ddl\Table;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test DB schema writer
@@ -55,8 +63,13 @@ class DbSchemaWriterTest extends \PHPUnit\Framework\TestCase
      * @param array $options
      * @param string|bool $expected
      * @throws \Zend_Db_Exception
+<<<<<<< HEAD
      */
     #[DataProvider('getAutoIncrementFieldDataProvider')]
+=======
+     * @dataProvider getAutoIncrementFieldDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testResetAutoIncrement(array $options, $expected)
     {
         $adapter = $this->getDbAdapter();
@@ -98,6 +111,7 @@ class DbSchemaWriterTest extends \PHPUnit\Framework\TestCase
         $adapter->dropTable($tableName);
     }
 
+<<<<<<< HEAD
     public static function getAutoIncrementFieldDataProvider()
     {
         return [
@@ -108,6 +122,18 @@ class DbSchemaWriterTest extends \PHPUnit\Framework\TestCase
             'non auto increment field' => [
                 'options' => ['unsigned' => true, 'nullable' => false,],
                 'expected' => 'AUTO_INCREMENT = 1',
+=======
+    public function getAutoIncrementFieldDataProvider()
+    {
+        return [
+            'auto increment field' => [
+                'field options' => ['identity' => true, 'unsigned' => true, 'nullable' => false, 'primary' => true],
+                'expected result' => 'AUTO_INCREMENT = 0',
+            ],
+            'non auto increment field' => [
+                'field options' => ['unsigned' => true, 'nullable' => false,],
+                'expected result' => 'AUTO_INCREMENT = 1',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ]
         ];
     }

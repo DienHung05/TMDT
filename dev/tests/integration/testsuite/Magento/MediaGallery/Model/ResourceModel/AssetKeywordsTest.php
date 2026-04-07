@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -16,7 +21,10 @@ use Magento\MediaGalleryApi\Api\GetAssetsKeywordsInterface;
 use Magento\MediaGalleryApi\Api\SaveAssetsKeywordsInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Testing assets keywords operation
@@ -66,11 +74,18 @@ class AssetKeywordsTest extends TestCase
      * Testing assets keywords save and get
      *
      * @magentoDataFixture Magento/MediaGallery/_files/media_asset.php
+<<<<<<< HEAD
+=======
+     * @dataProvider keywordsProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string[] $keywords
      * @param string[] $updatedKeywords
      * @throws \Magento\Framework\Exception\LocalizedException
      */
+<<<<<<< HEAD
     #[DataProvider('keywordsProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveAndGetKeywords(array $keywords, array $updatedKeywords): void
     {
         $loadedAssets = $this->getAssetsByPath->execute([self::FIXTURE_ASSET_PATH]);
@@ -128,7 +143,11 @@ class AssetKeywordsTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function keywordsProvider(): array
+=======
+    public function keywordsProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [['one-keyword'],['plum','orange']],

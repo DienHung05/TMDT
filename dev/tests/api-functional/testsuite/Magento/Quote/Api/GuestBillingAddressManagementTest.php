@@ -1,11 +1,17 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Quote\Api;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Framework\Webapi\Rest\Request;
@@ -26,12 +32,23 @@ class GuestBillingAddressManagementTest extends WebapiAbstract
     public const SERVICE_VERSION = 'V1';
     public const SERVICE_NAME = 'quoteGuestBillingAddressManagementV1';
     public const RESOURCE_PATH = '/V1/guest-carts/';
+=======
+use Magento\Quote\Api\Data\AddressInterface;
+use Magento\TestFramework\TestCase\WebapiAbstract;
+
+class GuestBillingAddressManagementTest extends WebapiAbstract
+{
+    const SERVICE_VERSION = 'V1';
+    const SERVICE_NAME = 'quoteGuestBillingAddressManagementV1';
+    const RESOURCE_PATH = '/V1/guest-carts/';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var \Magento\TestFramework\ObjectManager
      */
     protected $objectManager;
 
+<<<<<<< HEAD
     /**
      * @var AddressInterfaceFactory
      */
@@ -53,6 +70,11 @@ class GuestBillingAddressManagementTest extends WebapiAbstract
         $this->addressFactory = $this->objectManager->get(AddressInterfaceFactory::class);
         $this->quoteIdMaskFactory = $this->objectManager->get(QuoteIdMaskFactory::class);
         $this->fixtures = DataFixtureStorageManager::getStorage();
+=======
+    protected function setUp(): void
+    {
+        $this->objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     protected function getQuoteMaskedId($quoteId)
@@ -118,8 +140,13 @@ class GuestBillingAddressManagementTest extends WebapiAbstract
 
     /**
      * @magentoApiDataFixture Magento/Checkout/_files/quote_with_address_saved.php
+<<<<<<< HEAD
      */
     #[DataProvider('setAddressDataProvider')]
+=======
+     * @dataProvider setAddressDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSetAddress($useForShipping)
     {
         /** @var \Magento\Quote\Model\Quote $quote */
@@ -197,13 +224,18 @@ class GuestBillingAddressManagementTest extends WebapiAbstract
         }
     }
 
+<<<<<<< HEAD
     public static function setAddressDataProvider()
+=======
+    public function setAddressDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [true],
             [false]
         ];
     }
+<<<<<<< HEAD
 
     #[
         DataFixture(ProductFixture::class, as: 'p1'),
@@ -359,4 +391,6 @@ class GuestBillingAddressManagementTest extends WebapiAbstract
         $this->assertInstanceOf('SoapFault', $exception);
         $this->assertStringContainsString('required', $exception->getMessage());
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

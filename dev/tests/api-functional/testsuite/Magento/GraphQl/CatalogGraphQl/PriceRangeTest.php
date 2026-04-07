@@ -1,13 +1,19 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\CatalogGraphQl;
 
 use Magento\GraphQl\GetCustomerAuthenticationHeader;
+<<<<<<< HEAD
 use Magento\Tax\Test\Fixture\ProductTaxClass;
 use Magento\Tax\Test\Fixture\TaxRate as TaxRateFixture;
 use Magento\Tax\Test\Fixture\TaxRule as TaxRuleFixture;
@@ -18,6 +24,11 @@ use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\TestFramework\ObjectManager;
+use Magento\TestFramework\TestCase\GraphQlAbstract;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test class to verify catalog price rule is applied for
@@ -171,10 +182,17 @@ class PriceRangeTest extends GraphQlAbstract
 
         $this->assertNotEmpty($response['products']);
         $priceRange = $response['products']['items'][0]['price_range'];
+<<<<<<< HEAD
         $this->assertEquals(10.75, $priceRange['minimum_price']['regular_price']['value']);
         $this->assertEquals(10.75, $priceRange['minimum_price']['final_price']['value']);
         $this->assertEquals(10.75, $priceRange['maximum_price']['regular_price']['value']);
         $this->assertEquals(10.75, $priceRange['maximum_price']['final_price']['value']);
+=======
+        $this->assertEquals(10.75, round($priceRange['minimum_price']['regular_price']['value'], 2));
+        $this->assertEquals(10.75, round($priceRange['minimum_price']['final_price']['value'], 2));
+        $this->assertEquals(10.75, round($priceRange['maximum_price']['regular_price']['value'], 2));
+        $this->assertEquals(10.75, round($priceRange['maximum_price']['final_price']['value'], 2));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -221,10 +239,17 @@ class PriceRangeTest extends GraphQlAbstract
 
         $this->assertNotEmpty($response['products']);
         $priceRange = $response['products']['items'][0]['price_range'];
+<<<<<<< HEAD
         $this->assertEquals(10.75, $priceRange['minimum_price']['regular_price']['value']);
         $this->assertEquals(10.75, $priceRange['minimum_price']['final_price']['value']);
         $this->assertEquals(10.75, $priceRange['maximum_price']['regular_price']['value']);
         $this->assertEquals(10.75, $priceRange['maximum_price']['final_price']['value']);
+=======
+        $this->assertEquals(10.75, round($priceRange['minimum_price']['regular_price']['value'], 2));
+        $this->assertEquals(10.75, round($priceRange['minimum_price']['final_price']['value'], 2));
+        $this->assertEquals(10.75, round($priceRange['maximum_price']['regular_price']['value'], 2));
+        $this->assertEquals(10.75, round($priceRange['maximum_price']['final_price']['value'], 2));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -257,6 +282,7 @@ class PriceRangeTest extends GraphQlAbstract
     }
 
     /**
+<<<<<<< HEAD
      * Test the regular price and final price display with a rounded value when there is a tax rate that match with
      * the shipping settings origin but the default tax destination calculation is not set
     */
@@ -312,6 +338,8 @@ class PriceRangeTest extends GraphQlAbstract
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Get a query which user filter for product sku and returns price_tiers
      *
      * @param string $productSku

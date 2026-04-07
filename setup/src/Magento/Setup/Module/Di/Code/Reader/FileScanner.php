@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Setup\Module\Di\Code\Reader;
@@ -421,7 +426,11 @@ class FileScanner
      *
      * @return array|null
      */
+<<<<<<< HEAD
     public function getUses(?string $namespace = null): ?array
+=======
+    public function getUses(string $namespace = null): ?array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $this->scan();
 
@@ -435,7 +444,11 @@ class FileScanner
      *
      * @return array|null
      */
+<<<<<<< HEAD
     protected function getUsesNoScan(?string $namespace = null): ?array
+=======
+    protected function getUsesNoScan(string $namespace = null): ?array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $namespaces = [];
         foreach ($this->infos as $info) {

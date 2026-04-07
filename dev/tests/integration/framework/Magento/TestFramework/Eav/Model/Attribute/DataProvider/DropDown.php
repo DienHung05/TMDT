@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -21,24 +26,42 @@ class DropDown extends AbstractAttributeDataWithOptions
     public function __construct()
     {
         parent::__construct();
+<<<<<<< HEAD
         static::$defaultAttributePostData['used_for_sort_by'] = '0';
         static::$defaultAttributePostData['swatch_input_type'] = 'dropdown';
+=======
+        $this->defaultAttributePostData['used_for_sort_by'] = '0';
+        $this->defaultAttributePostData['swatch_input_type'] = 'dropdown';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
      * @inheritdoc
      */
+<<<<<<< HEAD
     public static function getUpdateProvider(): array
     {
         $frontendInput = static::getFrontendInput();
+=======
+    public function getUpdateProvider(): array
+    {
+        $frontendInput = $this->getFrontendInput();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         return array_replace_recursive(
             parent::getUpdateProvider(),
             [
                 "{$frontendInput}_other_attribute_code" => [
+<<<<<<< HEAD
                     'postData' => [
                         'attribute_code' => 'text_attribute_update',
                     ],
                     'expectedData' => [
+=======
+                    'post_data' => [
+                        'attribute_code' => 'text_attribute_update',
+                    ],
+                    'expected_data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         'attribute_code' => 'dropdown_attribute',
                     ],
                 ],
@@ -49,7 +72,11 @@ class DropDown extends AbstractAttributeDataWithOptions
     /**
      * @inheritdoc
      */
+<<<<<<< HEAD
     protected static function getFrontendInput(): string
+=======
+    protected function getFrontendInput(): string
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return 'select';
     }
@@ -57,7 +84,11 @@ class DropDown extends AbstractAttributeDataWithOptions
     /**
      * @inheritdoc
      */
+<<<<<<< HEAD
     protected static function getUpdatePostData(): array
+=======
+    protected function getUpdatePostData(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'frontend_label' => [
@@ -88,9 +119,15 @@ class DropDown extends AbstractAttributeDataWithOptions
     /**
      * @inheritdoc
      */
+<<<<<<< HEAD
     protected static function getUpdateExpectedData(): array
     {
         $updatePostData = static::getUpdatePostData();
+=======
+    protected function getUpdateExpectedData(): array
+    {
+        $updatePostData = $this->getUpdatePostData();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         return array_merge(
             $updatePostData,
             [

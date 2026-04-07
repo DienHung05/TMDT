@@ -1,8 +1,14 @@
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
  */
 /* eslint-disable */
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 define([
     'jquery',
     'Magento_ProductVideo/js/get-video-information'
@@ -10,6 +16,7 @@ define([
     'use strict';
 
     describe('Testing Youtube player Widget', function () {
+<<<<<<< HEAD
         var wdContainer, video, widget;
 
         beforeAll(function () {
@@ -29,12 +36,18 @@ define([
 
         beforeEach(function () {
             // Create DOM structure for widget
+=======
+        var wdContainer;
+
+        beforeEach(function () {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             wdContainer = $(
                 '<div>' +
                 '<div class="video-information uploader"><span></span></div>' +
                 '<div class="video-player-container">' +
                 '<div class="product-video"></div>' +
                 '</div>' +
+<<<<<<< HEAD
                 '</div>'
             ).appendTo(document.body);
 
@@ -43,10 +56,26 @@ define([
             widget = video.data('mageVideoYoutube');
 
             // Set spies
+=======
+                '</div>');
+        });
+
+        afterEach(function () {
+            $(wdContainer).remove();
+        });
+
+        it('Widget does not stops player if player is no defined', function () {
+            var video = wdContainer.find('.video-player-container').find('.product-video'),
+                widget;
+
+            video.videoYoutube();
+            widget = video.data('mageVideoYoutube');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             widget.stop = jasmine.createSpy();
             widget._player = {
                 destroy: jasmine.createSpy()
             };
+<<<<<<< HEAD
         });
 
         afterEach(function () {
@@ -79,6 +108,11 @@ define([
             expect(widget._player).toBeUndefined();
 
             widget.destroy(); // Second call - should trigger stop
+=======
+            widget.destroy();
+            expect(widget._player).toBeUndefined();
+            widget.destroy();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             expect(widget.stop).toHaveBeenCalledTimes(1);
         });
     });

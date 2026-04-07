@@ -1,4 +1,5 @@
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
@@ -38,6 +39,21 @@ define([
             }
         });
         //eslint-disable-line one-var, vars-on-top
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+define([
+    'underscore',
+    'uiRegistry',
+    'Magento_Ui/js/form/components/html'
+], function (_, registry, Constr) {
+    'use strict';
+
+    describe('Magento_Ui/js/form/components/html', function () {
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         var obj = new Constr({
             provider: 'provName',
             name: '',

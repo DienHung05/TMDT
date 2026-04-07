@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\RelatedProduct;
 
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\TestFramework\Fixture\DataFixture;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\TestCase\GraphQlAbstract;
 
 /**
@@ -228,6 +236,7 @@ QUERY;
         $relatedProducts = $response['products']['items'][0]['related_products'];
         self::assertCount(0, $relatedProducts);
     }
+<<<<<<< HEAD
     #[
         DataFixture(ProductFixture::class, ['name' =>'Simple related product', 'sku' => 'simple_related_product',
             'price' => 20], 'p1'),
@@ -305,4 +314,6 @@ QUERY;
             self::assertEquals($product['url_key'], $productExpectedData['url_key']);
         }
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

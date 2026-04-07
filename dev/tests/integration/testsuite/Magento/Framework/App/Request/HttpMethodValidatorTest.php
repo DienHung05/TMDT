@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -74,11 +79,19 @@ class HttpMethodValidatorTest extends TestCase
     {
         $map = $this->getMap();
 
+<<<<<<< HEAD
         $action1 = $this->createMock($map[0]['interface']);
         $this->request->setMethod($map[0]['method']);
         $this->validator->validate($this->request, $action1);
 
         $action2 = $this->createMock(ActionInterface::class);
+=======
+        $action1 = $this->getMockForAbstractClass($map[0]['interface']);
+        $this->request->setMethod($map[0]['method']);
+        $this->validator->validate($this->request, $action1);
+
+        $action2 = $this->getMockForAbstractClass(ActionInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->validator->validate($this->request, $action2);
     }
 
@@ -91,7 +104,11 @@ class HttpMethodValidatorTest extends TestCase
         $this->expectException(\Magento\Framework\App\Request\InvalidRequestException::class);
 
         $this->request->setMethod('method' .rand(0, 1000));
+<<<<<<< HEAD
         $action = $this->createMock(ActionInterface::class);
+=======
+        $action = $this->getMockForAbstractClass(ActionInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->validator->validate($this->request, $action);
     }
@@ -105,7 +122,11 @@ class HttpMethodValidatorTest extends TestCase
         $map = $this->getMap();
 
         $this->request->setMethod($map[1]['method']);
+<<<<<<< HEAD
         $action = $this->createMock($map[0]['interface']);
+=======
+        $action = $this->getMockForAbstractClass($map[0]['interface']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->validator->validate($this->request, $action);
     }

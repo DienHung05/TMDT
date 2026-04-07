@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\LoginAsCustomerGraphQl;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Exception;
 use Magento\Framework\Exception\AuthenticationException;
 use Magento\Integration\Api\AdminTokenServiceInterface as AdminTokenService;
@@ -118,12 +126,19 @@ class GenerateLoginCustomerTokenTest extends GraphQlAbstract
      * @magentoApiDataFixture Magento/LoginAsCustomer/_files/admin.php
      * @magentoConfigFixture admin_store login_as_customer/general/enabled 1
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider dataProviderInvalidInfo
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $adminUserName
      * @param string $adminPassword
      * @param string $customerEmail
      * @param string $message
      */
+<<<<<<< HEAD
     #[DataProvider('dataProviderInvalidInfo')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGenerateCustomerTokenInvalidData(
         string $adminUserName,
         string $adminPassword,
@@ -147,7 +162,11 @@ class GenerateLoginCustomerTokenTest extends GraphQlAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function dataProviderInvalidInfo(): array
+=======
+    public function dataProviderInvalidInfo(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'invalid_admin_user_name' => [

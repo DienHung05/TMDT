@@ -1,17 +1,28 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Test\Annotation;
 
 use Magento\TestFramework\Annotation\AdminConfigFixture;
+<<<<<<< HEAD
 use Magento\TestFramework\Annotation\TestCaseAnnotation;
 use Magento\TestFramework\Workaround\Override\Fixture\Resolver;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
+=======
+use Magento\TestFramework\Workaround\Override\Fixture\Resolver;
+use PHPUnit\Framework\TestCase;
+use PHPUnit\Util\Test as TestUtil;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test class for \Magento\TestFramework\Annotation\AdminConfigFixture.
@@ -44,6 +55,7 @@ class AdminConfigFixtureTest extends TestCase
         $this->createResolverMock();
         $this->object
             ->method('_getConfigValue')
+<<<<<<< HEAD
             ->willReturnCallback(
                 function ($arg1) {
                     if ($arg1 == 'any_config') {
@@ -53,6 +65,10 @@ class AdminConfigFixtureTest extends TestCase
                     }
                 }
             );
+=======
+            ->withConsecutive(['any_config'], ['any_config'])
+            ->willReturnOnConsecutiveCalls('some_value', 'some_value');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->object->startTest($this);
 
@@ -85,6 +101,7 @@ class AdminConfigFixtureTest extends TestCase
         $this->object->startTest($this);
         $this->object
             ->method('_getConfigValue')
+<<<<<<< HEAD
             ->willReturnCallback(
                 function ($arg1) {
                     if ($arg1 == 'any_config') {
@@ -94,6 +111,10 @@ class AdminConfigFixtureTest extends TestCase
                     }
                 }
             );
+=======
+            ->withConsecutive(['any_config'], ['any_config'])
+            ->willReturnOnConsecutiveCalls('some_value', 'some_value');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->object->initStoreAfter();
     }
@@ -109,11 +130,24 @@ class AdminConfigFixtureTest extends TestCase
             ->disableOriginalConstructor()
             ->onlyMethods(['applyConfigFixtures'])
             ->getMock();
+<<<<<<< HEAD
         $annotations = TestCaseAnnotation::getInstance()->getAnnotations($this);
         $mock->method('applyConfigFixtures')
             ->willReturn($annotations['method'][$this->object::ANNOTATION] ?? []);
         $reflection = new ReflectionClass(Resolver::class);
         $reflectionProperty = $reflection->getProperty('instance');
         $reflectionProperty->setValue(null, $mock);
+=======
+        $annotations = TestUtil::parseTestMethodAnnotations(
+            get_class($this),
+            $this->getName(false)
+        );
+        $mock->method('applyConfigFixtures')
+            ->willReturn($annotations['method'][$this->object::ANNOTATION]);
+        $reflection = new \ReflectionClass(Resolver::class);
+        $reflectionProperty = $reflection->getProperty('instance');
+        $reflectionProperty->setAccessible(true);
+        $reflectionProperty->setValue(Resolver::class, $mock);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2012 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -13,14 +18,22 @@
  */
 namespace Magento\Test\Db\Adapter;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class TransactionInterfaceTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @param string $class
+<<<<<<< HEAD
      */
     #[DataProvider('transparentTransactionDataProvider')]
+=======
+     * @dataProvider transparentTransactionDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testBeginTransparentTransaction($class)
     {
         $connectionMock = $this->_getConnectionMock($class);
@@ -33,8 +46,13 @@ class TransactionInterfaceTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @param string $class
+<<<<<<< HEAD
      */
     #[DataProvider('transparentTransactionDataProvider')]
+=======
+     * @dataProvider transparentTransactionDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRollbackTransparentTransaction($class)
     {
         $connectionMock = $this->_getConnectionMock($class);
@@ -47,8 +65,13 @@ class TransactionInterfaceTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @param string $class
+<<<<<<< HEAD
      */
     #[DataProvider('transparentTransactionDataProvider')]
+=======
+     * @dataProvider transparentTransactionDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCommitTransparentTransaction($class)
     {
         $connectionMock = $this->_getConnectionMock($class);
@@ -62,7 +85,11 @@ class TransactionInterfaceTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function transparentTransactionDataProvider()
+=======
+    public function transparentTransactionDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $result = [];
         $path = '/../../../../../../../Magento/TestFramework/Db/Adapter';

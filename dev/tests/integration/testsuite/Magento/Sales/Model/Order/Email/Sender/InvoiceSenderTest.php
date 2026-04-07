@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -19,7 +24,10 @@ use Magento\Sales\Model\Order\Invoice;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Mail\Template\TransportBuilderMock;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use Magento\TestFramework\ErrorLog\Logger;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Checks the sending of order invoice email to the customer.
@@ -54,12 +62,15 @@ class InvoiceSenderTest extends TestCase
     /** @var InvoiceIdentity */
     private $invoiceIdentity;
 
+<<<<<<< HEAD
     /** @var Logger */
     private $logger;
 
     /** @var int */
     private $minErrorDefaultValue;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @inheritdoc
      */
@@ -73,6 +84,7 @@ class InvoiceSenderTest extends TestCase
         $this->orderFactory = $this->objectManager->get(OrderInterfaceFactory::class);
         $this->invoiceFactory = $this->objectManager->get(InvoiceInterfaceFactory::class);
         $this->invoiceIdentity = $this->objectManager->get(InvoiceIdentity::class);
+<<<<<<< HEAD
         $this->logger = $this->objectManager->get(Logger::class);
 
         $reflection = new \ReflectionClass(get_class($this->logger));
@@ -80,6 +92,8 @@ class InvoiceSenderTest extends TestCase
         $this->minErrorDefaultValue = $reflectionProperty->getValue($this->logger);
         $reflectionProperty->setValue($this->logger, 400);
         $this->logger->clearMessages();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -99,7 +113,10 @@ class InvoiceSenderTest extends TestCase
 
         $this->assertEmpty($invoice->getEmailSent());
         $result = $this->invoiceSender->send($invoice, true);
+<<<<<<< HEAD
         $this->assertEmpty($this->logger->getMessages());
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertTrue($result);
         $this->assertNotEmpty($invoice->getEmailSent());
@@ -125,7 +142,10 @@ class InvoiceSenderTest extends TestCase
 
         $this->assertEmpty($invoice->getEmailSent());
         $result = $this->invoiceSender->send($invoice, true);
+<<<<<<< HEAD
         $this->assertEmpty($this->logger->getMessages());
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertEquals(self::NEW_CUSTOMER_EMAIL, $this->invoiceIdentity->getCustomerEmail());
         $this->assertTrue($result);
@@ -146,7 +166,10 @@ class InvoiceSenderTest extends TestCase
 
         $this->assertEmpty($invoice->getEmailSent());
         $result = $this->invoiceSender->send($invoice, true);
+<<<<<<< HEAD
         $this->assertEmpty($this->logger->getMessages());
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertEquals(self::OLD_CUSTOMER_EMAIL, $this->invoiceIdentity->getCustomerEmail());
         $this->assertTrue($result);
@@ -167,7 +190,10 @@ class InvoiceSenderTest extends TestCase
 
         $this->assertEmpty($invoice->getEmailSent());
         $result = $this->invoiceSender->send($invoice, true);
+<<<<<<< HEAD
         $this->assertEmpty($this->logger->getMessages());
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertEquals(self::ORDER_EMAIL, $this->invoiceIdentity->getCustomerEmail());
         $this->assertTrue($result);
@@ -187,7 +213,10 @@ class InvoiceSenderTest extends TestCase
             ->addAttributeToFilter(InvoiceInterface::ORDER_ID, $order->getID())
             ->getFirstItem();
         $result = $this->invoiceSender->send($invoice);
+<<<<<<< HEAD
         $this->assertEmpty($this->logger->getMessages());
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertFalse($result);
         $invoice = $order->getInvoiceCollection()->clear()->getFirstItem();
         $this->assertEmpty($invoice->getEmailSent());
@@ -215,7 +244,10 @@ class InvoiceSenderTest extends TestCase
         $order->setCustomerEmail('customer@example.com');
         $invoice = $this->createInvoice($order);
         $result = $this->invoiceSender->send($invoice);
+<<<<<<< HEAD
         $this->assertEmpty($this->logger->getMessages());
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertFalse($result);
         $this->assertTrue($invoice->getSendEmail());
     }
@@ -245,6 +277,7 @@ class InvoiceSenderTest extends TestCase
     {
         return $this->orderFactory->create()->loadByIncrementId($incrementId);
     }
+<<<<<<< HEAD
 
     /**
      * @inheritdoc
@@ -254,4 +287,6 @@ class InvoiceSenderTest extends TestCase
         $reflectionProperty = new \ReflectionProperty(get_class($this->logger), 'minimumErrorLevel');
         $reflectionProperty->setValue($this->logger, $this->minErrorDefaultValue);
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

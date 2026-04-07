@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2012 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\CustomerImportExport\Model\Export;
 
 use Magento\CustomerImportExport\Model\Import\Address as ImportAddress;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for customer address export model
@@ -131,20 +139,33 @@ class AddressTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function getGenderFilterValueDataProvider()
     {
         return [
             'male' => [1],  // $genderFilterValue
             'female' => [2]  // $genderFilterValue
         ];
+=======
+    public function getGenderFilterValueDataProvider()
+    {
+        return ['male' => ['$genderFilterValue' => 1], 'female' => ['$genderFilterValue' => 2]];
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
      * Test export method if filter was set
      *
+<<<<<<< HEAD
      * @param int $genderFilterValue
      */
     #[DataProvider('getGenderFilterValueDataProvider')]
+=======
+     * @dataProvider getGenderFilterValueDataProvider
+     *
+     * @param int $genderFilterValue
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExportWithFilter($genderFilterValue)
     {
         $entityIdCode = Address::COLUMN_ADDRESS_ID;
@@ -211,12 +232,21 @@ class AddressTest extends \PHPUnit\Framework\TestCase
     {
         $data = ['header' => [], 'data' => []];
 
+<<<<<<< HEAD
         $lines = str_getcsv($content, "\n", '"', '\\');
         foreach ($lines as $index => $line) {
             if ($index == 0) {
                 $data['header'] = str_getcsv($line, ',', '"', '\\');
             } else {
                 $row = array_combine($data['header'], str_getcsv($line, ',', '"', '\\'));
+=======
+        $lines = str_getcsv($content, "\n");
+        foreach ($lines as $index => $line) {
+            if ($index == 0) {
+                $data['header'] = str_getcsv($line);
+            } else {
+                $row = array_combine($data['header'], str_getcsv($line));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 if ($entityId !== null && !empty($row[$entityId])) {
                     $data['data'][$row[$entityId]] = $row;
                 } else {

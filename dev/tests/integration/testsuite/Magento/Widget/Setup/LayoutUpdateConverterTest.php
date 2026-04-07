@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Widget\Setup;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Widget\Setup;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class LayoutUpdateConverterTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -24,14 +32,23 @@ class LayoutUpdateConverterTest extends \PHPUnit\Framework\TestCase
     /**
      * @param string $value
      * @param string $expected
+<<<<<<< HEAD
      */
     #[DataProvider('convertDataProvider')]
+=======
+     * @dataProvider convertDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testConvert($value, $expected)
     {
         $this->assertEquals($expected, $this->converter->convert($value));
     }
 
+<<<<<<< HEAD
     public static function convertDataProvider()
+=======
+    public function convertDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         // @codingStandardsIgnoreStart
         $beginning = '<body><referenceContainer name="content"><block class="Magento\CatalogWidget\Block\Product\ProductsList" name="23e38bbfa7cc6474454570e51aeffcc3" template="Magento_CatalogWidget::product/widget/content/grid.phtml"><action method="setData"><argument name="name" xsi:type="string">show_pager</argument><argument name="value" xsi:type="string">0</argument></action><action method="setData"><argument name="name" xsi:type="string">products_count</argument><argument name="value" xsi:type="string">10</argument></action><action method="setData">';

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -12,7 +17,10 @@ use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\Stdlib\CookieManagerInterface;
 use Magento\SendFriend\Helper\Data as SendFriendHelper;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 use Laminas\Stdlib\Parameters;
 
@@ -55,13 +63,21 @@ class SendFriendTest extends TestCase
     /**
      * @magentoConfigFixture current_store sendfriend/email/max_recipients 1
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider validateDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $sender
      * @param array $recipients
      * @param string|bool $expectedResult
      *
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('validateDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testValidate(array $sender, array $recipients, $expectedResult): void
     {
         $this->prepareData($sender, $recipients);
@@ -71,7 +87,11 @@ class SendFriendTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function validateDataProvider(): array
+=======
+    public function validateDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'valid_data' => [
@@ -88,7 +108,11 @@ class SendFriendTest extends TestCase
                         'recipient_email@example.com',
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedResult' => true,
+=======
+                'expected_result' => true,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             'empty_message' => [
                 'sender' => [
@@ -104,7 +128,11 @@ class SendFriendTest extends TestCase
                         'recipient_email@example.com',
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedResult' => 'Please enter a message.',
+=======
+                'expected_result' => 'Please enter a message.',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             'empty_sender_name' => [
                 'sender' => [
@@ -120,7 +148,11 @@ class SendFriendTest extends TestCase
                         'recipient_email@example.com',
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedResult' => 'Please enter a sender name.',
+=======
+                'expected_result' => 'Please enter a sender name.',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             'empty_recipients' => [
                 'sender' => [
@@ -132,7 +164,11 @@ class SendFriendTest extends TestCase
                     'name' => [],
                     'email' => [],
                 ],
+<<<<<<< HEAD
                 'expectedResult' => 'Please specify at least one recipient.',
+=======
+                'expected_result' => 'Please specify at least one recipient.',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             'wrong_recipient_email' => [
                 'sender' => [
@@ -148,7 +184,11 @@ class SendFriendTest extends TestCase
                         '123123',
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedResult' => 'Please enter a correct recipient email address.',
+=======
+                'expected_result' => 'Please enter a correct recipient email address.',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             'to_much_recipients' => [
                 'sender' => [
@@ -166,7 +206,11 @@ class SendFriendTest extends TestCase
                         'recipient2_email@example.com',
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedResult' => 'No more than 1 emails can be sent at a time.',
+=======
+                'expected_result' => 'No more than 1 emails can be sent at a time.',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

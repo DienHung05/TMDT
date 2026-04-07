@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types = 1);
 
@@ -12,7 +17,10 @@ use Magento\Framework\Filesystem;
 use Magento\ImportExport\Model\Import;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -23,7 +31,11 @@ class CsvTest extends TestCase
     /**
      * @var string Destination file name
      */
+<<<<<<< HEAD
     private static $destination = 'destinationFile';
+=======
+    private $destination = 'destinationFile';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var ObjectManagerInterface
@@ -41,11 +53,19 @@ class CsvTest extends TestCase
     /**
      * Test to destruct export adapter
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider destructDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $destination
      * @param bool $shouldBeDeleted
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('destructDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDestruct(string $destination, bool $shouldBeDeleted): void
     {
         $csv = $this->objectManager->create(Csv::class, [
@@ -74,11 +94,19 @@ class CsvTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function destructDataProvider(): array
     {
         return [
             'temporary file' => [self::$destination, true],
             'import history file' => [Import::IMPORT_HISTORY_DIR . self::$destination, false],
+=======
+    public function destructDataProvider(): array
+    {
+        return [
+            'temporary file' => [$this->destination, true],
+            'import history file' => [Import::IMPORT_HISTORY_DIR . $this->destination, false],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
     }
 }

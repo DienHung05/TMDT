@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -9,8 +14,11 @@
  */
 namespace Magento\Sales\Model;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 abstract class AbstractCollectorPositionsTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -18,8 +26,14 @@ abstract class AbstractCollectorPositionsTest extends \PHPUnit\Framework\TestCas
      * @param string $configType
      * @param array $before
      * @param array $after
+<<<<<<< HEAD
      */
     #[DataProvider('collectorPositionDataProvider')]
+=======
+     *
+     * @dataProvider collectorPositionDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCollectorPosition($collectorCode, $configType, array $before, array $after)
     {
         $allCollectors = self::_getConfigCollectors($configType);
@@ -86,5 +100,9 @@ abstract class AbstractCollectorPositionsTest extends \PHPUnit\Framework\TestCas
      *
      * @return array
      */
+<<<<<<< HEAD
     abstract public static function collectorPositionDataProvider();
+=======
+    abstract public function collectorPositionDataProvider();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

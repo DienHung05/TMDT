@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2011 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -25,7 +30,10 @@ use Magento\TestFramework\TestCase\AbstractController;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\MockObject\MockObject;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use ReflectionException;
 
 /**
@@ -66,7 +74,11 @@ class ControllerAbstractTest extends AbstractController
         $testObjectManager = new ObjectManager($this);
 
         $this->messageManager = $this->createMock(Manager::class);
+<<<<<<< HEAD
         $this->cookieManagerMock = $this->createMock(CookieManagerInterface::class);
+=======
+        $this->cookieManagerMock = $this->getMockForAbstractClass(CookieManagerInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->serializerMock = $this->getMockBuilder(Json::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -81,7 +93,11 @@ class ControllerAbstractTest extends AbstractController
                 return json_decode($serializedData, true);
             }
         );
+<<<<<<< HEAD
         $this->interpretationStrategyMock = $this->createMock(InterpretationStrategyInterface::class);
+=======
+        $this->interpretationStrategyMock = $this->getMockForAbstractClass(InterpretationStrategyInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->interpretationStrategyMock->expects($this->any())
             ->method('interpret')
             ->willReturnCallback(
@@ -206,8 +222,13 @@ class ControllerAbstractTest extends AbstractController
      * @param string|null $messageTypeFilter
      *
      * @return void
+<<<<<<< HEAD
      */
     #[DataProvider('assertSessionMessagesDataProvider')]
+=======
+     * @dataProvider assertSessionMessagesDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAssertSessionMessagesSuccess(array $expectedMessages, ?string $messageTypeFilter): void
     {
         $this->addSessionMessages();
@@ -225,7 +246,11 @@ class ControllerAbstractTest extends AbstractController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function assertSessionMessagesDataProvider(): array
+=======
+    public function assertSessionMessagesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'message warning type filtering' => [

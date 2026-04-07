@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Config\App\Config\Type;
 
@@ -30,11 +35,14 @@ class SystemTest extends \PHPUnit\Framework\TestCase
         $this->system = $this->objectManager->create(System::class);
     }
 
+<<<<<<< HEAD
     public static function tearDownAfterClass(): void
     {
         unset($_ENV['CONFIG__STORES__DEFAULT__ABC__QRS__XYZ']);
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetValueDefaultScope()
     {
         $this->assertEquals(
@@ -52,6 +60,7 @@ class SystemTest extends \PHPUnit\Framework\TestCase
             $this->system->get('stores/default/web/test/test_value_1')
         );
     }
+<<<<<<< HEAD
 
     /**
      * Tests that configurations added as env variables don't cause the error 'Recursion detected'
@@ -79,4 +88,6 @@ class SystemTest extends \PHPUnit\Framework\TestCase
         unset($_ENV['CONFIG__STORES__DEFAULT__ABC__QRS__XYZ']);
         parent::tearDown();
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

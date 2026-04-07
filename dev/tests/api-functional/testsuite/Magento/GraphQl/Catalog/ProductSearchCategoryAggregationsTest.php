@@ -1,12 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Catalog;
 
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\AssignCategories as AssignCategoriesFixture;
 use Magento\Catalog\Test\Fixture\Category as CategoryFixture;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
@@ -16,6 +22,8 @@ use Magento\TestFramework\Fixture\DataFixtureStorage;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\TestCase\GraphQlAbstract;
 
 /**
@@ -24,6 +32,7 @@ use Magento\TestFramework\TestCase\GraphQlAbstract;
 class ProductSearchCategoryAggregationsTest extends GraphQlAbstract
 {
     /**
+<<<<<<< HEAD
      * @var DataFixtureStorage
      */
     private $fixtures;
@@ -44,6 +53,8 @@ class ProductSearchCategoryAggregationsTest extends GraphQlAbstract
         $this->uid = $this->objectManager->get(Uid::class);
     }
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Test category_id aggregation on filter by "eq" category ID condition.
      *
      * @magentoApiDataFixture Magento/Catalog/_files/categories.php
@@ -104,6 +115,7 @@ class ProductSearchCategoryAggregationsTest extends GraphQlAbstract
         $this->assertEquals($expectedSubcategorie, $categoryAggregation);
     }
 
+<<<<<<< HEAD
     #[
         DataFixture(ProductFixture::class, as: 'prod1'),
         DataFixture(CategoryFixture::class, ['name' => 'Category 1'], as: 'cat1'),
@@ -120,6 +132,8 @@ class ProductSearchCategoryAggregationsTest extends GraphQlAbstract
         $this->assertEquals($expectedCategories, $categoryAggregation);
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @param string $filterValue
      *
@@ -129,7 +143,10 @@ class ProductSearchCategoryAggregationsTest extends GraphQlAbstract
     {
         $query = $this->getGraphQlQuery($filterValue, $includeDirectChildrenOnly);
         $result = $this->graphQlQuery($query);
+<<<<<<< HEAD
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertArrayNotHasKey('errors', $result);
         $this->assertArrayHasKey('aggregations', $result['products']);
         $categoryAggregation = array_filter(
@@ -145,7 +162,11 @@ class ProductSearchCategoryAggregationsTest extends GraphQlAbstract
         foreach ($categoryAggregation['options'] as $option) {
             $this->assertNotEmpty($option['value']);
             $this->assertNotEmpty($option['label']);
+<<<<<<< HEAD
             $categoryAggregationIdsLabel[$this->uid->decode($option['value'])] = $option['label'];
+=======
+            $categoryAggregationIdsLabel[(int)$option['value']] = $option['label'];
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
         return $categoryAggregationIdsLabel;
     }
@@ -255,6 +276,7 @@ QUERY;
 }
 QUERY;
     }
+<<<<<<< HEAD
 
     /**
      * Test the categories that appear in aggregation Layered Navigation > Display Category Filter => Yes (default).
@@ -341,4 +363,6 @@ QUERY;
 }
 QUERY;
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

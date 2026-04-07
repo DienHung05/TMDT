@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Setup\Console\Command;
 
@@ -26,12 +31,22 @@ class BackupCommand extends AbstractSetupCommand
     /**
      * Name of input options
      */
+<<<<<<< HEAD
     public const INPUT_KEY_CODE = 'code';
     public const INPUT_KEY_MEDIA = 'media';
     public const INPUT_KEY_DB = 'db';
     public const NAME = 'setup:backup';
 
     /**
+=======
+    const INPUT_KEY_CODE = 'code';
+    const INPUT_KEY_MEDIA = 'media';
+    const INPUT_KEY_DB = 'db';
+
+    /**
+     * Object Manager
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @var ObjectManagerInterface
      */
     private $objectManager;
@@ -69,7 +84,11 @@ class BackupCommand extends AbstractSetupCommand
         ObjectManagerProvider $objectManagerProvider,
         MaintenanceMode $maintenanceMode,
         DeploymentConfig $deploymentConfig,
+<<<<<<< HEAD
         ?MaintenanceModeEnabler $maintenanceModeEnabler = null
+=======
+        MaintenanceModeEnabler $maintenanceModeEnabler = null
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ) {
         $this->objectManager = $objectManagerProvider->get();
         $this->backupRollbackFactory = $this->objectManager->get(\Magento\Framework\Setup\BackupRollbackFactory::class);
@@ -80,7 +99,11 @@ class BackupCommand extends AbstractSetupCommand
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
+=======
+     * {@inheritdoc}
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     protected function configure()
     {
@@ -104,16 +127,26 @@ class BackupCommand extends AbstractSetupCommand
                 'Take complete database backup'
             ),
         ];
+<<<<<<< HEAD
         $this->setName(self::NAME)
+=======
+        $this->setName('setup:backup')
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->setDescription('Takes backup of Magento Application code base, media and database')
             ->setDefinition($options);
         parent::configure();
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
+=======
+     * {@inheritdoc}
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         if (!$this->deploymentConfig->isAvailable()
             && ($input->getOption(self::INPUT_KEY_MEDIA) || $input->getOption(self::INPUT_KEY_DB))) {

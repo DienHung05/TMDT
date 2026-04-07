@@ -1,12 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Customer\Controller\Account;
 
+<<<<<<< HEAD
 use Magento\Customer\Model\ResourceModel\Customer as CustomerResource;
 use Magento\Customer\Model\ResourceModel\Visitor as VisitorResource;
 use Magento\Customer\Model\Session;
@@ -24,12 +30,24 @@ use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\TestCase\AbstractController;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\Customer\Model\Session;
+use Magento\Customer\Model\Url;
+use Magento\Framework\App\Request\Http as HttpRequest;
+use Magento\Framework\Message\MessageInterface;
+use Magento\Framework\Phrase;
+use Magento\Framework\Url\EncoderInterface;
+use Magento\TestFramework\TestCase\AbstractController;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class checks customer login action
  *
  * @see \Magento\Customer\Controller\Account\LoginPost
+<<<<<<< HEAD
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class LoginPostTest extends AbstractController
 {
@@ -45,6 +63,7 @@ class LoginPostTest extends AbstractController
     private $customerUrl;
 
     /**
+<<<<<<< HEAD
      * @var Generic
      */
     private $generic;
@@ -60,6 +79,8 @@ class LoginPostTest extends AbstractController
     private $visitorResource;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
@@ -69,9 +90,12 @@ class LoginPostTest extends AbstractController
         $this->session = $this->_objectManager->get(Session::class);
         $this->urlEncoder = $this->_objectManager->get(EncoderInterface::class);
         $this->customerUrl = $this->_objectManager->get(Url::class);
+<<<<<<< HEAD
         $this->generic = $this->_objectManager->get(Generic::class);
         $this->customerResource = $this->_objectManager->get(CustomerResource::class);
         $this->visitorResource = $this->_objectManager->get(VisitorResource::class);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -79,12 +103,20 @@ class LoginPostTest extends AbstractController
      *
      * @magentoDataFixture Magento/Customer/_files/customer.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider missingParametersDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string|null $email
      * @param string|null $password
      * @param string $expectedErrorMessage
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('missingParametersDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testLoginIncorrectParameters(?string $email, ?string $password, string $expectedErrorMessage): void
     {
         $this->prepareRequest($email, $password);
@@ -98,34 +130,58 @@ class LoginPostTest extends AbstractController
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function missingParametersDataProvider(): array
+=======
+    public function missingParametersDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'missing_email' => [
                 'email' => null,
                 'password' => 'password',
+<<<<<<< HEAD
                 'expectedErrorMessage' => 'A login and a password are required.',
+=======
+                'expected_error_message' => 'A login and a password are required.',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             'missing_password' => [
                 'email' => 'customer@example.com',
                 'password' => null,
+<<<<<<< HEAD
                 'expectedErrorMessage' => 'A login and a password are required.',
+=======
+                'expected_error_message' => 'A login and a password are required.',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             'missing_both_parameters' => [
                 'email' => null,
                 'password' => null,
+<<<<<<< HEAD
                 'expectedErrorMessage' => 'A login and a password are required.',
+=======
+                'expected_error_message' => 'A login and a password are required.',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             'wrong_email' => [
                 'email' => 'wrongemail@example.com',
                 'password' => 'password',
+<<<<<<< HEAD
                 'expectedErrorMessage' => 'The account sign-in was incorrect or your account is disabled temporarily.'
+=======
+                'expected_error_message' => 'The account sign-in was incorrect or your account is disabled temporarily.'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     . ' Please wait and try again later.',
             ],
             'wrong_password' => [
                 'email' => 'customer@example.com',
                 'password' => 'wrongpassword',
+<<<<<<< HEAD
                 'expectedErrorMessage' => 'The account sign-in was incorrect or your account is disabled temporarily.'
+=======
+                'expected_error_message' => 'The account sign-in was incorrect or your account is disabled temporarily.'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     . ' Please wait and try again later.',
             ],
         ];
@@ -249,6 +305,7 @@ class LoginPostTest extends AbstractController
     }
 
     /**
+<<<<<<< HEAD
      * @magentoConfigFixture current_store customer/startup/redirect_dashboard 1
      * @magentoConfigFixture current_store customer/captcha/enable 0
      *
@@ -333,6 +390,8 @@ class LoginPostTest extends AbstractController
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Prepare request
      *
      * @param string|null $email

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\Framework\Bulk\OperationInterface;
@@ -29,6 +34,7 @@ $bulks = [
         'description' => 'Bulk Description',
         'operation_count' => 3,
     ],
+<<<<<<< HEAD
     'in_progress_integration' => [
         'uuid' => 'bulk-uuid-2.1',
         'user_id' => 100,
@@ -36,6 +42,8 @@ $bulks = [
         'description' => 'Bulk Description',
         'operation_count' => 3,
     ],
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     'in_progress_failed' => [
         'uuid' => 'bulk-uuid-3',
         'user_id' => 1,

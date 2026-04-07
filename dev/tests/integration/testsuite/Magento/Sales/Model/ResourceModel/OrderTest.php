@@ -1,19 +1,28 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
 
 namespace Magento\Sales\Model\ResourceModel;
 
+<<<<<<< HEAD
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\Product\Type;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Framework\Event\ManagerInterface;
 use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\NoSuchEntityException;
+=======
+use Magento\Framework\Event\ManagerInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\Registry;
 use Magento\Sales\Api\OrderRepositoryInterface;
@@ -24,7 +33,10 @@ use Magento\Sales\Model\Order\Payment;
 use Magento\Sales\Model\ResourceModel\Order\CollectionFactory as OrderCollectionFactory;
 use Magento\Store\Api\StoreRepositoryInterface;
 use Magento\Store\Model\StoreManagerInterface;
+<<<<<<< HEAD
 use Magento\TestFramework\Fixture\DataFixture;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
 
@@ -60,9 +72,12 @@ class OrderTest extends TestCase
      */
     private $storeRepository;
 
+<<<<<<< HEAD
     /** @var ProductRepositoryInterface */
     private $productRepository;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @inheritdoc
      */
@@ -74,8 +89,11 @@ class OrderTest extends TestCase
         $this->orderIncrementId = '100000001';
         $this->storeManager = $this->objectManager->get(StoreManagerInterface::class);
         $this->storeRepository = $this->objectManager->get(StoreRepositoryInterface::class);
+<<<<<<< HEAD
         $this->productRepository = $this->objectManager->get(ProductRepositoryInterface::class);
         $this->productRepository->cleanCache();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -104,7 +122,10 @@ class OrderTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_simple.php
      * @return void
+<<<<<<< HEAD
      * @throws AlreadyExistsException
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function testSaveOrder(): void
     {
@@ -164,6 +185,7 @@ class OrderTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * Test save order with custom option text field
      *
      * @return void
@@ -267,13 +289,18 @@ class OrderTest extends TestCase
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Check that store name and x_forwarded_for with length within 255 chars can be saved in table sales_order
      *
      * @magentoDataFixture Magento/Store/_files/store_with_long_name.php
      * @magentoDbIsolation disabled
      * @return void
+<<<<<<< HEAD
      * @throws AlreadyExistsException
      * @throws NoSuchEntityException
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function testSaveLongNames(): void
     {
@@ -302,6 +329,7 @@ class OrderTest extends TestCase
         $this->assertStringContainsString($store->getWebsite()->getName(), $order->getStoreName());
         $this->assertStringContainsString($store->getGroup()->getName(), $order->getStoreName());
     }
+<<<<<<< HEAD
 
     /**
      * Get long text for option
@@ -314,4 +342,6 @@ class OrderTest extends TestCase
         HEREDOC;
         // phpcs:enable
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

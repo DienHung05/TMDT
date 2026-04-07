@@ -1,15 +1,25 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Customer\Block\Form;
 
 use Magento\Customer\Block\DataProviders\AddressAttributeData;
 use Magento\Customer\ViewModel\Address\RegionProvider;
 use Magento\Framework\View\Element\Template;
+<<<<<<< HEAD
 use Magento\Framework\View\Element\ButtonLockManager;
 use Magento\TestFramework\Helper\Bootstrap;
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\Customer\ViewModel\CreateAccountButton;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test class for \Magento\Customer\Block\Form\Register
@@ -28,10 +38,17 @@ class RegisterTest extends \PHPUnit\Framework\TestCase
         /** @var \Magento\Customer\Block\Widget\Company $block */
         $block = Bootstrap::getObjectManager()->create(Register::class)
             ->setTemplate('Magento_Customer::form/register.phtml')
+<<<<<<< HEAD
             ->setShowAddressFields(true);
         $this->setAttributeDataProvider($block);
         $this->setRegionProvider($block);
         $this->setButtonLockManager($block);
+=======
+            ->setShowAddressFields(true)
+            ->setCreateAccountButtonViewModel(Bootstrap::getObjectManager()->create(CreateAccountButton::class));
+        $this->setAttributeDataProvider($block);
+        $this->setRegionProvider($block);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertStringContainsString('title="Company"', $block->toHtml());
     }
@@ -46,10 +63,17 @@ class RegisterTest extends \PHPUnit\Framework\TestCase
         /** @var \Magento\Customer\Block\Widget\Company $block */
         $block = Bootstrap::getObjectManager()->create(Register::class)
             ->setTemplate('Magento_Customer::form/register.phtml')
+<<<<<<< HEAD
             ->setShowAddressFields(true);
         $this->setAttributeDataProvider($block);
         $this->setRegionProvider($block);
         $this->setButtonLockManager($block);
+=======
+            ->setShowAddressFields(true)
+            ->setCreateAccountButtonViewModel(Bootstrap::getObjectManager()->create(CreateAccountButton::class));
+        $this->setAttributeDataProvider($block);
+        $this->setRegionProvider($block);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertStringContainsString('title="Phone&#x20;Number"', $block->toHtml());
     }
@@ -64,10 +88,17 @@ class RegisterTest extends \PHPUnit\Framework\TestCase
         /** @var \Magento\Customer\Block\Widget\Company $block */
         $block = Bootstrap::getObjectManager()->create(Register::class)
             ->setTemplate('Magento_Customer::form/register.phtml')
+<<<<<<< HEAD
             ->setShowAddressFields(true);
         $this->setAttributeDataProvider($block);
         $this->setRegionProvider($block);
         $this->setButtonLockManager($block);
+=======
+            ->setShowAddressFields(true)
+            ->setCreateAccountButtonViewModel(Bootstrap::getObjectManager()->create(CreateAccountButton::class));
+        $this->setAttributeDataProvider($block);
+        $this->setRegionProvider($block);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertStringNotContainsString('title="Fax"', $block->toHtml());
     }
@@ -89,10 +120,17 @@ class RegisterTest extends \PHPUnit\Framework\TestCase
         /** @var \Magento\Customer\Block\Widget\Company $block */
         $block = Bootstrap::getObjectManager()->create(Register::class)
             ->setTemplate('Magento_Customer::form/register.phtml')
+<<<<<<< HEAD
             ->setShowAddressFields(true);
         $this->setAttributeDataProvider($block);
         $this->setRegionProvider($block);
         $this->setButtonLockManager($block);
+=======
+            ->setShowAddressFields(true)
+            ->setCreateAccountButtonViewModel(Bootstrap::getObjectManager()->create(CreateAccountButton::class));
+        $this->setAttributeDataProvider($block);
+        $this->setRegionProvider($block);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertStringNotContainsString('title="Company"', $block->toHtml());
     }
@@ -114,10 +152,17 @@ class RegisterTest extends \PHPUnit\Framework\TestCase
         /** @var \Magento\Customer\Block\Widget\Company $block */
         $block = Bootstrap::getObjectManager()->create(Register::class)
             ->setTemplate('Magento_Customer::form/register.phtml')
+<<<<<<< HEAD
             ->setShowAddressFields(true);
         $this->setAttributeDataProvider($block);
         $this->setRegionProvider($block);
         $this->setButtonLockManager($block);
+=======
+            ->setShowAddressFields(true)
+            ->setCreateAccountButtonViewModel(Bootstrap::getObjectManager()->create(CreateAccountButton::class));
+        $this->setAttributeDataProvider($block);
+        $this->setRegionProvider($block);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertStringNotContainsString('title="Phone&#x20;Number"', $block->toHtml());
     }
@@ -139,10 +184,17 @@ class RegisterTest extends \PHPUnit\Framework\TestCase
         /** @var \Magento\Customer\Block\Widget\Company $block */
         $block = Bootstrap::getObjectManager()->create(Register::class)
             ->setTemplate('Magento_Customer::form/register.phtml')
+<<<<<<< HEAD
             ->setShowAddressFields(true);
         $this->setAttributeDataProvider($block);
         $this->setRegionProvider($block);
         $this->setButtonLockManager($block);
+=======
+            ->setShowAddressFields(true)
+            ->setCreateAccountButtonViewModel(Bootstrap::getObjectManager()->create(CreateAccountButton::class));
+        $this->setAttributeDataProvider($block);
+        $this->setRegionProvider($block);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertStringContainsString('title="Fax"', $block->toHtml());
     }
@@ -155,10 +207,17 @@ class RegisterTest extends \PHPUnit\Framework\TestCase
         /** @var \Magento\Customer\Block\Form\Register $block */
         $block = Bootstrap::getObjectManager()->create(Register::class)
             ->setTemplate('Magento_Customer::form/register.phtml')
+<<<<<<< HEAD
             ->setShowAddressFields(true);
         $this->setAttributeDataProvider($block);
         $this->setRegionProvider($block);
         $this->setButtonLockManager($block);
+=======
+            ->setShowAddressFields(true)
+            ->setCreateAccountButtonViewModel(Bootstrap::getObjectManager()->create(CreateAccountButton::class));
+        $this->setAttributeDataProvider($block);
+        $this->setRegionProvider($block);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertStringNotContainsString('title="City"', $block->toHtml());
         $this->assertStringContainsString('title="Suburb"', $block->toHtml());
@@ -197,6 +256,7 @@ class RegisterTest extends \PHPUnit\Framework\TestCase
         $regionProvider = Bootstrap::getObjectManager()->create(RegionProvider::class);
         $block->setRegionProvider($regionProvider);
     }
+<<<<<<< HEAD
 
     /**
      * Set Button Lock Manager View Model
@@ -219,4 +279,6 @@ class RegisterTest extends \PHPUnit\Framework\TestCase
         );
         $block->setButtonLockManager($buttonLockManager);
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

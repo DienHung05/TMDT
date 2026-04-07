@@ -1,18 +1,27 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2012 Adobe
  * All Rights Reserved.
  */
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 namespace Magento\Framework\Image\Adapter;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Filesystem\Directory\WriteInterface;
+<<<<<<< HEAD
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Fixture\ImageFixture;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Depends;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoDataFixture Magento/Framework/Image/_files/image_fixture.php
@@ -25,7 +34,11 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
      *
      * @var array
      */
+<<<<<<< HEAD
     protected static $_adapters = [
+=======
+    protected $_adapters = [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         \Magento\Framework\Image\Adapter\AdapterInterface::ADAPTER_GD2,
         \Magento\Framework\Image\Adapter\AdapterInterface::ADAPTER_IM,
     ];
@@ -49,10 +62,17 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
      * @param array $data
      * @return array
      */
+<<<<<<< HEAD
     protected static function _prepareData($data)
     {
         $result = [];
         foreach (self::$_adapters as $adapterType) {
+=======
+    protected function _prepareData($data)
+    {
+        $result = [];
+        foreach ($this->_adapters as $adapterType) {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             foreach ($data as $row) {
                 $row[] = $adapterType;
                 $result[] = $row;
@@ -100,7 +120,11 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
      * @param string $pattern
      * @return string|null
      */
+<<<<<<< HEAD
     protected static function _getFixture($pattern)
+=======
+    protected function _getFixture($pattern)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         if (!$pattern) {
             return null;
@@ -151,14 +175,24 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
     /**
      * Checks if all dependencies are loaded
      * @param string $adapterType
+<<<<<<< HEAD
      */
     #[DataProvider('adaptersDataProvider')]
+=======
+     *
+     * @dataProvider adaptersDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCheckDependencies($adapterType)
     {
         $this->_getAdapter($adapterType);
     }
 
+<<<<<<< HEAD
     public static function adaptersDataProvider()
+=======
+    public function adaptersDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [\Magento\Framework\Image\Adapter\AdapterInterface::ADAPTER_GD2],
@@ -169,9 +203,16 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
     /**
      * @param string $image
      * @param string $adapterType
+<<<<<<< HEAD
      */
     #[Depends('testCheckDependencies')]
     #[DataProvider('openDataProvider')]
+=======
+     *
+     * @depends testCheckDependencies
+     * @dataProvider openDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testOpen($image, $adapterType)
     {
         $adapter = $this->_getAdapter($adapterType);
@@ -183,6 +224,7 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
         }
     }
 
+<<<<<<< HEAD
     public static function openDataProvider()
     {
         return self::_prepareData(
@@ -191,14 +233,29 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
                 [self::_getFixture('image_adapters_test.png')],
                 [self::_getFixture('image_adapters_test.tiff')],
                 [self::_getFixture('image_adapters_test.bmp')],
+=======
+    public function openDataProvider()
+    {
+        return $this->_prepareData(
+            [
+                [null],
+                [$this->_getFixture('image_adapters_test.png')],
+                [$this->_getFixture('image_adapters_test.tiff')],
+                [$this->_getFixture('image_adapters_test.bmp')],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ]
         );
     }
 
     /**
      * @param string $adapterType
+<<<<<<< HEAD
      */
     #[DataProvider('adaptersDataProvider')]
+=======
+     * @dataProvider adaptersDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetImage($adapterType)
     {
         $adapter = $this->_getAdapter($adapterType);
@@ -209,9 +266,16 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
     /**
      * @param string $image
      * @param string $adapterType
+<<<<<<< HEAD
      */
     #[Depends('testOpen')]
     #[DataProvider('openDataProvider')]
+=======
+     *
+     * @dataProvider openDataProvider
+     * @depends testOpen
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testImageSize($image, $adapterType)
     {
         $adapter = $this->_getAdapter($adapterType);
@@ -233,9 +297,16 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
      * @param string $adapterType
      *
      * @throws \Magento\Framework\Exception\FileSystemException
+<<<<<<< HEAD
      */
     #[Depends('testOpen')]
     #[DataProvider('saveDataProvider')]
+=======
+     *
+     * @dataProvider saveDataProvider
+     * @depends testOpen
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSave($image, $tmpDir, $adapterType)
     {
         $adapter = $this->_getAdapter($adapterType);
@@ -251,17 +322,28 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
         $rootDirectory->delete($tmpDir);
     }
 
+<<<<<<< HEAD
     public static function saveDataProvider()
+=======
+    public function saveDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
         /** @var $rootDirectory \Magento\Framework\Filesystem\Directory\WriteInterface */
         $rootDirectory = $objectManager->get(\Magento\Framework\Filesystem\Directory\TargetDirectory::class)
             ->getDirectoryWrite(DirectoryList::TMP);
         $dir = $rootDirectory->getAbsolutePath('image/');
+<<<<<<< HEAD
         return self::_prepareData(
             [
                 [self::_getFixture('image_adapters_test.png'), [$dir . uniqid('test_image_adapter')]],
                 [self::_getFixture('image_adapters_test.png'), [$dir, uniqid('test_image_adapter')]],
+=======
+        return $this->_prepareData(
+            [
+                [$this->_getFixture('image_adapters_test.png'), [$dir . uniqid('test_image_adapter')]],
+                [$this->_getFixture('image_adapters_test.png'), [$dir, uniqid('test_image_adapter')]],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ]
         );
     }
@@ -269,6 +351,7 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
     /**
      * @param string $image
      * @param array $dims (width, height)
+<<<<<<< HEAD
      * @param boolean $keepRatio
      * @param array|null $expectedDims (width, height)
      * @param string|null $expectedException
@@ -321,6 +404,37 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
                 ['image2', [100, 2], true, [100, 1], null],
                 ['image3', [2, 100], false, [2, 100], null],
                 ['image3', [2, 100], true, [1, 100], null],
+=======
+     * @param string $adapterType
+     *
+     * @dataProvider resizeDataProvider
+     * @depends testOpen
+     */
+    public function testResize($image, $dims, $adapterType)
+    {
+        $adapter = $this->_getAdapter($adapterType);
+        $adapter->open($image);
+        try {
+            $adapter->resize($dims[0], $dims[1]);
+            $this->assertEquals($dims, [$adapter->getOriginalWidth(), $adapter->getOriginalHeight()]);
+        } catch (\Exception $e) {
+            $result = $dims[0] !== null && $dims[0] <= 0 ||
+                $dims[1] !== null && $dims[1] <= 0 ||
+                empty(${$dims[0]}) && empty(${$dims[1]});
+            $this->assertTrue($result);
+        }
+    }
+
+    public function resizeDataProvider()
+    {
+        return $this->_prepareData(
+            [
+                [$this->_getFixture('image_adapters_test.png'), [150, 70]],
+                [$this->_getFixture('image_adapters_test.png'), [null, 70]],
+                [$this->_getFixture('image_adapters_test.png'), [100, null]],
+                [$this->_getFixture('image_adapters_test.png'), [null, null]],
+                [$this->_getFixture('image_adapters_test.png'), [-100, -50]],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ]
         );
     }
@@ -331,9 +445,15 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
      * @param array $pixel
      * @param string $adapterType
      *
+<<<<<<< HEAD
      */
     #[Depends('testOpen')]
     #[DataProvider('rotateDataProvider')]
+=======
+     * @dataProvider rotateDataProvider
+     * @depends testOpen
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRotate($image, $angle, $pixel, $adapterType)
     {
         $adapter = $this->_getAdapter($adapterType);
@@ -378,6 +498,7 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+<<<<<<< HEAD
     public static function rotateDataProvider()
     {
         return self::_prepareData(
@@ -386,6 +507,16 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
                 [self::_getFixture('image_adapters_test.png'), 48, ['x' => 157, 'y' => 35]],
                 [self::_getFixture('image_adapters_test.png'), 90, ['x' => 250, 'y' => 74]],
                 [self::_getFixture('image_adapters_test.png'), 180, ['x' => 250, 'y' => 74]],
+=======
+    public function rotateDataProvider()
+    {
+        return $this->_prepareData(
+            [
+                [$this->_getFixture('image_adapters_test.png'), 45, ['x' => 157, 'y' => 35]],
+                [$this->_getFixture('image_adapters_test.png'), 48, ['x' => 157, 'y' => 35]],
+                [$this->_getFixture('image_adapters_test.png'), 90, ['x' => 250, 'y' => 74]],
+                [$this->_getFixture('image_adapters_test.png'), 180, ['x' => 250, 'y' => 74]],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ]
         );
     }
@@ -399,10 +530,18 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
      * @param array $comparePoint1
      * @param array $comparePoint2
      * @param string $adapterType
+<<<<<<< HEAD
      */
     #[Depends('testOpen')]
     #[Depends('testImageSize')]
     #[DataProvider('imageWatermarkWithAlphaTransparencyDataProvider')]
+=======
+     *
+     * @dataProvider imageWatermarkWithAlphaTransparencyDataProvider
+     * @depends testOpen
+     * @depends testImageSize
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testWatermarkWithAlphaTransparency(
         $image,
         $watermark,
@@ -440,6 +579,7 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($result, $message);
     }
 
+<<<<<<< HEAD
     public static function imageWatermarkWithAlphaTransparencyDataProvider()
     {
         return self::_prepareData(
@@ -448,30 +588,55 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
                 [
                     self::_getFixture('watermark_alpha_base_image.jpg'),
                     self::_getFixture('watermark_alpha.png'),
+=======
+    public function imageWatermarkWithAlphaTransparencyDataProvider()
+    {
+        return $this->_prepareData(
+            [
+                // Watermark with alpha channel, 25%
+                [
+                    $this->_getFixture('watermark_alpha_base_image.jpg'),
+                    $this->_getFixture('watermark_alpha.png'),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     25,
                     [ 23, 3 ],
                     [ 23, 30 ]
                 ],
                 // Watermark with alpha channel, 50%
                 [
+<<<<<<< HEAD
                     self::_getFixture('watermark_alpha_base_image.jpg'),
                     self::_getFixture('watermark_alpha.png'),
+=======
+                    $this->_getFixture('watermark_alpha_base_image.jpg'),
+                    $this->_getFixture('watermark_alpha.png'),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     50,
                     [ 23, 3 ],
                     [ 23, 30 ]
                 ],
                 // Watermark with no alpha channel, 50%
                 [
+<<<<<<< HEAD
                     self::_getFixture('watermark_alpha_base_image.jpg'),
                     self::_getFixture('watermark.png'),
+=======
+                    $this->_getFixture('watermark_alpha_base_image.jpg'),
+                    $this->_getFixture('watermark.png'),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     50,
                     [ 3, 3 ],
                     [ 23,3 ]
                 ],
                 // Watermark with no alpha channel, 100%
                 [
+<<<<<<< HEAD
                     self::_getFixture('watermark_alpha_base_image.jpg'),
                     self::_getFixture('watermark.png'),
+=======
+                    $this->_getFixture('watermark_alpha_base_image.jpg'),
+                    $this->_getFixture('watermark.png'),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     100,
                     [ 3, 3 ],
                     [ 3, 60 ]
@@ -492,9 +657,16 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
      * @param int $colorX
      * @param int $colorY
      * @param string $adapterType
+<<<<<<< HEAD
      */
     #[Depends('testOpen')]
     #[DataProvider('imageWatermarkPositionDataProvider')]
+=======
+     *
+     * @dataProvider imageWatermarkPositionDataProvider
+     * @depends testOpen
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testWatermarkPosition(
         $image,
         $watermark,
@@ -529,6 +701,7 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($result, $message);
     }
 
+<<<<<<< HEAD
     public static function imageWatermarkPositionDataProvider()
     {
         return self::_prepareData(
@@ -536,6 +709,15 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
                 [
                     self::_getFixture('image_adapters_test.png'),
                     self::_getFixture('watermark.png'),
+=======
+    public function imageWatermarkPositionDataProvider()
+    {
+        return $this->_prepareData(
+            [
+                [
+                    $this->_getFixture('image_adapters_test.png'),
+                    $this->_getFixture('watermark.png'),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     50,
                     50,
                     100,
@@ -544,8 +726,13 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
                     10,
                 ],
                 [
+<<<<<<< HEAD
                     self::_getFixture('image_adapters_test.png'),
                     self::_getFixture('watermark.png'),
+=======
+                    $this->_getFixture('image_adapters_test.png'),
+                    $this->_getFixture('watermark.png'),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     100,
                     70,
                     100,
@@ -554,8 +741,13 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
                     10
                 ],
                 [
+<<<<<<< HEAD
                     self::_getFixture('image_adapters_test.png'),
                     self::_getFixture('watermark.png'),
+=======
+                    $this->_getFixture('image_adapters_test.png'),
+                    $this->_getFixture('watermark.png'),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     100,
                     70,
                     100,
@@ -564,8 +756,13 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
                     10
                 ],
                 [
+<<<<<<< HEAD
                     self::_getFixture('image_adapters_test.png'),
                     self::_getFixture('watermark.png'),
+=======
+                    $this->_getFixture('image_adapters_test.png'),
+                    $this->_getFixture('watermark.png'),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     100,
                     100,
                     100,
@@ -574,8 +771,13 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
                     10
                 ],
                 [
+<<<<<<< HEAD
                     self::_getFixture('image_adapters_test.png'),
                     self::_getFixture('watermark.jpg'),
+=======
+                    $this->_getFixture('image_adapters_test.png'),
+                    $this->_getFixture('watermark.jpg'),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     50,
                     50,
                     100,
@@ -584,8 +786,13 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
                     10
                 ],
                 [
+<<<<<<< HEAD
                     self::_getFixture('image_adapters_test.png'),
                     self::_getFixture('watermark.gif'),
+=======
+                    $this->_getFixture('image_adapters_test.png'),
+                    $this->_getFixture('watermark.gif'),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     50,
                     50,
                     100,
@@ -645,9 +852,15 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
      * @param int $bottom
      * @param string $adapterType
      *
+<<<<<<< HEAD
      */
     #[Depends('testOpen')]
     #[DataProvider('cropDataProvider')]
+=======
+     * @dataProvider cropDataProvider
+     * @depends testOpen
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCrop($image, $left, $top, $right, $bottom, $adapterType)
     {
         $adapter = $this->_getAdapter($adapterType);
@@ -665,6 +878,7 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expectedSize, $newSize);
     }
 
+<<<<<<< HEAD
     public static function cropDataProvider()
     {
         return self::_prepareData(
@@ -672,18 +886,35 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
                 [self::_getFixture('image_adapters_test.png'), 50, 50, 75, 75],
                 [self::_getFixture('image_adapters_test.png'), 20, 50, 35, 35],
                 [self::_getFixture('image_adapters_test.png'), 0, 0, 0, 0],
+=======
+    public function cropDataProvider()
+    {
+        return $this->_prepareData(
+            [
+                [$this->_getFixture('image_adapters_test.png'), 50, 50, 75, 75],
+                [$this->_getFixture('image_adapters_test.png'), 20, 50, 35, 35],
+                [$this->_getFixture('image_adapters_test.png'), 0, 0, 0, 0],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ]
         );
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider createPngFromStringDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $pixel1
      * @param array $expectedColor1
      * @param array $pixel2
      * @param array $expectedColor2
      * @param string $adapterType
      */
+<<<<<<< HEAD
     #[DataProvider('createPngFromStringDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreatePngFromString($pixel1, $expectedColor1, $pixel2, $expectedColor2, $adapterType)
     {
         $adapter = $this->_getAdapter($adapterType);
@@ -709,35 +940,63 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
      * @link http://php.net/manual/en/function.imageantialias.php
      * @return array
      */
+<<<<<<< HEAD
     public static function createPngFromStringDataProvider()
+=======
+    public function createPngFromStringDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
                 ['x' => 5, 'y' => 8],
+<<<<<<< HEAD
                 ['red' => 0, 'green' => 0, 'blue' => 0],
                 ['x' => 0, 'y' => 11],
                 ['red' => 255, 'green' => 255, 'blue' => 255],
+=======
+                'expectedColor1' => ['red' => 0, 'green' => 0, 'blue' => 0],
+                ['x' => 0, 'y' => 11],
+                'expectedColor2' => ['red' => 255, 'green' => 255, 'blue' => 255],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 \Magento\Framework\Image\Adapter\AdapterInterface::ADAPTER_GD2,
             ],
             [
                 ['x' => 5, 'y' => 12],
+<<<<<<< HEAD
                 ['red' => 0, 'green' => 0, 'blue' => 0],
                 ['x' => 0, 'y' => 20],
                 ['red' => 255, 'green' => 255, 'blue' => 255],
+=======
+                'expectedColor1' => ['red' => 0, 'green' => 0, 'blue' => 0],
+                ['x' => 0, 'y' => 20],
+                'expectedColor2' => ['red' => 255, 'green' => 255, 'blue' => 255],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 \Magento\Framework\Image\Adapter\AdapterInterface::ADAPTER_IM
             ],
             [
                 ['x' => 1, 'y' => 11],
+<<<<<<< HEAD
                 ['red' => 255, 'green' => 255, 'blue' => 255],
                 ['x' => 5, 'y' => 11],
                 ['red' => 0, 'green' => 0, 'blue' => 0],
+=======
+                'expectedColor1' => ['red' => 255, 'green' => 255, 'blue' => 255],
+                ['x' => 5, 'y' => 11],
+                'expectedColor2' => ['red' => 0, 'green' => 0, 'blue' => 0],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 \Magento\Framework\Image\Adapter\AdapterInterface::ADAPTER_GD2
             ],
             [
                 ['x' => 1, 'y' => 20],
+<<<<<<< HEAD
                 ['red' => 255, 'green' => 255, 'blue' => 255],
                 ['x' => 5, 'y' => 16],
                 ['red' => 0, 'green' => 0, 'blue' => 0],
+=======
+                'expectedColor1' => ['red' => 255, 'green' => 255, 'blue' => 255],
+                ['x' => 5, 'y' => 16],
+                'expectedColor2' => ['red' => 0, 'green' => 0, 'blue' => 0],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 \Magento\Framework\Image\Adapter\AdapterInterface::ADAPTER_IM
             ]
         ];
@@ -750,11 +1009,18 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider testValidateUploadFileExceptionDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $fileName
      * @param string $expectedErrorMsg
      * @param bool $useFixture
      */
+<<<<<<< HEAD
     #[DataProvider('imageValidateUploadFileExceptionDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testValidateUploadFileException($fileName, $expectedErrorMsg, $useFixture)
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -773,7 +1039,11 @@ class InterfaceTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function imageValidateUploadFileExceptionDataProvider()
+=======
+    public function testValidateUploadFileExceptionDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'image_notfound' => [

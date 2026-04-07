@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Theme\Model\View;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Store\Model\ScopeInterface;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoComponentsDir Magento/Theme/Model/_files/design
@@ -148,16 +156,29 @@ class DesignTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @magentoAppIsolation enabled
      */
     #[DataProvider('getFilenameDataProvider')]
+=======
+     * @dataProvider getFilenameDataProvider
+     * @magentoAppIsolation enabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetFilename($file, $params)
     {
         $this->_emulateFixtureTheme();
         $this->assertFileExists($this->_viewFileSystem->getFilename($file, $params));
     }
 
+<<<<<<< HEAD
     public static function getFilenameDataProvider(): array
+=======
+    /**
+     * @return array
+     */
+    public function getFilenameDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['theme_file.txt', ['module' => 'Magento_Catalog']],

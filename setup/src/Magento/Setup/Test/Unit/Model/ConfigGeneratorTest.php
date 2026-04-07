@@ -1,7 +1,13 @@
 <?php
+<<<<<<< HEAD
 /**
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+/***
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -53,12 +59,20 @@ class ConfigGeneratorTest extends TestCase
 
         $this->configDataMock = $this->getMockBuilder(ConfigData::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['set'])
+=======
+            ->setMethods(['set'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
 
         $configDataFactoryMock = $this->getMockBuilder(ConfigDataFactory::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['create'])
+=======
+            ->setMethods(['create'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
 
         $configDataFactoryMock->method('create')
@@ -66,7 +80,11 @@ class ConfigGeneratorTest extends TestCase
 
         $this->driverOptionsMock = $this->getMockBuilder(DriverOptions::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['getDriverOptions'])
+=======
+            ->setMethods(['getDriverOptions'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
 
         $this->model = $objectManager->getObject(

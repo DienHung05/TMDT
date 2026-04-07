@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -15,7 +20,10 @@ use Magento\Framework\GraphQl\Schema\SchemaGenerator;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\GraphQl\Model\Query\Logger\LoggerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -27,7 +35,11 @@ use PHPUnit\Framework\TestCase;
  */
 class LogDataTest extends TestCase
 {
+<<<<<<< HEAD
     public const CONTENT_TYPE = 'application/json';
+=======
+    const CONTENT_TYPE = 'application/json';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /** @var ObjectManagerInterface */
     private $objectManager;
@@ -59,11 +71,18 @@ class LogDataTest extends TestCase
      * @param string $query
      * @param array $headers
      * @param array $expectedResult
+<<<<<<< HEAD
+=======
+     * @dataProvider getQueryInformationDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @return void
      *
      * @magentoAppIsolation enabled
      */
+<<<<<<< HEAD
     #[DataProvider('getQueryInformationDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetQueryInformation(string $query, array $headers, array $expectedResult): void
     {
         $this->request->setPathInfo('/graphql');
@@ -100,7 +119,11 @@ class LogDataTest extends TestCase
      *
      * @return array[]
      */
+<<<<<<< HEAD
     public static function getQueryInformationDataProvider()
+=======
+    public function getQueryInformationDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [ // query with all headers
@@ -137,7 +160,10 @@ QUERY,
                     LoggerInterface::HAS_MUTATION => 'false',
                     LoggerInterface::NUMBER_OF_OPERATIONS => 1,
                     LoggerInterface::OPERATION_NAMES => 'products',
+<<<<<<< HEAD
                     LoggerInterface::TOP_LEVEL_OPERATION_NAME => 'products',
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LoggerInterface::COMPLEXITY => 5,
                     LoggerInterface::HTTP_RESPONSE_CODE => 200,
                     LoggerInterface::X_MAGENTO_CACHE_ID => '1234'
@@ -166,7 +192,10 @@ QUERY,
                     LoggerInterface::HAS_MUTATION => 'false',
                     LoggerInterface::NUMBER_OF_OPERATIONS => 1,
                     LoggerInterface::OPERATION_NAMES => 'products',
+<<<<<<< HEAD
                     LoggerInterface::TOP_LEVEL_OPERATION_NAME => 'products',
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LoggerInterface::COMPLEXITY => 5,
                     LoggerInterface::HTTP_RESPONSE_CODE => 200,
                     LoggerInterface::X_MAGENTO_CACHE_ID => ''
@@ -200,7 +229,10 @@ QUERY,
                     LoggerInterface::HAS_MUTATION => 'false',
                     LoggerInterface::NUMBER_OF_OPERATIONS => 0,
                     LoggerInterface::OPERATION_NAMES => 'operationNameNotFound',
+<<<<<<< HEAD
                     LoggerInterface::TOP_LEVEL_OPERATION_NAME => 'xyz',
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LoggerInterface::COMPLEXITY => 5,
                     LoggerInterface::HTTP_RESPONSE_CODE => 200,
                     LoggerInterface::X_MAGENTO_CACHE_ID => '1234'
@@ -263,7 +295,10 @@ QUERY,
                     LoggerInterface::HAS_MUTATION => 'true',
                     LoggerInterface::NUMBER_OF_OPERATIONS => 1,
                     LoggerInterface::OPERATION_NAMES => 'placeOrder',
+<<<<<<< HEAD
                     LoggerInterface::TOP_LEVEL_OPERATION_NAME => 'placeOrder',
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LoggerInterface::COMPLEXITY => 3,
                     LoggerInterface::HTTP_RESPONSE_CODE => 200,
                     LoggerInterface::X_MAGENTO_CACHE_ID => '1234'
@@ -289,7 +324,10 @@ QUERY,
                     LoggerInterface::HAS_MUTATION => 'true',
                     LoggerInterface::NUMBER_OF_OPERATIONS => 1,
                     LoggerInterface::OPERATION_NAMES => 'placeOrder',
+<<<<<<< HEAD
                     LoggerInterface::TOP_LEVEL_OPERATION_NAME => 'placeOrder',
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LoggerInterface::COMPLEXITY => 3,
                     LoggerInterface::HTTP_RESPONSE_CODE => 200,
                     LoggerInterface::X_MAGENTO_CACHE_ID => ''
@@ -334,7 +372,10 @@ QUERY,
                     LoggerInterface::HAS_MUTATION => 'false',
                     LoggerInterface::NUMBER_OF_OPERATIONS => 2,
                     LoggerInterface::OPERATION_NAMES => 'cart,products',
+<<<<<<< HEAD
                     LoggerInterface::TOP_LEVEL_OPERATION_NAME => 'products',
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LoggerInterface::COMPLEXITY => 8,
                     LoggerInterface::HTTP_RESPONSE_CODE => 200,
                     LoggerInterface::X_MAGENTO_CACHE_ID => '1234'

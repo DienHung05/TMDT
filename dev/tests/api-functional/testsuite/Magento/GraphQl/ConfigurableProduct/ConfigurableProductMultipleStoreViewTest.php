@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\ConfigurableProduct;
 
 use Magento\TestFramework\TestCase\GraphQlAbstract;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test configurable product queries work correctly with multiple websites
@@ -39,11 +47,18 @@ class ConfigurableProductMultipleStoreViewTest extends GraphQlAbstract
 
     /**
      * @magentoApiDataFixture Magento/ConfigurableProduct/_files/configurable_product_with_children_on_different_websites.php
+<<<<<<< HEAD
+=======
+     * @dataProvider childrenAssignedToDifferentWebsitesDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $store
      * @param string $childSku
      * @param string $attributeLabel
      */
+<<<<<<< HEAD
     #[DataProvider('childrenAssignedToDifferentWebsitesDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testConfigurableProductWithChildrenAssignedToDifferentWebsites(
         string $store,
         string $childSku,
@@ -65,7 +80,11 @@ class ConfigurableProductMultipleStoreViewTest extends GraphQlAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function childrenAssignedToDifferentWebsitesDataProvider(): array
+=======
+    public function childrenAssignedToDifferentWebsitesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['default', 'simple_option_2', 'Option 2'],

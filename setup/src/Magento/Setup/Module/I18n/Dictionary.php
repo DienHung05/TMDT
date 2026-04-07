@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Setup\Module\I18n;
 
@@ -35,9 +40,13 @@ class Dictionary
     public function addPhrase(Phrase $phrase)
     {
         $this->_phrases[] = $phrase;
+<<<<<<< HEAD
         // Normalize null keys to empty string to avoid deprecated null array offset on PHP 8.1+
         $key = (string)($phrase->getKey() ?? '');
         $this->_phrasesByKey[$key][] = $phrase;
+=======
+        $this->_phrasesByKey[$phrase->getKey()][] = $phrase;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**

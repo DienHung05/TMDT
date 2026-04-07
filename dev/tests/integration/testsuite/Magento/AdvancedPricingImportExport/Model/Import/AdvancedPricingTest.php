@@ -1,12 +1,20 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\AdvancedPricingImportExport\Model\Import;
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\SelectAttribute;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Filesystem;
 use Magento\ImportExport\Model\Import;
@@ -16,9 +24,12 @@ use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory;
 use Magento\Catalog\Api\Data\ProductTierPriceExtensionFactory;
+<<<<<<< HEAD
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea adminhtml
@@ -268,8 +279,13 @@ class AdvancedPricingTest extends \PHPUnit\Framework\TestCase
      * @param array $importData
      * @param string $importBehavior
      * @param array $invalidRows
+<<<<<<< HEAD
      */
     #[DataProvider('importValidationDuplicateWithSameBaseCurrencyDataProvider')]
+=======
+     * @dataProvider importValidationDuplicateWithSameBaseCurrencyDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testImportValidationDuplicateWithSameBaseCurrency(
         array $dbData,
         array $importData,
@@ -295,8 +311,13 @@ class AdvancedPricingTest extends \PHPUnit\Framework\TestCase
      * @param array $importData
      * @param string $importBehavior
      * @param array $invalidRows
+<<<<<<< HEAD
      */
     #[DataProvider('importValidationDuplicateWithDifferentBaseCurrencyDataProvider')]
+=======
+     * @dataProvider importValidationDuplicateWithDifferentBaseCurrencyDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testImportValidationDuplicateWithDifferentBaseCurrency(
         array $dbData,
         array $importData,
@@ -313,7 +334,11 @@ class AdvancedPricingTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array[]
      */
+<<<<<<< HEAD
     public static function importValidationDuplicateWithSameBaseCurrencyDataProvider(): array
+=======
+    public function importValidationDuplicateWithSameBaseCurrencyDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return require __DIR__ . '/_files/import_validation_duplicate_same_currency_data_provider.php';
     }
@@ -321,7 +346,11 @@ class AdvancedPricingTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array[]
      */
+<<<<<<< HEAD
     public static function importValidationDuplicateWithDifferentBaseCurrencyDataProvider(): array
+=======
+    public function importValidationDuplicateWithDifferentBaseCurrencyDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return require __DIR__ . '/_files/import_validation_duplicate_diff_currency_data_provider.php';
     }
@@ -339,8 +368,12 @@ class AdvancedPricingTest extends \PHPUnit\Framework\TestCase
         string $file,
         string $directoryCode = DirectoryList::ROOT,
         string $behavior = Import::BEHAVIOR_APPEND,
+<<<<<<< HEAD
         bool $validateOnly = false,
         string $entity = 'advanced_pricing'
+=======
+        bool $validateOnly = false
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ): ProcessingErrorAggregatorInterface {
         /** @var Filesystem $filesystem */
         $filesystem = $this->objectManager->create(Filesystem::class);
@@ -356,7 +389,11 @@ class AdvancedPricingTest extends \PHPUnit\Framework\TestCase
             ->setParameters(
                 [
                     'behavior' => $behavior,
+<<<<<<< HEAD
                     'entity' => $entity
+=======
+                    'entity' => 'advanced_pricing'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ]
             )
             ->validateData();
@@ -431,6 +468,7 @@ class AdvancedPricingTest extends \PHPUnit\Framework\TestCase
         $stream->close();
         return $varDir->getAbsolutePath($tmpFilename);
     }
+<<<<<<< HEAD
 
     /**
      * For checking if correct add and update count are being displayed after importing file having 100+ records
@@ -498,4 +536,6 @@ class AdvancedPricingTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(0, $this->model->getCreatedItemsCount(), 'Advance pricing create count2');
         $this->assertEquals(127, $this->model->getUpdatedItemsCount(), 'Advance pricing update count2');
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

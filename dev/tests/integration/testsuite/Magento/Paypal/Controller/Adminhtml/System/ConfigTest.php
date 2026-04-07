@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -10,7 +15,10 @@ namespace Magento\Paypal\Controller\Adminhtml\System;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Request\Http as HttpRequest;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea adminhtml
@@ -21,11 +29,19 @@ class ConfigTest extends \Magento\TestFramework\TestCase\AbstractBackendControll
      * @magentoAppIsolation enabled
      * @magentoDbIsolation enabled
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider saveMerchantCountryDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $section
      * @param array $groups
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('saveMerchantCountryDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveMerchantCountry(string $section, array $groups): void
     {
         /** @var ScopeConfigInterface $scopeConfig */
@@ -49,7 +65,11 @@ class ConfigTest extends \Magento\TestFramework\TestCase\AbstractBackendControll
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function saveMerchantCountryDataProvider(): array
+=======
+    public function saveMerchantCountryDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,7 +16,10 @@ use Magento\Catalog\Api\AttributeSetRepositoryInterface;
 use Magento\Catalog\Api\ProductAttributeOptionManagementInterface;
 use Magento\Catalog\Model\Category;
 use Magento\Eav\Model\ResourceModel\Entity\Attribute\CollectionFactory;
+<<<<<<< HEAD
 use Magento\Framework\TestFramework\Unit\Helper\MockCreationTrait;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use Magento\ImportExport\Model\Import;
 use Magento\Setup\Fixtures\AttributeSet\AttributeSetFixture;
@@ -28,8 +36,11 @@ use PHPUnit\Framework\TestCase;
  */
 class ConfigurableProductsFixtureTest extends TestCase
 {
+<<<<<<< HEAD
     use MockCreationTrait;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @var MockObject|FixtureModel
      */
@@ -52,10 +63,17 @@ class ConfigurableProductsFixtureTest extends TestCase
 
     protected function setUp(): void
     {
+<<<<<<< HEAD
         $this->fixtureModelMock = $this->createPartialMockWithReflection(
             FixtureModel::class,
             ['getValue', 'getObjectManager', 'createAttributeSet']
         );
+=======
+        $this->fixtureModelMock = $this->getMockBuilder(FixtureModel::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['createAttributeSet', 'getValue', 'getObjectManager'])
+            ->getMock();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->attributeSetsFixtureMock = $this->getMockBuilder(AttributeSetFixture::class)
             ->disableOriginalConstructor()
@@ -97,11 +115,19 @@ class ConfigurableProductsFixtureTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
+<<<<<<< HEAD
         $attributeSetRepositoryMock = $this->createMock(
             AttributeSetRepositoryInterface::class
         );
 
         $productAttributeOptionManagementInterface = $this->createMock(
+=======
+        $attributeSetRepositoryMock = $this->getMockForAbstractClass(
+            AttributeSetRepositoryInterface::class
+        );
+
+        $productAttributeOptionManagementInterface = $this->getMockForAbstractClass(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ProductAttributeOptionManagementInterface::class
         );
 
@@ -123,7 +149,11 @@ class ConfigurableProductsFixtureTest extends TestCase
             ]);
 
         $attributeCollectionFactoryMock = $this->getMockBuilder(CollectionFactory::class)
+<<<<<<< HEAD
             ->onlyMethods(['create'])
+=======
+            ->setMethods(['create'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->disableOriginalConstructor()
             ->getMock();
 

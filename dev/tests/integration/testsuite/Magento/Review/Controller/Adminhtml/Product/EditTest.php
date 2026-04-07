@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -69,10 +74,14 @@ class EditTest extends AbstractBackendController
         $review = $collection->getItemByColumnValue('status_id', Review::STATUS_PENDING);
 
         // Exclude resource from ACL.
+<<<<<<< HEAD
         $this->aclBuilder->getAcl()->deny(
             \Magento\TestFramework\Bootstrap::ADMIN_ROLE_ID,
             'Magento_Review::reviews_all'
         );
+=======
+        $this->aclBuilder->getAcl()->deny(null, 'Magento_Review::reviews_all');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->uri = 'backend/review/product/edit/id/' . $review->getId();
 
         parent::testAclHasAccess();

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -13,7 +18,10 @@ use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\App\Request\Http as HttpRequest;
 use Magento\Framework\Data\Form\FormKey;
 use Magento\Framework\Serialize\Serializer\Json;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class UpdateItemQtyTest extends \Magento\TestFramework\TestCase\AbstractController
 {
@@ -56,8 +64,13 @@ class UpdateItemQtyTest extends \Magento\TestFramework\TestCase\AbstractControll
      * @magentoDbIsolation enabled
      * @magentoAppArea frontend
      * @magentoDataFixture Magento/Checkout/_files/quote_with_simple_product.php
+<<<<<<< HEAD
      */
     #[DataProvider('requestDataProvider')]
+=======
+     * @dataProvider requestDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecute($requestQuantity, $expectedResponse)
     {
         try {
@@ -113,28 +126,49 @@ class UpdateItemQtyTest extends \Magento\TestFramework\TestCase\AbstractControll
      * Variations of request data.
      * @returns array
      */
+<<<<<<< HEAD
     public static function requestDataProvider(): array
     {
         return [
             [
                 'requestQuantity' => [],
                 'expectedResponse' => [
+=======
+    public function requestDataProvider(): array
+    {
+        return [
+            [
+                'request' => [],
+                'response' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'success' => false,
                     'error_message' => 'Something went wrong while saving the page.'.
                         ' Please refresh the page and try again.'
                 ]
             ],
             [
+<<<<<<< HEAD
                 'requestQuantity' => ['qty' => 2],
                 'expectedResponse' => [
+=======
+                'request' => ['qty' => 2],
+                'response' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'success' => true,
                 ]
             ],
             [
+<<<<<<< HEAD
                 'requestQuantity' => ['qty' => 230],
                 'expectedResponse' => [
                     'success' => false,
                     'error_message' => '[{"error":"Not enough items for sale","itemId":3}]']
+=======
+                'request' => ['qty' => 230],
+                'response' => [
+                    'success' => false,
+                    'error_message' => '[{"error":"The requested qty is not available","itemId":3}]']
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

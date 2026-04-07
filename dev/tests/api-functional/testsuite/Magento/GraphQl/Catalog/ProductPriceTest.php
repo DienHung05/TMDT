@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -31,18 +36,24 @@ use Magento\TestFramework\Fixture\DataFixtureStorage;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class ProductPriceTest extends GraphQlAbstract
 {
+<<<<<<< HEAD
     /**
      * @var float
      */
     private const EPSILON = 0.0000000001;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /** @var ObjectManager $objectManager */
     private $objectManager;
 
@@ -281,8 +292,13 @@ class ProductPriceTest extends GraphQlAbstract
      * @param array $expectedTierPrices
      * @param array $customerData
      * @param bool $isTierPriceExists
+<<<<<<< HEAD
      */
     #[DataProvider('priceDataProvider')]
+=======
+     * @dataProvider priceDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSimpleProductsWithSpecialPriceAndTierPrice(
         int $customerGroup,
         array $expectedPriceRange,
@@ -339,12 +355,21 @@ class ProductPriceTest extends GraphQlAbstract
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function priceDataProvider() : array
     {
         return [
             [
                 'customerGroup' => Group::CUST_GROUP_ALL,
                 'expectedPriceRange' => [
+=======
+    public function priceDataProvider() : array
+    {
+        return [
+            [
+                'customer_group' => Group::CUST_GROUP_ALL,
+                'expected_price_range' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     "simple1" => [
                         "minimum_price" => [
                             "regular_price" => ["value" => 10],
@@ -370,7 +395,11 @@ class ProductPriceTest extends GraphQlAbstract
                         ]
                     ]
                 ],
+<<<<<<< HEAD
                 'expectedTierPrices' => [
+=======
+                'expected_tier_prices' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     "simple1" => [
                         0 => [
                             'discount' =>['amount_off' => 1, 'percent_off' => 10],
@@ -386,11 +415,19 @@ class ProductPriceTest extends GraphQlAbstract
                         ]
                     ]
                 ],
+<<<<<<< HEAD
                 'customerData' => []
             ],
             [
                 'customerGroup' => 1,
                 'expectedPriceRange' => [
+=======
+                'customer_data' => []
+            ],
+            [
+                'customer_group' => 1,
+                'expected_price_range' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     "simple1" => [
                         "minimum_price" => [
                             "regular_price" => ["value" => 10],
@@ -416,7 +453,11 @@ class ProductPriceTest extends GraphQlAbstract
                         ]
                     ]
                 ],
+<<<<<<< HEAD
                 'expectedTierPrices' => [
+=======
+                'expected_tier_prices' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     "simple1" => [
                         0 => [
                             'discount' =>['amount_off' => 1, 'percent_off' => 10],
@@ -432,7 +473,11 @@ class ProductPriceTest extends GraphQlAbstract
                         ]
                     ]
                 ],
+<<<<<<< HEAD
                 'customerData' => [
+=======
+                'customer_data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'username' => 'customer@example.com',
                     'password' => 'password'
                 ]
@@ -698,7 +743,11 @@ class ProductPriceTest extends GraphQlAbstract
                 'customer_group_id' => Group::CUST_GROUP_ALL,
                 'percentage_value'=> null,
                 'qty'=> 2,
+<<<<<<< HEAD
                 'value'=> 20,
+=======
+                'value'=> 20
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ]
         ];
         foreach ($configurableProductVariants as $configurableProductVariant) {
@@ -778,7 +827,11 @@ class ProductPriceTest extends GraphQlAbstract
                         "value" => round((float) $configurableProductVariants[$key]->getSpecialPrice(), 2)
                     ],
                     "discount" => [
+<<<<<<< HEAD
                         "amount_off" => round($regularPrice[$key] - $finalPrice[$key], 2),
+=======
+                        "amount_off" => ($regularPrice[$key] - $finalPrice[$key]),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         "percent_off" => round(($regularPrice[$key] - $finalPrice[$key])*100/$regularPrice[$key], 2)
                     ]
                 ],
@@ -790,7 +843,11 @@ class ProductPriceTest extends GraphQlAbstract
                         "value" => round((float) $configurableProductVariants[$key]->getSpecialPrice(), 2)
                     ],
                     "discount" => [
+<<<<<<< HEAD
                         "amount_off" => round($regularPrice[$key] - $finalPrice[$key], 2),
+=======
+                        "amount_off" => $regularPrice[$key] - $finalPrice[$key],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         "percent_off" => round(($regularPrice[$key] - $finalPrice[$key])*100/$regularPrice[$key], 2)
                     ]
                 ]
@@ -1219,11 +1276,16 @@ QUERY;
                 $expected['regular_price']['currency'] ?? $currency,
                 $actual['regular_price']['currency']
             );
+<<<<<<< HEAD
             $this->assertEquals($expected['final_price']['value'], round($actual['final_price']['value'], 2));
+=======
+            $this->assertEquals($expected['final_price']['value'], $actual['final_price']['value']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $this->assertEquals(
                 $expected['final_price']['currency'] ?? $currency,
                 $actual['final_price']['currency']
             );
+<<<<<<< HEAD
             $this->assertEqualsWithDelta(
                 $expected['discount']['amount_off'],
                 ($actual['regular_price']['value'] - round($actual['final_price']['value'], 2)),
@@ -1239,6 +1301,10 @@ QUERY;
                 ),
                 self::EPSILON
             );
+=======
+            $this->assertEquals($expected['discount']['amount_off'], $actual['discount']['amount_off']);
+            $this->assertEquals($expected['discount']['percent_off'], $actual['discount']['percent_off']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
     }
 
@@ -1297,8 +1363,14 @@ QUERY;
 
     /**
      * Check pricing for Configurable product with "Display Out of Stock Products" enabled
+<<<<<<< HEAD
      */
     #[DataProvider('configurableProductPriceRangeWithDisplayOutOfStockProductsEnabledDataProvider')]
+=======
+     *
+     * @dataProvider configurableProductPriceRangeWithDisplayOutOfStockProductsEnabledDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     #[
         Config(Configuration::XML_PATH_SHOW_OUT_OF_STOCK, 1, ScopeInterface::SCOPE_STORE, 'default'),
         DataFixture(ProductFixture::class, ['price' => 10, 'special_price' => 7], 'p1'),
@@ -1371,7 +1443,11 @@ QUERY;
     /**
      * @return array[]
      */
+<<<<<<< HEAD
     public static function configurableProductPriceRangeWithDisplayOutOfStockProductsEnabledDataProvider(): array
+=======
+    public function configurableProductPriceRangeWithDisplayOutOfStockProductsEnabledDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

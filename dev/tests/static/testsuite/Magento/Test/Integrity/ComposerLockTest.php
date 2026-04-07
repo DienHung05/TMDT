@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Test\Integrity;
 
 use PHPUnit\Framework\Attributes\Depends;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Test\Integrity;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * A test that enforces composer.lock is up to date with composer.json
  */
@@ -23,10 +31,17 @@ class ComposerLockTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param string $lockFilePath
      * @return string
      */
     #[Depends('testLockFileExists')]
+=======
+     * @depends testLockFileExists
+     * @param string $lockFilePath
+     * @return string
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testLockFileReadable($lockFilePath)
     {
         $this->assertLockFileReadable($lockFilePath);
@@ -34,10 +49,17 @@ class ComposerLockTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param string $lockFilePath
      * @return string
      */
     #[Depends('testLockFileReadable')]
+=======
+     * @depends testLockFileReadable
+     * @param string $lockFilePath
+     * @return string
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testLockFileContainsJson($lockFilePath)
     {
         $lockFileContent = file_get_contents($lockFilePath);
@@ -46,9 +68,15 @@ class ComposerLockTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param string $lockFileContent
      */
     #[Depends('testLockFileContainsJson')]
+=======
+     * @depends testLockFileContainsJson
+     * @param string $lockFileContent
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpToDate($lockFileContent)
     {
         $lockData = json_decode($lockFileContent, true);

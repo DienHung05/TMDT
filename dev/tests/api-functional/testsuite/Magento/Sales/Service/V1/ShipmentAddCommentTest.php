@@ -1,31 +1,55 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
 declare(strict_types=1);
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 namespace Magento\Sales\Service\V1;
 
 use Magento\Sales\Api\Data\ShipmentCommentInterface;
 use Magento\TestFramework\TestCase\WebapiAbstract;
 
+<<<<<<< HEAD
+=======
+/**
+ * Class ShipmentAddCommentTest
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class ShipmentAddCommentTest extends WebapiAbstract
 {
     /**
      * Service read name
      */
+<<<<<<< HEAD
     public const SERVICE_READ_NAME = 'salesShipmentCommentRepositoryV1';
+=======
+    const SERVICE_READ_NAME = 'salesShipmentCommentRepositoryV1';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * Service version
      */
+<<<<<<< HEAD
     public const SERVICE_VERSION = 'V1';
+=======
+    const SERVICE_VERSION = 'V1';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * Shipment increment id
      */
+<<<<<<< HEAD
     public const SHIPMENT_INCREMENT_ID = '100000001';
+=======
+    const SHIPMENT_INCREMENT_ID = '100000001';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var \Magento\Framework\ObjectManagerInterface
@@ -39,6 +63,10 @@ class ShipmentAddCommentTest extends WebapiAbstract
 
     /**
      * Test shipment add comment service
+<<<<<<< HEAD
+=======
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoApiDataFixture Magento/Sales/_files/shipment.php
      */
     public function testShipmentAddComment()
@@ -55,7 +83,11 @@ class ShipmentAddCommentTest extends WebapiAbstract
             ShipmentCommentInterface::CREATED_AT => null,
             ShipmentCommentInterface::PARENT_ID => $shipment->getId(),
             ShipmentCommentInterface::IS_VISIBLE_ON_FRONT => 1,
+<<<<<<< HEAD
             ShipmentCommentInterface::IS_CUSTOMER_NOTIFIED => 1
+=======
+            ShipmentCommentInterface::IS_CUSTOMER_NOTIFIED => 1,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
 
         $requestData = ['entity' => $commentData];

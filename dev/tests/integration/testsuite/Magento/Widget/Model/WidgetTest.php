@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Widget\Model;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Widget\Model;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class WidgetTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -38,9 +46,16 @@ class WidgetTest extends \PHPUnit\Framework\TestCase
      * @param string $type
      * @param string $expectedFile
      * @return string
+<<<<<<< HEAD
      * @magentoAppIsolation enabled
      */
     #[DataProvider('getPlaceholderImageUrlDataProvider')]
+=======
+     *
+     * @dataProvider getPlaceholderImageUrlDataProvider
+     * @magentoAppIsolation enabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetPlaceholderImageUrl($type, $expectedFile)
     {
         $objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
@@ -56,7 +71,11 @@ class WidgetTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getPlaceholderImageUrlDataProvider()
+=======
+    public function getPlaceholderImageUrlDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'custom image' => [\Magento\Catalog\Block\Product\Widget\NewWidget::class,

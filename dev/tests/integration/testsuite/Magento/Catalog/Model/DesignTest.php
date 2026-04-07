@@ -1,7 +1,14 @@
 <?php
+<<<<<<< HEAD
 /**
  * Copyright 2011 Adobe
  * All Rights Reserved.
+=======
+
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -16,12 +23,18 @@ use Magento\Framework\View\Result\Page;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\Theme\Model\Theme;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Test class for \Magento\Catalog\Model\Design.
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+
+/**
+ * Test class for \Magento\Catalog\Model\Design.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class DesignTest extends TestCase
 {
@@ -36,7 +49,11 @@ class DesignTest extends TestCase
     private $productRepository;
 
     /**
+<<<<<<< HEAD
      * @inheritDoc
+=======
+     * @inheriDoc
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     protected function setUp(): void
     {
@@ -45,10 +62,17 @@ class DesignTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param Theme $theme
      * @return void
      */
     #[DataProvider('getThemeModel')]
+=======
+     * @dataProvider getThemeModel
+     * @param Theme $theme
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testApplyCustomDesign(Theme $theme): void
     {
         $this->model->applyCustomDesign($theme);
@@ -65,9 +89,15 @@ class DesignTest extends TestCase
      * @magentoDataFixture Magento/Catalog/_files/simple_product_with_custom_design.php
      * @param array $designSettings
      * @param array $expectedSetting
+<<<<<<< HEAD
      * @return void
      */
     #[DataProvider('getDesignSettingsForProductWithScheduleDesignTest')]
+=======
+     * @dataProvider getDesignSettingsForProductWithScheduleDesignTest
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetDesignSettingsForProductWithScheduleDesign(
         array $designSettings,
         array $expectedSetting
@@ -82,7 +112,11 @@ class DesignTest extends TestCase
     /**
      * @return array[]
      */
+<<<<<<< HEAD
     public static function getDesignSettingsForProductWithScheduleDesignTest(): array
+=======
+    public function getDesignSettingsForProductWithScheduleDesignTest(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $datetime = new \DateTime();
         $datetime->modify('-10 day');
@@ -94,25 +128,41 @@ class DesignTest extends TestCase
 
         return [
             'schedule_design_applied' => [
+<<<<<<< HEAD
                 'designSettings' => [
+=======
+                'design_settings' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'custom_layout' => '2columns-left',
                     'custom_design' => '2',
                     'custom_design_from' => $fromApplied,
                     'custom_design_to' => $to,
                 ],
+<<<<<<< HEAD
                 'expectedSetting' => [
+=======
+                'expected_settings' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'page_layout' => '2columns-left',
                     'custom_design' => '2',
                 ]
             ],
             'schedule_design_not_applied' => [
+<<<<<<< HEAD
                 'designSettings' => [
+=======
+                'design_settings' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'custom_layout' => '2columns-left',
                     'custom_design' => '2',
                     'custom_design_from' => $fromNotApplied,
                     'custom_design_to' => $to,
                 ],
+<<<<<<< HEAD
                 'expectedSetting' => [
+=======
+                'expected_settings' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'page_layout' => '3columns',
                     'custom_design' => null,
                 ]
@@ -151,10 +201,17 @@ class DesignTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getThemeModel(): array
     {
         $theme = Bootstrap::getObjectManager()->create(ThemeInterface::class);
         $theme->setData(self::_getThemeData());
+=======
+    public function getThemeModel(): array
+    {
+        $theme = Bootstrap::getObjectManager()->create(ThemeInterface::class);
+        $theme->setData($this->_getThemeData());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         return [[$theme]];
     }
@@ -162,7 +219,11 @@ class DesignTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     protected static function _getThemeData()
+=======
+    protected function _getThemeData()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'theme_title' => 'Magento Theme',

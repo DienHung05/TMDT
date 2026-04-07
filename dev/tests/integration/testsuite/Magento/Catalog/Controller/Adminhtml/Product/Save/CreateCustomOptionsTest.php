@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -12,7 +17,10 @@ use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\App\Request\Http as HttpRequest;
 use Magento\Framework\Message\MessageInterface;
 use Magento\TestFramework\TestCase\AbstractBackendController;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Base test cases for product custom options with type "field".
@@ -32,11 +40,19 @@ class CreateCustomOptionsTest extends AbstractBackendController
     /**
      * Test add to product custom option with type "field".
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider productWithNewOptionsDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $productPostData
      *
      * @magentoDbIsolation enabled
      */
+<<<<<<< HEAD
     #[DataProvider('productWithNewOptionsDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveCustomOptionWithTypeField(array $productPostData): void
     {
         $this->getRequest()->setPostValue($productPostData);
@@ -71,7 +87,11 @@ class CreateCustomOptionsTest extends AbstractBackendController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function productWithNewOptionsDataProvider(): array
+=======
+    public function productWithNewOptionsDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'required_options' => [
@@ -264,6 +284,10 @@ class CreateCustomOptionsTest extends AbstractBackendController
         $reflection = new \ReflectionObject($this);
         foreach ($reflection->getProperties() as $property) {
             if (!$property->isStatic() && 0 !== strpos($property->getDeclaringClass()->getName(), 'PHPUnit')) {
+<<<<<<< HEAD
+=======
+                $property->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $property->setValue($this, null);
             }
         }

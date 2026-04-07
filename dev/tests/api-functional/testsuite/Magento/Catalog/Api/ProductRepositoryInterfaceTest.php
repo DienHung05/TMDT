@@ -1,7 +1,14 @@
 <?php
+<<<<<<< HEAD
 /**
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -10,12 +17,15 @@ namespace Magento\Catalog\Api;
 use Magento\Authorization\Model\Role;
 use Magento\Authorization\Model\RoleFactory;
 use Magento\Authorization\Model\Rules;
+<<<<<<< HEAD
 use Magento\Catalog\Model\Product\Gallery\DefaultValueProcessor;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Store\Test\Fixture\Store as StoreFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Fixture\ScopeFixture;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\UrlRewrite\Model\ResourceModel\UrlRewriteCollectionFactory;
 use Magento\Authorization\Model\RulesFactory;
 use Magento\Catalog\Api\Data\ProductInterface;
@@ -41,7 +51,10 @@ use Magento\Store\Model\WebsiteRepository;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\WebapiAbstract;
 use Magento\UrlRewrite\Service\V1\Data\UrlRewrite;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for \Magento\Catalog\Api\ProductRepositoryInterface
@@ -49,6 +62,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
  * @magentoAppIsolation enabled
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
+<<<<<<< HEAD
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
 class ProductRepositoryInterfaceTest extends WebapiAbstract
@@ -60,6 +74,18 @@ class ProductRepositoryInterfaceTest extends WebapiAbstract
     private const KEY_TIER_PRICES = 'tier_prices';
     private const KEY_SPECIAL_PRICE = 'special_price';
     private const KEY_CATEGORY_LINKS = 'category_links';
+=======
+ */
+class ProductRepositoryInterfaceTest extends WebapiAbstract
+{
+    const SERVICE_NAME = 'catalogProductRepositoryV1';
+    const SERVICE_VERSION = 'V1';
+    const RESOURCE_PATH = '/V1/products';
+
+    const KEY_TIER_PRICES = 'tier_prices';
+    const KEY_SPECIAL_PRICE = 'special_price';
+    const KEY_CATEGORY_LINKS = 'category_links';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var array
@@ -193,7 +219,12 @@ class ProductRepositoryInterfaceTest extends WebapiAbstract
             ],
         ];
 
+<<<<<<< HEAD
         $expectedMessage = 'The product with SKU "%1" does not exist.';
+=======
+        $expectedMessage = "The product that was requested doesn't exist. Verify the product and try again.";
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         try {
             $this->_webApiCall($serviceInfo, ['sku' => $invalidSku]);
             $this->fail("Expected throwing exception");
@@ -215,11 +246,19 @@ class ProductRepositoryInterfaceTest extends WebapiAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function productCreationProvider()
     {
         $productBuilder = function ($data) {
             return array_replace_recursive(
                 self::getSimpleProductData(),
+=======
+    public function productCreationProvider()
+    {
+        $productBuilder = function ($data) {
+            return array_replace_recursive(
+                $this->getSimpleProductData(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $data
             );
         };
@@ -453,8 +492,14 @@ class ProductRepositoryInterfaceTest extends WebapiAbstract
 
     /**
      * Test create() method
+<<<<<<< HEAD
      */
     #[DataProvider('productCreationProvider')]
+=======
+     *
+     * @dataProvider productCreationProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreate($product)
     {
         $response = $this->saveProduct($product);
@@ -465,9 +510,15 @@ class ProductRepositoryInterfaceTest extends WebapiAbstract
     /**
      * @param array $fixtureProduct
      *
+<<<<<<< HEAD
      * @magentoApiDataFixture Magento/Store/_files/fixture_store_with_catalogsearch_index.php
      */
     #[DataProvider('productCreationProvider')]
+=======
+     * @dataProvider productCreationProvider
+     * @magentoApiDataFixture Magento/Store/_files/fixture_store_with_catalogsearch_index.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateAllStoreCode($fixtureProduct)
     {
         $response = $this->saveProduct($fixtureProduct, 'all');
@@ -495,8 +546,13 @@ class ProductRepositoryInterfaceTest extends WebapiAbstract
      * Test creating product with all store code on single store
      *
      * @param array $fixtureProduct
+<<<<<<< HEAD
      */
     #[DataProvider('productCreationProvider')]
+=======
+     * @dataProvider productCreationProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateAllStoreCodeForSingleWebsite($fixtureProduct)
     {
         $response = $this->saveProduct($fixtureProduct, 'all');
@@ -541,13 +597,21 @@ class ProductRepositoryInterfaceTest extends WebapiAbstract
 
     /**
      * @param array $fixtureProduct
+<<<<<<< HEAD
      * @magentoApiDataFixture Magento/Store/_files/fixture_store_with_catalogsearch_index.php
      */
     #[DataProvider('productCreationProvider')]
+=======
+     *
+     * @dataProvider productCreationProvider
+     * @magentoApiDataFixture Magento/Store/_files/fixture_store_with_catalogsearch_index.php
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDeleteAllStoreCode($fixtureProduct)
     {
         $sku = $fixtureProduct[ProductInterface::SKU];
         $this->saveProduct($fixtureProduct);
+<<<<<<< HEAD
 
         // Delete all with 'all' store code
         $this->deleteProduct($sku);
@@ -560,6 +624,16 @@ class ProductRepositoryInterfaceTest extends WebapiAbstract
             $errorObj = $this->processRestExceptionResult($e);
             $this->assertEquals($expectedMessage, $errorObj['message']);
         }
+=======
+        $this->expectException('Exception');
+        $this->expectExceptionMessage(
+            "The product that was requested doesn't exist. Verify the product and try again."
+        );
+
+        // Delete all with 'all' store code
+        $this->deleteProduct($sku);
+        $this->getProduct($sku);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -1097,12 +1171,20 @@ class ProductRepositoryInterfaceTest extends WebapiAbstract
 
     /**
      * @magentoApiDataFixture Magento/Catalog/_files/products_with_websites_and_stores.php
+<<<<<<< HEAD
+=======
+     * @dataProvider testGetListWithFilteringByStoreDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $searchCriteria
      * @param array $skus
      * @param int $expectedProductCount
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('getListWithFilteringByStoreDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetListWithFilteringByStore(array $searchCriteria, array $skus, $expectedProductCount = null)
     {
         $serviceInfo = [
@@ -1141,7 +1223,11 @@ class ProductRepositoryInterfaceTest extends WebapiAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function getListWithFilteringByStoreDataProvider()
+=======
+    public function testGetListWithFilteringByStoreDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -1188,8 +1274,13 @@ class ProductRepositoryInterfaceTest extends WebapiAbstract
      *
      * @magentoAppIsolation enabled
      * @magentoApiDataFixture Magento/Catalog/_files/products_for_search.php
+<<<<<<< HEAD
      */
     #[DataProvider('productPaginationDataProvider')]
+=======
+     * @dataProvider productPaginationDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetListPagination(int $pageSize, int $currentPage, int $expectedCount)
     {
         $fixtureProducts = 5;
@@ -1233,7 +1324,11 @@ class ProductRepositoryInterfaceTest extends WebapiAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function productPaginationDataProvider()
+=======
+    public function productPaginationDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'expect-all-items' => [
@@ -1334,10 +1429,18 @@ class ProductRepositoryInterfaceTest extends WebapiAbstract
      * Test get list filter by category sorting by position.
      *
      * @magentoApiDataFixture Magento/Catalog/_files/products_for_search.php
+<<<<<<< HEAD
      * @param string $sortOrder
      * @param array $expectedItems
      */
     #[DataProvider('getListSortingByPositionDataProvider')]
+=======
+     * @dataProvider getListSortingByPositionDataProvider
+     *
+     * @param string $sortOrder
+     * @param array $expectedItems
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetListSortingByPosition(string $sortOrder, array $expectedItems): void
     {
         $sortOrderBuilder = Bootstrap::getObjectManager()->create(SortOrderBuilder::class);
@@ -1376,11 +1479,19 @@ class ProductRepositoryInterfaceTest extends WebapiAbstract
      *
      * @return array[]
      */
+<<<<<<< HEAD
     public static function getListSortingByPositionDataProvider(): array
     {
         return [
             'sort_by_position_descending' => [
                 'sortOrder' => SortOrder::SORT_DESC,
+=======
+    public function getListSortingByPositionDataProvider(): array
+    {
+        return [
+            'sort_by_position_descending' => [
+                'direction' => SortOrder::SORT_DESC,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedItems' => [
                     'search_product_5',
                     'search_product_4',
@@ -1390,7 +1501,11 @@ class ProductRepositoryInterfaceTest extends WebapiAbstract
                 ],
             ],
             'sort_by_position_ascending' => [
+<<<<<<< HEAD
                 'sortOrder' => SortOrder::SORT_ASC,
+=======
+                'direction' => SortOrder::SORT_ASC,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedItems' => [
                     'search_product_1',
                     'search_product_2',
@@ -1469,7 +1584,11 @@ class ProductRepositoryInterfaceTest extends WebapiAbstract
      * @param array $productData
      * @return array
      */
+<<<<<<< HEAD
     protected static function getSimpleProductData($productData = [])
+=======
+    protected function getSimpleProductData($productData = [])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ProductInterface::SKU => isset($productData[ProductInterface::SKU])
@@ -2198,6 +2317,7 @@ class ProductRepositoryInterfaceTest extends WebapiAbstract
         $this->assertCount(1, $urlRewriteCollection);
     }
 
+<<<<<<< HEAD
     #[
         DataFixture(ScopeFixture::class, as: 'global_scope'),
         DataFixture(StoreFixture::class, as: 'store_view_2'),
@@ -2264,6 +2384,8 @@ class ProductRepositoryInterfaceTest extends WebapiAbstract
         $this->assertEquals(1, $image['position_use_default']);
     }
     
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @return string
      */
@@ -2305,7 +2427,11 @@ class ProductRepositoryInterfaceTest extends WebapiAbstract
      * @param int|null $storeId
      * @return ProductInterface
      */
+<<<<<<< HEAD
     private function getProductModel(string $sku, ?int $storeId = null): ProductInterface
+=======
+    private function getProductModel(string $sku, int $storeId = null): ProductInterface
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         try {
             $productRepository = Bootstrap::getObjectManager()->get(ProductRepositoryInterface::class);

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Setup\Console\Command;
@@ -14,6 +19,11 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Magento\Setup\Model\StoreConfigurationDataMapper;
 use Magento\Setup\Model\ObjectManagerProvider;
+<<<<<<< HEAD
+=======
+use Magento\Framework\ObjectManagerInterface;
+use Magento\Framework\Exception\LocalizedException;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Validator\Locale as LocaleValidator;
 use Magento\Framework\Validator\Timezone as TimezoneValidator;
 use Magento\Framework\Validator\Currency as CurrencyValidator;
@@ -24,18 +34,37 @@ use Magento\Framework\Validator\Url as UrlValidator;
  */
 class InstallStoreConfigurationCommand extends AbstractSetupCommand
 {
+<<<<<<< HEAD
     public const NAME = 'setup:store-config:set';
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @var InstallerFactory
      */
     private $installerFactory;
 
     /**
+<<<<<<< HEAD
+=======
+     * Deployment configuration
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @var DeploymentConfig
      */
     private $deploymentConfig;
 
     /**
+<<<<<<< HEAD
+=======
+     * Object Manager
+     *
+     * @var ObjectManagerInterface
+     * @deprecated 2.2.0
+     */
+    private $objectManager;
+
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @var LocaleValidator
      */
     private $localeValidator;
@@ -60,12 +89,20 @@ class InstallStoreConfigurationCommand extends AbstractSetupCommand
      *
      * @param InstallerFactory $installerFactory
      * @param DeploymentConfig $deploymentConfig
+<<<<<<< HEAD
      * @param ObjectManagerProvider $objectManagerProvider Deprecated since not used anymore
      * @param LocaleValidator $localeValidator
      * @param TimezoneValidator $timezoneValidator
      * @param CurrencyValidator $currencyValidator
      * @param UrlValidator $urlValidator
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+=======
+     * @param ObjectManagerProvider $objectManagerProvider
+     * @param LocaleValidator $localeValidator,
+     * @param TimezoneValidator $timezoneValidator,
+     * @param CurrencyValidator $currencyValidator,
+     * @param UrlValidator $urlValidator
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function __construct(
         InstallerFactory $installerFactory,
@@ -78,6 +115,10 @@ class InstallStoreConfigurationCommand extends AbstractSetupCommand
     ) {
         $this->installerFactory = $installerFactory;
         $this->deploymentConfig = $deploymentConfig;
+<<<<<<< HEAD
+=======
+        $this->objectManager = $objectManagerProvider->get();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->localeValidator = $localeValidator;
         $this->timezoneValidator = $timezoneValidator;
         $this->currencyValidator = $currencyValidator;
@@ -86,20 +127,34 @@ class InstallStoreConfigurationCommand extends AbstractSetupCommand
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
      */
     protected function configure()
     {
         $this->setName(self::NAME)
+=======
+     * {@inheritdoc}
+     */
+    protected function configure()
+    {
+        $this->setName('setup:store-config:set')
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->setDescription('Installs the store configuration. Deprecated since 2.2.0. Use config:set instead')
             ->setDefinition($this->getOptionsList());
         parent::configure();
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
+=======
+     * {@inheritdoc}
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         if (!$this->deploymentConfig->isAvailable()) {
             $output->writeln(
@@ -299,9 +354,15 @@ class InstallStoreConfigurationCommand extends AbstractSetupCommand
     /**
      * Validate codes for languages, currencies or timezones
      *
+<<<<<<< HEAD
      * @param LocaleValidator|TimezoneValidator|CurrencyValidator $lists
      * @param string $code
      * @param string $type
+=======
+     * @param LocaleValidator|TimezoneValidator|CurrencyValidator  $lists
+     * @param string  $code
+     * @param string  $type
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @return string
      */
     private function validateCodes($lists, $code, $type)

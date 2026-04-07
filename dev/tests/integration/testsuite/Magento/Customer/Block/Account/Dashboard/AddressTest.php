@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Customer\Block\Account\Dashboard;
 
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class address test.
@@ -86,8 +94,13 @@ class AddressTest extends \PHPUnit\Framework\TestCase
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @magentoDataFixture Magento/Customer/_files/customer_two_addresses.php
      * @magentoDataFixture Magento/Customer/_files/customer_no_address.php
+<<<<<<< HEAD
      */
     #[DataProvider('getPrimaryShippingAddressHtmlDataProvider')]
+=======
+     * @dataProvider getPrimaryShippingAddressHtmlDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetPrimaryShippingAddressHtml($customerId, $expected)
     {
         // todo: this test is sensitive to caching impact
@@ -99,7 +112,11 @@ class AddressTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $html);
     }
 
+<<<<<<< HEAD
     public static function getPrimaryShippingAddressHtmlDataProvider()
+=======
+    public function getPrimaryShippingAddressHtmlDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $expected = "John Smith<br />\nCompanyName<br />\nGreen str, 67<br />\n\n\n\nCityM,  Alabama, 75477<br />"
             . "\nUnited States<br />\nT: <a href=\"tel:3468676\">3468676</a>\n\n";
@@ -115,8 +132,13 @@ class AddressTest extends \PHPUnit\Framework\TestCase
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @magentoDataFixture Magento/Customer/_files/customer_two_addresses.php
      * @magentoDataFixture Magento/Customer/_files/customer_no_address.php
+<<<<<<< HEAD
      */
     #[DataProvider('getPrimaryBillingAddressHtmlDataProvider')]
+=======
+     * @dataProvider getPrimaryBillingAddressHtmlDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetPrimaryBillingAddressHtml($customerId, $expected)
     {
         if (!empty($customerId)) {
@@ -126,7 +148,11 @@ class AddressTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $html);
     }
 
+<<<<<<< HEAD
     public static function getPrimaryBillingAddressHtmlDataProvider()
+=======
+    public function getPrimaryBillingAddressHtmlDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $expected = "John Smith<br />\nCompanyName<br />\nGreen str, 67<br />\n\n\n\nCityM,  Alabama, 75477<br />"
             . "\nUnited States<br />\nT: <a href=\"tel:3468676\">3468676</a>\n\n";
@@ -141,8 +167,13 @@ class AddressTest extends \PHPUnit\Framework\TestCase
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @magentoDataFixture Magento/Customer/_files/customer_two_addresses.php
      * @magentoDataFixture Magento/Customer/_files/customer_no_address.php
+<<<<<<< HEAD
      */
     #[DataProvider('getPrimaryAddressEditUrlDataProvider')]
+=======
+     * @dataProvider getPrimaryAddressEditUrlDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetPrimaryShippingAddressEditUrl($customerId, $expected)
     {
         if (!empty($customerId)) {
@@ -156,8 +187,13 @@ class AddressTest extends \PHPUnit\Framework\TestCase
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @magentoDataFixture Magento/Customer/_files/customer_two_addresses.php
      * @magentoDataFixture Magento/Customer/_files/customer_no_address.php
+<<<<<<< HEAD
      */
     #[DataProvider('getPrimaryAddressEditUrlDataProvider')]
+=======
+     * @dataProvider getPrimaryAddressEditUrlDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetPrimaryBillingAddressEditUrl($customerId, $expected)
     {
         if (!empty($customerId)) {
@@ -167,7 +203,11 @@ class AddressTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $url);
     }
 
+<<<<<<< HEAD
     public static function getPrimaryAddressEditUrlDataProvider()
+=======
+    public function getPrimaryAddressEditUrlDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             '1' => [1, 'http://localhost/index.php/customer/address/edit/id/1/'],

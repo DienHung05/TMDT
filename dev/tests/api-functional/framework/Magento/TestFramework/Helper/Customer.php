@@ -1,19 +1,28 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\TestFramework\Helper;
 
 use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Customer\Model\Data\Customer as CustomerData;
 use Magento\Framework\Reflection\DataObjectProcessor;
+<<<<<<< HEAD
 use Magento\TestFramework\Helper\Bootstrap;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\TestCase\WebapiAbstract;
 use Magento\Framework\Webapi\Rest\Request as RestRequest;
 
 class Customer extends WebapiAbstract
 {
+<<<<<<< HEAD
     public const RESOURCE_PATH = '/V1/customers';
     public const SERVICE_NAME = 'customerAccountManagementV1';
     public const CUSTOMER_REPOSITORY_SERVICE_NAME = "customerCustomerRepositoryV1";
@@ -42,6 +51,36 @@ class Customer extends WebapiAbstract
     public const ADDRESS_CITY2 = 'CityX';
     public const ADDRESS_REGION_CODE1 = 'AL';
     public const ADDRESS_REGION_CODE2 = 'AL';
+=======
+    const RESOURCE_PATH = '/V1/customers';
+    const SERVICE_NAME = 'customerAccountManagementV1';
+    const CUSTOMER_REPOSITORY_SERVICE_NAME = "customerCustomerRepositoryV1";
+    const SERVICE_VERSION = 'V1';
+
+    const CONFIRMATION = 'a4fg7h893e39d';
+    const CREATED_AT = '2013-11-05';
+    const CREATED_IN = 'default';
+    const STORE_NAME = 'Store Name';
+    const DOB = '1970-01-01';
+    const GENDER = 'Male';
+    const GROUP_ID = 1;
+    const MIDDLENAME = 'A';
+    const PREFIX = 'Mr.';
+    const STORE_ID = 1;
+    const SUFFIX = 'Esq.';
+    const TAXVAT = '12';
+    const WEBSITE_ID = 1;
+
+    /** Sample values for testing */
+    const FIRSTNAME = 'Jane';
+    const LASTNAME = 'Doe';
+    const PASSWORD = 'test@123';
+
+    const ADDRESS_CITY1 = 'CityM';
+    const ADDRESS_CITY2 = 'CityX';
+    const ADDRESS_REGION_CODE1 = 'AL';
+    const ADDRESS_REGION_CODE2 = 'AL';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var \Magento\Customer\Api\Data\AddressInterfaceFactory
@@ -61,6 +100,7 @@ class Customer extends WebapiAbstract
     /** @var DataObjectProcessor */
     private $dataObjectProcessor;
 
+<<<<<<< HEAD
     /**
      * Lazy getter for customerAddressFactory
      */
@@ -116,6 +156,30 @@ class Customer extends WebapiAbstract
     /**
      * Create sample customer via API.
      *
+=======
+    public function __construct($name = null, array $data = [], $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
+
+        $this->customerAddressFactory = Bootstrap::getObjectManager()->create(
+            \Magento\Customer\Api\Data\AddressInterfaceFactory::class
+        );
+
+        $this->customerDataFactory = Bootstrap::getObjectManager()->create(
+            \Magento\Customer\Api\Data\CustomerInterfaceFactory::class
+        );
+
+        $this->dataObjectHelper = Bootstrap::getObjectManager()->create(
+            \Magento\Framework\Api\DataObjectHelper::class
+        );
+
+        $this->dataObjectProcessor = Bootstrap::getObjectManager()->create(
+            \Magento\Framework\Reflection\DataObjectProcessor::class
+        );
+    }
+
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $additional
      * @return array|bool|float|int|string
      */
@@ -133,7 +197,11 @@ class Customer extends WebapiAbstract
             ],
         ];
 
+<<<<<<< HEAD
         $customerDataArray = $this->getDataObjectProcessor()->buildOutputDataArray(
+=======
+        $customerDataArray = $this->dataObjectProcessor->buildOutputDataArray(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $this->createSampleCustomerDataObject($additional),
             \Magento\Customer\Api\Data\CustomerInterface::class
         );
@@ -145,8 +213,13 @@ class Customer extends WebapiAbstract
     /**
      * Update Existing customer
      *
+<<<<<<< HEAD
      * @param int $customerId
      * @param array $additional
+=======
+     * @param array $additional
+     * @param int $customerId
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @return array|bool|float|int|string
      */
     public function updateSampleCustomer($customerId, array $additional = [])
@@ -163,7 +236,11 @@ class Customer extends WebapiAbstract
             ],
         ];
 
+<<<<<<< HEAD
         $customerDataArray = $this->getDataObjectProcessor()->buildOutputDataArray(
+=======
+        $customerDataArray = $this->dataObjectProcessor->buildOutputDataArray(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $this->createSampleCustomerDataObject($additional),
             \Magento\Customer\Api\Data\CustomerInterface::class
         );
@@ -173,8 +250,11 @@ class Customer extends WebapiAbstract
     }
 
     /**
+<<<<<<< HEAD
      * Get customer sample data array.
      *
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $additional
      * @return array
      */
@@ -215,7 +295,11 @@ class Customer extends WebapiAbstract
      */
     public function createSampleCustomerDataObject(array $additional = [])
     {
+<<<<<<< HEAD
         $customerAddress1 = $this->getCustomerAddressFactory()->create();
+=======
+        $customerAddress1 = $this->customerAddressFactory->create();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $customerAddress1->setCountryId('US');
         $customerAddress1->setIsDefaultBilling(true);
         $customerAddress1->setIsDefaultShipping(true);
@@ -232,12 +316,20 @@ class Customer extends WebapiAbstract
         $customerAddress1->setCity(self::ADDRESS_CITY1);
         $customerAddress1->setFirstname('John');
         $customerAddress1->setLastname('Smith');
+<<<<<<< HEAD
         $address1 = $this->getDataObjectProcessor()->buildOutputDataArray(
+=======
+        $address1 = $this->dataObjectProcessor->buildOutputDataArray(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $customerAddress1,
             \Magento\Customer\Api\Data\AddressInterface::class
         );
 
+<<<<<<< HEAD
         $customerAddress2 = $this->getCustomerAddressFactory()->create();
+=======
+        $customerAddress2 = $this->customerAddressFactory->create();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $customerAddress2->setCountryId('US');
         $customerAddress2->setIsDefaultBilling(false);
         $customerAddress2->setIsDefaultShipping(false);
@@ -254,7 +346,11 @@ class Customer extends WebapiAbstract
         $customerAddress2->setCity(self::ADDRESS_CITY2);
         $customerAddress2->setFirstname('John');
         $customerAddress2->setLastname('Smith');
+<<<<<<< HEAD
         $address2 = $this->getDataObjectProcessor()->buildOutputDataArray(
+=======
+        $address2 = $this->dataObjectProcessor->buildOutputDataArray(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $customerAddress2,
             \Magento\Customer\Api\Data\AddressInterface::class
         );
@@ -262,8 +358,13 @@ class Customer extends WebapiAbstract
         $customerData = $this->getCustomerSampleData(
             array_merge([CustomerData::KEY_ADDRESSES => [$address1, $address2]], $additional)
         );
+<<<<<<< HEAD
         $customer = $this->getCustomerDataFactory()->create();
         $this->getDataObjectHelper()->populateWithArray(
+=======
+        $customer = $this->customerDataFactory->create();
+        $this->dataObjectHelper->populateWithArray(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $customer,
             $customerData,
             \Magento\Customer\Api\Data\CustomerInterface::class

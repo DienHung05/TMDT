@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
@@ -31,10 +36,17 @@ foreach ($simpleProduct->getOptions() as $option) {
             $options[$option->getId()] = ['month' => 1, 'day' => 1, 'year' => 2001, 'hour' => 1, 'minute' => 1];
             break;
         case 'drop_down':
+<<<<<<< HEAD
             $options[$option->getId()] = current($option->getValues())->getOptionTypeId();
             break;
         case 'radio':
             $options[$option->getId()] = current($option->getValues())->getOptionTypeId();
+=======
+            $options[$option->getId()] = '1';
+            break;
+        case 'radio':
+            $options[$option->getId()] = '1';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             break;
     }
 }

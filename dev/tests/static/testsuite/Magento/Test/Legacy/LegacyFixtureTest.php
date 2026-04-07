@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2022 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -22,6 +27,7 @@ class LegacyFixtureTest extends TestCase
      */
     public function testNew(): void
     {
+<<<<<<< HEAD
         $docUrl = 'https://developer.adobe.com/commerce/testing/guide/integration/attributes/data-fixture/';
         $files = AddedFiles::getAddedFilesList(__DIR__ . '/..');
         $legacyFixtureFiles = [];
@@ -30,6 +36,13 @@ class LegacyFixtureTest extends TestCase
         foreach ($files as $file) {
             if (pathinfo($file, PATHINFO_EXTENSION) === 'php'
                 && !preg_match($skip_pattern, $file)
+=======
+        $docUrl = 'https://devdocs.magento.com/guides/v2.4/test/integration/parameterized_data_fixture.html';
+        $files = AddedFiles::getAddedFilesList(__DIR__ . '/..');
+        $legacyFixtureFiles = [];
+        foreach ($files as $file) {
+            if (pathinfo($file, PATHINFO_EXTENSION) === 'php'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 && (
                     preg_match('/(integration\/testsuite|api-functional\/testsuite).*\/(_files|Fixtures)/', $file)
                     // Cover the case when tests are located in the module folder instead of dev/tests.

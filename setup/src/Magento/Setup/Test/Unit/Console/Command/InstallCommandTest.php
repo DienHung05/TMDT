@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -19,11 +24,18 @@ use Magento\Setup\Model\AdminAccount;
 use Magento\Setup\Model\ConfigModel;
 use Magento\Setup\Model\Installer;
 use Magento\Setup\Model\InstallerFactory;
+<<<<<<< HEAD
 use Magento\Setup\Model\SearchConfigOptionsList;
 use Magento\Setup\Model\StoreConfigurationDataMapper;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+=======
+use Magento\Setup\Model\StoreConfigurationDataMapper;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Magento\Setup\Model\SearchConfigOptionsList;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Helper\QuestionHelper;
@@ -149,9 +161,12 @@ class InstallCommandTest extends TestCase
         $this->definitionMock->expects($this->any())
             ->method('getOptions')
             ->willReturn([]);
+<<<<<<< HEAD
         $this->definitionMock->expects($this->any())
             ->method('getArguments')
             ->willReturn([]);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->applicationMock->expects($this->any())
             ->method('find')
             ->with(ConfigImportCommand::COMMAND_NAME)
@@ -190,8 +205,12 @@ class InstallCommandTest extends TestCase
             ->willReturn($this->installer);
         $this->installer->expects($this->once())->method('install');
         $this->configImportMock->expects($this->once())
+<<<<<<< HEAD
             ->method('run')
             ->willReturn(Cli::RETURN_SUCCESS);
+=======
+            ->method('run');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $commandTester = new CommandTester($this->command);
         $commandTester->execute($this->input);
@@ -212,9 +231,12 @@ class InstallCommandTest extends TestCase
             ->with('question')
             ->willReturn($this->questionHelperMock);
         $this->command->setHelperSet($this->helperSetMock);
+<<<<<<< HEAD
         $this->configImportMock->expects($this->once())
             ->method('run')
             ->willReturn(Cli::RETURN_SUCCESS);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $commandTester = new CommandTester($this->command);
         $commandTester->execute(['--' . InstallCommand::INPUT_KEY_INTERACTIVE_SETUP => true]);
@@ -322,9 +344,15 @@ class InstallCommandTest extends TestCase
     /**
      * Test install command with valid sales_order_increment_prefix value
      *
+<<<<<<< HEAD
      * @param $prefixValue
      */
     #[DataProvider('validateDataProvider')]
+=======
+     * @dataProvider validateDataProvider
+     * @param $prefixValue
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testValidate($prefixValue)
     {
         $this->adminUserMock
@@ -335,9 +363,12 @@ class InstallCommandTest extends TestCase
             ->willReturn($this->installer);
         $this->installer->expects($this->once())->method('install');
         $this->input['--' . InstallCommand::INPUT_KEY_SALES_ORDER_INCREMENT_PREFIX] = $prefixValue;
+<<<<<<< HEAD
         $this->configImportMock->expects($this->once())
             ->method('run')
             ->willReturn(Cli::RETURN_SUCCESS);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $commandTester = new CommandTester($this->command);
         $commandTester->execute($this->input);
@@ -346,9 +377,15 @@ class InstallCommandTest extends TestCase
     /**
      * Test install command with invalid sales_order_increment_prefix value
      *
+<<<<<<< HEAD
      * @param $prefixValue
      */
     #[DataProvider('validateWithExceptionDataProvider')]
+=======
+     * @dataProvider validateWithExceptionDataProvider
+     * @param $prefixValue
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testValidateWithException($prefixValue)
     {
         $this->expectException('InvalidArgumentException');
@@ -368,23 +405,40 @@ class InstallCommandTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function validateDataProvider()
     {
         return [
             'without option' => [''],
             'normal case' => ['abcde'],
             '20 chars' => ['12345678901234567890'],
+=======
+    public function validateDataProvider()
+    {
+        return [
+            'without option' => ['', ''],
+            'normal case' => ['abcde', ''],
+            '20 chars' => ['12345678901234567890', ''],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
     }
 
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function validateWithExceptionDataProvider()
     {
         return [
             ['123456789012345678901'],
             ['abcdefghijk12345678fdgsdfgsdfgsdfsgsdfg90abcdefgdfddgsdfg'],
+=======
+    public function validateWithExceptionDataProvider()
+    {
+        return [
+            ['123456789012345678901', 'InvalidArgumentException'],
+            ['abcdefghijk12345678fdgsdfgsdfgsdfsgsdfg90abcdefgdfddgsdfg', 'InvalidArgumentException'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
     }
 }

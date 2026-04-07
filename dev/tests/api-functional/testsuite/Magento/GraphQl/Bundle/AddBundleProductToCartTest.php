@@ -1,23 +1,33 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Bundle;
 
+<<<<<<< HEAD
 use Magento\Bundle\Test\Fixture\Link as BundleSelectionFixture;
 use Magento\Bundle\Test\Fixture\Option as BundleOptionFixture;
 use Magento\Bundle\Test\Fixture\Product as BundleProductFixture;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
+=======
+use Magento\Catalog\Api\ProductRepositoryInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\TestCase\GraphQlAbstract;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\QuoteIdToMaskedQuoteIdInterface;
 use Magento\Quote\Model\ResourceModel\Quote as QuoteResource;
+<<<<<<< HEAD
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorage;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
@@ -26,6 +36,11 @@ use Magento\TestFramework\Fixture\DataFixtureStorageManager;
  * Test adding bundled products to cart
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+
+/**
+ * Test adding bundled products to cart
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class AddBundleProductToCartTest extends GraphQlAbstract
 {
@@ -50,11 +65,14 @@ class AddBundleProductToCartTest extends GraphQlAbstract
     private $productRepository;
 
     /**
+<<<<<<< HEAD
      * @var DataFixtureStorage
      */
     private $fixtures;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
@@ -64,7 +82,10 @@ class AddBundleProductToCartTest extends GraphQlAbstract
         $this->quote = $objectManager->create(Quote::class);
         $this->quoteIdToMaskedId = $objectManager->get(QuoteIdToMaskedQuoteIdInterface::class);
         $this->productRepository = $objectManager->get(ProductRepositoryInterface::class);
+<<<<<<< HEAD
         $this->fixtures = $objectManager->get(DataFixtureStorageManager::class)->getStorage();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -165,8 +186,13 @@ QUERY;
 
     /**
      * @magentoApiDataFixture Magento/Bundle/_files/quote_with_bundle_and_options.php
+<<<<<<< HEAD
      */
     #[DataProvider('dataProviderTestUpdateBundleItemQuantity')]
+=======
+     * @dataProvider dataProviderTestUpdateBundleItemQuantity
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateBundleItemQuantity(int $quantity)
     {
         $this->quoteResource->load(
@@ -216,7 +242,11 @@ QUERY;
         $this->assertEquals($quantity, $bundleItem['quantity']);
     }
 
+<<<<<<< HEAD
     public static function dataProviderTestUpdateBundleItemQuantity(): array
+=======
+    public function dataProviderTestUpdateBundleItemQuantity(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [2],
@@ -392,6 +422,7 @@ QUERY;
 
         $this->graphQlMutation($query);
     }
+<<<<<<< HEAD
 
     /**
      * @magentoApiDataFixture Magento/Checkout/_files/active_quote.php
@@ -505,4 +536,6 @@ QUERY;
 
         $this->graphQlMutation($query);
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -17,7 +22,10 @@ use Magento\Store\Api\StoreRepositoryInterface;
 use Magento\Store\Model\Store;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Provide tests for loading gallery images on product load.
@@ -119,13 +127,20 @@ class ReadHandlerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider executeWithTwoImagesDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/product_with_multiple_images.php
      * @magentoDbIsolation enabled
      * @param array $images
      * @param array $expectation
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('executeWithTwoImagesDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecuteWithTwoImages(array $images, array $expectation): void
     {
         $this->setGalleryImages($this->getProduct(), $images);
@@ -154,7 +169,11 @@ class ReadHandlerTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function executeWithTwoImagesDataProvider(): array
+=======
+    public function executeWithTwoImagesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'with_two_images' => [
@@ -207,6 +226,10 @@ class ReadHandlerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider executeOnStoreViewDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/product_with_image.php
      * @magentoDataFixture Magento/Store/_files/second_store.php
      * @magentoDbIsolation disabled
@@ -216,7 +239,10 @@ class ReadHandlerTest extends \PHPUnit\Framework\TestCase
      * @param array $expectation
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('executeOnStoreViewDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecuteOnStoreView(string $file, string $field, string $value, array $expectation): void
     {
         $product = $this->getProduct();
@@ -238,7 +264,11 @@ class ReadHandlerTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function executeOnStoreViewDataProvider(): array
+=======
+    public function executeOnStoreViewDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'with_store_label' => [

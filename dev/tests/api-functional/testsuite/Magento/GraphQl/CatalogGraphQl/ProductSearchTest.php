@@ -1,12 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\CatalogGraphQl;
 
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Category as CategoryFixture;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Indexer\Model\IndexerFactory;
@@ -16,6 +22,12 @@ use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\Catalog\Test\Fixture\Product;
 use Magento\Indexer\Test\Fixture\Indexer;
+=======
+use Magento\GraphQl\GetCustomerAuthenticationHeader;
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\TestFramework\ObjectManager;
+use Magento\TestFramework\TestCase\GraphQlAbstract;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test class to verify product search, used for GraphQL resolver
@@ -23,6 +35,7 @@ use Magento\Indexer\Test\Fixture\Indexer;
  */
 class ProductSearchTest extends GraphQlAbstract
 {
+<<<<<<< HEAD
     #[
         DataFixture(CategoryFixture::class, as: 'cat1'),
         DataFixture(
@@ -71,10 +84,42 @@ class ProductSearchTest extends GraphQlAbstract
         /** @var \Magento\Catalog\Model\Product $product */
         $product = DataFixtureStorageManager::getStorage()->get('product');
         $response = $this->graphQlQuery($this->getProductSearchQuery($product->getName(), $product->getSku()));
+=======
+    /**
+     * @var ObjectManager|null
+     */
+    private $objectManager;
+
+    /**
+     * @var GetCustomerAuthenticationHeader
+     */
+    private $getCustomerAuthenticationHeader;
+
+    protected function setUp(): void
+    {
+        $this->objectManager = Bootstrap::getObjectManager();
+        $this->getCustomerAuthenticationHeader = $this->objectManager->get(GetCustomerAuthenticationHeader::class);
+    }
+
+    /**
+     * Test for checking if graphQL query fpr configurable product returns
+     * expected visible items
+     *
+     * @magentoApiDataFixture Magento/ConfigurableProduct/_files/configurable_products_with_different_super_attribute.php
+     */
+    public function testCheckIfConfigurableProductVisibilityReturnsExpectedItem(): void
+    {
+        $productName = 'Configurable Product';
+        $productSku = 'configurable';
+        $query = $this->getProductSearchQuery($productName, $productSku);
+
+        $response = $this->graphQlQuery($query);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertNotEmpty($response['products']);
         $this->assertEquals(1, $response['products']['total_count']);
         $this->assertNotEmpty($response['products']['items']);
+<<<<<<< HEAD
         $this->assertEquals($product->getName(), $response['products']['items'][0]['name']);
         $this->assertEquals($product->getSku(), $response['products']['items'][0]['sku']);
     }
@@ -142,6 +187,10 @@ class ProductSearchTest extends GraphQlAbstract
             }
         }
         QUERY;
+=======
+        $this->assertEquals($productName, $response['products']['items'][0]['name']);
+        $this->assertEquals($productSku, $response['products']['items'][0]['sku']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -154,6 +203,7 @@ class ProductSearchTest extends GraphQlAbstract
     private function getProductSearchQuery(string $productName, string $productSku): string
     {
         return <<<QUERY
+<<<<<<< HEAD
         {
         products(filter: {
             sku: {
@@ -216,6 +266,35 @@ class ProductSearchTest extends GraphQlAbstract
             }
         }
         QUERY;
+=======
+{
+  products(filter: {sku: {eq: "{$productSku}"}}, search: "$productName", sort: {}, pageSize: 200, currentPage: 1) {
+    total_count
+    page_info {
+        total_pages
+        current_page
+        page_size
+    }
+    items {
+        name
+        sku
+    }
+  }
+}
+QUERY;
+    }
+
+    /**
+     * @magentoApiDataFixture Magento/Catalog/_files/products_with_layered_navigation_attribute.php
+     */
+    public function testSearchSuggestions() : void
+    {
+        $query = $this->getSearchQueryWithSuggestions();
+        $response = $this->graphQlQuery($query);
+        $this->assertNotEmpty($response['products']);
+        $this->assertEmpty($response['products']['items']);
+        $this->assertNotEmpty($response['products']['suggestions']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -223,6 +302,7 @@ class ProductSearchTest extends GraphQlAbstract
      *
      * @return string
      */
+<<<<<<< HEAD
     private function getSearchQueryWithSuggestions(): string
     {
         return <<<QUERY
@@ -456,5 +536,24 @@ class ProductSearchTest extends GraphQlAbstract
           }
         }
         QUERY;
+=======
+    private function getSearchQueryWithSuggestions() : string
+    {
+        return <<<QUERY
+{
+  products(
+    search: "smiple"
+   ) {
+    items {
+      name
+      sku
+    }
+    suggestions {
+      search
+    }
+  }
+}
+QUERY;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

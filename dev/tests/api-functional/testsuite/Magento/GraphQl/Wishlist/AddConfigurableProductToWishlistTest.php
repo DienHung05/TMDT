@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -154,6 +159,7 @@ class AddConfigurableProductToWishlistTest extends GraphQlAbstract
     }
 
     /**
+<<<<<<< HEAD
      * @magentoConfigFixture default_store wishlist/general/active 1
      * @magentoApiDataFixture Magento/Customer/_files/customer.php
      * @magentoApiDataFixture Magento/ConfigurableProduct/_files/product_configurable_with_custom_option_dropdown.php
@@ -185,6 +191,8 @@ class AddConfigurableProductToWishlistTest extends GraphQlAbstract
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Authentication header map
      *
      * @param string $username

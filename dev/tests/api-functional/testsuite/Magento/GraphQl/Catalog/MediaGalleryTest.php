@@ -1,17 +1,25 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Catalog;
 
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Category as CategoryFixture;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\TestCase\GraphQlAbstract;
 
 /**
@@ -119,7 +127,10 @@ QUERY;
         url
         position
         disabled
+<<<<<<< HEAD
         types
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
       }
     }
   }
@@ -137,10 +148,13 @@ QUERY;
         $this->assertEquals(2, $mediaGallery[1]['position']);
         $this->assertFalse($mediaGallery[1]['disabled']);
         $this->assertTrue($this->checkImageExists($mediaGallery[1]['url']));
+<<<<<<< HEAD
         $this->assertNotEmpty($mediaGallery[0]['types']);
         $this->assertEquals('image', $mediaGallery[0]['types'][0]);
         $this->assertNotEmpty($mediaGallery[1]['types']);
         $this->assertEquals('thumbnail', $mediaGallery[1]['types'][0]);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -153,14 +167,20 @@ QUERY;
 {
   products(filter: {sku: {eq: "{$productSku}"}}) {
     items {
+<<<<<<< HEAD
       small_image {
         url
       }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
       media_gallery {
       	label
         url
         position
+<<<<<<< HEAD
         types
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         disabled
         ... on ProductVideo {
               video_content {
@@ -185,8 +205,11 @@ QUERY;
         $this->assertTrue($this->checkImageExists($mediaGallery[0]['url']));
         $this->assertFalse($mediaGallery[0]['disabled']);
         $this->assertEquals(2, $mediaGallery[0]['position']);
+<<<<<<< HEAD
         $this->assertNotEmpty($mediaGallery[0]['types']);
         $this->assertEquals('image', $mediaGallery[0]['types'][0]);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertNotEmpty($mediaGallery[0]['video_content']);
         $video_content = $mediaGallery[0]['video_content'];
         $this->assertEquals('external-video', $video_content['media_type']);
@@ -228,6 +251,7 @@ QUERY;
     }
 
     /**
+<<<<<<< HEAD
      *  Tests the sorting of media gallery entries by their position attribute for a given product.
      *
      * @return void
@@ -301,6 +325,8 @@ QUERY;
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $url
      * @return bool
      */

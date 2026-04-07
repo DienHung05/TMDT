@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -9,7 +14,10 @@ namespace Magento\TestModuleOverrideConfig\MagentoDataFixture;
 
 use Magento\TestModuleOverrideConfig\AbstractOverridesTest;
 use Magento\TestModuleOverrideConfig\Model\FixtureCallStorage;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class checks that magentoConfigFixtures can be placed into certain place using override config
@@ -35,6 +43,11 @@ class SortFixturesTest extends AbstractOverridesTest
     /**
      * Checks that fixtures can be placed to specific place according to config
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider sortFixturesProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/TestModuleOverrideConfig/_files/fixture1_first_module.php
      * @magentoDataFixture Magento/TestModuleOverrideConfig/_files/fixture2_first_module.php
      * @magentoDataFixture Magento/TestModuleOverrideConfig/_files/fixture3_first_module.php
@@ -42,7 +55,10 @@ class SortFixturesTest extends AbstractOverridesTest
      * @param array $sortedFixtures
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('sortFixturesProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSortFixtures(array $sortedFixtures): void
     {
         $this->assertEquals($sortedFixtures, $this->fixtureCallStorage->getStorage());
@@ -51,11 +67,19 @@ class SortFixturesTest extends AbstractOverridesTest
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function sortFixturesProvider(): array
     {
         return [
             'first_data_set' => [
                 'sortedFixtures' => [
+=======
+    public function sortFixturesProvider(): array
+    {
+        return [
+            'first_data_set' => [
+                'sorted_fixtures' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'fixture3_second_module.php',
                     'fixture1_first_module.php',
                     'fixture1_second_module.php',
@@ -67,7 +91,11 @@ class SortFixturesTest extends AbstractOverridesTest
                 ],
             ],
             'second_data_set' => [
+<<<<<<< HEAD
                 'sortedFixtures' => [
+=======
+                'sorted_fixtures' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'fixture1_first_module.php',
                     'fixture1_second_module.php',
                     'fixture2_first_module.php',

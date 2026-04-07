@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -27,11 +32,23 @@ class DataMerger
     public function merge(array $defaultData, array $data, bool $isExtensible = true): array
     {
         if ($isExtensible) {
+<<<<<<< HEAD
             if (isset($data[CustomAttributesDataInterface::CUSTOM_ATTRIBUTES])) {
                 $data[CustomAttributesDataInterface::CUSTOM_ATTRIBUTES] = $this->convertCustomAttributesToMap(
                     $data[CustomAttributesDataInterface::CUSTOM_ATTRIBUTES]
                 );
             }
+=======
+            if (!isset($data[ExtensibleDataInterface::EXTENSION_ATTRIBUTES_KEY])) {
+                $data[ExtensibleDataInterface::EXTENSION_ATTRIBUTES_KEY] = [];
+            }
+            if (!isset($data[CustomAttributesDataInterface::CUSTOM_ATTRIBUTES])) {
+                $data[CustomAttributesDataInterface::CUSTOM_ATTRIBUTES] = [];
+            }
+            $data[CustomAttributesDataInterface::CUSTOM_ATTRIBUTES] = $this->convertCustomAttributesToMap(
+                $data[CustomAttributesDataInterface::CUSTOM_ATTRIBUTES]
+            );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             foreach ($data as $key => $value) {
                 if (!array_key_exists($key, $defaultData)) {
                     if (array_key_exists($key, $defaultData[ExtensibleDataInterface::EXTENSION_ATTRIBUTES_KEY])) {
@@ -46,7 +63,11 @@ class DataMerger
 
         $result = $this->mergeRecursive($defaultData, $data);
 
+<<<<<<< HEAD
         if ($isExtensible && isset($result[CustomAttributesDataInterface::CUSTOM_ATTRIBUTES])) {
+=======
+        if ($isExtensible) {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $result[CustomAttributesDataInterface::CUSTOM_ATTRIBUTES] = $this->convertCustomAttributesToCollection(
                 $result[CustomAttributesDataInterface::CUSTOM_ATTRIBUTES]
             );
@@ -95,6 +116,7 @@ class DataMerger
         // check if data is not an associative array
         if (array_values($data) === $data) {
             foreach ($data as $item) {
+<<<<<<< HEAD
                 if (isset($item[AttributeInterface::VALUE])) {
                     $result[$item[AttributeInterface::ATTRIBUTE_CODE]] = $item[AttributeInterface::VALUE];
                 } elseif (isset($item['selected_options'])) {
@@ -105,6 +127,9 @@ class DataMerger
                         }, $item['selected_options'])
                     );
                 }
+=======
+                $result[$item[AttributeInterface::ATTRIBUTE_CODE]] = $item[AttributeInterface::VALUE];
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             }
         } else {
             $result = $data;

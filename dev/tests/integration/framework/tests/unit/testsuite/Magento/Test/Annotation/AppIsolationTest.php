@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2012 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -10,8 +15,12 @@
 namespace Magento\Test\Annotation;
 
 use Magento\Framework\ObjectManagerInterface;
+<<<<<<< HEAD
 use Magento\TestFramework\Annotation\Parser\AppIsolation as AnnotationParser;
 use Magento\TestFramework\Fixture\Parser\AppIsolation as AttributeParser;
+=======
+use Magento\TestFramework\Fixture\Parser\AppIsolation;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -29,6 +38,7 @@ class AppIsolationTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp(): void
     {
+<<<<<<< HEAD
         if (!class_exists(AttributeParser::class)) {
             require_once __DIR__ . '/../../../../../../Magento/TestFramework/Fixture/ParserInterface.php';
             require_once __DIR__ . '/../../../../../../Magento/TestFramework/Fixture/AppIsolation.php';
@@ -48,6 +58,16 @@ class AppIsolationTest extends \PHPUnit\Framework\TestCase
             AttributeParser::class => new AttributeParser(),
             // Old-style annotation parser (docblock comments)
             AnnotationParser::class => new AnnotationParser()
+=======
+        /** @var ObjectManagerInterface|MockObject $objectManager */
+        $objectManager = $this->getMockBuilder(ObjectManagerInterface::class)
+            ->onlyMethods(['get', 'create'])
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+
+        $sharedInstances = [
+            AppIsolation::class => $this->createConfiguredMock(AppIsolation::class, ['parse' => []])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
         $objectManager->method('get')
             ->willReturnCallback(
@@ -108,9 +128,13 @@ class AppIsolationTest extends \PHPUnit\Framework\TestCase
     public function testEndTestIsolationController()
     {
         /** @var $controllerTest \Magento\TestFramework\TestCase\AbstractController */
+<<<<<<< HEAD
         $controllerTest = $this->createMock(
             \Magento\TestFramework\TestCase\AbstractController::class
         );
+=======
+        $controllerTest = $this->getMockForAbstractClass(\Magento\TestFramework\TestCase\AbstractController::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->_application->expects($this->once())->method('reinitialize');
         $this->_object->endTest($controllerTest);
     }

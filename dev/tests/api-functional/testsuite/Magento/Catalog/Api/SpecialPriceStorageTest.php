@@ -1,11 +1,19 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
  */
 namespace Magento\Catalog\Api;
 
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Catalog\Api;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Model\ResourceModel\Product as ProductResource;
 use Magento\Framework\Exception\CouldNotSaveException;
@@ -118,9 +126,15 @@ class SpecialPriceStorageTest extends WebapiAbstract
      * Test update method.
      *
      * @magentoApiDataFixture Magento/Catalog/_files/product_virtual.php
+<<<<<<< HEAD
      * @param array $data
      */
     #[DataProvider('updateData')]
+=======
+     * @dataProvider updateData
+     * @param array $data
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdate(array $data)
     {
         $serviceInfo = [
@@ -192,13 +206,20 @@ class SpecialPriceStorageTest extends WebapiAbstract
      * Test delete method.
      *
      * @magentoApiDataFixture Magento/Catalog/_files/product_simple.php
+<<<<<<< HEAD
+=======
+     * @dataProvider deleteData
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $data
      * @throws CouldNotSaveException
      * @throws InputException
      * @throws NoSuchEntityException
      * @throws StateException
      */
+<<<<<<< HEAD
     #[DataProvider('deleteData')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDelete(array $data)
     {
         /** @var ProductRepositoryInterface $productRepository */
@@ -239,7 +260,11 @@ class SpecialPriceStorageTest extends WebapiAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function updateData(): array
+=======
+    public function updateData(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $fromDate = '2037-01-19 03:14:07';
         $toDate = '2038-01-19 03:14:07';
@@ -273,7 +298,11 @@ class SpecialPriceStorageTest extends WebapiAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function deleteData(): array
+=======
+    public function deleteData(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $fromDate = '1970-01-01 00:00:01';
         $toDate = '2038-01-19 03:14:07';

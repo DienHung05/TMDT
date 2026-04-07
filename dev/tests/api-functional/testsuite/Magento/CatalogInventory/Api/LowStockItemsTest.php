@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
@@ -15,6 +16,22 @@ class LowStockItemsTest extends WebapiAbstract
 {
     public const SERVICE_VERSION = 'V1';
     public const RESOURCE_PATH = '/V1/stockItems/lowStock/';
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\CatalogInventory\Api;
+
+use Magento\TestFramework\TestCase\WebapiAbstract;
+
+/**
+ * Class LowStockItemsTest
+ */
+class LowStockItemsTest extends WebapiAbstract
+{
+    const SERVICE_VERSION = 'V1';
+    const RESOURCE_PATH = '/V1/stockItems/lowStock/';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @param float $qty
@@ -22,9 +39,15 @@ class LowStockItemsTest extends WebapiAbstract
      * @param int $pageSize
      * @param array $result
      * @magentoApiDataFixture Magento/Catalog/_files/multiple_products.php
+<<<<<<< HEAD
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     #[DataProvider('getLowStockItemsDataProvider')]
+=======
+     * @dataProvider getLowStockItemsDataProvider
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetLowStockItems($qty, $currentPage, $pageSize, $result)
     {
         $requestData = ['scopeId' => 1, 'qty' => $qty, 'pageSize' => $pageSize, 'currentPage' => $currentPage];
@@ -46,7 +69,11 @@ class LowStockItemsTest extends WebapiAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getLowStockItemsDataProvider()
+=======
+    public function getLowStockItemsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

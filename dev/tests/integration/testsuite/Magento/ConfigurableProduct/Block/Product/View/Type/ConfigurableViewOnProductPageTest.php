@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -18,7 +23,10 @@ use Magento\Framework\View\LayoutInterface;
 use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -71,6 +79,10 @@ class ConfigurableViewOnProductPageTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider oneChildNotVisibleDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDbIsolation disabled
      *
      * @param string $sku
@@ -78,7 +90,10 @@ class ConfigurableViewOnProductPageTest extends TestCase
      * @param array $expectedData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('oneChildNotVisibleDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testOneChildNotVisible(string $sku, array $data, array $expectedData): void
     {
         $configurableProduct = $this->prepareConfigurableProduct($sku, $data);
@@ -89,7 +104,11 @@ class ConfigurableViewOnProductPageTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function oneChildNotVisibleDataProvider(): array
+=======
+    public function oneChildNotVisibleDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'one_child_out_of_stock' => [
@@ -100,7 +119,11 @@ class ConfigurableViewOnProductPageTest extends TestCase
                         'is_in_stock' => StockStatusInterface::STATUS_OUT_OF_STOCK,
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedData' => [
+=======
+                'expected_data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'stock_status' => 'In stock',
                     'options' => [
                         [
@@ -119,7 +142,11 @@ class ConfigurableViewOnProductPageTest extends TestCase
                         'is_in_stock' => StockStatusInterface::STATUS_IN_STOCK,
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedData' => [
+=======
+                'expected_data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'stock_status' => 'In stock',
                     'options' => [
                         [
@@ -135,12 +162,20 @@ class ConfigurableViewOnProductPageTest extends TestCase
     /**
      * @magentoConfigFixture current_store cataloginventory/options/show_out_of_stock 1
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider oneChildNotVisibleDataProviderWithEnabledConfig
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $sku
      * @param array $data
      * @param array $expectedData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('oneChildNotVisibleDataProviderWithEnabledConfig')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testOneChildNotVisibleWithEnabledShowOutOfStockProducts(
         string $sku,
         array $data,
@@ -154,7 +189,11 @@ class ConfigurableViewOnProductPageTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function oneChildNotVisibleDataProviderWithEnabledConfig(): array
+=======
+    public function oneChildNotVisibleDataProviderWithEnabledConfig(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'one_child_out_of_stock' => [
@@ -165,7 +204,11 @@ class ConfigurableViewOnProductPageTest extends TestCase
                         'is_in_stock' => StockStatusInterface::STATUS_OUT_OF_STOCK,
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedData' => [
+=======
+                'expected_data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'stock_status' => 'In stock',
                     'options' => [
                         [
@@ -188,7 +231,11 @@ class ConfigurableViewOnProductPageTest extends TestCase
                         'is_in_stock' => StockStatusInterface::STATUS_IN_STOCK,
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedData' => [
+=======
+                'expected_data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'stock_status' => 'In stock',
                     'options' => [
                         [

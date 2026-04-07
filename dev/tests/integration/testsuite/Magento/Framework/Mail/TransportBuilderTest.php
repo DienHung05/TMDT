@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -15,7 +20,10 @@ use Magento\Framework\Mail\Template\TransportBuilder;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class EmailMessageTest
@@ -49,9 +57,15 @@ class TransportBuilderTest extends TestCase
      * @magentoDbIsolation enabled
      *
      * @param string|array $email
+<<<<<<< HEAD
      * @throws LocalizedException
      */
     #[DataProvider('emailDataProvider')]
+=======
+     * @dataProvider emailDataProvider
+     * @throws LocalizedException
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddToEmail($email)
     {
         $template = $this->template->load('email_exception_fixture', 'template_code');
@@ -81,8 +95,13 @@ class TransportBuilderTest extends TestCase
 
         /** @var EmailMessage $emailMessage */
         $emailMessage = $this->builder->getTransport()->getMessage();
+<<<<<<< HEAD
         $header = 'text/' . $emailMessage->getSymfonyMessage()->getBody()->getMediaSubtype();
         $this->assertStringContainsStringIgnoringCase($templateType, $header);
+=======
+
+        $this->assertStringContainsStringIgnoringCase($templateType, $emailMessage->getHeaders()['Content-Type']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $addresses = $emailMessage->getTo();
 
@@ -103,7 +122,11 @@ class TransportBuilderTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function emailDataProvider(): array
+=======
+    public function emailDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -125,9 +148,15 @@ class TransportBuilderTest extends TestCase
      * @magentoDbIsolation enabled
      *
      * @param string|array $emails
+<<<<<<< HEAD
      * @throws LocalizedException
      */
     #[DataProvider('invalidEmailDataProvider')]
+=======
+     * @dataProvider invalidEmailDataProvider
+     * @throws LocalizedException
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddToInvalidEmailInTheQueue($emails)
     {
         $template = $this->template->load('email_exception_fixture', 'template_code');
@@ -162,8 +191,12 @@ class TransportBuilderTest extends TestCase
 
         /** @var EmailMessage $emailMessage */
         $emailMessage = $this->builder->getTransport()->getMessage();
+<<<<<<< HEAD
         $header = 'text/' . $emailMessage->getSymfonyMessage()->getBody()->getMediaSubtype();
         $this->assertStringContainsStringIgnoringCase($templateType, $header);
+=======
+        $this->assertStringContainsStringIgnoringCase($templateType, $emailMessage->getHeaders()['Content-Type']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $resultEmails = [];
         /** @var Address $toAddress */
@@ -177,7 +210,11 @@ class TransportBuilderTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function invalidEmailDataProvider(): array
+=======
+    public function invalidEmailDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

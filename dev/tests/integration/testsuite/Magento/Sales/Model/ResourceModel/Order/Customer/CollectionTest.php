@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Sales\Model\ResourceModel\Order\Customer;
 
+<<<<<<< HEAD
 use Magento\Framework\Exception\LocalizedException;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Store\Api\StoreRepositoryInterface;
 use Magento\Store\Api\WebsiteRepositoryInterface;
@@ -51,6 +59,7 @@ class CollectionTest extends TestCase
         $this->assertEquals($website->getName(), $customer->getWebsiteName());
         $this->assertEquals($store->getName(), $customer->getStoreName());
     }
+<<<<<<< HEAD
 
     /**
      * Test customer collection with the website and the store name filter.
@@ -85,4 +94,6 @@ class CollectionTest extends TestCase
         $this->assertEquals($website->getName(), $customerWithStoreWebsiteFilter->getWebsiteName());
         $this->assertEquals($store->getName(), $customerWithStoreWebsiteFilter->getStoreName());
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

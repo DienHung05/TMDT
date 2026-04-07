@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Quote\Customer;
 
+<<<<<<< HEAD
 use Magento\Framework\Exception\AuthenticationException;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\GraphQl\Quote\GetMaskedQuoteIdByReservedOrderId;
 use Magento\Integration\Api\CustomerTokenServiceInterface;
 use Magento\TestFramework\Helper\Bootstrap;
@@ -39,20 +47,30 @@ class GetSelectedShippingMethodTest extends GraphQlAbstract
     }
 
     /**
+<<<<<<< HEAD
      * @magentoConfigFixture default_store tax/calculation/price_includes_tax 1
      * @magentoConfigFixture default_store tax/calculation/shipping_includes_tax 1
      * @magentoConfigFixture default_store tax/cart_display/shipping 2
      * @magentoConfigFixture default_store tax/classes/shipping_tax_class 2
      * @magentoConfigFixture default_store tax/display/shipping 2
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoApiDataFixture Magento/Customer/_files/customer.php
      * @magentoApiDataFixture Magento/GraphQl/Catalog/_files/simple_product.php
      * @magentoApiDataFixture Magento/GraphQl/Quote/_files/customer/create_empty_cart.php
      * @magentoApiDataFixture Magento/GraphQl/Quote/_files/add_simple_product.php
+<<<<<<< HEAD
      * @magentoApiDataFixture Magento/Tax/_files/tax_rule_region_1_al.php
      * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_new_shipping_address.php
      * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_flatrate_shipping_method.php
      */
     public function testGetSelectedShippingMethodWithTax(): void
+=======
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_new_shipping_address.php
+     * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_flatrate_shipping_method.php
+     */
+    public function testGetSelectedShippingMethod()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $maskedQuoteId = $this->getMaskedQuoteIdByReservedOrderId->execute('test_quote');
 
@@ -85,6 +103,7 @@ class GetSelectedShippingMethodTest extends GraphQlAbstract
         self::assertEquals(10, $amount['value']);
         self::assertArrayHasKey('currency', $amount);
         self::assertEquals('USD', $amount['currency']);
+<<<<<<< HEAD
 
         self::assertArrayHasKey('price_excl_tax', $shippingAddress['selected_shipping_method']);
         $priceExclTax = $shippingAddress['selected_shipping_method']['price_excl_tax'];
@@ -228,6 +247,8 @@ class GetSelectedShippingMethodTest extends GraphQlAbstract
         self::assertEquals(10, $priceInclTax['value']);
         self::assertArrayHasKey('currency', $priceInclTax);
         self::assertEquals('USD', $priceInclTax['currency']);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -237,7 +258,11 @@ class GetSelectedShippingMethodTest extends GraphQlAbstract
      * @magentoApiDataFixture Magento/GraphQl/Quote/_files/add_simple_product.php
      * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_new_shipping_address.php
      */
+<<<<<<< HEAD
     public function testGetSelectedShippingMethodBeforeSet(): void
+=======
+    public function testGetSelectedShippingMethodBeforeSet()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $maskedQuoteId = $this->getMaskedQuoteIdByReservedOrderId->execute('test_quote');
 
@@ -262,7 +287,11 @@ class GetSelectedShippingMethodTest extends GraphQlAbstract
      * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_new_shipping_address.php
      * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_flatrate_shipping_method.php
      */
+<<<<<<< HEAD
     public function testGetSelectedShippingMethodFromGuestCart(): void
+=======
+    public function testGetSelectedShippingMethodFromGuestCart()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $maskedQuoteId = $this->getMaskedQuoteIdByReservedOrderId->execute('test_quote');
         $query = $this->getQuery($maskedQuoteId);
@@ -282,7 +311,11 @@ class GetSelectedShippingMethodTest extends GraphQlAbstract
      * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_new_shipping_address.php
      * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_flatrate_shipping_method.php
      */
+<<<<<<< HEAD
     public function testGetSelectedShippingMethodFromAnotherCustomerCart(): void
+=======
+    public function testGetSelectedShippingMethodFromAnotherCustomerCart()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $maskedQuoteId = $this->getMaskedQuoteIdByReservedOrderId->execute('test_quote');
         $query = $this->getQuery($maskedQuoteId);
@@ -300,7 +333,11 @@ class GetSelectedShippingMethodTest extends GraphQlAbstract
      * @magentoApiDataFixture Magento/GraphQl/Quote/_files/add_simple_product.php
      * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_new_shipping_address.php
      */
+<<<<<<< HEAD
     public function testGetGetSelectedShippingMethodIfShippingMethodIsNotSet(): void
+=======
+    public function testGetGetSelectedShippingMethodIfShippingMethodIsNotSet()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $maskedQuoteId = $this->getMaskedQuoteIdByReservedOrderId->execute('test_quote');
         $query = $this->getQuery($maskedQuoteId);
@@ -320,7 +357,11 @@ class GetSelectedShippingMethodTest extends GraphQlAbstract
      * @magentoApiDataFixture Magento/Customer/_files/customer.php
      *
      */
+<<<<<<< HEAD
     public function testGetGetSelectedShippingMethodOfNonExistentCart(): void
+=======
+    public function testGetGetSelectedShippingMethodOfNonExistentCart()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Could not find a cart with ID "non_existent_masked_id"');
@@ -335,12 +376,20 @@ class GetSelectedShippingMethodTest extends GraphQlAbstract
      * @param string $username
      * @param string $password
      * @return array
+<<<<<<< HEAD
      * @throws AuthenticationException
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     private function getHeaderMap(string $username = 'customer@example.com', string $password = 'password'): array
     {
         $customerToken = $this->customerTokenService->createCustomerAccessToken($username, $password);
+<<<<<<< HEAD
         return ['Authorization' => 'Bearer ' . $customerToken];
+=======
+        $headerMap = ['Authorization' => 'Bearer ' . $customerToken];
+        return $headerMap;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -366,6 +415,7 @@ class GetSelectedShippingMethodTest extends GraphQlAbstract
             value
             currency
         }
+<<<<<<< HEAD
         price_excl_tax {
           value
           currency
@@ -374,6 +424,8 @@ class GetSelectedShippingMethodTest extends GraphQlAbstract
           value
           currency
         }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
       }
     }
   }

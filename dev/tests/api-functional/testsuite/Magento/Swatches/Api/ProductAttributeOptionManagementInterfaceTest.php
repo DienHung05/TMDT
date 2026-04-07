@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Swatches\Api;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Catalog\Api\Data\ProductAttributeInterface;
 use Magento\Catalog\Model\ResourceModel\Eav\Attribute;
 use Magento\Eav\Api\Data\AttributeOptionInterface;
@@ -35,6 +43,10 @@ class ProductAttributeOptionManagementInterfaceTest extends WebapiAbstract
     /**
      * Test add option to swatch attribute
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider addDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoApiDataFixture Magento/Catalog/Model/Product/Attribute/_files/select_attribute.php
      * @param array $data
      * @param array $payload
@@ -44,7 +56,10 @@ class ProductAttributeOptionManagementInterfaceTest extends WebapiAbstract
      *
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('addDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAdd(
         array $data,
         array $payload,
@@ -127,7 +142,11 @@ class ProductAttributeOptionManagementInterfaceTest extends WebapiAbstract
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function addDataProvider(): array
+=======
+    public function addDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'visual swatch option with value' => [

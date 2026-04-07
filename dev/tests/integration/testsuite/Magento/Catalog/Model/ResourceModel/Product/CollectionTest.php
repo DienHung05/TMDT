@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -18,7 +23,10 @@ use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Fixture\DbIsolation;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for Magento\Catalog\Model\ResourceModel\Product\Collection
@@ -229,12 +237,19 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
     /**
      * Test addAttributeToSort() with attribute 'is_saleable' works properly on frontend.
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider addIsSaleableAttributeToSortDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/multiple_products_with_non_saleable_product.php
      * @magentoConfigFixture current_store cataloginventory/options/show_out_of_stock 1
      * @magentoAppIsolation enabled
      * @magentoAppArea frontend
      */
+<<<<<<< HEAD
     #[DataProvider('addIsSaleableAttributeToSortDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddIsSaleableAttributeToSort(string $productSku, string $order)
     {
         $this->collection->addAttributeToSort('is_saleable', $order);
@@ -245,6 +260,7 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function addIsSaleableAttributeToSortDataProvider(): array
     {
         return [
@@ -254,6 +270,17 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
             ],
             [
                 'productSku' => 'simple_not_saleable',
+=======
+    public function addIsSaleableAttributeToSortDataProvider(): array
+    {
+        return [
+            [
+                'product_sku' => 'simple_saleable',
+                'order' => Collection::SORT_ORDER_DESC,
+            ],
+            [
+                'product_sku' => 'simple_not_saleable',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'order' => Collection::SORT_ORDER_ASC,
             ]
         ];
@@ -262,13 +289,20 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
     /**
      * Test addAttributeToSort() with attribute 'price' works properly on frontend.
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider addPriceAttributeToSortDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/product_simple.php
      * @magentoDataFixture Magento/Catalog/_files/simple_product_with_tier_price_equal_zero.php
      * @magentoAppIsolation enabled
      * @magentoDbIsolation disabled
      * @magentoAppArea frontend
      */
+<<<<<<< HEAD
     #[DataProvider('addPriceAttributeToSortDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddPriceAttributeToSort(string $productSku, string $order)
     {
         $this->processor->getIndexer()->reindexAll();
@@ -281,6 +315,7 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function addPriceAttributeToSortDataProvider(): array
     {
         return [
@@ -290,6 +325,17 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
             ],
             [
                 'productSku' => 'simple-2',
+=======
+    public function addPriceAttributeToSortDataProvider(): array
+    {
+        return [
+            [
+                'product_sku' => 'simple',
+                'order' => Collection::SORT_ORDER_DESC,
+            ],
+            [
+                'product_sku' => 'simple-2',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'order' => Collection::SORT_ORDER_ASC,
             ]
         ];
@@ -338,8 +384,14 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
      * @param mixed $condition
      * @magentoDataFixture Magento/Catalog/Model/ResourceModel/_files/few_simple_products.php
      * @magentoDataFixture Magento/Catalog/Model/ResourceModel/_files/product_simple.php
+<<<<<<< HEAD
      */
     #[DataProvider('addAttributeTierPriceToFilterDataProvider')]
+=======
+     *
+     * @dataProvider addAttributeTierPriceToFilterDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddAttributeTierPriceToFilter($condition): void
     {
         $size = $this->collection->addAttributeToFilter('tier_price', $condition)->getSize();
@@ -349,7 +401,11 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function addAttributeTierPriceToFilterDataProvider(): array
+=======
+    public function addAttributeTierPriceToFilterDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'condition is array' => [['eq' => 8]],
@@ -364,8 +420,14 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
      *
      * @param mixed $condition
      * @magentoDataFixture Magento/Catalog/Model/ResourceModel/_files/product_simple.php
+<<<<<<< HEAD
      */
     #[DataProvider('addAttributeIsSaleableToFilterDataProvider')]
+=======
+     *
+     * @dataProvider addAttributeIsSaleableToFilterDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddAttributeIsSaleableToFilter($condition): void
     {
         $size = $this->collection->addAttributeToFilter('is_saleable', $condition)->getSize();
@@ -375,7 +437,11 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function addAttributeIsSaleableToFilterDataProvider(): array
+=======
+    public function addAttributeIsSaleableToFilterDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'condition is array' => [['eq' => 1]],

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Setup\Console\Command;
@@ -25,8 +30,11 @@ class GenerateFixturesCommand extends Command
 
     public const SKIP_REINDEX_OPTION = 'skip-reindex';
 
+<<<<<<< HEAD
     public const NAME = 'setup:performance:generate-fixtures';
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @var FixtureModel
      */
@@ -46,7 +54,11 @@ class GenerateFixturesCommand extends Command
      */
     protected function configure()
     {
+<<<<<<< HEAD
         $this->setName(self::NAME)
+=======
+        $this->setName('setup:performance:generate-fixtures')
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->setDescription('Generates fixtures')
             ->setDefinition([
                 new InputArgument(
@@ -67,7 +79,11 @@ class GenerateFixturesCommand extends Command
     /**
      * @inheritdoc
      */
+<<<<<<< HEAD
     protected function execute(InputInterface $input, OutputInterface $output): int
+=======
+    protected function execute(InputInterface $input, OutputInterface $output)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         try {
             $totalStartTime = microtime(true);

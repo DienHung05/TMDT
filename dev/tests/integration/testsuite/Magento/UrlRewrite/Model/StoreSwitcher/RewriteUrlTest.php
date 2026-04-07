@@ -1,20 +1,31 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\UrlRewrite\Model\StoreSwitcher;
 
+<<<<<<< HEAD
 use Exception;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Customer\Model\Session;
 use Magento\Framework\App\Config\ReinitableConfigInterface;
 use Magento\Framework\App\Config\Value;
+<<<<<<< HEAD
 use Magento\Framework\Exception\LocalizedException;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\ObjectManagerInterface as ObjectManager;
 use Magento\Store\Api\Data\StoreInterface;
@@ -22,13 +33,21 @@ use Magento\Store\Api\StoreRepositoryInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Store\Model\StoreSwitcher;
+<<<<<<< HEAD
 use Magento\Store\Model\StoreSwitcher\CannotSwitchStoreException;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
 
 /**
+<<<<<<< HEAD
  * Test store switching
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * Test store switching
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class RewriteUrlTest extends TestCase
 {
@@ -113,6 +132,7 @@ class RewriteUrlTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * Testing store switching with existing cms pages with non-existing url keys
      *
      * @magentoDataFixture Magento/UrlRewrite/_files/url_rewrite.php
@@ -145,12 +165,17 @@ class RewriteUrlTest extends TestCase
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Testing store switching using cms pages with the same url_key but with different page_id
      *
      * @magentoDataFixture Magento/Cms/_files/two_cms_page_with_same_url_for_different_stores.php
      * @magentoDbIsolation disabled
      * @return void
+<<<<<<< HEAD
      * @throws CannotSwitchStoreException|NoSuchEntityException
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function testSwitchCmsPageToAnotherStore(): void
     {
@@ -169,9 +194,12 @@ class RewriteUrlTest extends TestCase
      * @magentoDbIsolation disabled
      * @magentoAppArea frontend
      * @return void
+<<<<<<< HEAD
      * @throws CannotSwitchStoreException
      * @throws NoSuchEntityException
      * @throws LocalizedException
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function testSwitchCmsPageToAnotherStoreAsCustomer(): void
     {
@@ -206,7 +234,10 @@ class RewriteUrlTest extends TestCase
      * @param StoreInterface $targetStore
      * @param string $baseUrl
      * @return void
+<<<<<<< HEAD
      * @throws Exception
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     private function setBaseUrl(StoreInterface $targetStore, string $baseUrl): void
     {
@@ -229,7 +260,10 @@ class RewriteUrlTest extends TestCase
      *
      * @param string $storeCode
      * @return StoreInterface
+<<<<<<< HEAD
      * @throws NoSuchEntityException
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     private function getStoreByCode(string $storeCode): StoreInterface
     {

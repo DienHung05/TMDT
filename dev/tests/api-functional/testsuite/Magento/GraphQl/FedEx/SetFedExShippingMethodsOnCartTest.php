@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\FedEx;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\GraphQl\Quote\GetMaskedQuoteIdByReservedOrderId;
 use Magento\Integration\Api\CustomerTokenServiceInterface;
 use Magento\TestFramework\Helper\Bootstrap;
@@ -26,19 +34,31 @@ use Magento\TestFramework\TestCase\GraphQlAbstract;
  * | FEDEX_2_DAY            | 2 Day
  * | FIRST_OVERNIGHT        | First Overnight
  * | INTERNATIONAL_ECONOMY  |International Economy
+<<<<<<< HEAD
  * | FEDEX_INTERNATIONAL_PRIORITY | International Priority
+=======
+ * | INTERNATIONAL_PRIORITY | International Priority
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class SetFedExShippingMethodsOnCartTest extends GraphQlAbstract
 {
     /**
      * Defines carrier label for "FedEx" shipping method
      */
+<<<<<<< HEAD
     protected const CARRIER_LABEL = 'Federal Express';
+=======
+    const CARRIER_LABEL = 'Federal Express';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * Defines carrier code for "FedEx" shipping method
      */
+<<<<<<< HEAD
     protected const CARRIER_CODE = 'fedex';
+=======
+    const CARRIER_CODE = 'fedex';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var CustomerTokenServiceInterface
@@ -68,12 +88,20 @@ class SetFedExShippingMethodsOnCartTest extends GraphQlAbstract
      * @magentoApiDataFixture Magento/GraphQl/Quote/_files/add_simple_product.php
      * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_new_shipping_address.php
      * @magentoApiDataFixture Magento/GraphQl/FedEx/_files/enable_fedex_shipping_method.php
+<<<<<<< HEAD
      * @magentoConfigFixture carriers/fedex/api_key TESTAPIKEY
      * @magentoConfigFixture carriers/fedex/secret_key TESTSECRETKEY
      * @param string $methodCode
      * @param string $methodLabel
      */
     #[DataProvider('dataProviderShippingMethods')]
+=======
+     *
+     * @dataProvider dataProviderShippingMethods
+     * @param string $methodCode
+     * @param string $methodLabel
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSetFedExShippingMethod(string $methodCode, string $methodLabel)
     {
         $quoteReservedId = 'test_quote';
@@ -106,7 +134,11 @@ class SetFedExShippingMethodsOnCartTest extends GraphQlAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function dataProviderShippingMethods(): array
+=======
+    public function dataProviderShippingMethods(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Ground' => ['FEDEX_GROUND', 'Ground'],
@@ -126,12 +158,20 @@ class SetFedExShippingMethodsOnCartTest extends GraphQlAbstract
      * @magentoApiDataFixture Magento/GraphQl/Quote/_files/add_simple_product.php
      * @magentoApiDataFixture Magento/GraphQl/Quote/_files/set_new_shipping_canada_address.php
      * @magentoApiDataFixture Magento/GraphQl/FedEx/_files/enable_fedex_shipping_method.php
+<<<<<<< HEAD
      * @magentoConfigFixture carriers/fedex/api_key TESTAPIKEY
      * @magentoConfigFixture carriers/fedex/secret_key TESTSECRETKEY
      * @param string $methodCode
      * @param string $methodLabel
      */
     #[DataProvider('dataProviderShippingMethodsBasedOnCanadaAddress')]
+=======
+     *
+     * @dataProvider dataProviderShippingMethodsBasedOnCanadaAddress
+     * @param string $methodCode
+     * @param string $methodLabel
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSetFedExShippingMethodBasedOnCanadaAddress(string $methodCode, string $methodLabel)
     {
         $quoteReservedId = 'test_quote';
@@ -164,12 +204,21 @@ class SetFedExShippingMethodsOnCartTest extends GraphQlAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function dataProviderShippingMethodsBasedOnCanadaAddress(): array
     {
         return [
            'Ground' => ['FEDEX_GROUND', 'Ground'],
            'International Economy' => ['INTERNATIONAL_ECONOMY', 'International Economy'],
            'International Priority' => ['FEDEX_INTERNATIONAL_PRIORITY', 'International Priority'],
+=======
+    public function dataProviderShippingMethodsBasedOnCanadaAddress(): array
+    {
+        return [
+            'Ground' => ['FEDEX_GROUND', 'Ground'],
+            'International Economy' => ['INTERNATIONAL_ECONOMY', 'International Economy'],
+            'International Priority' => ['INTERNATIONAL_PRIORITY', 'International Priority'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
     }
 
@@ -206,9 +255,15 @@ mutation {
           method_title
         }
       }
+<<<<<<< HEAD
     }
   }
 }
+=======
+    } 
+  }
+}        
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 QUERY;
     }
 

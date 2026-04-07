@@ -1,12 +1,20 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Test\Integrity\Theme;
 
 use Magento\Framework\Component\ComponentRegistrar;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class XmlFilesTest extends \PHPUnit\Framework\TestCase
 {
@@ -24,8 +32,13 @@ class XmlFilesTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @param string $file
+<<<<<<< HEAD
      */
     #[DataProvider('viewConfigFileDataProvider')]
+=======
+     * @dataProvider viewConfigFileDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testViewConfigFile($file)
     {
         $domConfig = new \Magento\Framework\Config\Dom(
@@ -44,7 +57,11 @@ class XmlFilesTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function viewConfigFileDataProvider()
+=======
+    public function viewConfigFileDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $result = [];
         /** @var \Magento\Framework\Component\DirSearch $componentDirSearch */
@@ -59,8 +76,13 @@ class XmlFilesTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @param string $themeDir
+<<<<<<< HEAD
      */
     #[DataProvider('themeConfigFileExistsDataProvider')]
+=======
+     * @dataProvider themeConfigFileExistsDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testThemeConfigFileExists($themeDir)
     {
         $this->assertFileExists($themeDir . '/theme.xml');
@@ -69,7 +91,11 @@ class XmlFilesTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function themeConfigFileExistsDataProvider()
+=======
+    public function themeConfigFileExistsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $result = [];
         /** @var \Magento\Framework\Component\ComponentRegistrar $componentRegistrar */
@@ -83,8 +109,13 @@ class XmlFilesTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @param string $file
+<<<<<<< HEAD
      */
     #[DataProvider('themeConfigFileDataProvider')]
+=======
+     * @dataProvider themeConfigFileDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testThemeConfigFileSchema($file)
     {
         $domConfig = new \Magento\Framework\Config\Dom(file_get_contents($file), $this->validationStateMock);
@@ -97,8 +128,13 @@ class XmlFilesTest extends \PHPUnit\Framework\TestCase
      * Configuration should declare a single package/theme that corresponds to the file system directories
      *
      * @param string $file
+<<<<<<< HEAD
      */
     #[DataProvider('themeConfigFileDataProvider')]
+=======
+     * @dataProvider themeConfigFileDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testThemeConfigFileHasSingleTheme($file)
     {
         /** @var $configXml \SimpleXMLElement */
@@ -110,7 +146,11 @@ class XmlFilesTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function themeConfigFileDataProvider()
+=======
+    public function themeConfigFileDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $result = [];
         /** @var \Magento\Framework\Component\DirSearch $componentDirSearch */

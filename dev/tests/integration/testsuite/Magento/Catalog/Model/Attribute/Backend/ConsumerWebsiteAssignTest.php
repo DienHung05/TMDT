@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -20,7 +25,10 @@ use Magento\Framework\ObjectManagerInterface;
 use Magento\Store\Api\WebsiteRepositoryInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\MessageQueue\ClearQueueProcessor;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -137,13 +145,21 @@ class ConsumerWebsiteAssignTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider errorProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/update_product_website_quene_data.php
      *
      * @param \Throwable $exception
      * @param int $code
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('errorProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testWithException(\Throwable $exception, int $code): void
     {
         $this->prepareMock($exception);
@@ -154,7 +170,11 @@ class ConsumerWebsiteAssignTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function errorProvider(): array
+=======
+    public function errorProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'with_dead_lock_exception' => [

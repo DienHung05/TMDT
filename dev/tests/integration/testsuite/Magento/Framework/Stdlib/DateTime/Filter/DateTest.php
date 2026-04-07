@@ -1,12 +1,20 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Framework\Stdlib\DateTime\Filter;
 
 use Magento\TestFramework\ObjectManager;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class DateTest extends \PHPUnit\Framework\TestCase
 {
@@ -48,8 +56,14 @@ class DateTest extends \PHPUnit\Framework\TestCase
     /**
      * @param string $inputData
      * @param string $expectedDate
+<<<<<<< HEAD
      */
     #[DataProvider('filterDataProvider')]
+=======
+     *
+     * @dataProvider filterDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testFilter($inputData, $expectedDate)
     {
         $this->markTestSkipped(
@@ -61,7 +75,11 @@ class DateTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function filterDataProvider()
+=======
+    public function filterDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['2000-01-01', '2000-01-01'],
@@ -75,9 +93,15 @@ class DateTest extends \PHPUnit\Framework\TestCase
      * @param string $inputData
      * @param string $expectedDate
      *
+<<<<<<< HEAD
      * @return void
      */
     #[DataProvider('localeDateFilterProvider')]
+=======
+     * @dataProvider localeDateFilterProvider
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testLocaleDateFilter($locale, $inputData, $expectedDate)
     {
         $this->localeResolver->setLocale($locale);
@@ -87,7 +111,11 @@ class DateTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function localeDateFilterProvider()
+=======
+    public function localeDateFilterProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['en_US', '01/02/2010', '2010-01-02'],

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -39,7 +44,11 @@ class SimpleProductsFixture extends Fixture
     /**
      * Simple product sku pattern
      */
+<<<<<<< HEAD
     public const SKU_PATTERN = 'product_dynamic_%s';
+=======
+    const SKU_PATTERN = 'product_dynamic_%s';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @var int
@@ -257,12 +266,15 @@ class SimpleProductsFixture extends Fixture
             'category_ids' => function ($index, $entityNumber) {
                 return $this->websiteCategoryProvider->getCategoryId($index);
             },
+<<<<<<< HEAD
             'meta_keyword' => function ($productId) {
                 return sprintf($this->getSkuPattern(), $productId);
             },
             'meta_title' => function ($productId) {
                 return sprintf($this->getSkuPattern(), $productId);
             },
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'attribute_set_id' => $attributeSet,
             'additional_attributes' => $additionalAttributes,
             'status' => function () {

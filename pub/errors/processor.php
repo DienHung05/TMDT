@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2011 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -22,11 +27,19 @@ use Magento\Framework\App\Response\Http;
  */
 class Processor
 {
+<<<<<<< HEAD
     public const MAGE_ERRORS_LOCAL_XML = 'local.xml';
     public const MAGE_ERRORS_DESIGN_XML = 'design.xml';
     public const DEFAULT_SKIN = 'default';
     public const ERROR_DIR = 'pub/errors';
     public const NUMBER_SYMBOLS_IN_SUBDIR_NAME = 2;
+=======
+    const MAGE_ERRORS_LOCAL_XML = 'local.xml';
+    const MAGE_ERRORS_DESIGN_XML = 'design.xml';
+    const DEFAULT_SKIN = 'default';
+    const ERROR_DIR = 'pub/errors';
+    const NUMBER_SYMBOLS_IN_SUBDIR_NAME = 2;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * Page title
@@ -111,6 +124,7 @@ class Processor
     public $reportUrl;
 
     /**
+<<<<<<< HEAD
      * @var string
      */
     public $_reportDir;
@@ -126,6 +140,8 @@ class Processor
     public $_errorDir;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Server script name
      *
      * @var string
@@ -178,9 +194,15 @@ class Processor
      */
     public function __construct(
         Http $response,
+<<<<<<< HEAD
         ?Json $serializer = null,
         ?Escaper $escaper = null,
         ?DocumentRoot $documentRoot = null
+=======
+        Json $serializer = null,
+        Escaper $escaper = null,
+        DocumentRoot $documentRoot = null
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ) {
         $this->_response = $response;
         $this->_errorDir  = __DIR__ . '/';
@@ -188,6 +210,10 @@ class Processor
         $this->serializer = $serializer ?: ObjectManager::getInstance()->get(Json::class);
         $this->escaper = $escaper ?: ObjectManager::getInstance()->get(Escaper::class);
         $this->documentRoot = $documentRoot ?? ObjectManager::getInstance()->get(DocumentRoot::class);
+<<<<<<< HEAD
+=======
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         if (!empty($_SERVER['SCRIPT_NAME'])) {
             if (in_array(basename($_SERVER['SCRIPT_NAME'], '.php'), ['404', '503', 'report'])) {
                 $this->_scriptName = dirname($_SERVER['SCRIPT_NAME']);
@@ -195,8 +221,15 @@ class Processor
                 $this->_scriptName = $_SERVER['SCRIPT_NAME'];
             }
         }
+<<<<<<< HEAD
         $this->_indexDir = $this->_getIndexDir();
         $this->_root  = is_dir($this->_indexDir . 'app');
+=======
+
+        $this->_indexDir = $this->_getIndexDir();
+        $this->_root  = is_dir($this->_indexDir . 'app');
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->_prepareConfig();
         if (isset($_GET['skin'])) {
             $this->_setSkin($_GET['skin']);
@@ -204,7 +237,10 @@ class Processor
         if (isset($_GET['id'])) {
             $this->loadReport($_GET['id']);
         }
+<<<<<<< HEAD
         $response->setMetadata("NotCacheable", true);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -447,7 +483,11 @@ class Processor
         $html = '';
         if ($baseTemplate && $contentTemplate) {
             ob_start();
+<<<<<<< HEAD
             require $baseTemplate;
+=======
+            require_once $baseTemplate;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $html = ob_get_clean();
         }
         return $html;
@@ -739,7 +779,11 @@ class Processor
      * @param \stdClass $config
      * @return void
      */
+<<<<<<< HEAD
     protected function _setSkin($value, ?\stdClass $config = null)
+=======
+    protected function _setSkin($value, \stdClass $config = null)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         if (preg_match('/^[a-z0-9_]+$/i', $value) && is_dir($this->_errorDir . $value)) {
             if (!$config) {

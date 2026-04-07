@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -76,12 +81,19 @@ class DataProviderTest extends TestCase
      * Check that custom layout date is handled properly.
      *
      * @magentoDataFixture Magento/Cms/_files/pages_with_layout_xml.php
+<<<<<<< HEAD
+=======
+     * @dataProvider customLayoutDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @param string $identifier
      * @param string|null $layoutUpdateSelected
      * @return void
      */
+<<<<<<< HEAD
     #[\PHPUnit\Framework\Attributes\DataProvider('customLayoutDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCustomLayoutData(string $identifier, ?string $layoutUpdateSelected): void
     {
         $page = $this->repo->execute($identifier, 0);
@@ -105,7 +117,11 @@ class DataProviderTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function customLayoutDataProvider(): array
+=======
+    public function customLayoutDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['test_custom_layout_page_1', '_existing_'],

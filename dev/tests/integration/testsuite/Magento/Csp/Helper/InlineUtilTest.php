@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -13,7 +18,10 @@ use Magento\Csp\Model\Collector\DynamicCollectorMock;
 use Magento\Csp\Model\Policy\FetchPolicy;
 use Magento\Framework\View\Helper\SecureHtmlRenderer;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -45,8 +53,12 @@ class InlineUtilTest extends TestCase
     {
         Bootstrap::getObjectManager()->configure([
             'preferences' => [
+<<<<<<< HEAD
                 DynamicCollector::class => DynamicCollectorMock::class,
                 CspNonceProvider::class => CspNonceProviderMock::class
+=======
+                DynamicCollector::class => DynamicCollectorMock::class
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ]
         ]);
         $this->util = Bootstrap::getObjectManager()->get(InlineUtil::class);
@@ -75,6 +87,10 @@ class InlineUtilTest extends TestCase
      * @param PolicyInterface[] $policiesExpected
      * @return void
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider getTags
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoConfigFixture default_store csp/policies/storefront/scripts/policy_id script-src
      * @magentoConfigFixture default_store csp/policies/storefront/scripts/none 0
      * @magentoConfigFixture default_store csp/policies/storefront/scripts/self 1
@@ -86,7 +102,10 @@ class InlineUtilTest extends TestCase
      * @magentoConfigFixture default_store csp/policies/storefront/styles/self 1
      * @magentoConfigFixture default_store csp/policies/storefront/styles/inline 0
      */
+<<<<<<< HEAD
     #[DataProvider('getTags')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRenderTag(
         string $tagName,
         array $attributes,
@@ -104,6 +123,7 @@ class InlineUtilTest extends TestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function getTags(): array
     {
         return [
@@ -113,12 +133,27 @@ class InlineUtilTest extends TestCase
                 null,  // $content
                 '<script src="http&#x3A;&#x2F;&#x2F;magento.com&#x2F;static&#x2F;some-script.js"></script>',  // $result
                 [new FetchPolicy('script-src', false, ['http://magento.com'])]  // $policiesExpected
+=======
+    public function getTags(): array
+    {
+        return [
+            'remote-script' => [
+                'script',
+                ['src' => 'http://magento.com/static/some-script.js'],
+                null,
+                '<script src="http&#x3A;&#x2F;&#x2F;magento.com&#x2F;static&#x2F;some-script.js"></script>',
+                [new FetchPolicy('script-src', false, ['http://magento.com'])]
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             'inline-script' => [
                 'script',
                 ['type' => 'text/javascript'],
                 "\n    let someVar = 25;\n    document.getElementById('test').innerText = someVar;\n",
+<<<<<<< HEAD
                 "<script type=\"text&#x2F;javascript\" nonce=\"nonce-1234567890abcdef\">\n    let someVar = 25;"
+=======
+                "<script type=\"text&#x2F;javascript\">\n    let someVar = 25;"
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     ."\n    document.getElementById('test').innerText = someVar;\n</script>",
                 [
                     new FetchPolicy(
@@ -129,8 +164,13 @@ class InlineUtilTest extends TestCase
                         false,
                         false,
                         false,
+<<<<<<< HEAD
                         ['nonce-1234567890abcdef'],
                         []
+=======
+                        [],
+                        ['U+SKpEef030N2YgyKKdIBIvPy8Fmd42N/JcTZgQV+DA=' => 'sha256']
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     )
                 ]
             ],

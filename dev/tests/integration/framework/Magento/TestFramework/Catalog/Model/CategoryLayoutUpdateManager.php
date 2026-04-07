@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -41,9 +46,14 @@ class CategoryLayoutUpdateManager extends LayoutUpdateManager
      */
     public function fetchAvailableFiles(CategoryInterface $category): array
     {
+<<<<<<< HEAD
         $categoryId = $category->getId();
         if ($categoryId !== null && array_key_exists($categoryId, $this->fakeFiles)) {
             return $this->fakeFiles[$categoryId];
+=======
+        if (array_key_exists($category->getId(), $this->fakeFiles)) {
+            return $this->fakeFiles[$category->getId()];
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
 
         return parent::fetchAvailableFiles($category);

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -39,7 +44,10 @@ class ConfigGeneratorTest extends TestCase
         /** @var Random|MockObject $randomMock */
         $randomMock = $this->createMock(Random::class);
         $randomMock->expects($this->any())->method('getRandomString')->willReturn('key');
+<<<<<<< HEAD
         $randomMock->expects($this->any())->method('getRandomBytes')->willReturn('randombytes');
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $cryptKeyGenerator = new CryptKeyGenerator($randomMock);
 
@@ -54,7 +62,11 @@ class ConfigGeneratorTest extends TestCase
 
         $driverOptions = $this->getMockBuilder(DriverOptions::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['getDriverOptions'])
+=======
+            ->setMethods(['getDriverOptions'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
 
         $this->configGeneratorObject = new ConfigGenerator(
@@ -79,11 +91,15 @@ class ConfigGeneratorTest extends TestCase
         $returnValue = $this->configGeneratorObject->createCryptConfig([]);
         $this->assertEquals(ConfigFilePool::APP_ENV, $returnValue->getFileKey());
         // phpcs:ignore Magento2.Security.InsecureFunction
+<<<<<<< HEAD
         $this->assertEquals([
                 'crypt' => [
                     'key' => ConfigOptionsListConstants::STORE_KEY_ENCODED_RANDOM_STRING_PREFIX . 'randombytes'
                 ]
             ], $returnValue->getData());
+=======
+        $this->assertEquals(['crypt' => ['key' => md5('key')]], $returnValue->getData());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     public function testCreateSessionConfigWithInput()

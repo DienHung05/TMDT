@@ -1,9 +1,15 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
  */
 declare(strict_types=1);
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 namespace Magento\Paypal\Model\Express;
 
@@ -17,9 +23,13 @@ use Magento\Paypal\Model\Info;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\Quote\Address;
 use Magento\Quote\Model\ResourceModel\Quote\Collection;
+<<<<<<< HEAD
 use Magento\Framework\TestFramework\Unit\Helper\MockCreationTrait;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -28,8 +38,11 @@ use PHPUnit\Framework\TestCase;
  */
 class CheckoutTest extends TestCase
 {
+<<<<<<< HEAD
     use MockCreationTrait;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @var ObjectManagerInterface
      */
@@ -77,10 +90,17 @@ class CheckoutTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
+<<<<<<< HEAD
         $this->api = $this->createPartialMockWithReflection(
             Nvp::class,
             ['call', 'getExportedShippingAddress', 'getExportedBillingAddress', 'getShippingRateCode']
         );
+=======
+        $this->api = $this->getMockBuilder(Nvp::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['call', 'getExportedShippingAddress', 'getExportedBillingAddress', 'getShippingRateCode'])
+            ->getMock();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->api->expects($this->any())
             ->method('call')
@@ -111,7 +131,11 @@ class CheckoutTest extends TestCase
 
         $apiTypeFactory = $this->getMockBuilder(Factory::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['create'])
+=======
+            ->setMethods(['create'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
 
         $paypalInfo = $this->getMockBuilder(Info::class)
@@ -129,7 +153,11 @@ class CheckoutTest extends TestCase
 
         $api = $this->getMockBuilder(Nvp::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['callSetExpressCheckout'])
+=======
+            ->setMethods(['callSetExpressCheckout'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
 
         $api->expects($this->any())
@@ -197,8 +225,13 @@ class CheckoutTest extends TestCase
      * @magentoDbIsolation enabled
      * @param string $accountEmail
      * @param string $expected
+<<<<<<< HEAD
      */
     #[DataProvider('placeGuestQuoteDataProvider')]
+=======
+     * @dataProvider placeGuestQuoteDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPlaceGuestQuote($accountEmail, $expected)
     {
         /** @var Quote $quote */
@@ -238,7 +271,11 @@ class CheckoutTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function placeGuestQuoteDataProvider(): array
+=======
+    public function placeGuestQuoteDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'case with account email absent' => [null, 'paypal_account@email.com'],
@@ -603,6 +640,7 @@ class CheckoutTest extends TestCase
         );
 
         $exportedBillingAddress = $this->getExportedAddressFixture($this->getExportedData()['billing'], $prefix);
+<<<<<<< HEAD
         $this->api->expects($this->any())
             ->method('getExportedBillingAddress')
             ->willReturn($exportedBillingAddress);
@@ -614,6 +652,16 @@ class CheckoutTest extends TestCase
 
         $this->api->expects($this->any())
             ->method('getShippingRateCode')
+=======
+        $this->api->method('getExportedBillingAddress')
+            ->willReturn($exportedBillingAddress);
+
+        $exportedShippingAddress = $this->getExportedAddressFixture($this->getExportedData()['shipping'], $prefix);
+        $this->api->method('getExportedShippingAddress')
+            ->willReturn($exportedShippingAddress);
+
+        $this->api->method('getShippingRateCode')
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->willReturn('flatrate_flatrate Flat Rate - Fixed');
 
         $this->paypalInfo->method('importToPayment')
@@ -671,12 +719,20 @@ class CheckoutTest extends TestCase
 
         $apiTypeFactory = $this->getMockBuilder(Factory::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['create'])
+=======
+            ->setMethods(['create'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
 
         $paypalInfo = $this->getMockBuilder(Info::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['importToPayment'])
+=======
+            ->setMethods(['importToPayment'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
 
         $checkoutModel = $this->objectManager->create(
@@ -688,21 +744,38 @@ class CheckoutTest extends TestCase
             ]
         );
 
+<<<<<<< HEAD
         $api = $this->createPartialMockWithReflection(
             Nvp::class,
             ['call', 'getExportedBillingAddress', 'getExportedShippingAddress']
         );
+=======
+        $api = $this->getMockBuilder(Nvp::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['call', 'getExportedShippingAddress', 'getExportedBillingAddress'])
+            ->getMock();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $apiTypeFactory->expects($this->any())
             ->method('create')
             ->willReturn($api);
 
         $exportedBillingAddress = $this->getExportedAddressFixture($quote->getBillingAddress()->getData());
+<<<<<<< HEAD
         $api->method('getExportedBillingAddress')
             ->willReturn($exportedBillingAddress);
 
         $exportedShippingAddress = $this->getExportedAddressFixture($quote->getShippingAddress()->getData());
         $api->method('getExportedShippingAddress')
+=======
+        $api->expects($this->any())
+            ->method('getExportedBillingAddress')
+            ->willReturn($exportedBillingAddress);
+
+        $exportedShippingAddress = $this->getExportedAddressFixture($quote->getShippingAddress()->getData());
+        $api->expects($this->any())
+            ->method('getExportedShippingAddress')
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->willReturn($exportedShippingAddress);
 
         $this->addCountryFactory($api);
@@ -783,6 +856,10 @@ class CheckoutTest extends TestCase
     {
         $reflection = new \ReflectionClass($api);
         $property = $reflection->getProperty('_countryFactory');
+<<<<<<< HEAD
+=======
+        $property->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $property->setValue($api, $this->objectManager->get(CountryFactory::class));
     }
 }

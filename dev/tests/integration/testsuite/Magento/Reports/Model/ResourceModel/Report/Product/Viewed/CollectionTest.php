@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Reports\Model\ResourceModel\Report\Product\Viewed;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Reports\Model\ResourceModel\Report\Product\Viewed;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * @magentoAppArea adminhtml
  */
@@ -43,6 +51,11 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider tableForPeriodDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param $period
      * @param $expectedTable
      * @param $dateFrom
@@ -50,7 +63,10 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
      * @param $isTotal
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
+<<<<<<< HEAD
     #[DataProvider('tableForPeriodDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testTableSelection($period, $expectedTable, $dateFrom, $dateTo, $isTotal = false)
     {
         $dbTableName = $this->_collection->getTable($expectedTable);
@@ -97,13 +113,18 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function tableForPeriodDataProvider()
+=======
+    public function tableForPeriodDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $dateFrom = '2019-10-15';
         $dateYearBefore = date('Y-m-d', strtotime($dateFrom . ' -1 year'));
         return [
             [
                 'period'    => 'year',
+<<<<<<< HEAD
                 'expectedTable'     => 'report_viewed_product_aggregated_yearly',
                 'dateFrom' => null,
                 'dateTo'   => null,
@@ -210,6 +231,114 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
                 'expectedTable'     => 'report_viewed_product_aggregated_yearly',
                 'dateFrom' => null,
                 'dateTo'   => null,
+=======
+                'table'     => 'report_viewed_product_aggregated_yearly',
+                'date_from' => null,
+                'date_to'   => null,
+                'is_total'  => true,
+            ],
+            [
+                'period'    => 'year',
+                'table'     => 'report_viewed_product_aggregated_yearly',
+                'date_from' => $dateYearBefore,
+                'date_to'   => $dateFrom,
+            ],
+            [
+                'period'    => 'year',
+                'table'     => 'report_viewed_product_aggregated_yearly',
+                'date_from' => $dateYearBefore,
+                'date_to'   => null,
+            ],
+            [
+                'period'    => 'month',
+                'table'     => 'report_viewed_product_aggregated_monthly',
+                'date_from' => null,
+                'date_to'   => $dateFrom,
+            ],
+            [
+                'period'    => 'year',
+                'table'     => 'report_viewed_product_aggregated_yearly',
+                'date_from' => $dateYearBefore,
+                'date_to'   => null,
+            ],
+            [
+                'period'    => 'year',
+                'table'     => 'report_viewed_product_aggregated_yearly',
+                'date_from' => null,
+                'date_to'   => $dateFrom,
+            ],
+            [
+                'period'    => 'month',
+                'table'     => 'report_viewed_product_aggregated_monthly',
+                'date_from' => null,
+                'date_to'   => null,
+            ],
+            [
+                'period'    => 'month',
+                'table'     => 'report_viewed_product_aggregated_monthly',
+                'date_from' => $dateYearBefore,
+                'date_to'   => $dateYearBefore,
+            ],
+            [
+                'period'    => 'month',
+                'table'     => 'report_viewed_product_aggregated_monthly',
+                'date_from' => null,
+                'date_to'   => $dateYearBefore,
+            ],
+            [
+                'period'    => 'month',
+                'table'     => 'report_viewed_product_aggregated_monthly',
+                'date_from' => $dateYearBefore,
+                'date_to'   => null,
+            ],
+            [
+                'period'    => 'day',
+                'table'     => 'report_viewed_product_aggregated_daily',
+                'date_from' => null,
+                'date_to'   => null,
+            ],
+            [
+                'period'    => 'undefinedPeriod',
+                'table'     => 'report_viewed_product_aggregated_daily',
+                'date_from' => null,
+                'date_to'   => null,
+            ],
+            [
+                'period'    => null,
+                'table'     => 'report_viewed_product_aggregated_daily',
+                'date_from' => $dateYearBefore,
+                'date_to'   => $dateFrom,
+            ],
+            [
+                'period'    => null,
+                'table'     => 'report_viewed_product_aggregated_daily',
+                'date_from' => $dateFrom,
+                'date_to'   => $dateFrom,
+            ],
+            [
+                'period'    => 'day',
+                'table'     => 'report_viewed_product_aggregated_daily',
+                'date_from' => $dateYearBefore,
+                'date_to'   => $dateYearBefore,
+            ],
+            [
+                'period'    => 'year',
+                'table'     => 'report_viewed_product_aggregated_daily',
+                'date_from' => $dateYearBefore,
+                'date_to'   => $dateYearBefore,
+            ],
+            [
+                'period'    => 'year',
+                'table'     => 'report_viewed_product_aggregated_daily',
+                'date_from' => null,
+                'date_to'   => $dateYearBefore,
+            ],
+            [
+                'period'    => null,
+                'table'     => 'report_viewed_product_aggregated_yearly',
+                'date_from' => null,
+                'date_to'   => null,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ]
         ];
     }

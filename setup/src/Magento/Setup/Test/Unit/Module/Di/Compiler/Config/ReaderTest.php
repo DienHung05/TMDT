@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -59,7 +64,11 @@ class ReaderTest extends TestCase
     protected function setUp(): void
     {
         $this->diContainerConfig =
+<<<<<<< HEAD
             $this->createMock(ConfigInterface::class);
+=======
+            $this->getMockForAbstractClass(ConfigInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->configLoader =
             $this->createMock(ConfigLoader::class);
 
@@ -174,8 +183,13 @@ class ReaderTest extends TestCase
     private function getPreferences()
     {
         return [
+<<<<<<< HEAD
             'Interface1' => 'DateTime',
             'ThirdPartyInterface' => 'DateTimeZone',
+=======
+            'Interface1' => 'ConcreteType1',
+            'ThirdPartyInterface' => 'ConcreteType2'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
     }
 
@@ -187,8 +201,13 @@ class ReaderTest extends TestCase
         return [
             ['ConcreteType1', 'ConcreteType1'],
             ['ConcreteType2', 'ConcreteType2'],
+<<<<<<< HEAD
             ['Interface1', 'DateTime'],
             ['ThirdPartyInterface', 'DateTimeZone'],
+=======
+            ['Interface1', 'ConcreteType1'],
+            ['ThirdPartyInterface', 'ConcreteType2']
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
     }
 

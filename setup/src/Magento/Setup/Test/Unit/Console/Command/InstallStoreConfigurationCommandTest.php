@@ -1,13 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Setup\Test\Unit\Console\Command;
 
 use Magento\Framework\App\DeploymentConfig;
+<<<<<<< HEAD
+=======
+use Magento\Framework\ObjectManagerInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Validator\Currency as CurrencyValidator;
 use Magento\Framework\Validator\Locale as LocaleValidator;
 use Magento\Framework\Validator\Timezone as TimezoneValidator;
@@ -18,7 +27,10 @@ use Magento\Setup\Model\InstallerFactory;
 use Magento\Setup\Model\ObjectManagerProvider;
 use Magento\Setup\Model\StoreConfigurationDataMapper;
 use PHPUnit\Framework\MockObject\MockObject;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 
@@ -43,6 +55,14 @@ class InstallStoreConfigurationCommandTest extends TestCase
     private $installer;
 
     /**
+<<<<<<< HEAD
+=======
+     * @var ObjectManagerInterface|MockObject
+     */
+    private $objectManager;
+
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @var LocaleValidator|MockObject
      */
     private $localeValidatorMock;
@@ -78,7 +98,17 @@ class InstallStoreConfigurationCommandTest extends TestCase
         $this->deploymentConfig = $this->createMock(DeploymentConfig::class);
         $this->installer = $this->createMock(Installer::class);
         $objectManagerProvider = $this->createMock(ObjectManagerProvider::class);
+<<<<<<< HEAD
 
+=======
+        $this->objectManager = $this->getMockForAbstractClass(
+            ObjectManagerInterface::class,
+            [],
+            '',
+            false
+        );
+        $objectManagerProvider->expects($this->once())->method('get')->willReturn($this->objectManager);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->command = new InstallStoreConfigurationCommand(
             $this->installerFactory,
             $this->deploymentConfig,
@@ -120,10 +150,17 @@ class InstallStoreConfigurationCommandTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param array $option
      * @param string $error
      */
     #[DataProvider('validateDataProvider')]
+=======
+     * @dataProvider validateDataProvider
+     * @param array $option
+     * @param string $error
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecuteInvalidData(array $option, $error)
     {
         $this->localeValidatorMock->expects($this->any())->method('isValid')->willReturn(false);
@@ -144,7 +181,11 @@ class InstallStoreConfigurationCommandTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function validateDataProvider()
+=======
+    public function validateDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

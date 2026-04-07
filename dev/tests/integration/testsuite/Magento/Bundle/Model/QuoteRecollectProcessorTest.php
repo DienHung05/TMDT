@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,7 +16,10 @@ use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\TestFramework\Bundle\Model\PrepareBundleLinks;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Quote\Model\GetQuoteByReservedOrderId;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -50,12 +58,19 @@ class QuoteRecollectProcessorTest extends TestCase
      *
      * @magentoAppIsolation enabled
      * @magentoDataFixture Magento/Bundle/_files/quote_with_fixed_bundle_product.php
+<<<<<<< HEAD
+=======
+     * @dataProvider getBundleOptionsDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $optionsData
      * @param array $selectionsData
      * @param string $expectedTriggerRecollect
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('getBundleOptionsDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testMarkQuoteRecollectAfterChangeBundleOptions(
         array $optionsData,
         array $selectionsData,
@@ -71,7 +86,11 @@ class QuoteRecollectProcessorTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getBundleOptionsDataProvider(): array
+=======
+    public function getBundleOptionsDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'product option changed' => [

@@ -1,7 +1,13 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,7 +17,10 @@ use Magento\Framework\Exception\InvalidArgumentException;
 use Magento\MediaContentApi\Api\GetAssetIdsByContentFieldInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for GetAssetIdsByContentFieldTest
@@ -41,6 +50,11 @@ class GetAssetIdsByContentFieldTest extends TestCase
 
     /**
      * Test for getting asset id by category fields
+<<<<<<< HEAD
+=======
+     *
+     * @dataProvider dataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoConfigFixture system/media_gallery/enabled 1
      * @magentoDataFixture Magento/MediaGallery/_files/media_asset.php
      * @magentoDataFixture Magento/MediaContentCatalog/_files/category_with_asset.php
@@ -50,7 +64,10 @@ class GetAssetIdsByContentFieldTest extends TestCase
      * @param array $expectedAssetIds
      * @throws InvalidArgumentException
      */
+<<<<<<< HEAD
     #[DataProvider('dataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCategoryFields(string $field, string $value, array $expectedAssetIds): void
     {
         $this->assertEquals(
@@ -61,6 +78,11 @@ class GetAssetIdsByContentFieldTest extends TestCase
 
     /**
      * Test for getting asset id by product fields
+<<<<<<< HEAD
+=======
+     *
+     * @dataProvider dataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoConfigFixture system/media_gallery/enabled 1
      * @magentoDataFixture Magento/MediaGallery/_files/media_asset.php
      * @magentoDataFixture Magento/MediaContentCatalog/_files/product_with_asset.php
@@ -69,7 +91,10 @@ class GetAssetIdsByContentFieldTest extends TestCase
      * @param array $expectedAssetIds
      * @throws InvalidArgumentException
      */
+<<<<<<< HEAD
     #[DataProvider('dataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testProductFields(string $field, string $value, array $expectedAssetIds): void
     {
         $this->assertEquals(

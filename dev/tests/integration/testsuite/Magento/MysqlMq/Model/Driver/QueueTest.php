@@ -1,12 +1,20 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\MysqlMq\Model\Driver;
 
 use Magento\MysqlMq\Model\Driver\Queue;
+<<<<<<< HEAD
 use Magento\MysqlMq\Model\ResourceModel\MessageCollection;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for MySQL queue driver class.
@@ -44,11 +52,14 @@ class QueueTest extends \PHPUnit\Framework\TestCase
         /** @var \Magento\Framework\MessageQueue\Config\Data $queueConfig */
         $queueConfig = $this->objectManager->get(\Magento\Framework\MessageQueue\Config\Data::class);
         $queueConfig->reset();
+<<<<<<< HEAD
         $messageCollection = $this->objectManager->create(MessageCollection::class);
         foreach ($messageCollection as $message) {
             $message->delete();
         }
         parent::tearDown();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -71,6 +82,7 @@ class QueueTest extends \PHPUnit\Framework\TestCase
         $this->assertArrayHasKey('topic_name', $actualMessageProperties);
         $this->assertEquals($topicName, $actualMessageProperties['topic_name']);
     }
+<<<<<<< HEAD
 
     /**
      * @magentoDataFixture Magento/MysqlMq/_files/queues.php
@@ -96,4 +108,6 @@ class QueueTest extends \PHPUnit\Framework\TestCase
         // Assert that only 2 messages are available in queue (message1 and message3)
         $this->assertEquals(2, $this->queue->count());
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

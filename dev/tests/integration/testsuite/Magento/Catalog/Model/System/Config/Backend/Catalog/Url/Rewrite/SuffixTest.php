@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -22,7 +27,10 @@ use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\UrlRewrite\Model\Storage\DbStorage;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -33,7 +41,10 @@ use PHPUnit\Framework\TestCase;
  * @magentoAppArea adminhtml
  * @magentoDbIsolation enabled
  * @magentoAppIsolation enabled
+<<<<<<< HEAD
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class SuffixTest extends TestCase
 {
@@ -85,18 +96,30 @@ class SuffixTest extends TestCase
     public function testSaveWithError(): void
     {
         $this->expectException(LocalizedException::class);
+<<<<<<< HEAD
         $this->expectExceptionMessage((string)__('Anchor symbol (#) is not supported in url rewrite suffix.'));
+=======
+        $this->expectErrorMessage((string)__('Anchor symbol (#) is not supported in url rewrite suffix.'));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->model->setValue('.html#');
         $this->model->beforeSave();
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider wrongValuesProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/second_product_simple.php
      *
      * @param array $data
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('wrongValuesProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveWithWrongData(array $data): void
     {
         $productId = (int)$this->productRepository->get('simple2')->getId();
@@ -115,7 +138,11 @@ class SuffixTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function wrongValuesProvider(): array
+=======
+    public function wrongValuesProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'with_wrong_path' => [

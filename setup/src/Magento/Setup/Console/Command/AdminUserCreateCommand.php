@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Setup\Console\Command;
@@ -21,7 +26,10 @@ use Symfony\Component\Console\Question\Question;
  */
 class AdminUserCreateCommand extends AbstractSetupCommand
 {
+<<<<<<< HEAD
     public const NAME = 'admin:user:create';
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @var InstallerFactory
      */
@@ -50,7 +58,11 @@ class AdminUserCreateCommand extends AbstractSetupCommand
      */
     protected function configure()
     {
+<<<<<<< HEAD
         $this->setName(self::NAME)
+=======
+        $this->setName('admin:user:create')
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->setDescription('Creates an administrator')
             ->setDefinition($this->getOptionsList());
         parent::configure();
@@ -155,7 +167,11 @@ class AdminUserCreateCommand extends AbstractSetupCommand
     /**
      * @inheritdoc
      */
+<<<<<<< HEAD
     protected function execute(InputInterface $input, OutputInterface $output): int
+=======
+    protected function execute(InputInterface $input, OutputInterface $output)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $errors = $this->validate($input);
         if ($errors) {
@@ -221,7 +237,11 @@ class AdminUserCreateCommand extends AbstractSetupCommand
      * @param InputInterface $input
      * @return string[]
      */
+<<<<<<< HEAD
     public function validate(InputInterface $input): array
+=======
+    public function validate(InputInterface $input)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $errors = [];
         $user = new \Magento\Framework\DataObject();

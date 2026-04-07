@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\TestFramework\Isolation;
@@ -58,12 +63,16 @@ class DeploymentConfig
     public function endTest(\PHPUnit\Framework\TestCase $test)
     {
         $config = $this->reader->load();
+<<<<<<< HEAD
         
         // Normalize configs by removing keys that are legitimately regenerated during tests
         $normalizedInitial = $this->normalizeConfig($this->config);
         $normalizedCurrent = $this->normalizeConfig($config);
         
         if ($normalizedInitial != $normalizedCurrent) {
+=======
+        if ($this->config != $config) {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $error = "\n\nERROR: deployment configuration is corrupted. The application state is no longer valid.\n"
                 . 'Further tests may fail.'
                 . " This test failure may be misleading, if you are re-running it on a corrupted application.\n"
@@ -71,6 +80,7 @@ class DeploymentConfig
             $test->fail($error);
         }
     }
+<<<<<<< HEAD
     
     /**
      * Normalize configuration by removing keys that are expected to change during test execution
@@ -116,4 +126,6 @@ class DeploymentConfig
         
         return $config;
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

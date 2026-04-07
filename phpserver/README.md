@@ -14,7 +14,11 @@ Without a router script, that is not possible via the php built-in server.
 
 ## How to install Magento
 
+<<<<<<< HEAD
 Please read how to install Magento using the [command line](https://experienceleague.adobe.com/docs/commerce-operations/installation-guide/advanced.html). An example follows:
+=======
+Please read how to install Magento using the [command line](https://devdocs.magento.com/guides/v2.4/install-gde/install/cli/install-cli.html). An example follows:
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 ```php
 php bin/magento setup:install --base-url=http://127.0.0.1:8082 \
@@ -22,12 +26,20 @@ php bin/magento setup:install --base-url=http://127.0.0.1:8082 \
 --admin-firstname=Magento --admin-lastname=User --admin-email=user@example.com \
 --admin-user=admin --admin-password=admin123 --language=en_US \
 --currency=USD --timezone=America/Chicago --use-rewrites=1 \
+<<<<<<< HEAD
 --search-engine=elasticsearch8 --elasticsearch-host=es-host.example.com --elasticsearch-port=9200
+=======
+--search-engine=elasticsearch7 --elasticsearch-host=es-host.example.com --elasticsearch-port=9200
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 ```
 
 Note: By default, Magento creates a random Admin URI for you. Make sure to write this value down because it's how you access the Magento Admin later. For example: `http://127.0.0.1:8082/index.php/admin_1vpn01`.
 
+<<<<<<< HEAD
 For more information about the installation process using the CLI, you can consult the dedicated documentation that can found in [the developer documentation](https://experienceleague.adobe.com/docs/commerce-operations/installation-guide/composer.html).
+=======
+For more information about the installation process using the CLI, you can consult the dedicated documentation that can found in [the developer documentation](https://devdocs.magento.com/guides/v2.4/install-gde/install/cli/install-cli-subcommands.html).
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 ### How to run Magento
 

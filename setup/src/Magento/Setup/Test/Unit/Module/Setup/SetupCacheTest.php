@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -9,7 +14,10 @@ namespace Magento\Setup\Test\Unit\Module\Setup;
 
 use Magento\Setup\Module\Setup\SetupCache;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class SetupCacheTest extends TestCase
 {
@@ -47,9 +55,15 @@ class SetupCacheTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @param string $field
      */
     #[DataProvider('getNonexistentDataProvider')]
+=======
+     * @dataProvider getNonexistentDataProvider
+     * @param string $field
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetNonexistent($field)
     {
         $this->assertFalse($this->object->get('table', 'parent', 'row', $field));
@@ -58,7 +72,11 @@ class SetupCacheTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getNonexistentDataProvider()
+=======
+    public function getNonexistentDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [null],
@@ -79,13 +97,20 @@ class SetupCacheTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider hasDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $table
      * @param string $parentId
      * @param string $rowId
      * @param string $field
      * @param bool $expected
      */
+<<<<<<< HEAD
     #[DataProvider('hasDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testHas($table, $parentId, $rowId, $field, $expected)
     {
         $this->object->setField('table', 'parent', 'row', 'field', 'data');
@@ -95,7 +120,11 @@ class SetupCacheTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function hasDataProvider()
+=======
+    public function hasDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'existing'           => ['table', 'parent', 'row', 'field', true],

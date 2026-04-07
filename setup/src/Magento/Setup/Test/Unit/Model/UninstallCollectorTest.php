@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -28,6 +33,7 @@ class UninstallCollectorTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp(): void
     {
+<<<<<<< HEAD
         require_once '_files/app/code/Magento/A/Setup/Uninstall.php';
         require_once '_files/app/code/Magento/B/Setup/Uninstall.php';
 
@@ -38,14 +44,33 @@ class UninstallCollectorTest extends \PHPUnit\Framework\TestCase
 
         $setup = $this->createMock(\Magento\Setup\Module\DataSetup::class);
         $this->adapterInterface = $this->createMock(\Magento\Framework\DB\Adapter\AdapterInterface::class);
+=======
+        $objectManagerProvider = $this->createMock(\Magento\Setup\Model\ObjectManagerProvider::class);
+        $objectManager =
+            $this->getMockForAbstractClass(\Magento\Framework\ObjectManagerInterface::class, [], '', false);
+        $objectManagerProvider->expects($this->once())->method('get')->willReturn($objectManager);
+
+        $setup = $this->createMock(\Magento\Setup\Module\DataSetup::class);
+        $this->adapterInterface = $this->getMockForAbstractClass(
+            \Magento\Framework\DB\Adapter\AdapterInterface::class,
+            [],
+            '',
+            false
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $select = $this->createPartialMock(\Magento\Framework\DB\Select::class, ['from']);
         $this->adapterInterface->expects($this->once())->method('select')->willReturn($select);
         $setup->expects($this->exactly(2))->method('getConnection')->willReturn($this->adapterInterface);
         $this->result = $this->createMock(\Magento\Framework\DB\Select::class);
         $select->expects($this->once())->method('from')->willReturn($this->result);
 
+<<<<<<< HEAD
         $uninstallA = 'Magento\A\Setup\Uninstall';
         $uninstallB = 'Magento\B\Setup\Uninstall';
+=======
+        $uninstallA = 'Uninstall Class A';
+        $uninstallB = 'Uninstall Class B';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $objectManager->expects($this->any())
             ->method('create')
             ->willReturnMap(
@@ -69,7 +94,11 @@ class UninstallCollectorTest extends \PHPUnit\Framework\TestCase
             ->willReturn([['module' => 'Magento_A'], ['module' => 'Magento_B'], ['module' => 'Magento_C']]);
 
         $this->assertEquals(
+<<<<<<< HEAD
             ['Magento_A' => 'Magento\A\Setup\Uninstall', 'Magento_B' => 'Magento\B\Setup\Uninstall'],
+=======
+            ['Magento_A' => 'Uninstall Class A', 'Magento_B' => 'Uninstall Class B'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $this->collector->collectUninstall()
         );
     }
@@ -82,9 +111,49 @@ class UninstallCollectorTest extends \PHPUnit\Framework\TestCase
             ->with($this->result)
             ->willReturn([['module' => 'Magento_A']]);
 
+<<<<<<< HEAD
         $this->assertEquals(
             ['Magento_A' => 'Magento\A\Setup\Uninstall'],
             $this->collector->collectUninstall(['Magento_A'])
         );
     }
 }
+=======
+        $this->assertEquals(['Magento_A' => 'Uninstall Class A'], $this->collector->collectUninstall(['Magento_A']));
+    }
+}
+
+namespace Magento\Setup\Model;
+
+/**
+ * This function overrides the native function for the purpose of testing
+ *
+ * @param string $obj
+ * @param string $className
+ * @return bool
+ */
+function is_subclass_of($obj, $className)
+{
+    if ($obj == 'Uninstall Class A' && $className == \Magento\Framework\Setup\UninstallInterface::class) {
+        return true;
+    }
+    if ($obj == 'Uninstall Class B' && $className == \Magento\Framework\Setup\UninstallInterface::class) {
+        return true;
+    }
+    return false;
+}
+
+/**
+ * This function overrides the native function for the purpose of testing
+ *
+ * @param string $className
+ * @return bool
+ */
+function class_exists($className)
+{
+    if ($className == 'Magento\A\Setup\Uninstall' || $className == 'Magento\B\Setup\Uninstall') {
+        return true;
+    }
+    return false;
+}
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f

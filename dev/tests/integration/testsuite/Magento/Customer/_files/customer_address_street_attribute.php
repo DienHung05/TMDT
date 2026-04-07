@@ -5,8 +5,13 @@
  * and default customer address.
  * It also call a new fixture to update customer address `input_validation` rule for `street` field.
  *
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 use Magento\Customer\Model\CustomerRegistry;
 use Magento\TestFramework\Workaround\Override\Fixture\Resolver;

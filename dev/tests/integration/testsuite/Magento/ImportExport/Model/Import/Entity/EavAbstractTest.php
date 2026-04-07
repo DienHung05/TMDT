@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -24,10 +29,19 @@ class EavAbstractTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         parent::setUp();
+<<<<<<< HEAD
         $this->_model = $this->getMockBuilder(\Magento\ImportExport\Model\Import\Entity\AbstractEav::class)
             ->disableOriginalConstructor()
             ->onlyMethods(['getEntityTypeCode', 'validateRow', '_importData'])
             ->getMock();
+=======
+        $this->_model = $this->getMockForAbstractClass(
+            \Magento\ImportExport\Model\Import\Entity\AbstractEav::class,
+            [],
+            '',
+            false
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**

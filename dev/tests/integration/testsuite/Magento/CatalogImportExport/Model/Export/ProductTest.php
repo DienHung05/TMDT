@@ -1,13 +1,19 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types = 1);
 
 namespace Magento\CatalogImportExport\Model\Export;
 
+<<<<<<< HEAD
 use Magento\Catalog\Api\CategoryRepositoryInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\Product\Visibility;
@@ -40,6 +46,13 @@ use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Fixture\DbIsolation;
 use Magento\Translation\Test\Fixture\Translation;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Catalog\Model\ResourceModel\Product\Attribute\Collection as ProductAttributeCollection;
+use Magento\Catalog\Observer\SwitchPriceAttributeScopeOnConfigChange;
+use Magento\CatalogImportExport\Model\Export\Product\Type\Simple as SimpleProductType;
+use Magento\Framework\App\Config\ReinitableConfigInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoDataFixtureBeforeTransaction Magento/Catalog/_files/enable_reindex_schedule.php
@@ -71,6 +84,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
     private $productRepository;
 
     /**
+<<<<<<< HEAD
      * @var CategoryRepositoryInterface
      */
     private $categoryRepository;
@@ -86,6 +100,8 @@ class ProductTest extends \PHPUnit\Framework\TestCase
     private $fixtures;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @var array
      */
     public static $stockItemAttributes = [
@@ -121,9 +137,12 @@ class ProductTest extends \PHPUnit\Framework\TestCase
             \Magento\CatalogImportExport\Model\Export\Product::class
         );
         $this->productRepository = $this->objectManager->create(ProductRepositoryInterface::class);
+<<<<<<< HEAD
         $this->categoryRepository = $this->objectManager->create(CategoryRepositoryInterface::class);
         $this->storeManager = $this->objectManager->get(StoreManagerInterface::class);
         $this->fixtures = $this->objectManager->get(DataFixtureStorageManager::class)->getStorage();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -149,11 +168,16 @@ class ProductTest extends \PHPUnit\Framework\TestCase
         $this->assertStringContainsString('test_option_code_2', $exportData);
         $this->assertStringContainsString('max_characters=10', $exportData);
         $this->assertStringContainsString('text_attribute=!@#$%^&*()_+1234567890-=|\\:;""\'<,>.?/', $exportData);
+<<<<<<< HEAD
         $occurrencesCount = substr_count($exportData, 'Hello "" &amp;"" Bring the water bottle when you can!');
+=======
+        $occurrencesCount = substr_count($exportData, 'Hello "" &"" Bring the water bottle when you can!');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertEquals(1, $occurrencesCount);
     }
 
     /**
+<<<<<<< HEAD
      * Verify successful export of product with stock data with 'use config max sale quantity is enabled
      *
      * @magentoConfigFixture default/cataloginventory/item_options/manage_stock 1
@@ -196,16 +220,25 @@ class ProductTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Verify successful export of the product with custom attributes containing json and markup
      *
      * @magentoDataFixture Magento/Catalog/_files/product_text_attribute.php
      * @magentoDataFixture Magento/Catalog/_files/second_product_simple.php
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
+=======
+     * @dataProvider exportWithJsonAndMarkupTextAttributeDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $attributeData
      * @param string $expectedResult
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('exportWithJsonAndMarkupTextAttributeDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExportWithJsonAndMarkupTextAttribute(string $attributeData, string $expectedResult): void
     {
         /** @var \Magento\Catalog\Api\ProductRepositoryInterface $productRepository */
@@ -239,7 +272,11 @@ class ProductTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function exportWithJsonAndMarkupTextAttributeDataProvider(): array
+=======
+    public function exportWithJsonAndMarkupTextAttributeDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'json' => [
@@ -260,6 +297,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
      * @magentoDbIsolation enabled
      *
      * @return void
+<<<<<<< HEAD
      * @throws NoSuchEntityException
      */
     public function testExportSpecialChars(): void
@@ -270,12 +308,18 @@ class ProductTest extends \PHPUnit\Framework\TestCase
         $product->setDescription('Description with &lt;h2&gt;this is test page&lt;/h2&gt;');
         $this->productRepository->save($product);
 
+=======
+     */
+    public function testExportSpecialChars(): void
+    {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->model->setWriter(
             $this->objectManager->create(
                 \Magento\ImportExport\Model\Export\Adapter\Csv::class
             )
         );
         $exportData = $this->model->export();
+<<<<<<< HEAD
         $rows = $this->csvToArray($exportData);
 
         $this->assertCount(4, $rows);
@@ -294,10 +338,14 @@ class ProductTest extends \PHPUnit\Framework\TestCase
             'Description with &lt;h2&gt;this is test page&lt;/h2&gt;',
             $rowBySku['simple &quot;1&quot;']['description']
         );
+=======
+        $this->assertStringContainsString('simple ""1""', $exportData);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertStringContainsString('Category with slash\/ symbol', $exportData);
     }
 
     /**
+<<<<<<< HEAD
      * Converts comma separated csv data to array
      *
      * @param $exportData
@@ -318,6 +366,8 @@ class ProductTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/CatalogImportExport/_files/product_export_with_product_links_data.php
      * @magentoDbIsolation enabled
      *
@@ -762,6 +812,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      * @magentoDataFixture Magento/Catalog/_files/product_simple.php
      * @magentoDataFixture Magento/Store/_files/second_website_with_two_stores.php
      * @magentoDbIsolation disabled
@@ -802,13 +853,22 @@ class ProductTest extends \PHPUnit\Framework\TestCase
      * Verify that "stock status" filter correctly applies to export result
      *
      * @magentoDataFixture Magento/Catalog/_files/multiple_products_with_few_out_of_stock.php
+=======
+     * Verify that "stock status" filter correctly applies to export result
+     *
+     * @magentoDataFixture Magento/Catalog/_files/multiple_products_with_few_out_of_stock.php
+     * @dataProvider filterByQuantityAndStockStatusDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @param string $value
      * @param array $productsIncluded
      * @param array $productsNotIncluded
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('filterByQuantityAndStockStatusDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testFilterByQuantityAndStockStatus(
         string $value,
         array $productsIncluded,
@@ -825,7 +885,11 @@ class ProductTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function filterByQuantityAndStockStatusDataProvider(): array
+=======
+    public function filterByQuantityAndStockStatusDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -870,18 +934,27 @@ class ProductTest extends \PHPUnit\Framework\TestCase
      * @magentoDataFixture Magento/Catalog/_files/product_simple_with_options.php
      * @magentoDataFixture Magento/Catalog/_files/product_with_two_websites.php
      */
+<<<<<<< HEAD
     #[DataProvider('websiteIdFilterDataProvider')]
     public function testFilterByWebsiteId(string $websiteIdFilter): void
+=======
+    public function testExportProductWithRestrictedWebsite(): void
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $websiteRepository = $this->objectManager->get(\Magento\Store\Api\WebsiteRepositoryInterface::class);
         $website = $websiteRepository->get('second_website');
 
+<<<<<<< HEAD
         $exportData = $this->doExport([$websiteIdFilter => $website->getId()]);
+=======
+        $exportData = $this->doExport(['website_id' => $website->getId()]);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertStringContainsString('"Simple Product"', $exportData);
         $this->assertStringNotContainsString('"Virtual Product With Custom Options"', $exportData);
     }
 
+<<<<<<< HEAD
     public static function websiteIdFilterDataProvider(): array
     {
         return [
@@ -890,6 +963,8 @@ class ProductTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testFilterAttributeCollection(): void
     {
         $collection = $this->objectManager->create(ProductAttributeCollection::class);
@@ -928,6 +1003,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
         );
         return $this->model->export();
     }
+<<<<<<< HEAD
 
     #[
         AppArea('adminhtml'),
@@ -1080,4 +1156,6 @@ class ProductTest extends \PHPUnit\Framework\TestCase
 
         $this->assertSame($dbSkus, $exportedSkus);
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

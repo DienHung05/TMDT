@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Config\Console\Command;
@@ -12,6 +17,7 @@ use Magento\Framework\App\DeploymentConfig\Writer;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Config\File\ConfigFilePool;
 use Magento\Framework\Console\Cli;
+<<<<<<< HEAD
 use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Filesystem;
 use Magento\Store\Model\ScopeInterface;
@@ -24,11 +30,20 @@ use Magento\TestFramework\Fixture\DbIsolation;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\Framework\Filesystem;
+use Magento\Store\Model\ScopeInterface;
+use Magento\TestFramework\Helper\Bootstrap;
+use PHPUnit\Framework\TestCase;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Symfony\Component\Console\Tester\CommandTester;
 
 /**
  * Test for \Magento\Config\Console\Command\ConfigShowCommand.
+<<<<<<< HEAD
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class ConfigShowCommandTest extends TestCase
 {
@@ -103,12 +118,15 @@ class ConfigShowCommandTest extends TestCase
         $_ENV['CONFIG__WEBSITES__BASE__WEB__TEST2__TEST_VALUE_4'] = 'value4.env.website_base.test';
         $_ENV['CONFIG__STORES__DEFAULT__WEB__TEST2__TEST_VALUE_4'] = 'value4.env.store_default.test';
 
+<<<<<<< HEAD
         $_ENV['CONFIG__DEFAULT__CAMELCASE__UPPERCASE__SNAKE_CASE'] = 'env.default.test';
         $_ENV['CONFIG__WEBSITES__SECONDWEBSITE__CAMELCASE__UPPERCASE__SNAKE_CASE'] = 'env.website_secondwebsite.test';
         $_ENV['CONFIG__STORES__THIRD_STORE__CAMELCASE__UPPERCASE__SNAKE_CASE'] = 'env.store_third_store.test';
 
         $this->setConfigPaths();
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $command = $objectManager->create(ConfigShowCommand::class);
         $this->commandTester = new CommandTester($command);
     }
@@ -124,13 +142,45 @@ class ConfigShowCommandTest extends TestCase
      *
      * @magentoDbIsolation enabled
      * @magentoDataFixture Magento/Config/_files/config_data.php
+<<<<<<< HEAD
      */
     #[DataProvider('executeDataProvider')]
+=======
+     * @dataProvider executeDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecute($scope, $scopeCode, $resultCode, array $configs): void
     {
         $this->setConfigPaths();
 
+<<<<<<< HEAD
         $this->checkConfigs($configs, $scope, $scopeCode, $resultCode);
+=======
+        foreach ($configs as $inputPath => $configValue) {
+            $arguments = [
+                ConfigShowCommand::INPUT_ARGUMENT_PATH => $inputPath
+            ];
+
+            if ($scope !== null) {
+                $arguments['--' . ConfigShowCommand::INPUT_OPTION_SCOPE] = $scope;
+            }
+            if ($scopeCode !== null) {
+                $arguments['--' . ConfigShowCommand::INPUT_OPTION_SCOPE_CODE] = $scopeCode;
+            }
+
+            $this->commandTester->execute($arguments);
+
+            $this->assertEquals(
+                $resultCode,
+                $this->commandTester->getStatusCode()
+            );
+
+            $commandOutput = $this->commandTester->getDisplay();
+            foreach ($configValue as $value) {
+                $this->assertStringContainsString($value, $commandOutput);
+            }
+        }
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -142,6 +192,10 @@ class ConfigShowCommandTest extends TestCase
     {
         $reflection = new \ReflectionClass(Structure::class);
         $mappedPaths = $reflection->getProperty('mappedPaths');
+<<<<<<< HEAD
+=======
+        $mappedPaths->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $mappedPaths->setValue($this->structure, $this->getConfigPaths());
     }
 
@@ -153,11 +207,15 @@ class ConfigShowCommandTest extends TestCase
     private function getConfigPaths(): array
     {
         $configs = [
+<<<<<<< HEAD
             'camelCase/UPPERCASE/snake_case',
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'web/test/test_value_1',
             'web/test/test_value_2',
             'web/test2/test_value_3',
             'web/test2/test_value_4',
+<<<<<<< HEAD
             'web/test/value',
             'carriers/fedex/account',
             'paypal/fetch_reports/ftp_password',
@@ -165,6 +223,12 @@ class ConfigShowCommandTest extends TestCase
             'web/test',
             'web/test2',
             'camelCase',
+=======
+            'carriers/fedex/account',
+            'paypal/fetch_reports/ftp_password',
+            'web/test',
+            'web/test2',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             'web',
         ];
 
@@ -175,7 +239,11 @@ class ConfigShowCommandTest extends TestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function executeDataProvider()
+=======
+    public function executeDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -328,6 +396,7 @@ class ConfigShowCommandTest extends TestCase
         ];
     }
 
+<<<<<<< HEAD
     #[
         AppArea('frontend'),
         DbIsolation(false),
@@ -425,6 +494,10 @@ class ConfigShowCommandTest extends TestCase
     /**
      * @return array
      * @throws FileSystemException
+=======
+    /**
+     * @return array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     private function loadConfig()
     {
@@ -433,13 +506,17 @@ class ConfigShowCommandTest extends TestCase
 
     /**
      * @return array
+<<<<<<< HEAD
      * @throws FileSystemException
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     private function loadEnvConfig()
     {
         return $this->reader->load(ConfigFilePool::APP_ENV);
     }
 
+<<<<<<< HEAD
     /**
      * @param array $configs
      * @param $scope
@@ -476,6 +553,8 @@ class ConfigShowCommandTest extends TestCase
         }
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     protected function tearDown(): void
     {
         $_ENV = $this->env;

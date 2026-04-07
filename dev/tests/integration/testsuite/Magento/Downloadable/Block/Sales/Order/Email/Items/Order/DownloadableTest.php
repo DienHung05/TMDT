@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -72,8 +77,14 @@ class DownloadableTest extends TestCase
         /** @var GuestCartManagementInterface $cartManagement */
         $cartManagement = $this->objectManager->get(GuestCartManagementInterface::class);
         $cartManagement->placeOrder($cartId);
+<<<<<<< HEAD
         $message = $this->transportBuilder->getSentMessage();
         $rawMessage = quoted_printable_decode($message->getBody()->bodyToString());
+=======
+
+        $message = $this->transportBuilder->getSentMessage();
+        $rawMessage = $message->getBody()->getParts()[0]->getRawContent();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertStringContainsString('Configurable Downloadable Product', $rawMessage);
         $this->assertStringContainsString('SKU: downloadable-product', $rawMessage);
         $this->assertStringContainsString('Downloadable Product Link', $rawMessage);

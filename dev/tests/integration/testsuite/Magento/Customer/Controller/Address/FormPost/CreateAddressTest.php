@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -17,7 +22,10 @@ use Magento\Framework\Escaper;
 use Magento\Framework\Message\MessageInterface;
 use Magento\TestFramework\Directory\Model\GetRegionIdByName;
 use Magento\TestFramework\TestCase\AbstractController;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test cases related to check that customer address correctly created from
@@ -100,12 +108,20 @@ class CreateAddressTest extends AbstractController
     /**
      * Assert that default or non-default customer address successfully created via controller on frontend.
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider postDataForSuccessCreateDefaultAddressDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $postData
      * @param bool $isShippingDefault
      * @param bool $isBillingDefault
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('postDataForSuccessCreateDefaultAddressDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddressSuccessfullyCreatedAsDefaultForCustomer(
         array $postData,
         bool $isShippingDefault,
@@ -133,7 +149,11 @@ class CreateAddressTest extends AbstractController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function postDataForSuccessCreateDefaultAddressDataProvider(): array
+=======
+    public function postDataForSuccessCreateDefaultAddressDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'any_addresses_are_default' => [
@@ -174,11 +194,19 @@ class CreateAddressTest extends AbstractController
     /**
      * Assert that customer address successfully created via controller on frontend.
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider postDataForSuccessCreateAddressDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $postData
      * @param array $expectedData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('postDataForSuccessCreateAddressDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddressSuccessfullyCreatedForCustomer(array $postData, array $expectedData): void
     {
         if (isset($expectedData['custom_region_name'])) {
@@ -207,7 +235,11 @@ class CreateAddressTest extends AbstractController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function postDataForSuccessCreateAddressDataProvider(): array
+=======
+    public function postDataForSuccessCreateAddressDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'required_fields_valid_data' => [
@@ -266,11 +298,19 @@ class CreateAddressTest extends AbstractController
      * Assert that customer address wasn't created via controller on frontend
      * when POST data broken.
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider postDataForCreateAddressWithErrorDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $postData
      * @param array $expectedSessionMessages
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('postDataForCreateAddressWithErrorDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddressWasntCreatedForCustomer(array $postData, array $expectedSessionMessages): void
     {
         $this->performRequestWithData($postData);
@@ -282,7 +322,11 @@ class CreateAddressTest extends AbstractController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function postDataForCreateAddressWithErrorDataProvider(): array
+=======
+    public function postDataForCreateAddressWithErrorDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'empty_post_data' => [

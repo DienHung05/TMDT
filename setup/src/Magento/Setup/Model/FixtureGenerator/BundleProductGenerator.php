@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Setup\Model\FixtureGenerator;
 
@@ -43,11 +48,19 @@ class BundleProductGenerator
 
     /**
      * @param ProductGeneratorFactory $productGeneratorFactory
+<<<<<<< HEAD
      * @param ResourceConnection|null $resource
      */
     public function __construct(
         ProductGeneratorFactory $productGeneratorFactory,
         ?ResourceConnection $resource = null
+=======
+     * @param ResourceConnection $resource|null
+     */
+    public function __construct(
+        ProductGeneratorFactory $productGeneratorFactory,
+        ResourceConnection $resource = null
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ) {
         $this->productGeneratorFactory = $productGeneratorFactory;
 
@@ -224,9 +237,19 @@ class BundleProductGenerator
     {
         if (!$this->sequenceValues[$tableName]) {
             $connection = $this->resource->getConnection();
+<<<<<<< HEAD
             $entityStatus = $connection->showTableStatus($tableName);
             $this->sequenceValues[$tableName] = $entityStatus['Auto_increment'];
             return $this->sequenceValues[$tableName];
+=======
+
+            $this->sequenceValues[$tableName] = $connection->fetchOne(
+                $connection->select()->from(
+                    $this->resource->getTableName($tableName),
+                    'MAX(`sequence_value`)'
+                )
+            );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
 
         return ++$this->sequenceValues[$tableName];

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Config\Model;
 
@@ -11,7 +16,10 @@ use Magento\Config\Model\ResourceModel\Config\Data\CollectionFactory;
 use Magento\Framework\Config\ScopeInterface;
 use Magento\Framework\Encryption\EncryptorInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -23,9 +31,15 @@ class ConfigTest extends TestCase
      * @covers \Magento\Config\Model\Config::save
      * @param array $groups
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
      * @magentoConfigFixture current_store general/single_store_mode/enabled 1
      */
     #[DataProvider('saveWithSingleStoreModeEnabledDataProvider')]
+=======
+     * @dataProvider saveWithSingleStoreModeEnabledDataProvider
+     * @magentoConfigFixture current_store general/single_store_mode/enabled 1
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveWithSingleStoreModeEnabled($groups)
     {
         Bootstrap::getObjectManager()->get(
@@ -53,7 +67,11 @@ class ConfigTest extends TestCase
         $this->assertArrayNotHasKey('dev/debug/template_hints_blocks', $_configData);
     }
 
+<<<<<<< HEAD
     public static function saveWithSingleStoreModeEnabledDataProvider()
+=======
+    public function saveWithSingleStoreModeEnabledDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return require __DIR__ . '/_files/config_groups.php';
     }
@@ -64,8 +82,13 @@ class ConfigTest extends TestCase
      * @param array $groups
      * @param array $expected
      * @magentoDbIsolation enabled
+<<<<<<< HEAD
      */
     #[DataProvider('saveDataProvider')]
+=======
+     * @dataProvider saveDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSave($section, $groups, $expected)
     {
         $objectManager = Bootstrap::getObjectManager();
@@ -88,7 +111,11 @@ class ConfigTest extends TestCase
         }
     }
 
+<<<<<<< HEAD
     public static function saveDataProvider()
+=======
+    public function saveDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return require __DIR__ . '/_files/config_section.php';
     }
@@ -99,8 +126,13 @@ class ConfigTest extends TestCase
      * @param array $override
      * @param array $inherit
      * @param array $expected
+<<<<<<< HEAD
      */
     #[DataProvider('saveWebsiteScopeDataProvider')]
+=======
+     * @dataProvider saveWebsiteScopeDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveUseDefault(
         string $website,
         string $section,
@@ -138,12 +170,21 @@ class ConfigTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function saveWebsiteScopeDataProvider(): array
     {
         return [
             [
                 'base',
                 'payment',
+=======
+    public function saveWebsiteScopeDataProvider(): array
+    {
+        return [
+            [
+                'website' => 'base',
+                'section' => 'payment',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 [
                     'groups' => [
                         'account' => [
@@ -162,7 +203,11 @@ class ConfigTest extends TestCase
                         ],
                     ],
                 ],
+<<<<<<< HEAD
                 [
+=======
+                'expected' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'paypal/general/merchant_country' => 'GB',
                 ],
             ]

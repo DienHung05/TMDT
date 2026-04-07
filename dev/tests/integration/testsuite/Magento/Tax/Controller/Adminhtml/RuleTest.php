@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Tax\Controller\Adminhtml;
 
@@ -15,7 +20,10 @@ use Magento\TestFramework\Helper\Bootstrap;
 use Magento\Tax\Api\Data\TaxRateInterface;
 use Magento\Tax\Model\TaxRuleFixtureFactory;
 use Magento\Tax\Model\Rate\Provider as RatesProvider;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Tests for Tax Rules controllers.
@@ -88,9 +96,15 @@ class RuleTest extends \Magento\TestFramework\TestCase\AbstractBackendController
      *
      * @param array $postData
      * @param int $itemsCount
+<<<<<<< HEAD
      * @magentoDbIsolation enabled
      */
     #[DataProvider('ajaxActionDataProvider')]
+=======
+     * @dataProvider ajaxActionDataProvider
+     * @magentoDbIsolation enabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAjaxLoadRates($postData, $itemsCount)
     {
         $this->getRequest()->setPostValue($postData);
@@ -139,7 +153,11 @@ class RuleTest extends \Magento\TestFramework\TestCase\AbstractBackendController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function ajaxActionDataProvider()
+=======
+    public function ajaxActionDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $taxRatesProvider = Bootstrap::getObjectManager()->create(RatesProvider::class);
 

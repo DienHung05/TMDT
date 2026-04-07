@@ -1,15 +1,30 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\CatalogRule\Model\Indexer\Product;
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
+<<<<<<< HEAD
 use Magento\Catalog\Model\ResourceModel\Product\Collection;
 use Magento\CatalogRule\Model\ResourceModel\Rule;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Api\SortOrder;
+=======
+use Magento\Catalog\Model\ProductRepository;
+use Magento\Catalog\Model\ResourceModel\Product\Collection;
+use Magento\CatalogRule\Model\Indexer\IndexBuilder;
+use Magento\CatalogRule\Model\ResourceModel\Rule;
+use Magento\Framework\Api\SearchCriteriaInterface;
+use Magento\Framework\Api\SortOrder;
+use Magento\Store\Api\WebsiteRepositoryInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 
 class PriceTest extends \PHPUnit\Framework\TestCase
@@ -25,12 +40,36 @@ class PriceTest extends \PHPUnit\Framework\TestCase
     private $resourceRule;
 
     /**
+<<<<<<< HEAD
+=======
+     * @var WebsiteRepositoryInterface
+     */
+    private $websiteRepository;
+
+    /**
+     * @var ProductRepository
+     */
+    private $productRepository;
+
+    /**
+     * @var IndexBuilder
+     */
+    private $indexerBuilder;
+
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
     {
         $this->objectManager = Bootstrap::getObjectManager();
         $this->resourceRule = $this->objectManager->get(Rule::class);
+<<<<<<< HEAD
+=======
+        $this->websiteRepository = $this->objectManager->get(WebsiteRepositoryInterface::class);
+        $this->productRepository = $this->objectManager->create(ProductRepository::class);
+        $this->indexerBuilder = $this->objectManager->get(IndexBuilder::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -66,6 +105,31 @@ class PriceTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @magentoDataFixtureBeforeTransaction Magento/CatalogRule/_files/simple_product_with_catalog_rule_50_percent_off.php
+     * @magentoDbIsolation enabled
+     * @magentoAppIsolation enabled
+     * @return void
+     */
+    public function testPriceForSecondStore():void
+    {
+        $websiteId = $this->websiteRepository->get('test')->getId();
+        $simpleProduct = $this->productRepository->get('simple');
+        $simpleProduct->setPriceCalculation(true);
+        $this->assertEquals('simple', $simpleProduct->getSku());
+        $this->assertFalse(
+            $this->resourceRule->getRulePrice(new \DateTime(), $websiteId, 1, $simpleProduct->getId())
+        );
+        $this->indexerBuilder->reindexById($simpleProduct->getId());
+        $this->assertEquals(
+            25,
+            $this->resourceRule->getRulePrice(new \DateTime(), $websiteId, 1, $simpleProduct->getId())
+        );
+    }
+
+    /**
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixtureBeforeTransaction Magento/CatalogRule/_files/simple_products.php
      * @magentoDataFixtureBeforeTransaction Magento/CatalogRule/_files/rule_by_attribute.php
      * @magentoDbIsolation enabled

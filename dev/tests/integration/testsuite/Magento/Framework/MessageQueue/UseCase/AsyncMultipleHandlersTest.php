@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Framework\MessageQueue\UseCase;
 
 use Magento\Framework\MessageQueue\DefaultValueProvider;
 use Magento\TestFramework\Helper\Bootstrap;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Framework\MessageQueue\UseCase;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestModuleAsyncAmqp\Model\AsyncTestData;
 
 class AsyncMultipleHandlersTest extends QueueTestCaseAbstract
@@ -45,6 +53,7 @@ class AsyncMultipleHandlersTest extends QueueTestCaseAbstract
     ];
 
     /**
+<<<<<<< HEAD
      * @var string
      */
     private $connectionType;
@@ -65,6 +74,8 @@ class AsyncMultipleHandlersTest extends QueueTestCaseAbstract
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Verify that Queue Framework supports multiple topics per queue.
      *
      * Current test is not test of Web API framework itself,
@@ -72,11 +83,14 @@ class AsyncMultipleHandlersTest extends QueueTestCaseAbstract
      */
     public function testAsynchronousRpcCommunication()
     {
+<<<<<<< HEAD
         if ($this->connectionType === 'stomp') {
             $this->markTestSkipped('AMQP test skipped because STOMP connection is available.
             This test is AMQP-specific.');
         }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         foreach ($this->topicValueMap as $topic => $data) {
             $message = null;
             if (is_array($data)) {

@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 # Copyright 2018 Adobe
 # All Rights Reserved.
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 type Query {
     products(
     search: String,
@@ -88,7 +91,13 @@ type ProductTierPrices {
     website_id: Float
 }
 
+<<<<<<< HEAD
 interface ProductInterface @typeResolver(class:"Magento\\CatalogGraphQl\\Model\\ProductInterfaceTypeResolverComposite") @doc(description: "comment for ProductInterface")
+=======
+interface ProductInterface
+@typeResolver(class: "Magento\\CatalogGraphQl\\Model\\ProductInterfaceTypeResolverComposite")
+@doc(description: "comment for ProductInterface")
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  {
     id: Int @doc(description: "comment for [ProductInterface].")
     name: String
@@ -211,11 +220,16 @@ type CustomizableRadioValue {
 type VirtualProduct implements ProductInterface, CustomizableProductInterface {
 }
 
+<<<<<<< HEAD
 type SimpleProduct implements ProductInterface, PhysicalProductInterface, CustomizableProductInterface @doc(description: "Comment for empty SimpleProduct type")
 {
 }
 
 type SimpleProduct implements ProductInterface & PhysicalProductInterface & CustomizableProductInterface @doc(description: "Comment for empty SimpleProduct type")
+=======
+type SimpleProduct implements ProductInterface, PhysicalProductInterface, CustomizableProductInterface
+@doc(description: "Comment for empty SimpleProduct type")
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 {
 }
 
@@ -319,7 +333,12 @@ input ProductSortInput @doc(description:"Input ProductSortInput") {
     gift_message_available: SortEnum
 }
 
+<<<<<<< HEAD
 type MediaGalleryEntry @doc(description: "Comment for MediaGalleryEntry type")
+=======
+type MediaGalleryEntry
+@doc(description: "Comment for MediaGalleryEntry type")
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 {
     id: Int @doc(description: "id for MediaGalleryEntry")
     media_type: String

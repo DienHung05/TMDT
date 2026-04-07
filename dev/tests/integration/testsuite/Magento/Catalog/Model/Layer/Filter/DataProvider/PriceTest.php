@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -12,7 +17,10 @@ use Magento\Catalog\Model\Layer\Resolver;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test class for \Magento\Catalog\Model\Layer\Filter\DataProvider\Price.
@@ -91,7 +99,11 @@ class PriceTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getRangeItemCountsDataProvider(): array
+=======
+    public function getRangeItemCountsDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             // These are $inputRange, [$expectedItemCounts] values
@@ -103,6 +115,10 @@ class PriceTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider getRangeItemCountsDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/categories.php
      * @magentoAppIsolation enabled
      * @magentoDbIsolation disabled
@@ -110,7 +126,10 @@ class PriceTest extends TestCase
      * @param array $expectedItemCounts
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('getRangeItemCountsDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetRangeItemCounts(int $inputRange, array $expectedItemCounts): void
     {
         $this->layer->setCurrentCategory(4);
@@ -134,11 +153,18 @@ class PriceTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider getAdditionalRequestDataDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $priceFilters
      * @param string $expectedRequest
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('getAdditionalRequestDataDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetAdditionalRequestData(array $priceFilters, string $expectedRequest): void
     {
         $filter = explode('-', $priceFilters[0]);
@@ -155,6 +181,7 @@ class PriceTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getAdditionalRequestDataDataProvider(): array
     {
         return [
@@ -169,6 +196,22 @@ class PriceTest extends TestCase
             'not_valid_prior_filters' => [
                 'priceFilters' => ['10-11', '20-21', '31', '40-41'],
                 'expectedRequest' => ',10-11',
+=======
+    public function getAdditionalRequestDataDataProvider(): array
+    {
+        return [
+            'with_prior_filters' => [
+                'price_filters' => ['10-11', '20-21', '30-31'],
+                'expected_request' => ',10-11,20-21,30-31',
+            ],
+            'without_prior_filters' => [
+                'price_filters' => ['10-11'],
+                'expected_request' => ',10-11',
+            ],
+            'not_valid_prior_filters' => [
+                'price_filters' => ['10-11', '20-21', '31', '40-41'],
+                'expected_request' => ',10-11',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

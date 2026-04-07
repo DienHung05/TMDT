@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -12,10 +17,18 @@ use Magento\TestFramework\TestCase\GraphQlAbstract;
 /**
  * Test coverage for zero subtotal and check/money order payment methods in the store config
  *
+<<<<<<< HEAD
  */
 class StoreConfigTest extends GraphQlAbstract
 {
     public const STORE_CONFIG_QUERY = <<<QUERY
+=======
+ * @magentoDbIsolation enabled
+ */
+class StoreConfigTest extends GraphQlAbstract
+{
+    const STORE_CONFIG_QUERY = <<<QUERY
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 {
     storeConfig {
         zero_subtotal_enabled

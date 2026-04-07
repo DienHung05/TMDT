@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2011 Adobe
  * All Rights Reserved.
  */
@@ -17,18 +18,43 @@ class GroupTest extends TestCase
 {
     /**
      * @var Group
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+namespace Magento\Customer\Model;
+
+class GroupTest extends \PHPUnit\Framework\TestCase
+{
+    /**
+     * @var \Magento\Customer\Model\Group
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     protected $groupModel;
 
     /**
+<<<<<<< HEAD
      * @var GroupInterfaceFactory
+=======
+     * @var \Magento\Customer\Api\Data\GroupInterfaceFactory
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     protected $groupFactory;
 
     protected function setUp(): void
     {
+<<<<<<< HEAD
         $this->groupModel = Bootstrap::getObjectManager()->create(Group::class);
         $this->groupFactory = Bootstrap::getObjectManager()->create(GroupInterfaceFactory::class);
+=======
+        $this->groupModel = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(
+            \Magento\Customer\Model\Group::class
+        );
+        $this->groupFactory = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(
+            \Magento\Customer\Api\Data\GroupInterfaceFactory::class
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     public function testCRUD()
@@ -37,6 +63,7 @@ class GroupTest extends TestCase
         $crud = new \Magento\TestFramework\Entity($this->groupModel, ['customer_group_code' => uniqid()]);
         $crud->testCrud();
     }
+<<<<<<< HEAD
 
     /**
      * Test that customer group correctly handles multibyte and normal characters when saving
@@ -109,4 +136,6 @@ class GroupTest extends TestCase
             ]
         ];
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

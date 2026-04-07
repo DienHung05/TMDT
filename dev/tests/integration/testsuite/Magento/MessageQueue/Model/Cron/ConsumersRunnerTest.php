@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -23,15 +28,21 @@ use Magento\Framework\ShellInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Tests the different cases of consumers running by ConsumersRunner
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
+<<<<<<< HEAD
 #[AllowMockObjectsWithoutExpectations]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class ConsumersRunnerTest extends TestCase
 {
     /**
@@ -93,7 +104,11 @@ class ConsumersRunnerTest extends TestCase
     {
         $this->objectManager = Bootstrap::getObjectManager();
         $this->shellMock = $this->getMockBuilder(ShellInterface::class)
+<<<<<<< HEAD
             ->getMock();
+=======
+            ->getMockForAbstractClass();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $resourceConnection = $this->objectManager->create(ResourceConnection::class);
         $deploymentConfig = $this->objectManager->create(DeploymentConfig::class);
         // create object with new otherwise dummy locker is created because of di.xml preference for integration tests
@@ -132,8 +147,13 @@ class ConsumersRunnerTest extends TestCase
      * @param array $expectedArguments
      *
      * @return void
+<<<<<<< HEAD
      */
     #[DataProvider('runDataProvider')]
+=======
+     * @dataProvider runDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testArgumentMaxMessages(
         string $specificConsumer,
         int $maxMessage,
@@ -153,20 +173,34 @@ class ConsumersRunnerTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function runDataProvider()
+=======
+    public function runDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
           [
               'specificConsumer' => 'exportProcessor',
+<<<<<<< HEAD
               'maxMessage' => 10,
+=======
+              'max_messages' => 10,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
               'command' => PHP_BINARY . ' ' . BP . '/bin/magento queue:consumers:start %s %s %s',
               'expectedArguments' => ['exportProcessor', '--single-thread', '--max-messages=10'],
           ],
           [
               'specificConsumer' => 'exportProcessor',
+<<<<<<< HEAD
               'maxMessage' => 5000,
               'command' => PHP_BINARY . ' ' . BP . '/bin/magento queue:consumers:start %s %s %s',
               'expectedArguments' => ['exportProcessor', '--single-thread', '--max-messages=5000'],
+=======
+              'max_messages' => 5000,
+              'command' => PHP_BINARY . ' ' . BP . '/bin/magento queue:consumers:start %s %s %s',
+              'expectedArguments' => ['exportProcessor', '--single-thread', '--max-messages=100'],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
           ],
         ];
     }

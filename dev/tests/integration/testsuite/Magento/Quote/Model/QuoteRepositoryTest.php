@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Quote\Model;
 
+<<<<<<< HEAD
 use Magento\Customer\Api\CustomerRepositoryInterface;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\SearchCriteria;
 use Magento\Framework\Api\SearchCriteriaBuilder;
@@ -87,6 +95,7 @@ class QuoteRepositoryTest extends TestCase
     private $quote;
 
     /**
+<<<<<<< HEAD
      * @var \Magento\Quote\Model\QuoteFactory
      */
     private $quoteFactorys;
@@ -102,6 +111,8 @@ class QuoteRepositoryTest extends TestCase
     private $customerRepository;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
@@ -117,9 +128,12 @@ class QuoteRepositoryTest extends TestCase
         $this->addressFactory = $this->objectManager->get(AddressInterfaceFactory::class);
         $this->quoteFactory = $this->objectManager->get(CartInterfaceFactory::class);
         $this->itemFactory = $this->objectManager->get(CartItemInterfaceFactory::class);
+<<<<<<< HEAD
         $this->quoteFactorys = $this->objectManager->get(\Magento\Quote\Model\QuoteFactory::class);
         $this->store = $this->objectManager->get(\Magento\Store\Model\Store::class);
         $this->customerRepository = $this->objectManager->get(CustomerRepositoryInterface::class);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -297,6 +311,7 @@ class QuoteRepositoryTest extends TestCase
         $this->assertEquals($expectedExtensionAttributes['lastname'], $testAttribute->getLastName());
         $this->assertEquals($expectedExtensionAttributes['email'], $testAttribute->getEmail());
     }
+<<<<<<< HEAD
 
     /**
      * @magentoDataFixture Magento/Customer/_files/customer.php
@@ -381,4 +396,6 @@ class QuoteRepositoryTest extends TestCase
         $afterDeletionQuote = $this->quoteFactorys->create()->load($thirdQuote->getId());
         $this->assertNull($afterDeletionQuote->getId());
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

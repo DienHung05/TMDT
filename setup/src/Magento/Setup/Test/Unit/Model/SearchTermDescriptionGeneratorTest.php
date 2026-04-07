@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -56,6 +61,7 @@ class SearchTermDescriptionGeneratorTest extends TestCase
         $this->searchTermManagerMock
             ->expects($this->exactly(2))
             ->method('applySearchTermsToDescription')
+<<<<<<< HEAD
             ->willReturnCallback(
                 function ($arg1, $arg2) use ($descriptionMock, $firstProductIndex, $secondProductIndex) {
                     if ($arg1 === $descriptionMock && $arg2 === $firstProductIndex) {
@@ -64,6 +70,11 @@ class SearchTermDescriptionGeneratorTest extends TestCase
                         return null;
                     }
                 }
+=======
+            ->withConsecutive(
+                [$descriptionMock, $firstProductIndex],
+                [$descriptionMock, $secondProductIndex]
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             );
 
         $this->searchTermDescriptionGenerator->generate($firstProductIndex);

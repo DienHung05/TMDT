@@ -1,26 +1,46 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
 declare(strict_types=1);
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 namespace Magento\Sales\Service\V1;
 
 use Magento\Sales\Api\Data\InvoiceCommentInterface;
 use Magento\TestFramework\TestCase\WebapiAbstract;
 
+<<<<<<< HEAD
+=======
+/**
+ * Class InvoiceAddCommentTest
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class InvoiceAddCommentTest extends WebapiAbstract
 {
     /**
      * Service read name
      */
+<<<<<<< HEAD
     public const SERVICE_READ_NAME = 'salesInvoiceCommentRepositoryV1';
+=======
+    const SERVICE_READ_NAME = 'salesInvoiceCommentRepositoryV1';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * Service version
      */
+<<<<<<< HEAD
     public const SERVICE_VERSION = 'V1';
+=======
+    const SERVICE_VERSION = 'V1';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * Test invoice add comment service
@@ -40,7 +60,11 @@ class InvoiceAddCommentTest extends WebapiAbstract
             InvoiceCommentInterface::CREATED_AT => null,
             InvoiceCommentInterface::PARENT_ID => $invoice->getId(),
             InvoiceCommentInterface::IS_VISIBLE_ON_FRONT => 1,
+<<<<<<< HEAD
             InvoiceCommentInterface::IS_CUSTOMER_NOTIFIED => 1
+=======
+            InvoiceCommentInterface::IS_CUSTOMER_NOTIFIED => 1,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
 
         $requestData = ['entity' => $commentData];

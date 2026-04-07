@@ -1,12 +1,19 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Catalog\Api;
 
+<<<<<<< HEAD
 use Magento\Catalog\Model\Product\Gallery\DefaultValueProcessor;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Framework\Api\Data\ImageContentInterface;
@@ -15,6 +22,9 @@ use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorage;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Fixture\ScopeFixture;
+=======
+use Magento\Framework\Api\Data\ImageContentInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\Catalog\Model\ProductFactory;
 use Magento\Catalog\Model\Product\Attribute\Backend\Media\ImageEntryConverter;
@@ -25,6 +35,7 @@ use Magento\Framework\ObjectManagerInterface;
 
 /**
  * Class ProductAttributeMediaGalleryManagementInterfaceTest
+<<<<<<< HEAD
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
@@ -36,6 +47,11 @@ class ProductAttributeMediaGalleryManagementInterfaceTest extends WebapiAbstract
 
     public const SERVICE_VERSION = 'V1';
 
+=======
+ */
+class ProductAttributeMediaGalleryManagementInterfaceTest extends WebapiAbstract
+{
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Default create service request information (product with SKU 'simple' is used)
      *
@@ -68,11 +84,14 @@ class ProductAttributeMediaGalleryManagementInterfaceTest extends WebapiAbstract
     private $objectManager;
 
     /**
+<<<<<<< HEAD
      * @var DataFixtureStorage
      */
     private $fixtures;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritDoc
      */
     protected function setUp(): void
@@ -81,6 +100,7 @@ class ProductAttributeMediaGalleryManagementInterfaceTest extends WebapiAbstract
 
         $this->createServiceInfo = [
             'rest' => [
+<<<<<<< HEAD
                 'resourcePath' => self::RESOURCE_PATH.'simple/media',
                 'httpMethod' => Request::HTTP_METHOD_POST,
             ],
@@ -88,18 +108,36 @@ class ProductAttributeMediaGalleryManagementInterfaceTest extends WebapiAbstract
                 'service' => self::SERVICE_NAME ,
                 'serviceVersion' => self::SERVICE_VERSION,
                 'operation' => self::SERVICE_NAME.'Create',
+=======
+                'resourcePath' => '/V1/products/simple/media',
+                'httpMethod' => Request::HTTP_METHOD_POST,
+            ],
+            'soap' => [
+                'service' => 'catalogProductAttributeMediaGalleryManagementV1',
+                'serviceVersion' => 'V1',
+                'operation' => 'catalogProductAttributeMediaGalleryManagementV1Create',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
 
         $this->updateServiceInfo = [
             'rest' => [
+<<<<<<< HEAD
                 'resourcePath' => self::RESOURCE_PATH.'simple/media',
+=======
+                'resourcePath' => '/V1/products/simple/media',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'httpMethod' => Request::HTTP_METHOD_PUT,
             ],
             'soap' => [
                 'service' => 'catalogProductAttributeMediaGalleryManagementV1',
+<<<<<<< HEAD
                 'serviceVersion' => self::SERVICE_VERSION,
                 'operation' => self::SERVICE_NAME.'Update',
+=======
+                'serviceVersion' => 'V1',
+                'operation' => 'catalogProductAttributeMediaGalleryManagementV1Update',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
 
@@ -108,14 +146,23 @@ class ProductAttributeMediaGalleryManagementInterfaceTest extends WebapiAbstract
                 'httpMethod' => Request::HTTP_METHOD_DELETE,
             ],
             'soap' => [
+<<<<<<< HEAD
                 'service' => self::SERVICE_NAME,
                 'serviceVersion' => self::SERVICE_VERSION,
                 'operation' => self::SERVICE_NAME.'Remove',
+=======
+                'service' => 'catalogProductAttributeMediaGalleryManagementV1',
+                'serviceVersion' => 'V1',
+                'operation' => 'catalogProductAttributeMediaGalleryManagementV1Remove',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
 
         $this->testImagePath = __DIR__ . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'test_image.jpg';
+<<<<<<< HEAD
         $this->fixtures = $this->objectManager->get(DataFixtureStorageManager::class)->getStorage();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -502,6 +549,14 @@ class ProductAttributeMediaGalleryManagementInterfaceTest extends WebapiAbstract
      */
     public function testCreateThrowsExceptionIfTargetProductDoesNotExist()
     {
+<<<<<<< HEAD
+=======
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage(
+            'The product that was requested doesn\'t exist. Verify the product and try again.'
+        );
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->createServiceInfo['rest']['resourcePath'] = '/V1/products/wrong_product_sku/media';
 
         $requestData = [
@@ -518,6 +573,7 @@ class ProductAttributeMediaGalleryManagementInterfaceTest extends WebapiAbstract
             ]
         ];
 
+<<<<<<< HEAD
         $expectedMessage = 'The product with SKU "%1" does not exist.';
         try {
             $this->_webApiCall($this->createServiceInfo, ['sku' => 'simple', 'entry' => $requestData]);
@@ -527,6 +583,9 @@ class ProductAttributeMediaGalleryManagementInterfaceTest extends WebapiAbstract
             $errorObj = $this->processRestExceptionResult($e);
             $this->assertEquals($expectedMessage, $errorObj['message']);
         }
+=======
+        $this->_webApiCall($this->createServiceInfo, ['sku' => 'simple', 'entry' => $requestData]);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -562,6 +621,14 @@ class ProductAttributeMediaGalleryManagementInterfaceTest extends WebapiAbstract
      */
     public function testUpdateThrowsExceptionIfTargetProductDoesNotExist()
     {
+<<<<<<< HEAD
+=======
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage(
+            'The product that was requested doesn\'t exist. Verify the product and try again.'
+        );
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->updateServiceInfo['rest']['resourcePath'] = '/V1/products/wrong_product_sku/media'
             . '/' . 'wrong-sku';
         $requestData = [
@@ -576,6 +643,7 @@ class ProductAttributeMediaGalleryManagementInterfaceTest extends WebapiAbstract
             ],
         ];
 
+<<<<<<< HEAD
         $expectedMessage = 'The product with SKU "%1" does not exist.';
         try {
             $this->_webApiCall($this->updateServiceInfo, $requestData, null, 'all');
@@ -585,6 +653,9 @@ class ProductAttributeMediaGalleryManagementInterfaceTest extends WebapiAbstract
             $errorObj = $this->processRestExceptionResult($e);
             $this->assertEquals($expectedMessage, $errorObj['message']);
         }
+=======
+        $this->_webApiCall($this->updateServiceInfo, $requestData, null, 'all');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -621,12 +692,21 @@ class ProductAttributeMediaGalleryManagementInterfaceTest extends WebapiAbstract
      */
     public function testDeleteThrowsExceptionIfTargetProductDoesNotExist()
     {
+<<<<<<< HEAD
+=======
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage(
+            'The product that was requested doesn\'t exist. Verify the product and try again.'
+        );
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->deleteServiceInfo['rest']['resourcePath'] = '/V1/products/wrong_product_sku/media/9999';
         $requestData = [
             'sku' => 'wrong_product_sku',
             'entryId' => 9999,
         ];
 
+<<<<<<< HEAD
         $expectedMessage = 'The product with SKU "%1" does not exist.';
         try {
             $this->_webApiCall($this->deleteServiceInfo, $requestData);
@@ -636,6 +716,9 @@ class ProductAttributeMediaGalleryManagementInterfaceTest extends WebapiAbstract
             $errorObj = $this->processRestExceptionResult($e);
             $this->assertEquals($expectedMessage, $errorObj['message']);
         }
+=======
+        $this->_webApiCall($this->deleteServiceInfo, $requestData);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -657,6 +740,7 @@ class ProductAttributeMediaGalleryManagementInterfaceTest extends WebapiAbstract
         $this->_webApiCall($this->deleteServiceInfo, $requestData);
     }
 
+<<<<<<< HEAD
     #[
         DataFixture(StoreFixture::class, as: 'store2'),
         DataFixture(ProductFixture::class, ['media_gallery_entries' => [[], []]], as: 'product')
@@ -684,6 +768,8 @@ class ProductAttributeMediaGalleryManagementInterfaceTest extends WebapiAbstract
         $this->assertCount(2, $mediaGalleryEntries);
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Test get() method
      *
@@ -710,6 +796,7 @@ class ProductAttributeMediaGalleryManagementInterfaceTest extends WebapiAbstract
 
         $serviceInfo = [
             'rest' => [
+<<<<<<< HEAD
                 'resourcePath' => self::RESOURCE_PATH . $productSku . '/media/' . $imageId,
                 'httpMethod' => Request::HTTP_METHOD_GET,
             ],
@@ -717,6 +804,15 @@ class ProductAttributeMediaGalleryManagementInterfaceTest extends WebapiAbstract
                 'service' => self::SERVICE_NAME,
                 'serviceVersion' => self::SERVICE_VERSION,
                 'operation' => self::SERVICE_NAME.'Get',
+=======
+                'resourcePath' => '/V1/products/' . $productSku . '/media/' . $imageId,
+                'httpMethod' => Request::HTTP_METHOD_GET,
+            ],
+            'soap' => [
+                'service' => 'catalogProductAttributeMediaGalleryManagementV1',
+                'serviceVersion' => 'V1',
+                'operation' => 'catalogProductAttributeMediaGalleryManagementV1Get',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
         $requestData = [
@@ -743,6 +839,7 @@ class ProductAttributeMediaGalleryManagementInterfaceTest extends WebapiAbstract
         $productSku = 'simple'; //from fixture
         $serviceInfo = [
             'rest' => [
+<<<<<<< HEAD
                 'resourcePath' => self::RESOURCE_PATH . urlencode($productSku) . '/media',
                 'httpMethod' => Request::HTTP_METHOD_GET,
             ],
@@ -750,6 +847,15 @@ class ProductAttributeMediaGalleryManagementInterfaceTest extends WebapiAbstract
                 'service' => self::SERVICE_NAME,
                 'serviceVersion' => self::SERVICE_VERSION,
                 'operation' => self::SERVICE_NAME.'GetList',
+=======
+                'resourcePath' => '/V1/products/' . urlencode($productSku) . '/media',
+                'httpMethod' => Request::HTTP_METHOD_GET,
+            ],
+            'soap' => [
+                'service' => 'catalogProductAttributeMediaGalleryManagementV1',
+                'serviceVersion' => 'V1',
+                'operation' => 'catalogProductAttributeMediaGalleryManagementV1GetList',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
 
@@ -775,6 +881,7 @@ class ProductAttributeMediaGalleryManagementInterfaceTest extends WebapiAbstract
         $productSku = 'absent_sku_' . time();
         $serviceInfo = [
             'rest' => [
+<<<<<<< HEAD
                 'resourcePath' => self::RESOURCE_PATH . urlencode($productSku) . '/media',
                 'httpMethod' => Request::HTTP_METHOD_GET,
             ],
@@ -782,6 +889,15 @@ class ProductAttributeMediaGalleryManagementInterfaceTest extends WebapiAbstract
                 'service' => self::SERVICE_NAME,
                 'serviceVersion' => self::SERVICE_VERSION,
                 'operation' => self::SERVICE_NAME.'GetList',
+=======
+                'resourcePath' => '/V1/products/' . urlencode($productSku) . '/media',
+                'httpMethod' => Request::HTTP_METHOD_GET,
+            ],
+            'soap' => [
+                'service' => 'catalogProductAttributeMediaGalleryManagementV1',
+                'serviceVersion' => 'V1',
+                'operation' => 'catalogProductAttributeMediaGalleryManagementV1GetList',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
 
@@ -791,7 +907,11 @@ class ProductAttributeMediaGalleryManagementInterfaceTest extends WebapiAbstract
         if (TESTS_WEB_API_ADAPTER == self::ADAPTER_SOAP) {
             $this->expectException('SoapFault');
             $this->expectExceptionMessage(
+<<<<<<< HEAD
                 'The product with SKU "%1" does not exist.'
+=======
+                "The product that was requested doesn't exist. Verify the product and try again."
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             );
         } else {
             $this->expectException('Exception');
@@ -846,6 +966,7 @@ class ProductAttributeMediaGalleryManagementInterfaceTest extends WebapiAbstract
         $this->assertStringStartsWith('/t/e/test_image', $updatedImage['file']);
         $this->assertEquals($videoContent, array_intersect_key($updatedImage, $videoContent));
     }
+<<<<<<< HEAD
 
     /**
      * Check content attribute in getList method
@@ -1038,4 +1159,6 @@ class ProductAttributeMediaGalleryManagementInterfaceTest extends WebapiAbstract
         $this->assertEquals(1, $gallery['images'][$existingImageId]['disabled_use_default']);
         $this->assertEquals(1, $gallery['images'][$existingImageId]['position_use_default']);
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

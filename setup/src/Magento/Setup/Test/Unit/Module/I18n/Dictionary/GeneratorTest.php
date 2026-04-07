@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -58,7 +63,11 @@ class GeneratorTest extends TestCase
     {
         $this->parserMock = $this->createMock(Parser::class);
         $this->contextualParserMock = $this->createMock(Contextual::class);
+<<<<<<< HEAD
         $this->writerMock = $this->createMock(WriterInterface::class);
+=======
+        $this->writerMock = $this->getMockForAbstractClass(WriterInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->factoryMock = $this->createMock(Factory::class);
         $this->factoryMock->expects($this->any())
             ->method('createDictionaryWriter')
@@ -102,6 +111,10 @@ class GeneratorTest extends TestCase
             ->willReturn($optionResolver);
         $this->generator->generate('', $outputFilename);
         $property = new \ReflectionProperty($this->generator, 'writer');
+<<<<<<< HEAD
+=======
+        $property->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertNull($property->getValue($this->generator));
     }
 
@@ -187,11 +200,15 @@ class GeneratorTest extends TestCase
         $this->parserMock->expects($this->once())->method('getPhrases')->willReturn($phrases);
         $this->writerMock
             ->method('write')
+<<<<<<< HEAD
             ->willReturnCallback(function ($arg1) use ($phrases) {
                 if ($arg1 == $phrases[0] || $arg1 == $phrases[1]) {
                     return null;
                 }
             });
+=======
+            ->withConsecutive([$phrases[0]], [$phrases[1]]);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->generator->generate($baseDir, 'file.csv');
     }

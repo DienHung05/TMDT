@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Bundle\Model\Product;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * @codingStandardsIgnoreStart
  * @magentoDataFixtureBeforeTransaction Magento/Bundle/_files/PriceCalculator/dynamic_bundle_product_with_catalog_rule.php
@@ -20,9 +28,15 @@ class DynamicBundleWithCatalogPriceRuleCalculatorTest extends BundlePriceAbstrac
     /**
      * @param array $strategyModifiers
      * @param array $expectedResults
+<<<<<<< HEAD
      * @magentoAppIsolation enabled
      */
     #[DataProvider('getTestCases')]
+=======
+     * @dataProvider getTestCases
+     * @magentoAppIsolation enabled
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPriceForDynamicBundle(array $strategyModifiers, array $expectedResults)
     {
         $this->prepareFixture($strategyModifiers, 'bundle_product');
@@ -50,11 +64,19 @@ class DynamicBundleWithCatalogPriceRuleCalculatorTest extends BundlePriceAbstrac
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function getTestCases()
     {
         return [
             '#1 Testing price for dynamic bundle with one required option' => [
                 'strategyModifiers' => self::getBundleProductConfiguration1(),
+=======
+    public function getTestCases()
+    {
+        return [
+            '#1 Testing price for dynamic bundle with one required option' => [
+                'strategy' => $this->getBundleProductConfiguration1(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     // 10 * 0.9
                     'minimalPrice' => 9,
@@ -65,7 +87,11 @@ class DynamicBundleWithCatalogPriceRuleCalculatorTest extends BundlePriceAbstrac
             ],
 
             '#3 Testing price for dynamic bundle with one non required option' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getBundleProductConfiguration3(),
+=======
+                'strategy' => $this->getBundleProductConfiguration3(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     // 0.9 * 2 * 10
                     'minimalPrice' => 18,
@@ -76,7 +102,11 @@ class DynamicBundleWithCatalogPriceRuleCalculatorTest extends BundlePriceAbstrac
             ],
 
             '#4 Testing price for dynamic bundle with one required checkbox type option and 2 simples' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getBundleProductConfiguration4(),
+=======
+                'strategy' => $this->getBundleProductConfiguration4(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     // 0.9 * 1 * 10
                     'minimalPrice' => 9,
@@ -87,7 +117,11 @@ class DynamicBundleWithCatalogPriceRuleCalculatorTest extends BundlePriceAbstrac
             ],
 
             '#5 Testing price for dynamic bundle with one required multi type option and 2 simples' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getBundleProductConfiguration5(),
+=======
+                'strategy' => $this->getBundleProductConfiguration5(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     // 0.9 * 1 * 10
                     'minimalPrice' => 9,
@@ -98,7 +132,11 @@ class DynamicBundleWithCatalogPriceRuleCalculatorTest extends BundlePriceAbstrac
             ],
 
             '#6 Testing price for dynamic bundle with one required radio type option and 2 simples' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getBundleProductConfiguration6(),
+=======
+                'strategy' => $this->getBundleProductConfiguration6(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     // 0.9 * 1 * 10
                     'minimalPrice' => 9,
@@ -109,7 +147,11 @@ class DynamicBundleWithCatalogPriceRuleCalculatorTest extends BundlePriceAbstrac
             ],
 
             '#7 Testing price for dynamic bundle with two required options' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getBundleProductConfiguration7(),
+=======
+                'strategy' => $this->getBundleProductConfiguration7(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     // 0.9 * 1 * 10 + 0.9 * 1 * 10
                     'minimalPrice' => 18,
@@ -120,7 +162,11 @@ class DynamicBundleWithCatalogPriceRuleCalculatorTest extends BundlePriceAbstrac
             ],
 
             '#8 Testing price for dynamic bundle with one required option and one non required' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getBundleProductConfiguration8(),
+=======
+                'strategy' => $this->getBundleProductConfiguration8(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     // 1 * 0.9 * 10
                     'minimalPrice' => 9,
@@ -131,7 +177,11 @@ class DynamicBundleWithCatalogPriceRuleCalculatorTest extends BundlePriceAbstrac
             ],
 
             '#9 Testing price for dynamic bundle with two non required options' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getBundleProductConfiguration9(),
+=======
+                'strategy' => $this->getBundleProductConfiguration9(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     // 0.9 * 1 * 10
                     'minimalPrice' => 9,
@@ -147,7 +197,11 @@ class DynamicBundleWithCatalogPriceRuleCalculatorTest extends BundlePriceAbstrac
      * Dynamic bundle with one required option
      * @return array
      */
+<<<<<<< HEAD
     private static function getBundleProductConfiguration1()
+=======
+    private function getBundleProductConfiguration1()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -175,7 +229,11 @@ class DynamicBundleWithCatalogPriceRuleCalculatorTest extends BundlePriceAbstrac
      * Dynamic bundle with one non required option
      * @return array
      */
+<<<<<<< HEAD
     private static function getBundleProductConfiguration3()
+=======
+    private function getBundleProductConfiguration3()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -203,7 +261,11 @@ class DynamicBundleWithCatalogPriceRuleCalculatorTest extends BundlePriceAbstrac
      * Dynamic bundle with one required checkbox type option and 2 simples
      * @return array
      */
+<<<<<<< HEAD
     private static function getBundleProductConfiguration4()
+=======
+    private function getBundleProductConfiguration4()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -235,7 +297,11 @@ class DynamicBundleWithCatalogPriceRuleCalculatorTest extends BundlePriceAbstrac
      * Dynamic bundle with one required multi type option and 2 simples
      * @return array
      */
+<<<<<<< HEAD
     private static function getBundleProductConfiguration5()
+=======
+    private function getBundleProductConfiguration5()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -267,7 +333,11 @@ class DynamicBundleWithCatalogPriceRuleCalculatorTest extends BundlePriceAbstrac
      * Dynamic bundle with one required radio type option and 2 simples
      * @return array
      */
+<<<<<<< HEAD
     private static function getBundleProductConfiguration6()
+=======
+    private function getBundleProductConfiguration6()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -299,7 +369,11 @@ class DynamicBundleWithCatalogPriceRuleCalculatorTest extends BundlePriceAbstrac
      * Dynamic bundle with two required options
      * @return array
      */
+<<<<<<< HEAD
     private static function getBundleProductConfiguration7()
+=======
+    private function getBundleProductConfiguration7()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -346,7 +420,11 @@ class DynamicBundleWithCatalogPriceRuleCalculatorTest extends BundlePriceAbstrac
      * Dynamic bundle with one required option and one non required
      * @return array
      */
+<<<<<<< HEAD
     private static function getBundleProductConfiguration8()
+=======
+    private function getBundleProductConfiguration8()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -393,7 +471,11 @@ class DynamicBundleWithCatalogPriceRuleCalculatorTest extends BundlePriceAbstrac
      * Dynamic bundle with two non required options
      * @return array
      */
+<<<<<<< HEAD
     private static function getBundleProductConfiguration9()
+=======
+    private function getBundleProductConfiguration9()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [

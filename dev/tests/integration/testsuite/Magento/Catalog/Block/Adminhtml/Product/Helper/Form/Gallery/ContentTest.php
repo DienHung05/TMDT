@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Catalog\Block\Adminhtml\Product\Helper\Form\Gallery;
@@ -16,7 +21,10 @@ use Magento\Framework\Registry;
 use Magento\Store\Api\StoreRepositoryInterface;
 use Magento\Store\Model\Store;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea adminhtml
@@ -79,12 +87,19 @@ class ContentTest extends \PHPUnit\Framework\TestCase
     /**
      * Test get images json using registry or data persistor.
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider getImagesAndImageTypesDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/product_with_image.php
      * @magentoAppIsolation enabled
      * @param bool $isProductNew
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('getImagesAndImageTypesDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetImagesJson(bool $isProductNew)
     {
         $this->prepareProduct($isProductNew);
@@ -101,12 +116,19 @@ class ContentTest extends \PHPUnit\Framework\TestCase
     /**
      * Test get image types json using registry or data persistor.
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider getImagesAndImageTypesDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/product_with_image.php
      * @magentoAppIsolation enabled
      * @param bool $isProductNew
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('getImagesAndImageTypesDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetImageTypes(bool $isProductNew)
     {
         $this->prepareProduct($isProductNew);
@@ -126,7 +148,11 @@ class ContentTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function getImagesAndImageTypesDataProvider()
+=======
+    public function getImagesAndImageTypesDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -143,6 +169,10 @@ class ContentTest extends \PHPUnit\Framework\TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_with_image.php
      * @magentoDataFixture Magento/Store/_files/second_store.php
+<<<<<<< HEAD
+=======
+     * @dataProvider imagesPositionStoreViewDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $addFromStore
      * @param array $newImages
      * @param string $viewFromStore
@@ -150,7 +180,10 @@ class ContentTest extends \PHPUnit\Framework\TestCase
      * @return void
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
+<<<<<<< HEAD
     #[DataProvider('imagesPositionStoreViewDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testImagesPositionStoreView(
         string $addFromStore,
         array $newImages,
@@ -183,7 +216,11 @@ class ContentTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array[]
      */
+<<<<<<< HEAD
     public static function imagesPositionStoreViewDataProvider(): array
+=======
+    public function imagesPositionStoreViewDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

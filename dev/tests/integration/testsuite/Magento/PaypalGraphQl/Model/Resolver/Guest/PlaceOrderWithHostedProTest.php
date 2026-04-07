@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -55,12 +60,20 @@ class PlaceOrderWithHostedProTest extends TestCase
 
         $this->nvpMock = $this->getMockBuilder(Nvp::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['call'])
+=======
+            ->setMethods(['call'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
 
         $apiFactoryMock = $this->getMockBuilder(ApiFactory::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['create'])
+=======
+            ->setMethods(['create'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
         $apiFactoryMock->method('create')->willReturn($this->nvpMock);
 
@@ -198,7 +211,12 @@ QUERY;
 
         $exceptionMessage = 'Declined response message from PayPal gateway';
         $exception = new LocalizedException(__($exceptionMessage));
+<<<<<<< HEAD
         $expectedErrorCode = 'UNABLE_TO_PLACE_ORDER';
+=======
+        $expectedExceptionMessage = 'Unable to place order: A server error stopped your order from being placed. ' .
+            'Please try to place your order again';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->nvpMock->method('call')->willThrowException($exception);
 
@@ -206,7 +224,12 @@ QUERY;
         $responseData = $this->json->unserialize($response->getContent());
         $this->assertArrayHasKey('errors', $responseData);
         $actualError = $responseData['errors'][0];
+<<<<<<< HEAD
         $this->assertEquals($expectedErrorCode, $actualError['extensions']['error_code']);
+=======
+        $this->assertEquals($expectedExceptionMessage, $actualError['message']);
+        $this->assertEquals(GraphQlInputException::EXCEPTION_CATEGORY, $actualError['extensions']['category']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**

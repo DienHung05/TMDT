@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -16,7 +21,10 @@ use Magento\UrlRewrite\Model\ResourceModel\UrlRewriteCollection;
 use Magento\UrlRewrite\Model\ResourceModel\UrlRewriteCollectionFactory;
 use Magento\UrlRewrite\Model\UrlRewrite as UrlRewriteItem;
 use Magento\UrlRewrite\Service\V1\Data\UrlRewrite;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -60,12 +68,19 @@ class FindByUrlRewriteTest extends TestCase
      * Assert that product is available by URL rewrite with different visibility.
      *
      * @magentoDataFixture Magento/ConfigurableProduct/_files/configurable_product_with_two_child_products.php
+<<<<<<< HEAD
+=======
+     * @dataProvider visibilityWithExpectedResultDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDbIsolation enabled
      *
      * @param array $productsData
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('visibilityWithExpectedResultDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCheckIsUrlRewriteForChildrenProductsHasCreated(array $productsData): void
     {
         $this->checkConfigurableUrlRewriteWasCreated();
@@ -99,7 +114,11 @@ class FindByUrlRewriteTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function visibilityWithExpectedResultDataProvider(): array
+=======
+    public function visibilityWithExpectedResultDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'visibility_for_both_product_only_catalog' => [
@@ -275,6 +294,10 @@ class FindByUrlRewriteTest extends TestCase
         $reflection = new \ReflectionObject($this);
         foreach ($reflection->getProperties() as $property) {
             if (!$property->isStatic() && 0 !== strpos($property->getDeclaringClass()->getName(), 'PHPUnit')) {
+<<<<<<< HEAD
+=======
+                $property->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $property->setValue($this, null);
             }
         }

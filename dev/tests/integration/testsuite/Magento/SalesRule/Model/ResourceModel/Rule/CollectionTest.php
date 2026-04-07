@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\SalesRule\Model\ResourceModel\Rule;
 
@@ -9,7 +14,10 @@ use Magento\Config\Model\Config\Backend\Admin\Custom as AdminBackendConfig;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Api\WebsiteRepositoryInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -42,11 +50,18 @@ class CollectionTest extends TestCase
     /**
      * @magentoDataFixture Magento/SalesRule/_files/rules.php
      * @magentoDataFixture Magento/SalesRule/_files/coupons.php
+<<<<<<< HEAD
+=======
+     * @dataProvider setValidationFilterDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $couponCode
      * @param array $expectedItems
      * @magentoDbIsolation disabled
      */
+<<<<<<< HEAD
     #[DataProvider('setValidationFilterDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSetValidationFilter($couponCode, $expectedItems)
     {
         /** @var \Magento\SalesRule\Model\Rule[] $items */
@@ -73,7 +88,11 @@ class CollectionTest extends TestCase
      * data provider for testSetValidationFilter
      * @return array
      */
+<<<<<<< HEAD
     public static function setValidationFilterDataProvider()
+=======
+    public function setValidationFilterDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Check type COUPON' => ['coupon_code', ['#1', '#2', '#5']],
@@ -265,10 +284,17 @@ class CollectionTest extends TestCase
     /**
      * @magentoAppIsolation disabled
      * @magentoDataFixture Magento/SalesRule/_files/multi_websites_rules.php
+<<<<<<< HEAD
      * @param string[] $websiteCodes
      * @param int $count
      */
     #[DataProvider('addWebsiteFilterDataProvider')]
+=======
+     * @dataProvider addWebsiteFilterDataProvider
+     * @param string[] $websiteCodes
+     * @param int $count
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddWebsiteFilter(array $websiteCodes, int $count)
     {
         $websiteRepository = Bootstrap::getObjectManager()->get(WebsiteRepositoryInterface::class);
@@ -285,7 +311,11 @@ class CollectionTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function addWebsiteFilterDataProvider(): array
+=======
+    public function addWebsiteFilterDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

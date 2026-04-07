@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Framework\Translate;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class InlineTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -92,13 +100,22 @@ class InlineTest extends \PHPUnit\Framework\TestCase
     /**
      * @param string $originalText
      * @param string $expectedText
+<<<<<<< HEAD
      */
     #[DataProvider('processResponseBodyDataProvider')]
+=======
+     * @dataProvider processResponseBodyDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testProcessResponseBody($originalText, $expectedText)
     {
         $actualText = $originalText;
         $this->_model->processResponseBody($actualText, false);
+<<<<<<< HEAD
         $this->markTestSkipped('Bug MAGE-2494');
+=======
+        $this->markTestIncomplete('Bug MAGE-2494');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $expected = new \DOMDocument();
         $expected->preserveWhiteSpace = false;
@@ -114,7 +131,11 @@ class InlineTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function processResponseBodyDataProvider()
+=======
+    public function processResponseBodyDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $originalText = file_get_contents(__DIR__ . '/_files/_inline_page_original.html');
         $expectedText = file_get_contents(__DIR__ . '/_files/_inline_page_expected.html');

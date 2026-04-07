@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -18,7 +23,10 @@ use Magento\LoginAsCustomerAssistance\Model\ResourceModel\GetLoginAsCustomerAssi
 use Magento\TestFramework\Authentication\OauthHelper;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\WebapiAbstract;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Api tests for @see \Magento\LoginAsCustomerAssistance\Plugin\CustomerPlugin::afterSave.
@@ -68,15 +76,24 @@ class CustomerAfterPluginTest extends WebapiAbstract
      * Check that 'assistance_allowed' set as expected.
      *
      * @magentoApiDataFixture Magento/Customer/_files/customer.php
+<<<<<<< HEAD
+=======
+     * @dataProvider assistanceStatesDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param int $state
      * @param bool $expected
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('assistanceStatesDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUpdateCustomer(int $state, bool $expected): void
     {
         $customerId = (int)$this->customerRepository->get('customer@example.com')->getId();
 
+<<<<<<< HEAD
         $updatedLastName = 'Updated lastname';
         $customer = $this->getCustomerData($customerId);
         $customerData = $this->dataObjectProcessor->buildOutputDataArray($customer, Customer::class);
@@ -90,6 +107,18 @@ class CustomerAfterPluginTest extends WebapiAbstract
                 Customer::LASTNAME => $updatedLastName,
                 Customer::EMAIL => $customer->getEmail(),
                 Customer::ID => $customerId,
+=======
+        $updatedLastname = 'Updated lastname';
+        $customer = $this->getCustomerData($customerId);
+        $customerData = $this->dataObjectProcessor->buildOutputDataArray($customer, Customer::class);
+        $customerData[Customer::LASTNAME] = $updatedLastname;
+        $customerData[ExtensibleDataInterface::EXTENSION_ATTRIBUTES_KEY]['assistance_allowed'] = $state;
+
+        $requestData['customer'] = TESTS_WEB_API_ADAPTER === self::ADAPTER_SOAP
+            ? $customerData
+            : [
+                Customer::LASTNAME => $updatedLastname,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 Customer::EXTENSION_ATTRIBUTES_KEY => ['assistance_allowed' => $state]
             ];
 
@@ -98,7 +127,11 @@ class CustomerAfterPluginTest extends WebapiAbstract
         $this->assertNotNull($response);
 
         $existingCustomerDataObject = $this->getCustomerData($customerId);
+<<<<<<< HEAD
         $this->assertEquals($updatedLastName, $existingCustomerDataObject->getLastname());
+=======
+        $this->assertEquals($updatedLastname, $existingCustomerDataObject->getLastname());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertEquals($expected, $this->isAssistanceEnabled->execute($customerId));
     }
 
@@ -106,6 +139,7 @@ class CustomerAfterPluginTest extends WebapiAbstract
      * Check that 'assistance_allowed' set as expected with limited resources.
      *
      * @magentoApiDataFixture Magento/Customer/_files/customer.php
+<<<<<<< HEAD
      * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      * @param int $state
@@ -114,6 +148,15 @@ class CustomerAfterPluginTest extends WebapiAbstract
      */
     #[DataProvider('assistanceStatesDataProvider')]
     public function testUpdateCustomerWithLimitedResources(int $state, bool $expected): void
+=======
+     * @dataProvider assistanceStatesDataProvider
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
+     *
+     * @param int $state
+     * @return void
+     */
+    public function testUpdateCustomerWithLimitedResources(int $state): void
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $resources = [
             'Magento_Customer::customer',
@@ -121,6 +164,7 @@ class CustomerAfterPluginTest extends WebapiAbstract
         ];
         $customerId = (int)$this->customerRepository->get('customer@example.com')->getId();
 
+<<<<<<< HEAD
         $updatedLastName = 'Updated lastname';
         $customer = $this->getCustomerData($customerId);
         $customerData = $this->dataObjectProcessor->buildOutputDataArray($customer, Customer::class);
@@ -134,6 +178,18 @@ class CustomerAfterPluginTest extends WebapiAbstract
                 Customer::LASTNAME => $updatedLastName,
                 Customer::EMAIL => $customer->getEmail(),
                 Customer::ID => $customerId,
+=======
+        $updatedLastname = 'Updated lastname';
+        $customer = $this->getCustomerData($customerId);
+        $customerData = $this->dataObjectProcessor->buildOutputDataArray($customer, Customer::class);
+        $customerData[Customer::LASTNAME] = $updatedLastname;
+        $customerData[ExtensibleDataInterface::EXTENSION_ATTRIBUTES_KEY]['assistance_allowed'] = $state;
+
+        $requestData['customer'] = TESTS_WEB_API_ADAPTER === self::ADAPTER_SOAP
+            ? $customerData
+            : [
+                Customer::LASTNAME => $updatedLastname,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 Customer::EXTENSION_ATTRIBUTES_KEY => ['assistance_allowed' => $state]
             ];
 
@@ -143,7 +199,11 @@ class CustomerAfterPluginTest extends WebapiAbstract
         $this->assertNotNull($response);
 
         $existingCustomerDataObject = $this->getCustomerData($customerId);
+<<<<<<< HEAD
         $this->assertEquals($updatedLastName, $existingCustomerDataObject->getLastname());
+=======
+        $this->assertEquals($updatedLastname, $existingCustomerDataObject->getLastname());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertEquals(false, $this->isAssistanceEnabled->execute($customerId));
     }
 
@@ -184,7 +244,11 @@ class CustomerAfterPluginTest extends WebapiAbstract
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function assistanceStatesDataProvider(): array
+=======
+    public function assistanceStatesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'Assistance Allowed' => [IsAssistanceEnabledInterface::ALLOWED, true],

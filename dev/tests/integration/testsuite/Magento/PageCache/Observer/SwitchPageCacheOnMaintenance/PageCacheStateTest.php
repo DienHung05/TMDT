@@ -1,14 +1,23 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
 
 namespace Magento\PageCache\Observer\SwitchPageCacheOnMaintenance;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 use Magento\TestFramework\Helper\Bootstrap;
 
@@ -36,8 +45,13 @@ class PageCacheStateTest extends TestCase
      *
      * @param bool $state
      * @return void
+<<<<<<< HEAD
      */
     #[DataProvider('saveStateProvider')]
+=======
+     * @dataProvider saveStateProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSave(bool $state): void
     {
         $this->pageCacheStateStorage->save($state);
@@ -62,7 +76,11 @@ class PageCacheStateTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function saveStateProvider(): array
+=======
+    public function saveStateProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [[true], [false]];
     }

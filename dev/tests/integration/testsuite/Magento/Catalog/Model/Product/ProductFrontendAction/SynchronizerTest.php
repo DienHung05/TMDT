@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,7 +16,10 @@ use Magento\Catalog\Model\ProductRepository;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Model\Session;
 use Magento\Customer\Model\Visitor;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for \Magento\Catalog\Model\Product\ProductFrontendAction\Synchronizer.
@@ -136,12 +144,19 @@ class SynchronizerTest extends \PHPUnit\Framework\TestCase
      * @param string|null $customerEmail
      * @param int $expectedCollectionSize
      * @return void
+<<<<<<< HEAD
+=======
+     * @dataProvider getAllActionsDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @magentoDataFixture Magento/Catalog/_files/product_simple.php
      * @magentoDataFixture Magento/Catalog/_files/second_product_simple.php
      */
+<<<<<<< HEAD
     #[DataProvider('getAllActionsDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetAllActions(?int $visitorId, ?string $customerEmail, int $expectedCollectionSize): void
     {
         $customerId = $customerEmail ? $this->customerRepository->get($customerEmail)->getId() : null;
@@ -176,7 +191,11 @@ class SynchronizerTest extends \PHPUnit\Framework\TestCase
      * @throws \Magento\Framework\Exception\LocalizedException
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
+<<<<<<< HEAD
     public static function getAllActionsDataProvider()
+=======
+    public function getAllActionsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['visitorId' => null, 'customerEmail' => 'customer@example.com', 'expectedCollectionSize' => 2],

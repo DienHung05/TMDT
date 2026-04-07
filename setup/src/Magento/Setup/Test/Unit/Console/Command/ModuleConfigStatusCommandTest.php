@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -14,7 +19,10 @@ use Magento\Setup\Console\Command\ModuleConfigStatusCommand;
 use Magento\Setup\Model\Installer;
 use Magento\Setup\Model\InstallerFactory;
 use PHPUnit\Framework\TestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Symfony\Component\Console\Tester\CommandTester;
 
 /**
@@ -26,8 +34,13 @@ class ModuleConfigStatusCommandTest extends TestCase
      * @param array $currentConfig
      * @param array $correctConfig
      * @param string $expectedOutput
+<<<<<<< HEAD
      */
     #[DataProvider('executeDataProvider')]
+=======
+     * @dataProvider executeDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecute(array $currentConfig, array $correctConfig, string $expectedOutput)
     {
         $configReader = $this->createMock(Reader::class);
@@ -56,7 +69,11 @@ class ModuleConfigStatusCommandTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function executeDataProvider()
+=======
+    public function executeDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $successMessage = 'The modules configuration is up to date.' . PHP_EOL;
         $failureMessage = 'The modules configuration in the \'app/etc/config.php\' '

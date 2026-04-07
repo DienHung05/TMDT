@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Backend\Block\System\Store;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Backend\Block\System\Store;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * @magentoAppArea adminhtml
  */
@@ -40,8 +48,13 @@ class EditTest extends \PHPUnit\Framework\TestCase
      * @magentoAppIsolation enabled
      * @param $registryData
      * @param $expected
+<<<<<<< HEAD
      */
     #[DataProvider('getStoreTypesForLayout')]
+=======
+     * @dataProvider getStoreTypesForLayout
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testStoreTypeFormCreated($registryData, $expected)
     {
         $this->_initStoreTypesInRegistry($registryData);
@@ -60,7 +73,11 @@ class EditTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getStoreTypesForLayout()
+=======
+    public function getStoreTypesForLayout()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -82,8 +99,13 @@ class EditTest extends \PHPUnit\Framework\TestCase
      * @magentoAppIsolation enabled
      * @param $registryData
      * @param $expected
+<<<<<<< HEAD
      */
     #[DataProvider('getStoreDataForBlock')]
+=======
+     * @dataProvider getStoreDataForBlock
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetHeaderText($registryData, $expected)
     {
         $this->_initStoreTypesInRegistry($registryData);
@@ -102,7 +124,11 @@ class EditTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getStoreDataForBlock()
+=======
+    public function getStoreDataForBlock()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

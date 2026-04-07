@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -36,7 +41,11 @@ class ClassesScanner implements ClassesScannerInterface
      * @param DirectoryList|null $directoryList
      * @throws FileSystemException
      */
+<<<<<<< HEAD
     public function __construct(array $excludePatterns = [], ?DirectoryList $directoryList = null)
+=======
+    public function __construct(array $excludePatterns = [], DirectoryList $directoryList = null)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $this->excludePatterns = $excludePatterns;
         if ($directoryList === null) {

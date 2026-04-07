@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
  */
@@ -23,10 +24,23 @@ use Magento\Quote\Model\SubmitQuoteValidator;
 use Magento\Quote\Test\Fixture\AddProductToCart;
 use Magento\Quote\Test\Fixture\CustomerCart;
 use Magento\Sales\Api\InvoiceManagementInterface;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\SalesRule\Plugin;
+
+use Magento\Framework\DataObject;
+use Magento\Framework\ObjectManagerInterface;
+use Magento\Quote\Model\Quote;
+use Magento\Quote\Model\QuoteManagement;
+use Magento\Quote\Model\SubmitQuoteValidator;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Sales\Api\OrderManagementInterface;
 use Magento\Sales\Model\Service\OrderService;
 use Magento\SalesRule\Model\Coupon;
 use Magento\SalesRule\Model\ResourceModel\Coupon\Usage;
+<<<<<<< HEAD
 use Magento\SalesRule\Test\Fixture\Rule as SalesRuleFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorage;
@@ -35,6 +49,11 @@ use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\MessageQueue\EnvironmentPreconditionException;
 use Magento\TestFramework\MessageQueue\PreconditionFailedException;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\TestFramework\MessageQueue\EnvironmentPreconditionException;
+use Magento\TestFramework\MessageQueue\PreconditionFailedException;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\MessageQueue\PublisherConsumerController;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -85,6 +104,7 @@ class CouponUsagesTest extends TestCase
     private $orderService;
 
     /**
+<<<<<<< HEAD
      * @var DataFixtureStorage
      */
     private $fixtures;
@@ -105,6 +125,8 @@ class CouponUsagesTest extends TestCase
     private $consumerFactory;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
@@ -114,10 +136,13 @@ class CouponUsagesTest extends TestCase
         $this->couponUsage = $this->objectManager->create(DataObject::class);
         $this->quoteManagement = $this->objectManager->get(QuoteManagement::class);
         $this->orderService = $this->objectManager->get(OrderService::class);
+<<<<<<< HEAD
         $this->fixtures = $this->objectManager->get(DataFixtureStorageManager::class)->getStorage();
         $this->couponManagement = $this->objectManager->get(CouponManagementInterface::class);
         $this->orderManagement = $this->objectManager->get(OrderManagementInterface::class);
         $this->consumerFactory = $this->objectManager->get(ConsumerFactory::class);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->publisherConsumerController = Bootstrap::getObjectManager()->create(
             PublisherConsumerController::class,
@@ -150,7 +175,11 @@ class CouponUsagesTest extends TestCase
     }
 
     /**
+<<<<<<< HEAD
      * Test increasing coupon usages after order placing and decreasing after order cancellation.
+=======
+     * Test increasing coupon usages after after order placing and decreasing after order cancellation.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @magentoDataFixture Magento/SalesRule/_files/coupons_limited_order.php
      * @magentoDbIsolation disabled
@@ -170,7 +199,11 @@ class CouponUsagesTest extends TestCase
 
         // Make sure coupon usages value is incremented then order is placed.
         $order = $this->quoteManagement->submit($quote);
+<<<<<<< HEAD
         sleep(30); // timeout to processing Magento queue
+=======
+        sleep(10); // timeout to processing Magento queue
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->usage->loadByCustomerCoupon($this->couponUsage, $customerId, $coupon->getId());
         $coupon->loadByCode($couponCode);
 
@@ -204,6 +237,7 @@ class CouponUsagesTest extends TestCase
      * @param array $mockObjects
      * @magentoDataFixture Magento/SalesRule/_files/coupons_limited_order.php
      * @magentoDbIsolation disabled
+<<<<<<< HEAD
      */
     #[DataProvider('quoteSubmitFailureDataProvider')]
     public function testQuoteSubmitFailure(array $mockObjects)
@@ -214,6 +248,12 @@ class CouponUsagesTest extends TestCase
             $mockObjects['submitQuoteValidator'] = $mockObjects['submitQuoteValidator']($this);
         }
 
+=======
+     * @dataProvider quoteSubmitFailureDataProvider
+     */
+    public function testQuoteSubmitFailure(array $mockObjects)
+    {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $customerId = 1;
         $couponCode = 'one_usage';
         $reservedOrderId = 'test01';
@@ -234,7 +274,11 @@ class CouponUsagesTest extends TestCase
         try {
             $quoteManagement->submit($quote);
         } catch (\Exception $exception) {
+<<<<<<< HEAD
             sleep(30); // timeout to processing queue
+=======
+            sleep(10); // timeout to processing queue
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $this->usage->loadByCustomerCoupon($this->couponUsage, $customerId, $coupon->getId());
             $coupon->loadByCode($couponCode);
             self::assertEquals(
@@ -251,6 +295,7 @@ class CouponUsagesTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function quoteSubmitFailureDataProvider(): array
     {
         $orderManagement = static function (self $testCase) {
@@ -268,6 +313,21 @@ class CouponUsagesTest extends TestCase
                 ->willThrowException(new \Exception());
             return $mock;
         };
+=======
+    public function quoteSubmitFailureDataProvider(): array
+    {
+        /** @var OrderManagementInterface|MockObject $orderManagement */
+        $orderManagement = $this->createMock(OrderManagementInterface::class);
+        $orderManagement->expects($this->once())
+            ->method('place')
+            ->willThrowException(new \Exception());
+
+        /** @var OrderManagementInterface|MockObject $orderManagement */
+        $submitQuoteValidator = $this->createMock(SubmitQuoteValidator::class);
+        $submitQuoteValidator->expects($this->once())
+            ->method('validateQuote')
+            ->willThrowException(new \Exception());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         return [
             'order placing failure' => [
@@ -278,6 +338,7 @@ class CouponUsagesTest extends TestCase
             ],
         ];
     }
+<<<<<<< HEAD
 
     /**
      * Test that coupon usage is NOT decremented when order is partially invoiced and then cancelled
@@ -360,4 +421,6 @@ class CouponUsagesTest extends TestCase
         self::assertEquals(1, $coupon->getTimesUsed());
         self::assertEquals(1, $this->couponUsage->getTimesUsed());
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

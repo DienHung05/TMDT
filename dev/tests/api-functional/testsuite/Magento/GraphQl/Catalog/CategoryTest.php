@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -24,7 +29,10 @@ use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
 use Magento\TestFramework\TestCase\GraphQl\ResponseContainsErrorsException;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test loading of category tree
@@ -611,8 +619,13 @@ QUERY;
      *
      * @param string $imagePrefix
      * @magentoApiDataFixture Magento/Catalog/_files/catalog_category_with_image.php
+<<<<<<< HEAD
      */
     #[DataProvider('categoryImageDataProvider')]
+=======
+     * @dataProvider categoryImageDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCategoryImage(?string $imagePrefix)
     {
         /** @var CategoryCollection $categoryCollection */
@@ -781,6 +794,7 @@ QUERY;
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function categoryImageDataProvider(): array
     {
         return [
@@ -795,6 +809,22 @@ QUERY;
             ],
             'catalog_category_strategy' => [
                 'imagePrefix' => 'catalog/category/'
+=======
+    public function categoryImageDataProvider(): array
+    {
+        return [
+            'default_filename_strategy' => [
+                'image_prefix' => null
+            ],
+            'just_filename_strategy' => [
+                'image_prefix' => ''
+            ],
+            'with_pub_media_strategy' => [
+                'image_prefix' => '/media/catalog/category/'
+            ],
+            'catalog_category_strategy' => [
+                'image_prefix' => 'catalog/category/'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

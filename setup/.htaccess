@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # If you want to enable the web based setup functionality, add your ip address
 # to the allow list below or comment out the IfVersion Deny deny blocks below.
 <Files "index.php">
@@ -10,6 +11,8 @@
     </IfVersion>
 </Files>
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 Options -Indexes
 
 <IfModule mod_rewrite.c>

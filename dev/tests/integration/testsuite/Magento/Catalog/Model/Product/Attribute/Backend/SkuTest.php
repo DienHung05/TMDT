@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Catalog\Model\Product\Attribute\Backend;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Catalog\Model\Product\Attribute\Backend;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * Test class for \Magento\Catalog\Model\Product\Attribute\Backend\Sku.
  * @magentoAppArea adminhtml
@@ -30,8 +38,13 @@ class SkuTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @param $product \Magento\Catalog\Model\Product
+<<<<<<< HEAD
      */
     #[DataProvider('uniqueSkuDataProvider')]
+=======
+     * @dataProvider uniqueSkuDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGenerateUniqueSkuNotExistingProduct($product)
     {
         $this->assertEquals('simple', $product->getSku());
@@ -66,9 +79,15 @@ class SkuTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function uniqueSkuDataProvider()
     {
         $product = self::_getProduct();
+=======
+    public function uniqueSkuDataProvider()
+    {
+        $product = $this->_getProduct();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         return [[$product]];
     }
 
@@ -77,7 +96,11 @@ class SkuTest extends \PHPUnit\Framework\TestCase
      *
      * @return \Magento\Catalog\Model\Product
      */
+<<<<<<< HEAD
     protected static function _getProduct()
+=======
+    protected function _getProduct()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         /** @var $product \Magento\Catalog\Model\Product */
         $product = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(

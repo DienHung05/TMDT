@@ -1,12 +1,20 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Test\Integrity\Modular;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class MviewConfigFilesTest extends \PHPUnit\Framework\TestCase
 {
@@ -33,8 +41,13 @@ class MviewConfigFilesTest extends \PHPUnit\Framework\TestCase
     /**
      * Test each acl configuration file
      * @param string $file
+<<<<<<< HEAD
      */
     #[DataProvider('mviewConfigFileDataProvider')]
+=======
+     * @dataProvider mviewConfigFileDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testIndexerConfigFile($file)
     {
         $validationStateMock = $this->createMock(\Magento\Framework\Config\ValidationStateInterface::class);
@@ -52,7 +65,11 @@ class MviewConfigFilesTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function mviewConfigFileDataProvider()
+=======
+    public function mviewConfigFileDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return \Magento\Framework\App\Utility\Files::init()->getConfigFiles('mview.xml');
     }

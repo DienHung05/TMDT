@@ -1,21 +1,33 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Store;
 
+<<<<<<< HEAD
 use Magento\Directory\Helper\Data;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Store\Api\Data\StoreConfigInterface;
 use Magento\Store\Api\StoreConfigManagerInterface;
 use Magento\Store\Api\StoreRepositoryInterface;
 use Magento\Store\Api\StoreResolverInterface;
+<<<<<<< HEAD
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\Store;
 use Magento\TestFramework\Fixture\Config;
+=======
+use Magento\Store\Model\Store;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
@@ -38,6 +50,7 @@ class StoreConfigResolverTest extends GraphQlAbstract
     }
 
     /**
+<<<<<<< HEAD
      * @magentoConfigFixture default_store web/seo/use_rewrites 1
      * @magentoApiDataFixture Magento/Store/_files/store.php
      * @throws NoSuchEntityException
@@ -48,6 +61,11 @@ class StoreConfigResolverTest extends GraphQlAbstract
         Config(Data::OPTIONAL_ZIP_COUNTRIES_CONFIG_PATH, 'fr', ScopeInterface::SCOPE_STORE, 'default'),
         Config(Data::XML_PATH_DISPLAY_ALL_STATES, true, ScopeInterface::SCOPE_STORE, 'default'),
     ]
+=======
+     * @magentoApiDataFixture Magento/Store/_files/store.php
+     * @throws NoSuchEntityException
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetStoreConfig(): void
     {
         /** @var  StoreConfigManagerInterface $storeConfigManager */
@@ -89,10 +107,14 @@ class StoreConfigResolverTest extends GraphQlAbstract
     secure_base_link_url,
     secure_base_static_url,
     secure_base_media_url,
+<<<<<<< HEAD
     default_country,
     countries_with_required_region,
     optional_zip_countries,
     display_state_if_optional
+=======
+    store_name
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
   }
 }
 QUERY;
@@ -148,9 +170,13 @@ QUERY;
         $this->assertEquals($storeConfig->getSecureBaseLinkUrl(), $responseConfig['secure_base_link_url']);
         $this->assertEquals($storeConfig->getSecureBaseStaticUrl(), $responseConfig['secure_base_static_url']);
         $this->assertEquals($storeConfig->getSecureBaseMediaUrl(), $responseConfig['secure_base_media_url']);
+<<<<<<< HEAD
         $this->assertEquals('es', $responseConfig['default_country']);
         $this->assertEquals('us', $responseConfig['countries_with_required_region']);
         $this->assertEquals('fr', $responseConfig['optional_zip_countries']);
         $this->assertEquals('true', $responseConfig['display_state_if_optional']);
+=======
+        $this->assertEquals($store->getName(), $responseConfig['store_name']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

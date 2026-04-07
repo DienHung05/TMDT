@@ -1,20 +1,31 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
 
 namespace Magento\Catalog\Model;
 
+<<<<<<< HEAD
 use Magento\Catalog\Api\Data\ProductInterface;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\Product\Attribute\Source\Status;
 use Magento\Catalog\Model\Product\Copier;
 use Magento\Catalog\Model\Product\Visibility;
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Framework\App\Cache\Type\Block;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\InputException;
@@ -24,12 +35,17 @@ use Magento\Framework\Exception\StateException;
 use Magento\Framework\Math\Random;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Store\Model\Store;
+<<<<<<< HEAD
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
 use Magento\Widget\Model\Widget\Instance;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\TestFramework\ObjectManager;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Tests product model:
@@ -62,18 +78,24 @@ class ProductTest extends \PHPUnit\Framework\TestCase
     private $objectManager;
 
     /**
+<<<<<<< HEAD
      * @var DataFixtureStorageManager
      */
     private $fixtures;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
     {
         $this->objectManager = Bootstrap::getObjectManager();
         $this->productRepository = $this->objectManager->create(ProductRepositoryInterface::class);
+<<<<<<< HEAD
         $this->fixtures = DataFixtureStorageManager::getStorage();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->_model = $this->objectManager->create(Product::class);
     }
 
@@ -261,11 +283,15 @@ class ProductTest extends \PHPUnit\Framework\TestCase
 
         $mediaDirectory->create($config->getBaseTmpMediaPath());
         $targetFile = $config->getTmpMediaPath(basename($sourceFile));
+<<<<<<< HEAD
         $mediaDirectory->getDriver()
             ->filePutContents(
                 $mediaDirectory->getAbsolutePath($targetFile),
                 file_get_contents($sourceFile)
             );
+=======
+        $mediaDirectory->getDriver()->filePutContents($mediaDirectory->getAbsolutePath($targetFile), file_get_contents($sourceFile));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         return $targetFile;
     }
@@ -303,6 +329,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
 
         try {
             $this->assertNotEquals(
+<<<<<<< HEAD
                 $customScopeDuplicate->getId(),
                 $customScopeProduct->getId(),
                 'Duplicate product Id should not equal to source product Id'
@@ -315,31 +342,58 @@ class ProductTest extends \PHPUnit\Framework\TestCase
             $this->assertNotEquals(
                 $customScopeDuplicate->getShortDescription(),
                 $defaultScopeDuplicate->getShortDescription(),
+=======
+                $customScopeDuplicate->getId(), $customScopeProduct->getId(),
+                'Duplicate product Id should not equal to source product Id'
+            );
+            $this->assertNotEquals(
+                $customScopeDuplicate->getSku(), $customScopeProduct->getSku(),
+                'Duplicate product SKU should not equal to source product SKU'
+            );
+            $this->assertNotEquals(
+                $customScopeDuplicate->getShortDescription(), $defaultScopeDuplicate->getShortDescription(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'Short description of the duplicated product on custom scope should not equal to ' .
                 'duplicate product description on default scope'
             );
             $this->assertEquals(
+<<<<<<< HEAD
                 $customScopeProduct->getShortDescription(),
                 $customScopeDuplicate->getShortDescription(),
+=======
+                $customScopeProduct->getShortDescription(), $customScopeDuplicate->getShortDescription(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'Short description of the duplicated product on custom scope should equal to ' .
                 'source product description on custom scope'
             );
             $this->assertEquals(
+<<<<<<< HEAD
                 $customScopeProduct->getStoreId(),
                 $customScopeDuplicate->getStoreId(),
+=======
+                $customScopeProduct->getStoreId(), $customScopeDuplicate->getStoreId(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'Store Id of the duplicated product on custom scope should equal to ' .
                 'store Id of source product on custom scope'
             );
             $this->assertEquals(
+<<<<<<< HEAD
                 $defaultScopeProduct->getStoreId(),
                 $defaultScopeDuplicate->getStoreId(),
+=======
+                $defaultScopeProduct->getStoreId(), $defaultScopeDuplicate->getStoreId(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'Store Id of the duplicated product on default scope should equal to ' .
                 'store Id of source product on default scope'
             );
 
             $this->assertEquals(
+<<<<<<< HEAD
                 Status::STATUS_DISABLED,
                 $defaultScopeDuplicate->getStatus(),
+=======
+                Status::STATUS_DISABLED, $defaultScopeDuplicate->getStatus(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'Duplicate should be disabled'
             );
 
@@ -762,13 +816,20 @@ class ProductTest extends \PHPUnit\Framework\TestCase
      * Check stock status changing if backorders functionality enabled.
      *
      * @magentoDataFixture Magento/Catalog/_files/product_simple_out_of_stock.php
+<<<<<<< HEAD
+=======
+     * @dataProvider productWithBackordersDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param int $qty
      * @param int $stockStatus
      * @param bool $expectedStockStatus
      *
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('productWithBackordersDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveWithBackordersEnabled(int $qty, int $stockStatus, bool $expectedStockStatus): void
     {
         $product = $this->productRepository->get('simple-out-of-stock', true, null, true);
@@ -835,7 +896,11 @@ class ProductTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function productWithBackordersDataProvider(): array
+=======
+    public function productWithBackordersDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [0, 0, false],
@@ -893,6 +958,7 @@ class ProductTest extends \PHPUnit\Framework\TestCase
         $product = $this->productRepository->get('some_sku', false, null, true);
         $this->assertEquals(9.95, $product->getPrice());
     }
+<<<<<<< HEAD
 
     /**
      * Tests case for product saving invalidate cache successfully
@@ -924,4 +990,6 @@ class ProductTest extends \PHPUnit\Framework\TestCase
             $blockHtmlCache->test($cacheKey)
         );
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

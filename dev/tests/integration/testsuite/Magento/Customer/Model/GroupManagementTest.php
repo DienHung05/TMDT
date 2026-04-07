@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Customer\Model;
 
 use Magento\Store\Model\ScopeInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for Magento\Customer\Model\GroupManagement
@@ -34,8 +42,14 @@ class GroupManagementTest extends \PHPUnit\Framework\TestCase
     /**
      * @param $testGroup
      * @param $storeId
+<<<<<<< HEAD
      */
     #[DataProvider('getDefaultGroupDataProvider')]
+=======
+     *
+     * @dataProvider getDefaultGroupDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetDefaultGroupWithStoreId($testGroup, $storeId)
     {
         $this->assertDefaultGroupMatches($testGroup, $storeId);
@@ -112,7 +126,11 @@ class GroupManagementTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getDefaultGroupDataProvider()
+=======
+    public function getDefaultGroupDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         /** @var \Magento\Store\Model\StoreManagerInterface  $storeManager */
         $storeManager = Bootstrap::getObjectManager()->get(\Magento\Store\Model\StoreManagerInterface::class);

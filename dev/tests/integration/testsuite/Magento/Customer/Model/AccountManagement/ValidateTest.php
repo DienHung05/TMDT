@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -13,7 +18,10 @@ use Magento\Customer\Api\Data\CustomerInterfaceFactory;
 use Magento\Framework\Api\DataObjectHelper;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -50,11 +58,19 @@ class ValidateTest extends TestCase
     /**
      * Validate customer fields.
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider validateFieldsProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $customerData
      * @param array $expectedResults
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('validateFieldsProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testValidateFields(
         array $customerData,
         array $expectedResults
@@ -78,12 +94,20 @@ class ValidateTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function validateFieldsProvider(): array
+=======
+    public function validateFieldsProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $attributeEmptyMessage = 'The "%1" attribute value is empty. Set the attribute and try again.';
         return [
             'without_required_fields' => [
+<<<<<<< HEAD
                 'customerData' => [],
+=======
+                'customer_data' => [],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     'valid' => false,
                     'messages' => [
@@ -96,7 +120,11 @@ class ValidateTest extends TestCase
                 ],
             ],
             'with_required_fields' => [
+<<<<<<< HEAD
                 'customerData' => [
+=======
+                'customer_data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     CustomerInterface::WEBSITE_ID => 1,
                     CustomerInterface::GROUP_ID => 1,
                     CustomerInterface::FIRSTNAME => 'Jane',

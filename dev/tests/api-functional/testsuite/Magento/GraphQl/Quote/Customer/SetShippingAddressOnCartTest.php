@@ -1,23 +1,34 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Quote\Customer;
 
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Customer\Api\AddressRepositoryInterface;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Test\Fixture\Customer;
 use Magento\Customer\Test\Fixture\CustomerWithAddresses;
+=======
+use Magento\Customer\Api\AddressRepositoryInterface;
+use Magento\Customer\Api\CustomerRepositoryInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\GraphQl\Quote\GetMaskedQuoteIdByReservedOrderId;
 use Magento\Integration\Api\CustomerTokenServiceInterface;
 use Magento\Quote\Model\QuoteFactory;
 use Magento\Quote\Model\QuoteIdToMaskedQuoteIdInterface;
 use Magento\Quote\Model\ResourceModel\Quote as QuoteResource;
+<<<<<<< HEAD
 use Magento\Quote\Test\Fixture\AddProductToCart;
 use Magento\Quote\Test\Fixture\CustomerCart as CustomerCartFixture;
 use Magento\Quote\Test\Fixture\QuoteIdMask;
@@ -31,6 +42,13 @@ use PHPUnit\Framework\Attributes\DataProvider;
  * Test for set shipping addresses on cart mutation
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\TestFramework\TestCase\GraphQlAbstract;
+
+/**
+ * Test for set shipping addresses on cart mutation
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class SetShippingAddressOnCartTest extends GraphQlAbstract
 {
@@ -76,6 +94,7 @@ class SetShippingAddressOnCartTest extends GraphQlAbstract
 
     protected function setUp(): void
     {
+<<<<<<< HEAD
         $this->quoteResource = Bootstrap::getObjectManager()->get(QuoteResource::class);
         $this->quoteFactory = Bootstrap::getObjectManager()->get(QuoteFactory::class);
         $this->quoteIdToMaskedId = Bootstrap::getObjectManager()->get(QuoteIdToMaskedQuoteIdInterface::class);
@@ -85,6 +104,17 @@ class SetShippingAddressOnCartTest extends GraphQlAbstract
         $this->customerAddressRepository = Bootstrap::getObjectManager()->get(AddressRepositoryInterface::class);
         $this->searchCriteriaBuilder = Bootstrap::getObjectManager()->get(SearchCriteriaBuilder::class);
         $this->customerRepository = Bootstrap::getObjectManager()->get(CustomerRepositoryInterface::class);
+=======
+        $objectManager = Bootstrap::getObjectManager();
+        $this->quoteResource = $objectManager->get(QuoteResource::class);
+        $this->quoteFactory = $objectManager->get(QuoteFactory::class);
+        $this->quoteIdToMaskedId = $objectManager->get(QuoteIdToMaskedQuoteIdInterface::class);
+        $this->getMaskedQuoteIdByReservedOrderId = $objectManager->get(GetMaskedQuoteIdByReservedOrderId::class);
+        $this->customerTokenService = $objectManager->get(CustomerTokenServiceInterface::class);
+        $this->customerAddressRepository = $objectManager->get(AddressRepositoryInterface::class);
+        $this->searchCriteriaBuilder = $objectManager->get(SearchCriteriaBuilder::class);
+        $this->customerRepository = $objectManager->get(CustomerRepositoryInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -173,7 +203,11 @@ mutation {
             company: "Magento"
             street: ["Via Solferino", "45"]
             city: "Ceriano Laghetto"
+<<<<<<< HEAD
             region: "58"
+=======
+            region: "1"
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             postcode: "20816"
             country_code: "FR"
             telephone: "3273581975",
@@ -425,8 +459,12 @@ mutation {
 }
 QUERY;
         self::expectExceptionMessage(
+<<<<<<< HEAD
             'The shipping address cannot contain "customer_address_id" or '
             . '"customer_address_uid" together with "address".'
+=======
+            'The shipping address cannot contain "customer_address_id" and "address" at the same time.'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
         $this->graphQlMutation($query, [], '', $this->getHeaderMap());
     }
@@ -469,6 +507,7 @@ QUERY;
         $this->graphQlMutation($query, [], '', $this->getHeaderMap('customer2@search.example.com'));
     }
 
+<<<<<<< HEAD
     #[
         DataFixture(CustomerWithAddresses::class, as: 'customer'),
         DataFixture(Customer::class, as: 'customer2'),
@@ -513,6 +552,45 @@ QUERY;
             '',
             $this->getHeaderMap(DataFixtureStorageManager::getStorage()->get('customer2')->getEmail())
         );
+=======
+    /**
+     * _security
+     * @magentoApiDataFixture Magento/Customer/_files/three_customers.php
+     * @magentoApiDataFixture Magento/Customer/_files/customer_address.php
+     * @magentoApiDataFixture Magento/Checkout/_files/quote_with_simple_product_saved.php
+     *
+     */
+    public function testSetShippingAddressToAnotherCustomerCart()
+    {
+        $this->expectException(\Exception::class);
+
+        $maskedQuoteId = $this->assignQuoteToCustomer('test_order_with_simple_product_without_address', 1);
+
+        $query = <<<QUERY
+mutation {
+  setShippingAddressesOnCart(
+    input: {
+      cart_id: "$maskedQuoteId"
+      shipping_addresses: [
+        {
+          customer_address_id: 1
+        }
+      ]
+    }
+  ) {
+    cart {
+      shipping_addresses {
+        postcode
+      }
+    }
+  }
+}
+QUERY;
+        $this->expectExceptionMessage(
+            "The current user cannot perform operations on cart \"$maskedQuoteId\""
+        );
+        $this->graphQlMutation($query, [], '', $this->getHeaderMap('customer2@search.example.com'));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -521,11 +599,18 @@ QUERY;
      * @magentoApiDataFixture Magento/GraphQl/Quote/_files/customer/create_empty_cart.php
      * @magentoApiDataFixture Magento/GraphQl/Quote/_files/add_simple_product.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider dataProviderUpdateWithMissedRequiredParameters
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $input
      * @param string $message
      * @throws \Exception
      */
+<<<<<<< HEAD
     #[DataProvider('dataProviderUpdateWithMissedRequiredParameters')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSetNewShippingAddressWithMissedRequiredParameters(string $input, string $message)
     {
         $maskedQuoteId = $this->getMaskedQuoteIdByReservedOrderId->execute('test_quote');
@@ -598,7 +683,11 @@ QUERY;
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function dataProviderUpdateWithMissedRequiredParameters(): array
+=======
+    public function dataProviderUpdateWithMissedRequiredParameters(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'missed_region' => [
@@ -966,11 +1055,19 @@ mutation {
           address: {
             firstname: "Vasyl"
             lastname: "Doe"
+<<<<<<< HEAD
             street: ["Via della Posta"]
             city: "Vatican City"
             region: "Vatican City"
             postcode: "00120"
             country_code: "VA"
+=======
+            street: ["1 Svobody"]
+            city: "Lviv"
+            region: "Lviv"
+            postcode: "00000"
+            country_code: "UA"
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             telephone: "555-555-55-55"
           }
         }
@@ -993,8 +1090,13 @@ QUERY;
         $response = $this->graphQlMutation($query, [], '', $this->getHeaderMap());
         self::assertArrayHasKey('cart', $response['setShippingAddressesOnCart']);
         $cartResponse = $response['setShippingAddressesOnCart']['cart'];
+<<<<<<< HEAD
         self::assertEquals('VA', $cartResponse['shipping_addresses'][0]['country']['code']);
         self::assertEquals('Vatican City', $cartResponse['shipping_addresses'][0]['region']['label']);
+=======
+        self::assertEquals('UA', $cartResponse['shipping_addresses'][0]['country']['code']);
+        self::assertEquals('Lviv', $cartResponse['shipping_addresses'][0]['region']['label']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -1874,8 +1976,12 @@ mutation {
 }
 QUERY;
         $this->expectExceptionMessage(
+<<<<<<< HEAD
             'The shipping address must contain either "customer_address_id" or '
             . '"customer_address_uid" or "address".'
+=======
+            'The shipping address must contain either "customer_address_id" or "address".'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
         $this->graphQlMutation($query, [], '', $this->getHeaderMap());
     }
@@ -1918,7 +2024,11 @@ QUERY;
             ['response_field' => 'city', 'expected_value' => 'Ceriano Laghetto'],
             ['response_field' => 'postcode', 'expected_value' => '20816'],
             ['response_field' => 'telephone', 'expected_value' => '3273581975'],
+<<<<<<< HEAD
             ['response_field' => 'region', 'expected_value' => ['code' => '58', 'label' => 'Nièvre']],
+=======
+            ['response_field' => 'region', 'expected_value' => ['code' => '1', 'label' => 'Ain']],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ['response_field' => 'country', 'expected_value' => ['code' => 'FR', 'label' => 'FR']]
         ];
 
@@ -2150,6 +2260,7 @@ QUERY;
 
         $this->assertResponseFields($addressResponse, $assertionMap);
     }
+<<<<<<< HEAD
 
     #[
         DataFixture(Customer::class, as: 'customer'),
@@ -2205,4 +2316,6 @@ QUERY;
         $this->expectExceptionMessage('"postcode" is required. Enter and try again.');
         $this->graphQlMutation($query, [], '', $this->getHeaderMap($customerData->getEmail()));
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

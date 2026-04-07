@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -66,11 +71,16 @@ class FilteredErrorFormatter implements ErrorFormatter
             return self::NO_ERRORS;
         }
 
+<<<<<<< HEAD
         $params = [
+=======
+        $clearedAnalysisResult = new AnalysisResult(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $this->clearIgnoredErrors($analysisResult->getFileSpecificErrors()),
             $analysisResult->getNotFileSpecificErrors(),
             $analysisResult->getInternalErrors(),
             $analysisResult->getWarnings(),
+<<<<<<< HEAD
             $analysisResult->getCollectedData(),
             $analysisResult->isDefaultLevelUsed(),
             $analysisResult->getProjectConfigFile(),
@@ -91,6 +101,12 @@ class FilteredErrorFormatter implements ErrorFormatter
 
         //@phpstan:ignore-line
         $clearedAnalysisResult = new AnalysisResult(...$params);
+=======
+            $analysisResult->isDefaultLevelUsed(),
+            $analysisResult->getProjectConfigFile(),
+            $analysisResult->isResultCacheSaved()
+        );
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         return $this->tableErrorFormatter->formatErrors($clearedAnalysisResult, $output);
     }

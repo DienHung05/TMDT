@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -16,7 +21,10 @@ use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Helper\Xpath;
 use Magento\TestFramework\Mail\Template\TransportBuilderMock;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -68,16 +76,24 @@ class ResetPasswordTest extends TestCase
             1
         );
         $customerSecure = $this->customerRegistry->retrieveSecureData(1);
+<<<<<<< HEAD
         $mailTemplate = quoted_printable_decode(
             $this->transportBuilderMock->getSentMessage()->getBody()->bodyToString()
         );
+=======
+        $mailTemplate = $this->transportBuilderMock->getSentMessage()->getBody()->getParts()[0]->getRawContent();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertEquals(
             1,
             Xpath::getElementsCountForXpath(
                 sprintf(
+<<<<<<< HEAD
                     '//a[contains(@href, \'customer/account/createPassword/?email=%1$s&id=%2$d&token=%3$s\')]',
                     urlencode($customerSecure->getEmail()),
+=======
+                    '//a[contains(@href, \'customer/account/createPassword/?id=%1$d&token=%2$s\')]',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     $customerSecure->getId(),
                     $customerSecure->getRpToken()
                 ),
@@ -90,7 +106,10 @@ class ResetPasswordTest extends TestCase
     /**
      * @magentoAppArea frontend
      * @magentoDataFixture Magento/Customer/_files/customer.php
+<<<<<<< HEAD
      * @magentoConfigFixture current_store customer/password/password_reset_protection_type 0
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @return void
      */
     public function testSendPasswordResetLink(): void
@@ -104,7 +123,10 @@ class ResetPasswordTest extends TestCase
     /**
      * @magentoAppArea frontend
      * @magentoDataFixture Magento/Customer/_files/customer.php
+<<<<<<< HEAD
      * @magentoConfigFixture current_store customer/password/password_reset_protection_type 0
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @return void
      */
     public function testSendPasswordResetLinkDefaultWebsite(): void
@@ -116,14 +138,22 @@ class ResetPasswordTest extends TestCase
 
     /**
      * @magentoAppArea frontend
+<<<<<<< HEAD
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @magentoConfigFixture current_store customer/password/password_reset_protection_type 0
      *
+=======
+     * @dataProvider passwordResetErrorsProvider
+     * @magentoDataFixture Magento/Customer/_files/customer.php
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $email
      * @param int|null $websiteId
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('passwordResetErrorsProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPasswordResetErrors(string $email, ?int $websiteId = null): void
     {
         $websiteId = $websiteId ?? (int)$this->storeManager->getWebsite('base')->getId();
@@ -140,6 +170,7 @@ class ResetPasswordTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function passwordResetErrorsProvider(): array
     {
         return [
@@ -149,6 +180,17 @@ class ResetPasswordTest extends TestCase
             'websiteId' => [
                 'email' => 'customer@example.com',
                 'websiteId' => 0,
+=======
+    public function passwordResetErrorsProvider(): array
+    {
+        return [
+            'wrong_email' => [
+                'email' => 'foo@example.com',
+            ],
+            'wrong_website_id' => [
+                'email' => 'customer@example.com',
+                'website_id' => 0,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

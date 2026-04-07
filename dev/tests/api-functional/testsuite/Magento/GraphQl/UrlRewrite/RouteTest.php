@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,8 +16,11 @@ use Magento\Catalog\Api\CategoryRepositoryInterface;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\Exception\AlreadyExistsException;
+<<<<<<< HEAD
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
@@ -20,12 +28,18 @@ use Magento\UrlRewrite\Model\ResourceModel\UrlRewrite as UrlRewriteResourceModel
 use Magento\UrlRewrite\Model\UrlFinderInterface;
 use Magento\UrlRewrite\Model\UrlRewrite as UrlRewriteModel;
 use Magento\UrlRewrite\Service\V1\Data\UrlRewrite as UrlRewriteService;
+<<<<<<< HEAD
 use Magento\UrlRewrite\Test\Fixture\UrlRewrite as UrlRewriteFixture;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Test the GraphQL endpoint's Route query to verify url route information is correctly returned.
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+
+/**
+ * Test the GraphQL endpoint's Route query to verify url route information is correctly returned.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class RouteTest extends GraphQlAbstract
 {
@@ -227,16 +241,31 @@ QUERY;
   route(url:"{$urlKey}")
   {
     __typename
+<<<<<<< HEAD
     relative_url
     redirect_code
     type
     ...on SimpleProduct {
         name
         sku
+=======
+    ...on SimpleProduct {
+      name
+      sku
+      relative_url
+      redirect_code
+      type
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
     ...on CategoryTree {
         name
         uid
+<<<<<<< HEAD
+=======
+        relative_url
+        redirect_code
+        type
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
     ...on CmsPage {
     	title
@@ -244,6 +273,12 @@ QUERY;
         page_layout
         content
         content_heading
+<<<<<<< HEAD
+=======
+        relative_url
+        redirect_code
+        type
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
   }
 }
@@ -343,10 +378,17 @@ QUERY;
      * @magentoApiDataFixture Magento/Catalog/_files/product_with_category.php
      * @magentoApiDataFixture Magento/Cms/_files/pages.php
      *
+<<<<<<< HEAD
      * @param string $requestPath
      * @throws AlreadyExistsException
      */
     #[DataProvider('urlRewriteEntitiesDataProvider')]
+=======
+     * @dataProvider urlRewriteEntitiesDataProvider
+     * @param string $requestPath
+     * @throws AlreadyExistsException
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testUrlRewriteCleansCacheOnChange(string $requestPath)
     {
 
@@ -383,7 +425,11 @@ QUERY;
         $urlRewriteResourceModel->save($urlRewrite);
     }
 
+<<<<<<< HEAD
     public static function urlRewriteEntitiesDataProvider(): array
+=======
+    public function urlRewriteEntitiesDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -476,6 +522,7 @@ QUERY;
         $this->assertNull($apiResponse['route']);
     }
 
+<<<<<<< HEAD
     #[
         DataFixture(UrlRewriteFixture::class, ['redirect_type' => 301, 'target_path' => 'http://example.com'], 'url')
     ]
@@ -491,6 +538,8 @@ QUERY;
         $this->assertNull($response['route']['type']);
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Return UrlRewrite model instance by request_path
      *
@@ -517,6 +566,7 @@ QUERY;
 
         return $urlRewrite;
     }
+<<<<<<< HEAD
 
     #[
         DataFixture(UrlRewriteFixture::class, ['request_path' => 'test-same-path', 'target_path' => 'test-same-path'])
@@ -540,4 +590,6 @@ QUERY;
         );
         $this->graphQlQuery($query);
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Backend\Controller\Adminhtml;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 /**
  * @magentoAppArea adminhtml
  */
@@ -35,7 +43,11 @@ class CacheTest extends \Magento\TestFramework\TestCase\AbstractBackendControlle
         );
         /** @var $cacheFrontend \Magento\Framework\Cache\FrontendInterface */
         foreach ($cachePool as $cacheFrontend) {
+<<<<<<< HEAD
             $this->assertFalse($cacheFrontend->load('NON_APPLICATION_FIXTURE'));
+=======
+            $this->assertFalse($cacheFrontend->getBackend()->load('NON_APPLICATION_FIXTURE'));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         }
     }
 
@@ -61,15 +73,25 @@ class CacheTest extends \Magento\TestFramework\TestCase\AbstractBackendControlle
         foreach ($cachePool as $cacheFrontend) {
             $this->assertSame(
                 'non-application cache data',
+<<<<<<< HEAD
                 $cacheFrontend->load('NON_APPLICATION_FIXTURE')
+=======
+                $cacheFrontend->getBackend()->load('NON_APPLICATION_FIXTURE')
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             );
         }
     }
 
     /**
+<<<<<<< HEAD
      * @param $action
      */
     #[DataProvider('massActionsInvalidTypesDataProvider')]
+=======
+     * @dataProvider massActionsInvalidTypesDataProvider
+     * @param $action
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testMassActionsInvalidTypes($action)
     {
         $this->getRequest()->setParams(['types' => ['invalid_type_1', 'invalid_type_2', 'config']]);
@@ -83,7 +105,11 @@ class CacheTest extends \Magento\TestFramework\TestCase\AbstractBackendControlle
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function massActionsInvalidTypesDataProvider()
+=======
+    public function massActionsInvalidTypesDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'enable' => ['massEnable'],

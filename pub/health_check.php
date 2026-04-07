@@ -1,9 +1,15 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
  */
 declare(strict_types=1);
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * phpcs:disable PSR1.Files.SideEffects
@@ -66,7 +72,11 @@ if ($cacheConfigs) {
         try {
             /** @var \Magento\Framework\App\Cache\Frontend\Factory $cacheFrontendFactory */
             $cacheFrontendFactory = $objectManager->get(Magento\Framework\App\Cache\Frontend\Factory::class);
+<<<<<<< HEAD
             /** @var \Magento\Framework\Cache\Backend\BackendInterface $backend */
+=======
+            /** @var \Zend_Cache_Backend_Interface $backend */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $backend = $cacheFrontendFactory->create($cacheConfig);
             $backend->test('test_cache_id');
         } catch (\Exception $e) {

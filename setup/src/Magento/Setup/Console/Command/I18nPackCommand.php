@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Setup\Console\Command;
 
@@ -20,20 +25,32 @@ class I18nPackCommand extends Command
     /**#@+
      * Keys and shortcuts for input arguments and options
      */
+<<<<<<< HEAD
     public const INPUT_KEY_SOURCE = 'source';
     public const INPUT_KEY_LOCALE = 'locale';
     public const INPUT_KEY_MODE = 'mode';
     public const INPUT_KEY_ALLOW_DUPLICATES = 'allow-duplicates';
+=======
+    const INPUT_KEY_SOURCE = 'source';
+    const INPUT_KEY_LOCALE = 'locale';
+    const INPUT_KEY_MODE = 'mode';
+    const INPUT_KEY_ALLOW_DUPLICATES = 'allow-duplicates';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**#@-*/
 
     /**
      * 'replace' mode value
      */
+<<<<<<< HEAD
     public const MODE_REPLACE = 'replace';
+=======
+    const MODE_REPLACE = 'replace';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * 'merge' mode value
      */
+<<<<<<< HEAD
     public const MODE_MERGE = 'merge';
     public const NAME = 'i18n:pack';
 
@@ -43,6 +60,16 @@ class I18nPackCommand extends Command
     protected function configure()
     {
         $this->setName(self::NAME)
+=======
+    const MODE_MERGE = 'merge';
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configure()
+    {
+        $this->setName('i18n:pack')
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->setDescription('Saves language package');
         $this->setDefinition([
             new InputArgument(
@@ -74,10 +101,17 @@ class I18nPackCommand extends Command
     }
 
     /**
+<<<<<<< HEAD
      * @inheritdoc
      * @throws \InvalidArgumentException
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
+=======
+     * {@inheritdoc}
+     * @throws \InvalidArgumentException
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $generator = ServiceLocator::getPackGenerator();
         $mode = $input->getOption(self::INPUT_KEY_MODE);

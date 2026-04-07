@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -16,7 +21,10 @@ use Magento\Framework\Message\MessageInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\TestFramework\Store\ExecuteInStoreContext;
 use Magento\TestFramework\TestCase\AbstractController;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class add product to cart controller.
@@ -121,10 +129,18 @@ class AddTest extends AbstractController
     }
 
     /**
+<<<<<<< HEAD
      * @param array $params
      * @return void
      */
     #[DataProvider('wrongParamsDataProvider')]
+=======
+     * @dataProvider wrongParamsDataProvider
+     *
+     * @param array $params
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testWithWrongParams(array $params): void
     {
         $this->prepareReferer();
@@ -135,7 +151,11 @@ class AddTest extends AbstractController
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function wrongParamsDataProvider(): array
+=======
+    public function wrongParamsDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'empty_params' => ['params' => []],
@@ -172,7 +192,11 @@ class AddTest extends AbstractController
         $product = $this->productRepository->get('simple-1');
         $postData = ['product' => $product->getId(), 'qty' => '1000'];
         $this->dispatchAddToCartRequest($postData);
+<<<<<<< HEAD
         $message = (string)__('Not enough items for sale');
+=======
+        $message = (string)__('The requested qty is not available');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertSessionMessages($this->containsEqual($message), MessageInterface::TYPE_ERROR);
         $this->assertRedirect($this->stringContains($product->getProductUrl()));
     }

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -9,7 +14,10 @@ namespace Magento\Catalog\Block\Product\ProductList;
 
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Model\ResourceModel\Product\Link\Product\Collection as LinkProductCollection;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Check the correct behavior of related products on the product view page
@@ -78,12 +86,19 @@ class RelatedTest extends AbstractLinksTest
     /**
      * Test the display of related products in the block
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider displayLinkedProductsProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/product_simple.php
      * @magentoDataFixture Magento/Catalog/_files/products_list.php
      * @param array $data
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('displayLinkedProductsProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testDisplayRelatedProducts(array $data): void
     {
         $this->updateProducts($data['updateProducts']);
@@ -124,13 +139,20 @@ class RelatedTest extends AbstractLinksTest
     /**
      * Test the display of related products in the block on different websites
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider multipleWebsitesLinkedProductsProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/products_with_websites_and_stores.php
      * @magentoDataFixture Magento/Catalog/_files/products_list.php
      * @magentoAppIsolation enabled
      * @param array $data
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('multipleWebsitesLinkedProductsProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testMultipleWebsitesRelatedProducts(array $data): void
     {
         $this->updateProducts($this->prepareProductsWebsiteIds());

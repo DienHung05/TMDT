@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -18,7 +23,10 @@ use Magento\Setup\Console\Command\ModuleDisableCommand;
 use Magento\Setup\Console\Command\ModuleEnableCommand;
 use Magento\Setup\Model\ObjectManagerProvider;
 use PHPUnit\Framework\MockObject\MockObject;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 
@@ -65,7 +73,11 @@ class ModuleEnableDisableCommandTest extends TestCase
     protected function setUp(): void
     {
         $this->objectManagerProviderMock = $this->createMock(ObjectManagerProvider::class);
+<<<<<<< HEAD
         $objectManager = $this->createMock(ObjectManagerInterface::class);
+=======
+        $objectManager = $this->getMockForAbstractClass(ObjectManagerInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->objectManagerProviderMock
             ->method('get')
             ->willReturn($objectManager);
@@ -91,8 +103,13 @@ class ModuleEnableDisableCommandTest extends TestCase
      * @param bool $clearStaticContent
      * @param string $expectedMessage
      *
+<<<<<<< HEAD
      */
     #[DataProvider('executeDataProvider')]
+=======
+     * @dataProvider executeDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecute($isEnable, $clearStaticContent, $expectedMessage)
     {
         $this->statusMock->expects($this->once())
@@ -124,7 +141,11 @@ class ModuleEnableDisableCommandTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function executeDataProvider()
+=======
+    public function executeDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'enable, do not clear static content' => [
@@ -182,8 +203,13 @@ class ModuleEnableDisableCommandTest extends TestCase
      * @param bool $isEnable
      * @param string $expectedMessage
      *
+<<<<<<< HEAD
      */
     #[DataProvider('executeAllDataProvider')]
+=======
+     * @dataProvider executeAllDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecuteAll($isEnable, $expectedMessage)
     {
         $setupUpgradeMessage = 'To make sure that the enabled modules are properly registered, run \'setup:upgrade\'.';
@@ -223,7 +249,11 @@ class ModuleEnableDisableCommandTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function executeAllDataProvider()
+=======
+    public function executeAllDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'enable'  => [true, '%amodules have been enabled%aMagento_Module1%a'],
@@ -234,8 +264,13 @@ class ModuleEnableDisableCommandTest extends TestCase
     /**
      * @param bool $isEnable
      *
+<<<<<<< HEAD
      */
     #[DataProvider('executeWithConstraintsDataProvider')]
+=======
+     * @dataProvider executeWithConstraintsDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecuteWithConstraints($isEnable)
     {
         $this->statusMock->expects($this->once())
@@ -258,7 +293,11 @@ class ModuleEnableDisableCommandTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function executeWithConstraintsDataProvider()
+=======
+    public function executeWithConstraintsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'enable'  => [true],
@@ -270,8 +309,13 @@ class ModuleEnableDisableCommandTest extends TestCase
      * @param bool $isEnable
      * @param string $expectedMessage
      *
+<<<<<<< HEAD
      */
     #[DataProvider('executeExecuteForceDataProvider')]
+=======
+     * @dataProvider executeExecuteForceDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecuteForce($isEnable, $expectedMessage)
     {
         $this->statusMock->expects($this->once())
@@ -294,7 +338,11 @@ class ModuleEnableDisableCommandTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function executeExecuteForceDataProvider()
+=======
+    public function executeExecuteForceDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'enable'  => [true, '%amodules have been enabled%aMagento_Module1%a'],
@@ -305,8 +353,13 @@ class ModuleEnableDisableCommandTest extends TestCase
     /**
      * @param bool $isEnable
      *
+<<<<<<< HEAD
      */
     #[DataProvider('executeWithConstraintsDataProvider')]
+=======
+     * @dataProvider executeWithConstraintsDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testExecuteNoChanges($isEnable)
     {
         $this->statusMock->expects($this->once())
@@ -332,8 +385,15 @@ class ModuleEnableDisableCommandTest extends TestCase
         $class = $isEnable ? ModuleEnableCommand::class : ModuleDisableCommand::class;
         $command = new $class($this->objectManagerProviderMock);
         $deploymentConfigProperty = new \ReflectionProperty($class, 'deploymentConfig');
+<<<<<<< HEAD
         $deploymentConfigProperty->setValue($command, $this->deploymentConfigMock);
         $deploymentConfigProperty = new \ReflectionProperty($class, 'generatedFiles');
+=======
+        $deploymentConfigProperty->setAccessible(true);
+        $deploymentConfigProperty->setValue($command, $this->deploymentConfigMock);
+        $deploymentConfigProperty = new \ReflectionProperty($class, 'generatedFiles');
+        $deploymentConfigProperty->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $deploymentConfigProperty->setValue($command, $this->generatedFiles);
         return new CommandTester($command);
     }

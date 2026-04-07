@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\PaypalGraphQl\Model\Resolver\Guest;
 
+<<<<<<< HEAD
 use Laminas\Http\Exception\RuntimeException;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\App\ProductMetadataInterface;
 use Magento\Framework\DataObject;
 use Magento\Framework\GraphQl\Exception\GraphQlInputException;
@@ -54,17 +62,29 @@ class PlaceOrderWithPaymentsAdvancedTest extends TestCase
         $this->getMaskedQuoteIdByReservedOrderId = $this->objectManager->get(GetMaskedQuoteIdByReservedOrderId::class);
         $this->gateway = $this->getMockBuilder(Gateway::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['postRequest'])
             ->getMock();
 
         $requestFactory = $this->getMockBuilder(RequestFactory::class)
             ->onlyMethods(['create'])
+=======
+            ->setMethods(['postRequest'])
+            ->getMock();
+
+        $requestFactory = $this->getMockBuilder(RequestFactory::class)
+            ->setMethods(['create'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->paymentRequest = $this->getMockBuilder(Request::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['__call','setData'])
+=======
+            ->setMethods(['__call','setData'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
         $this->paymentRequest->method('__call')
             ->willReturnCallback(
@@ -128,6 +148,7 @@ class PlaceOrderWithPaymentsAdvancedTest extends TestCase
             ->willReturnMap(
                 [
                     [
+<<<<<<< HEAD
                         [
                             'user' => null,
                             'vendor' => null,
@@ -142,6 +163,20 @@ class PlaceOrderWithPaymentsAdvancedTest extends TestCase
                 ],
                 ['USER1', 1, $this->paymentRequest],
                 ['USER2', 'USER2SilentPostHash', $this->paymentRequest]
+=======
+                        'user' => null,
+                        'vendor' => null,
+                        'partner' => null,
+                        'pwd' => null,
+                        'verbosity' => null,
+                        'BUTTONSOURCE' => $button,
+                        'tender' => 'C',
+                    ],
+                    $this->returnSelf()
+                ],
+                ['USER1', 1, $this->returnSelf()],
+                ['USER2', 'USER2SilentPostHash', $this->returnSelf()]
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             );
 
         $responseData = $this->setPaymentMethodAndPlaceOrder($cartId, $paymentMethod);
@@ -206,9 +241,16 @@ class PlaceOrderWithPaymentsAdvancedTest extends TestCase
         $cartId = $this->getMaskedQuoteIdByReservedOrderId->execute('test_quote');
 
         $resultCode = Payflowlink::RESPONSE_CODE_DECLINED_BY_FILTER;
+<<<<<<< HEAD
         $exception = new RuntimeException(__('Declined response message from PayPal gateway')->render());
         //Exception message is transformed into more controlled message
         $expectedErrorCode = 'UNABLE_TO_PLACE_ORDER';
+=======
+        $exception = new \Zend_Http_Client_Exception(__('Declined response message from PayPal gateway'));
+        //Exception message is transformed into more controlled message
+        $expectedExceptionMessage =
+            "Unable to place order: Payment Gateway is unreachable at the moment. Please use another payment option.";
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->paymentRequest->method('setData')
             ->with(
@@ -231,7 +273,12 @@ class PlaceOrderWithPaymentsAdvancedTest extends TestCase
         $responseData = $this->setPaymentMethodAndPlaceOrder($cartId, $paymentMethod);
         $this->assertArrayHasKey('errors', $responseData);
         $actualError = $responseData['errors'][0];
+<<<<<<< HEAD
         $this->assertEquals($expectedErrorCode, $actualError['extensions']['error_code']);
+=======
+        $this->assertEquals($expectedExceptionMessage, $actualError['message']);
+        $this->assertEquals(GraphQlInputException::EXCEPTION_CATEGORY, $actualError['extensions']['category']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**

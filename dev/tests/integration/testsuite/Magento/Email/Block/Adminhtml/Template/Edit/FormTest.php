@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Email\Block\Adminhtml\Template\Edit;
 
@@ -61,6 +66,10 @@ class FormTest extends \PHPUnit\Framework\TestCase
             \Magento\Email\Block\Adminhtml\Template\Edit\Form::class,
             '_prepareForm'
         );
+<<<<<<< HEAD
+=======
+        $this->prepareFormMethod->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -72,11 +81,15 @@ class FormTest extends \PHPUnit\Framework\TestCase
         $this->runTest();
     }
 
+<<<<<<< HEAD
     /**
      * @return mixed
      * @throws \ReflectionException
      */
     protected function runTest(): mixed
+=======
+    protected function runTest()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $this->prepareFormMethod->invoke($this->block);
         $form = $this->block->getForm();
@@ -84,6 +97,9 @@ class FormTest extends \PHPUnit\Framework\TestCase
             $this->assertNotNull($form->getElement($key));
         }
         $this->assertGreaterThan(0, strpos($form->getElement('insert_variable')->getData('text'), 'Insert Variable'));
+<<<<<<< HEAD
         return $form;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Framework\View\Element;
 
@@ -9,7 +14,10 @@ use Magento\Framework\Math\Random;
 use Magento\Framework\Session\SessionManagerInterface;
 use Magento\Framework\Session\SidResolverInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppIsolation enabled
@@ -27,9 +35,12 @@ class AbstractBlockTest extends \PHPUnit\Framework\TestCase
      */
     protected $_layout = null;
 
+<<<<<<< HEAD
     /**
      * @var array
      */
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     protected static $_mocks = [];
 
     /**
@@ -45,9 +56,20 @@ class AbstractBlockTest extends \PHPUnit\Framework\TestCase
         /** @var \Magento\Framework\View\DesignInterface $design */
         $design = Bootstrap::getObjectManager()->get(\Magento\Framework\View\DesignInterface::class);
         $design->setDefaultDesignTheme();
+<<<<<<< HEAD
         $this->_block = Bootstrap::getObjectManager()->create(
             \Magento\Framework\View\Element\Text::class,
             ['data' => ['module_name' => 'Magento_Theme']]
+=======
+        $this->_block = $this->getMockForAbstractClass(
+            AbstractBlock::class,
+            [
+                Bootstrap::getObjectManager()->get(
+                    \Magento\Framework\View\Element\Context::class
+                ),
+                ['module_name' => 'Magento_Theme']
+            ]
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
         $this->session = Bootstrap::getObjectManager()->get(SessionManagerInterface::class);
     }
@@ -359,9 +381,13 @@ class AbstractBlockTest extends \PHPUnit\Framework\TestCase
         $parent = $this->_createBlockWithLayout('parent', 'parent');
         $block = $this->_createBlockWithLayout('');
         $parent->setChild('', $block);
+<<<<<<< HEAD
         $childNames = $parent->getChildNames();
         $this->assertNotEmpty($childNames);
         $this->assertMatchesRegularExpression('/^magento\\\\framework\\\\view\\\\element\\\\text_\d+$/i', $childNames[0]);
+=======
+        $this->assertContains('abstractblockmock_0', $parent->getChildNames());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -503,8 +529,13 @@ class AbstractBlockTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+<<<<<<< HEAD
      */
     #[DataProvider('escapeHtmlDataProvider')]
+=======
+     * @dataProvider escapeHtmlDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testEscapeHtml($data, $expected)
     {
         $actual = $this->_block->escapeHtml($data);
@@ -514,7 +545,11 @@ class AbstractBlockTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function escapeHtmlDataProvider()
+=======
+    public function escapeHtmlDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'array data' => [
@@ -574,7 +609,11 @@ class AbstractBlockTest extends \PHPUnit\Framework\TestCase
         $this->assertNotEquals($name, $key);
 
         $block->setCacheKey('key');
+<<<<<<< HEAD
         $this->assertEquals(AbstractBlock::CUSTOM_CACHE_KEY_PREFIX . 'key', $block->getCacheKey());
+=======
+        $this->assertEquals(AbstractBlock::CACHE_KEY_PREFIX . 'key', $block->getCacheKey());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -654,11 +693,29 @@ class AbstractBlockTest extends \PHPUnit\Framework\TestCase
         $alias = null,
         $type = AbstractBlock::class
     ) {
+<<<<<<< HEAD
+=======
+        $typePart = explode('\\', $type);
+        $mockClass = array_pop($typePart) . 'Mock';
+        if (!isset(self::$_mocks[$mockClass])) {
+            self::$_mocks[$mockClass] = $this->getMockForAbstractClass(
+                $type,
+                [
+                    Bootstrap::getObjectManager()->get(
+                        \Magento\Framework\View\Element\Context::class
+                    ),
+                    ['module_name' => 'Magento_Theme']
+                ],
+                $mockClass
+            );
+        }
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         if ($this->_layout === null) {
             $this->_layout = Bootstrap::getObjectManager()->get(
                 \Magento\Framework\View\LayoutInterface::class
             );
         }
+<<<<<<< HEAD
         
         if ($type === AbstractBlock::class) {
             $type = \Magento\Framework\View\Element\Text::class;
@@ -670,6 +727,9 @@ class AbstractBlockTest extends \PHPUnit\Framework\TestCase
             $block->setNameInLayout($name);
         }
         
+=======
+        $block = $this->_layout->addBlock($mockClass, $name, '', $alias);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         return $block;
     }
 }

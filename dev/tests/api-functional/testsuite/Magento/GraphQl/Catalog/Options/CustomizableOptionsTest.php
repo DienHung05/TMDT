@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -11,7 +16,10 @@ use Exception;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Helper\CompareArraysRecursively;
 use Magento\TestFramework\TestCase\GraphQlAbstract;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for customizable product options.
@@ -37,9 +45,15 @@ class CustomizableOptionsTest extends GraphQlAbstract
      *
      * @param array $optionDataProvider
      *
+<<<<<<< HEAD
      * @throws Exception
      */
     #[DataProvider('getProductCustomizableOptionsProvider')]
+=======
+     * @dataProvider getProductCustomizableOptionsProvider
+     * @throws Exception
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testQueryCustomizableOptions(array $optionDataProvider): void
     {
         $productSku = 'simple';
@@ -88,11 +102,19 @@ QUERY;
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function getProductCustomizableOptionsProvider(): array
     {
         return [
             'products' => [
                 'optionDataProvider' => [
+=======
+    public function getProductCustomizableOptionsProvider(): array
+    {
+        return [
+            'products' => [
+                'items' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'options' => [
                         [
                             'title' => 'test_option_code_1'

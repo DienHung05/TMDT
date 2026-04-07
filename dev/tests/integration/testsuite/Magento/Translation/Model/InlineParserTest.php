@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -15,7 +20,10 @@ use Magento\Framework\App\Area;
 use Magento\Store\Model\ScopeInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\Translation\Model\Inline\Parser;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
@@ -45,8 +53,20 @@ class InlineParserTest extends TestCase
 
     /**
      * Process ajax post test
+<<<<<<< HEAD
      */
     #[DataProvider('processAjaxPostDataProvider')]
+=======
+     *
+     * @dataProvider processAjaxPostDataProvider
+     *
+     * @param string $originalText
+     * @param string $translatedText
+     * @param string $area
+     * @param bool|null $isPerStore
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testProcessAjaxPost(
         string $originalText,
         string $translatedText,
@@ -77,8 +97,15 @@ class InlineParserTest extends TestCase
 
     /**
      * Data provider for testProcessAjaxPost
+<<<<<<< HEAD
      */
     public static function processAjaxPostDataProvider(): array
+=======
+     *
+     * @return array
+     */
+    public function processAjaxPostDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['original text 1', 'translated text 1', Area::AREA_ADMINHTML],
@@ -90,17 +117,35 @@ class InlineParserTest extends TestCase
 
     /**
      * Set get is json test
+<<<<<<< HEAD
      */
     #[DataProvider('allowedAreasDataProvider')]
+=======
+     *
+     * @dataProvider allowedAreasDataProvider
+     *
+     * @param string $area
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSetGetIsJson(string $area): void
     {
         Bootstrap::getObjectManager()->get(State::class)
             ->setAreaCode($area);
 
         $isJsonProperty = new \ReflectionProperty(get_class($this->model), '_isJson');
+<<<<<<< HEAD
         $this->assertFalse($isJsonProperty->getValue($this->model));
 
         $setIsJsonMethod = new \ReflectionMethod($this->model, 'setIsJson');
+=======
+        $isJsonProperty->setAccessible(true);
+
+        $this->assertFalse($isJsonProperty->getValue($this->model));
+
+        $setIsJsonMethod = new \ReflectionMethod($this->model, 'setIsJson');
+        $setIsJsonMethod->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $setIsJsonMethod->invoke($this->model, true);
 
         $this->assertTrue($isJsonProperty->getValue($this->model));
@@ -108,8 +153,15 @@ class InlineParserTest extends TestCase
 
     /**
      * Data provider for testSetGetIsJson
+<<<<<<< HEAD
      */
     public static function allowedAreasDataProvider(): array
+=======
+     *
+     * @return array
+     */
+    public function allowedAreasDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [Area::AREA_ADMINHTML],

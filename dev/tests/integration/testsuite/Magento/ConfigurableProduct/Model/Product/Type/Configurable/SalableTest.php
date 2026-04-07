@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -12,7 +17,10 @@ use Magento\Catalog\Model\Product\Attribute\Source\Status;
 use Magento\CatalogInventory\Api\Data\StockStatusInterface;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -43,12 +51,20 @@ class SalableTest extends TestCase
     /**
      * @magentoDataFixture Magento/ConfigurableProduct/_files/product_configurable.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider salableDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $productSkus
      * @param array $productData
      * @param bool $expectedValue
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('salableDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testIsSalable(array $productSkus, array $productData, bool $expectedValue): void
     {
         $this->updateProduct($productSkus, $productData);
@@ -60,6 +76,7 @@ class SalableTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function salableDataProvider(): array
     {
         return [
@@ -71,11 +88,25 @@ class SalableTest extends TestCase
             'one_child_out_of_stock' => [
                 'productSkus' => ['simple_10'],
                 'productData' => [
+=======
+    public function salableDataProvider(): array
+    {
+        return [
+            'all children enabled_and_in_stock' => [
+                'product_skus' => [],
+                'data' => [],
+                'expected_value' => true,
+            ],
+            'one_child_out_of_stock' => [
+                'product_skus' => ['simple_10'],
+                'data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'stock_data' => [
                         'use_config_manage_stock' => 1,
                         'is_in_stock' => StockStatusInterface::STATUS_OUT_OF_STOCK,
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedValue' => true,
             ],
             'one_child_disabled' => [
@@ -91,12 +122,33 @@ class SalableTest extends TestCase
             'all_children_out_of_stock' => [
                 'productSkus' => ['simple_10', 'simple_20'],
                 'productData' => [
+=======
+                'expected_value' => true,
+            ],
+            'one_child_disabled' => [
+                'product_skus' => ['simple_10'],
+                'data' => ['status' => Status::STATUS_DISABLED],
+                'expected_value' => true,
+            ],
+            'all_children_disabled' => [
+                'product_skus' => ['simple_10', 'simple_20'],
+                'data' => ['status' => Status::STATUS_DISABLED],
+                'expected_value' => false,
+            ],
+            'all_children_out_of_stock' => [
+                'product_skus' => ['simple_10', 'simple_20'],
+                'data' => [
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'stock_data' => [
                         'use_config_manage_stock' => 1,
                         'is_in_stock' => StockStatusInterface::STATUS_OUT_OF_STOCK,
                     ],
                 ],
+<<<<<<< HEAD
                 'expectedValue' => false,
+=======
+                'expected_value' => false,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ]
         ];
     }

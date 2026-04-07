@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -14,18 +19,28 @@ use Magento\Framework\View\LayoutInterface;
 use Magento\Paypal\Model\Config;
 use Magento\Store\Model\ScopeInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 class BannerTest extends TestCase
 {
     /**
      * @magentoAppArea frontend
+<<<<<<< HEAD
+=======
+     * @dataProvider getJsLayoutDataProvider
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoAppIsolation enabled
      * @covers       \Magento\Paypal\Block\PayLater\Banner::getJsLayout()
      * @covers       \Magento\Paypal\Block\PayLater\Banner::getStyleAttributesConfig()
      */
+<<<<<<< HEAD
     #[DataProvider('getJsLayoutDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetJsLayout($systemConfig, $blockConfig, $expectedConfig)
     {
         $this->setConfig($systemConfig);
@@ -45,7 +60,11 @@ class BannerTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getJsLayoutDataProvider()
+=======
+    public function getJsLayoutDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -122,10 +141,17 @@ class BannerTest extends TestCase
 
     /**
      * @magentoAppArea frontend
+<<<<<<< HEAD
      * @covers \Magento\Paypal\Block\PayLater\Banner::getJsLayout()
      * @covers \Magento\Paypal\Block\PayLater\Banner::getPayPalSdkUrl()
      */
     #[DataProvider('sdkUrlDataProvider')]
+=======
+     * @dataProvider sdkUrlDataProvider
+     * @covers \Magento\Paypal\Block\PayLater\Banner::getJsLayout()
+     * @covers \Magento\Paypal\Block\PayLater\Banner::getPayPalSdkUrl()
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSdkUrl($blockConfig, $expectedUrl)
     {
         $layout = Bootstrap::getObjectManager()->get(LayoutInterface::class);
@@ -137,7 +163,11 @@ class BannerTest extends TestCase
         $this->assertStringContainsString($expectedUrl, $jsConfig['components']['payLater']['config']['sdkUrl']);
     }
 
+<<<<<<< HEAD
     public static function sdkUrlDataProvider()
+=======
+    public function sdkUrlDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -217,10 +247,17 @@ class BannerTest extends TestCase
      *
      * @magentoAppArea frontend
      * @magentoAppIsolation enabled
+<<<<<<< HEAD
      * @param $systemConfig
      * @param $blockConfig
      */
     #[DataProvider('toHtmlEmptyDataProvider')]
+=======
+     * @dataProvider toHtmlEmptyDataProvider
+     * @param $systemConfig
+     * @param $blockConfig
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testToHtmlEmpty($systemConfig, $blockConfig)
     {
         //Enable all required options
@@ -252,7 +289,11 @@ class BannerTest extends TestCase
     /**
      * @return array[]
      */
+<<<<<<< HEAD
     public static function toHtmlEmptyDataProvider()
+=======
+    public function toHtmlEmptyDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $paymentPath = 'payment/%s/active';
         return [

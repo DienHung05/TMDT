@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -17,7 +22,10 @@ use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\Validator\Exception as ValidatorException;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -36,7 +44,11 @@ class CreateCustomOptionsTest extends TestCase
     private $objectManager;
 
     /**
+<<<<<<< HEAD
      * Repository for loading and saving catalog products.
+=======
+     * Product repository.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @var ProductRepositoryInterface
      */
@@ -48,7 +60,11 @@ class CreateCustomOptionsTest extends TestCase
     private $optionRepository;
 
     /**
+<<<<<<< HEAD
      * Factory for creating product custom option DTOs.
+=======
+     * Custom option factory.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @var ProductCustomOptionInterfaceFactory
      */
@@ -119,11 +135,19 @@ class CreateCustomOptionsTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_without_options.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider productCustomOptionsTypeTextDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $optionData
      *
      * @magentoDbIsolation enabled
      */
+<<<<<<< HEAD
     #[DataProvider('productCustomOptionsTypeTextDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateOptionsWithTypeText(array $optionData): void
     {
         $option = $this->baseCreateCustomOptionAndAssert($optionData);
@@ -139,12 +163,20 @@ class CreateCustomOptionsTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_without_options.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider fileExtensionsDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $rawExtensions
      * @param string $expectedExtensions
      *
      * @magentoDbIsolation enabled
      */
+<<<<<<< HEAD
     #[DataProvider('fileExtensionsDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testFileExtensions(string $rawExtensions, string $expectedExtensions): void
     {
         $product = $this->productRepository->get('simple');
@@ -174,12 +206,20 @@ class CreateCustomOptionsTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_without_options.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider productCustomOptionsTypeSelectDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $optionData
      * @param array $optionValueData
      *
      * @magentoDbIsolation enabled
      */
+<<<<<<< HEAD
     #[DataProvider('productCustomOptionsTypeSelectDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateOptionsWithTypeSelect(array $optionData, array $optionValueData): void
     {
         $optionValue = $this->customOptionValueFactory->create(['data' => $optionValueData]);
@@ -201,11 +241,19 @@ class CreateCustomOptionsTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_without_options.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider productCustomOptionsTypeDateDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $optionData
      *
      * @magentoDbIsolation enabled
      */
+<<<<<<< HEAD
     #[DataProvider('productCustomOptionsTypeDateDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateOptionsWithTypeDate(array $optionData): void
     {
         $option = $this->baseCreateCustomOptionAndAssert($optionData);
@@ -219,12 +267,20 @@ class CreateCustomOptionsTest extends TestCase
      *
      * @magentoDataFixture Magento/Catalog/_files/product_without_options.php
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider productCustomOptionsWithErrorDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param array $optionData
      * @param \Exception $expectedErrorObject
      *
      * @magentoDbIsolation enabled
      */
+<<<<<<< HEAD
     #[DataProvider('productCustomOptionsWithErrorDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateOptionWithError(array $optionData, \Exception $expectedErrorObject): void
     {
         $product = $this->productRepository->get('simple');
@@ -239,7 +295,11 @@ class CreateCustomOptionsTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function productCustomOptionsTypeTextDataProvider(): array
+=======
+    public function productCustomOptionsTypeTextDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'area_field_required_options' => [
@@ -327,7 +387,11 @@ class CreateCustomOptionsTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function fileExtensionsDataProvider(): array
+=======
+    public function fileExtensionsDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['JPG, PNG, GIF', 'jpg, png, gif'],
@@ -347,7 +411,11 @@ class CreateCustomOptionsTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function productCustomOptionsTypeSelectDataProvider(): array
+=======
+    public function productCustomOptionsTypeSelectDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'drop_down_field_required_option' => [
@@ -648,7 +716,11 @@ class CreateCustomOptionsTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function productCustomOptionsTypeDateDataProvider(): array
+=======
+    public function productCustomOptionsTypeDateDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'date_field_required_options' => [
@@ -805,7 +877,11 @@ class CreateCustomOptionsTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function productCustomOptionsWithErrorDataProvider(): array
+=======
+    public function productCustomOptionsWithErrorDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'error_option_without_product_sku' => [

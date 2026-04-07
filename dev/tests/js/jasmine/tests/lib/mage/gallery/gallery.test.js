@@ -1,6 +1,11 @@
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /* eslint-disable max-nested-callbacks */
@@ -33,8 +38,12 @@ define([
                 thumbwidth: 88,
                 transition: 'slide',
                 transitionduration: 500,
+<<<<<<< HEAD
                 width: 700,
                 whiteBorders: 0
+=======
+                width: 700
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             },
             fullscreen: {
                 arrows: true,
@@ -100,7 +109,10 @@ define([
             expect(gallery.settings.data).toBeDefined();
             expect(gallery.settings.api).toBeDefined();
             expect(gallery.settings.activeBreakpoint).toEqual({});
+<<<<<<< HEAD
             expect(gallery.config.options.height).toEqual(element.height());
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
             $.fn.data = originSpy;
         });

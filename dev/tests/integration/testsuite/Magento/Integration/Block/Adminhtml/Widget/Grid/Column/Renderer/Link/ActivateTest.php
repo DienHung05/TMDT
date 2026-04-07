@@ -1,12 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Integration\Block\Adminhtml\Widget\Grid\Column\Renderer\Link;
 
 use Magento\Integration\Model\Integration;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea adminhtml
@@ -63,8 +72,13 @@ class ActivateTest extends \PHPUnit\Framework\TestCase
      * @param string $endpoint
      * @param string $identityLinkUrl
      * @param int $expectedResult
+<<<<<<< HEAD
      */
     #[DataProvider('renderTokenExchangeProvider')]
+=======
+     * @dataProvider renderTokenExchangeProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testRenderTokenExchange($endpoint, $identityLinkUrl, $expectedResult)
     {
         $integration = $this->getFixtureIntegration();
@@ -82,7 +96,11 @@ class ActivateTest extends \PHPUnit\Framework\TestCase
         $this->assertStringContainsString('>Reauthorize</a>', $buttonHtml);
     }
 
+<<<<<<< HEAD
     public static function renderTokenExchangeProvider()
+=======
+    public function renderTokenExchangeProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['http://example.com/endpoint', 'http://example.com/identity', 1],

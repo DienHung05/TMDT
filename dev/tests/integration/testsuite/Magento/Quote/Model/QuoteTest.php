@@ -1,13 +1,20 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2011 Adobe
  * All Rights Reserved.
  */
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 declare(strict_types=1);
 
 namespace Magento\Quote\Model;
 
+<<<<<<< HEAD
 use Magento\Bundle\Test\Fixture\AddProductToCart as AddBundleProductToCartFixture;
 use Magento\Bundle\Test\Fixture\Option as BundleOptionFixture;
 use Magento\Bundle\Test\Fixture\Product as BundleProductFixture;
@@ -17,6 +24,10 @@ use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\ConfigurableProduct\Test\Fixture\AddProductToCart as AddConfigurableProductToCartFixture;
 use Magento\ConfigurableProduct\Test\Fixture\Attribute as AttributeFixture;
 use Magento\ConfigurableProduct\Test\Fixture\Product as ConfigurableProductFixture;
+=======
+use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Checkout\Model\Session as CheckoutSession;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Customer\Api\Data\CustomerInterfaceFactory;
@@ -28,12 +39,16 @@ use Magento\Framework\Api\DataObjectHelper;
 use Magento\Framework\Api\ExtensibleDataObjectConverter;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\ObjectManagerInterface;
+<<<<<<< HEAD
 use Magento\Quote\Api\CartRepositoryInterface;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Quote\Api\Data\AddressInterface;
 use Magento\Quote\Api\Data\AddressInterfaceFactory;
 use Magento\Quote\Api\Data\CartInterface;
 use Magento\Quote\Api\Data\CartItemInterface;
 use Magento\Quote\Api\Data\CartItemInterfaceFactory;
+<<<<<<< HEAD
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\DataFixture;
@@ -42,6 +57,9 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Quote\Model\GetQuoteByReservedOrderId;
 use PHPUnit\Framework\TestCase;
 
@@ -52,7 +70,10 @@ use PHPUnit\Framework\TestCase;
  *
  * @magentoDbIsolation enabled
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+<<<<<<< HEAD
  * @SuppressWarnings(PHPMD.TooManyFields)
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class QuoteTest extends TestCase
 {
@@ -99,6 +120,7 @@ class QuoteTest extends TestCase
     private $extensibleDataObjectConverter;
 
     /**
+<<<<<<< HEAD
      * @var CartRepositoryInterface
      */
     private $cartRepository;
@@ -109,6 +131,8 @@ class QuoteTest extends TestCase
     private $fixtures;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
@@ -129,8 +153,11 @@ class QuoteTest extends TestCase
         $this->customerResourceModel = $this->objectManager->get(CustomerResourceModel::class);
         $this->groupFactory = $this->objectManager->get(GroupFactory::class);
         $this->extensibleDataObjectConverter = $this->objectManager->get(ExtensibleDataObjectConverter::class);
+<<<<<<< HEAD
         $this->cartRepository = $this->objectManager->get(CartRepositoryInterface::class);
         $this->fixtures = $this->objectManager->get(DataFixtureStorageManager::class)->getStorage();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -170,6 +197,7 @@ class QuoteTest extends TestCase
     public function testGetAddressWithVirtualProduct(): void
     {
         $quote = $this->objectManager->create(Quote::class);
+<<<<<<< HEAD
         $storeManager = $this->objectManager->get(\Magento\Store\Model\StoreManagerInterface::class);
         $originalStore = $storeManager->getStore();
         $defaultStoreView = $storeManager->getDefaultStoreView();
@@ -210,6 +238,33 @@ class QuoteTest extends TestCase
         } finally {
             $storeManager->setCurrentStore($originalStore);
         }
+=======
+        $billingAddress = $this->addressFactory->create();
+        $billingAddress->setFirstname('Joe')
+            ->setLastname('Doe')
+            ->setCountryId('US')
+            ->setRegion('TX')
+            ->setCity('Austin')
+            ->setStreet('1000 West Parmer Line')
+            ->setPostcode('11501')
+            ->setTelephone('123456789');
+        $quote->setBillingAddress($billingAddress);
+        $shippingAddress = $this->addressFactory->create();
+        $shippingAddress->setFirstname('Joe')
+            ->setLastname('Doe')
+            ->setCountryId('US')
+            ->setRegion('NJ')
+            ->setCity('Newark')
+            ->setStreet('2775  Granville Lane')
+            ->setPostcode('07102')
+            ->setTelephone('9734685221');
+        $quote->setShippingAddress($shippingAddress);
+        $product = $this->productRepository->get('virtual-product', false, null, true);
+        $quote->addProduct($product);
+        $quote->save();
+        $expectedAddress = $quote->getBillingAddress();
+        $this->assertEquals($expectedAddress, $quote->getAllItems()[0]->getAddress());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -483,9 +538,15 @@ class QuoteTest extends TestCase
      * @param int|null $expectedOrderGiftMessageId
      *
      * @magentoDataFixture Magento/Sales/_files/quote.php
+<<<<<<< HEAD
      * @return void
      */
     #[DataProvider('giftMessageDataProvider')]
+=======
+     * @dataProvider giftMessageDataProvider
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testMerge(
         ?int $guestItemGiftMessageId,
         ?int $customerItemGiftMessageId,
@@ -517,6 +578,7 @@ class QuoteTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function giftMessageDataProvider(): array
     {
         return [
@@ -535,6 +597,26 @@ class QuoteTest extends TestCase
                 'customerOrderGiftMessageId' => 22,
                 'expectedItemGiftMessageId' => 1,
                 'expectedOrderGiftMessageId' => 11,
+=======
+    public function giftMessageDataProvider(): array
+    {
+        return [
+            [
+                'guestItemId' => null,
+                'customerItemId' => 1,
+                'guestOrderId' => null,
+                'customerOrderId' => 11,
+                'expectedItemId' => 1,
+                'expectedOrderId' => 11,
+            ],
+            [
+                'guestItemId' => 1,
+                'customerItemId' => 2,
+                'guestOrderId' => 11,
+                'customerOrderId' => 22,
+                'expectedItemId' => 1,
+                'expectedOrderId' => 11,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }
@@ -596,7 +678,11 @@ class QuoteTest extends TestCase
     {
         $quote = $this->quoteFactory->create();
         $product = $this->productRepository->get('simple-1');
+<<<<<<< HEAD
         $this->expectExceptionObject(new LocalizedException(__('Not enough items for sale')));
+=======
+        $this->expectExceptionObject(new LocalizedException(__('The requested qty is not available')));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $quote->addProduct($product, 1500);
     }
 
@@ -853,6 +939,7 @@ class QuoteTest extends TestCase
             );
         }
     }
+<<<<<<< HEAD
 
     #[
         DataFixture(ProductFixture::class, ['price' => 922903400.00], as: 'product'),
@@ -946,4 +1033,6 @@ class QuoteTest extends TestCase
             $registry->register('isSecureArea', $isSecureArea);
         }
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

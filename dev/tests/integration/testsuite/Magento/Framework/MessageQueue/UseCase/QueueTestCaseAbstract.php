@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Framework\MessageQueue\UseCase;
 
@@ -81,9 +86,13 @@ class QueueTestCaseAbstract extends \PHPUnit\Framework\TestCase
      */
     protected function tearDown(): void
     {
+<<<<<<< HEAD
         if ($this->publisherConsumerController !== null) {
             $this->publisherConsumerController->stopConsumers();
         }
+=======
+        $this->publisherConsumerController->stopConsumers();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -127,6 +136,11 @@ class QueueTestCaseAbstract extends \PHPUnit\Framework\TestCase
         // phpcs:enable Magento2.Functions.StaticFunction
         if (version_compare(phpversion(), '7') == -1) {
             $closeConnection = new \ReflectionMethod(\Magento\Amqp\Model\Config::class, 'closeConnection');
+<<<<<<< HEAD
+=======
+            $closeConnection->setAccessible(true);
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             $config = Bootstrap::getObjectManager()->get(\Magento\Amqp\Model\Config::class);
             $closeConnection->invoke($config);
         }

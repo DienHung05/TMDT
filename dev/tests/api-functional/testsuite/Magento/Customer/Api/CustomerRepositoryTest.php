@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
@@ -14,6 +15,19 @@ use Magento\Customer\Api\Data\CustomerInterface as Customer;
 use Magento\Customer\Api\Data\CustomerInterfaceFactory;
 use Magento\Customer\Model\CustomerRegistry;
 use Magento\Framework\Api\DataObjectHelper;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+namespace Magento\Customer\Api;
+
+use Magento\Customer\Api\Data\AddressInterface as Address;
+use Magento\Customer\Api\Data\CustomerInterfaceFactory;
+use Magento\Customer\Model\CustomerRegistry;
+use Magento\Framework\Api\DataObjectHelper;
+use Magento\Customer\Api\Data\CustomerInterface as Customer;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\FilterGroupBuilder;
 use Magento\Framework\Api\SearchCriteriaBuilder;
@@ -26,11 +40,15 @@ use Magento\Framework\Reflection\DataObjectProcessor;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Webapi\Exception as HTTPExceptionCodes;
 use Magento\Framework\Webapi\Rest\Request;
+<<<<<<< HEAD
 use Magento\Integration\Api\AdminTokenServiceInterface;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Integration\Api\CustomerTokenServiceInterface;
 use Magento\Integration\Api\IntegrationServiceInterface;
 use Magento\Integration\Api\OauthServiceInterface;
 use Magento\Integration\Model\Integration;
+<<<<<<< HEAD
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\AppIsolation;
 use Magento\TestFramework\Fixture\DataFixture;
@@ -40,6 +58,11 @@ use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Helper\Customer as CustomerHelper;
 use Magento\TestFramework\TestCase\WebapiAbstract;
 use Magento\User\Test\Fixture\User as UserFixture;
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\TestFramework\Helper\Customer as CustomerHelper;
+use Magento\TestFramework\TestCase\WebapiAbstract;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test for \Magento\Customer\Api\CustomerRepositoryInterface.
@@ -122,7 +145,11 @@ class CustomerRepositoryTest extends WebapiAbstract
         $this->searchCriteriaBuilder = Bootstrap::getObjectManager()->create(SearchCriteriaBuilder::class);
         $this->sortOrderBuilder = Bootstrap::getObjectManager()->create(SortOrderBuilder::class);
         $this->filterGroupBuilder = Bootstrap::getObjectManager()->create(FilterGroupBuilder::class);
+<<<<<<< HEAD
         $this->customerHelper = new CustomerHelper($this->name());
+=======
+        $this->customerHelper = new CustomerHelper();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->dataObjectProcessor = Bootstrap::getObjectManager()->create(DataObjectProcessor::class);
     }
@@ -152,7 +179,12 @@ class CustomerRepositoryTest extends WebapiAbstract
     }
 
     /**
+<<<<<<< HEAD
      * Validate update operation by invalid customer
+=======
+     * Validate update by invalid customer.
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function testInvalidCustomerUpdate()
     {
@@ -161,8 +193,14 @@ class CustomerRepositoryTest extends WebapiAbstract
         //Create first customer and retrieve customer token.
         $firstCustomerData = $this->_createCustomer();
 
+<<<<<<< HEAD
         //Get customer ID token
         /** @var \Magento\Integration\Api\CustomerTokenServiceInterface $customerTokenService */
+=======
+        // get customer ID token
+        /** @var \Magento\Integration\Api\CustomerTokenServiceInterface $customerTokenService */
+        //$customerTokenService = $this->objectManager->create(CustomerTokenServiceInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $customerTokenService = Bootstrap::getObjectManager()->create(
             \Magento\Integration\Api\CustomerTokenServiceInterface::class
         );
@@ -246,9 +284,17 @@ class CustomerRepositoryTest extends WebapiAbstract
                 'operation' => self::SERVICE_NAME . 'DeleteById',
             ],
         ];
+<<<<<<< HEAD
         $response = (TESTS_WEB_API_ADAPTER === self::ADAPTER_SOAP)
             ? $this->_webApiCall($serviceInfo, ['customerId' => $customerData['id']])
             : $this->_webApiCall($serviceInfo);
+=======
+        if (TESTS_WEB_API_ADAPTER == self::ADAPTER_SOAP) {
+            $response = $this->_webApiCall($serviceInfo, ['customerId' => $customerData['id']]);
+        } else {
+            $response = $this->_webApiCall($serviceInfo);
+        }
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $this->assertTrue($response);
 
@@ -259,7 +305,11 @@ class CustomerRepositoryTest extends WebapiAbstract
     }
 
     /**
+<<<<<<< HEAD
      * Check that non-authorized consumer can`t delete customer.
+=======
+     * Check that non authorized consumer can`t delete customer.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      *
      * @return void
      */
@@ -353,10 +403,17 @@ class CustomerRepositoryTest extends WebapiAbstract
     public function testUpdateCustomer(): void
     {
         $customerId = 1;
+<<<<<<< HEAD
         $updatedLastName = 'Updated lastname';
         $customer = $this->getCustomerData($customerId);
         $customerData = $this->dataObjectProcessor->buildOutputDataArray($customer, Customer::class);
         $customerData[Customer::LASTNAME] = $updatedLastName;
+=======
+        $updatedLastname = 'Updated lastname';
+        $customer = $this->getCustomerData($customerId);
+        $customerData = $this->dataObjectProcessor->buildOutputDataArray($customer, Customer::class);
+        $customerData[Customer::LASTNAME] = $updatedLastname;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $serviceInfo = [
             'rest' => [
@@ -370,6 +427,7 @@ class CustomerRepositoryTest extends WebapiAbstract
             ],
         ];
 
+<<<<<<< HEAD
         $requestData['customer'] = (TESTS_WEB_API_ADAPTER === self::ADAPTER_SOAP)
             ? $customerData
             : [
@@ -378,12 +436,22 @@ class CustomerRepositoryTest extends WebapiAbstract
                 Customer::EMAIL => $customer->getEmail(),
                 Customer::ID => $customerId,
             ];
+=======
+        $requestData['customer'] = TESTS_WEB_API_ADAPTER === self::ADAPTER_SOAP
+            ? $customerData
+            : [Customer::LASTNAME => $updatedLastname];
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $response = $this->_webApiCall($serviceInfo, $requestData);
         $this->assertNotNull($response);
 
         //Verify if the customer is updated
         $existingCustomerDataObject = $this->getCustomerData($customerId);
+<<<<<<< HEAD
         $this->assertEquals($updatedLastName, $existingCustomerDataObject->getLastname());
+=======
+        $this->assertEquals($updatedLastname, $existingCustomerDataObject->getLastname());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->assertEquals($customerData[Customer::FIRSTNAME], $existingCustomerDataObject->getFirstname());
     }
 
@@ -654,8 +722,13 @@ class CustomerRepositoryTest extends WebapiAbstract
                 $this->assertEquals(HTTPExceptionCodes::HTTP_BAD_REQUEST, $e->getCode());
                 $exceptionData = $this->processRestExceptionResult($e);
                 $expectedExceptionData = [
+<<<<<<< HEAD
                     'message' => '"%1" is a required value.',
                     'parameters' => ['0' => 'First Name'],
+=======
+                    'message' => '"%fieldName" is required. Enter and try again.',
+                    'parameters' => ['fieldName' => Address::FIRSTNAME],
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 ];
                 $this->assertEquals($expectedExceptionData, $exceptionData);
             }
@@ -687,8 +760,14 @@ class CustomerRepositoryTest extends WebapiAbstract
      *
      * @param bool $subscribeStatus
      * @return void
+<<<<<<< HEAD
      * */
     #[DataProvider('subscriptionDataProvider')]
+=======
+     *
+     * @dataProvider subscriptionDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSearchCustomers(bool $subscribeStatus): void
     {
         $builder = Bootstrap::getObjectManager()->create(FilterBuilder::class);
@@ -741,7 +820,11 @@ class CustomerRepositoryTest extends WebapiAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function subscriptionDataProvider(): array
+=======
+    public function subscriptionDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'subscribed user' => [true],
@@ -1049,11 +1132,15 @@ class CustomerRepositoryTest extends WebapiAbstract
         $customerLoadedData = $this->_webApiCall($serviceInfo, ['customerId' => $customerData[Customer::ID]]);
         self::assertGreaterThanOrEqual($customerData[Customer::UPDATED_AT], $customerLoadedData[Customer::UPDATED_AT]);
         unset($customerData[Customer::UPDATED_AT]);
+<<<<<<< HEAD
         unset(
             $customerLoadedData[Customer::UPDATED_AT],
             $customerLoadedData[Customer::CONFIRMATION],
             $customerLoadedData[Customer::CUSTOM_ATTRIBUTES]
         );
+=======
+        unset($customerLoadedData[Customer::UPDATED_AT], $customerLoadedData[Customer::CONFIRMATION]);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         self::assertEquals($customerData, $customerLoadedData);
 
         $revokeToken = $customerTokenService->revokeCustomerAccessToken($customerData[Customer::ID]);
@@ -1115,8 +1202,14 @@ class CustomerRepositoryTest extends WebapiAbstract
      * @param string $fieldValue
      * @param string $expectedMessage
      * @return void
+<<<<<<< HEAD
      * */
     #[DataProvider('customerDataProvider')]
+=======
+     *
+     * @dataProvider customerDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateCustomerWithInvalidCustomerFirstName(
         string $fieldName,
         string $fieldValue,
@@ -1159,7 +1252,11 @@ class CustomerRepositoryTest extends WebapiAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function customerDataProvider(): array
+=======
+    public function customerDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['firstname', 'Jane ☺ ', 'First Name is not valid!'],
@@ -1184,8 +1281,14 @@ class CustomerRepositoryTest extends WebapiAbstract
      * @param string $fieldName
      * @param string $fieldValue
      * @return void
+<<<<<<< HEAD
      * */
     #[DataProvider('customerWithMultiByteDataProvider')]
+=======
+     *
+     * @dataProvider customerWithMultiByteDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateCustomerWithMultibyteCharacters(string $fieldName, string $fieldValue): void
     {
         $customerData = $this->dataObjectProcessor->buildOutputDataArray(
@@ -1219,7 +1322,11 @@ class CustomerRepositoryTest extends WebapiAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function customerWithMultiByteDataProvider(): array
+=======
+    public function customerWithMultiByteDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -1239,8 +1346,14 @@ class CustomerRepositoryTest extends WebapiAbstract
      * @param string $fieldName
      * @param string $fieldValue
      * @return void
+<<<<<<< HEAD
      * */
     #[DataProvider('customerValidNameDataProvider')]
+=======
+     *
+     * @dataProvider customerValidNameDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateCustomerWithValidName(string $fieldName, string $fieldValue): void
     {
         $customerData = $this->dataObjectProcessor->buildOutputDataArray(
@@ -1274,7 +1387,11 @@ class CustomerRepositoryTest extends WebapiAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function customerValidNameDataProvider(): array
+=======
+    public function customerValidNameDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
@@ -1307,6 +1424,7 @@ class CustomerRepositoryTest extends WebapiAbstract
             ],
         ];
     }
+<<<<<<< HEAD
 
     /**
      * Verify with an admin access token that customers' default addresses are successfully altered
@@ -1403,4 +1521,6 @@ class CustomerRepositoryTest extends WebapiAbstract
         $this->assertIsArray($response);
         $this->assertArrayHasKey('addresses', $response);
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

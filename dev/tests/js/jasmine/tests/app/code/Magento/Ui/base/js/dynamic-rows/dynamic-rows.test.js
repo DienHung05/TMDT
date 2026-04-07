@@ -1,6 +1,11 @@
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /* eslint-disable max-nested-callbacks */
@@ -204,6 +209,7 @@ define([
             expect(model.pages()).toEqual(2);
             expect(model.currentPage()).toEqual(2);
         });
+<<<<<<< HEAD
 
         it('should process pages before addChild', function () {
             var ctx = {},
@@ -236,5 +242,7 @@ define([
             expect(model.currentPage()).toEqual(3);
             expect(model.addChild).toHaveBeenCalledWith(ctx, index, prop);
         });
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     });
 });

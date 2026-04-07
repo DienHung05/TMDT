@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\CatalogInventory\Model\StockItemSave\OnProductUpdate\ByProductModel;
 
@@ -44,7 +49,11 @@ class ByStockDataTest extends \PHPUnit\Framework\TestCase
      * model (deprecated)
      *
      * @magentoDataFixture Magento/Catalog/_files/product_simple.php
+<<<<<<< HEAD
      * @magentoDbIsolation enabled
+=======
+     * @magentoDbIsolation disabled
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function testSaveBySetStockData()
     {
@@ -61,7 +70,11 @@ class ByStockDataTest extends \PHPUnit\Framework\TestCase
      * via product model (deprecated)
      *
      * @magentoDataFixture Magento/Catalog/_files/product_simple.php
+<<<<<<< HEAD
      * @magentoDbIsolation enabled
+=======
+     * @magentoDbIsolation disabled
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function testSaveBySetData()
     {

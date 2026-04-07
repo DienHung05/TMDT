@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -14,7 +19,10 @@ use Magento\Framework\App\Config\MutableScopeConfigInterface;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -50,13 +58,21 @@ class OptionsTest extends TestCase
     /**
      * Test suffix and prefix options
      *
+<<<<<<< HEAD
+=======
+     * @dataProvider optionsDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param string $optionType
      * @param array $showOptionConfig
      * @param array $optionValuesConfig
      * @param array $expectedOptions
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('optionsDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testOptions(
         string $optionType,
         array $showOptionConfig,
@@ -97,7 +113,11 @@ class OptionsTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function optionsDataProvider(): array
+=======
+    public function optionsDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionPrefixName = 'prefix';
         $optionSuffixName = 'suffix';

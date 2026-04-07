@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\CheckoutAgreements\Api;
 
@@ -65,10 +70,16 @@ class CheckoutAgreementsRepositoryTest extends WebapiAbstract
      */
     public function testGetListReturnsTheListOfActiveCheckoutAgreements()
     {
+<<<<<<< HEAD
         $this->markTestSkipped('This test relies on system configuration state.');
         // checkout/options/enable_agreements must be set to 1 in system configuration
         // @todo remove above statement when \Magento\TestFramework\TestCase\WebapiAbstract::_updateAppConfig is fixed
 
+=======
+        // checkout/options/enable_agreements must be set to 1 in system configuration
+        // @todo remove next statement when \Magento\TestFramework\TestCase\WebapiAbstract::_updateAppConfig is fixed
+        $this->markTestIncomplete('This test relies on system configuration state.');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $agreementModel = $this->getAgreementByName('Checkout Agreement (active)');
 
         $agreements = $this->_webApiCall($this->listServiceInfo, []);

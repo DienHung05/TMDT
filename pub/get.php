@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2011 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 /**
  * Public media files entry point
@@ -49,10 +54,15 @@ $relativePath = $request->getPathInfo();
 if (file_exists($configCacheFile) && is_readable($configCacheFile)) {
     $config = json_decode(file_get_contents($configCacheFile), true);
 
+<<<<<<< HEAD
     // Checking update time
     if (isset($config['update_time'], $config['media_directory'], $config['allowed_resources'])
         && filemtime($configCacheFile) + $config['update_time'] > time()
     ) {
+=======
+    //checking update time
+    if (filemtime($configCacheFile) + $config['update_time'] > time()) {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $mediaDirectory = $config['media_directory'];
         $allowedResources = $config['allowed_resources'];
 
@@ -62,13 +72,21 @@ if (file_exists($configCacheFile) && is_readable($configCacheFile)) {
             $fileRelativePath = str_replace(rtrim($mediaDirectory, '/') . '/', '', $fileAbsolutePath);
 
             if (!$isAllowed($fileRelativePath, $allowedResources)) {
+<<<<<<< HEAD
                 require 'errors/404.php';
+=======
+                require_once 'errors/404.php';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 exit;
             }
 
             if (is_readable($fileAbsolutePath)) {
                 if (is_dir($fileAbsolutePath)) {
+<<<<<<< HEAD
                     require 'errors/404.php';
+=======
+                    require_once 'errors/404.php';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     exit;
                 }
 

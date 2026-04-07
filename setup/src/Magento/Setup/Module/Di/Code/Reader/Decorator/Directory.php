@@ -1,12 +1,25 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Setup\Module\Di\Code\Reader\Decorator;
 
 use Magento\Setup\Module\Di\Compiler\Log\Log;
 
+<<<<<<< HEAD
+=======
+/**
+ * Class Directory
+ *
+ * @package Magento\Setup\Module\Di\Code\Reader\Decorator
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 class Directory implements \Magento\Setup\Module\Di\Code\Reader\ClassesScannerInterface
 {
     /**
@@ -64,7 +77,11 @@ class Directory implements \Magento\Setup\Module\Di\Code\Reader\ClassesScannerIn
         $this->validator = $validator;
         $this->generationDir = $generationDir;
 
+<<<<<<< HEAD
         set_error_handler([$this, 'errorHandler'], E_NOTICE);
+=======
+        set_error_handler([$this, 'errorHandler'], E_STRICT);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -107,8 +124,11 @@ class Directory implements \Magento\Setup\Module\Di\Code\Reader\ClassesScannerIn
     }
 
     /**
+<<<<<<< HEAD
      * Retrieves relations
      *
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @return array
      */
     public function getRelations()

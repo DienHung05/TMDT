@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -10,7 +15,10 @@ namespace Magento\Security\Model\UserExpiration;
 use Magento\Framework\Locale\ResolverInterface;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -47,10 +55,16 @@ class ValidatorTest extends TestCase
      * Verify validation for date expiration with different locales.
      *
      * @magentoAppArea adminhtml
+<<<<<<< HEAD
      * @param string $locale
      * @return void
      */
     #[DataProvider('validateUserExpiresAtDataProvider')]
+=======
+     * @dataProvider validateUserExpiresAtDataProvider
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testValidateUserExpiresAt(string $locale): void
     {
         $this->markTestSkipped('Test is blocked by issue AC-285');
@@ -73,6 +87,7 @@ class ValidatorTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function validateUserExpiresAtDataProvider(): array
     {
         return [
@@ -84,6 +99,19 @@ class ValidatorTest extends TestCase
             ],
             'non_default_non_english_textual' => [
                 'locale' => 'uk_UA',
+=======
+    public function validateUserExpiresAtDataProvider(): array
+    {
+        return [
+            'default' => [
+                'locale_code' => 'en_US',
+            ],
+            'non_default_english_textual' => [
+                'locale_code' => 'de_DE',
+            ],
+            'non_default_non_english_textual' => [
+                'locale_code' => 'uk_UA',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

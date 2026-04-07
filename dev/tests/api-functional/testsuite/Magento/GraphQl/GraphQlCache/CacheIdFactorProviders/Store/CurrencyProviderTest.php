@@ -1,7 +1,13 @@
 <?php
+<<<<<<< HEAD
 /**
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+/*
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\GraphQl\GraphQlCache\CacheIdFactorProviders\Store;
 
@@ -25,12 +31,20 @@ class CurrencyProviderTest extends GraphQlAbstract
         $currency1Response = $this->graphQlQueryWithResponseHeaders($query, [], '', ['content-currency' => 'USD']);
         $this->assertArrayHasKey(CacheIdCalculator::CACHE_ID_HEADER, $currency1Response['headers']);
         $currency1CacheId = $currency1Response['headers'][CacheIdCalculator::CACHE_ID_HEADER];
+<<<<<<< HEAD
         $this->assertTrue((bool)preg_match('/^[0-9a-f]{64}$/i', $currency1CacheId));
+=======
+        $this->assertTrue((boolean)preg_match('/^[0-9a-f]{64}$/i', $currency1CacheId));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $currency2Response = $this->graphQlQueryWithResponseHeaders($query, [], '', ['content-currency' => 'EUR']);
         $this->assertArrayHasKey(CacheIdCalculator::CACHE_ID_HEADER, $currency2Response['headers']);
         $currency2CacheId = $currency2Response['headers'][CacheIdCalculator::CACHE_ID_HEADER];
+<<<<<<< HEAD
         $this->assertTrue((bool)preg_match('/^[0-9a-f]{64}$/i', $currency2CacheId));
+=======
+        $this->assertTrue((boolean)preg_match('/^[0-9a-f]{64}$/i', $currency2CacheId));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         // Assert that currency1 and currency2 return different cache ids
         $this->assertNotEquals($currency1CacheId, $currency2CacheId);

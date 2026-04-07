@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /** @var \Magento\Framework\Registry $registry */
@@ -24,5 +29,9 @@ $store = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(\Ma
 if ($store->load('fixture_third_store', 'code')->getId()) {
     $store->delete();
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 $registry->unregister('isSecureArea');
 $registry->register('isSecureArea', false);

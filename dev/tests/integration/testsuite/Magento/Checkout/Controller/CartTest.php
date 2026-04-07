@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -10,13 +15,18 @@
 namespace Magento\Checkout\Controller;
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
+<<<<<<< HEAD
 use Magento\Catalog\Model\Product;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\CatalogInventory\Api\StockItemRepositoryInterface;
+=======
+use Magento\Checkout\Model\Session;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Model\ResourceModel\CustomerRepository;
 use Magento\Framework\Data\Form\FormKey;
 use Magento\Framework\Api\SearchCriteriaBuilder;
+<<<<<<< HEAD
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Quote\Api\Data\CartInterface;
@@ -29,13 +39,20 @@ use Magento\Quote\Test\Fixture\GuestCart;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorage;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
+=======
+use Magento\Quote\Model\Quote;
+use Magento\Quote\Api\CartRepositoryInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Request;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Sales\Model\ResourceModel\Order\Collection as OrderCollection;
 use Magento\Sales\Model\ResourceModel\Order\Item\Collection as OrderItemCollection;
 use Magento\Framework\App\Request\Http as HttpRequest;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -47,6 +64,7 @@ class CartTest extends \Magento\TestFramework\TestCase\AbstractController
     private $checkoutSession;
 
     /**
+<<<<<<< HEAD
      * @var ProductRepositoryInterface
      */
     private $productRepository;
@@ -57,6 +75,8 @@ class CartTest extends \Magento\TestFramework\TestCase\AbstractController
     private $fixtures;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
@@ -64,8 +84,11 @@ class CartTest extends \Magento\TestFramework\TestCase\AbstractController
         parent::setUp();
         $this->checkoutSession = $this->_objectManager->get(CheckoutSession::class);
         $this->_objectManager->addSharedInstance($this->checkoutSession, CheckoutSession::class);
+<<<<<<< HEAD
         $this->productRepository = $this->_objectManager->create(ProductRepositoryInterface::class);
         $this->fixtures = DataFixtureStorageManager::getStorage();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -336,8 +359,13 @@ class CartTest extends \Magento\TestFramework\TestCase\AbstractController
      * @param string $expectedPrice
      * @magentoDataFixture Magento/Catalog/_files/products.php
      * @magentoAppIsolation enabled
+<<<<<<< HEAD
      */
     #[DataProvider('addAddProductDataProvider')]
+=======
+     * @dataProvider addAddProductDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddToCartSimpleProduct($area, $expectedPrice)
     {
         $formKey = $this->_objectManager->get(FormKey::class);
@@ -369,11 +397,19 @@ class CartTest extends \Magento\TestFramework\TestCase\AbstractController
     /**
      * Data provider for testAddToCartSimpleProduct
      */
+<<<<<<< HEAD
     public static function addAddProductDataProvider()
     {
         return [
             'frontend' => ['frontend', 'expectedPrice' => 10],
             'adminhtml' => ['adminhtml', 'expectedPrice' => 1]
+=======
+    public function addAddProductDataProvider()
+    {
+        return [
+            'frontend' => ['frontend', 'expected_price' => 10],
+            'adminhtml' => ['adminhtml', 'expected_price' => 1]
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         ];
     }
 
@@ -386,16 +422,26 @@ class CartTest extends \Magento\TestFramework\TestCase\AbstractController
      * @param string $request
      * @magentoAppArea frontend
      * @magentoDataFixture Magento/Checkout/_files/order_items.php
+<<<<<<< HEAD
      * @return void
      */
     #[DataProvider('reorderItemsDataProvider')]
+=======
+     * @dataProvider reorderItemsDataProvider
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testReorderItems(bool $loggedIn, string $request)
     {
         // Make sure test starts without logged in customer.
         $customerSession = $this->_objectManager->get(CustomerSession::class);
         $customerSession->logout();
 
+<<<<<<< HEAD
         $checkoutSession = Bootstrap::getObjectManager()->get(CheckoutSession::class);
+=======
+        $checkoutSession = Bootstrap::getObjectManager()->get(Session::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $expected = [];
         if ($loggedIn && $request == Request::METHOD_POST) {
             $customer = $this->_objectManager->create(CustomerRepository::class)->get('customer2@example.com');
@@ -423,6 +469,7 @@ class CartTest extends \Magento\TestFramework\TestCase\AbstractController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function reorderItemsDataProvider()
     {
         return [
@@ -441,6 +488,26 @@ class CartTest extends \Magento\TestFramework\TestCase\AbstractController
             [
                 'loggedIn' => true,
                 'request' => Request::METHOD_GET,
+=======
+    public function reorderItemsDataProvider()
+    {
+        return [
+            [
+                'logged_in' => false,
+                'request_type' => Request::METHOD_POST,
+            ],
+            [
+                'logged_in' => false,
+                'request_type' => Request::METHOD_GET,
+            ],
+            [
+                'logged_in' => true,
+                'request_type' => Request::METHOD_POST,
+            ],
+            [
+                'logged_in' => true,
+                'request_type' => Request::METHOD_GET,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }
@@ -472,6 +539,7 @@ class CartTest extends \Magento\TestFramework\TestCase\AbstractController
                 break;
         }
     }
+<<<<<<< HEAD
 
     /**
      * @throws NoSuchEntityException
@@ -601,4 +669,6 @@ class CartTest extends \Magento\TestFramework\TestCase\AbstractController
         $response = json_decode($response, true);
         return $response;
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

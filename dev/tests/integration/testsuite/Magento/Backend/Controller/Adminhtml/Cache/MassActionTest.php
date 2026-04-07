@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Backend\Controller\Adminhtml\Cache;
 
@@ -10,7 +15,10 @@ use Magento\TestFramework\Helper\Bootstrap;
 use Magento\Framework\Config\File\ConfigFilePool;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\TestFramework\App\State as AppState;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class MassActionTest extends \Magento\TestFramework\TestCase\AbstractBackendController
 {
@@ -52,9 +60,15 @@ class MassActionTest extends \Magento\TestFramework\TestCase\AbstractBackendCont
     }
 
     /**
+<<<<<<< HEAD
      * @param array $typesToEnable
      */
     #[DataProvider('massActionsDataProvider')]
+=======
+     * @dataProvider massActionsDataProvider
+     * @param array $typesToEnable
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testMassEnableActionDeveloperMode($typesToEnable = [])
     {
         $this->setAll(false);
@@ -72,9 +86,15 @@ class MassActionTest extends \Magento\TestFramework\TestCase\AbstractBackendCont
     }
 
     /**
+<<<<<<< HEAD
      * @param array $typesToEnable
      */
     #[DataProvider('massActionsDataProvider')]
+=======
+     * @dataProvider massActionsDataProvider
+     * @param array $typesToEnable
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testMassEnableActionProductionMode($typesToEnable = [])
     {
         Bootstrap::getObjectManager()->get(AppState::class)->setMode(AppState::MODE_PRODUCTION);
@@ -89,9 +109,15 @@ class MassActionTest extends \Magento\TestFramework\TestCase\AbstractBackendCont
     }
 
     /**
+<<<<<<< HEAD
      * @param array $typesToDisable
      */
     #[DataProvider('massActionsDataProvider')]
+=======
+     * @dataProvider massActionsDataProvider
+     * @param array $typesToDisable
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testMassDisableActionDeveloperMode($typesToDisable = [])
     {
         $this->setAll(true);
@@ -109,9 +135,15 @@ class MassActionTest extends \Magento\TestFramework\TestCase\AbstractBackendCont
     }
 
     /**
+<<<<<<< HEAD
      * @param array $typesToDisable
      */
     #[DataProvider('massActionsDataProvider')]
+=======
+     * @dataProvider massActionsDataProvider
+     * @param array $typesToDisable
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testMassDisableActionProductionMode($typesToDisable = [])
     {
         Bootstrap::getObjectManager()->get(AppState::class)->setMode(AppState::MODE_PRODUCTION);
@@ -128,14 +160,26 @@ class MassActionTest extends \Magento\TestFramework\TestCase\AbstractBackendCont
     /**
      * Retrieve cache states (enabled/disabled) information
      *
+<<<<<<< HEAD
      * @return array
+=======
+     * Access configuration file directly as it is not possible to re-include modified file under HHVM
+     * @link https://github.com/facebook/hhvm/issues/1447
+     *
+     * @return array
+     * @SuppressWarnings(PHPMD.EvalExpression)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     protected function getCacheStates()
     {
         $configFilePool = new ConfigFilePool();
         $configPath = Bootstrap::getInstance()->getAppTempDir() . '/'. DirectoryList::CONFIG .'/'
             . $configFilePool->getPath($configFilePool::APP_ENV);
+<<<<<<< HEAD
         $configData = include $configPath;
+=======
+        $configData = eval(str_replace('<?php', '', file_get_contents($configPath)));
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         return $configData[State::CACHE_KEY];
     }
 
@@ -157,9 +201,15 @@ class MassActionTest extends \Magento\TestFramework\TestCase\AbstractBackendCont
 
     /**
      * @magentoDataFixture Magento/Backend/controllers/_files/cache/all_types_invalidated.php
+<<<<<<< HEAD
      * @param array $typesToRefresh
      */
     #[DataProvider('massActionsDataProvider')]
+=======
+     * @dataProvider massActionsDataProvider
+     * @param array $typesToRefresh
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testMassRefreshAction($typesToRefresh = [])
     {
         $this->getRequest()->setParams(['types' => $typesToRefresh]);
@@ -175,7 +225,11 @@ class MassActionTest extends \Magento\TestFramework\TestCase\AbstractBackendCont
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function massActionsDataProvider()
+=======
+    public function massActionsDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'no types' => [[]],

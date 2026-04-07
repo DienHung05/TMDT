@@ -1,11 +1,19 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
  */
 declare(strict_types=1);
 
 use Magento\Sales\Model\InvoiceOrder;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+declare(strict_types=1);
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Creditmemo;
 use Magento\Sales\Model\Order\Creditmemo\Item;
@@ -21,7 +29,10 @@ $creditmemoFactory = $objectManager->get(CreditmemoFactory::class);
 /** @var Order $order */
 $order = $objectManager->create(Order::class);
 $order->loadByIncrementId('100000002');
+<<<<<<< HEAD
 $objectManager->get(InvoiceOrder::class)->execute($order->getId());
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 $creditmemo = $creditmemoFactory->createByOrder($order, $order->getData());
 $creditmemo->setOrder($order);
 $creditmemo->setState(Creditmemo::STATE_OPEN);

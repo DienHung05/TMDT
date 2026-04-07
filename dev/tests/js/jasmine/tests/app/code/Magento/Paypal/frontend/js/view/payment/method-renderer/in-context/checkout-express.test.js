@@ -1,6 +1,11 @@
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /* eslint-disable max-nested-callbacks */
@@ -12,7 +17,11 @@ define([
 ], function (Squire, ko, $, Component) {
     'use strict';
 
+<<<<<<< HEAD
     describe('paypal/js/view/payment/method-renderer/paypal-express-in-context', function () {
+=======
+    describe('paypal/js/view/payment/method-renderer/paypal-express-abstract', function () {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         var injector = new Squire(),
             mocks = {
                 'Magento_Paypal/js/action/set-payment-method': jasmine.createSpy(),
@@ -36,7 +45,11 @@ define([
             window.checkoutConfig = {
                 quoteData: {
                     /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
+<<<<<<< HEAD
                     entity_id: 1
+=======
+                    entity_Id: 1
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 },
                 formKey: 'formKey'
             };
@@ -59,7 +72,11 @@ define([
                     done();
                 });
         });
+<<<<<<< HEAD
         /*eslint-disable no-unused-vars*/
+=======
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         afterEach(function () {
             try {
                 injector.clean();

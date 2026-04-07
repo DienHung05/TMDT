@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\DownloadableImportExport\Model;
 
 use Magento\CatalogImportExport\Model\AbstractProductExportImportTestCase;
 use Magento\Catalog\Model\Product;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test export and import downloadable products
@@ -17,7 +25,11 @@ class DownloadableTest extends AbstractProductExportImportTestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function exportImportDataProvider(): array
+=======
+    public function exportImportDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'downloadable-product' => [
@@ -42,8 +54,13 @@ class DownloadableTest extends AbstractProductExportImportTestCase
      * @param string[] $skus
      * @param string[] $skippedAttributes
      * @return void
+<<<<<<< HEAD
      */
     #[DataProvider('exportImportDataProvider')]
+=======
+     * @dataProvider exportImportDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testImportExport(array $fixtures, array $skus, array $skippedAttributes = []): void
     {
         $skippedAttributes = array_merge(self::$skippedAttributes, ['downloadable_links']);
@@ -60,9 +77,15 @@ class DownloadableTest extends AbstractProductExportImportTestCase
      * @param array $fixtures
      * @param string[] $skus
      * @param string[] $skippedAttributes
+<<<<<<< HEAD
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     #[DataProvider('exportImportDataProvider')]
+=======
+     * @dataProvider exportImportDataProvider
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testImportExportWithPagination(array $fixtures, array $skus, array $skippedAttributes = [])
     {
         $skippedAttributes = array_merge(self::$skippedAttributes, ['downloadable_links']);

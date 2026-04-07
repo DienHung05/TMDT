@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Paypal\Controller\Payflow;
 
@@ -17,7 +22,10 @@ use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Email\Sender\OrderSender;
 use Magento\TestFramework\TestCase\AbstractController;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\MockObject_MockObject as MockObject;
 use Psr\Log\LoggerInterface;
 
@@ -72,8 +80,13 @@ class SilentPostTest extends AbstractController
      * @param string $orderState
      * @param string $orderStatus
      * @magentoDataFixture Magento/Paypal/_files/order_payflow_link.php
+<<<<<<< HEAD
      */
     #[DataProvider('responseCodeDataProvider')]
+=======
+     * @dataProvider responseCodeDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSuccessfulNotification($resultCode, $orderState, $orderStatus)
     {
         $orderIncrementId = '000000045';
@@ -95,7 +108,11 @@ class SilentPostTest extends AbstractController
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function responseCodeDataProvider()
+=======
+    public function responseCodeDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [Payflowlink::RESPONSE_CODE_APPROVED, Order::STATE_COMPLETE, Order::STATE_COMPLETE],

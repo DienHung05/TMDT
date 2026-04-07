@@ -1,9 +1,15 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 declare(strict_types=1);
 
 namespace Magento\Sales\Controller\Adminhtml\Order\Invoice;
@@ -13,7 +19,10 @@ use Magento\Sales\Api\Data\InvoiceInterface;
 use Magento\Sales\Api\Data\OrderItemInterface;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\ResourceModel\Order\Item;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\Constraint\StringContains;
 
 /**
@@ -36,11 +45,14 @@ class SaveTest extends AbstractInvoiceControllerTest
     private $orderItemResource;
 
     /**
+<<<<<<< HEAD
      * @var string
      */
     protected $resource = "Magento_Sales::invoice";
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
@@ -98,8 +110,13 @@ class SaveTest extends AbstractInvoiceControllerTest
             )
         );
         $this->assertEquals($message->getSubject(), $subject);
+<<<<<<< HEAD
         $bodyParts = quoted_printable_decode($message->getBody()->bodyToString());
         $this->assertThat($bodyParts, $messageConstraint);
+=======
+        $bodyParts = $message->getBody()->getParts();
+        $this->assertThat(reset($bodyParts)->getRawContent(), $messageConstraint);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -120,6 +137,11 @@ class SaveTest extends AbstractInvoiceControllerTest
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * @dataProvider invoiceDataProvider
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Sales/_files/order.php
      *
      * @param int $invoicedItemsQty
@@ -127,7 +149,10 @@ class SaveTest extends AbstractInvoiceControllerTest
      * @param bool $doShipment
      * @return void
      */
+<<<<<<< HEAD
     #[DataProvider('invoiceDataProvider')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSuccessfulInvoice(
         int $invoicedItemsQty,
         string $commentMessage = '',
@@ -147,6 +172,7 @@ class SaveTest extends AbstractInvoiceControllerTest
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function invoiceDataProvider(): array
     {
         return [
@@ -161,6 +187,22 @@ class SaveTest extends AbstractInvoiceControllerTest
                 'invoicedItemsQty' => 2,
                 'commentMessage' => '',
                 'doShipment' => true,
+=======
+    public function invoiceDataProvider(): array
+    {
+        return [
+            'with_comment_message' => [
+                'invoiced_items_qty' => 2,
+                'comment_message' => 'test comment message',
+            ],
+            'partial_invoice' => [
+                'invoiced_items_qty' => 1,
+            ],
+            'with_do_shipment' => [
+                'invoiced_items_qty' => 2,
+                'comment_message' => '',
+                'do_shipment' => true,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Paypal\Model\Api;
 
@@ -71,6 +76,10 @@ class PayflowNvpTest extends \PHPUnit\Framework\TestCase
 
         $refObject = new \ReflectionObject($config);
         $refProperty = $refObject->getProperty('productMetadata');
+<<<<<<< HEAD
+=======
+        $refProperty->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $refProperty->setValue($config, $productMetadata);
 
         $this->nvpApi->setConfigObject($config);

@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Framework\Css\PreProcessor\File\Collector;
 
 use Magento\Framework\App\Bootstrap;
 use Magento\Framework\App\Filesystem\DirectoryList;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoComponentsDir Magento/Framework/Css/PreProcessor/_files/code/Magento
@@ -80,9 +88,15 @@ class AggregatedTest extends \PHPUnit\Framework\TestCase
      * @param string $path
      * @param string $themeName
      * @param string[] $expectedFiles
+<<<<<<< HEAD
      * @magentoComponentsDir Magento/Framework/Css/PreProcessor/_files/design
      */
     #[DataProvider('getFilesDataProvider')]
+=======
+     * @dataProvider getFilesDataProvider
+     * @magentoComponentsDir Magento/Framework/Css/PreProcessor/_files/design
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetFiles($path, $themeName, array $expectedFiles)
     {
         /** @var \Magento\Framework\View\Design\Theme\FlyweightFactory $themeFactory */
@@ -106,7 +120,11 @@ class AggregatedTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getFilesDataProvider()
+=======
+    public function getFilesDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $fixtureDir = dirname(dirname(__DIR__));
         return [

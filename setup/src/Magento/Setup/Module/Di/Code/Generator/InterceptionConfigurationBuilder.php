@@ -1,7 +1,13 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Setup\Module\Di\Code\Generator;
@@ -9,12 +15,18 @@ namespace Magento\Setup\Module\Di\Code\Generator;
 use Magento\Framework\App\Area;
 use Magento\Framework\App\Cache\Manager;
 use Magento\Framework\App\Interception\Cache\CompiledConfig;
+<<<<<<< HEAD
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Interception\Config\Config as InterceptionConfig;
 use Magento\Framework\Interception\Definition\Runtime;
 use Magento\Framework\Interception\ObjectManager\ConfigInterface;
 use Magento\Framework\ObjectManager\InterceptableValidator;
 use Magento\Setup\Module\Di\Code\Reader\Type;
+=======
+use Magento\Framework\Interception\Config\Config as InterceptionConfig;
+use Magento\Setup\Module\Di\Code\Reader\Type;
+use Magento\Framework\ObjectManager\InterceptableValidator;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class InterceptionConfigurationBuilder
 {
@@ -51,32 +63,45 @@ class InterceptionConfigurationBuilder
     private $interceptableValidator;
 
     /**
+<<<<<<< HEAD
      * @var ConfigInterface
      */
     private $omConfig;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @param InterceptionConfig $interceptionConfig
      * @param PluginList $pluginList
      * @param Type $typeReader
      * @param Manager $cacheManager
      * @param InterceptableValidator $interceptableValidator
+<<<<<<< HEAD
      * @param ConfigInterface|null $omConfig
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function __construct(
         InterceptionConfig $interceptionConfig,
         PluginList $pluginList,
         Type $typeReader,
         Manager $cacheManager,
+<<<<<<< HEAD
         InterceptableValidator $interceptableValidator,
         ?ConfigInterface $omConfig = null
+=======
+        InterceptableValidator $interceptableValidator
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     ) {
         $this->interceptionConfig = $interceptionConfig;
         $this->pluginList = $pluginList;
         $this->typeReader = $typeReader;
         $this->cacheManager = $cacheManager;
         $this->interceptableValidator = $interceptableValidator;
+<<<<<<< HEAD
         $this->omConfig = $omConfig ?? ObjectManager::getInstance()->get(ConfigInterface::class);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -205,6 +230,7 @@ class InterceptionConfigurationBuilder
      * @param array $interceptionConfiguration
      * @return array
      */
+<<<<<<< HEAD
     private function getInterceptedMethods(array $interceptionConfiguration): array
     {
         $pluginDefinitionList = new Runtime();
@@ -225,6 +251,20 @@ class InterceptionConfigurationBuilder
             $plugins = \array_unique($pluginsMethods);
         }
 
+=======
+    private function getInterceptedMethods($interceptionConfiguration)
+    {
+        $pluginDefinitionList = new \Magento\Framework\Interception\Definition\Runtime();
+        foreach ($interceptionConfiguration as &$plugins) {
+            $pluginsMethods = [];
+            foreach ($plugins as $plugin) {
+                $pluginsMethods = array_unique(
+                    array_merge($pluginsMethods, array_keys($pluginDefinitionList->getMethodList($plugin)))
+                );
+            }
+            $plugins = $pluginsMethods;
+        }
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         return $interceptionConfiguration;
     }
 }

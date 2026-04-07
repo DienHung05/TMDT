@@ -1,5 +1,6 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
  */
@@ -7,6 +8,13 @@ namespace Magento\Framework\MessageQueue\UseCase;
 
 use Magento\Framework\MessageQueue\DefaultValueProvider;
 use Magento\TestFramework\Helper\Bootstrap;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Framework\MessageQueue\UseCase;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestModuleAsyncAmqp\Model\AsyncTestData;
 
 class MixSyncAndAsyncSingleQueueTest extends QueueTestCaseAbstract
@@ -17,7 +25,11 @@ class MixSyncAndAsyncSingleQueueTest extends QueueTestCaseAbstract
     protected $msgObject;
 
     /**
+<<<<<<< HEAD
      * @var string[]
+=======
+     * {@inheritdoc}
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     protected $consumers = ['mixed.sync.and.async.queue.consumer'];
 
@@ -31,6 +43,7 @@ class MixSyncAndAsyncSingleQueueTest extends QueueTestCaseAbstract
      */
     protected $maxMessages = 4;
 
+<<<<<<< HEAD
     /**
      * @var string
      */
@@ -58,6 +71,10 @@ class MixSyncAndAsyncSingleQueueTest extends QueueTestCaseAbstract
             This test is AMQP-specific.');
         }
 
+=======
+    public function testMixSyncAndAsyncSingleQueue()
+    {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->msgObject = $this->objectManager->create(AsyncTestData::class); // @phpstan-ignore-line
 
         // Publish asynchronous messages

@@ -1,6 +1,11 @@
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /* eslint-disable max-nested-callbacks */
@@ -94,6 +99,7 @@ define([
                 expect(rules['validate-number'].handler(value)).toBe(false);
             });
         });
+<<<<<<< HEAD
         describe('"validate-nonempty-number-greater-than-zero" method', function () {
             it('Check on empty value', function () {
                 var value = '';
@@ -164,6 +170,8 @@ define([
                 expect(rules['validate-number-range'].handler('abc123', '1-10')).toBe(false);
             });
         });
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     });
 
     describe('validate-color', function () {

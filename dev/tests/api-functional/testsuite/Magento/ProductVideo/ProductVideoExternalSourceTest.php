@@ -1,12 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\ProductVideo;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
@@ -19,6 +25,9 @@ use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Fixture\ScopeFixture;
 use Magento\TestFramework\Helper\Bootstrap;
+=======
+use Magento\Catalog\Api\Data\ProductInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\TestCase\WebapiAbstract;
 
 /**
@@ -29,16 +38,26 @@ use Magento\TestFramework\TestCase\WebapiAbstract;
  */
 class ProductVideoExternalSourceTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     public const SERVICE_NAME = 'catalogProductRepositoryV1';
     public const SERVICE_VERSION = 'V1';
     public const RESOURCE_PATH = '/V1/products';
+=======
+    const SERVICE_NAME = 'catalogProductRepositoryV1';
+    const SERVICE_VERSION = 'V1';
+    const RESOURCE_PATH = '/V1/products';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * Media gallery entries with external videos
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function externalVideoDataProvider(): array
+=======
+    public function externalVideoDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'youtube-external-video' => [
@@ -48,7 +67,11 @@ class ProductVideoExternalSourceTest extends WebapiAbstract
                     'label' => 'Test Video Created',
                     'types' => [],
                     'position' => 1,
+<<<<<<< HEAD
                     'content' => self::getVideoThumbnailStub(),
+=======
+                    'content' => $this->getVideoThumbnailStub(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'extension_attributes' => [
                         'video_content' => [
                             'media_type' => 'external-video',
@@ -68,7 +91,11 @@ class ProductVideoExternalSourceTest extends WebapiAbstract
                     'label' => 'Test Video Updated',
                     'types' => [],
                     'position' => 1,
+<<<<<<< HEAD
                     'content' => self::getVideoThumbnailStub(),
+=======
+                    'content' => $this->getVideoThumbnailStub(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'extension_attributes' => [
                         'video_content' => [
                             'media_type' => 'external-video',
@@ -89,7 +116,11 @@ class ProductVideoExternalSourceTest extends WebapiAbstract
      *
      * @return array|string[]
      */
+<<<<<<< HEAD
     private static function getVideoThumbnailStub(): array
+=======
+    private function getVideoThumbnailStub(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'type' => 'image/png',
@@ -103,9 +134,15 @@ class ProductVideoExternalSourceTest extends WebapiAbstract
     /**
      * Test create/ update product with external video media gallery entry
      *
+<<<<<<< HEAD
      * @param array $mediaGalleryData
      */
     #[DataProvider('externalVideoDataProvider')]
+=======
+     * @dataProvider externalVideoDataProvider
+     * @param array $mediaGalleryData
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testCreateWithExternalVideo(array $mediaGalleryData)
     {
         $simpleProductBaseData = $this->getSimpleProductData(
@@ -124,6 +161,7 @@ class ProductVideoExternalSourceTest extends WebapiAbstract
         );
     }
 
+<<<<<<< HEAD
     #[
         DataFixture(ScopeFixture::class, as: 'global_scope'),
         DataFixture(StoreFixture::class, as: 'store_view_2'),
@@ -217,6 +255,8 @@ class ProductVideoExternalSourceTest extends WebapiAbstract
         $this->assertEquals(1, $video['video_description_use_default']);
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Get Simple Product Data
      *
@@ -279,6 +319,7 @@ class ProductVideoExternalSourceTest extends WebapiAbstract
 
         return $this->_webApiCall($serviceInfo, $requestData, null, $storeCode);
     }
+<<<<<<< HEAD
 
     private function getProductModel(string $sku, ?int $storeId = null): ProductInterface
     {
@@ -308,4 +349,6 @@ class ProductVideoExternalSourceTest extends WebapiAbstract
 
         return $this->_webApiCall($serviceInfo, ['sku' => $sku], null, $storeCode);
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

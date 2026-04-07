@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /**
@@ -11,7 +16,10 @@ namespace Magento\Theme\Model\Theme;
 
 use Magento\Framework\App\Area;
 use Magento\Framework\App\Filesystem\DirectoryList;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoComponentsDir Magento/Theme/Model/_files/design
@@ -55,8 +63,14 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Load from configuration
+<<<<<<< HEAD
      */
     #[DataProvider('expectedThemeDataFromConfiguration')]
+=======
+     *
+     * @dataProvider expectedThemeDataFromConfiguration
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testLoadFromConfiguration($area, $vendor, $themeName, $expectedData)
     {
         $this->_model->addConstraint(\Magento\Theme\Model\Theme\Collection::CONSTRAINT_AREA, $area);
@@ -68,8 +82,15 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Expected theme data from configuration
+<<<<<<< HEAD
      */
     public static function expectedThemeDataFromConfiguration(): array
+=======
+     *
+     * @return array
+     */
+    public function expectedThemeDataFromConfiguration()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

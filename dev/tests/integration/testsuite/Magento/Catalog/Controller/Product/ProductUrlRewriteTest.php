@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -22,6 +27,10 @@ use Magento\TestFramework\TestCase\AbstractController;
 /**
  * Checks product availability on storefront by url rewrite
  *
+<<<<<<< HEAD
+=======
+ * @magentoConfigFixture default/catalog/seo/generate_category_product_rewrites 1
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  * @magentoDbIsolation enabled
  */
 class ProductUrlRewriteTest extends AbstractController
@@ -63,7 +72,10 @@ class ProductUrlRewriteTest extends AbstractController
     }
 
     /**
+<<<<<<< HEAD
      * @magentoConfigFixture default/catalog/seo/generate_category_product_rewrites 1
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/second_product_simple.php
      * @return void
      */
@@ -77,7 +89,10 @@ class ProductUrlRewriteTest extends AbstractController
     }
 
     /**
+<<<<<<< HEAD
      * @magentoConfigFixture default/catalog/seo/generate_category_product_rewrites 1
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/category_product.php
      * @return void
      */
@@ -92,7 +107,10 @@ class ProductUrlRewriteTest extends AbstractController
     }
 
     /**
+<<<<<<< HEAD
      * @magentoConfigFixture default/catalog/seo/generate_category_product_rewrites 1
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDataFixture Magento/Catalog/_files/second_product_simple.php
      * @return void
      */
@@ -112,7 +130,10 @@ class ProductUrlRewriteTest extends AbstractController
     }
 
     /**
+<<<<<<< HEAD
      * @magentoConfigFixture default/catalog/seo/generate_category_product_rewrites 1
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoDbIsolation disabled
      * @magentoDataFixture Magento/Store/_files/core_fixturestore.php
      * @magentoDataFixture Magento/Catalog/_files/second_product_simple.php

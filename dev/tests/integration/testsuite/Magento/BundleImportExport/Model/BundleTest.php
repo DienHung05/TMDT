@@ -1,19 +1,31 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\BundleImportExport\Model;
 
 use Magento\CatalogImportExport\Model\AbstractProductExportImportTestCase;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class BundleTest extends AbstractProductExportImportTestCase
 {
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function exportImportDataProvider(): array
+=======
+    public function exportImportDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             // @todo uncomment after MAGETWO-49677 resolved
@@ -50,6 +62,7 @@ class BundleTest extends AbstractProductExportImportTestCase
     }
 
     /**
+<<<<<<< HEAD
      * Run import/export tests.
      *
      * @magentoAppArea adminhtml
@@ -79,6 +92,8 @@ class BundleTest extends AbstractProductExportImportTestCase
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function assertEqualsSpecificAttributes(

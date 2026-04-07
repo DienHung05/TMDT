@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -53,7 +58,11 @@ class AddressTest extends \PHPUnit\Framework\TestCase
 
         $this->quoteSession = $this->getMockBuilder(QuoteSession::class)
             ->disableOriginalConstructor()
+<<<<<<< HEAD
             ->onlyMethods(['getStore', 'getQuote', '__call'])
+=======
+            ->setMethods(['getCustomerId', 'getStore', 'getStoreId', 'getQuote'])
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ->getMock();
 
         $this->block = $this->objectManager->create(
@@ -72,6 +81,7 @@ class AddressTest extends \PHPUnit\Framework\TestCase
         $website = $this->getWebsite('base');
         $customer = $this->getCustomer('customer@example.com', (int)$website->getId());
         $addresses = $customer->getAddresses();
+<<<<<<< HEAD
         $customerId = $customer->getId();
         $this->quoteSession->method('__call')
             ->willReturnCallback(function ($method) use ($customerId) {
@@ -80,6 +90,10 @@ class AddressTest extends \PHPUnit\Framework\TestCase
                 }
                 return null;
             });
+=======
+        $this->quoteSession->method('getCustomerId')
+            ->willReturn($customer->getId());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
         $actual = $this->block->getAddressCollection();
         self::assertNotEmpty($actual);
@@ -99,6 +113,7 @@ class AddressTest extends \PHPUnit\Framework\TestCase
         $store = $this->getStore('fixture_second_store');
         $this->quoteSession->method('getStore')
             ->willReturn($store);
+<<<<<<< HEAD
         $customerId = $customer->getId();
         $this->quoteSession->method('__call')
             ->willReturnCallback(function ($method) use ($customerId) {
@@ -107,6 +122,10 @@ class AddressTest extends \PHPUnit\Framework\TestCase
                 }
                 return null;
             });
+=======
+        $this->quoteSession->method('getCustomerId')
+            ->willReturn($customer->getId());
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $addresses = $customer->getAddresses();
         $expected = [
             0 => [

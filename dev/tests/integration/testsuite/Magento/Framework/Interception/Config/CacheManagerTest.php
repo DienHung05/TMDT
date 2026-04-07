@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 declare(strict_types=1);
@@ -9,7 +14,10 @@ declare(strict_types=1);
 namespace Magento\Framework\Interception\Config;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class CacheManagerTest extends \PHPUnit\Framework\TestCase
 {
@@ -62,9 +70,15 @@ class CacheManagerTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Test load interception cache from generated/metadata
+<<<<<<< HEAD
      * @param array $testConfig
      */
     #[DataProvider('interceptionCompiledConfigDataProvider')]
+=======
+     * @dataProvider interceptionCompiledConfigDataProvider
+     * @param array $testConfig
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testInstantiateFromCompiled(array $testConfig)
     {
         $this->configWriter->write(self::CACHE_ID, $testConfig);
@@ -75,9 +89,15 @@ class CacheManagerTest extends \PHPUnit\Framework\TestCase
 
     /**
      * Test load interception cache from backend cache
+<<<<<<< HEAD
      * @param array $testConfig
      */
     #[DataProvider('interceptionCacheConfigDataProvider')]
+=======
+     * @dataProvider interceptionCacheConfigDataProvider
+     * @param array $testConfig
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testInstantiateFromCache(array $testConfig)
     {
         $this->cache->save($this->serializer->serialize($testConfig), self::CACHE_ID);
@@ -86,7 +106,11 @@ class CacheManagerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($testConfig, $config->load(self::CACHE_ID));
     }
 
+<<<<<<< HEAD
     public static function interceptionCompiledConfigDataProvider()
+=======
+    public function interceptionCompiledConfigDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [['classA' => true, 'classB' => false]],
@@ -94,7 +118,11 @@ class CacheManagerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+<<<<<<< HEAD
     public static function interceptionCacheConfigDataProvider()
+=======
+    public function interceptionCacheConfigDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [['classC' => true, 'classD' => false]],

@@ -1,14 +1,23 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2018 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Bundle\Model\Product;
 
+<<<<<<< HEAD
 use Magento\Bundle\Api\Data\LinkInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use \Magento\Bundle\Api\Data\LinkInterface;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoDbIsolation disabled
@@ -20,11 +29,18 @@ class FixedBundlePriceCalculatorWithDimensionTest extends BundlePriceAbstract
     /**
      * @param array $strategyModifiers
      * @param array $expectedResults
+<<<<<<< HEAD
+=======
+     * @dataProvider getTestCases
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoAppIsolation enabled
      * @magentoDataFixture Magento/Bundle/_files/PriceCalculator/fixed_bundle_product.php
      * @magentoDbIsolation disabled
      */
+<<<<<<< HEAD
     #[DataProvider('getTestCases')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPriceForFixedBundle(array $strategyModifiers, array $expectedResults)
     {
         $this->prepareFixture($strategyModifiers, 'bundle_product');
@@ -58,12 +74,19 @@ class FixedBundlePriceCalculatorWithDimensionTest extends BundlePriceAbstract
     /**
      * @param array $strategyModifiers
      * @param array $expectedResults
+<<<<<<< HEAD
+=======
+     * @dataProvider getTestCases
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @magentoAppIsolation enabled
      * @magentoConfigFixture current_store catalog/price/scope 1
      * @magentoDataFixture Magento/Bundle/_files/PriceCalculator/fixed_bundle_product.php
      * @magentoDbIsolation disabled
      */
+<<<<<<< HEAD
     #[DataProvider('getTestCases')]
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPriceForFixedBundleInWebsiteScope(array $strategyModifiers, array $expectedResults)
     {
         $this->prepareFixture($strategyModifiers, 'bundle_product');
@@ -99,11 +122,19 @@ class FixedBundlePriceCalculatorWithDimensionTest extends BundlePriceAbstract
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function getTestCases()
     {
         return [
             '#1 Testing price for fixed bundle product with one simple' => [
                 'strategyModifiers' => self::getProductWithOneSimple(),
+=======
+    public function getTestCases()
+    {
+        return [
+            '#1 Testing price for fixed bundle product with one simple' => [
+                'strategy' => $this->getProductWithOneSimple(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     //  110 + 10 (price from simple1)
                     'minimalPrice' => 120,
@@ -113,7 +144,11 @@ class FixedBundlePriceCalculatorWithDimensionTest extends BundlePriceAbstract
             ],
 
             '#2 Testing price for fixed bundle product with three simples and different qty' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductWithDifferentQty(),
+=======
+                'strategy' => $this->getProductWithDifferentQty(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     // 110 + 10 (min price from simples)
                     'minimalPrice' => 120,
@@ -123,7 +158,11 @@ class FixedBundlePriceCalculatorWithDimensionTest extends BundlePriceAbstract
             ],
 
             '#3 Testing price for fixed bundle product with three simples and different price' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductWithDifferentPrice(),
+=======
+                'strategy' => $this->getProductWithDifferentPrice(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     //  110 + 10
                     'minimalPrice' => 120,
@@ -133,7 +172,11 @@ class FixedBundlePriceCalculatorWithDimensionTest extends BundlePriceAbstract
             ],
 
             '#4 Testing price for fixed bundle product with three simples' => [
+<<<<<<< HEAD
                 'strategyModifiers' => self::getProductWithSamePrice(),
+=======
+                'strategy' => $this->getProductWithSamePrice(),
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'expectedResults' => [
                     //  110 + 10
                     'minimalPrice' => 120,
@@ -143,10 +186,17 @@ class FixedBundlePriceCalculatorWithDimensionTest extends BundlePriceAbstract
             ],
 
             '
+<<<<<<< HEAD
                 #5 Testing price for fixed bundle product
                 with fixed sub items, fixed options and without any discounts
             ' => [
                 'strategyModifiers' => self::getBundleConfiguration3(
+=======
+                #5 Testing price for fixed bundle product 
+                with fixed sub items, fixed options and without any discounts
+            ' => [
+                'strategy' => $this->getBundleConfiguration3(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_FIXED,
                     self::CUSTOM_OPTION_PRICE_TYPE_FIXED
                 ),
@@ -160,10 +210,17 @@ class FixedBundlePriceCalculatorWithDimensionTest extends BundlePriceAbstract
             ],
 
             '
+<<<<<<< HEAD
                 #6 Testing price for fixed bundle product
                 with percent sub items, percent options and without any discounts
             ' => [
                 'strategyModifiers' => self::getBundleConfiguration3(
+=======
+                #6 Testing price for fixed bundle product 
+                with percent sub items, percent options and without any discounts
+            ' => [
+                'strategy' => $this->getBundleConfiguration3(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_PERCENT,
                     self::CUSTOM_OPTION_PRICE_TYPE_PERCENT
                 ),
@@ -177,10 +234,17 @@ class FixedBundlePriceCalculatorWithDimensionTest extends BundlePriceAbstract
             ],
 
             '
+<<<<<<< HEAD
                 #7 Testing price for fixed bundle product
                 with fixed sub items, percent options and without any discounts
             ' => [
                 'strategyModifiers' => self::getBundleConfiguration3(
+=======
+                #7 Testing price for fixed bundle product 
+                with fixed sub items, percent options and without any discounts
+            ' => [
+                'strategy' => $this->getBundleConfiguration3(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_FIXED,
                     self::CUSTOM_OPTION_PRICE_TYPE_PERCENT
                 ),
@@ -194,10 +258,17 @@ class FixedBundlePriceCalculatorWithDimensionTest extends BundlePriceAbstract
             ],
 
             '
+<<<<<<< HEAD
                 #8 Testing price for fixed bundle product
                 with percent sub items, fixed options and without any discounts
             ' => [
                 'strategyModifiers' => self::getBundleConfiguration3(
+=======
+                #8 Testing price for fixed bundle product 
+                with percent sub items, fixed options and without any discounts
+            ' => [
+                'strategy' => $this->getBundleConfiguration3(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     LinkInterface::PRICE_TYPE_PERCENT,
                     self::CUSTOM_OPTION_PRICE_TYPE_FIXED
                 ),
@@ -216,7 +287,11 @@ class FixedBundlePriceCalculatorWithDimensionTest extends BundlePriceAbstract
      * Fixed bundle product with one simple
      * @return array
      */
+<<<<<<< HEAD
     private static function getProductWithOneSimple()
+=======
+    private function getProductWithOneSimple()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -246,7 +321,11 @@ class FixedBundlePriceCalculatorWithDimensionTest extends BundlePriceAbstract
      * Fixed bundle product with three simples and different qty
      * @return array
      */
+<<<<<<< HEAD
     private static function getProductWithDifferentQty()
+=======
+    private function getProductWithDifferentQty()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -288,7 +367,11 @@ class FixedBundlePriceCalculatorWithDimensionTest extends BundlePriceAbstract
      * Fixed bundle product with three simples and different price
      * @return array
      */
+<<<<<<< HEAD
     private static function getProductWithSamePrice()
+=======
+    private function getProductWithSamePrice()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -330,7 +413,11 @@ class FixedBundlePriceCalculatorWithDimensionTest extends BundlePriceAbstract
      * Fixed bundle product with three simples
      * @return array
      */
+<<<<<<< HEAD
     private static function getProductWithDifferentPrice()
+=======
+    private function getProductWithDifferentPrice()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [
@@ -374,7 +461,11 @@ class FixedBundlePriceCalculatorWithDimensionTest extends BundlePriceAbstract
      * @param string $customOptionsPriceType
      * @return array
      */
+<<<<<<< HEAD
     private static function getBundleConfiguration3($selectionsPriceType, $customOptionsPriceType)
+=======
+    private function getBundleConfiguration3($selectionsPriceType, $customOptionsPriceType)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $optionsData = [
             [

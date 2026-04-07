@@ -1,6 +1,11 @@
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 /* eslint-disable max-nested-callbacks */
@@ -119,8 +124,12 @@ define([
                 obj.data = function (data) {
                     if (!data) {
                         return {
+<<<<<<< HEAD
                             existingKey1: 'existingKey1Value',
                             existingKey2: 'existingKey2Value'
+=======
+                            dataProperty: 'dataValue'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                         };
                     }
 
@@ -131,16 +140,25 @@ define([
             it('check calls "providerHandler" method with data', function () {
                 var data = {
                     items: {
+<<<<<<< HEAD
                         newKey: 'newKeyValue',
                         existingKey2: 'existingKey2NewValue'
+=======
+                        key: 'value'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     }
                 };
 
                 obj.providerHandler(data);
 
+<<<<<<< HEAD
                 expect(obj.result.existingKey1).toBe('existingKey1Value');
                 expect(obj.result.existingKey2).toBe('existingKey2NewValue');
                 expect(obj.result.newKey).toBe('newKeyValue');
+=======
+                expect(obj.result.key).toBe('value');
+                expect(obj.result.dataProperty).toBe('dataValue');
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             });
             it('check calls "providerHandler" method without data', function () {
                 obj.providerHandler({});
@@ -347,6 +365,7 @@ define([
                 expect(obj.hasIdsInSentRequest(ids)).toBe(false);
             });
 
+<<<<<<< HEAD
             it('check calls "hasIdsInSentRequest" with request data #1', function () {
                 expect(obj.hasIdsInSentRequest(ids)).toBe(true);
             });
@@ -361,6 +380,11 @@ define([
                 };
                 expect(obj.hasIdsInSentRequest(ids)).toBe(false);
             });
+=======
+            it('check calls "hasIdsInSentRequest" with request data', function () {
+                expect(obj.hasIdsInSentRequest(ids)).toBe(true);
+            });
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         });
         describe('"addDataFromPageCache" method', function () {
             beforeEach(function () {

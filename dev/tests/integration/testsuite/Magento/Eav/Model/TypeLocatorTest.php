@@ -1,13 +1,21 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Eav\Model;
 
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 
 class TypeLocatorTest extends \PHPUnit\Framework\TestCase
@@ -25,8 +33,13 @@ class TypeLocatorTest extends \PHPUnit\Framework\TestCase
     /**
      * @param string $entityType
      * @param string[] $attributeList
+<<<<<<< HEAD
      */
     #[DataProvider('getExpectedAttributeTypesProvider')]
+=======
+     * @dataProvider getExpectedAttributeTypesProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetType(
         $entityType,
         array $attributeList
@@ -44,7 +57,11 @@ class TypeLocatorTest extends \PHPUnit\Framework\TestCase
      * @return array
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
+<<<<<<< HEAD
     public static function getExpectedAttributeTypesProvider(): array
+=======
+    public function getExpectedAttributeTypesProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'product' => [
@@ -195,7 +212,11 @@ class TypeLocatorTest extends \PHPUnit\Framework\TestCase
                     'custom_design_to' => 'string',
                     'available_sort_by' => 'string[]',
                     'page_layout' => 'string',
+<<<<<<< HEAD
                     'default_sort_by' => 'string',
+=======
+                    'default_sort_by' => 'string[]',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'filter_price_range' => 'double',
                     'custom_layout_update' => 'string',
                 ]
@@ -216,6 +237,10 @@ class TypeLocatorTest extends \PHPUnit\Framework\TestCase
         $reflection = new \ReflectionObject($this);
         foreach ($reflection->getProperties() as $property) {
             if (!$property->isStatic() && 0 !== strpos($property->getDeclaringClass()->getName(), 'PHPUnit')) {
+<<<<<<< HEAD
+=======
+                $property->setAccessible(true);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $property->setValue($this, null);
             }
         }

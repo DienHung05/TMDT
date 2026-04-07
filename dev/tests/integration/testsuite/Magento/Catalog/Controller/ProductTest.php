@@ -1,12 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2013 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Catalog\Controller;
 
+<<<<<<< HEAD
 use Magento\Bundle\Test\Fixture\Link as BundleSelectionFixture;
 use Magento\Bundle\Test\Fixture\Option as BundleOptionFixture;
 use Magento\Bundle\Test\Fixture\Product as BundleProductFixture;
@@ -22,6 +28,13 @@ use Magento\TestFramework\Catalog\Model\ProductLayoutUpdateManager;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorage;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
+=======
+use Magento\Catalog\Api\Data\ProductInterface;
+use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Catalog\Model\Session;
+use Magento\Framework\Registry;
+use Magento\TestFramework\Catalog\Model\ProductLayoutUpdateManager;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\Helper\Xpath;
 use Magento\TestFramework\TestCase\AbstractController;
@@ -45,11 +58,14 @@ class ProductTest extends AbstractController
     private $session;
 
     /**
+<<<<<<< HEAD
      * @var DataFixtureStorage
      */
     private $fixture;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
@@ -68,7 +84,10 @@ class ProductTest extends AbstractController
         $this->registry = $this->_objectManager->get(Registry::class);
         $this->productRepository = $this->_objectManager->get(ProductRepositoryInterface::class);
         $this->session = $this->_objectManager->get(Session::class);
+<<<<<<< HEAD
         $this->fixture = DataFixtureStorageManager::getStorage();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -271,6 +290,7 @@ class ProductTest extends AbstractController
             ->getHandles();
         $this->assertContains("catalog_product_view_selectable_{$sku}_{$file}", $handles);
     }
+<<<<<<< HEAD
 
     /**
      * Validate itemprop generation on different product types' page
@@ -341,4 +361,6 @@ class ProductTest extends AbstractController
             'itemprop description doesn\'t match for product type '.$product->getTypeId()
         );
     }
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 }

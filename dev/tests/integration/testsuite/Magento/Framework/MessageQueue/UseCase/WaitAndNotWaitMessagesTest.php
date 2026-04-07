@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Framework\MessageQueue\UseCase;
 
@@ -9,8 +14,11 @@ use Magento\Framework\App\DeploymentConfig\FileReader;
 use Magento\Framework\App\DeploymentConfig\Writer;
 use Magento\Framework\Config\File\ConfigFilePool;
 use Magento\Framework\Filesystem;
+<<<<<<< HEAD
 use Magento\Framework\MessageQueue\DefaultValueProvider;
 use Magento\TestFramework\Helper\Bootstrap;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestModuleAsyncAmqp\Model\AsyncTestData;
 
 class WaitAndNotWaitMessagesTest extends QueueTestCaseAbstract
@@ -36,7 +44,11 @@ class WaitAndNotWaitMessagesTest extends QueueTestCaseAbstract
     protected $msgObject;
 
     /**
+<<<<<<< HEAD
      * @var string[]
+=======
+     * {@inheritdoc}
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     protected $consumers = ['mixed.sync.and.async.queue.consumer'];
 
@@ -51,15 +63,19 @@ class WaitAndNotWaitMessagesTest extends QueueTestCaseAbstract
     protected $maxMessages = 4;
 
     /**
+<<<<<<< HEAD
      * @var string
      */
     private $connectionType;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
     {
+<<<<<<< HEAD
         $this->objectManager = Bootstrap::getObjectManager();
         /** @var DefaultValueProvider $defaultValueProvider */
         $defaultValueProvider = $this->objectManager->get(DefaultValueProvider::class);
@@ -73,6 +89,14 @@ class WaitAndNotWaitMessagesTest extends QueueTestCaseAbstract
             $this->filesystem = $this->objectManager->get(Filesystem::class);
             $this->config = $this->loadConfig();
         }
+=======
+        parent::setUp();
+        // phpstan:ignore "Class Magento\TestModuleAsyncAmqp\Model\AsyncTestData not found."
+        $this->msgObject = $this->objectManager->create(AsyncTestData::class);
+        $this->reader = $this->objectManager->get(FileReader::class);
+        $this->filesystem = $this->objectManager->get(Filesystem::class);
+        $this->config = $this->loadConfig();
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -80,11 +104,14 @@ class WaitAndNotWaitMessagesTest extends QueueTestCaseAbstract
      */
     public function testWaitForMessages()
     {
+<<<<<<< HEAD
         if ($this->connectionType === 'stomp') {
             $this->markTestSkipped('AMQP test skipped because STOMP connection is available.
             This test is AMQP-specific.');
         }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->publisherConsumerController->stopConsumers();
 
         $config = $this->config;
@@ -116,11 +143,14 @@ class WaitAndNotWaitMessagesTest extends QueueTestCaseAbstract
      */
     public function testNotWaitForMessages(): void
     {
+<<<<<<< HEAD
         if ($this->connectionType === 'stomp') {
             $this->markTestSkipped('AMQP test skipped because STOMP connection is available.
             This test is AMQP-specific.');
         }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $this->publisherConsumerController->stopConsumers();
 
         $config = $this->config;
@@ -181,8 +211,12 @@ class WaitAndNotWaitMessagesTest extends QueueTestCaseAbstract
     protected function tearDown(): void
     {
         parent::tearDown();
+<<<<<<< HEAD
         if ($this->config !== null) {
             $this->writeConfig($this->config);
         }
+=======
+        $this->writeConfig($this->config);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 namespace Magento\Test\Integrity;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestStatus\TestStatus;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * An integrity test that searches for references to static files and asserts that they are resolved via fallback
@@ -58,7 +66,10 @@ class StaticFilesTest extends \PHPUnit\Framework\TestCase
      */
     private $filesystem;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     protected function setUp(): void
     {
         $om = \Magento\TestFramework\Helper\Bootstrap::getObjectmanager();
@@ -89,8 +100,13 @@ class StaticFilesTest extends \PHPUnit\Framework\TestCase
      * @param string $module
      * @param string $filePath
      * @param string $absolutePath
+<<<<<<< HEAD
      */
     #[DataProvider('referencesFromStaticFilesDataProvider')]
+=======
+     * @dataProvider referencesFromStaticFilesDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testReferencesFromStaticFiles($area, $themePath, $locale, $module, $filePath, $absolutePath)
     {
         $contents = file_get_contents($absolutePath);
@@ -188,7 +204,11 @@ class StaticFilesTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function referencesFromStaticFilesDataProvider()
+=======
+    public function referencesFromStaticFilesDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return \Magento\Framework\App\Utility\Files::init()->getStaticPreProcessingFiles('*.{less,css}');
     }
@@ -201,11 +221,17 @@ class StaticFilesTest extends \PHPUnit\Framework\TestCase
      * @param string $locale
      * @param string $module
      * @param string $filePath
+<<<<<<< HEAD
      * @param string $absolutePath
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     #[DataProvider('lessNotConfusedWithCssDataProvider')]
     public function testLessNotConfusedWithCss($area, $themePath, $locale, $module, $filePath, $absolutePath)
+=======
+     * @dataProvider lessNotConfusedWithCssDataProvider
+     */
+    public function testLessNotConfusedWithCss($area, $themePath, $locale, $module, $filePath)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         if (false !== strpos($filePath, 'widgets.css')) {
             $filePath .= '';
@@ -230,7 +256,11 @@ class StaticFilesTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function lessNotConfusedWithCssDataProvider()
+=======
+    public function lessNotConfusedWithCssDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return \Magento\Framework\App\Utility\Files::init()->getStaticPreProcessingFiles('*.{less,css}');
     }
@@ -242,8 +272,13 @@ class StaticFilesTest extends \PHPUnit\Framework\TestCase
      * @param string $area
      * @param string $themePath
      * @param string $fileId
+<<<<<<< HEAD
      */
     #[DataProvider('referencesFromPhtmlFilesDataProvider')]
+=======
+     * @dataProvider referencesFromPhtmlFilesDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testReferencesFromPhtmlFiles($phtmlFile, $area, $themePath, $fileId)
     {
         list($module, $filePath) = \Magento\Framework\View\Asset\Repository::extractModule($fileId);
@@ -256,12 +291,20 @@ class StaticFilesTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function referencesFromPhtmlFilesDataProvider()
+=======
+    public function referencesFromPhtmlFilesDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $result = [];
         foreach (\Magento\Framework\App\Utility\Files::init()->getPhtmlFiles(true, false) as $info) {
             list($area, $themePath, , , $file) = $info;
+<<<<<<< HEAD
             foreach (self::collectGetViewFileUrl($file) as $fileId) {
+=======
+            foreach ($this->collectGetViewFileUrl($file) as $fileId) {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $result[] = [$file, $area, $themePath, $fileId];
             }
         }
@@ -274,7 +317,11 @@ class StaticFilesTest extends \PHPUnit\Framework\TestCase
      * @param string $file
      * @return array
      */
+<<<<<<< HEAD
     private static function collectGetViewFileUrl($file)
+=======
+    private function collectGetViewFileUrl($file)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $result = [];
         if (preg_match_all('/\$block->getViewFileUrl\(\'([^\']+?)\'\)/', file_get_contents($file), $matches)) {
@@ -290,8 +337,13 @@ class StaticFilesTest extends \PHPUnit\Framework\TestCase
      * @param string $area
      * @param string $themePath
      * @param string $fileId
+<<<<<<< HEAD
      */
     #[DataProvider('referencesFromLayoutFilesDataProvider')]
+=======
+     * @dataProvider referencesFromLayoutFilesDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testReferencesFromLayoutFiles($layoutFile, $area, $themePath, $fileId)
     {
         list($module, $filePath) = \Magento\Framework\View\Asset\Repository::extractModule($fileId);
@@ -304,7 +356,11 @@ class StaticFilesTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function referencesFromLayoutFilesDataProvider()
+=======
+    public function referencesFromLayoutFilesDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $result = [];
         $files = \Magento\Framework\App\Utility\Files::init()->getLayoutFiles(['with_metainfo' => true], false);
@@ -312,12 +368,20 @@ class StaticFilesTest extends \PHPUnit\Framework\TestCase
             list($area, $themePath, , , $file) = array_pad($metaInfo, 5, null);
 
             if (!is_string($file)) {
+<<<<<<< HEAD
                 TestStatus::warning(
+=======
+                $this->addWarning(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                     'Wrong layout file configuration provided. The `file` meta info must be the type of string'
                 );
                 continue;
             }
+<<<<<<< HEAD
             foreach (self::collectFileIdsFromLayout($file) as $fileId) {
+=======
+            foreach ($this->collectFileIdsFromLayout($file) as $fileId) {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 $result[] = [$file, $area, $themePath, $fileId];
             }
         }
@@ -330,7 +394,11 @@ class StaticFilesTest extends \PHPUnit\Framework\TestCase
      * @param string $file
      * @return array
      */
+<<<<<<< HEAD
     private static function collectFileIdsFromLayout($file)
+=======
+    private function collectFileIdsFromLayout($file)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         $xml = simplexml_load_file($file);
         $elements = $xml->xpath('//head/css|link|script');

@@ -1,12 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\Backend\Model\Dashboard;
 
+<<<<<<< HEAD
 use Magento\Framework\ObjectManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
@@ -16,6 +22,10 @@ use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Framework\Stdlib\DateTime;
 use DateTimeZone;
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+use Magento\TestFramework\Helper\Bootstrap;
+use PHPUnit\Framework\TestCase;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Verify chart data by different period.
@@ -25,11 +35,14 @@ use PHPUnit\Framework\Attributes\DataProvider;
 class ChartTest extends TestCase
 {
     /**
+<<<<<<< HEAD
      * @var ObjectManagerInterface
      */
     private $objectManager;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @var Chart
      */
     private $model;
@@ -39,14 +52,19 @@ class ChartTest extends TestCase
      */
     protected function setUp(): void
     {
+<<<<<<< HEAD
         $this->objectManager = Bootstrap::getObjectManager();
         $this->model = $this->objectManager->get(Chart::class);
+=======
+        $this->model = Bootstrap::getObjectManager()->create(Chart::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
      * Verify getByPeriod with all types of period
      *
      * @magentoDataFixture Magento/Sales/_files/order_list_with_invoice.php
+<<<<<<< HEAD
      * @return void
      */
     #[DataProvider('getChartDataProvider')]
@@ -87,6 +105,13 @@ class ChartTest extends TestCase
         $order->setCreatedAt($dateTime->format(DateTime::DATETIME_PHP_FORMAT));
         $order->setPayment($payment);
         $order->save();
+=======
+     * @dataProvider getChartDataProvider
+     * @return void
+     */
+    public function testGetByPeriodWithParam(int $expectedDataQty, string $period, string $chartParam): void
+    {
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $ordersData = $this->model->getByPeriod($period, $chartParam);
         $ordersCount = array_sum(array_map(function ($item) {
             return $item['y'];
@@ -99,38 +124,62 @@ class ChartTest extends TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function getChartDataProvider(): array
+=======
+    public function getChartDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [
                 2,
                 '24h',
+<<<<<<< HEAD
                 'quantity',
                 '100000002'
+=======
+                'quantity'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             [
                 3,
                 '7d',
+<<<<<<< HEAD
                 'quantity',
                 '100000003'
+=======
+                'quantity'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             [
                 4,
                 '1m',
+<<<<<<< HEAD
                 'quantity',
                 '100000004'
+=======
+                'quantity'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             [
                 5,
                 '1y',
+<<<<<<< HEAD
                 'quantity',
                 '100000005'
+=======
+                'quantity'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
             [
                 6,
                 '2y',
+<<<<<<< HEAD
                 'quantity',
                 '100000006'
+=======
+                'quantity'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ]
         ];
     }

@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Setup\Module\I18n\Pack;
 
@@ -69,7 +74,13 @@ class GeneratorTest extends \PHPUnit\Framework\TestCase
 
         $reflection = new \ReflectionClass(\Magento\Framework\Component\ComponentRegistrar::class);
         $paths = $reflection->getProperty('paths');
+<<<<<<< HEAD
         $this->backupRegistrar = $paths->getValue();
+=======
+        $paths->setAccessible(true);
+        $this->backupRegistrar = $paths->getValue();
+        $paths->setAccessible(false);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     protected function tearDown(): void
@@ -77,7 +88,13 @@ class GeneratorTest extends \PHPUnit\Framework\TestCase
         \Magento\Framework\System\Dirs::rm($this->_packPath);
         $reflection = new \ReflectionClass(\Magento\Framework\Component\ComponentRegistrar::class);
         $paths = $reflection->getProperty('paths');
+<<<<<<< HEAD
         $paths->setValue(null, $this->backupRegistrar);
+=======
+        $paths->setAccessible(true);
+        $paths->setValue($this->backupRegistrar);
+        $paths->setAccessible(false);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     public function testGeneration()

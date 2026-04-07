@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2017 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -42,13 +47,21 @@ class FixtureConfigTest extends TestCase
 
     public function testLoadConfig()
     {
+<<<<<<< HEAD
         $this->fileParserMock->expects($this->any())->method('xmlToArray')->willReturn(
+=======
+        $this->fileParserMock->expects($this->exactly(2))->method('xmlToArray')->willReturn(
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ['config' => [ 'profile' => ['some_key' => 'some_value']]]
         );
 
         $domMock = $this->createPartialMock(\DOMDocument::class, ['load', 'xinclude']);
         $domMock->expects($this->once())->method('load')->with('config.file')->willReturn(
+<<<<<<< HEAD
             false
+=======
+            $this->fileParserMock->xmlToArray()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
         $domMock->expects($this->once())->method('xinclude');
         $this->fileParserMock->expects($this->exactly(2))->method('getDom')->willReturn($domMock);

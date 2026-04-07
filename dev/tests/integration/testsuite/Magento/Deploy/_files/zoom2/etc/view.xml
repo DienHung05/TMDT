@@ -1,10 +1,18 @@
 <?xml version="1.0"?>
 <!--
+<<<<<<< HEAD
 /**
  * Copyright 2017 Adobe
  * All Rights Reserved.
  */
 -->
+=======
+  ~ /**
+  ~ * Copyright © Magento, Inc. All rights reserved.
+  ~ * See COPYING.txt for license details.
+  ~ */
+  -->
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 <view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/view.xsd">
     <vars module="Js_Bundle">
         <var name="bundle_size">2MB</var>

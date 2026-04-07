@@ -1,13 +1,20 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
  */
 
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 declare(strict_types=1);
 
 namespace Magento\Sales\Model\Service;
 
+<<<<<<< HEAD
 use Magento\Bundle\Test\Fixture\AddProductToCart as AddBundleProductToCartFixture;
 use Magento\Bundle\Test\Fixture\Option as BundleOptionFixture;
 use Magento\Bundle\Test\Fixture\Product as BundleProductFixture;
@@ -35,6 +42,14 @@ use PHPUnit\Framework\Attributes\DataProvider;
  * Tests \Magento\Sales\Model\Service\InvoiceService
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+use Magento\Sales\Api\Data\OrderInterface;
+use Magento\Sales\Model\Order;
+use Magento\TestFramework\Helper\Bootstrap;
+
+/**
+ * Tests \Magento\Sales\Model\Service\InvoiceService
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class InvoiceServiceTest extends \PHPUnit\Framework\TestCase
 {
@@ -44,6 +59,7 @@ class InvoiceServiceTest extends \PHPUnit\Framework\TestCase
     private $invoiceService;
 
     /**
+<<<<<<< HEAD
      * @var OrderRepositoryInterface|null
      */
     private ?OrderRepositoryInterface $orderRepository;
@@ -54,27 +70,40 @@ class InvoiceServiceTest extends \PHPUnit\Framework\TestCase
     private ?DataFixtureStorage $fixtures;
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * @inheritdoc
      */
     protected function setUp(): void
     {
         $this->invoiceService = Bootstrap::getObjectManager()->create(InvoiceService::class);
+<<<<<<< HEAD
         $this->orderRepository = Bootstrap::getObjectManager()->create(OrderRepositoryInterface::class);
         $this->fixtures = DataFixtureStorageManager::getStorage();
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
      * @param int $invoiceQty
      * @magentoDataFixture Magento/Sales/_files/order_configurable_product.php
      * @return void
+<<<<<<< HEAD
      */
     #[DataProvider('prepareInvoiceConfigurableProductDataProvider')]
+=======
+     * @dataProvider prepareInvoiceConfigurableProductDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPrepareInvoiceConfigurableProduct(int $invoiceQty): void
     {
         /** @var OrderInterface $order */
         $order = Bootstrap::getObjectManager()->create(Order::class)->load('100000001', 'increment_id');
         $orderItems = $order->getItems();
+<<<<<<< HEAD
         $parentItemId = 0;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         foreach ($orderItems as $orderItem) {
             if ($orderItem->getParentItemId()) {
                 $parentItemId = $orderItem->getParentItemId();
@@ -87,7 +116,11 @@ class InvoiceServiceTest extends \PHPUnit\Framework\TestCase
         }
     }
 
+<<<<<<< HEAD
     public static function prepareInvoiceConfigurableProductDataProvider(): array
+=======
+    public function prepareInvoiceConfigurableProductDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'full invoice' => [2],
@@ -99,8 +132,13 @@ class InvoiceServiceTest extends \PHPUnit\Framework\TestCase
      * @param int $invoiceQty
      * @magentoDataFixture Magento/Sales/_files/order.php
      * @return void
+<<<<<<< HEAD
      */
     #[DataProvider('prepareInvoiceSimpleProductDataProvider')]
+=======
+     * @dataProvider prepareInvoiceSimpleProductDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPrepareInvoiceSimpleProduct(int $invoiceQty): void
     {
         /** @var OrderInterface $order */
@@ -117,7 +155,11 @@ class InvoiceServiceTest extends \PHPUnit\Framework\TestCase
         }
     }
 
+<<<<<<< HEAD
     public static function prepareInvoiceSimpleProductDataProvider(): array
+=======
+    public function prepareInvoiceSimpleProductDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'full invoice' => [2],
@@ -134,8 +176,13 @@ class InvoiceServiceTest extends \PHPUnit\Framework\TestCase
      * @return void
      * @throws \Magento\Framework\Exception\LocalizedException
      * @magentoDataFixture Magento/Sales/_files/order_with_bundle.php
+<<<<<<< HEAD
      */
     #[DataProvider('bundleProductQtyOrderedDataProvider')]
+=======
+     * @dataProvider bundleProductQtyOrderedDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testPrepareInvoiceBundleProduct(
         array $qtyToInvoice,
         array $qtyInvoiced,
@@ -164,6 +211,7 @@ class InvoiceServiceTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function bundleProductQtyOrderedDataProvider(): array
     {
         return [
@@ -195,10 +243,44 @@ class InvoiceServiceTest extends \PHPUnit\Framework\TestCase
                     'bundle_simple_1' => 5,
                 ],
                 'errorMsg' => 'Invoiced qty for product %s does not match.',
+=======
+    public function bundleProductQtyOrderedDataProvider(): array
+    {
+        return [
+            'Create invoice w/o predefined qty' => [
+                'Qty to invoice' => [],
+                'Qty ordered' => [
+                    'bundle_1' => 2,
+                    'bundle_simple_1' => 10,
+                ],
+                'Error msg' => 'Invoiced qty for product %s does not match.',
+            ],
+            'Create invoice with predefined qty' => [
+                'Qty to invoice' => [
+                    'bundle_1' => 2,
+                    'bundle_simple_1' => 10,
+                ],
+                'Qty ordered' => [
+                    'bundle_1' => 2,
+                    'bundle_simple_1' => 10,
+                ],
+                'Error msg' => 'Invoiced qty for product %s does not match.',
+            ],
+            'Create invoice with partial predefined qty for bundle' => [
+                'Qty to invoice' => [
+                    'bundle_1' => 1,
+                ],
+                'Qty ordered' => [
+                    'bundle_1' => 1,
+                    'bundle_simple_1' => 5,
+                ],
+                'Error msg' => 'Invoiced qty for product %s does not match.',
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             ],
         ];
     }
 
+<<<<<<< HEAD
     #[
         DataFixture(ProductFixture::class, ['price' => 10], as: 'p1'),
         DataFixture(ProductFixture::class, ['price' => 20], as: 'p2'),
@@ -248,6 +330,8 @@ class InvoiceServiceTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(24, $invoice->getBaseGrandTotal());
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Associate product qty to invoice to order item id.
      *

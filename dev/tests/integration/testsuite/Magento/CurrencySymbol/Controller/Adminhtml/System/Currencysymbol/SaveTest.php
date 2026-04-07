@@ -1,12 +1,20 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\CurrencySymbol\Controller\Adminhtml\System\Currencysymbol;
 
 use Magento\Framework\App\Request\Http as HttpRequest;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 class SaveTest extends \Magento\TestFramework\TestCase\AbstractBackendController
 {
@@ -20,8 +28,13 @@ class SaveTest extends \Magento\TestFramework\TestCase\AbstractBackendController
      * @magentoConfigFixture               currency/options/allow USD
      * @magentoDbIsolation enabled
      * @magentoAppIsolation enabled
+<<<<<<< HEAD
      */
     #[DataProvider('currencySymbolDataProvider')]
+=======
+     * @dataProvider currencySymbolDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testSaveAction($currencyCode, $inputCurrencySymbol, $outputCurrencySymbol)
     {
         /** @var \Magento\CurrencySymbol\Model\System\Currencysymbol $currencySymbol */
@@ -56,7 +69,11 @@ class SaveTest extends \Magento\TestFramework\TestCase\AbstractBackendController
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function currencySymbolDataProvider()
+=======
+    public function currencySymbolDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['USD', 'customSymbolUSD', 'customSymbolUSD'],

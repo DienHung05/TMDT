@@ -1,11 +1,19 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
  */
 namespace Magento\Quote\Api;
 
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+namespace Magento\Quote\Api;
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Api\SortOrderBuilder;
@@ -21,9 +29,12 @@ use Magento\Framework\Webapi\Rest\Request;
  */
 class CartRepositoryTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     /**
      * @var string
      */
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     private static $mineCartUrl = '/V1/carts/mine';
 
     /**
@@ -149,6 +160,10 @@ class CartRepositoryTest extends WebapiAbstract
 
     /**
      * Tests exception when cartId is not provided.
+<<<<<<< HEAD
+=======
+     *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      */
     public function testGetCartThrowsExceptionIfThereIsNoCartWithProvidedId()
     {
@@ -270,6 +285,7 @@ class CartRepositoryTest extends WebapiAbstract
     }
 
     /**
+<<<<<<< HEAD
      * Test quote customer id
      *
      * @magentoApiDataFixture Magento/Checkout/_files/quote_with_shipping_method.php
@@ -277,14 +293,32 @@ class CartRepositoryTest extends WebapiAbstract
     #[DataProvider('customerIdDataProvider')]
     public function testSaveQuoteWithCustomerData($customerId)
     {
+=======
+     * Saving quote - negative case, attempt to change customer id in the active quote for the user with Customer role.
+     *
+     * @dataProvider customerIdDataProvider
+     * @magentoApiDataFixture Magento/Checkout/_files/quote_with_shipping_method.php
+     */
+    public function testSaveQuoteException($customerId)
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('Invalid state change requested');
+
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $token = $this->getToken();
 
         /** @var Quote $quote */
         $quote = $this->getCart('test_order_1');
+<<<<<<< HEAD
         $originalCustomerId = $quote->getCustomerId();
 
         $requestData = $this->getRequestData($quote->getId());
         // Set customer id in request data
+=======
+
+        $requestData = $this->getRequestData($quote->getId());
+        // Replace to customer id not much with current user id..
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $requestData['quote']['customer']['id'] = $customerId;
 
         $serviceInfo = [
@@ -302,9 +336,12 @@ class CartRepositoryTest extends WebapiAbstract
         ];
 
         $this->_webApiCall($serviceInfo, $requestData);
+<<<<<<< HEAD
 
         $quote->loadActive($requestData["quote"]["id"]);
         $this->assertEquals($originalCustomerId, $quote->getCustomerId());
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -386,7 +423,11 @@ class CartRepositoryTest extends WebapiAbstract
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function customerIdDataProvider()
+=======
+    public function customerIdDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [[999],[null],['25']];
     }

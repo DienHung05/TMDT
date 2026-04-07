@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2016 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -16,7 +21,10 @@ use Magento\Setup\Module\I18n\Factory;
 use Magento\Setup\Module\I18n\Locale;
 use Magento\Setup\Module\I18n\Pack\Writer\File\Csv;
 use PHPUnit\Framework\MockObject\MockObject;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use PHPUnit\Framework\TestCase;
 
 require_once __DIR__ . '/_files/ioMock.php';
@@ -83,9 +91,15 @@ class CsvTest extends TestCase
     /**
      * @param string $contextType
      * @param array $contextValue
+<<<<<<< HEAD
      * @return void
      */
     #[DataProvider('writeDictionaryWithRuntimeExceptionDataProvider')]
+=======
+     * @dataProvider writeDictionaryWithRuntimeExceptionDataProvider
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testWriteDictionaryWithRuntimeException($contextType, $contextValue)
     {
         $this->expectException('RuntimeException');
@@ -97,7 +111,11 @@ class CsvTest extends TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function writeDictionaryWithRuntimeExceptionDataProvider()
+=======
+    public function writeDictionaryWithRuntimeExceptionDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             ['', []],
@@ -181,7 +199,11 @@ class CsvTest extends TestCase
             ->with($contextType, $contextValue)
             ->willReturn($path);
 
+<<<<<<< HEAD
         $writerMock = $this->createMock(WriterInterface::class);
+=======
+        $writerMock = $this->getMockForAbstractClass(WriterInterface::class);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $writerMock->expects($this->once())
             ->method('write')
             ->with($this->phraseMock);

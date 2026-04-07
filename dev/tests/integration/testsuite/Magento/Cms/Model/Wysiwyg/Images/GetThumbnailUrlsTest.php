@@ -1,7 +1,13 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2021 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Cms\Model\Wysiwyg\Images;
 
@@ -13,7 +19,10 @@ use Magento\Framework\Filesystem;
 use Magento\Framework\Filesystem\Driver\File;
 use Magento\Framework\Filesystem\DriverInterface;
 use Magento\TestFramework\Helper\Bootstrap;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Test methods of class Storage
@@ -113,8 +122,13 @@ class GetThumbnailUrlsTest extends \PHPUnit\Framework\TestCase
      * @return void
      * @magentoAppIsolation enabled
      * @magentoAppArea adminhtml
+<<<<<<< HEAD
      */
     #[DataProvider('getThumbnailUrlDataProvider')]
+=======
+     * @dataProvider getThumbnailUrlDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetThumbnailUrl(string $directory, string $filename, array $expectedUrls): void
     {
         $root = $this->storage->getCmsWysiwygImages()->getStorageRoot();
@@ -136,7 +150,11 @@ class GetThumbnailUrlsTest extends \PHPUnit\Framework\TestCase
      *
      * @return array
      */
+<<<<<<< HEAD
     public static function getThumbnailUrlDataProvider(): array
+=======
+    public function getThumbnailUrlDataProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             [

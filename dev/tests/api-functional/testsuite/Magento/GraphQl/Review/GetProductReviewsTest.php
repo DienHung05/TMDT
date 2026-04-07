@@ -1,14 +1,22 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Review;
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
+<<<<<<< HEAD
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\Framework\Exception\AuthenticationException;
 use Magento\Framework\Registry;
 use Magento\Integration\Api\CustomerTokenServiceInterface;
@@ -16,6 +24,7 @@ use Magento\Review\Model\ResourceModel\Review\Collection;
 use Magento\Review\Model\ResourceModel\Review\CollectionFactory as ReviewCollectionFactory;
 use Magento\Review\Model\Review;
 use Magento\Review\Model\Review\SummaryFactory;
+<<<<<<< HEAD
 use Magento\Review\Test\Fixture\Review as ReviewFixture;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Store\Test\Fixture\Store as StoreFixture;
@@ -30,6 +39,15 @@ use PHPUnit\Framework\Attributes\DataProvider;
  * Test coverage for product reviews queries
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+=======
+use Magento\Store\Model\StoreManagerInterface;
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\TestFramework\ObjectManager;
+use Magento\TestFramework\TestCase\GraphQlAbstract;
+
+/**
+ * Test coverage for product reviews queries
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 class GetProductReviewsTest extends GraphQlAbstract
 {
@@ -161,7 +179,10 @@ QUERY;
         /** @var ProductRepositoryInterface $productRepository */
         $productRepository = ObjectManager::getInstance()->get(ProductRepositoryInterface::class);
         $product = $productRepository->get($productSku, false, null, true);
+<<<<<<< HEAD
         // phpcs:ignore
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         $summaryFactory = ObjectManager::getInstance()->get(SummaryFactory::class);
         $storeId = ObjectManager::getInstance()->get(StoreManagerInterface::class)->getStore()->getId();
         $summary = $summaryFactory->create()->setStoreId($storeId)->load($product->getId());
@@ -255,6 +276,7 @@ QUERY;
         self::assertEquals($expectedFirstItem, $response['customer']['reviews']['items'][0]);
     }
 
+<<<<<<< HEAD
     #[
         DataFixture(StoreFixture::class, ['code' => 'store2'], 'store2'),
         DataFixture(ProductFixture::class, ['sku' => 'product1'], 'product1'),
@@ -352,6 +374,8 @@ QUERY;
         ];
     }
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * Removing the recently added product reviews
      */

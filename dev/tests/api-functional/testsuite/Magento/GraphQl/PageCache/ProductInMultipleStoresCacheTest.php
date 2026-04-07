@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2019 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -219,6 +224,7 @@ QUERY;
         $productNameInFixtureStore = 'Product\'s Name in Fixture Store';
         $product->setName($productNameInFixtureStore)->setStoreId($storeId)->save();
 
+<<<<<<< HEAD
         // test cached response store + currency header with non existing currency, and no valid response, no cache
         $headerMap = ['Store' => $storeCodeFromFixture, 'Content-Currency' => 'SOMECURRENCY'];
         $this->expectExceptionMessage(
@@ -226,6 +232,8 @@ QUERY;
         );
         $this->graphQlQuery($query, [], '', $headerMap);
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         // test store header only, query is cached at this point in EUR
         $headerMap = ['Store' => $storeCodeFromFixture];
         $response = $this->graphQlQuery($query, [], '', $headerMap);
@@ -237,7 +245,11 @@ QUERY;
         $this->assertEquals(
             'EUR',
             $response['products']['items'][0]['price']['minimalPrice']['amount']['currency'],
+<<<<<<< HEAD
             'Currency code EUR in fixture ' . $storeCodeFromFixture . ' is expected'
+=======
+            'Currency code EUR in fixture ' . $storeCodeFromFixture . ' is unexpected'
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
         );
 
         // test cached store + currency header in Euros
@@ -309,5 +321,15 @@ QUERY;
             $response['products']['items'][0]['price']['minimalPrice']['amount']['currency'],
             'Currency code USD in fixture store default is unexpected'
         );
+<<<<<<< HEAD
+=======
+
+        // test cached response store + currency header with non existing currency, and no valid response, no cache
+        $headerMap = ['Store' => $storeCodeFromFixture, 'Content-Currency' => 'SOMECURRENCY'];
+        $this->expectExceptionMessage(
+            'GraphQL response contains errors: Please correct the target currency'
+        );
+        $this->graphQlQuery($query, [], '', $headerMap);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 }

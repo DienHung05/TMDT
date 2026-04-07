@@ -2,8 +2,13 @@
 namespace Magento\Framework\Stdlib;
 
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 
 use Magento\TestFramework\Helper\Bootstrap;
@@ -16,9 +21,12 @@ use Magento\TestFramework\TestCase\HttpClient\CurlClientWithCookies;
  */
 class CookieManagerTest extends \Magento\TestFramework\TestCase\WebapiAbstract
 {
+<<<<<<< HEAD
     /**
      * @var string
      */
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     private $cookieTesterUrl = 'testmoduleone/CookieTester';
 
     /** @var CurlClientWithCookies */
@@ -147,10 +155,14 @@ class CookieManagerTest extends \Magento\TestFramework\TestCase\WebapiAbstract
         if (isset($cookie['max-age'])) {
             $this->assertEquals(0, $cookie['max-age']);
         }
+<<<<<<< HEAD
         $this->assertEquals(
             date('D, j-M-o H:i:s T', strtotime('Thu, 01-Jan-1970 00:00:01 GMT')),
             date('D, j-M-o H:i:s T', strtotime($cookie['expires']))
         );
+=======
+        $this->assertEquals('Thu, 01-Jan-1970 00:00:01 GMT', $cookie['expires']);
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**

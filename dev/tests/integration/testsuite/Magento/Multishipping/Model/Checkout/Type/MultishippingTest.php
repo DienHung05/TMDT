@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2014 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Multishipping\Model\Checkout\Type;
 
@@ -21,10 +26,14 @@ use Magento\Sales\Model\Order\Email\Sender\OrderSender;
 use Magento\Sales\Model\Service\OrderService;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
 use \PHPUnit\Framework\MockObject\MockObject as MockObject;
 use PHPUnit\Framework\MockObject\Stub\ReturnArgument;
 use PHPUnit\Framework\MockObject\Stub\Exception as StubException;
+=======
+use \PHPUnit\Framework\MockObject\MockObject as MockObject;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * @magentoAppArea frontend
@@ -79,8 +88,13 @@ class MultishippingTest extends \PHPUnit\Framework\TestCase
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @magentoDataFixture Magento/Customer/_files/customer_two_addresses.php
      * @magentoAppIsolation enabled
+<<<<<<< HEAD
      */
     #[DataProvider('getCustomerDefaultAddressDataProvider')]
+=======
+     * @dataProvider getCustomerDefaultAddressDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetCustomerDefaultAddress($addressType)
     {
         /**
@@ -137,8 +151,13 @@ class MultishippingTest extends \PHPUnit\Framework\TestCase
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @magentoDataFixture Magento/Customer/_files/customer_two_addresses.php
      * @magentoAppIsolation enabled
+<<<<<<< HEAD
      */
     #[DataProvider('getCustomerDefaultAddressDataProvider')]
+=======
+     * @dataProvider getCustomerDefaultAddressDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetCustomerDefaultAddressDefaultAddressNotSet($addressType)
     {
         /**
@@ -178,8 +197,13 @@ class MultishippingTest extends \PHPUnit\Framework\TestCase
      * @param string $addressType
      * @magentoDataFixture Magento/Customer/_files/customer.php
      * @magentoAppIsolation enabled
+<<<<<<< HEAD
      */
     #[DataProvider('getCustomerDefaultAddressDataProvider')]
+=======
+     * @dataProvider getCustomerDefaultAddressDataProvider
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testGetCustomerDefaultAddressCustomerWithoutAddresses($addressType)
     {
         /**
@@ -208,7 +232,11 @@ class MultishippingTest extends \PHPUnit\Framework\TestCase
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function getCustomerDefaultAddressDataProvider()
+=======
+    public function getCustomerDefaultAddressDataProvider()
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             self::ADDRESS_TYPE_SHIPPING => [self::ADDRESS_TYPE_SHIPPING],
@@ -415,9 +443,15 @@ class MultishippingTest extends \PHPUnit\Framework\TestCase
         $orderService->expects($this->exactly(3))
             ->method('place')
             ->willReturnOnConsecutiveCalls(
+<<<<<<< HEAD
                 new ReturnArgument(0),
                 new StubException($exception),
                 new StubException($exception)
+=======
+                $this->returnArgument(0),
+                $this->throwException($exception),
+                $this->throwException($exception)
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
             );
 
         return $orderService;

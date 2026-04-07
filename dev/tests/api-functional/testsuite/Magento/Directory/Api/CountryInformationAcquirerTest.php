@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2015 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 namespace Magento\Directory\Api;
 
@@ -9,12 +14,21 @@ use Magento\TestFramework\TestCase\WebapiAbstract;
 
 class CountryInformationAcquirerTest extends WebapiAbstract
 {
+<<<<<<< HEAD
     private const SERVICE_NAME = 'directoryCountryInformationAcquirerV1';
     private const RESOURCE_COUNTRIES_PATH = '/V1/directory/countries';
     private const RESOURCE_COUNTRY = 'US';
     private const SERVICE_VERSION = 'V1';
 
     private const STORE_CODE_FROM_FIXTURE = 'fixturestore';
+=======
+    const SERVICE_NAME = 'directoryCountryInformationAcquirerV1';
+    const RESOURCE_COUNTRIES_PATH = '/V1/directory/countries';
+    const RESOURCE_COUNTRY = 'US';
+    const SERVICE_VERSION = 'V1';
+
+    const STORE_CODE_FROM_FIXTURE = 'fixturestore';
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
     /**
      * @magentoApiDataFixture Magento/Store/_files/core_fixturestore.php
@@ -39,6 +53,7 @@ class CountryInformationAcquirerTest extends WebapiAbstract
         $this->assertSame('AD', $result[0]['two_letter_abbreviation']);
         $this->assertSame('AND', $result[0]['three_letter_abbreviation']);
         $this->assertSame('Andorra', $result[0]['full_name_english']);
+<<<<<<< HEAD
 
         $emptyFullNameLocaleCount = 0;
         foreach ($result as $country) {
@@ -47,6 +62,8 @@ class CountryInformationAcquirerTest extends WebapiAbstract
             }
         }
         $this->assertEquals(0, $emptyFullNameLocaleCount);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
@@ -76,6 +93,7 @@ class CountryInformationAcquirerTest extends WebapiAbstract
     }
 
     /**
+<<<<<<< HEAD
      * @magentoApiDataFixture Magento/Store/_files/core_fixturestore.php
      */
     public function testGetObsoleteCountry()
@@ -99,6 +117,8 @@ class CountryInformationAcquirerTest extends WebapiAbstract
     }
 
     /**
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
      * Retrieve existing country information for the store
      *
      * @param string $storeCode
@@ -126,6 +146,7 @@ class CountryInformationAcquirerTest extends WebapiAbstract
      * Retrieve existing country information for the store
      *
      * @param string $storeCode
+<<<<<<< HEAD
      * @param string $countryId
      * @return \Magento\Directory\Api\Data\CountryInformationInterface
      */
@@ -134,6 +155,15 @@ class CountryInformationAcquirerTest extends WebapiAbstract
         $serviceInfo = [
             'rest' => [
                 'resourcePath' => self::RESOURCE_COUNTRIES_PATH . '/' . $countryId,
+=======
+     * @return \Magento\Directory\Api\Data\CountryInformationInterface
+     */
+    protected function getCountryInfo($storeCode = 'default')
+    {
+        $serviceInfo = [
+            'rest' => [
+                'resourcePath' => self::RESOURCE_COUNTRIES_PATH . '/' . self::RESOURCE_COUNTRY,
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
                 'httpMethod' => \Magento\Framework\Webapi\Rest\Request::HTTP_METHOD_GET,
             ],
             'soap' => [

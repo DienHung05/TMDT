@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
@@ -9,7 +14,10 @@ namespace Magento\TestModuleOverrideConfig\MagentoDataFixture;
 
 use Magento\TestModuleOverrideConfig\AbstractOverridesTest;
 use Magento\TestModuleOverrideConfig\Model\FixtureCallStorage;
+<<<<<<< HEAD
 use PHPUnit\Framework\Attributes\DataProvider;
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 
 /**
  * Class checks that magentoDataFixtures can be added using override config
@@ -34,10 +42,18 @@ class AddFixtureTest extends AbstractOverridesTest
     /**
      * Checks that fixtures added in all nodes successfully applied
      *
+<<<<<<< HEAD
      * @param array $fixtures
      * @return void
      */
     #[DataProvider('addedFixturesProvider')]
+=======
+     * @dataProvider addedFixturesProvider
+     *
+     * @param array $fixtures
+     * @return void
+     */
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     public function testAddFixtures(array $fixtures): void
     {
         foreach ($fixtures as $scope => $fixture) {
@@ -52,7 +68,11 @@ class AddFixtureTest extends AbstractOverridesTest
     /**
      * @return array
      */
+<<<<<<< HEAD
     public static function addedFixturesProvider(): array
+=======
+    public function addedFixturesProvider(): array
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     {
         return [
             'first_data_set' => [

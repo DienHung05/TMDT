@@ -1,12 +1,18 @@
 <?php
 /**
+<<<<<<< HEAD
  * Copyright 2020 Adobe
  * All Rights Reserved.
+=======
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
  */
 declare(strict_types=1);
 
 namespace Magento\GraphQl\Sales;
 
+<<<<<<< HEAD
 use Magento\Customer\Model\ResourceModel\CustomerRepository;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Integration\Api\CustomerTokenServiceInterface;
@@ -14,6 +20,12 @@ use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Model\QuoteRepository;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\ObjectManager;
+=======
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Integration\Api\CustomerTokenServiceInterface;
+use Magento\Quote\Api\CartRepositoryInterface;
+use Magento\TestFramework\Helper\Bootstrap;
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
 use Magento\TestFramework\TestCase\GraphQlAbstract;
 
 /**
@@ -59,7 +71,10 @@ class ReorderTest extends GraphQlAbstract
         } catch (NoSuchEntityException $e) {
         }
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     /**
      * @magentoApiDataFixture Magento/Sales/_files/customer_order_item_with_product_and_custom_options.php
      */
@@ -188,12 +203,15 @@ class ReorderTest extends GraphQlAbstract
         $expectedResponse['cart']['items'][0]['quantity'] = 20;
 
         $this->assertResponseFields($response['reorderItems'], $expectedResponse);
+<<<<<<< HEAD
         $customer = ObjectManager::getInstance()->get(CustomerRepository::class)
             ->get(self::CUSTOMER_EMAIL);
         $quoteRepository = ObjectManager::getInstance()->get(QuoteRepository::class);
         $quote = $quoteRepository->getActiveForCustomer($customer->getId());
         $quote->setIsActive(false);
         $quoteRepository->save($quote);
+=======
+>>>>>>> cd2dc8bb627573641d87e5e03a85271f17f3264f
     }
 
     /**
