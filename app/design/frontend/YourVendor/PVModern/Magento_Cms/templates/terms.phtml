@@ -1,109 +1,164 @@
 <?php /** @var \Magento\Framework\View\Element\Template $block */ ?>
-<div class="pvl-page">
-    <div class="pvl-hero">
-        <div class="pv3-container">
-            <span class="pvl-hero-kicker">Legal</span>
-            <h1>Terms of Service</h1>
-            <p class="pvl-hero-meta">Last updated: <?= date('F j, Y') ?> &nbsp;|&nbsp; Effective immediately</p>
+<section class="pv3-legal-page">
+    <div class="pv3-container pv3-legal-wrap">
+
+        <div class="pv3-legal-header">
+            <span class="pv3-legal-badge">📄 Legal</span>
+            <h1 class="pv3-legal-title">Terms of Service</h1>
+            <p class="pv3-legal-meta">Last updated: <strong>January 1, 2025</strong> &mdash; Effective immediately. Welcome to MixiiiStore.</p>
         </div>
-    </div>
-    <div class="pv3-container">
-        <div class="pvl-body">
-            <aside class="pvl-toc">
-                <div class="pvl-toc-inner">
-                    <p class="pvl-toc-title">Contents</p>
-                    <ul class="pvl-toc-list">
-                        <li><a href="#tos-acceptance">1. Acceptance</a></li>
-                        <li><a href="#tos-use">2. Use of Service</a></li>
-                        <li><a href="#tos-orders">3. Orders & Payments</a></li>
-                        <li><a href="#tos-shipping">4. Shipping & Delivery</a></li>
-                        <li><a href="#tos-returns">5. Returns & Refunds</a></li>
-                        <li><a href="#tos-ip">6. Intellectual Property</a></li>
-                        <li><a href="#tos-liability">7. Limitation of Liability</a></li>
-                        <li><a href="#tos-governing">8. Governing Law</a></li>
-                        <li><a href="#tos-contact">9. Contact Us</a></li>
-                    </ul>
-                </div>
-            </aside>
-            <div class="pvl-content">
 
-                <div class="pvl-section" id="tos-acceptance">
-                    <h2><span class="pvl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg></span>1. Acceptance of Terms</h2>
-                    <p>By accessing or using MixiiiStore ("the Site"), placing an order, or creating an account, you agree to be bound by these Terms of Service and all applicable laws. If you do not agree with any part of these terms, you may not use our services.</p>
-                    <div class="pvl-highlight">These Terms constitute a legally binding agreement between you and MixiiiStore. Please read them carefully before making any purchase.</div>
-                </div>
+        <div class="pv3-legal-toc">
+            <strong>Table of Contents</strong>
+            <ol>
+                <li><a href="#terms-s1">Acceptance of Terms</a></li>
+                <li><a href="#terms-s2">Use of the Site</a></li>
+                <li><a href="#terms-s3">Account Registration</a></li>
+                <li><a href="#terms-s4">Orders &amp; Payment</a></li>
+                <li><a href="#terms-s5">Pricing &amp; Promotions</a></li>
+                <li><a href="#terms-s6">Shipping &amp; Delivery</a></li>
+                <li><a href="#terms-s7">Returns &amp; Refunds</a></li>
+                <li><a href="#terms-s8">Warranties</a></li>
+                <li><a href="#terms-s9">Intellectual Property</a></li>
+                <li><a href="#terms-s10">Limitation of Liability</a></li>
+                <li><a href="#terms-s11">Governing Law</a></li>
+                <li><a href="#terms-s12">Contact Us</a></li>
+            </ol>
+        </div>
 
-                <div class="pvl-section" id="tos-use">
-                    <h2><span class="pvl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>2. Use of Service</h2>
-                    <p>You agree to use MixiiiStore only for lawful purposes. You must not:</p>
-                    <ul>
-                        <li>Use the Site in any way that violates applicable local, national, or international law.</li>
-                        <li>Transmit any unsolicited advertising or promotional material.</li>
-                        <li>Impersonate any person or entity or misrepresent your affiliation.</li>
-                        <li>Attempt to gain unauthorized access to any portion of the Site or servers.</li>
-                        <li>Use automated tools to scrape, crawl, or data-mine the Site without permission.</li>
-                    </ul>
-                    <p>We reserve the right to terminate accounts that violate these terms at our sole discretion.</p>
-                </div>
+        <div class="pv3-legal-body">
 
-                <div class="pvl-section" id="tos-orders">
-                    <h2><span class="pvl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h6"/><path d="M23 8v3a4 4 0 0 1-4 4h-1"/><circle cx="7" cy="20" r="2"/><circle cx="17" cy="20" r="2"/></svg></span>3. Orders & Payments</h2>
-                    <p>All orders placed on MixiiiStore are subject to acceptance and availability. We reserve the right to refuse or cancel any order at our discretion.</p>
-                    <ul>
-                        <li>Prices are displayed in USD unless otherwise stated and may change without notice.</li>
-                        <li>Payment must be completed before order processing begins.</li>
-                        <li>We accept major credit/debit cards and other payment methods shown at checkout.</li>
-                        <li>All transactions are encrypted and processed securely via PCI-compliant payment gateways.</li>
-                        <li>In the event of a pricing error, we will notify you and allow you to confirm at the correct price or cancel.</li>
-                    </ul>
-                </div>
+            <h2 id="terms-s1">1. Acceptance of Terms</h2>
+            <p>By accessing or using the MixiiiStore website (<strong>mixiiistore.com</strong> and all subdomains), mobile applications, or any related services (collectively, the "Platform"), you agree to be legally bound by these Terms of Service ("Terms"), our Privacy Policy, and our Cookie Policy. If you do not agree with any part of these Terms, please discontinue use of the Platform immediately.</p>
+            <p>These Terms constitute a legally binding agreement between you ("Customer," "you," or "User") and MixiiiStore ("we," "us," or "our"), a technology and hardware retail brand.</p>
 
-                <div class="pvl-section" id="tos-shipping">
-                    <h2><span class="pvl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3"/><rect width="13" height="9" x="9" y="11" rx="1"/><circle cx="11" cy="20" r="1"/><circle cx="20" cy="20" r="1"/></svg></span>4. Shipping & Delivery</h2>
-                    <p>Shipping times and costs vary by location. Estimated delivery windows are provided at checkout and are not guaranteed. MixiiiStore is not liable for delays caused by carriers, customs, or events outside our control.</p>
-                    <ul>
-                        <li>Risk of loss passes to you upon handover to the carrier.</li>
-                        <li>International orders may be subject to import duties and taxes paid by the buyer.</li>
-                        <li>We will provide tracking information once the order has been dispatched.</li>
-                    </ul>
-                </div>
+            <h2 id="terms-s2">2. Use of the Site</h2>
+            <p>You agree to use the Platform only for lawful purposes and in a manner that does not infringe the rights of, or restrict or inhibit the use and enjoyment of, the Platform by any third party.</p>
+            <p>You must not:</p>
+            <ul>
+                <li>Use the Platform in any way that violates any applicable local, national, or international law or regulation.</li>
+                <li>Transmit any unsolicited or unauthorized advertising or promotional material (spam).</li>
+                <li>Attempt to gain unauthorized access to any part of the Platform, its server, or any connected database.</li>
+                <li>Use automated tools (bots, scrapers) to access or collect data from the Platform without express written permission.</li>
+                <li>Reproduce, duplicate, copy, sell, or exploit any part of the Platform for commercial purposes without a written license.</li>
+            </ul>
 
-                <div class="pvl-section" id="tos-returns">
-                    <h2><span class="pvl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></span>5. Returns & Refunds</h2>
-                    <p>Items may be returned within <strong>30 days</strong> of receipt provided they are in original, unopened condition. To initiate a return, contact our support team with your order number.</p>
-                    <ul>
-                        <li>Software, digital downloads, and opened licensed products are non-refundable.</li>
-                        <li>Defective items will be replaced or refunded at no additional cost.</li>
-                        <li>Return shipping costs are the customer's responsibility unless the item is defective.</li>
-                        <li>Refunds are processed within 5–10 business days of receiving the returned item.</li>
-                    </ul>
-                </div>
+            <h2 id="terms-s3">3. Account Registration</h2>
+            <p>To purchase products or access certain features, you may be required to create an account. You are responsible for:</p>
+            <ul>
+                <li>Maintaining the confidentiality of your login credentials.</li>
+                <li>All activities that occur under your account.</li>
+                <li>Notifying us immediately at <a href="mailto:support@mixiiistore.com">support@mixiiistore.com</a> of any unauthorized access.</li>
+            </ul>
+            <p>We reserve the right to terminate or suspend accounts that violate these Terms, engage in fraudulent activity, or pose a security risk.</p>
 
-                <div class="pvl-section" id="tos-ip">
-                    <h2><span class="pvl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></span>6. Intellectual Property</h2>
-                    <p>All content on MixiiiStore, including text, images, logos, and code, is owned by or licensed to MixiiiStore and protected by applicable intellectual property laws. You may not reproduce, distribute, or create derivative works without explicit written permission.</p>
-                </div>
+            <h2 id="terms-s4">4. Orders &amp; Payment</h2>
+            <p>When you place an order, you represent that: (a) you are legally capable of entering into binding contracts; (b) you are at least 18 years of age; and (c) the payment information you provide is accurate and you are authorized to use it.</p>
+            <p>All orders are subject to product availability and confirmation. We reserve the right to decline or cancel any order at any time at our sole discretion, including orders that appear to be placed by resellers or contain suspected fraudulent information. In such cases, you will receive a full refund of any payment made.</p>
+            <p>We accept major credit cards, bank transfers, and approved third-party payment gateways displayed at checkout. All transactions are processed via secure, encrypted connections.</p>
 
-                <div class="pvl-section" id="tos-liability">
-                    <h2><span class="pvl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>7. Limitation of Liability</h2>
-                    <p>To the maximum extent permitted by law, MixiiiStore shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the Site or any products purchased. Our total liability shall not exceed the amount you paid for the relevant order.</p>
-                </div>
+            <h2 id="terms-s5">5. Pricing &amp; Promotions</h2>
+            <p>All prices displayed on the Platform are in Vietnamese Dong (VND) or USD as specified, and are inclusive of any applicable VAT unless stated otherwise. Prices are subject to change without notice. However, once an order is confirmed, the price is locked in.</p>
+            <p>Promotional codes and sale prices are valid only during the specified promotional period and cannot be applied retroactively. MixiiiStore reserves the right to modify or cancel promotions at any time.</p>
 
-                <div class="pvl-section" id="tos-governing">
-                    <h2><span class="pvl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>8. Governing Law</h2>
-                    <p>These Terms shall be governed by and construed in accordance with applicable laws. Any disputes shall be resolved through binding arbitration before resorting to litigation, except for claims relating to intellectual property infringement.</p>
-                </div>
+            <h2 id="terms-s6">6. Shipping &amp; Delivery</h2>
+            <p>We offer nationwide delivery to addresses within Vietnam. Estimated delivery times are provided at checkout and are not guaranteed. Delivery timelines may be affected by circumstances beyond our control, including weather events, carrier delays, and peak periods.</p>
+            <p>Risk of loss and title for products pass to you upon delivery by our carrier to the shipping address provided. We are not responsible for delays or non-delivery resulting from incorrect shipping information provided by the customer.</p>
 
-                <div class="pvl-section" id="tos-contact">
-                    <h2><span class="pvl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>9. Contact Us</h2>
-                    <p>For any questions regarding these Terms of Service, please reach out to our team:</p>
-                    <a class="pvl-contact-card" href="<?= $block->escapeUrl($block->getUrl('contact')) ?>">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                        Contact Support Team
-                    </a>
-                </div>
+            <h2 id="terms-s7">7. Returns &amp; Refunds</h2>
+            <p>We operate a <strong>7-day return policy</strong> for most products from the date of delivery, subject to the following conditions:</p>
+            <ul>
+                <li>The item must be unused, in its original packaging, and in resaleable condition.</li>
+                <li>Proof of purchase (order number, receipt) must be provided.</li>
+                <li>Items marked as "Final Sale," open-box, or software licenses are non-returnable.</li>
+                <li>Defective or DOA (Dead on Arrival) products may be returned within <strong>30 days</strong> for a full replacement or refund.</li>
+            </ul>
+            <p>To initiate a return, contact us at <a href="mailto:returns@mixiiistore.com">returns@mixiiistore.com</a>. Refunds will be processed within 7–14 business days of us receiving and inspecting the returned item.</p>
 
+            <h2 id="terms-s8">8. Warranties</h2>
+            <p>Products sold on MixiiiStore carry the manufacturer's warranty as specified on each product listing. MixiiiStore acts as the authorized retail agent and warranty facilitator. Warranty claims are subject to the manufacturer's terms and may require the product to be sent to an authorized service center.</p>
+            <p>MixiiiStore does not provide any additional warranty beyond what is offered by the manufacturer unless explicitly stated in writing.</p>
+
+            <h2 id="terms-s9">9. Intellectual Property</h2>
+            <p>All content on the Platform, including but not limited to text, graphics, logos, product images, audio clips, and software, is the property of MixiiiStore or its content suppliers and is protected by applicable intellectual property laws. Unauthorized use is strictly prohibited.</p>
+
+            <h2 id="terms-s10">10. Limitation of Liability</h2>
+            <p>To the fullest extent permitted by applicable law, MixiiiStore shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, data, or goodwill, arising out of or in connection with your use of the Platform or purchase of products.</p>
+            <p>Our total aggregate liability shall not exceed the amount paid by you for the specific product that is the subject of the claim.</p>
+
+            <h2 id="terms-s11">11. Governing Law</h2>
+            <p>These Terms shall be governed by and construed in accordance with the laws of the Socialist Republic of Vietnam. Any disputes arising under or in connection with these Terms shall be subject to the exclusive jurisdiction of the competent courts of Ho Chi Minh City, Vietnam.</p>
+
+            <h2 id="terms-s12">12. Contact Us</h2>
+            <p>If you have any questions about these Terms of Service, please contact us:</p>
+            <div class="pv3-legal-contact">
+                <p><strong>MixiiiStore</strong></p>
+                <p>Email: <a href="mailto:legal@mixiiistore.com">legal@mixiiistore.com</a></p>
+                <p>Support: <a href="mailto:support@mixiiistore.com">support@mixiiistore.com</a></p>
+                <p>Website: <?= $block->escapeUrl($block->getUrl('')) ?></p>
             </div>
+
+        </div><!-- /.pv3-legal-body -->
+
+        <div class="pv3-legal-footer-links">
+            <a href="<?= $block->escapeUrl($block->getUrl('privacy-policy')) ?>">Privacy Policy</a>
+            <span>·</span>
+            <a href="<?= $block->escapeUrl($block->getUrl('cookies')) ?>">Cookie Policy</a>
+            <span>·</span>
+            <a href="<?= $block->escapeUrl($block->getUrl('')) ?>">Back to Store</a>
         </div>
+
     </div>
-</div>
+</section>
+
+<style>
+.pv3-legal-page {
+    background: linear-gradient(135deg,#0f0720 0%,#130a2b 100%);
+    min-height: 100vh;
+    padding: 60px 0;
+}
+.pv3-legal-wrap { max-width: 820px; margin: 0 auto; }
+.pv3-legal-header { text-align: center; margin-bottom: 40px; }
+.pv3-legal-badge {
+    display: inline-block; padding: 4px 14px;
+    background: rgba(99,102,241,.15); border: 1px solid rgba(99,102,241,.3);
+    border-radius: 20px; color: #a5b4fc; font-size: 13px; font-weight: 600; margin-bottom: 14px;
+}
+.pv3-legal-title  { font-size: clamp(24px,4vw,40px); font-weight: 800; color: #fff; margin: 0 0 12px; }
+.pv3-legal-meta   { color: #64748b; font-size: 14px; margin: 0; }
+.pv3-legal-meta strong { color: #94a3b8; }
+.pv3-legal-toc {
+    background: rgba(99,102,241,.06); border: 1px solid rgba(99,102,241,.2);
+    border-radius: 12px; padding: 24px 28px; margin-bottom: 40px;
+}
+.pv3-legal-toc strong { display: block; color: #e2e8f0; margin-bottom: 12px; font-size: 14px; }
+.pv3-legal-toc ol { margin: 0; padding-left: 20px; color: #94a3b8; }
+.pv3-legal-toc li { margin-bottom: 6px; font-size: 14px; }
+.pv3-legal-toc a  { color: #818cf8; text-decoration: none; }
+.pv3-legal-toc a:hover { color: #a5b4fc; text-decoration: underline; }
+.pv3-legal-body { color: #cbd5e1; line-height: 1.8; }
+.pv3-legal-body h2 {
+    font-size: 20px; font-weight: 700; color: #fff;
+    margin: 36px 0 14px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.07);
+}
+.pv3-legal-body h2:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+.pv3-legal-body p  { margin: 0 0 16px; font-size: 15px; }
+.pv3-legal-body ul { padding-left: 20px; margin-bottom: 16px; }
+.pv3-legal-body li { margin-bottom: 8px; font-size: 15px; }
+.pv3-legal-body a  { color: #818cf8; }
+.pv3-legal-body a:hover { color: #a5b4fc; }
+.pv3-legal-contact {
+    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+    border-radius: 12px; padding: 20px 24px; margin-top: 8px;
+}
+.pv3-legal-contact p { margin: 0 0 6px; }
+.pv3-legal-contact p:last-child { margin-bottom: 0; }
+.pv3-legal-footer-links {
+    text-align: center; margin-top: 48px; padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,.07);
+    display: flex; gap: 12px; justify-content: center; align-items: center;
+}
+.pv3-legal-footer-links a { color: #818cf8; text-decoration: none; font-size: 14px; }
+.pv3-legal-footer-links a:hover { color: #a5b4fc; }
+.pv3-legal-footer-links span { color: #334155; }
+</style>

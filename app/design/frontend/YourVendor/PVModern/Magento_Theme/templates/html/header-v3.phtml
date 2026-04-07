@@ -1,46 +1,91 @@
 <?php
-/** @var \Magento\Framework\View\Element\Template $block */
-$om = \Magento\Framework\App\ObjectManager::getInstance();
-$checkoutSession = $om->get(\Magento\Checkout\Model\Session::class);
-$cartQty = 0;
+/**
+ * PVModern v4.1-fixed — Header
+ * =============================
+ * Navigation: pure CSS hover mega-menus, RequireJS sliding underline
+ * Cart badge: Magento customerData (KO observable) real-time update
+ * No Alpine.js dependency — works with stock Magento RequireJS stack.
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ */
+
+$_om = \Magento\Framework\App\ObjectManager::getInstance();
+
+/* ── Server-side cart count (initial render) ───────── */
+$_cartQty = 0;
 try {
-    $cartQty = (int) round((float) $checkoutSession->getQuote()->getItemsQty());
+    $_cartQty = (int) round(
+        (float) $_om->get(\Magento\Checkout\Model\Session::class)
+                    ->getQuote()->getItemsQty()
+    );
 } catch (\Throwable $e) {}
 
-/* ── Mega-menu definition ── */
-$megaMenus = [
-    'Desktop' => [
-        'href'  => '#pv3-products',
-        'color' => '',
+/* ── Page-context detection for nav underline ──────────────────────────────
+ * PHP detects whether we are on a category page and which nav item is active.
+ * Values are embedded as data-* attributes on the <nav> element.
+ * The RequireJS widget (v3-header.js) reads these on DOMReady to set the
+ * initial underline position and text color — no page-load flash.
+ * ─────────────────────────────────────────────────────────────────────────── */
+$_req       = $_om->get(\Magento\Framework\App\RequestInterface::class);
+$_action    = $_req->getFullActionName();
+$_isCatPage = ($_action === 'catalog_category_view');
+
+$_activeCat = '';
+if ($_isCatPage) {
+    try {
+        $_cat = $_om->get(\Magento\Framework\Registry::class)->registry('current_category');
+        if ($_cat) {
+            $_nm  = strtolower((string) $_cat->getName());
+            $_map = [
+                'desktop' => ['desktop', 'pc', 'workstation', 'tower'],
+                'laptop'  => ['laptop',  'notebook', 'macbook', 'ultrabook'],
+                'monitor' => ['monitor', 'display',  'lcd',     'oled', 'screen'],
+                'apple'   => ['apple',   'iphone',   'ipad',    'airpod', 'mac'],
+            ];
+            foreach ($_map as $_k => $_kws) {
+                foreach ($_kws as $_kw) {
+                    if (strpos($_nm, $_kw) !== false) {
+                        $_activeCat = $_k;
+                        break 2;
+                    }
+                }
+            }
+        }
+    } catch (\Throwable $e) {}
+}
+
+/* ── Mega-menu data ─────────────────────────────────────────────────────── */
+$_menus = [
+    'desktop' => [
+        'label' => 'Desktop',
         'cols'  => [
             [
                 'title' => 'Components',
                 'links' => [
-                    ['label' => 'GPU',        'q' => 'GPU'],
-                    ['label' => 'CPU',        'q' => 'CPU'],
-                    ['label' => 'RAM',        'q' => 'RAM'],
-                    ['label' => 'SSD',        'q' => 'SSD'],
-                    ['label' => 'HDD',        'q' => 'HDD'],
-                    ['label' => 'PSU',        'q' => 'PSU'],
-                    ['label' => 'Heatsink',   'q' => 'heatsink'],
-                    ['label' => 'Case Fan',   'q' => 'case fan'],
-                    ['label' => 'PC Case',    'q' => 'PC case'],
-                    ['label' => 'Gaming Gear','q' => 'gaming gear'],
+                    ['label' => 'GPU',         'q' => 'gpu'],
+                    ['label' => 'CPU',         'q' => 'cpu'],
+                    ['label' => 'RAM',         'q' => 'ram'],
+                    ['label' => 'SSD',         'q' => 'ssd'],
+                    ['label' => 'HDD',         'q' => 'hdd'],
+                    ['label' => 'PSU',         'q' => 'psu'],
+                    ['label' => 'Heatsink',    'q' => 'heatsink'],
+                    ['label' => 'Case Fan',    'q' => 'case fan'],
+                    ['label' => 'PC Case',     'q' => 'pc case'],
+                    ['label' => 'Gaming Gear', 'q' => 'gaming gear'],
                 ],
             ],
             [
-                'title' => 'Quick Links',
+                'title' => 'Shop By',
                 'links' => [
-                    ['label' => 'Build Custom PC', 'url' => 'pc-builder'],
-                    ['label' => 'Pre-built Desktops', 'q' => 'desktop'],
-                    ['label' => 'Workstations', 'q' => 'workstation'],
+                    ['label' => 'PC Builder',    'url' => 'pc-builder'],
+                    ['label' => 'Pre-built PCs', 'q'   => 'desktop'],
+                    ['label' => 'Workstations',  'q'   => 'workstation'],
                 ],
             ],
         ],
     ],
-    'Laptop' => [
-        'href'  => '#pv3-products',
-        'color' => '',
+    'laptop' => [
+        'label' => 'Laptop',
         'cols'  => [
             [
                 'title' => 'Brands',
@@ -52,90 +97,90 @@ $megaMenus = [
                     ['label' => 'Lenovo',        'q' => 'lenovo laptop'],
                     ['label' => 'MSI',           'q' => 'msi laptop'],
                     ['label' => 'Acer',          'q' => 'acer laptop'],
-                    ['label' => 'Gigabyte',      'q' => 'gigabyte laptop'],
                     ['label' => 'Razer',         'q' => 'razer laptop'],
-                    ['label' => 'LG Gram',       'q' => 'lg gram'],
                 ],
             ],
             [
                 'title' => 'Categories',
                 'links' => [
-                    ['label' => 'Gaming Laptops',    'q' => 'gaming laptop'],
-                    ['label' => 'Ultrabooks',         'q' => 'ultrabook'],
-                    ['label' => 'Business Laptops',   'q' => 'business laptop'],
-                    ['label' => 'Student Laptops',    'q' => 'student laptop'],
+                    ['label' => 'Gaming Laptops',  'q' => 'gaming laptop'],
+                    ['label' => 'Ultrabooks',       'q' => 'ultrabook'],
+                    ['label' => 'Business Laptops', 'q' => 'business laptop'],
+                    ['label' => 'Student Laptops',  'q' => 'student laptop'],
                 ],
             ],
         ],
     ],
-    'Monitor' => [
-        'href'  => '#pv3-products',
-        'color' => '',
+    'monitor' => [
+        'label' => 'Monitor',
         'cols'  => [
             [
                 'title' => 'Brands',
                 'links' => [
-                    ['label' => 'ASUS',         'q' => 'asus monitor'],
-                    ['label' => 'LG',           'q' => 'lg monitor'],
-                    ['label' => 'Samsung',      'q' => 'samsung monitor'],
-                    ['label' => 'Dell',         'q' => 'dell monitor'],
-                    ['label' => 'AOC',          'q' => 'aoc monitor'],
-                    ['label' => 'BenQ',         'q' => 'benq monitor'],
-                    ['label' => 'ViewSonic',    'q' => 'viewsonic'],
-                    ['label' => 'MSI',          'q' => 'msi monitor'],
+                    ['label' => 'ASUS',      'q' => 'asus monitor'],
+                    ['label' => 'LG',        'q' => 'lg monitor'],
+                    ['label' => 'Samsung',   'q' => 'samsung monitor'],
+                    ['label' => 'Dell',      'q' => 'dell monitor'],
+                    ['label' => 'AOC',       'q' => 'aoc monitor'],
+                    ['label' => 'BenQ',      'q' => 'benq monitor'],
+                    ['label' => 'MSI',       'q' => 'msi monitor'],
                 ],
             ],
             [
                 'title' => 'Panel Type',
                 'links' => [
-                    ['label' => '4K / UHD',      'q' => '4k monitor'],
-                    ['label' => '144Hz Gaming',   'q' => '144hz monitor'],
-                    ['label' => '240Hz Gaming',   'q' => '240hz monitor'],
-                    ['label' => 'OLED Display',   'q' => 'oled monitor'],
-                    ['label' => 'Ultrawide',      'q' => 'ultrawide monitor'],
+                    ['label' => '4K / UHD',   'q' => '4k monitor'],
+                    ['label' => '144Hz',       'q' => '144hz monitor'],
+                    ['label' => '240Hz',       'q' => '240hz monitor'],
+                    ['label' => 'OLED',        'q' => 'oled monitor'],
+                    ['label' => 'Ultrawide',   'q' => 'ultrawide monitor'],
                 ],
             ],
         ],
     ],
-    'Apple' => [
-        'href'  => '#pv3-products',
-        'color' => '',
+    'apple' => [
+        'label' => 'Apple',
         'cols'  => [
             [
                 'title' => 'Mac',
                 'links' => [
-                    ['label' => 'MacBook Air',   'q' => 'macbook air'],
-                    ['label' => 'MacBook Pro',   'q' => 'macbook pro'],
-                    ['label' => 'iMac',          'q' => 'imac'],
-                    ['label' => 'Mac mini',      'q' => 'mac mini'],
-                    ['label' => 'Mac Studio',    'q' => 'mac studio'],
-                    ['label' => 'Mac Pro',       'q' => 'mac pro'],
+                    ['label' => 'MacBook Air', 'q' => 'macbook air'],
+                    ['label' => 'MacBook Pro', 'q' => 'macbook pro'],
+                    ['label' => 'iMac',        'q' => 'imac'],
+                    ['label' => 'Mac mini',    'q' => 'mac mini'],
+                    ['label' => 'Mac Studio',  'q' => 'mac studio'],
                 ],
             ],
             [
-                'title' => 'Other Devices',
+                'title' => 'Devices',
                 'links' => [
-                    ['label' => 'iPad Pro',      'q' => 'ipad pro'],
-                    ['label' => 'iPad Air',      'q' => 'ipad air'],
-                    ['label' => 'iPhone',        'q' => 'iphone'],
-                    ['label' => 'Apple Watch',   'q' => 'apple watch'],
-                    ['label' => 'AirPods',       'q' => 'airpods'],
+                    ['label' => 'iPad Pro',    'q' => 'ipad pro'],
+                    ['label' => 'iPad Air',    'q' => 'ipad air'],
+                    ['label' => 'iPhone',      'q' => 'iphone'],
+                    ['label' => 'Apple Watch', 'q' => 'apple watch'],
+                    ['label' => 'AirPods',     'q' => 'airpods'],
                 ],
             ],
         ],
     ],
 ];
-$searchUrl = $block->escapeUrl($block->getUrl('catalogsearch/result'));
+
+$_searchUrl  = $block->escapeUrl($block->getUrl('catalogsearch/result'));
+$_isCatStr   = $_isCatPage ? 'true' : 'false';
+$_activeStr  = $block->escapeHtmlAttr($_activeCat);
 ?>
 <header class="pv3-header-shell" data-mage-init='{"pvmodernHeader":{}}'>
+
     <div class="pv3-header-line"></div>
+
     <div class="pv3-header-main">
         <div class="pv3-container pv3-header-row">
 
-            <!-- Brand -->
+            <!-- LOGO ──────────────────────────────────────────────────────── -->
             <a class="pv3-brand" href="<?= $block->escapeUrl($block->getUrl('')) ?>">
                 <span class="pv3-brand-mark">
-                    <img src="<?= $block->escapeUrl($block->getViewFileUrl('YourVendor_PVModern::images/icon.svg')) ?>" alt="MixiiiStore" />
+                    <img src="<?= $block->escapeUrl($block->getViewFileUrl('YourVendor_PVModern::images/icon.svg')) ?>"
+                         alt="MixiiiStore" width="20" height="20" />
                     <span class="pv3-brand-status"></span>
                 </span>
                 <span class="pv3-brand-copy">
@@ -144,46 +189,75 @@ $searchUrl = $block->escapeUrl($block->getUrl('catalogsearch/result'));
                 </span>
             </a>
 
-            <!-- Search -->
-            <form class="pv3-search" action="<?= $searchUrl ?>" method="get">
+            <!-- SEARCH ─────────────────────────────────────────────────────── -->
+            <form class="pv3-search" action="<?= $_searchUrl ?>" method="get" role="search">
                 <span class="pv3-search-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
                 </span>
-                <input type="text" name="q" placeholder="Search for products..." />
+                <input type="text" name="q"
+                       placeholder="Search for products..."
+                       autocomplete="off"
+                       aria-label="Search" />
             </form>
 
-            <!-- Mega-nav (desktop) -->
-            <nav class="pv3-nav" aria-label="Primary" data-role="category-nav">
-                <?php foreach ($megaMenus as $label => $menu): ?>
-                <div class="pv3-nav-item<?= $label === 'Deals' ? ' is-deals-item' : '' ?>"
-                     data-nav-item="<?= $block->escapeHtmlAttr(strtolower($label)) ?>">
-                    <a href="<?= $block->escapeUrl($block->getUrl(ltrim($menu['href'], '#') ?: '')) ?>"
-                       data-category="<?= $block->escapeHtmlAttr(strtolower($label)) ?>"
-                       class="pv3-nav-link<?= $label === 'Deals' ? ' is-deals' : '' ?>">
-                        <?= $block->escapeHtml($label) ?>
-                        <?php if (count($menu['cols']) > 0): ?>
+            <!-- NAV ────────────────────────────────────────────────────────────
+                 data-cat-page  → 'true'|'false'  — PHP page-type detection
+                 data-active    → nav key          — PHP category name mapping
+                 RequireJS widget reads these two attributes to:
+                   1. Set initial underline position (category pages only)
+                   2. Animate underline on hover (all pages)
+                   3. Color the active link blue (category pages)
+            ──────────────────────────────────────────────────────────────────── -->
+            <nav class="pv3-nav"
+                 id="pv3-nav"
+                 aria-label="Primary navigation"
+                 data-cat-page="<?= $_isCatStr ?>"
+                 data-active="<?= $_activeStr ?>">
+
+                <?php foreach ($_menus as $_key => $_menu): ?>
+                <?php $_hKey = $block->escapeHtmlAttr($_key); ?>
+
+                <div class="pv3-nav-item" data-nav-key="<?= $_hKey ?>">
+
+                    <!-- The <a> carries data-cat for JS targeting -->
+                    <a href="<?= $block->escapeUrl($block->getUrl('')) ?>#pv3-products"
+                       class="pv3-nav-link<?= ($_activeCat === $_key) ? ' is-active' : '' ?>"
+                       data-cat="<?= $_hKey ?>"
+                       aria-haspopup="true">
+                        <?= $block->escapeHtml($_menu['label']) ?>
                         <span class="pv3-nav-caret" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="m6 9 6 6 6-6"/>
+                            </svg>
                         </span>
-                        <?php endif; ?>
                     </a>
 
-                    <?php if (!empty($menu['cols'])): ?>
-                    <div class="pv3-mega-menu" role="region" aria-label="<?= $block->escapeHtmlAttr($label) ?> menu">
+                    <!--
+                        Mega-menu — shown/hidden by CSS :hover on .pv3-nav-item.
+                        padding-top:20px on .pv3-mega-menu creates a transparent
+                        hover bridge so the cursor can travel from link to panel.
+                    -->
+                    <div class="pv3-mega-menu" role="region"
+                         aria-label="<?= $block->escapeHtmlAttr($_menu['label']) ?> submenu">
                         <div class="pv3-mega-inner">
-                            <?php foreach ($menu['cols'] as $col): ?>
+                            <?php foreach ($_menu['cols'] as $_col): ?>
                             <div class="pv3-mega-col">
-                                <strong class="pv3-mega-col-title"><?= $block->escapeHtml($col['title']) ?></strong>
+                                <strong class="pv3-mega-col-title">
+                                    <?= $block->escapeHtml($_col['title']) ?>
+                                </strong>
                                 <ul>
-                                    <?php foreach ($col['links'] as $link): ?>
+                                    <?php foreach ($_col['links'] as $_link): ?>
                                     <li>
-                                        <?php if (!empty($link['url'])): ?>
-                                        <a href="<?= $block->escapeUrl($block->getUrl($link['url'])) ?>">
-                                            <?= $block->escapeHtml($link['label']) ?>
+                                        <?php if (!empty($_link['url'])): ?>
+                                        <a href="<?= $block->escapeUrl($block->getUrl($_link['url'])) ?>">
+                                            <?= $block->escapeHtml($_link['label']) ?>
                                         </a>
                                         <?php else: ?>
-                                        <a href="<?= $block->escapeUrl($block->getUrl('catalogsearch/result', ['_query' => ['q' => $link['q']]])) ?>">
-                                            <?= $block->escapeHtml($link['label']) ?>
+                                        <a href="<?= $block->escapeUrl($block->getUrl('catalogsearch/result', ['_query' => ['q' => $_link['q']]])) ?>">
+                                            <?= $block->escapeHtml($_link['label']) ?>
                                         </a>
                                         <?php endif; ?>
                                     </li>
@@ -193,62 +267,121 @@ $searchUrl = $block->escapeUrl($block->getUrl('catalogsearch/result'));
                             <?php endforeach; ?>
                         </div>
                     </div>
-                    <?php endif; ?>
+
                 </div>
                 <?php endforeach; ?>
 
-                <!-- Deals standalone link -->
-                <a class="pv3-nav-link is-deals" href="<?= $block->escapeUrl($block->getUrl('deals')) ?>" data-category="deals">Deals</a>
+                <!-- Deals — no dropdown -->
+                <a class="pv3-nav-link is-deals"
+                   data-cat="deals"
+                   href="<?= $block->escapeUrl($block->getUrl('deals')) ?>">Deals</a>
 
-                <!-- Sliding underline indicator -->
-                <span class="pv3-nav-indicator" aria-hidden="true"></span>
+                <!--
+                    UNDERLINE INDICATOR
+                    Positioned & animated by v3-header.js.
+                    CSS: position:absolute; bottom:0; transition: left .28s, width .28s
+                    JS sets: indicator.style.left, indicator.style.width, indicator.style.opacity
+                    Hidden by default (opacity:0 in CSS). JS reveals it only when appropriate.
+                -->
+                <span class="pv3-nav-indicator" id="pv3-nav-indicator" aria-hidden="true"></span>
+
             </nav>
 
-            <!-- Actions -->
+            <!-- ACTIONS ────────────────────────────────────────────────────── -->
             <div class="pv3-actions">
-                <a class="pv3-icon-button is-favorite" href="<?= $block->escapeUrl($block->getUrl('wishlist')) ?>" aria-label="Wishlist">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 21-1.4-1.27C5.4 15 2 11.86 2 8.03 2 4.9 4.42 2.5 7.5 2.5c1.74 0 3.41.81 4.5 2.09A6 6 0 0 1 16.5 2.5C19.58 2.5 22 4.9 22 8.03c0 3.83-3.4 6.97-8.6 11.7L12 21z"/></svg>
+
+                <a class="pv3-icon-button"
+                   href="<?= $block->escapeUrl($block->getUrl('wishlist')) ?>"
+                   aria-label="Wishlist">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m12 21-1.4-1.27C5.4 15 2 11.86 2 8.03 2 4.9 4.42 2.5 7.5 2.5c1.74 0 3.41.81 4.5 2.09A6 6 0 0 1 16.5 2.5C19.58 2.5 22 4.9 22 8.03c0 3.83-3.4 6.97-8.6 11.7L12 21z"/>
+                    </svg>
                 </a>
-                <a class="pv3-icon-button" href="<?= $block->escapeUrl($block->getUrl('customer/account')) ?>" aria-label="My account">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7" r="4"/></svg>
+
+                <a class="pv3-icon-button"
+                   href="<?= $block->escapeUrl($block->getUrl('customer/account')) ?>"
+                   aria-label="My account">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7" r="4"/>
+                    </svg>
                 </a>
-                <a class="pv3-cart-button" href="<?= $block->escapeUrl($block->getUrl('checkout/cart')) ?>" aria-label="Cart">
-                    <span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.5 3H5l2.68 11.39a1 1 0 0 0 .97.76h9.72a1 1 0 0 0 .97-.79L21 6H6"/></svg>
+
+                <!--
+                    Cart badge:
+                    [data-cart-badge] → targeted by RequireJS pvmodernHeader widget.
+                    Bound to Magento customerData.get('cart').summary_count via
+                    Knockout.js observable — updates without page reload.
+                -->
+                <a class="pv3-cart-button"
+                   href="<?= $block->escapeUrl($block->getUrl('checkout/cart')) ?>"
+                   aria-label="Cart">
+                    <span class="pv3-cart-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="8"  cy="21" r="1"/>
+                            <circle cx="19" cy="21" r="1"/>
+                            <path d="M2.5 3H5l2.68 11.39a1 1 0 0 0 .97.76h9.72a1 1 0 0 0 .97-.79L21 6H6"/>
+                        </svg>
                     </span>
-                    <em><?= $block->escapeHtml((string) $cartQty) ?></em>
+                    <em data-cart-badge
+                        style="<?= $_cartQty < 1 ? 'display:none' : '' ?>">
+                        <?= $_cartQty > 0 ? $block->escapeHtml((string)$_cartQty) : '' ?>
+                    </em>
                 </a>
-                <button class="pv3-menu-toggle" type="button" data-role="menu-toggle" aria-expanded="false" aria-controls="pv3-mobile-menu">
+
+                <!-- Hamburger (visible on mobile via CSS) -->
+                <button class="pv3-menu-toggle"
+                        type="button"
+                        data-role="menu-toggle"
+                        aria-expanded="false"
+                        aria-controls="pv3-mobile-menu"
+                        aria-label="Toggle menu">
                     <span class="pv3-menu-toggle__open">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18"/><path d="M3 6h18"/><path d="M3 18h18"/></svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 12h18"/><path d="M3 6h18"/><path d="M3 18h18"/>
+                        </svg>
                     </span>
                     <span class="pv3-menu-toggle__close">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+                        </svg>
                     </span>
                 </button>
-            </div>
-        </div>
-    </div>
 
-    <!-- Mobile menu -->
-    <div class="pv3-mobile-menu" id="pv3-mobile-menu" data-role="mobile-menu" hidden>
+            </div><!-- /.pv3-actions -->
+
+        </div><!-- /.pv3-header-row -->
+    </div><!-- /.pv3-header-main -->
+
+    <!-- MOBILE MENU ─────────────────────────────────────────────────────────── -->
+    <div class="pv3-mobile-menu"
+         id="pv3-mobile-menu"
+         data-role="mobile-menu"
+         hidden>
         <div class="pv3-container">
-            <form class="pv3-mobile-search" action="<?= $searchUrl ?>" method="get">
+            <form class="pv3-mobile-search" action="<?= $_searchUrl ?>" method="get">
                 <span class="pv3-search-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
                 </span>
                 <input type="text" name="q" placeholder="Search for products..." />
             </form>
-            <nav class="pv3-mobile-nav" aria-label="Mobile primary" data-role="category-nav-mobile">
-                <?php foreach ($megaMenus as $label => $menu): ?>
-                <a href="<?= $block->escapeUrl($block->getUrl(ltrim($menu['href'], '#') ?: '')) ?>"
-                   data-category="<?= $block->escapeHtmlAttr(strtolower($label)) ?>"
-                   class="<?= $label === 'Deals' ? 'is-deals' : '' ?>">
-                    <?= $block->escapeHtml($label) ?>
+            <nav class="pv3-mobile-nav" aria-label="Mobile navigation">
+                <?php foreach ($_menus as $_key => $_menu): ?>
+                <a href="<?= $block->escapeUrl($block->getUrl('')) ?>#pv3-products">
+                    <?= $block->escapeHtml($_menu['label']) ?>
                 </a>
                 <?php endforeach; ?>
-                <a class="is-deals" href="<?= $block->escapeUrl($block->getUrl('deals')) ?>" data-category="deals">Deals</a>
+                <a class="is-deals" href="<?= $block->escapeUrl($block->getUrl('deals')) ?>">Deals</a>
+                <hr class="pv3-mobile-divider" />
+                <a href="<?= $block->escapeUrl($block->getUrl('terms')) ?>">Terms of Service</a>
+                <a href="<?= $block->escapeUrl($block->getUrl('privacy')) ?>">Privacy Policy</a>
+                <a href="<?= $block->escapeUrl($block->getUrl('cookies')) ?>">Cookie Policy</a>
+                <a href="<?= $block->escapeUrl($block->getUrl('customer/account')) ?>">My Account</a>
+                <a href="<?= $block->escapeUrl($block->getUrl('wishlist')) ?>">Wishlist</a>
             </nav>
         </div>
     </div>
+
 </header>

@@ -1,6 +1,5 @@
 <?php
 /** @var \Magento\Framework\View\Element\Template $block */
-
 $om                       = \Magento\Framework\App\ObjectManager::getInstance();
 $storeManager             = $om->get(\Magento\Store\Model\StoreManagerInterface::class);
 $productCollectionFactory = $om->get(\Magento\Catalog\Model\ResourceModel\Product\CollectionFactory::class);
@@ -9,15 +8,15 @@ $priceCurrency            = $om->get(\Magento\Framework\Pricing\PriceCurrencyInt
 $imageHelper              = $om->get(\Magento\Catalog\Helper\Image::class);
 $store                    = $storeManager->getStore();
 
-$activeFilter = isset($_GET['filter']) ? htmlspecialchars((string) $_GET['filter'], ENT_QUOTES) : 'all';
+$activeFilter = isset($_GET['filter']) ? htmlspecialchars((string)$_GET['filter'], ENT_QUOTES) : 'all';
 
-/* ── Fetch products with special price ── */
+/* ── Fetch sale products ─────────────────────────────────────────────────── */
 $deals = [];
 try {
     $collection = $productCollectionFactory->create();
-    $collection->setStoreId((int) $store->getId())
+    $collection->setStoreId((int)$store->getId())
         ->addStoreFilter($store)
-        ->addAttributeToSelect(['name','small_image','image','price','special_price','special_from_date','special_to_date'])
+        ->addAttributeToSelect(['name','small_image','price','special_price'])
         ->addFinalPrice()
         ->addUrlRewrite()
         ->addAttributeToFilter('status', 1)
@@ -29,78 +28,95 @@ try {
     $collection->getSelect()->order('e.entity_id DESC');
     $collection->load();
 
-    $now = date('Y-m-d H:i:s');
     foreach ($collection as $product) {
-        $regularPrice = (float) $product->getData('price');
-        $specialPrice = (float) $product->getFinalPrice();
-        if ($specialPrice <= 0 || $regularPrice <= 0 || $specialPrice >= $regularPrice) {
-            continue;
-        }
-        $discountPct  = (int) round(100 * (1 - $specialPrice / $regularPrice));
-        if ($discountPct < 1) { continue; }
-
-        $imgUrl = (string) $imageHelper->init($product, 'category_page_grid')->getUrl();
-
+        $regular = (float)$product->getData('price');
+        $special = (float)$product->getFinalPrice();
+        if ($special <= 0 || $regular <= 0 || $special >= $regular) continue;
+        $disc = (int)round(100 * (1 - $special / $regular));
+        if ($disc < 1) continue;
         $deals[] = [
-            'id'       => (int)    $product->getId(),
-            'name'     => (string) $product->getName(),
-            'url'      => (string) $product->getProductUrl(),
-            'image'    => $imgUrl ?: '',
-            'regular'  => $regularPrice,
-            'special'  => $specialPrice,
-            'discount' => $discountPct,
-            'regular_html' => $priceCurrency->format($regularPrice, false),
-            'special_html' => $priceCurrency->format($specialPrice, false),
+            'id'      => (int)$product->getId(),
+            'name'    => (string)$product->getName(),
+            'url'     => (string)$product->getProductUrl(),
+            'image'   => (string)$imageHelper->init($product, 'category_page_grid')->getUrl(),
+            'regular' => $regular,
+            'special' => $special,
+            'disc'    => $disc,
+            'reg_fmt' => $priceCurrency->format($regular, false),
+            'sp_fmt'  => $priceCurrency->format($special, false),
         ];
     }
-    /* Sort by biggest discount first */
-    usort($deals, static function ($a, $b) { return $b['discount'] <=> $a['discount']; });
+    usort($deals, function ($a, $b) { return $b['disc'] - $a['disc']; });
 } catch (\Throwable $e) { /* silent */ }
 
-/* ── Apply filter ── */
-$filtered = $deals;
-if ($activeFilter === 'under500') {
-    $filtered = array_filter($deals, static fn($d) => $d['special'] < 500);
-} elseif ($activeFilter === 'under1000') {
-    $filtered = array_filter($deals, static fn($d) => $d['special'] >= 500 && $d['special'] < 1000);
-} elseif ($activeFilter === 'under2000') {
-    $filtered = array_filter($deals, static fn($d) => $d['special'] >= 1000 && $d['special'] < 2000);
-} elseif ($activeFilter === 'under5pct') {
-    $filtered = array_filter($deals, static fn($d) => $d['discount'] >= 5);
-} elseif ($activeFilter === 'under10pct') {
-    $filtered = array_filter($deals, static fn($d) => $d['discount'] >= 10);
+/* ── Filter helpers ──────────────────────────────────────────────────────── */
+function _pvd_count($deals, $filter) {
+    $c = 0;
+    foreach ($deals as $d) {
+        switch ($filter) {
+            case 'hot':     if ($d['disc'] >= 20) $c++; break;
+            case 'mid':     if ($d['disc'] >= 10 && $d['disc'] < 20) $c++; break;
+            case 'budget':  if ($d['special'] < 500) $c++; break;
+            default:        $c++; break;
+        }
+    }
+    return $c;
 }
-$filtered  = array_values($filtered);
-$totalDeals = count($deals);
-$bestsellers = array_slice($deals, 0, 6); /* top 6 by discount = "best sellers" */
-$bestseller_ids = array_column($bestsellers, 'id');
 
-$filterTabs = [
-    'all'       => ['label' => '🔥 All Deals',    'count' => count($deals)],
-    'under500'  => ['label' => 'Under $500',       'count' => count(array_filter($deals, fn($d) => $d['special'] < 500))],
-    'under1000' => ['label' => '$500 – $999',      'count' => count(array_filter($deals, fn($d) => $d['special'] >= 500 && $d['special'] < 1000))],
-    'under2000' => ['label' => '$1,000 – $1,999',  'count' => count(array_filter($deals, fn($d) => $d['special'] >= 1000 && $d['special'] < 2000))],
-    'under5pct' => ['label' => '5%+ Off',          'count' => count(array_filter($deals, fn($d) => $d['discount'] >= 5))],
-    'under10pct'=> ['label' => '10%+ Off',         'count' => count(array_filter($deals, fn($d) => $d['discount'] >= 10))],
+$filtered = [];
+foreach ($deals as $d) {
+    switch ($activeFilter) {
+        case 'hot':    if ($d['disc'] >= 20) $filtered[] = $d; break;
+        case 'mid':    if ($d['disc'] >= 10 && $d['disc'] < 20) $filtered[] = $d; break;
+        case 'budget': if ($d['special'] < 500) $filtered[] = $d; break;
+        default:       $filtered[] = $d; break;
+    }
+}
+
+$topIds   = array_column(array_slice($deals, 0, 8), 'id');
+$dealsUrl = $escaper->escapeUrl($block->getUrl('deals'));
+$maxDisc  = !empty($deals) ? max(array_column($deals, 'disc')) : 0;
+$tabs = [
+    'all'    => ['label' => 'All Deals',  'icon' => '&#x1F4E6;', 'count' => count($deals)],
+    'hot'    => ['label' => '20%+ Off',   'icon' => '&#x26A1;',   'count' => _pvd_count($deals, 'hot')],
+    'mid'    => ['label' => '10-19% Off', 'icon' => '&#x2714;',   'count' => _pvd_count($deals, 'mid')],
+    'budget' => ['label' => 'Under $500', 'icon' => '&#x1F4B0;',  'count' => _pvd_count($deals, 'budget')],
 ];
-$dealsUrl = $block->getUrl('deals');
 ?>
+
+<!– ═══════════════════════════════════════════════════════════════ DEALS PAGE –>
 <div class="pvd-page">
 
-    <!-- ── Hero ── -->
+    <!– ── HERO BANNER ─────────────────────────────────────────────────────── –>
     <div class="pvd-hero">
-        <div class="pv3-container pvd-hero-inner">
-            <div class="pvd-hero-kicker">⚡ Limited Time — While Stocks Last</div>
-            <h1>Hot <span>Deals</span></h1>
-            <p class="pvd-hero-sub">Biggest discounts on premium hardware — updated daily from our catalog.</p>
-            <div class="pvd-hero-stats">
+        <div class="pvd-hero__bg"></div>
+        <div class="pvd-hero__particles" aria-hidden="true">
+            <?php for ($i = 0; $i < 8; $i++): ?>
+            <span class="pvd-particle" style="--d:<?= $i * 0.4 ?>s;--x:<?= rand(5,95) ?>%;--s:<?= rand(4,10) ?>px"></span>
+            <?php endfor; ?>
+        </div>
+        <div class="pv3-container pvd-hero__inner">
+            <div class="pvd-hero__left">
+                <div class="pvd-hero__badge">
+                    <span class="pvd-badge-dot"></span>
+                    FLASH SALE — Limited time
+                </div>
+                <h1 class="pvd-hero__title">
+                    Hot <span class="pvd-text-fire">Deals</span>
+                </h1>
+                <p class="pvd-hero__sub">
+                    Up to <strong><?= (int)$maxDisc ?>% OFF</strong> on top hardware &mdash;
+                    <?= count($deals) ?> products on sale right now.
+                </p>
+            </div>
+            <div class="pvd-hero__stats">
                 <div class="pvd-stat">
-                    <strong><?= $block->escapeHtml((string) $totalDeals) ?></strong>
-                    <span>Active Deals</span>
+                    <strong><?= count($deals) ?></strong>
+                    <span>Products</span>
                 </div>
                 <div class="pvd-stat">
-                    <strong><?= $deals ? $block->escapeHtml((string) max(array_column($deals, 'discount'))) . '%' : '—' ?></strong>
-                    <span>Max Savings</span>
+                    <strong><?= (int)$maxDisc ?>%</strong>
+                    <span>Max Off</span>
                 </div>
                 <div class="pvd-stat">
                     <strong>Daily</strong>
@@ -110,94 +126,537 @@ $dealsUrl = $block->getUrl('deals');
         </div>
     </div>
 
-    <!-- ── Filter tabs ── -->
-    <div class="pvd-filters">
-        <div class="pv3-container">
-            <div class="pvd-filter-tabs">
-                <?php foreach ($filterTabs as $key => $tab): ?>
-                <a href="<?= $block->escapeUrl($dealsUrl . '?filter=' . $key) ?>"
-                   class="pvd-filter-tab<?= $activeFilter === $key ? ' is-active' : '' ?>">
-                    <?= $block->escapeHtml($tab['label']) ?>
-                    <?php if ($tab['count'] > 0): ?>
-                    <span style="opacity:.7;font-size:11px;">(<?= $block->escapeHtml((string) $tab['count']) ?>)</span>
-                    <?php endif; ?>
-                </a>
-                <?php endforeach; ?>
-            </div>
+    <!– ── FILTER TABS ──────────────────────────────────────────────────────── –>
+    <div class="pvd-tabs-bar">
+        <div class="pv3-container pvd-tabs">
+            <?php foreach ($tabs as $k => $t): ?>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('deals') . '?filter=' . $k) ?>"
+               class="pvd-tab<?= $activeFilter === $k ? ' is-active' : '' ?>">
+                <span class="pvd-tab__icon"><?= $t['icon'] ?></span>
+                <span class="pvd-tab__label"><?= $block->escapeHtml($t['label']) ?></span>
+                <?php if ($t['count']): ?>
+                <span class="pvd-tab__count"><?= (int)$t['count'] ?></span>
+                <?php endif; ?>
+            </a>
+            <?php endforeach; ?>
         </div>
     </div>
 
-    <div class="pv3-container">
+    <!– ── PRODUCT GRID ─────────────────────────────────────────────────────── –>
+    <div class="pv3-container pvd-grid-wrap">
 
         <?php if (!empty($filtered)): ?>
-
-        <!-- ── Best Seller Banner ── -->
-        <?php if ($activeFilter === 'all'): ?>
-        <div class="pvd-banner">
-            <div class="pvd-banner-inner">
-                <span class="pvd-banner-bolt">🏆</span>
-                <span class="pvd-banner-text">Best <span>Sellers</span></span>
-                <span class="pvd-banner-bolt">🏆</span>
-            </div>
+        <div class="pvd-count-bar">
+            Showing <strong><?= count($filtered) ?></strong> deals
+            <?php if ($activeFilter !== 'all'): ?>
+            &mdash; <a href="<?= $dealsUrl ?>" class="pvd-clear">Clear filter</a>
+            <?php endif; ?>
         </div>
-        <?php endif; ?>
 
-        <!-- ── Product grid ── -->
-        <div class="pvd-grid-section">
-            <div class="pvd-products-grid">
-                <?php foreach ($filtered as $i => $deal): ?>
-                <?php $isBest = in_array($deal['id'], $bestseller_ids, true); ?>
-                <article class="pvd-card<?= $isBest ? ' is-bestseller' : '' ?>">
-                    <div class="pvd-card-badges">
-                        <span class="pvd-badge pvd-badge--discount">-<?= $block->escapeHtml((string) $deal['discount']) ?>%</span>
-                        <?php if ($isBest): ?>
-                        <span class="pvd-badge pvd-badge--bestseller">⭐ Best Seller</span>
-                        <?php endif; ?>
-                        <?php if ($deal['discount'] >= 15): ?>
-                        <span class="pvd-badge pvd-badge--hot">🔥 Hot Deal</span>
-                        <?php endif; ?>
-                    </div>
-                    <a class="pvd-card-image" href="<?= $block->escapeUrl($deal['url']) ?>">
-                        <?php if ($deal['image']): ?>
-                        <img src="<?= $block->escapeUrl($deal['image']) ?>"
-                             alt="<?= $block->escapeHtmlAttr($deal['name']) ?>" loading="lazy" />
-                        <?php else: ?>
-                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 9 6 6"/><path d="m15 9-6 6"/></svg>
-                        <?php endif; ?>
-                    </a>
-                    <div class="pvd-card-body">
-                        <p class="pvd-card-name">
-                            <a href="<?= $block->escapeUrl($deal['url']) ?>"><?= $block->escapeHtml($deal['name']) ?></a>
-                        </p>
-                        <div class="pvd-prices">
-                            <span class="pvd-price-special"><?= $block->escapeHtml($deal['special_html']) ?></span>
-                            <span class="pvd-price-original"><?= $block->escapeHtml($deal['regular_html']) ?></span>
-                        </div>
-                        <a class="pvd-card-cta" href="<?= $block->escapeUrl($deal['url']) ?>">
-                            <?= $block->escapeHtml(__('View Deal')) ?> →
+        <div class="pvd-grid">
+            <?php foreach ($filtered as $d): ?>
+            <?php $isTop = in_array($d['id'], $topIds, true); ?>
+            <article class="pvd-card<?= $isTop ? ' is-top' : '' ?>">
+
+                <!– Discount badge –>
+                <div class="pvd-card__badges">
+                    <span class="pvd-disc-badge">-<?= (int)$d['disc'] ?>%</span>
+                    <?php if ($isTop): ?>
+                    <span class="pvd-best-badge">&#x2B50; TOP</span>
+                    <?php endif; ?>
+                    <?php if ($d['disc'] >= 20): ?>
+                    <span class="pvd-hot-badge">&#x26A1; HOT</span>
+                    <?php endif; ?>
+                </div>
+
+                <!– Image –>
+                <a class="pvd-card__image" href="<?= $escaper->escapeUrl($d['url']) ?>">
+                    <?php if ($d['image']): ?>
+                    <img src="<?= $escaper->escapeUrl($d['image']) ?>"
+                         alt="<?= $block->escapeHtmlAttr($d['name']) ?>"
+                         loading="lazy" />
+                    <?php else: ?>
+                    <svg viewBox="0 0 100 80" fill="none">
+                        <rect width="100" height="80" rx="8" fill="#1e1b4b"/>
+                        <path d="M30 40h40M50 20v40" stroke="#6366f1" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <?php endif; ?>
+                    <div class="pvd-card__image-overlay"></div>
+                </a>
+
+                <!– Body –>
+                <div class="pvd-card__body">
+                    <p class="pvd-card__name">
+                        <a href="<?= $escaper->escapeUrl($d['url']) ?>">
+                            <?= $block->escapeHtml($d['name']) ?>
                         </a>
+                    </p>
+                    <div class="pvd-card__pricing">
+                        <span class="pvd-price-sp"><?= $block->escapeHtml($d['sp_fmt']) ?></span>
+                        <span class="pvd-price-reg"><?= $block->escapeHtml($d['reg_fmt']) ?></span>
                     </div>
-                </article>
-                <?php endforeach; ?>
-            </div>
+                    <div class="pvd-savings-bar">
+                        <span>Save <?= $block->escapeHtml($priceCurrency->format($d['regular'] - $d['special'], false)) ?></span>
+                        <div class="pvd-savings-progress">
+                            <div class="pvd-savings-fill" style="width:<?= min($d['disc'], 100) ?>%"></div>
+                        </div>
+                    </div>
+                    <a class="pvd-card__cta" href="<?= $escaper->escapeUrl($d['url']) ?>">
+                        View Deal
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+            </article>
+            <?php endforeach; ?>
         </div>
 
         <?php else: ?>
-        <div class="pvd-empty" style="padding-top:64px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
-                <line x1="7" y1="7" x2="7.01" y2="7"/>
+        <div class="pvd-empty">
+            <svg viewBox="0 0 80 80" fill="none">
+                <circle cx="40" cy="40" r="38" stroke="#4f46e5" stroke-width="2" opacity=".3"/>
+                <path d="M25 40h30M40 25v30" stroke="#818cf8" stroke-width="3" stroke-linecap="round" opacity=".5"/>
             </svg>
-            <p>No deals found for this filter.</p>
-            <p style="font-size:13px;margin-top:8px;">
-                To create deals: go to <a href="<?= $block->escapeUrl($block->getUrl('adminhtml')) ?>">Magento Admin</a>
-                → Catalog → Products → set a <strong>Special Price</strong> on any product.
+            <h3>No deals in this category yet</h3>
+            <p>Go to <a href="<?= $escaper->escapeUrl($block->getUrl('adminhtml')) ?>">
+                Magento Admin &rarr; Catalog &rarr; Products</a> and set a
+                <strong>Special Price</strong> on any product.
             </p>
-            <a href="<?= $block->escapeUrl($dealsUrl) ?>" class="pvd-filter-tab is-active" style="margin-top:16px;display:inline-flex;">
+            <a href="<?= $dealsUrl ?>" class="pvd-card__cta" style="display:inline-flex;margin-top:20px">
                 View All Deals
             </a>
         </div>
         <?php endif; ?>
+    </div>
 
+    <!– Footer links –>
+    <div class="pv3-container pvd-footer-links">
+        <a href="<?= $escaper->escapeUrl($block->getUrl('')) ?>">&#x2190; Back to Store</a>
+        <span>&middot;</span>
+        <a href="<?= $escaper->escapeUrl($block->getUrl('pcbuilder')) ?>">Build Custom PC</a>
     </div>
 </div>
+
+<style>
+/* ═══════════════════════════════════════════════════════════════════
+   PVModern v5 — Hot Deals Page
+   Flash Sale Gaming Aesthetic — GearVN/PhongVu Standard
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Page shell ───────────────────────────────────────────────────── */
+.pvd-page {
+    background: #0a0a12;
+    min-height: 100vh;
+    padding-bottom: 80px;
+    color: #e2e8f0;
+}
+
+/* ── Hero ─────────────────────────────────────────────────────────── */
+.pvd-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 56px 0 48px;
+}
+.pvd-hero__bg {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(135deg, #1a0533 0%, #0f0720 40%, #120a1e 60%, #1a0a00 100%);
+}
+.pvd-hero__bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 60% 60% at 20% 50%, rgba(234,88,12,.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 80% 50%, rgba(99,102,241,.2) 0%, transparent 70%);
+}
+/* floating particles */
+.pvd-hero__particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.pvd-particle {
+    position: absolute;
+    left: var(--x);
+    top: -20px;
+    width: var(--s);
+    height: var(--s);
+    border-radius: 50%;
+    background: rgba(249,115,22,.6);
+    animation: pvd-fall 6s var(--d) linear infinite;
+}
+@keyframes pvd-fall {
+    0%   { transform: translateY(0) scale(1); opacity: .8; }
+    100% { transform: translateY(110vh) scale(.2); opacity: 0; }
+}
+.pvd-hero__inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 32px;
+}
+.pvd-hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: rgba(234,88,12,.15);
+    border: 1px solid rgba(234,88,12,.35);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    color: #fb923c;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+.pvd-badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #f97316;
+    animation: pvd-pulse 1.4s ease-in-out infinite;
+}
+@keyframes pvd-pulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(249,115,22,.6); }
+    50%      { box-shadow: 0 0 0 6px rgba(249,115,22,0); }
+}
+.pvd-hero__title {
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 900;
+    line-height: 1;
+    color: #fff;
+    margin: 0 0 16px;
+    letter-spacing: -.03em;
+}
+.pvd-text-fire {
+    background: linear-gradient(135deg, #f97316 0%, #ef4444 50%, #dc2626 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.pvd-hero__sub {
+    color: #94a3b8;
+    font-size: 16px;
+    margin: 0;
+}
+.pvd-hero__sub strong { color: #fb923c; }
+.pvd-hero__stats {
+    display: flex;
+    gap: 28px;
+}
+.pvd-stat {
+    text-align: center;
+    padding: 16px 24px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 16px;
+    backdrop-filter: blur(8px);
+}
+.pvd-stat strong {
+    display: block;
+    font-size: 28px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #f97316, #ef4444);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.pvd-stat span {
+    font-size: 11px;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+}
+
+/* ── Filter tabs ──────────────────────────────────────────────────── */
+.pvd-tabs-bar {
+    background: rgba(255,255,255,.03);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    backdrop-filter: blur(12px);
+}
+.pvd-tabs {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 12px 0;
+}
+.pvd-tabs::-webkit-scrollbar { display: none; }
+.pvd-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    border-radius: 10px;
+    border: 1.5px solid rgba(255,255,255,.08);
+    color: #94a3b8;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: all .18s ease;
+    cursor: pointer;
+}
+.pvd-tab:hover {
+    border-color: rgba(249,115,22,.4);
+    color: #fb923c;
+    background: rgba(249,115,22,.08);
+}
+.pvd-tab.is-active {
+    background: linear-gradient(135deg, rgba(239,68,68,.2), rgba(249,115,22,.15));
+    border-color: rgba(249,115,22,.5);
+    color: #fb923c;
+    box-shadow: 0 4px 16px rgba(249,115,22,.18);
+}
+.pvd-tab__icon { font-size: 14px; }
+.pvd-tab__count {
+    background: rgba(249,115,22,.2);
+    border-radius: 999px;
+    padding: 1px 7px;
+    font-size: 11px;
+    color: #fb923c;
+}
+
+/* ── Count bar ────────────────────────────────────────────────────── */
+.pvd-grid-wrap { padding-top: 32px; }
+.pvd-count-bar {
+    color: #64748b;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+.pvd-count-bar strong { color: #e2e8f0; }
+.pvd-clear { color: #6366f1; text-decoration: none; }
+.pvd-clear:hover { color: #818cf8; }
+
+/* ── Product Grid ─────────────────────────────────────────────────── */
+.pvd-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+@media (min-width: 640px)  { .pvd-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 900px)  { .pvd-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 1200px) { .pvd-grid { grid-template-columns: repeat(5, 1fr); } }
+
+/* ── Product Card ─────────────────────────────────────────────────── */
+.pvd-card {
+    background: linear-gradient(145deg, #12111d 0%, #0e0d19 100%);
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 14px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.pvd-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(249,115,22,.35);
+    box-shadow: 0 20px 48px rgba(239,68,68,.15), 0 0 0 1px rgba(249,115,22,.2);
+}
+.pvd-card.is-top {
+    border-color: rgba(251,191,36,.3);
+}
+.pvd-card.is-top:hover {
+    border-color: rgba(251,191,36,.55);
+    box-shadow: 0 20px 48px rgba(251,191,36,.12);
+}
+
+/* Badges */
+.pvd-card__badges {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 2;
+}
+.pvd-disc-badge {
+    display: inline-block;
+    padding: 3px 9px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #ef4444, #f97316);
+    color: #fff;
+    letter-spacing: .04em;
+    box-shadow: 0 4px 12px rgba(239,68,68,.4);
+}
+.pvd-best-badge {
+    display: inline-block;
+    padding: 3px 9px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #f59e0b, #eab308);
+    color: #000;
+}
+.pvd-hot-badge {
+    display: inline-block;
+    padding: 3px 9px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: #fff;
+}
+
+/* Image area */
+.pvd-card__image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 180px;
+    padding: 16px;
+    background: linear-gradient(145deg, rgba(99,102,241,.06) 0%, rgba(255,255,255,.02) 100%);
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+}
+.pvd-card__image img {
+    max-width: 100%;
+    max-height: 148px;
+    object-fit: contain;
+    transition: transform .35s ease;
+    position: relative;
+    z-index: 1;
+}
+.pvd-card:hover .pvd-card__image img { transform: scale(1.07); }
+.pvd-card__image-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(99,102,241,.06) 0%, transparent 70%);
+}
+
+/* Card body */
+.pvd-card__body {
+    padding: 12px 14px 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.pvd-card__name {
+    font-size: 13px;
+    line-height: 1.45;
+    margin: 0 0 12px;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 38px;
+}
+.pvd-card__name a {
+    color: #e2e8f0;
+    text-decoration: none;
+    font-weight: 600;
+}
+.pvd-card__name a:hover { color: #fb923c; }
+
+/* Pricing */
+.pvd-card__pricing {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+.pvd-price-sp {
+    font-size: 20px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #f97316, #ef4444);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+}
+.pvd-price-reg {
+    font-size: 12px;
+    color: #475569;
+    text-decoration: line-through;
+    line-height: 1.4;
+}
+
+/* Savings bar */
+.pvd-savings-bar {
+    margin-bottom: 12px;
+}
+.pvd-savings-bar > span {
+    font-size: 11px;
+    color: #4ade80;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+}
+.pvd-savings-progress {
+    height: 3px;
+    background: rgba(255,255,255,.08);
+    border-radius: 3px;
+    overflow: hidden;
+}
+.pvd-savings-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, #4ade80, #22c55e);
+    transition: width .6s ease;
+}
+
+/* CTA button */
+.pvd-card__cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    height: 36px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: opacity .2s, transform .2s, box-shadow .2s;
+}
+.pvd-card__cta svg { width: 13px; height: 13px; }
+.pvd-card__cta:hover {
+    opacity: .92;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(239,68,68,.35);
+    color: #fff;
+}
+
+/* ── Empty state ──────────────────────────────────────────────────── */
+.pvd-empty {
+    text-align: center;
+    padding: 80px 20px;
+    color: #475569;
+}
+.pvd-empty svg { width: 64px; height: 64px; margin: 0 auto 20px; display: block; }
+.pvd-empty h3 { font-size: 20px; font-weight: 700; color: #94a3b8; margin: 0 0 12px; }
+.pvd-empty p  { font-size: 14px; margin: 0; max-width: 400px; margin: 0 auto; }
+.pvd-empty a  { color: #6366f1; text-decoration: underline; }
+
+/* ── Footer links ─────────────────────────────────────────────────── */
+.pvd-footer-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    padding: 48px 0 0;
+    border-top: 1px solid rgba(255,255,255,.05);
+    margin-top: 48px;
+}
+.pvd-footer-links a {
+    color: #6366f1;
+    font-size: 14px;
+    text-decoration: none;
+}
+.pvd-footer-links a:hover { color: #818cf8; }
+.pvd-footer-links span { color: #334155; }
+</style>

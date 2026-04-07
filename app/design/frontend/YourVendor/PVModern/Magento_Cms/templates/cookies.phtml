@@ -1,117 +1,182 @@
 <?php /** @var \Magento\Framework\View\Element\Template $block */ ?>
-<div class="pvl-page">
-    <div class="pvl-hero">
-        <div class="pv3-container">
-            <span class="pvl-hero-kicker">Legal</span>
-            <h1>Cookie Policy</h1>
-            <p class="pvl-hero-meta">Last updated: <?= date('F j, Y') ?> &nbsp;|&nbsp; ePrivacy & GDPR Compliant</p>
+<section class="pv3-legal-page">
+    <div class="pv3-container pv3-legal-wrap">
+
+        <div class="pv3-legal-header">
+            <span class="pv3-legal-badge">🍪 Cookies</span>
+            <h1 class="pv3-legal-title">Cookie Policy</h1>
+            <p class="pv3-legal-meta">Last updated: <strong>January 1, 2025</strong> &mdash; MixiiiStore uses cookies to improve your shopping experience.</p>
         </div>
-    </div>
-    <div class="pv3-container">
-        <div class="pvl-body">
-            <aside class="pvl-toc">
-                <div class="pvl-toc-inner">
-                    <p class="pvl-toc-title">Contents</p>
-                    <ul class="pvl-toc-list">
-                        <li><a href="#ck-what">1. What Are Cookies</a></li>
-                        <li><a href="#ck-types">2. Types We Use</a></li>
-                        <li><a href="#ck-third">3. Third-Party Cookies</a></li>
-                        <li><a href="#ck-manage">4. Managing Cookies</a></li>
-                        <li><a href="#ck-consent">5. Consent</a></li>
-                        <li><a href="#ck-changes">6. Policy Changes</a></li>
-                        <li><a href="#ck-contact">7. Contact</a></li>
-                    </ul>
-                </div>
-            </aside>
-            <div class="pvl-content">
 
-                <div class="pvl-section" id="ck-what">
-                    <h2><span class="pvl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg></span>1. What Are Cookies?</h2>
-                    <p>Cookies are small text files stored on your device (computer, tablet, or phone) when you visit a website. They allow the site to recognize your device and remember information about your visit, such as your cart contents and preferences.</p>
-                    <div class="pvl-highlight">Cookies cannot run programs or deliver viruses to your device. They are uniquely assigned to you and can only be read by a web server in the domain that issued the cookie.</div>
-                </div>
+        <div class="pv3-legal-toc">
+            <strong>Table of Contents</strong>
+            <ol>
+                <li><a href="#ck-s1">What Are Cookies?</a></li>
+                <li><a href="#ck-s2">Why We Use Cookies</a></li>
+                <li><a href="#ck-s3">Types of Cookies We Use</a></li>
+                <li><a href="#ck-s4">Third-Party Cookies</a></li>
+                <li><a href="#ck-s5">Managing Your Cookie Preferences</a></li>
+                <li><a href="#ck-s6">Browser Settings</a></li>
+                <li><a href="#ck-s7">Changes to This Policy</a></li>
+                <li><a href="#ck-s8">Contact Us</a></li>
+            </ol>
+        </div>
 
-                <div class="pvl-section" id="ck-types">
-                    <h2><span class="pvl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg></span>2. Types of Cookies We Use</h2>
+        <div class="pv3-legal-body">
 
-                    <table style="width:100%;border-collapse:collapse;font-size:14px;margin:16px 0;">
-                        <thead>
-                            <tr style="background:rgba(99,102,241,.07);">
-                                <th style="text-align:left;padding:10px 12px;font-weight:700;border-radius:8px 0 0 0;">Type</th>
-                                <th style="text-align:left;padding:10px 12px;font-weight:700;">Purpose</th>
-                                <th style="text-align:left;padding:10px 12px;font-weight:700;border-radius:0 8px 0 0;">Duration</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr style="border-bottom:1px solid #e2e8f0;">
-                                <td style="padding:10px 12px;"><strong>Essential</strong></td>
-                                <td style="padding:10px 12px;color:#475569;">Required for core functions: login sessions, cart, checkout, CSRF protection.</td>
-                                <td style="padding:10px 12px;color:#475569;">Session</td>
-                            </tr>
-                            <tr style="border-bottom:1px solid #e2e8f0;">
-                                <td style="padding:10px 12px;"><strong>Functional</strong></td>
-                                <td style="padding:10px 12px;color:#475569;">Remember your preferences such as language, currency, and wishlist.</td>
-                                <td style="padding:10px 12px;color:#475569;">1 year</td>
-                            </tr>
-                            <tr style="border-bottom:1px solid #e2e8f0;">
-                                <td style="padding:10px 12px;"><strong>Analytics</strong></td>
-                                <td style="padding:10px 12px;color:#475569;">Understand how visitors use our site (page views, bounce rates, referrals).</td>
-                                <td style="padding:10px 12px;color:#475569;">2 years</td>
-                            </tr>
-                            <tr>
-                                <td style="padding:10px 12px;"><strong>Marketing</strong></td>
-                                <td style="padding:10px 12px;color:#475569;">Personalise ads and track conversions across advertising networks.</td>
-                                <td style="padding:10px 12px;color:#475569;">90 days</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <h2 id="ck-s1">1. What Are Cookies?</h2>
+            <p>Cookies are small text files that are placed on your device (computer, smartphone, or tablet) when you visit a website. They are widely used to make websites work more efficiently, remember your preferences, and provide information to the website owners.</p>
+            <p>Cookies do not contain personally identifiable information by themselves, but they may be linked to such information that we hold about you. They cannot run programs or deliver viruses to your device.</p>
 
-                <div class="pvl-section" id="ck-third">
-                    <h2><span class="pvl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></span>3. Third-Party Cookies</h2>
-                    <p>Some cookies are placed by our trusted third-party partners:</p>
-                    <ul>
-                        <li><strong>Google Analytics</strong> — Tracks anonymous usage statistics to help us improve the site.</li>
-                        <li><strong>Google Ads / Meta Pixel</strong> — Measures advertising effectiveness and enables remarketing.</li>
-                        <li><strong>Stripe / PayPal</strong> — Required for secure payment processing and fraud prevention.</li>
-                        <li><strong>Hotjar</strong> (if enabled) — Provides heatmaps and session recordings for UX improvements.</li>
-                    </ul>
-                    <p>We recommend reviewing each provider's privacy policy to understand how they use data collected via their cookies.</p>
-                </div>
+            <h2 id="ck-s2">2. Why We Use Cookies</h2>
+            <p>MixiiiStore uses cookies and similar tracking technologies for the following purposes:</p>
+            <ul>
+                <li>To keep you logged in to your account during your shopping session.</li>
+                <li>To remember the contents of your shopping cart between pages and visits.</li>
+                <li>To understand how you use our Platform so we can improve it.</li>
+                <li>To deliver personalized product recommendations and relevant advertisements.</li>
+                <li>To track the effectiveness of our marketing campaigns.</li>
+                <li>To prevent fraud and improve security.</li>
+            </ul>
 
-                <div class="pvl-section" id="ck-manage">
-                    <h2><span class="pvl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg></span>4. Managing Cookies</h2>
-                    <p>You can control and manage cookies in several ways:</p>
-                    <ul>
-                        <li><strong>Browser settings:</strong> Most browsers allow you to block or delete cookies via their privacy settings.</li>
-                        <li><strong>Our cookie banner:</strong> When you first visit MixiiiStore, you can choose to accept or decline non-essential cookies.</li>
-                        <li><strong>Opt-out tools:</strong> Use tools like the <a href="https://optout.networkadvertising.org/" target="_blank" rel="noopener noreferrer" style="color:#6366f1;font-weight:600;">NAI opt-out</a> or <a href="https://www.youronlinechoices.com/" target="_blank" rel="noopener noreferrer" style="color:#6366f1;font-weight:600;">Your Online Choices</a>.</li>
-                    </ul>
-                    <div class="pvl-highlight">
-                        ⚠️ Disabling essential cookies will prevent certain features (like cart and checkout) from working correctly.
-                    </div>
-                </div>
+            <h2 id="ck-s3">3. Types of Cookies We Use</h2>
 
-                <div class="pvl-section" id="ck-consent">
-                    <h2><span class="pvl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg></span>5. Your Consent</h2>
-                    <p>By continuing to use MixiiiStore after being notified about our cookie use, you consent to the use of cookies as described in this policy. You can withdraw consent at any time by adjusting your browser settings or using the cookie preference center.</p>
-                </div>
+            <div class="pv3-ck-table-wrap">
+                <table class="pv3-ck-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Purpose</th>
+                            <th>Duration</th>
+                            <th>Examples</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="pv3-ck-badge pv3-ck-badge--essential">Essential</span></td>
+                            <td>Core functionality — login sessions, shopping cart, CSRF protection. Cannot be disabled.</td>
+                            <td>Session / 30 days</td>
+                            <td>PHPSESSID, frontend, form_key</td>
+                        </tr>
+                        <tr>
+                            <td><span class="pv3-ck-badge pv3-ck-badge--functional">Functional</span></td>
+                            <td>Remember your preferences such as language, currency, and recently viewed products.</td>
+                            <td>1 year</td>
+                            <td>store, currency, recently_viewed</td>
+                        </tr>
+                        <tr>
+                            <td><span class="pv3-ck-badge pv3-ck-badge--analytics">Analytics</span></td>
+                            <td>Anonymously track site usage to help us understand and improve user experience.</td>
+                            <td>2 years</td>
+                            <td>_ga, _gid, _gat (Google Analytics)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="pv3-ck-badge pv3-ck-badge--marketing">Marketing</span></td>
+                            <td>Used to serve relevant ads and track campaign performance. Require your consent.</td>
+                            <td>90 days</td>
+                            <td>_fbp, _gcl_au, ttq</td>
+                        </tr>
+                        <tr>
+                            <td><span class="pv3-ck-badge pv3-ck-badge--security">Security</span></td>
+                            <td>Protect against cross-site request forgery and session hijacking.</td>
+                            <td>Session</td>
+                            <td>X-Magento-Vary, form_key</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-                <div class="pvl-section" id="ck-changes">
-                    <h2><span class="pvl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>6. Policy Changes</h2>
-                    <p>We may update this Cookie Policy from time to time to reflect changes in technology, legislation, or our business practices. The date at the top of this page indicates when the policy was last revised. We encourage you to check back periodically.</p>
-                </div>
+            <h2 id="ck-s4">4. Third-Party Cookies</h2>
+            <p>Some cookies on our Platform are set by third-party services. These third parties may use cookies to collect information about your online activities across different websites. We do not control the use of these third-party cookies and are not responsible for the privacy practices of these third parties.</p>
+            <p>Third parties that may set cookies on our Platform include:</p>
+            <ul>
+                <li><strong>Google Analytics</strong> – Website traffic analysis. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy ↗</a></li>
+                <li><strong>Facebook Pixel</strong> – Advertising performance tracking. <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener noreferrer">Meta Privacy Policy ↗</a></li>
+                <li><strong>Payment Gateways</strong> – Secure transaction processing (e.g., VNPay, Momo, Stripe).</li>
+                <li><strong>Live Chat</strong> – Customer support tools (if applicable).</li>
+            </ul>
 
-                <div class="pvl-section" id="ck-contact">
-                    <h2><span class="pvl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>7. Questions?</h2>
-                    <p>If you have any questions about this Cookie Policy or our privacy practices, please contact us:</p>
-                    <a class="pvl-contact-card" href="<?= $block->escapeUrl($block->getUrl('contact')) ?>">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                        Contact Privacy Team
-                    </a>
-                </div>
+            <h2 id="ck-s5">5. Managing Your Cookie Preferences</h2>
+            <p>When you first visit MixiiiStore, you will be presented with a cookie consent banner where you can choose which categories of cookies to accept. You can update your preferences at any time using the "Cookie Settings" link in our website footer.</p>
+            <p>Please note:</p>
+            <ul>
+                <li>Disabling <strong>Essential</strong> cookies may prevent you from using core features such as the shopping cart and checkout.</li>
+                <li>Disabling <strong>Analytics</strong> cookies means we will not be able to track your visit to improve the site.</li>
+                <li>Disabling <strong>Marketing</strong> cookies will result in less relevant advertising but will not reduce the number of ads you see.</li>
+            </ul>
 
+            <h2 id="ck-s6">6. Browser Settings</h2>
+            <p>You can also control cookies directly through your browser settings. Most browsers allow you to refuse cookies, delete existing cookies, and be notified when new cookies are placed on your device. Please refer to your browser's help documentation for instructions:</p>
+            <ul>
+                <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer">Google Chrome ↗</a></li>
+                <li><a href="https://support.mozilla.org/en-US/kb/enable-and-disable-cookies-website-preferences" target="_blank" rel="noopener noreferrer">Mozilla Firefox ↗</a></li>
+                <li><a href="https://support.apple.com/en-us/HT201265" target="_blank" rel="noopener noreferrer">Apple Safari ↗</a></li>
+                <li><a href="https://support.microsoft.com/en-us/windows/manage-cookies-in-microsoft-edge-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank" rel="noopener noreferrer">Microsoft Edge ↗</a></li>
+            </ul>
+            <p>Note that blocking all cookies may impact your experience on MixiiiStore and many other websites.</p>
+
+            <h2 id="ck-s7">7. Changes to This Policy</h2>
+            <p>We may update this Cookie Policy periodically to reflect changes in our practices or applicable legislation. Material changes will be communicated via email or a notice on the Platform. The "Last updated" date at the top of this page indicates when it was most recently revised.</p>
+
+            <h2 id="ck-s8">8. Contact Us</h2>
+            <p>If you have any questions about our use of cookies, please contact us:</p>
+            <div class="pv3-legal-contact">
+                <p><strong>MixiiiStore – Privacy &amp; Cookies</strong></p>
+                <p>Email: <a href="mailto:privacy@mixiiistore.com">privacy@mixiiistore.com</a></p>
+                <p>Support: <a href="mailto:support@mixiiistore.com">support@mixiiistore.com</a></p>
             </div>
         </div>
+
+        <div class="pv3-legal-footer-links">
+            <a href="<?= $block->escapeUrl($block->getUrl('terms')) ?>">Terms of Service</a>
+            <span>·</span>
+            <a href="<?= $block->escapeUrl($block->getUrl('privacy-policy')) ?>">Privacy Policy</a>
+            <span>·</span>
+            <a href="<?= $block->escapeUrl($block->getUrl('')) ?>">Back to Store</a>
+        </div>
+
     </div>
-</div>
+</section>
+
+<style>
+.pv3-legal-page{background:linear-gradient(135deg,#0f0720 0%,#130a2b 100%);min-height:100vh;padding:60px 0}
+.pv3-legal-wrap{max-width:860px;margin:0 auto}
+.pv3-legal-header{text-align:center;margin-bottom:40px}
+.pv3-legal-badge{display:inline-block;padding:4px 14px;background:rgba(99,102,241,.15);border:1px solid rgba(99,102,241,.3);border-radius:20px;color:#a5b4fc;font-size:13px;font-weight:600;margin-bottom:14px}
+.pv3-legal-title{font-size:clamp(24px,4vw,40px);font-weight:800;color:#fff;margin:0 0 12px}
+.pv3-legal-meta{color:#64748b;font-size:14px;margin:0}
+.pv3-legal-meta strong{color:#94a3b8}
+.pv3-legal-toc{background:rgba(99,102,241,.06);border:1px solid rgba(99,102,241,.2);border-radius:12px;padding:24px 28px;margin-bottom:40px}
+.pv3-legal-toc strong{display:block;color:#e2e8f0;margin-bottom:12px;font-size:14px}
+.pv3-legal-toc ol{margin:0;padding-left:20px;color:#94a3b8}
+.pv3-legal-toc li{margin-bottom:6px;font-size:14px}
+.pv3-legal-toc a{color:#818cf8;text-decoration:none}
+.pv3-legal-toc a:hover{color:#a5b4fc;text-decoration:underline}
+.pv3-legal-body{color:#cbd5e1;line-height:1.8}
+.pv3-legal-body h2{font-size:20px;font-weight:700;color:#fff;margin:36px 0 14px;padding-top:36px;border-top:1px solid rgba(255,255,255,.07)}
+.pv3-legal-body h2:first-child{border-top:none;padding-top:0;margin-top:0}
+.pv3-legal-body p{margin:0 0 16px;font-size:15px}
+.pv3-legal-body ul{padding-left:20px;margin-bottom:16px}
+.pv3-legal-body li{margin-bottom:8px;font-size:15px}
+.pv3-legal-body a{color:#818cf8}
+.pv3-legal-body a:hover{color:#a5b4fc}
+.pv3-legal-contact{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:20px 24px;margin-top:8px}
+.pv3-legal-contact p{margin:0 0 6px}
+.pv3-legal-contact p:last-child{margin-bottom:0}
+/* Cookie table */
+.pv3-ck-table-wrap{overflow-x:auto;margin-bottom:20px}
+.pv3-ck-table{width:100%;border-collapse:collapse;font-size:14px}
+.pv3-ck-table th{background:rgba(99,102,241,.15);color:#e2e8f0;padding:12px 14px;text-align:left;border-bottom:1px solid rgba(255,255,255,.1);font-weight:700}
+.pv3-ck-table td{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.06);color:#94a3b8;vertical-align:top}
+.pv3-ck-table tr:last-child td{border-bottom:none}
+.pv3-ck-badge{display:inline-block;padding:3px 10px;border-radius:6px;font-size:12px;font-weight:700;white-space:nowrap}
+.pv3-ck-badge--essential{background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.3)}
+.pv3-ck-badge--functional{background:rgba(34,197,94,.12);color:#4ade80;border:1px solid rgba(34,197,94,.3)}
+.pv3-ck-badge--analytics{background:rgba(59,130,246,.12);color:#60a5fa;border:1px solid rgba(59,130,246,.3)}
+.pv3-ck-badge--marketing{background:rgba(245,158,11,.12);color:#fbbf24;border:1px solid rgba(245,158,11,.3)}
+.pv3-ck-badge--security{background:rgba(99,102,241,.15);color:#a5b4fc;border:1px solid rgba(99,102,241,.3)}
+.pv3-legal-footer-links{text-align:center;margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.07);display:flex;gap:12px;justify-content:center;align-items:center}
+.pv3-legal-footer-links a{color:#818cf8;text-decoration:none;font-size:14px}
+.pv3-legal-footer-links a:hover{color:#a5b4fc}
+.pv3-legal-footer-links span{color:#334155}
+</style>
