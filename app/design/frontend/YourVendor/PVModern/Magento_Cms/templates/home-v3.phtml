@@ -369,7 +369,7 @@ $heroProducts = array_slice($heroProducts, 0, 4);
                         <span>Shop Collection</span>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </a>
-                    <a class="pv3-btn pv3-btn--secondary" href="<?= $block->escapeUrl($block->getUrl('pc-builder')) ?>">Build Custom PC</a>
+                    <a class="pv3-btn pv3-btn--secondary" href="<?= $block->escapeUrl($block->getUrl('pcbuilder')) ?>">Build Custom PC</a>
                 </div>
 
                 <div class="pv3-trust-bar">
@@ -427,6 +427,19 @@ $heroProducts = array_slice($heroProducts, 0, 4);
                     </div>
                 </article>
             <?php endforeach; ?>
+        </div>
+    </section>
+
+    <!-- ══ HARDWARE INVENTORY BANNER ════════════════════════════════════════ -->
+    <section class="pvh-hw-banner" aria-label="Hardware Inventory">
+        <div class="pvh-hw-banner__bg"></div>
+        <div class="pvh-hw-banner__content pv3-container">
+            <span class="pvh-hw-banner__badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                Premium Collection
+            </span>
+            <h2 class="pvh-hw-banner__title">Hardware <em>Inventory</em></h2>
+            <p class="pvh-hw-banner__desc">Live Magento admin products are shown here. Use the compact category dropdown, search, price range and availability filters, then add eligible items straight to cart.</p>
         </div>
     </section>
 
@@ -634,7 +647,7 @@ $heroProducts = array_slice($heroProducts, 0, 4);
             <div class="pv3-newsletter-inner">
                 <span class="pv3-newsletter-kicker">Stay Updated</span>
                 <h2>Stay Updated</h2>
-                <p>Get notified about new arrivals, exclusive deals, restocks, and curated tech drops from MixiiiStore.</p>
+                <p>Get notified about new arrivals, exclusive deals, restocks, and curated tech drops from Techieworld.</p>
                 <form class="pv3-newsletter-form" action="<?= $block->escapeUrl($block->getUrl('newsletter/subscriber/new')) ?>" method="post">
                     <input type="hidden" name="form_key" value="<?= $block->escapeHtmlAttr($formKey) ?>" />
                     <input type="email" name="email" placeholder="Enter your email" required />

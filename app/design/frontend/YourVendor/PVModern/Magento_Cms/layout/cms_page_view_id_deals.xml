@@ -2,7 +2,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <attribute name="class" value="pvmodern-v3"/>
+        <attribute name="class" value="pvmodern-v3 pv3-app-mode"/>
         <referenceBlock name="breadcrumbs"     remove="true"/>
         <referenceBlock name="page.main.title" remove="true"/>
         <referenceBlock name="cms_page"        remove="true"/>

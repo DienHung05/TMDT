@@ -4,7 +4,7 @@
     <update handle="pvmodern_v3_styles"/>
     <body>
         <!-- Apply dark builder body class (pvmodern-pcbuilder) -->
-        <attribute name="class" value="pvmodern-v3 pvmodern-pcbuilder"/>
+        <attribute name="class" value="pvmodern-v3 pvmodern-pcbuilder pv3-app-mode"/>
 
         <!-- Hide Magento default content and breadcrumbs -->
         <referenceBlock name="breadcrumbs"      remove="true"/>
