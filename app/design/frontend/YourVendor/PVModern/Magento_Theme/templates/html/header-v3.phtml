@@ -29,6 +29,7 @@ try {
 $_req       = $_om->get(\Magento\Framework\App\RequestInterface::class);
 $_action    = $_req->getFullActionName();
 $_isCatPage = ($_action === 'catalog_category_view');
+$_searchUrl = $block->getUrl('');
 
 $_activeCat = '';
 if ($_isCatPage) {
@@ -54,118 +55,182 @@ if ($_isCatPage) {
     } catch (\Throwable $e) {}
 }
 
+$_normalizeKey = static function (string $value): string {
+    $value = strtolower(trim($value));
+    $value = preg_replace('/[^a-z0-9]+/', '-', $value);
+
+    return trim((string) $value, '-');
+};
+
+$_categoryCollectionFactory = $_om->get(\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory::class);
+$_rootCategoryId = (int) $_om->get(\Magento\Store\Model\StoreManagerInterface::class)->getStore()->getRootCategoryId();
+$_categoryMap = [];
+$_topCategoryIds = [];
+
+try {
+    $_topCategories = $_categoryCollectionFactory->create();
+    $_topCategories
+        ->addAttributeToSelect(['name', 'url_key', 'is_active'])
+        ->addAttributeToFilter('parent_id', $_rootCategoryId)
+        ->addAttributeToFilter('is_active', 1);
+
+    foreach ($_topCategories as $_category) {
+        $_categoryMap[$_normalizeKey((string) $_category->getName())] = $_category;
+        $_topCategoryIds[] = (int) $_category->getId();
+    }
+
+    if (!empty($_topCategoryIds)) {
+        $_childCategories = $_categoryCollectionFactory->create();
+        $_childCategories
+            ->addAttributeToSelect(['name', 'url_key', 'is_active'])
+            ->addAttributeToFilter('parent_id', ['in' => $_topCategoryIds])
+            ->addAttributeToFilter('is_active', 1);
+
+        foreach ($_childCategories as $_category) {
+            $_categoryMap[$_normalizeKey((string) $_category->getName())] = $_category;
+        }
+    }
+} catch (\Throwable $e) {}
+
+$_buildSearchUrl = static function (string $query) use ($_searchUrl): string {
+    $query = trim($query);
+
+    if ($query === '') {
+        return $_searchUrl . '#pv3-products';
+    }
+
+    return $_searchUrl . '?q=' . rawurlencode($query) . '#pv3-products';
+};
+
+$_resolveMenuLink = static function (array $_link) use ($_categoryMap, $_normalizeKey, $block, $_buildSearchUrl): string {
+    if (!empty($_link['url'])) {
+        return $block->getUrl($_link['url']);
+    }
+
+    if (!empty($_link['category'])) {
+        $_key = $_normalizeKey((string) $_link['category']);
+        if (!empty($_categoryMap[$_key])) {
+            try {
+                return (string) $_categoryMap[$_key]->getUrl();
+            } catch (\Throwable $e) {
+            }
+        }
+
+        return $_buildSearchUrl((string) $_link['category']);
+    }
+
+    return $_buildSearchUrl((string) ($_link['q'] ?? ''));
+};
+
 /* ── Mega-menu data ─────────────────────────────────────────────────────── */
 $_menus = [
     'desktop' => [
         'label' => 'Desktop',
+        'category' => 'Desktop',
         'cols'  => [
             [
                 'title' => 'Components',
                 'links' => [
-                    ['label' => 'GPU',         'q' => 'gpu'],
-                    ['label' => 'CPU',         'q' => 'cpu'],
-                    ['label' => 'RAM',         'q' => 'ram'],
-                    ['label' => 'SSD',         'q' => 'ssd'],
-                    ['label' => 'HDD',         'q' => 'hdd'],
-                    ['label' => 'PSU',         'q' => 'psu'],
-                    ['label' => 'Heatsink',    'q' => 'heatsink'],
-                    ['label' => 'Case Fan',    'q' => 'case fan'],
-                    ['label' => 'PC Case',     'q' => 'pc case'],
-                    ['label' => 'Gaming Gear', 'q' => 'gaming gear'],
+                    ['label' => 'GPU',       'category' => 'GPU'],
+                    ['label' => 'CPU',       'category' => 'CPU'],
+                    ['label' => 'RAM',       'category' => 'RAM'],
+                    ['label' => 'SSD',       'category' => 'SSD'],
+                    ['label' => 'HDD',       'category' => 'HDD'],
+                    ['label' => 'Mainboard', 'category' => 'Mainboard'],
+                    ['label' => 'PSU',       'category' => 'PSU'],
+                    ['label' => 'Heatsink',  'category' => 'Heatsink'],
+                    ['label' => 'Fan',       'category' => 'Fan'],
+                    ['label' => 'Case',      'category' => 'Case'],
                 ],
             ],
             [
                 'title' => 'Shop By',
                 'links' => [
                     ['label' => 'PC Builder',    'url' => 'pc-builder'],
-                    ['label' => 'Pre-built PCs', 'q'   => 'desktop'],
-                    ['label' => 'Workstations',  'q'   => 'workstation'],
+                    ['label' => 'Desktop Systems', 'category' => 'Desktop'],
+                    ['label' => 'Warranty Lookup', 'url' => 'warranty'],
                 ],
             ],
         ],
     ],
     'laptop' => [
         'label' => 'Laptop',
+        'category' => 'Laptop',
         'cols'  => [
             [
-                'title' => 'Brands',
+                'title' => 'Browse',
                 'links' => [
-                    ['label' => 'Apple MacBook', 'q' => 'macbook'],
-                    ['label' => 'ASUS',          'q' => 'asus laptop'],
-                    ['label' => 'Dell',          'q' => 'dell laptop'],
-                    ['label' => 'HP',            'q' => 'hp laptop'],
-                    ['label' => 'Lenovo',        'q' => 'lenovo laptop'],
-                    ['label' => 'MSI',           'q' => 'msi laptop'],
-                    ['label' => 'Acer',          'q' => 'acer laptop'],
-                    ['label' => 'Razer',         'q' => 'razer laptop'],
+                    ['label' => 'Gaming Laptops',  'category' => 'Gaming Laptop'],
+                    ['label' => 'Creator Laptops', 'category' => 'Creator Laptop'],
+                    ['label' => 'Business Laptops', 'category' => 'Business Laptop'],
+                    ['label' => 'Ultrabooks',      'category' => 'Ultrabook'],
                 ],
             ],
             [
-                'title' => 'Categories',
+                'title' => 'Popular Brands',
                 'links' => [
-                    ['label' => 'Gaming Laptops',  'q' => 'gaming laptop'],
-                    ['label' => 'Ultrabooks',       'q' => 'ultrabook'],
-                    ['label' => 'Business Laptops', 'q' => 'business laptop'],
-                    ['label' => 'Student Laptops',  'q' => 'student laptop'],
+                    ['label' => 'Apple MacBook', 'category' => 'MacBook'],
+                    ['label' => 'ASUS',          'q' => 'asus laptop'],
+                    ['label' => 'Dell',          'q' => 'dell laptop'],
+                    ['label' => 'Lenovo',        'q' => 'lenovo laptop'],
+                    ['label' => 'Acer',          'q' => 'acer laptop'],
                 ],
             ],
         ],
     ],
     'monitor' => [
         'label' => 'Monitor',
+        'category' => 'Monitor',
         'cols'  => [
             [
-                'title' => 'Brands',
+                'title' => 'Browse',
+                'links' => [
+                    ['label' => 'Gaming Monitors',   'category' => 'Gaming Monitor'],
+                    ['label' => 'Creator Monitors',  'category' => 'Creator Monitor'],
+                    ['label' => 'Ultrawide Monitors', 'category' => 'Ultrawide Monitor'],
+                    ['label' => '4K Monitors',       'category' => '4K Monitor'],
+                ],
+            ],
+            [
+                'title' => 'Popular Brands',
                 'links' => [
                     ['label' => 'ASUS',      'q' => 'asus monitor'],
                     ['label' => 'LG',        'q' => 'lg monitor'],
                     ['label' => 'Samsung',   'q' => 'samsung monitor'],
                     ['label' => 'Dell',      'q' => 'dell monitor'],
-                    ['label' => 'AOC',       'q' => 'aoc monitor'],
-                    ['label' => 'BenQ',      'q' => 'benq monitor'],
                     ['label' => 'MSI',       'q' => 'msi monitor'],
-                ],
-            ],
-            [
-                'title' => 'Panel Type',
-                'links' => [
-                    ['label' => '4K / UHD',   'q' => '4k monitor'],
-                    ['label' => '144Hz',       'q' => '144hz monitor'],
-                    ['label' => '240Hz',       'q' => '240hz monitor'],
-                    ['label' => 'OLED',        'q' => 'oled monitor'],
-                    ['label' => 'Ultrawide',   'q' => 'ultrawide monitor'],
                 ],
             ],
         ],
     ],
     'apple' => [
         'label' => 'Apple',
+        'category' => 'Apple',
         'cols'  => [
             [
-                'title' => 'Mac',
+                'title' => 'Apple Hardware',
                 'links' => [
-                    ['label' => 'MacBook Air', 'q' => 'macbook air'],
-                    ['label' => 'MacBook Pro', 'q' => 'macbook pro'],
-                    ['label' => 'iMac',        'q' => 'imac'],
-                    ['label' => 'Mac mini',    'q' => 'mac mini'],
-                    ['label' => 'Mac Studio',  'q' => 'mac studio'],
+                    ['label' => 'MacBook',     'category' => 'MacBook'],
+                    ['label' => 'Mac Desktop', 'category' => 'Mac Desktop'],
+                    ['label' => 'iPhone',      'category' => 'iPhone'],
+                    ['label' => 'iPad',        'category' => 'iPad'],
                 ],
             ],
             [
                 'title' => 'Devices',
                 'links' => [
-                    ['label' => 'iPad Pro',    'q' => 'ipad pro'],
-                    ['label' => 'iPad Air',    'q' => 'ipad air'],
-                    ['label' => 'iPhone',      'q' => 'iphone'],
-                    ['label' => 'Apple Watch', 'q' => 'apple watch'],
-                    ['label' => 'AirPods',     'q' => 'airpods'],
+                    ['label' => 'AirPods',     'category' => 'AirPods'],
+                    ['label' => 'Apple Watch', 'category' => 'Apple Watch'],
+                    ['label' => 'MacBook Pro', 'q' => 'macbook pro'],
+                    ['label' => 'MacBook Air', 'q' => 'macbook air'],
+                    ['label' => 'Mac Studio',  'q' => 'mac studio'],
                 ],
             ],
         ],
     ],
 ];
 
-$_searchUrl        = $block->escapeUrl($block->getUrl('catalogsearch/result'));
+$_searchUrl        = $block->escapeUrl($_searchUrl);
 $_searchSuggestUrl = $block->escapeUrl($block->getUrl('pvmodern/search/suggest'));
 $_searchQuery      = trim((string) $_req->getParam('q', ''));
 $_isCatStr         = $_isCatPage ? 'true' : 'false';
@@ -203,6 +268,7 @@ $_activeStr        = $block->escapeHtmlAttr($_activeCat);
                   role="search"
                   data-suggest-url="<?= $_searchSuggestUrl ?>"
                   data-search-url="<?= $_searchUrl ?>"
+                  data-results-anchor="pv3-products"
                   data-min-length="1"
                   aria-expanded="false">
                 <span class="pv3-search-icon" aria-hidden="true">
@@ -248,7 +314,7 @@ $_activeStr        = $block->escapeHtmlAttr($_activeCat);
                 <div class="pv3-nav-item" data-nav-key="<?= $_hKey ?>">
 
                     <!-- The <a> carries data-cat for JS targeting -->
-                    <a href="<?= $block->escapeUrl($block->getUrl('')) ?>#pv3-products"
+                    <a href="<?= $block->escapeUrl($_resolveMenuLink(['category' => (string) ($_menu['category'] ?? $_menu['label'])])) ?>"
                        class="pv3-nav-link<?= ($_activeCat === $_key) ? ' is-active' : '' ?>"
                        data-cat="<?= $_hKey ?>"
                        aria-haspopup="true">
@@ -276,15 +342,9 @@ $_activeStr        = $block->escapeHtmlAttr($_activeCat);
                                 <ul>
                                     <?php foreach ($_col['links'] as $_link): ?>
                                     <li>
-                                        <?php if (!empty($_link['url'])): ?>
-                                        <a href="<?= $block->escapeUrl($block->getUrl($_link['url'])) ?>">
+                                        <a href="<?= $block->escapeUrl($_resolveMenuLink($_link)) ?>">
                                             <?= $block->escapeHtml($_link['label']) ?>
                                         </a>
-                                        <?php else: ?>
-                                        <a href="<?= $block->escapeUrl($block->getUrl('catalogsearch/result', ['_query' => ['q' => $_link['q']]])) ?>">
-                                            <?= $block->escapeHtml($_link['label']) ?>
-                                        </a>
-                                        <?php endif; ?>
                                     </li>
                                     <?php endforeach; ?>
                                 </ul>
@@ -394,7 +454,7 @@ $_activeStr        = $block->escapeHtmlAttr($_activeCat);
             </form>
             <nav class="pv3-mobile-nav" aria-label="Mobile navigation">
                 <?php foreach ($_menus as $_key => $_menu): ?>
-                <a href="<?= $block->escapeUrl($block->getUrl('')) ?>#pv3-products">
+                <a href="<?= $block->escapeUrl($_resolveMenuLink(['category' => (string) ($_menu['category'] ?? $_menu['label'])])) ?>">
                     <?= $block->escapeHtml($_menu['label']) ?>
                 </a>
                 <?php endforeach; ?>

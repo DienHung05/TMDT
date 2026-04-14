@@ -1,15 +1,27 @@
 <?php /** @var \Magento\Framework\View\Element\Template $block */ ?>
+<?php
+$_homeUrl = $block->getUrl('');
+$_homeSearchUrl = static function (string $query = '') use ($_homeUrl): string {
+    $query = trim($query);
+
+    if ($query === '') {
+        return $_homeUrl . '#pv3-products';
+    }
+
+    return $_homeUrl . '?q=' . rawurlencode($query) . '#pv3-products';
+};
+?>
 <footer class="pv3-footer-shell">
     <div class="pv3-container">
         <div class="pv3-footer-grid">
             <div>
                 <h3>Shop</h3>
                 <ul>
-                    <li><a href="#pv3-products">Featured products</a></li>
-                    <li><a href="<?= $block->escapeUrl($block->getUrl('catalogsearch/result', ['_query' => ['q' => 'monitor']])) ?>">Monitor</a></li>
-                    <li><a href="<?= $block->escapeUrl($block->getUrl('catalogsearch/result', ['_query' => ['q' => 'apple']])) ?>">Apple</a></li>
-                    <li><a href="<?= $block->escapeUrl($block->getUrl('catalogsearch/result', ['_query' => ['q' => 'laptop']])) ?>">Laptop</a></li>
-                    <li><a href="<?= $block->escapeUrl($block->getUrl('catalogsearch/result', ['_query' => ['q' => 'desktop']])) ?>">Desktop</a></li>
+                    <li><a href="<?= $block->escapeUrl($_homeSearchUrl()) ?>">Featured products</a></li>
+                    <li><a href="<?= $block->escapeUrl($_homeSearchUrl('monitor')) ?>">Monitor</a></li>
+                    <li><a href="<?= $block->escapeUrl($_homeSearchUrl('apple')) ?>">Apple</a></li>
+                    <li><a href="<?= $block->escapeUrl($_homeSearchUrl('laptop')) ?>">Laptop</a></li>
+                    <li><a href="<?= $block->escapeUrl($_homeSearchUrl('desktop')) ?>">Desktop</a></li>
                     <li><a href="<?= $block->escapeUrl($block->getUrl('deals')) ?>">Deals</a></li>
                 </ul>
             </div>
@@ -21,7 +33,7 @@
                     <li><a href="<?= $block->escapeUrl($block->getUrl('warranty')) ?>">Warranty Lookup</a></li>
                     <li><a href="<?= $block->escapeUrl($block->getUrl('checkout/cart')) ?>">Cart</a></li>
                     <li><a href="<?= $block->escapeUrl($block->getUrl('customer/account')) ?>">My account</a></li>
-                    <li><a href="<?= $block->escapeUrl($block->getUrl('pcbuilder')) ?>">Build Custom PC</a></li>
+                    <li><a href="<?= $block->escapeUrl($block->getUrl('pc-builder')) ?>">Build Custom PC</a></li>
                 </ul>
             </div>
             <div>
@@ -30,7 +42,7 @@
                     <li><a href="<?= $block->escapeUrl($block->getUrl('terms')) ?>">Terms of Service</a></li>
                     <li><a href="<?= $block->escapeUrl($block->getUrl('privacy')) ?>">Privacy Policy</a></li>
                     <li><a href="<?= $block->escapeUrl($block->getUrl('cookies')) ?>">Cookie Policy</a></li>
-                    <li><a href="<?= $block->escapeUrl($block->getUrl('catalogsearch/result')) ?>">Search</a></li>
+                    <li><a href="<?= $block->escapeUrl($_homeSearchUrl()) ?>">Search</a></li>
                 </ul>
             </div>
             <div>

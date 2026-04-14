@@ -264,9 +264,10 @@ foreach ($slots as $key => $slot) {
                             Chọn linh kiện
                         </button>
                         <?php else: ?>
+                        <?php $fallbackUrl = $block->getUrl('') . '?q=' . urlencode(str_replace('|', ' ', $slot['kw'])) . '#pv3-products'; ?>
                         <span class="pvcb-avail" style="color:#374151">
                             Chưa có sản phẩm.
-                            <a href="<?= $block->escapeUrl($block->getUrl('catalogsearch/result/index') . '?q=' . urlencode(str_replace('|',' ',$slot['kw']))) ?>"
+                            <a href="<?= $block->escapeUrl($fallbackUrl) ?>"
                                class="pvcb-fallback-link">Tìm kiếm</a>
                         </span>
                         <?php endif; ?>

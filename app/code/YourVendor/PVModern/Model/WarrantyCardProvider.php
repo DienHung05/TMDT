@@ -74,7 +74,7 @@ class WarrantyCardProvider
         $collection
             ->setStoreId((int) $store->getId())
             ->addStoreFilter($store)
-            ->addAttributeToSelect(['name', 'sku', 'small_image', 'image'])
+            ->addAttributeToSelect(['name', 'sku', 'small_image', 'image', 'imei'])
             ->addUrlRewrite()
             ->addAttributeToFilter('status', 1)
             ->setVisibility($this->visibility->getVisibleInSiteIds())
@@ -101,7 +101,7 @@ class WarrantyCardProvider
         $daysLeft = (int) $today->diff($expiresAt)->format('%r%a');
         $isActive = $daysLeft >= 0;
         $phoneRaw = $this->buildDigits($product, 10, 'phone');
-        $imeiRaw = $this->buildImei($product);
+        $imeiRaw = $this->resolveImei($product);
         $purchaseCodeRaw = $this->buildPurchaseCode($product);
 
         return [
@@ -147,6 +147,17 @@ class WarrantyCardProvider
         }
 
         return $base . ((10 - ($sum % 10)) % 10);
+    }
+
+    private function resolveImei(Product $product): string
+    {
+        $imei = preg_replace('/\D+/', '', (string) $product->getData('imei')) ?? '';
+
+        if (strlen($imei) === 15) {
+            return $imei;
+        }
+
+        return $this->buildImei($product);
     }
 
     private function buildDigits(Product $product, int $length, string $salt): string

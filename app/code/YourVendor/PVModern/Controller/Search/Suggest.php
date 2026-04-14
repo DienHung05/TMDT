@@ -9,6 +9,7 @@ use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 use Magento\Catalog\Model\Product\Visibility;
 use Magento\Catalog\Helper\Image as ImageHelper;
+use Magento\CatalogInventory\Helper\Stock as StockHelper;
 use Magento\Framework\Pricing\PriceCurrencyInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
@@ -18,7 +19,7 @@ use Magento\Store\Model\StoreManagerInterface;
  */
 class Suggest implements HttpGetActionInterface
 {
-    private const MAX_RESULTS = 8;
+    private const MAX_RESULTS = 10;
 
     public function __construct(
         private readonly RequestInterface        $request,
@@ -26,6 +27,7 @@ class Suggest implements HttpGetActionInterface
         private readonly CollectionFactory       $collectionFactory,
         private readonly Visibility              $visibility,
         private readonly ImageHelper             $imageHelper,
+        private readonly StockHelper             $stockHelper,
         private readonly PriceCurrencyInterface  $priceCurrency,
         private readonly StoreManagerInterface   $storeManager
     ) {}
@@ -58,8 +60,12 @@ class Suggest implements HttpGetActionInterface
                         ['attribute' => 'name', 'like' => $like],
                         ['attribute' => 'sku', 'like' => $like],
                     ]
-                )
-                ->setPageSize(24)
+                );
+
+            $this->stockHelper->addInStockFilterToCollection($collection);
+
+            $collection
+                ->setPageSize(40)
                 ->setCurPage(1);
 
             $items = [];

@@ -24,6 +24,14 @@ define(['jquery'], function ($) {
             pageSize = parseInt($grid.data('page-size'), 10) || 8,
             visibleLimit = pageSize;
 
+        function getInitialQuery() {
+            try {
+                return String(new URLSearchParams(window.location.search).get('q') || '');
+            } catch (error) {
+                return '';
+            }
+        }
+
         function getCards() {
             return $grid.children('.pv3-product-card');
         }
@@ -136,6 +144,9 @@ define(['jquery'], function ($) {
                 if (maxPrice !== null && price > maxPrice) {
                     matches = false;
                 }
+                if (search && stock === 'out_of_stock') {
+                    matches = false;
+                }
                 if (search && haystack.indexOf(search) === -1) {
                     matches = false;
                 }
@@ -221,6 +232,10 @@ define(['jquery'], function ($) {
 
         $recentSlider.on('scroll', updateRecentArrows);
         $(window).on('resize', updateRecentArrows);
+
+        if ($search.length) {
+            $search.val(getInitialQuery());
+        }
 
         sortCards();
         applyFilters(true);

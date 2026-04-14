@@ -173,6 +173,7 @@ define([
             var $drop  = $form.find('#pv3-search-dropdown');
             var suggestUrl = String($form.data('suggest-url') || '');
             var searchUrl  = String($form.data('search-url') || '');
+            var resultsAnchor = String($form.data('results-anchor') || 'pv3-products');
             var minLength  = parseInt($form.data('min-length'), 10) || 1;
             var debounceTimer = null;
             var activeIdx = -1;
@@ -196,16 +197,15 @@ define([
                     .replace(/'/g, '&#39;');
             }
 
-            function highlight(text, query) {
-                var safeQuery = $.trim(query || '');
-                if (!safeQuery) {
-                    return text;
+            function buildSearchUrl(query) {
+                var normalized = normalizeQuery(query);
+                var suffix = resultsAnchor ? ('#' + resultsAnchor) : '';
+
+                if (!normalized) {
+                    return searchUrl + suffix;
                 }
 
-                return text.replace(
-                    new RegExp('(' + safeQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig'),
-                    '<mark class="pv3-search-highlight">$1</mark>'
-                );
+                return searchUrl + '?q=' + encodeURIComponent(normalized) + suffix;
             }
 
             function getLinks() {
@@ -258,7 +258,7 @@ define([
                                     '<img class="pv3-search-img" src="' + escHtml(item.image) + '" alt="' + escHtml(item.name) + '" loading="lazy" />' +
                                 '</span>' +
                                 '<span class="pv3-search-info">' +
-                                    '<span class="pv3-search-name">' + highlight(escHtml(item.name), query) + '</span>' +
+                                    '<span class="pv3-search-name">' + escHtml(item.name) + '</span>' +
                                     sku +
                                     '<span class="pv3-search-price">' + oldPrice + escHtml(item.price) + discount + '</span>' +
                                 '</span>' +
@@ -267,7 +267,7 @@ define([
                     }).join('');
 
                     html +=
-                        '<a href="' + escHtml(searchUrl + '?q=' + encodeURIComponent(query)) + '" class="pv3-search-item pv3-sd-all" role="option">' +
+                        '<a href="' + escHtml(buildSearchUrl(query)) + '" class="pv3-search-item pv3-sd-all" role="option">' +
                             '<span class="pv3-search-info pv3-search-info--all">' +
                                 'View all results for "' + escHtml(query) + '" ->' +
                             '</span>' +
@@ -334,6 +334,13 @@ define([
                 if (query.length >= minLength && $drop.children().length) {
                     showDrop();
                 }
+            });
+
+            $form.on('submit', function (event) {
+                var query = normalizeQuery($input.val());
+
+                event.preventDefault();
+                window.location.assign(buildSearchUrl(query));
             });
 
             $input.on('keydown', function (event) {
