@@ -1,94 +1,457 @@
 <?php
-/**
- * @var $block \Vendor\News\Block\News
- */
-$news = $block->getNews();
+/** @var \Vendor\News\Block\News $block */
+$news = $block->getPagedNews();
+$currentTab = $block->getCurrentTab();
 ?>
 
-<div class="vnexpress-news">
-    <h1 class="page-title">Tin tức mới nhất từ VnExpress</h1>
+<div class="vnexpress-news-wrapper">
+    <div class="news-header">
+        <h1 class="news-title-page">VnExpress News</h1>
+        <p class="news-subtitle">Stay informed with the latest headlines</p>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div class="news-tabs">
+        <a href="?tab=business&p=1" class="tab-link <?= $block->isActiveTab('business') ? 'active' : '' ?>">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+            Business & Finance
+        </a>
+        <a href="?tab=lifestyle&p=1" class="tab-link <?= $block->isActiveTab('lifestyle') ? 'active' : '' ?>">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            Lifestyle & Entertainment
+        </a>
+    </div>
 
     <?php if (empty($news)): ?>
-        <div class="message info">
-            <span>Không thể tải tin tức. Vui lòng thử lại sau.</span>
+        <div class="news-error">
+            <span class="error-icon">📭</span>
+            <p>No news available at the moment. Please try again later.</p>
         </div>
     <?php else: ?>
-        <ul class="news-list">
-            <?php foreach ($news as $item): ?>
-                <li class="news-item">
-                    <h2 class="news-title">
-                        <a href="<?= $block->escapeUrl($item['link']) ?>" target="_blank" rel="nofollow">
-                            <?= $block->escapeHtml($item['title']) ?>
+        <div class="news-grid">
+            <?php foreach ($news as $index => $item): ?>
+                <div class="news-card" data-id="<?= $index ?>">
+                    <div class="news-card-image">
+                        <img src="<?= $block->escapeUrl($item['image']) ?>"
+                             alt="<?= $block->escapeHtmlAttr($item['title']) ?>"
+                             loading="lazy"
+                             onerror="this.src='https://cdn-icons-png.flaticon.com/512/2991/2991148.png'">
+                        <div class="card-category">
+                            <span><?= $currentTab == 'business' ? '💼 Business' : '🎭 Lifestyle' ?></span>
+                        </div>
+                    </div>
+                    <div class="news-card-content">
+                        <h2 class="news-card-title">
+                            <a href="<?= $block->escapeUrl($item['link']) ?>" target="_blank" rel="nofollow">
+                                <?= $block->escapeHtml($item['title']) ?>
+                            </a>
+                        </h2>
+                        <div class="news-card-meta">
+                            <span class="meta-date">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                                <?= $block->escapeHtml($item['pubDate']) ?>
+                            </span>
+                            <span class="meta-source">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                </svg>
+                                VnExpress
+                            </span>
+                        </div>
+                        <p class="news-card-description">
+                            <?= $block->escapeHtml(substr(strip_tags($item['description']), 0, 100)) ?>...
+                        </p>
+                        <a href="<?= $block->escapeUrl($item['link']) ?>" class="read-more" target="_blank">
+                            Read full article
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
                         </a>
-                    </h2>
-                    <div class="news-date">
-                        <?= $block->escapeHtml($block->formatDate($item['pubDate'])) ?>
                     </div>
-                    <div class="news-description">
-                        <?= $block->escapeHtml(substr(strip_tags($item['description']), 0, 200)) ?>...
-                    </div>
-                    <a href="<?= $block->escapeUrl($item['link']) ?>" class="read-more" target="_blank">
-                        Đọc tiếp →
-                    </a>
-                </li>
+                </div>
             <?php endforeach; ?>
-        </ul>
+        </div>
+
+        <!-- Pagination -->
+        <?= $block->getPaginationHtml() ?>
     <?php endif; ?>
 </div>
 
 <style>
-    .vnexpress-news {
-        max-width: 1200px;
+    /* Base Styles - Light & Harmonious */
+    .vnexpress-news-wrapper {
+        max-width: 1280px;
         margin: 0 auto;
+        padding: 48px 24px;
+        background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        min-height: 100vh;
+    }
+
+    /* Header */
+    .news-header {
+        text-align: center;
+        margin-bottom: 48px;
+    }
+
+    .news-title-page {
+        font-size: 48px;
+        font-weight: 800;
+        margin: 0 0 12px;
+        background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: -0.02em;
+    }
+
+    .news-subtitle {
+        font-size: 18px;
+        color: #6c757d;
+        margin: 0;
+        font-weight: 400;
+    }
+
+    /* Tab Navigation */
+    .news-tabs {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-bottom: 40px;
+        background: white;
+        padding: 8px;
+        border-radius: 60px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .tab-link {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 24px;
+        border-radius: 40px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        transition: all 0.2s ease;
+        background: transparent;
+        color: #6c757d;
+    }
+
+    .tab-link svg {
+        transition: all 0.2s ease;
+    }
+
+    .tab-link:hover {
+        background: #f8f9fa;
+        color: #3498db;
+    }
+
+    .tab-link.active {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+        box-shadow: 0 4px 12px rgba(52,152,219,0.25);
+    }
+
+    .tab-link.active svg {
+        stroke: white;
+    }
+
+    /* Error Message */
+    .news-error {
+        text-align: center;
+        background: white;
+        border-radius: 24px;
+        padding: 60px 40px;
+        color: #6c757d;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+
+    .error-icon {
+        font-size: 64px;
+        display: block;
+        margin-bottom: 16px;
+    }
+
+    /* Grid Layout */
+    .news-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+        gap: 28px;
+        margin-bottom: 48px;
+    }
+
+    /* News Card */
+    .news-card {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .news-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 32px -12px rgba(0,0,0,0.12);
+    }
+
+    .news-card-image {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+    }
+
+    .news-card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+    }
+
+    .news-card:hover .news-card-image img {
+        transform: scale(1.05);
+    }
+
+    .card-category {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+    }
+
+    .card-category span {
+        background: rgba(0,0,0,0.75);
+        backdrop-filter: blur(8px);
+        color: white;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 20px;
+        letter-spacing: 0.3px;
+    }
+
+    .news-card-content {
         padding: 20px;
     }
-    .page-title {
-        font-size: 24px;
-        margin-bottom: 20px;
-        color: #333;
+
+    .news-card-title {
+        font-size: 18px;
+        font-weight: 700;
+        margin: 0 0 12px;
+        line-height: 1.4;
     }
-    .news-list {
+
+    .news-card-title a {
+        color: #2c3e50;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .news-card-title a:hover {
+        color: #3498db;
+    }
+
+    .news-card-meta {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 12px;
+        font-size: 12px;
+        color: #adb5bd;
+    }
+
+    .meta-date, .meta-source {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .news-card-description {
+        color: #6c757d;
+        font-size: 14px;
+        line-height: 1.5;
+        margin: 0 0 16px;
+    }
+
+    .read-more {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #3498db;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+        transition: all 0.2s ease;
+    }
+
+    .read-more:hover {
+        gap: 12px;
+        color: #2980b9;
+    }
+
+    .read-more svg {
+        transition: transform 0.2s ease;
+    }
+
+    .read-more:hover svg {
+        transform: translateX(3px);
+    }
+
+    /* Pagination */
+    .pagination {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .pagination-list {
+        display: inline-flex;
+        gap: 8px;
         list-style: none;
         padding: 0;
+        margin: 0;
+        flex-wrap: wrap;
+        justify-content: center;
     }
-    .news-item {
-        border-bottom: 1px solid #e5e5e5;
-        padding: 20px 0;
-        margin-bottom: 10px;
+
+    .pagination-list li {
+        display: inline-block;
     }
-    .news-title {
-        font-size: 18px;
-        margin: 0 0 10px 0;
-    }
-    .news-title a {
-        color: #1979c3;
+
+    .page-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 40px;
+        height: 40px;
+        padding: 0 12px;
+        background: white;
+        color: #3498db;
         text-decoration: none;
+        border-radius: 12px;
+        font-weight: 500;
+        font-size: 14px;
+        transition: all 0.2s ease;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.04);
     }
-    .news-title a:hover {
-        text-decoration: underline;
+
+    .page-link:hover {
+        background: #3498db;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(52,152,219,0.2);
     }
-    .news-date {
-        color: #999;
-        font-size: 12px;
-        margin-bottom: 10px;
+
+    .page-link.active {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+        box-shadow: 0 4px 12px rgba(52,152,219,0.3);
     }
-    .news-description {
-        color: #666;
-        line-height: 1.5;
-        margin-bottom: 10px;
+
+    .page-link.disabled {
+        color: #ced4da;
+        cursor: not-allowed;
+        background: #f8f9fa;
     }
-    .read-more {
-        color: #1979c3;
-        text-decoration: none;
-        font-size: 13px;
+
+    .page-link.disabled:hover {
+        background: #f8f9fa;
+        color: #ced4da;
+        transform: none;
+        box-shadow: none;
     }
-    .read-more:hover {
-        text-decoration: underline;
+
+    .page-link.prev, .page-link.next {
+        font-weight: 600;
     }
-    .message.info {
-        background: #f0f0f0;
-        padding: 15px;
-        border-left: 4px solid #ff9900;
-        color: #666;
+
+    .dots {
+        background: transparent;
+        box-shadow: none;
+        color: #adb5bd;
+    }
+
+    .dots:hover {
+        background: transparent;
+        color: #adb5bd;
+        transform: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .vnexpress-news-wrapper {
+            padding: 32px 16px;
+        }
+
+        .news-title-page {
+            font-size: 32px;
+        }
+
+        .news-subtitle {
+            font-size: 15px;
+        }
+
+        .news-tabs {
+            max-width: 100%;
+            border-radius: 40px;
+        }
+
+        .tab-link {
+            padding: 8px 18px;
+            font-size: 13px;
+        }
+
+        .news-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .news-card-image {
+            height: 180px;
+        }
+
+        .page-link {
+            min-width: 36px;
+            height: 36px;
+            padding: 0 10px;
+            font-size: 13px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .news-title-page {
+            font-size: 26px;
+        }
+
+        .tab-link span:not(svg) {
+            display: none;
+        }
+
+        .tab-link {
+            padding: 10px 20px;
+        }
+
+        .news-card-content {
+            padding: 16px;
+        }
+
+        .news-card-title {
+            font-size: 16px;
+        }
     }
 </style>

@@ -5,7 +5,7 @@
             <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-news-link" after="-">
                 <arguments>
                     <argument name="path" xsi:type="string">news</argument>
-                    <argument name="label" xsi:type="string">Tin tức VnExpress</argument>
+                    <argument name="label" xsi:type="string">VnExpress News</argument>
                 </arguments>
             </block>
         </referenceBlock>
