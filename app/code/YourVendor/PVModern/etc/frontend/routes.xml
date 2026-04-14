@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <!-- /deals -->
+        <route id="deals" frontName="deals">
+            <module name="YourVendor_PVModern"/>
+        </route>
+        <!-- /terms -->
+        <route id="terms" frontName="terms">
+            <module name="YourVendor_PVModern"/>
+        </route>
+        <!-- /privacy -->
+        <route id="privacy" frontName="privacy">
+            <module name="YourVendor_PVModern"/>
+        </route>
+        <!-- /cookies -->
+        <route id="cookies" frontName="cookies">
+            <module name="YourVendor_PVModern"/>
+        </route>
+        <!-- /pcbuilder -->
+        <route id="pcbuilder" frontName="pcbuilder">
+            <module name="YourVendor_PVModern"/>
+        </route>
+        <!-- /pvmodern — generic API-style routes (e.g. search/suggest) -->
+        <route id="pvmodern" frontName="pvmodern">
+            <module name="YourVendor_PVModern"/>
+        </route>
+    </router>
+</config>

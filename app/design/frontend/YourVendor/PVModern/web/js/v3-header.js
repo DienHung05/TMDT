@@ -163,69 +163,213 @@ define([
         }());
 
         /* ═══════════════════════════════════════════════════════════════════
-           REAL-TIME GRAPHQL SEARCH AUTOSUGGEST
+           SEARCH AUTOSUGGEST
+           Uses the PVModern controller endpoint so live Magento products
+           added in admin show in the main header as the customer types.
         ═══════════════════════════════════════════════════════════════════ */
-        (function initSearchGraphQL() {
-            var $input = $root.find('.pv3-search-input');
-            var $drop  = $root.find('#pv3-search-dropdown');
-            if (!$input.length || !$drop.length) return;
-            
-            var debounceTimer;
-            $input.on('input', function() {
-                var q = $(this).val().trim();
-                // Escape quotes in query
-                q = q.replace(/"/g, '');
-                
-                if (q.length < 2) {
-                    $drop.hide();
+        (function initSearchSuggest() {
+            var $form  = $root.find('.pv3-search');
+            var $input = $form.find('.pv3-search-input');
+            var $drop  = $form.find('#pv3-search-dropdown');
+            var suggestUrl = String($form.data('suggest-url') || '');
+            var searchUrl  = String($form.data('search-url') || '');
+            var minLength  = parseInt($form.data('min-length'), 10) || 1;
+            var debounceTimer = null;
+            var activeIdx = -1;
+            var request = null;
+            var cache = {};
+
+            if (!$form.length || !$input.length || !$drop.length || !suggestUrl) {
+                return;
+            }
+
+            function normalizeQuery(value) {
+                return String(value || '').replace(/\s+/g, ' ').trim();
+            }
+
+            function escHtml(value) {
+                return String(value)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;');
+            }
+
+            function highlight(text, query) {
+                var safeQuery = $.trim(query || '');
+                if (!safeQuery) {
+                    return text;
+                }
+
+                return text.replace(
+                    new RegExp('(' + safeQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig'),
+                    '<mark class="pv3-search-highlight">$1</mark>'
+                );
+            }
+
+            function getLinks() {
+                return $drop.find('.pv3-search-item');
+            }
+
+            function showDrop() {
+                $form.attr('aria-expanded', 'true');
+                $drop.prop('hidden', false).show();
+            }
+
+            function hideDrop() {
+                activeIdx = -1;
+                $form.attr('aria-expanded', 'false');
+                $drop.prop('hidden', true).hide();
+            }
+
+            function syncActiveItem() {
+                var $links = getLinks();
+                $links.removeClass('is-active');
+                if (activeIdx >= 0 && $links.eq(activeIdx).length) {
+                    $links.eq(activeIdx).addClass('is-active');
+                    $links.eq(activeIdx)[0].scrollIntoView({block: 'nearest'});
+                }
+            }
+
+            function renderItems(items, query) {
+                var html = '';
+
+                if (!items.length) {
+                    html =
+                        '<div class="pv3-search-loading">' +
+                            'No products found for "<strong>' + escHtml(query) + '</strong>"' +
+                        '</div>';
+                } else {
+                    html = $.map(items, function (item, index) {
+                        var oldPrice = item.original_price
+                            ? '<del class="pv3-sd-old">' + escHtml(item.original_price) + '</del>'
+                            : '';
+                        var discount = item.discount
+                            ? '<span class="pv3-sd-disc">-' + escHtml(item.discount) + '%</span>'
+                            : '';
+                        var sku = item.sku
+                            ? '<span class="pv3-search-sku">' + escHtml(item.sku) + '</span>'
+                            : '';
+
+                        return (
+                            '<a href="' + escHtml(item.url) + '" class="pv3-search-item" role="option" data-idx="' + index + '">' +
+                                '<span class="pv3-search-thumb">' +
+                                    '<img class="pv3-search-img" src="' + escHtml(item.image) + '" alt="' + escHtml(item.name) + '" loading="lazy" />' +
+                                '</span>' +
+                                '<span class="pv3-search-info">' +
+                                    '<span class="pv3-search-name">' + highlight(escHtml(item.name), query) + '</span>' +
+                                    sku +
+                                    '<span class="pv3-search-price">' + oldPrice + escHtml(item.price) + discount + '</span>' +
+                                '</span>' +
+                            '</a>'
+                        );
+                    }).join('');
+
+                    html +=
+                        '<a href="' + escHtml(searchUrl + '?q=' + encodeURIComponent(query)) + '" class="pv3-search-item pv3-sd-all" role="option">' +
+                            '<span class="pv3-search-info pv3-search-info--all">' +
+                                'View all results for "' + escHtml(query) + '" ->' +
+                            '</span>' +
+                        '</a>';
+                }
+
+                activeIdx = -1;
+                $drop.html(html);
+                showDrop();
+            }
+
+            function fetchSuggestions(query) {
+                if (request && request.readyState !== 4) {
+                    request.abort();
+                }
+
+                if (cache[query]) {
+                    renderItems(cache[query], query);
                     return;
                 }
+
+                $drop.html('<div class="pv3-search-loading">Searching...</div>');
+                showDrop();
+
+                request = $.ajax({
+                    url: suggestUrl,
+                    method: 'GET',
+                    dataType: 'json',
+                    data: {q: query}
+                }).done(function (response) {
+                    var currentQuery = normalizeQuery($input.val());
+                    var items = response && $.isArray(response.items) ? response.items : [];
+
+                    cache[query] = items;
+                    if (currentQuery === query) {
+                        renderItems(items, query);
+                    }
+                }).fail(function (xhr) {
+                    if (xhr && xhr.statusText === 'abort') {
+                        return;
+                    }
+
+                    $drop.html('<div class="pv3-search-loading">Search is temporarily unavailable.</div>');
+                    showDrop();
+                });
+            }
+
+            $input.on('input', function () {
+                var query = normalizeQuery($(this).val());
+
                 clearTimeout(debounceTimer);
-                debounceTimer = setTimeout(function() {
-                    $drop.html('<div class="pv3-search-loading">Searching...</div>').show();
-                    
-                    var gqlBody = JSON.stringify({
-                        query: '{ products(search: "' + q + '", pageSize: 5) { items { name, url_key, price_range { minimum_price { regular_price { value } } }, small_image { url } } } }'
-                    });
-                    
-                    $.ajax({
-                        url: '/graphql',
-                        method: 'POST',
-                        contentType: 'application/json',
-                        data: gqlBody,
-                        success: function(res) {
-                            var items = res.data && res.data.products && res.data.products.items ? res.data.products.items : [];
-                            if (!items.length) {
-                                $drop.html('<div class="pv3-search-loading">No products found.</div>');
-                                return;
-                            }
-                            var html = '';
-                            items.forEach(function(item) {
-                                var priceVal = 0;
-                                if (item.price_range && item.price_range.minimum_price && item.price_range.minimum_price.regular_price) {
-                                    priceVal = item.price_range.minimum_price.regular_price.value * 25000;
-                                }
-                                var pFmt = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(priceVal).replace('₫','').trim() + ' ₫';
-                                
-                                html += '<a href="/' + item.url_key + '.html" class="pv3-search-item">' +
-                                        '<img src="' + item.small_image.url + '" class="pv3-search-img" alt=""/>' +
-                                        '<div class="pv3-search-info">' +
-                                        '<span class="pv3-search-name">' + item.name + '</span>' +
-                                        '<span class="pv3-search-price">' + pFmt + '</span>' +
-                                        '</div></a>';
-                            });
-                            $drop.html(html);
-                        },
-                        error: function() {
-                            $drop.html('<div class="pv3-search-loading">Error connecting. Try again.</div>');
-                        }
-                    });
-                }, 400);
+                if (query.length < minLength) {
+                    hideDrop();
+                    return;
+                }
+
+                debounceTimer = setTimeout(function () {
+                    fetchSuggestions(query);
+                }, 220);
             });
-            
-            $(document).on('click', function(e) {
-                if (!$(e.target).closest('.pv3-search').length) {
-                    $drop.hide();
+
+            $input.on('focus', function () {
+                var query = normalizeQuery($input.val());
+                if (query.length >= minLength && $drop.children().length) {
+                    showDrop();
+                }
+            });
+
+            $input.on('keydown', function (event) {
+                var $links = getLinks();
+
+                if (!$links.length) {
+                    return;
+                }
+
+                if (event.key === 'ArrowDown') {
+                    event.preventDefault();
+                    activeIdx = Math.min(activeIdx + 1, $links.length - 1);
+                    syncActiveItem();
+                } else if (event.key === 'ArrowUp') {
+                    event.preventDefault();
+                    activeIdx = Math.max(activeIdx - 1, -1);
+                    syncActiveItem();
+                } else if (event.key === 'Enter' && activeIdx >= 0) {
+                    event.preventDefault();
+                    $links.eq(activeIdx)[0].click();
+                } else if (event.key === 'Escape') {
+                    hideDrop();
+                }
+            });
+
+            $drop.on('mouseenter', '.pv3-search-item', function () {
+                activeIdx = parseInt($(this).data('idx'), 10);
+                if (isNaN(activeIdx)) {
+                    activeIdx = -1;
+                }
+                syncActiveItem();
+            });
+
+            $(document).on('click.pvSearch', function (event) {
+                if (!$(event.target).closest('.pv3-search').length) {
+                    hideDrop();
                 }
             });
         }());

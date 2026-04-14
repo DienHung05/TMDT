@@ -165,9 +165,11 @@ $_menus = [
     ],
 ];
 
-$_searchUrl  = $block->escapeUrl($block->getUrl('catalogsearch/result'));
-$_isCatStr   = $_isCatPage ? 'true' : 'false';
-$_activeStr  = $block->escapeHtmlAttr($_activeCat);
+$_searchUrl        = $block->escapeUrl($block->getUrl('catalogsearch/result'));
+$_searchSuggestUrl = $block->escapeUrl($block->getUrl('pvmodern/search/suggest'));
+$_searchQuery      = trim((string) $_req->getParam('q', ''));
+$_isCatStr         = $_isCatPage ? 'true' : 'false';
+$_activeStr        = $block->escapeHtmlAttr($_activeCat);
 ?>
 <?php /* ── Google Fonts: Inter ── */ ?>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -195,7 +197,14 @@ $_activeStr  = $block->escapeHtmlAttr($_activeCat);
             </a>
 
             <!-- SEARCH ─────────────────────────────────────────────────────── -->
-            <form class="pv3-search" action="<?= $_searchUrl ?>" method="get" role="search">
+            <form class="pv3-search"
+                  action="<?= $_searchUrl ?>"
+                  method="get"
+                  role="search"
+                  data-suggest-url="<?= $_searchSuggestUrl ?>"
+                  data-search-url="<?= $_searchUrl ?>"
+                  data-min-length="1"
+                  aria-expanded="false">
                 <span class="pv3-search-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="11" cy="11" r="8"/>
@@ -204,31 +213,20 @@ $_activeStr  = $block->escapeHtmlAttr($_activeCat);
                 </span>
                 <input type="text" name="q"
                        placeholder="Search for products..."
+                       value="<?= $block->escapeHtmlAttr($_searchQuery) ?>"
                        autocomplete="off"
-                       aria-label="Search" class="pv3-search-input" />
-                <div class="pv3-search-dropdown" id="pv3-search-dropdown" style="display:none;"></div>
+                       spellcheck="false"
+                       aria-label="Search"
+                       aria-controls="pv3-search-dropdown"
+                       aria-autocomplete="list"
+                       class="pv3-search-input" />
+                <div class="pv3-search-dropdown"
+                     id="pv3-search-dropdown"
+                     role="listbox"
+                     aria-label="Product suggestions"
+                     aria-live="polite"
+                     hidden></div>
             </form>
-
-            <style>
-                .pv3-search { position: relative; }
-                .pv3-search-dropdown {
-                    position: absolute; top: calc(100% + 8px); left: 0; width: 100%;
-                    background: #fff; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-                    border: 1px solid #e2e8f0; z-index: 1000; overflow: hidden;
-                    max-height: 400px; overflow-y: auto;
-                }
-                .pv3-search-item {
-                    display: flex; align-items: center; padding: 12px 16px; border-bottom: 1px solid #f1f5f9;
-                    text-decoration: none; transition: background 0.2s;
-                }
-                .pv3-search-item:last-child { border-bottom: none; }
-                .pv3-search-item:hover { background: #f8fafc; }
-                .pv3-search-img { width: 48px; height: 48px; object-fit: contain; border-radius: 6px; margin-right: 16px; }
-                .pv3-search-info { flex: 1; }
-                .pv3-search-name { display: block; font-size: 14px; font-weight: 500; color: #0f172a; margin-bottom: 4px; }
-                .pv3-search-price { display: block; font-size: 14px; font-weight: 700; color: #3b82f6; }
-                .pv3-search-loading { padding: 16px; text-align: center; color: #64748b; font-size: 14px; }
-            </style>
 
             <!-- NAV ────────────────────────────────────────────────────────────
                  data-cat-page  → 'true'|'false'  — PHP page-type detection
@@ -410,116 +408,4 @@ $_activeStr  = $block->escapeHtmlAttr($_activeCat);
             </nav>
         </div>
     </div>
-
 </header>
-
-<script>
-(function () {
-    'use strict';
-
-    var input    = document.querySelector('.pv3-search-input');
-    var dropdown = document.getElementById('pv3-search-dropdown');
-    var form     = document.querySelector('.pv3-search');
-    if (!input || !dropdown) return;
-
-    var suggestUrl = '<?= $block->escapeJs($block->getUrl('pvmodern/search/suggest')) ?>';
-    var searchUrl  = '<?= $block->escapeJs($block->getUrl('catalogsearch/result')) ?>';
-    var activeIdx  = -1;
-    var timer      = null;
-    var lastQ      = '';
-    var currentItems = [];
-
-    /* ── Render ───────────────────────────────────────────────────── */
-    function renderItems(items, q) {
-        currentItems = items;
-        activeIdx = -1;
-        if (!items.length) {
-            dropdown.innerHTML = '<div class="pv3-search-loading">No results for "<strong>' + escHtml(q) + '</strong>"</div>';
-        } else {
-            var html = items.map(function (item, i) {
-                var disc = item.discount ? '<span class="pv3-sd-disc">-' + item.discount + '%</span>' : '';
-                var old  = item.original_price ? '<del class="pv3-sd-old">' + escHtml(item.original_price) + '</del>' : '';
-                return '<a href="' + escAttr(item.url) + '" class="pv3-search-item" data-idx="' + i + '">' +
-                    '<img class="pv3-search-img" src="' + escAttr(item.image) + '" alt="' + escAttr(item.name) + '" loading="lazy"/>' +
-                    '<div class="pv3-search-info">' +
-                        '<span class="pv3-search-name">' + highlight(escHtml(item.name), q) + '</span>' +
-                        '<span class="pv3-search-price">' + old + escHtml(item.price) + disc + '</span>' +
-                    '</div>' +
-                    '</a>';
-            }).join('');
-            /* View-all footer */
-            html += '<a href="' + escAttr(searchUrl + '?q=' + encodeURIComponent(q)) + '" class="pv3-search-item pv3-sd-all">' +
-                '<span class="pv3-search-info" style="text-align:center;width:100%;color:#6366f1;font-weight:700;">' +
-                    'View all results for "' + escHtml(q) + '" →' +
-                '</span></a>';
-            dropdown.innerHTML = html;
-        }
-        showDrop();
-    }
-
-    function highlight(text, q) {
-        if (!q) return text;
-        return text.replace(new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi'),
-            '<mark style="background:rgba(99,102,241,.25);color:inherit;border-radius:2px;">$1</mark>');
-    }
-
-    /* ── Fetch ────────────────────────────────────────────────────── */
-    function fetchSuggestions(q) {
-        dropdown.innerHTML = '<div class="pv3-search-loading">Searching…</div>';
-        showDrop();
-        fetch(suggestUrl + '?q=' + encodeURIComponent(q))
-            .then(function (r) { return r.json(); })
-            .then(function (data) { renderItems(data.items || [], q); })
-            .catch(function () { hideDrop(); });
-    }
-
-    /* ── Show / Hide ───────────────────────────────────────────────── */
-    function showDrop() { dropdown.style.display = 'block'; }
-    function hideDrop() { dropdown.style.display = 'none'; activeIdx = -1; }
-
-    /* ── Keyboard nav ─────────────────────────────────────────────── */
-    input.addEventListener('keydown', function (e) {
-        var links = dropdown.querySelectorAll('.pv3-search-item');
-        if (e.key === 'ArrowDown') {
-            e.preventDefault();
-            activeIdx = Math.min(activeIdx + 1, links.length - 1);
-        } else if (e.key === 'ArrowUp') {
-            e.preventDefault();
-            activeIdx = Math.max(activeIdx - 1, -1);
-        } else if (e.key === 'Enter' && activeIdx >= 0) {
-            e.preventDefault();
-            links[activeIdx].click();
-            return;
-        } else if (e.key === 'Escape') {
-            hideDrop(); return;
-        }
-        links.forEach(function (l, i) { l.classList.toggle('is-active', i === activeIdx); });
-        if (activeIdx >= 0 && links[activeIdx]) links[activeIdx].scrollIntoView({block:'nearest'});
-    });
-
-    /* ── Input handler ────────────────────────────────────────────── */
-    input.addEventListener('input', function () {
-        var q = input.value.trim();
-        clearTimeout(timer);
-        if (q.length < 2) { hideDrop(); lastQ = ''; return; }
-        if (q === lastQ) return;
-        lastQ = q;
-        timer = setTimeout(function () { fetchSuggestions(q); }, 280);
-    });
-
-    input.addEventListener('focus', function () {
-        if (lastQ.length >= 2) showDrop();
-    });
-
-    /* ── Outside click ────────────────────────────────────────────── */
-    document.addEventListener('click', function (e) {
-        if (!form.contains(e.target)) hideDrop();
-    });
-
-    /* ── Helpers ──────────────────────────────────────────────────── */
-    function escHtml(str) {
-        return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-    }
-    function escAttr(str) { return escHtml(str); }
-})();
-</script>

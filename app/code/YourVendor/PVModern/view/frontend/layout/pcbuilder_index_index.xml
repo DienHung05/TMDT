@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<page layout="1column"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <attribute name="class" value="pvmodern-pcbuilder"/>
+        <referenceBlock name="breadcrumbs"             remove="true"/>
+        <referenceBlock name="page.main.title"         remove="true"/>
+        <referenceBlock name="sidebar.main"            remove="true"/>
+        <referenceBlock name="sidebar.additional"      remove="true"/>
+        <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+        <referenceBlock name="wishlist_sidebar"        remove="true"/>
+        <referenceContainer name="sidebar.main"        remove="true"/>
+        <referenceContainer name="sidebar.additional"  remove="true"/>
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="pvmodern.pcbuilder.page"
+                   template="Magento_Cms::pc-builder.phtml"
+                   cacheable="false"/>
+        </referenceContainer>
+    </body>
+</page>
