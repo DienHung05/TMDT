@@ -815,6 +815,10 @@
         padding: 48px 0;
     }
 
+    .pv3-products-section--direct {
+        padding-top: 20px;
+    }
+
     .pv3-section-header {
         text-align: center;
         margin-bottom: 40px;
@@ -5015,7 +5019,7 @@ body.pvmodern-legal-page {
         position: relative;
         overflow: hidden;
         width: 100%;
-        min-height: 220px;
+        min-height: 340px;
         display: flex;
         align-items: center;
     }
@@ -5032,13 +5036,22 @@ body.pvmodern-legal-page {
         content: '';
         position: absolute;
         inset: 0;
-        background: linear-gradient(90deg, rgba(6,6,20,.85) 0%, rgba(6,6,20,.5) 60%, transparent 100%);
+        background:
+            radial-gradient(circle at center, rgba(129, 140, 248, .24) 0%, rgba(15, 23, 42, .08) 42%, rgba(15, 23, 42, .82) 100%),
+            linear-gradient(180deg, rgba(6, 6, 20, .3) 0%, rgba(6, 6, 20, .82) 100%);
     }
     .pvh-hw-banner__content {
         position: relative;
         z-index: 1;
-        padding: 48px 32px;
-        max-width: 720px;
+        width: 100%;
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 56px 32px 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
     }
     .pvh-hw-banner__badge {
         display: inline-flex;
@@ -5055,15 +5068,17 @@ body.pvmodern-legal-page {
         text-transform: uppercase;
         margin-bottom: 16px;
         font-family: 'Inter', sans-serif !important;
+        justify-content: center;
     }
     .pvh-hw-banner__title {
         font-size: clamp(28px, 4vw, 48px);
         font-weight: 900;
         line-height: 1.1;
         color: #fff;
-        margin: 0 0 12px;
+        margin: 0 auto 14px;
         letter-spacing: -.03em;
         font-family: 'Inter', sans-serif !important;
+        max-width: 760px;
     }
     .pvh-hw-banner__title em {
         font-style: normal;
@@ -5074,10 +5089,512 @@ body.pvmodern-legal-page {
     }
     .pvh-hw-banner__desc {
         color: #94a3b8;
-        font-size: 15px;
-        line-height: 1.6;
-        margin: 0;
+        font-size: 16px;
+        line-height: 1.7;
+        margin: 0 auto;
+        max-width: 780px;
         font-family: 'Inter', sans-serif !important;
+    }
+
+    .page-layout-1column.pvmodern-warranty-page .page-main {
+        max-width: none;
+        padding: 0 0 84px;
+    }
+
+    .page-layout-1column.pvmodern-warranty-page .column.main {
+        width: 100%;
+        float: none;
+        margin: 0;
+    }
+
+    .pvmodern-warranty-page .page-wrapper {
+        background:
+            radial-gradient(circle at top left, rgba(59, 130, 246, .08) 0%, rgba(59, 130, 246, 0) 28%),
+            radial-gradient(circle at top right, rgba(34, 197, 94, .08) 0%, rgba(34, 197, 94, 0) 20%),
+            linear-gradient(180deg, #f8fbff 0%, #ffffff 28%, #f8fafc 100%);
+    }
+
+    .pvw-page {
+        padding: 36px 0 0;
+    }
+
+    .pvw-hero {
+        position: relative;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: minmax(0, 1.35fr) minmax(260px, .78fr);
+        gap: 28px;
+        padding: 40px 42px;
+        border-radius: 32px;
+        background:
+            radial-gradient(circle at top left, rgba(14, 165, 233, .3) 0%, rgba(14, 165, 233, 0) 34%),
+            linear-gradient(135deg, #071221 0%, #10233d 50%, #091524 100%);
+        box-shadow: 0 30px 70px rgba(15, 23, 42, .16);
+    }
+
+    .pvw-hero::before {
+        content: '';
+        position: absolute;
+        inset: auto -8% -32% auto;
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        background: rgba(56, 189, 248, .12);
+        filter: blur(10px);
+    }
+
+    .pvw-hero::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+            linear-gradient(130deg, rgba(255, 255, 255, .06) 0%, rgba(255, 255, 255, 0) 46%),
+            repeating-linear-gradient(90deg, rgba(148, 163, 184, .06) 0, rgba(148, 163, 184, .06) 1px, transparent 1px, transparent 44px);
+        pointer-events: none;
+    }
+
+    .pvw-hero__copy,
+    .pvw-hero__meta {
+        position: relative;
+        z-index: 1;
+    }
+
+    .pvw-hero__badge,
+    .pvw-panel__eyebrow,
+    .pvw-section-head span {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+        padding: 8px 14px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+    }
+
+    .pvw-hero__badge {
+        margin-bottom: 18px;
+        background: rgba(255, 255, 255, .12);
+        border: 1px solid rgba(255, 255, 255, .14);
+        color: #dbeafe;
+    }
+
+    .pvw-hero h1 {
+        margin: 0;
+        color: #f8fafc;
+        font-size: clamp(32px, 5vw, 58px);
+        line-height: 1.02;
+        font-weight: 900;
+        letter-spacing: -.04em;
+    }
+
+    .pvw-hero h1 span {
+        background: linear-gradient(135deg, #38bdf8, #22c55e);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .pvw-hero p {
+        margin: 18px 0 0;
+        max-width: 720px;
+        color: #bfdbfe;
+        font-size: 17px;
+        line-height: 1.75;
+    }
+
+    .pvw-hero__meta {
+        display: grid;
+        gap: 14px;
+        align-content: end;
+    }
+
+    .pvw-hero__meta > div {
+        padding: 18px 20px;
+        border-radius: 22px;
+        background: rgba(248, 250, 252, .94);
+        border: 1px solid rgba(191, 219, 254, .52);
+        box-shadow: 0 18px 30px rgba(15, 23, 42, .14);
+    }
+
+    .pvw-hero__meta strong {
+        display: block;
+        color: @pv-slate-800;
+        font-size: 20px;
+        font-weight: 800;
+        line-height: 1.1;
+    }
+
+    .pvw-hero__meta span {
+        display: block;
+        margin-top: 6px;
+        color: @pv-slate-500;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    .pvw-methods {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+        margin-top: 28px;
+    }
+
+    .pvw-panel,
+    .pvw-card {
+        background: #ffffff;
+        border: 1px solid rgba(148, 163, 184, .18);
+        border-radius: 28px;
+        box-shadow: 0 24px 60px rgba(15, 23, 42, .08);
+    }
+
+    .pvw-panel {
+        padding: 28px;
+    }
+
+    .pvw-panel__eyebrow,
+    .pvw-section-head span {
+        background: linear-gradient(90deg, rgba(59, 130, 246, .12), rgba(34, 197, 94, .14));
+        color: #2563eb;
+    }
+
+    .pvw-panel h2,
+    .pvw-section-head h2 {
+        margin: 0;
+        color: @pv-slate-800;
+        font-size: 30px;
+        line-height: 1.1;
+        font-weight: 800;
+        letter-spacing: -.03em;
+    }
+
+    .pvw-panel p,
+    .pvw-section-head p {
+        margin: 12px 0 0;
+        color: @pv-slate-500;
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    .pvw-form {
+        display: grid;
+        gap: 16px;
+        margin-top: 24px;
+    }
+
+    .pvw-form label {
+        display: grid;
+        gap: 8px;
+        margin: 0;
+    }
+
+    .pvw-form label span {
+        color: @pv-slate-700;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: .02em;
+    }
+
+    .pvw-form input {
+        height: 54px;
+        width: 100%;
+        padding: 0 18px;
+        border-radius: 16px;
+        border: 1px solid rgba(148, 163, 184, .34);
+        background: #f8fafc;
+        color: @pv-slate-800;
+        font-size: 15px;
+        transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .pvw-form input:focus {
+        border-color: rgba(37, 99, 235, .5);
+        background: #ffffff;
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, .12);
+        outline: none;
+    }
+
+    .pvw-form button {
+        height: 54px;
+        border: 0;
+        border-radius: 16px;
+        background: linear-gradient(135deg, #2563eb, #0ea5e9);
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 800;
+        letter-spacing: .01em;
+        box-shadow: 0 18px 34px rgba(37, 99, 235, .24);
+        transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .pvw-form button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 24px 38px rgba(37, 99, 235, .28);
+    }
+
+    .pvw-alert {
+        margin-top: 24px;
+        padding: 16px 18px;
+        border-radius: 18px;
+        border: 1px solid #fed7aa;
+        background: #fff7ed;
+        color: #c2410c;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1.6;
+    }
+
+    .pvw-result,
+    .pvw-samples {
+        margin-top: 32px;
+    }
+
+    .pvw-section-head {
+        display: grid;
+        gap: 10px;
+        margin-bottom: 18px;
+    }
+
+    .pvw-card {
+        padding: 24px;
+    }
+
+    .pvw-card--result {
+        border-color: rgba(59, 130, 246, .24);
+    }
+
+    .pvw-card__product {
+        display: grid;
+        grid-template-columns: 116px minmax(0, 1fr) auto;
+        gap: 18px;
+        align-items: center;
+    }
+
+    .pvw-card__image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 116px;
+        height: 116px;
+        border-radius: 24px;
+        background: linear-gradient(145deg, #eff6ff, #f8fafc);
+        border: 1px solid rgba(191, 219, 254, .75);
+        overflow: hidden;
+    }
+
+    .pvw-card__image img {
+        max-width: 88px;
+        max-height: 88px;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .pvw-card__copy {
+        min-width: 0;
+    }
+
+    .pvw-card__sku {
+        display: inline-block;
+        margin-bottom: 8px;
+        color: #2563eb;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+    }
+
+    .pvw-card__copy h3 {
+        margin: 0;
+        color: @pv-slate-800;
+        font-size: 24px;
+        line-height: 1.25;
+        font-weight: 800;
+    }
+
+    .pvw-card__copy a {
+        display: inline-flex;
+        align-items: center;
+        margin-top: 12px;
+        color: #2563eb;
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .pvw-card__copy a:hover {
+        color: #1d4ed8;
+    }
+
+    .pvw-card__status {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        align-self: start;
+        padding: 10px 14px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 800;
+        white-space: nowrap;
+    }
+
+    .pvw-card__status.is-active {
+        background: #ecfdf5;
+        color: #047857;
+    }
+
+    .pvw-card__status.is-expired {
+        background: #fef2f2;
+        color: #b91c1c;
+    }
+
+    .pvw-card__grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 24px;
+    }
+
+    .pvw-card__grid > div {
+        display: grid;
+        gap: 6px;
+        padding: 16px 18px;
+        border-radius: 18px;
+        background: #f8fafc;
+        border: 1px solid rgba(148, 163, 184, .18);
+    }
+
+    .pvw-card__grid span {
+        color: @pv-slate-400;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+    }
+
+    .pvw-card__grid strong {
+        color: @pv-slate-800;
+        font-size: 15px;
+        line-height: 1.55;
+        word-break: break-word;
+    }
+
+    .pvw-sample-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    @media (max-width: 1024px) {
+        .pvh-hw-banner {
+            min-height: 320px;
+        }
+
+        .pvw-hero {
+            grid-template-columns: 1fr;
+        }
+
+        .pvw-card__product {
+            grid-template-columns: 100px minmax(0, 1fr);
+        }
+
+        .pvw-card__status {
+            justify-self: start;
+            grid-column: 2;
+        }
+
+        .pvw-card__grid,
+        .pvw-sample-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 767px) {
+        .pv3-products-section--direct {
+            padding-top: 16px;
+        }
+
+        .pvh-hw-banner {
+            min-height: 300px;
+        }
+
+        .pvh-hw-banner__content {
+            padding: 44px 20px 48px;
+        }
+
+        .pvh-hw-banner__badge {
+            font-size: 10px;
+            padding: 5px 12px;
+            letter-spacing: .08em;
+        }
+
+        .pvh-hw-banner__desc {
+            font-size: 15px;
+        }
+
+        .pvw-page {
+            padding-top: 24px;
+        }
+
+        .pvw-hero,
+        .pvw-panel,
+        .pvw-card {
+            border-radius: 24px;
+        }
+
+        .pvw-hero {
+            padding: 28px 20px;
+            gap: 22px;
+        }
+
+        .pvw-hero__meta > div {
+            padding: 16px 18px;
+        }
+
+        .pvw-methods,
+        .pvw-sample-grid,
+        .pvw-card__grid {
+            grid-template-columns: 1fr;
+        }
+
+        .pvw-panel {
+            padding: 24px 20px;
+        }
+
+        .pvw-panel h2,
+        .pvw-section-head h2 {
+            font-size: 26px;
+        }
+
+        .pvw-card {
+            padding: 20px;
+        }
+
+        .pvw-card__product {
+            grid-template-columns: 1fr;
+        }
+
+        .pvw-card__image {
+            width: 92px;
+            height: 92px;
+            border-radius: 20px;
+        }
+
+        .pvw-card__image img {
+            max-width: 70px;
+            max-height: 70px;
+        }
+
+        .pvw-card__copy h3 {
+            font-size: 20px;
+        }
+
+        .pvw-card__status {
+            grid-column: auto;
+            justify-self: start;
+        }
     }
 
     /* ═══════════════════════════════════════════════════════════════════════

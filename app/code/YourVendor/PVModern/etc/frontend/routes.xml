@@ -22,6 +22,10 @@
         <route id="pcbuilder" frontName="pcbuilder">
             <module name="YourVendor_PVModern"/>
         </route>
+        <!-- /warranty -->
+        <route id="warranty" frontName="warranty">
+            <module name="YourVendor_PVModern"/>
+        </route>
         <!-- /pvmodern — generic API-style routes (e.g. search/suggest) -->
         <route id="pvmodern" frontName="pvmodern">
             <module name="YourVendor_PVModern"/>

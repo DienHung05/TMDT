@@ -1,0 +1,129 @@
+<?php
+/** @var \YourVendor\PVModern\Block\Warranty\Lookup $block */
+$result = $block->getLookupResult();
+$samples = $block->getSampleCards(3);
+$message = $block->getLookupMessage();
+?>
+<section class="pvw-page">
+    <div class="pv3-container">
+        <section class="pvw-hero">
+            <div class="pvw-hero__copy">
+                <span class="pvw-hero__badge">Support Center</span>
+                <h1>Warranty <span>Lookup</span></h1>
+                <p>Check coverage with the same fast flow used by large hardware stores. Search by phone number and purchase code, or by the product IMEI assigned to each active warranty card.</p>
+            </div>
+            <div class="pvw-hero__meta">
+                <div>
+                    <strong>2 ways</strong>
+                    <span>to validate coverage</span>
+                </div>
+                <div>
+                    <strong>Live catalog</strong>
+                    <span>warranty cards generated from your products</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="pvw-methods">
+            <article class="pvw-panel">
+                <span class="pvw-panel__eyebrow">Method 01</span>
+                <h2>Phone number + purchase code</h2>
+                <p>Use the customer phone number together with the purchase code printed on the warranty card.</p>
+                <form class="pvw-form" action="<?= $block->escapeUrl($block->getUrl('warranty')) ?>" method="get">
+                    <input type="hidden" name="lookup" value="card" />
+                    <label>
+                        <span>Phone number</span>
+                        <input type="tel" name="phone" value="<?= $block->escapeHtmlAttr($block->getFieldValue('phone')) ?>" placeholder="0901 234 567" />
+                    </label>
+                    <label>
+                        <span>Purchase code</span>
+                        <input type="text" name="purchase_code" value="<?= $block->escapeHtmlAttr($block->getFieldValue('purchase_code')) ?>" placeholder="TW8A1B-3C9D2" />
+                    </label>
+                    <button type="submit">Check warranty</button>
+                </form>
+            </article>
+
+            <article class="pvw-panel">
+                <span class="pvw-panel__eyebrow">Method 02</span>
+                <h2>IMEI lookup</h2>
+                <p>Enter the product IMEI to retrieve the matching warranty card and expiration date instantly.</p>
+                <form class="pvw-form" action="<?= $block->escapeUrl($block->getUrl('warranty')) ?>" method="get">
+                    <input type="hidden" name="lookup" value="imei" />
+                    <label>
+                        <span>IMEI code</span>
+                        <input type="text" name="imei" value="<?= $block->escapeHtmlAttr($block->getFieldValue('imei')) ?>" placeholder="356 741 258 963 214" />
+                    </label>
+                    <button type="submit">Find by IMEI</button>
+                </form>
+            </article>
+        </section>
+
+        <?php if ($message !== ''): ?>
+            <div class="pvw-alert"><?= $block->escapeHtml($message) ?></div>
+        <?php endif; ?>
+
+        <?php if ($result): ?>
+            <section class="pvw-result">
+                <div class="pvw-section-head">
+                    <span>Warranty card</span>
+                    <h2>Coverage found</h2>
+                </div>
+                <article class="pvw-card pvw-card--result">
+                    <div class="pvw-card__product">
+                        <span class="pvw-card__image">
+                            <img src="<?= $block->escapeUrl($result['image_url']) ?>" alt="<?= $block->escapeHtmlAttr($result['product_name']) ?>" />
+                        </span>
+                        <div class="pvw-card__copy">
+                            <span class="pvw-card__sku"><?= $block->escapeHtml($result['sku']) ?></span>
+                            <h3><?= $block->escapeHtml($result['product_name']) ?></h3>
+                            <a href="<?= $block->escapeUrl($result['product_url']) ?>">View product</a>
+                        </div>
+                        <span class="pvw-card__status <?= $block->escapeHtmlAttr($result['status_class']) ?>">
+                            <?= $block->escapeHtml($result['status']) ?>
+                        </span>
+                    </div>
+                    <div class="pvw-card__grid">
+                        <div><span>Phone number</span><strong><?= $block->escapeHtml($result['phone']) ?></strong></div>
+                        <div><span>Purchase code</span><strong><?= $block->escapeHtml($result['purchase_code']) ?></strong></div>
+                        <div><span>IMEI</span><strong><?= $block->escapeHtml($result['imei']) ?></strong></div>
+                        <div><span>Warranty period</span><strong><?= $block->escapeHtml((string) $result['warranty_months']) ?> months</strong></div>
+                        <div><span>Purchase date</span><strong><?= $block->escapeHtml($result['purchase_date']) ?></strong></div>
+                        <div><span>Valid until</span><strong><?= $block->escapeHtml($result['expires_at']) ?></strong></div>
+                    </div>
+                </article>
+            </section>
+        <?php endif; ?>
+
+        <section class="pvw-samples">
+            <div class="pvw-section-head">
+                <span>Testing cards</span>
+                <h2>Use these sample warranty records</h2>
+                <p>The cards below are generated from your live storefront products so you can test both search methods immediately.</p>
+            </div>
+            <div class="pvw-sample-grid">
+                <?php foreach ($samples as $card): ?>
+                    <article class="pvw-card">
+                        <div class="pvw-card__product">
+                            <span class="pvw-card__image">
+                                <img src="<?= $block->escapeUrl($card['image_url']) ?>" alt="<?= $block->escapeHtmlAttr($card['product_name']) ?>" />
+                            </span>
+                            <div class="pvw-card__copy">
+                                <span class="pvw-card__sku"><?= $block->escapeHtml($card['sku']) ?></span>
+                                <h3><?= $block->escapeHtml($card['product_name']) ?></h3>
+                            </div>
+                            <span class="pvw-card__status <?= $block->escapeHtmlAttr($card['status_class']) ?>">
+                                <?= $block->escapeHtml($card['status']) ?>
+                            </span>
+                        </div>
+                        <div class="pvw-card__grid">
+                            <div><span>Phone number</span><strong><?= $block->escapeHtml($card['phone']) ?></strong></div>
+                            <div><span>Purchase code</span><strong><?= $block->escapeHtml($card['purchase_code']) ?></strong></div>
+                            <div><span>IMEI</span><strong><?= $block->escapeHtml($card['imei']) ?></strong></div>
+                            <div><span>Valid until</span><strong><?= $block->escapeHtml($card['expires_at']) ?></strong></div>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+            </div>
+        </section>
+    </div>
+</section>
