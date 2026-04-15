@@ -12,6 +12,7 @@ use Magento\Catalog\Helper\Image as ImageHelper;
 use Magento\CatalogInventory\Helper\Stock as StockHelper;
 use Magento\Framework\Pricing\PriceCurrencyInterface;
 use Magento\Store\Model\StoreManagerInterface;
+use YourVendor\PVModern\Model\ProductVisualResolver;
 
 /**
  * GET /pvmodern/search/suggest?q=<query>
@@ -29,7 +30,8 @@ class Suggest implements HttpGetActionInterface
         private readonly ImageHelper             $imageHelper,
         private readonly StockHelper             $stockHelper,
         private readonly PriceCurrencyInterface  $priceCurrency,
-        private readonly StoreManagerInterface   $storeManager
+        private readonly StoreManagerInterface   $storeManager,
+        private readonly ProductVisualResolver   $productVisualResolver
     ) {}
 
     public function execute()
@@ -76,16 +78,12 @@ class Suggest implements HttpGetActionInterface
                     ? (int) round((1 - ($finalPrice / $regularPrice)) * 100)
                     : null;
 
-                $imageUrl = $this->imageHelper
-                    ->init($product, 'product_thumbnail_image')
-                    ->getUrl();
-
                 $items[] = [
                     'id'            => (int) $product->getId(),
                     'name'          => (string) $product->getName(),
                     'sku'           => (string) $product->getSku(),
                     'url'           => (string) $product->getProductUrl(),
-                    'image'         => (string) $imageUrl,
+                    'image'         => $this->productVisualResolver->resolveProductImage($product, 'product_thumbnail_image'),
                     'price'         => $this->priceCurrency->format($finalPrice, false),
                     'original_price'=> $discount ? $this->priceCurrency->format($regularPrice, false) : null,
                     'discount'      => $discount,

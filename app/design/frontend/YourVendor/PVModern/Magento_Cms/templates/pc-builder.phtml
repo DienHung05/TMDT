@@ -2,153 +2,103 @@
 /** @var \Magento\Framework\View\Element\Template $block */
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   PC BUILDER v5.1 — Backend Data Layer (Fixed OR keyword search + fallback)
+   PC BUILDER v6 — strict category-backed component sourcing
    ═══════════════════════════════════════════════════════════════════════════ */
 $om                         = \Magento\Framework\App\ObjectManager::getInstance();
 $storeManager               = $om->get(\Magento\Store\Model\StoreManagerInterface::class);
 $productCollectionFactory   = $om->get(\Magento\Catalog\Model\ResourceModel\Product\CollectionFactory::class);
 $categoryCollectionFactory  = $om->get(\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory::class);
-$categoryFactory            = $om->get(\Magento\Catalog\Model\CategoryFactory::class);
 $visibility                 = $om->get(\Magento\Catalog\Model\Product\Visibility::class);
 $priceCurrency              = $om->get(\Magento\Framework\Pricing\PriceCurrencyInterface::class);
-$imageHelper                = $om->get(\Magento\Catalog\Helper\Image::class);
+$productVisualResolver      = $om->get(\YourVendor\PVModern\Model\ProductVisualResolver::class);
 $store                      = $storeManager->getStore();
 
-/* ── Step 1: Auto-discover category IDs by keyword-matching category names ── */
-function pvPcDiscoverCats($categoryCollectionFactory) {
-    /* Keywords per slot. More broad = higher chance of matching real categories */
-    $slots = [
-        'cpu'         => ['cpu', 'processor', 'vi xu ly', 'vi xử lý'],
-        'motherboard' => ['motherboard', 'mainboard', 'bo mach', 'bo mạch'],
-        'gpu'         => ['gpu', 'vga', 'graphics', 'video', 'card man hinh', 'card màn'],
-        'ram'         => ['ram', 'memory', 'ddr'],
-        'storage'     => ['ssd', 'nvme', 'o cung', 'ổ cứng', 'hdd', 'storage'],
-        'case'        => ['case', 'vo may', 'vỏ máy', 'chassis'],
-        'psu'         => ['psu', 'power', 'nguon', 'nguồn'],
-        'cooler'      => ['cooler', 'cooling', 'tan nhiet', 'tản nhiệt', 'aio'],
-    ];
+function pvPcFindCategoryIds($categoryCollectionFactory, array $names) {
+    $wanted = [];
+    foreach ($names as $name) {
+        $wanted[mb_strtolower(trim((string) $name))] = true;
+    }
+
     $found = [];
+
     try {
-        $col = $categoryCollectionFactory->create();
-        $col->addAttributeToSelect(['name', 'entity_id'])
-            ->addAttributeToFilter('is_active', 1)
-            ->addAttributeToFilter('level', ['gt' => 1]);
-        foreach ($col as $cat) {
-            $name = strtolower((string)$cat->getName());
-            foreach ($slots as $slot => $keywords) {
-                if (isset($found[$slot])) continue;
-                foreach ($keywords as $kw) {
-                    if (str_contains($name, $kw) || strpos($name, $kw) !== false) {
-                        $found[$slot] = (int)$cat->getId();
-                        break;
-                    }
-                }
+        $collection = $categoryCollectionFactory->create();
+        $collection->addAttributeToSelect(['name', 'entity_id'])
+            ->addAttributeToFilter('is_active', 1);
+
+        foreach ($collection as $category) {
+            $key = mb_strtolower(trim((string) $category->getName()));
+            if (isset($wanted[$key])) {
+                $found[] = (int) $category->getId();
             }
         }
-    } catch (\Throwable $e) {}
-    return $found;
-}
-
-/* ── Step 2: Load products for a slot ───────────────────────────────────── */
-function pvPcLoadProducts($productCollectionFactory, $categoryFactory, $visibility, $imageHelper, $priceCurrency, $store, $catId, $keywords, $limit = 12) {
-    $om = \Magento\Framework\App\ObjectManager::getInstance();
-
-    $makeCollection = function() use ($productCollectionFactory, $store, $visibility, $limit) {
-        $c = $productCollectionFactory->create();
-        $c->setStoreId((int)$store->getId())
-          ->addStoreFilter($store)
-          ->addAttributeToSelect(['name','small_image','price','special_price'])
-          ->addFinalPrice()
-          ->addUrlRewrite()
-          ->addAttributeToFilter('status', 1)
-          ->setVisibility($visibility->getVisibleInCatalogIds())
-          ->setPageSize($limit)
-          ->setCurPage(1);
-        return $c;
-    };
-
-    $items = [];
-
-    /* ── Try 1: category filter if we found a matching category ── */
-    if ($catId) {
-        try {
-            $cat = $categoryFactory->create()->load($catId);
-            if ($cat->getId()) {
-                $col = $makeCollection();
-                $col->addCategoryFilter($cat);
-                $col->getSelect()->order('e.entity_id DESC');
-                $col->load();
-                if ($col->count() > 0) {
-                    return pvPcMapItems($col, $imageHelper, $priceCurrency);
-                }
-            }
-        } catch (\Throwable $e) {}
+    } catch (\Throwable $e) {
     }
 
-    /* ── Try 2: OR keyword search across product names ── */
-    if ($keywords) {
-        try {
-            $kwArr = array_filter(
-                array_map('trim', preg_split('/[\s|]+/', $keywords)),
-                function ($k) { return strlen($k) >= 3; }
-            );
-            if (!empty($kwArr)) {
-                $conditions = array_map(function($kw) {
-                    return ['like' => '%' . $kw . '%'];
-                }, array_values($kwArr));
-                /* Magento 2: array of conditions on same attribute = OR */
-                $col = $makeCollection();
-                $col->addAttributeToFilter('name', $conditions);
-                $col->getSelect()->order('e.entity_id DESC');
-                $col->load();
-                if ($col->count() > 0) {
-                    return pvPcMapItems($col, $imageHelper, $priceCurrency);
-                }
-            }
-        } catch (\Throwable $e) {}
-    }
-
-    /* ── Try 3: broad SKU / search (last resort) ── */
-    /* Return empty — we'll show the "no products" UI without a fallback dump */
-    return [];
+    return array_values(array_unique(array_filter($found)));
 }
 
-function pvPcMapItems($collection, $imageHelper, $priceCurrency) {
+function pvPcLoadProducts($productCollectionFactory, $visibility, $priceCurrency, $productVisualResolver, $store, array $categoryIds, $limit = 16) {
+    if (empty($categoryIds)) {
+        return [];
+    }
+
+    $collection = $productCollectionFactory->create();
+    $collection->setStoreId((int) $store->getId())
+        ->addStoreFilter($store)
+        ->addAttributeToSelect(['name', 'sku', 'small_image', 'image', 'thumbnail', 'price', 'special_price'])
+        ->addFinalPrice()
+        ->addUrlRewrite()
+        ->addAttributeToFilter('status', 1)
+        ->setVisibility($visibility->getVisibleInCatalogIds())
+        ->addCategoriesFilter(['in' => $categoryIds])
+        ->setPageSize($limit)
+        ->setCurPage(1);
+    $collection->getSelect()->order('e.entity_id DESC');
+
+    return pvPcMapItems($collection, $productVisualResolver, $priceCurrency);
+}
+
+function pvPcMapItems($collection, $productVisualResolver, $priceCurrency) {
     $items = [];
+
     foreach ($collection as $product) {
-        $regular = (float)$product->getData('price');
-        $special = (float)$product->getFinalPrice();
-        if ($special <= 0) $special = $regular;
+        $regular = (float) $product->getData('price');
+        $special = (float) $product->getFinalPrice();
+        if ($special <= 0) {
+            $special = $regular;
+        }
+
         $disc = ($regular > $special && $regular > 0)
-            ? (int)round(100 * (1 - $special / $regular)) : 0;
+            ? (int) round(100 * (1 - $special / $regular))
+            : 0;
+
         $items[] = [
-            'id'        => (int)$product->getId(),
-            'name'      => (string)$product->getName(),
-            'sku'       => (string)$product->getSku(),
-            'url'       => (string)$product->getProductUrl(),
-            'image'     => (string)$imageHelper->init($product, 'category_page_grid')->getUrl(),
+            'id'        => (int) $product->getId(),
+            'name'      => (string) $product->getName(),
+            'sku'       => (string) $product->getSku(),
+            'url'       => (string) $product->getProductUrl(),
+            'image'     => $productVisualResolver->resolveProductImage($product, 'category_page_grid'),
             'price'     => $special ?: $regular,
             'price_fmt' => $priceCurrency->format($special ?: $regular, false),
             'disc'      => $disc,
         ];
     }
+
     return $items;
 }
 
 /* ── Slot definitions ────────────────────────────────────────────────────── */
 $slots = [
-    'cpu'         => ['label' => 'CPU',          'sub' => 'Vi Xử Lý',           'kw' => 'cpu|processor|ryzen|intel|core i|threadripper'],
-    'motherboard' => ['label' => 'Motherboard',  'sub' => 'Bo Mạch Chủ',        'kw' => 'motherboard|mainboard|b650|z790|b760|x670'],
-    'gpu'         => ['label' => 'GPU / VGA',     'sub' => 'Card Màn Hình',      'kw' => 'vga|gpu|rtx|gtx|rx 7|rx 6|radeon|geforce|arc a'],
-    'ram'         => ['label' => 'RAM',           'sub' => 'Bộ Nhớ',             'kw' => 'ram|ddr5|ddr4|memory|corsair vengeance|kingston fury'],
-    'storage'     => ['label' => 'Storage',       'sub' => 'Ổ Cứng / SSD',       'kw' => 'ssd|nvme|970 evo|980 pro|wd black|crucial p5|gen4'],
-    'case'        => ['label' => 'PC Case',       'sub' => 'Vỏ Máy',             'kw' => 'case|chassis|tower|mid tower|nzxt|lian li|fractal'],
-    'psu'         => ['label' => 'Power Supply',  'sub' => 'Nguồn',              'kw' => 'psu|power supply|650w|750w|850w|1000w|corsair rm|evga'],
-    'cooler'      => ['label' => 'CPU Cooler',    'sub' => 'Tản Nhiệt CPU',      'kw' => 'cooler|aio|240mm|360mm|noctua|deepcool|be quiet|dark rock'],
-    'fan'         => ['label' => 'Case Fan',      'sub' => 'Quạt Tản Nhiệt',     'kw' => 'case fan|120mm fan|140mm fan|rgb fan|argb|lian li uni'],
-    'monitor'     => ['label' => 'Monitor',       'sub' => 'Màn Hình',           'kw' => 'monitor|man hinh|27 inch|24 inch|4k|144hz|240hz|oled|lg 27|samsung 27|benq'],
-    'gaming_gear' => ['label' => 'Gaming Gear',   'sub' => 'Bàn Phím & Chuột',   'kw' => 'keyboard|mouse|gaming mouse|mechanical|mousepad|headset|gaming chair|gaming gear'],
-    'others'      => ['label' => 'Others',        'sub' => 'Thiết Bị Khác',      'kw' => 'usb hub|webcam|speaker|sound card|capture card|ups|cable management'],
+    'cpu'         => ['label' => 'CPU',          'sub' => 'Vi Xu Ly',       'categories' => ['CPU'], 'fallback' => 'cpu'],
+    'motherboard' => ['label' => 'Motherboard',  'sub' => 'Bo Mach Chu',    'categories' => ['Mainboard'], 'fallback' => 'mainboard'],
+    'gpu'         => ['label' => 'GPU / VGA',    'sub' => 'Card Man Hinh',  'categories' => ['GPU'], 'fallback' => 'gpu'],
+    'ram'         => ['label' => 'RAM',          'sub' => 'Bo Nho',         'categories' => ['RAM'], 'fallback' => 'ram'],
+    'storage'     => ['label' => 'Storage',      'sub' => 'SSD va HDD',     'categories' => ['SSD', 'HDD'], 'fallback' => 'ssd'],
+    'case'        => ['label' => 'PC Case',      'sub' => 'Vo May',         'categories' => ['Case'], 'fallback' => 'pc case'],
+    'psu'         => ['label' => 'Power Supply', 'sub' => 'Nguon',          'categories' => ['PSU'], 'fallback' => 'power supply'],
+    'cooler'      => ['label' => 'CPU Cooler',   'sub' => 'Tan Nhiet CPU',  'categories' => ['Heatsink'], 'fallback' => 'cpu cooler'],
+    'fan'         => ['label' => 'Case Fan',     'sub' => 'Quat Tan Nhiet', 'categories' => ['Fan'], 'fallback' => 'case fan'],
 ];
 
 $icons = [
@@ -160,21 +110,19 @@ $icons = [
     'case'        => '<rect x="4" y="2" width="16" height="20" rx="2" stroke-width="1.5"/><path d="M9 6h6M9 10h6M12 14v4" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="18" r="1" fill="currentColor"/>',
     'psu'         => '<path d="m13 2-10 12h9l-1 8 10-12h-9l1-8z" stroke-width="1.5" stroke-linejoin="round"/>',
     'cooler'      => '<circle cx="12" cy="12" r="9" stroke-width="1.5"/><circle cx="12" cy="12" r="3" stroke-width="1.5"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" stroke-width="1.5" stroke-linecap="round"/>',
-    /* ── New slots ── */
     'fan'         => '<circle cx="12" cy="12" r="2" stroke-width="1.5"/><path d="M12 10c0-3-2.5-5-5-4s-3 4-1 5.5M12 10c2.5-1.5 5.5-.5 6 2s-1.5 4.5-3 3M12 14c0 3 2.5 5 5 4s3-4 1-5.5M12 14c-2.5 1.5-5.5.5-6-2s1.5-4.5 3-3" stroke-width="1.5" stroke-linecap="round"/>',
-    'monitor'     => '<rect x="2" y="3" width="20" height="14" rx="2" stroke-width="1.5"/><path d="M8 21h8M12 17v4" stroke-width="1.5" stroke-linecap="round"/>',
-    'gaming_gear' => '<path d="M6 12h4M8 10v4" stroke-width="1.5" stroke-linecap="round"/><circle cx="15" cy="11" r="1" fill="currentColor"/><circle cx="17" cy="13" r="1" fill="currentColor"/><path d="M10.5 5h3a1 1 0 0 1 1 1l1.5 8a2 2 0 0 1-2 2h-6a2 2 0 0 1-2-2l1.5-8a1 1 0 0 1 1-1z" stroke-width="1.5"/>',
-    'others'      => '<circle cx="12" cy="12" r="3" stroke-width="1.5"/><path d="M19.1 15a7 7 0 0 1-.6 1.5l1.4 1.4-1.4 1.4-1.4-1.4A7 7 0 0 1 15 19.1V21h-2v-1.9a7 7 0 0 1-1.5-.6L10 19.9 8.6 18.5l1.4-1.4A7 7 0 0 1 4.9 15H3v-2h1.9a7 7 0 0 1 .6-1.5L4.1 10l1.4-1.4 1.4 1.4A7 7 0 0 1 9 4.9V3h2v1.9a7 7 0 0 1 1.5.6L14 4.1 15.4 5.5 14 6.9a7 7 0 0 1 1.1 2.1H17v2h-1.9z" stroke-width="1.5" stroke-linecap="round"/>',
 ];
 
-/* Discover categories first */
-$catIds      = pvPcDiscoverCats($categoryCollectionFactory);
 $slotProducts = [];
 foreach ($slots as $key => $slot) {
     $slotProducts[$key] = pvPcLoadProducts(
-        $productCollectionFactory, $categoryFactory, $visibility,
-        $imageHelper, $priceCurrency, $store,
-        $catIds[$key] ?? null, $slot['kw'], 16
+        $productCollectionFactory,
+        $visibility,
+        $priceCurrency,
+        $productVisualResolver,
+        $store,
+        pvPcFindCategoryIds($categoryCollectionFactory, $slot['categories']),
+        18
     );
 }
 ?>
@@ -200,7 +148,7 @@ foreach ($slots as $key => $slot) {
             </div>
             <div class="pvcb-hero__summary-box">
                 <span class="pvcb-summary-label">Tổng Ước Tính</span>
-                <span class="pvcb-summary-total" id="pvTotal">0₫</span>
+                <span class="pvcb-summary-total" id="pvTotal">$0.00</span>
                 <button type="button" class="pvcb-summary-btn" onclick="pvAddToCart()">
                     Thêm vào giỏ hàng
                 </button>
@@ -264,7 +212,7 @@ foreach ($slots as $key => $slot) {
                             Chọn linh kiện
                         </button>
                         <?php else: ?>
-                        <?php $fallbackUrl = $block->getUrl('') . '?q=' . urlencode(str_replace('|', ' ', $slot['kw'])) . '#pv3-products'; ?>
+                        <?php $fallbackUrl = $block->getUrl('') . '?q=' . urlencode($slot['fallback']) . '#pv3-products'; ?>
                         <span class="pvcb-avail" style="color:#374151">
                             Chưa có sản phẩm.
                             <a href="<?= $block->escapeUrl($fallbackUrl) ?>"
@@ -306,7 +254,7 @@ foreach ($slots as $key => $slot) {
                     <div class="pvcb-picker__grid">
                         <?php foreach ($products as $p): ?>
                         <div class="pvcb-prod"
-                             onclick="pvSelect('<?= $key ?>',<?= (int)$p['id'] ?>,<?= (float)$p['price'] ?>,'<?= $block->escapeJs($p['name']) ?>','<?= $block->escapeJs($p['image']) ?>','<?= $block->escapeJs($p['price_fmt']) ?>')"
+                             onclick="pvSelect('<?= $key ?>',<?= (int)$p['id'] ?>,'<?= $block->escapeJs($p['sku']) ?>',<?= (float)$p['price'] ?>,'<?= $block->escapeJs($p['name']) ?>','<?= $block->escapeJs($p['image']) ?>','<?= $block->escapeJs($p['price_fmt']) ?>')"
                              title="<?= $block->escapeHtmlAttr($p['name']) ?>">
                             <?php if ($p['disc'] >= 5): ?>
                             <span class="pvcb-prod__disc">-<?= (int)$p['disc'] ?>%</span>
@@ -339,7 +287,7 @@ foreach ($slots as $key => $slot) {
                 <div class="pvcb-sum-divider"></div>
                 <div class="pvcb-sum-row">
                     <span>Tổng cộng</span>
-                    <strong id="pvSideTotal">0₫</strong>
+                    <strong id="pvSideTotal">$0.00</strong>
                 </div>
                 <button type="button" class="pvcb-sum-reset" onclick="pvReset()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -365,27 +313,13 @@ foreach ($slots as $key => $slot) {
     <!– Sticky mobile bar –>
     <div class="pvcb-sticky">
         <span>Tổng:</span>
-        <strong id="pvStickyTotal">0₫</strong>
+        <strong id="pvStickyTotal">$0.00</strong>
         <button type="button" class="pvcb-summary-btn" onclick="pvAddToCart()">
             Thêm vào giỏ hàng
         </button>
     </div>
 </div>
 </div>
-
-<script>
-function pvAddToCart() {
-    // Logic to collect selected product IDs and add to cart
-    const selectedIds = Object.values(window.pvSelected || {}).map(p => p.id);
-    if (selectedIds.length === 0) {
-        alert('Vui lòng chọn ít nhất một linh kiện.');
-        return;
-    }
-    // Example: Redirect to a custom controller or use AJAX
-    console.log('Adding to cart:', selectedIds);
-    alert('Đã thêm các linh kiện vào giỏ hàng!');
-}
-</script>
 
 <style>
 /* ═══════════════════════════════════════════════════════════
@@ -650,11 +584,10 @@ function pvAddToCart() {
 <script>
 /* ─── PC Builder State Machine ──────────────────────────────────────────── */
 var pvBuild = {};
+var pvCurrency = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'});
 
 function pvFmt(n) {
-    if (!n) return '0₫';
-    return new Intl.NumberFormat('vi-VN', {style:'currency',currency:'VND'}).format(n * 25000)
-        .replace('₫','').trim() + '₫';
+    return pvCurrency.format(n || 0);
 }
 
 function pvOpen(slot) {
@@ -671,8 +604,8 @@ function pvClose(slot) {
     if (p) p.style.display = 'none';
     if (s) s.classList.remove('is-open-picker');
 }
-function pvSelect(slot, id, price, name, image, priceFmt) {
-    pvBuild[slot] = {id:id, price:price, name:name, image:image, priceFmt:priceFmt};
+function pvSelect(slot, id, sku, price, name, image, priceFmt) {
+    pvBuild[slot] = {id:id, sku:sku, price:price, name:name, image:image, priceFmt:priceFmt};
     var emptyEl = document.getElementById('pvEmpty-' + slot);
     var selEl   = document.getElementById('pvSel-' + slot);
     var slotEl  = document.getElementById('pvSlot-' + slot);
@@ -698,11 +631,11 @@ function pvRemove(slot) {
     if (slotEl)  slotEl.classList.remove('is-filled');
     pvUpdateSummary();
 }
-function pvReset() { Object.keys(pvBuild).forEach(pvRemove); }
+function pvReset() { Object.keys(pvBuild).forEach(function(slot) { pvRemove(slot); }); }
 function pvUpdateSummary() {
     var keys   = Object.keys(pvBuild);
     var sum    = keys.reduce(function(a,k){ return a + pvBuild[k].price; }, 0);
-    var fmt    = sum > 0 ? new Intl.NumberFormat('vi-VN',{style:'currency',currency:'USD'}).format(sum) : '0₫';
+    var fmt    = pvFmt(sum);
     ['pvTotal','pvSideTotal','pvStickyTotal'].forEach(function(id){
         var el = document.getElementById(id); if (el) el.textContent = fmt;
     });

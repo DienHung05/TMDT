@@ -5,7 +5,6 @@ namespace YourVendor\PVModern\Model;
 
 use DateInterval;
 use DateTimeImmutable;
-use Magento\Catalog\Helper\Image as ImageHelper;
 use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\Product\Visibility;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
@@ -18,8 +17,8 @@ class WarrantyCardProvider
     public function __construct(
         private readonly CollectionFactory $collectionFactory,
         private readonly Visibility $visibility,
-        private readonly ImageHelper $imageHelper,
-        private readonly StoreManagerInterface $storeManager
+        private readonly StoreManagerInterface $storeManager,
+        private readonly ProductVisualResolver $productVisualResolver
     ) {
     }
 
@@ -108,7 +107,7 @@ class WarrantyCardProvider
             'product_name' => (string) $product->getName(),
             'sku' => (string) $product->getSku(),
             'product_url' => (string) $product->getProductUrl(),
-            'image_url' => $this->imageHelper->init($product, 'product_page_image_small')->getUrl(),
+            'image_url' => $this->productVisualResolver->resolveProductImage($product, 'product_page_image_small'),
             'phone' => $this->formatPhone($phoneRaw),
             'phone_raw' => $phoneRaw,
             'purchase_code' => $this->formatPurchaseCode($purchaseCodeRaw),

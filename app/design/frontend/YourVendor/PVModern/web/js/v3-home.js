@@ -17,12 +17,12 @@ define(['jquery'], function ($) {
             $priceMax = $root.find('[data-price-max]'),
             $search = $root.find('[data-product-search]'),
             $viewButtons = $root.find('[data-view]'),
-            $loadMore = $root.find('[data-load-more]'),
+            $pagination = $root.find('[data-pagination]'),
             $recentSlider = $root.find('[data-recent-slider]'),
             $recentPrev = $root.find('[data-recent-prev]'),
             $recentNext = $root.find('[data-recent-next]'),
             pageSize = parseInt($grid.data('page-size'), 10) || 8,
-            visibleLimit = pageSize;
+            currentPage = 1;
 
         function getInitialQuery() {
             try {
@@ -63,19 +63,50 @@ define(['jquery'], function ($) {
             $root.find('[data-stat="lowstock"]').text(lowStock);
         }
 
-        function applyVisibilityLimit() {
-            var $matched = getCards().not('.is-filtered-out');
+        function renderPagination(totalItems) {
+            var totalPages = Math.max(1, Math.ceil(totalItems / pageSize)),
+                page,
+                $button;
 
-            $matched.hide();
-            $matched.slice(0, visibleLimit).show();
-            getCards().filter('.is-filtered-out').hide();
-
-            if ($matched.length > visibleLimit) {
-                $loadMore.show();
-            } else {
-                $loadMore.hide();
+            if (!$pagination.length) {
+                return;
             }
 
+            $pagination.empty();
+
+            if (totalPages <= 1) {
+                $pagination.attr('hidden', 'hidden');
+                return;
+            }
+
+            $pagination.removeAttr('hidden');
+
+            for (page = 1; page <= totalPages; page += 1) {
+                $button = $('<button/>', {
+                    type: 'button',
+                    'class': 'pv3-pagination-button' + (page === currentPage ? ' is-active' : ''),
+                    'data-page': page,
+                    text: page
+                });
+                $pagination.append($button);
+            }
+        }
+
+        function applyPagination() {
+            var $matched = getCards().not('.is-filtered-out'),
+                totalPages = Math.max(1, Math.ceil($matched.length / pageSize)),
+                startIndex;
+
+            if (currentPage > totalPages) {
+                currentPage = totalPages;
+            }
+
+            $matched.hide();
+            startIndex = (currentPage - 1) * pageSize;
+            $matched.slice(startIndex, startIndex + pageSize).show();
+            getCards().filter('.is-filtered-out').hide();
+
+            renderPagination($matched.length);
             updateStats();
         }
 
@@ -155,10 +186,10 @@ define(['jquery'], function ($) {
             });
 
             if (resetLimit) {
-                visibleLimit = pageSize;
+                currentPage = 1;
             }
 
-            applyVisibilityLimit();
+            applyPagination();
         }
 
         function updateRecentArrows() {
@@ -217,9 +248,16 @@ define(['jquery'], function ($) {
             $grid.toggleClass('is-list', view === 'list');
         });
 
-        $loadMore.on('click', function () {
-            visibleLimit += pageSize;
-            applyVisibilityLimit();
+        $pagination.on('click', '[data-page]', function () {
+            currentPage = parseInt($(this).data('page'), 10) || 1;
+            applyPagination();
+            try {
+                document.getElementById('pv3-products').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            } catch (error) {
+            }
         });
 
         $recentPrev.on('click', function () {

@@ -1851,33 +1851,45 @@
         text-decoration: none;
     }
 
-    .pv3-load-more-row {
+    .pv3-pagination-row {
         margin-top: 48px;
         text-align: center;
     }
 
-    .pv3-load-more {
-        min-width: 220px;
+    .pv3-pagination {
+        display: inline-flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        padding: 0 16px;
+    }
+
+    .pv3-pagination[hidden] {
+        display: none !important;
+    }
+
+    .pv3-pagination-button {
+        min-width: 48px;
         min-height: 48px;
-        padding: 0 24px;
-        border: 0;
-        border-radius: 12px;
-        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
-        color: #ffffff;
+        padding: 0 16px;
+        border: 1px solid rgba(99, 102, 241, .16);
+        border-radius: 14px;
+        background: #ffffff;
+        color: @pv-slate-700;
         font-size: 15px;
         font-weight: 700;
-        box-shadow: 0 16px 32px -14px rgba(99,102,241,.55);
-        transition: transform .3s ease, box-shadow .3s ease;
+        box-shadow: 0 14px 34px rgba(148, 163, 184, .14);
+        transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease, color .22s ease;
         cursor: pointer;
     }
 
-    .pv3-load-more:hover {
+    .pv3-pagination-button:hover,
+    .pv3-pagination-button.is-active {
         transform: translateY(-2px);
-        box-shadow: 0 18px 36px -14px rgba(99,102,241,.62);
-    }
-
-    .pv3-load-more[hidden] {
-        display: none !important;
+        border-color: rgba(99, 102, 241, .35);
+        color: #ffffff;
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 52%, #a855f7 100%);
+        box-shadow: 0 18px 36px rgba(99, 102, 241, .24);
     }
 
     .pv3-product-card.is-filtered-out {
@@ -1990,7 +2002,7 @@
     .pv3-newsletter-inner {
         margin: 0 auto;
         /* Keep the card slightly inset so its outer gutters read like the Recently Added shell */
-        max-width: 1268px;
+        max-width: 1240px;
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -2202,23 +2214,28 @@
 
     .pv3-recent-bottom {
         display: flex;
-        align-items: center;
+        align-items: flex-end;
         justify-content: space-between;
         gap: 12px;
     }
 
     .pv3-recent-price {
-        font-size: 24px;
+        flex: 1 1 auto;
+        min-width: 0;
+        max-width: calc(100% - 110px);
+        font-size: 20px;
         font-weight: 800;
-        line-height: 1;
+        line-height: 1.05;
+        letter-spacing: -.03em;
     }
 
     .pv3-recent-form {
         margin: 0;
+        flex-shrink: 0;
     }
 
     .pv3-recent-button {
-        min-width: 88px;
+        min-width: 104px;
         min-height: 40px;
         padding: 0 16px;
         border: 0;
@@ -2265,6 +2282,10 @@
         .pv3-recent-bottom {
             flex-direction: column;
             align-items: stretch;
+        }
+
+        .pv3-recent-price {
+            max-width: 100%;
         }
 
         .pv3-recent-button {
@@ -4115,6 +4136,7 @@
     .pv3-product-content { display: flex !important; flex-direction: column !important; flex: 1 !important; }
     .pv3-product-content h3 { flex: 1 0 auto; }
     .pv3-price-row       { margin-top: auto !important; padding-top: 8px; }
+    .pv3-price-current   { font-size: clamp(24px, 2vw, 30px); letter-spacing: -.035em; }
     .pv3-card-form, a.pv3-card-button, button.pv3-card-button { flex-shrink: 0; }
     .pvcat-card   { display: flex !important; flex-direction: column !important; height: 100% !important; }
     .pvcat-body   { flex: 1 !important; display: flex !important; flex-direction: column !important; }

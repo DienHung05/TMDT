@@ -5,7 +5,7 @@ $storeManager             = $om->get(\Magento\Store\Model\StoreManagerInterface:
 $productCollectionFactory = $om->get(\Magento\Catalog\Model\ResourceModel\Product\CollectionFactory::class);
 $visibility               = $om->get(\Magento\Catalog\Model\Product\Visibility::class);
 $priceCurrency            = $om->get(\Magento\Framework\Pricing\PriceCurrencyInterface::class);
-$imageHelper              = $om->get(\Magento\Catalog\Helper\Image::class);
+$productVisualResolver    = $om->get(\YourVendor\PVModern\Model\ProductVisualResolver::class);
 $store                    = $storeManager->getStore();
 
 $activeFilter = isset($_GET['filter']) ? htmlspecialchars((string)$_GET['filter'], ENT_QUOTES) : 'all';
@@ -38,7 +38,7 @@ try {
             'id'      => (int)$product->getId(),
             'name'    => (string)$product->getName(),
             'url'     => (string)$product->getProductUrl(),
-            'image'   => (string)$imageHelper->init($product, 'category_page_grid')->getUrl(),
+            'image'   => $productVisualResolver->resolveProductImage($product, 'category_page_grid'),
             'regular' => $regular,
             'special' => $special,
             'disc'    => $disc,
@@ -235,7 +235,7 @@ $tabs = [
     <div class="pv3-container pvd-footer-links">
         <a href="<?= $escaper->escapeUrl($block->getUrl('')) ?>">&#x2190; Back to Store</a>
         <span>&middot;</span>
-        <a href="<?= $escaper->escapeUrl($block->getUrl('pcbuilder')) ?>">Build Custom PC</a>
+        <a href="<?= $escaper->escapeUrl($block->getUrl('pc-builder')) ?>">Build Custom PC</a>
     </div>
 </div>
 

@@ -23,6 +23,8 @@ use Magento\Store\Model\StoreManagerInterface;
 
 class EnrichTechCatalog implements DataPatchInterface
 {
+    private const USD_DIVISOR = 26336.0;
+
     public function __construct(
         private readonly ModuleDataSetupInterface $moduleDataSetup,
         private readonly EavSetupFactory $eavSetupFactory,
@@ -228,7 +230,7 @@ class EnrichTechCatalog implements DataPatchInterface
 
         $product->setName($definition['name']);
         $product->setStatus(Status::STATUS_ENABLED);
-        $product->setPrice((float) $definition['price']);
+        $product->setPrice($this->normalizeUsdPrice((float) $definition['price']));
         $product->setWeight((float) ($definition['weight'] ?? 1));
         $product->setTaxClassId(2);
         $product->setData('brand', $definition['brand']);
@@ -238,11 +240,11 @@ class EnrichTechCatalog implements DataPatchInterface
         $product->setMetaKeyword($definition['brand'] . ', ' . implode(', ', $definition['categories']));
         $product->setMetaDescription(strip_tags($definition['short_description']));
         $product->setData('imei', $definition['imei'] ?? $this->buildImei($definition['sku']));
-        $product->setCategoryIds(array_values(array_unique(array_merge($product->getCategoryIds(), $categoryIds))));
+        $product->setCategoryIds(array_values(array_unique($categoryIds)));
 
         if (array_key_exists('special_price', $definition)) {
             if ($definition['special_price'] !== null) {
-                $product->setSpecialPrice((float) $definition['special_price']);
+                $product->setSpecialPrice($this->normalizeUsdPrice((float) $definition['special_price']));
             } else {
                 $product->setSpecialPrice(null);
             }
@@ -261,10 +263,11 @@ class EnrichTechCatalog implements DataPatchInterface
     private function enrichExistingCatalog(array $categoryMap): void
     {
         $collection = $this->productCollectionFactory->create();
-        $collection->addAttributeToSelect(['name', 'sku', 'brand', 'imei']);
+        $collection->addAttributeToSelect(['name', 'sku', 'brand', 'imei', 'price', 'special_price']);
+        $managedCategoryIds = array_map('intval', array_values($categoryMap));
 
         foreach ($collection as $product) {
-            $categoryIds = array_map('intval', (array) $product->getCategoryIds());
+            $categoryIds = array_values(array_diff(array_map('intval', (array) $product->getCategoryIds()), $managedCategoryIds));
 
             foreach ($this->inferCategoryNames($product) as $categoryName) {
                 $key = $this->normalizeKey($categoryName);
@@ -281,6 +284,14 @@ class EnrichTechCatalog implements DataPatchInterface
 
             if (!(string) $product->getData('brand')) {
                 $product->setData('brand', $this->inferBrand($product));
+            }
+
+            $currentPrice = (float) $product->getPrice();
+            $product->setPrice($this->normalizeUsdPrice($currentPrice));
+
+            $specialPrice = $product->getData('special_price');
+            if ($specialPrice !== null && $specialPrice !== '') {
+                $product->setSpecialPrice($this->normalizeUsdPrice((float) $specialPrice));
             }
 
             $this->productRepository->save($product);
@@ -302,7 +313,10 @@ class EnrichTechCatalog implements DataPatchInterface
             $categories[] = 'Desktop';
             $categories[] = 'GPU';
         }
-        if ($this->containsAny($haystack, ['cpu', 'ryzen', 'intel core', 'threadripper', 'processor'])) {
+        if (
+            $this->containsAny($haystack, ['cpu', 'ryzen', 'intel core', 'threadripper', 'processor'])
+            && !$this->containsAny($haystack, ['cooler', 'aio', 'radiator', 'cpu cooler'])
+        ) {
             $categories[] = 'Desktop';
             $categories[] = 'CPU';
         }
@@ -334,7 +348,7 @@ class EnrichTechCatalog implements DataPatchInterface
             $categories[] = 'Desktop';
             $categories[] = 'Fan';
         }
-        if ($this->containsAny($haystack, ['case', 'tower', 'chassis'])) {
+        if ($this->containsAny($haystack, ['case', 'tower', 'chassis']) && !$this->containsAny($haystack, ['case fan'])) {
             $categories[] = 'Desktop';
             $categories[] = 'Case';
         }
@@ -348,7 +362,7 @@ class EnrichTechCatalog implements DataPatchInterface
         if ($this->containsAny($haystack, ['xps', 'creator', 'proart', 'studio'])) {
             $categories[] = 'Creator Laptop';
         }
-        if ($this->containsAny($haystack, ['business', 'thinkpad', 'elitebook', 'zenbook'])) {
+        if ($this->containsAny($haystack, ['business', 'thinkpad', 'elitebook', 'zenbook', 'latitude'])) {
             $categories[] = 'Business Laptop';
         }
         if ($this->containsAny($haystack, ['ultrabook', 'macbook air'])) {
@@ -400,7 +414,7 @@ class EnrichTechCatalog implements DataPatchInterface
     private function inferBrand(Product $product): string
     {
         $name = (string) $product->getName();
-        foreach (['AMD', 'ASUS', 'Gigabyte', 'Apple', 'Dell', 'Samsung', 'LG', 'Corsair', 'Lenovo', 'MSI', 'Acer', 'Noctua', 'Ugreen'] as $brand) {
+        foreach (['AMD', 'ASUS', 'Gigabyte', 'Apple', 'Dell', 'Samsung', 'LG', 'Corsair', 'Lenovo', 'MSI', 'Acer', 'Noctua', 'Ugreen', 'Seagate', 'Fractal', 'NZXT', 'Lian Li'] as $brand) {
             if (stripos($name, $brand) !== false) {
                 return $brand;
             }
@@ -426,6 +440,19 @@ class EnrichTechCatalog implements DataPatchInterface
         $value = preg_replace('/[^a-z0-9]+/u', '-', $value) ?? $value;
 
         return trim($value, '-');
+    }
+
+    private function normalizeUsdPrice(float $value): float
+    {
+        if ($value <= 0) {
+            return 0.0;
+        }
+
+        if ($value > 10000) {
+            $value /= self::USD_DIVISOR;
+        }
+
+        return round($value, 2);
     }
 
     private function buildImei(string $seed): string
@@ -656,6 +683,402 @@ class EnrichTechCatalog implements DataPatchInterface
                 'categories' => ['Monitor', 'Creator Monitor', '4K Monitor'],
                 'short_description' => 'Color-accurate creator monitor designed for grading, photography, and studio review.',
                 'description' => '<p>ASUS ProArt PA32UCXR focuses on calibrated color, creator workflows, and professional review environments where precision matters.</p>',
+            ],
+            [
+                'sku' => 'CPU-AMD-Ryzen 9 9900X-AM5',
+                'name' => 'CPU AMD Ryzen 9 9900X (Up 5.6 GHz, 12 Cores 24 Threads, AM5)',
+                'brand' => 'AMD',
+                'price' => 15490000,
+                'special_price' => null,
+                'qty' => 18,
+                'categories' => ['Desktop', 'CPU'],
+                'short_description' => 'Balanced Ryzen 9 desktop processor for premium gaming and creator builds.',
+                'description' => '<p>Ryzen 9 9900X offers strong AM5 desktop performance for gaming, coding, and production work.</p>',
+            ],
+            [
+                'sku' => 'CPU-AMD-Ryzen 7 9800X3D-AM5',
+                'name' => 'CPU AMD Ryzen 7 9800X3D (Up 5.2 GHz, 8 Cores 16 Threads, AM5)',
+                'brand' => 'AMD',
+                'price' => 13990000,
+                'special_price' => 13490000,
+                'qty' => 20,
+                'categories' => ['Desktop', 'CPU'],
+                'short_description' => 'High-value X3D gaming processor for AM5 enthusiasts.',
+                'description' => '<p>Ryzen 7 9800X3D focuses on fast gaming performance with efficient thermals and a strong AM5 upgrade path.</p>',
+            ],
+            [
+                'sku' => 'GPU-ASUS-TUF-RTX5080-OC',
+                'name' => 'Card ASUS TUF Gaming GeForce RTX 5080 OC 16GB GDDR7',
+                'brand' => 'ASUS',
+                'price' => 54990000,
+                'special_price' => null,
+                'qty' => 8,
+                'categories' => ['Desktop', 'GPU'],
+                'short_description' => 'Premium ASUS graphics card built for ultra settings and 4K play.',
+                'description' => '<p>ASUS TUF RTX 5080 OC combines flagship cooling and next-gen GeForce performance for premium desktop systems.</p>',
+            ],
+            [
+                'sku' => 'GPU-ASUS-PRIME-RTX5070TI-OC',
+                'name' => 'Card ASUS Prime GeForce RTX 5070 Ti OC 16GB GDDR7',
+                'brand' => 'ASUS',
+                'price' => 32990000,
+                'special_price' => 30990000,
+                'qty' => 12,
+                'categories' => ['Desktop', 'GPU'],
+                'short_description' => 'High-end GeForce card for fast 1440p and entry 4K desktop builds.',
+                'description' => '<p>ASUS Prime RTX 5070 Ti OC delivers strong ray tracing and AI throughput in a clean triple-fan design.</p>',
+            ],
+            [
+                'sku' => 'MB-GIGABYTE-X870E-AORUS-MASTER',
+                'name' => 'Mainboard Gigabyte X870E AORUS MASTER',
+                'brand' => 'Gigabyte',
+                'price' => 16990000,
+                'special_price' => null,
+                'qty' => 14,
+                'categories' => ['Desktop', 'Mainboard'],
+                'short_description' => 'Flagship AMD AM5 motherboard with strong VRM and premium connectivity.',
+                'description' => '<p>X870E AORUS MASTER is built for Ryzen flagship systems with robust power delivery and top-tier expansion.</p>',
+            ],
+            [
+                'sku' => 'MB-GIGABYTE-B650E-AORUS-ELITE-AX',
+                'name' => 'Mainboard Gigabyte B650E AORUS ELITE AX ICE',
+                'brand' => 'Gigabyte',
+                'price' => 7990000,
+                'special_price' => 7490000,
+                'qty' => 22,
+                'categories' => ['Desktop', 'Mainboard'],
+                'short_description' => 'Value-focused AM5 board with Wi-Fi and PCIe Gen5 support.',
+                'description' => '<p>B650E AORUS ELITE AX ICE brings strong daily AM5 performance and expansion for modern desktop builds.</p>',
+            ],
+            [
+                'sku' => 'RAM-CORSAIR-DOMINATOR-64-DDR5-6400',
+                'name' => 'RAM Corsair Dominator Titanium RGB 64GB DDR5 6400',
+                'brand' => 'Corsair',
+                'price' => 8590000,
+                'special_price' => null,
+                'qty' => 26,
+                'categories' => ['Desktop', 'RAM'],
+                'short_description' => 'Premium DDR5 kit for flagship gaming and creator systems.',
+                'description' => '<p>Corsair Dominator Titanium RGB 64GB pairs premium thermals with fast DDR5 speed for modern high-end PCs.</p>',
+            ],
+            [
+                'sku' => 'RAM-CORSAIR-VENGEANCE-32-DDR5-6000',
+                'name' => 'RAM Corsair Vengeance RGB 32GB DDR5 6000',
+                'brand' => 'Corsair',
+                'price' => 3490000,
+                'special_price' => 3190000,
+                'qty' => 34,
+                'categories' => ['Desktop', 'RAM'],
+                'short_description' => 'Fast DDR5 memory kit for balanced performance desktops.',
+                'description' => '<p>Corsair Vengeance RGB 32GB DDR5 6000 is an ideal memory choice for gaming and productivity PCs.</p>',
+            ],
+            [
+                'sku' => 'RAM-CORSAIR-VENGEANCE-64-DDR5-6400',
+                'name' => 'RAM Corsair Vengeance RGB 64GB DDR5 6400',
+                'brand' => 'Corsair',
+                'price' => 5890000,
+                'special_price' => null,
+                'qty' => 28,
+                'categories' => ['Desktop', 'RAM'],
+                'short_description' => 'High-capacity DDR5 kit for demanding multitasking and creator work.',
+                'description' => '<p>Vengeance RGB 64GB DDR5 6400 delivers higher memory capacity for editing, coding, and heavy multitasking.</p>',
+            ],
+            [
+                'sku' => 'SSD-SEAGATE-FIRECUDA-530R-2TB',
+                'name' => 'SSD Seagate FireCuda 530R 2TB PCIe Gen4 NVMe',
+                'brand' => 'Seagate',
+                'price' => 5190000,
+                'special_price' => 4890000,
+                'qty' => 30,
+                'categories' => ['Desktop', 'SSD'],
+                'short_description' => 'High-speed NVMe SSD for games, workstations, and creator files.',
+                'description' => '<p>FireCuda 530R 2TB offers fast Gen4 storage for game libraries, scratch disks, and daily desktop speed.</p>',
+            ],
+            [
+                'sku' => 'SSD-SEAGATE-FIRECUDA-530R-4TB',
+                'name' => 'SSD Seagate FireCuda 530R 4TB PCIe Gen4 NVMe',
+                'brand' => 'Seagate',
+                'price' => 9990000,
+                'special_price' => null,
+                'qty' => 18,
+                'categories' => ['Desktop', 'SSD'],
+                'short_description' => 'Large-capacity Gen4 SSD for premium gaming and creator builds.',
+                'description' => '<p>FireCuda 530R 4TB gives desktop users fast storage and large capacity in a single NVMe drive.</p>',
+            ],
+            [
+                'sku' => 'SSD-SEAGATE-FIRECUDA-540-1TB',
+                'name' => 'SSD Seagate FireCuda 540 1TB PCIe Gen5 NVMe',
+                'brand' => 'Seagate',
+                'price' => 2890000,
+                'special_price' => null,
+                'qty' => 32,
+                'categories' => ['Desktop', 'SSD'],
+                'short_description' => 'Entry Gen5 storage for ultra-fast desktop boot and load times.',
+                'description' => '<p>FireCuda 540 1TB brings PCIe Gen5 responsiveness to enthusiast desktops that need top-tier storage speed.</p>',
+            ],
+            [
+                'sku' => 'HDD-SEAGATE-IRONWOLF-8TB',
+                'name' => 'HDD Seagate IronWolf 8TB 7200RPM NAS Drive',
+                'brand' => 'Seagate',
+                'price' => 5390000,
+                'special_price' => null,
+                'qty' => 22,
+                'categories' => ['Desktop', 'HDD'],
+                'short_description' => 'Reliable high-capacity hard drive for NAS and archival desktops.',
+                'description' => '<p>IronWolf 8TB provides dependable high-capacity storage for desktop backups, media, and project archives.</p>',
+            ],
+            [
+                'sku' => 'HDD-SEAGATE-IRONWOLFPRO-12TB',
+                'name' => 'HDD Seagate IronWolf Pro 12TB 7200RPM NAS Drive',
+                'brand' => 'Seagate',
+                'price' => 8790000,
+                'special_price' => 8290000,
+                'qty' => 16,
+                'categories' => ['Desktop', 'HDD'],
+                'short_description' => 'Professional NAS drive for larger creator and workstation storage arrays.',
+                'description' => '<p>IronWolf Pro 12TB is tuned for heavier workloads and larger always-on storage deployments.</p>',
+            ],
+            [
+                'sku' => 'HDD-SEAGATE-EXOS-X20-20TB',
+                'name' => 'HDD Seagate Exos X20 20TB Enterprise Drive',
+                'brand' => 'Seagate',
+                'price' => 12990000,
+                'special_price' => null,
+                'qty' => 12,
+                'categories' => ['Desktop', 'HDD'],
+                'short_description' => 'Enterprise-grade hard drive for large storage pools and backups.',
+                'description' => '<p>Exos X20 20TB offers large-capacity storage for servers, content archives, and workstation projects.</p>',
+            ],
+            [
+                'sku' => 'PSU-CORSAIR-RM850X-SHIFT',
+                'name' => 'PSU Corsair RM850x Shift 850W 80 Plus Gold',
+                'brand' => 'Corsair',
+                'price' => 4190000,
+                'special_price' => null,
+                'qty' => 24,
+                'categories' => ['Desktop', 'PSU'],
+                'short_description' => 'Quiet fully modular PSU for premium gaming and creator desktops.',
+                'description' => '<p>RM850x Shift offers clean cable routing and stable 80 Plus Gold power for modern PC builds.</p>',
+            ],
+            [
+                'sku' => 'PSU-CORSAIR-RM1000X-SHIFT',
+                'name' => 'PSU Corsair RM1000x Shift 1000W 80 Plus Gold',
+                'brand' => 'Corsair',
+                'price' => 5790000,
+                'special_price' => 5490000,
+                'qty' => 18,
+                'categories' => ['Desktop', 'PSU'],
+                'short_description' => '1000W modular PSU for high-power RTX builds and workstations.',
+                'description' => '<p>RM1000x Shift is designed for modern flagship GPUs and clean premium desktop cable management.</p>',
+            ],
+            [
+                'sku' => 'PSU-CORSAIR-HX1200I',
+                'name' => 'PSU Corsair HX1200i 1200W 80 Plus Platinum',
+                'brand' => 'Corsair',
+                'price' => 8990000,
+                'special_price' => null,
+                'qty' => 12,
+                'categories' => ['Desktop', 'PSU'],
+                'short_description' => 'High-end platinum PSU for enthusiast and workstation systems.',
+                'description' => '<p>HX1200i brings platinum efficiency and stable power delivery to top-end desktop configurations.</p>',
+            ],
+            [
+                'sku' => 'COOL-CORSAIR-TITAN-360-RX',
+                'name' => 'CPU Cooler Corsair iCUE LINK TITAN 360 RX RGB',
+                'brand' => 'Corsair',
+                'price' => 7690000,
+                'special_price' => null,
+                'qty' => 18,
+                'categories' => ['Desktop', 'Heatsink'],
+                'short_description' => 'Premium 360mm AIO cooler for flagship desktop CPUs.',
+                'description' => '<p>iCUE LINK TITAN 360 RX RGB delivers premium thermals and cleaner cable routing for high-end builds.</p>',
+            ],
+            [
+                'sku' => 'COOL-CORSAIR-H150I-LCD-XT',
+                'name' => 'CPU Cooler Corsair iCUE H150i LCD XT 360mm',
+                'brand' => 'Corsair',
+                'price' => 6990000,
+                'special_price' => 6590000,
+                'qty' => 16,
+                'categories' => ['Desktop', 'Heatsink'],
+                'short_description' => 'LCD AIO cooler with premium cooling performance and visual customization.',
+                'description' => '<p>H150i LCD XT combines strong 360mm cooling with a customizable display for showcase PCs.</p>',
+            ],
+            [
+                'sku' => 'COOL-CORSAIR-H100I-ELITE',
+                'name' => 'CPU Cooler Corsair iCUE H100i Elite 240mm',
+                'brand' => 'Corsair',
+                'price' => 4190000,
+                'special_price' => null,
+                'qty' => 20,
+                'categories' => ['Desktop', 'Heatsink'],
+                'short_description' => 'Compact AIO cooler for balanced gaming and productivity builds.',
+                'description' => '<p>H100i Elite offers dependable 240mm liquid cooling for mainstream enthusiast desktops.</p>',
+            ],
+            [
+                'sku' => 'FAN-CORSAIR-QX120-TRIPLE',
+                'name' => 'Case Fan Corsair iCUE LINK QX120 RGB Triple Pack',
+                'brand' => 'Corsair',
+                'price' => 4190000,
+                'special_price' => null,
+                'qty' => 26,
+                'categories' => ['Desktop', 'Fan'],
+                'short_description' => 'Premium RGB fan pack for airflow-focused showcase builds.',
+                'description' => '<p>QX120 RGB fans deliver strong airflow, lighting, and simplified cable management for modern desktops.</p>',
+            ],
+            [
+                'sku' => 'FAN-CORSAIR-RX120-TRIPLE',
+                'name' => 'Case Fan Corsair iCUE LINK RX120 RGB Triple Pack',
+                'brand' => 'Corsair',
+                'price' => 3290000,
+                'special_price' => 2990000,
+                'qty' => 24,
+                'categories' => ['Desktop', 'Fan'],
+                'short_description' => 'Balanced RGB fan kit for clean airflow and lower noise.',
+                'description' => '<p>RX120 RGB triple pack is ideal for balanced airflow, lighting, and day-to-day cooling upgrades.</p>',
+            ],
+            [
+                'sku' => 'FAN-CORSAIR-AF120RGB-TRIPLE',
+                'name' => 'Case Fan Corsair AF120 RGB Elite Triple Pack',
+                'brand' => 'Corsair',
+                'price' => 1990000,
+                'special_price' => null,
+                'qty' => 36,
+                'categories' => ['Desktop', 'Fan'],
+                'short_description' => 'Affordable RGB airflow kit for mainstream gaming systems.',
+                'description' => '<p>AF120 RGB Elite gives builders an easy way to add airflow and clean lighting to new PC builds.</p>',
+            ],
+            [
+                'sku' => 'CASE-CORSAIR-5000D-AIRFLOW',
+                'name' => 'Case Corsair 5000D Airflow Tempered Glass',
+                'brand' => 'Corsair',
+                'price' => 4290000,
+                'special_price' => null,
+                'qty' => 18,
+                'categories' => ['Desktop', 'Case'],
+                'short_description' => 'Premium mid-tower chassis focused on cooling and cable management.',
+                'description' => '<p>Corsair 5000D Airflow is a versatile high-airflow case for powerful gaming and creator desktops.</p>',
+            ],
+            [
+                'sku' => 'CASE-CORSAIR-3500X-ARGB',
+                'name' => 'Case Corsair 3500X ARGB Tempered Glass',
+                'brand' => 'Corsair',
+                'price' => 3290000,
+                'special_price' => 3090000,
+                'qty' => 20,
+                'categories' => ['Desktop', 'Case'],
+                'short_description' => 'Showcase chassis with strong airflow and integrated ARGB presentation.',
+                'description' => '<p>3500X ARGB delivers a clean tempered-glass layout for builders who want style and airflow.</p>',
+            ],
+            [
+                'sku' => 'CASE-CORSAIR-6500X',
+                'name' => 'Case Corsair 6500X Dual Chamber',
+                'brand' => 'Corsair',
+                'price' => 5490000,
+                'special_price' => null,
+                'qty' => 12,
+                'categories' => ['Desktop', 'Case'],
+                'short_description' => 'Dual-chamber enthusiast case for large showcase PC builds.',
+                'description' => '<p>Corsair 6500X offers a roomy dual-chamber layout for flagship systems and clean presentation.</p>',
+            ],
+            [
+                'sku' => 'LAP-APPLE-MBA13-M3',
+                'name' => 'Apple MacBook Air 13 M3 16GB 512GB',
+                'brand' => 'Apple',
+                'price' => 31990000,
+                'special_price' => null,
+                'qty' => 10,
+                'categories' => ['Laptop', 'Apple', 'MacBook', 'Ultrabook'],
+                'short_description' => 'Portable Apple laptop for daily work, study, and travel.',
+                'description' => '<p>MacBook Air 13 with M3 balances lightweight portability, long battery life, and fast everyday performance.</p>',
+            ],
+            [
+                'sku' => 'LAP-DELL-LATITUDE-9450',
+                'name' => 'Dell Latitude 9450 2-in-1 Core Ultra 7 32GB 1TB',
+                'brand' => 'Dell',
+                'price' => 46990000,
+                'special_price' => null,
+                'qty' => 9,
+                'categories' => ['Laptop', 'Business Laptop'],
+                'short_description' => 'Premium business notebook with flexible 2-in-1 productivity.',
+                'description' => '<p>Latitude 9450 focuses on business mobility, strong build quality, and efficient daily productivity.</p>',
+            ],
+            [
+                'sku' => 'MON-SAMSUNG-ODYSSEY-NEOG9',
+                'name' => 'Samsung Odyssey Neo G9 49 Dual UHD 240Hz',
+                'brand' => 'Samsung',
+                'price' => 46990000,
+                'special_price' => 43990000,
+                'qty' => 7,
+                'categories' => ['Monitor', 'Gaming Monitor', 'Ultrawide Monitor'],
+                'short_description' => 'Immersive super-ultrawide display for premium sim, racing, and multitasking setups.',
+                'description' => '<p>Odyssey Neo G9 delivers an expansive 49-inch desktop view for immersive gaming and wide productivity layouts.</p>',
+            ],
+            [
+                'sku' => 'MON-SAMSUNG-VIEWFINITY-S9',
+                'name' => 'Samsung ViewFinity S9 27 5K Creator Monitor',
+                'brand' => 'Samsung',
+                'price' => 32990000,
+                'special_price' => null,
+                'qty' => 9,
+                'categories' => ['Monitor', 'Creator Monitor'],
+                'short_description' => 'High-resolution creator monitor for photography, design, and studio workflows.',
+                'description' => '<p>ViewFinity S9 offers crisp 5K detail and creator-oriented image quality for professional desktop work.</p>',
+            ],
+            [
+                'sku' => 'DESK-APPLE-MAC-MINI-M4P',
+                'name' => 'Apple Mac mini M4 Pro 24GB 512GB',
+                'brand' => 'Apple',
+                'price' => 41990000,
+                'special_price' => null,
+                'qty' => 11,
+                'categories' => ['Desktop', 'Apple', 'Mac Desktop'],
+                'short_description' => 'Compact Apple desktop for development, office work, and creative tasks.',
+                'description' => '<p>Mac mini M4 Pro packs strong Apple silicon performance into a compact desktop suited for professional workflows.</p>',
+            ],
+            [
+                'sku' => 'APL-IPHONE-16-128',
+                'name' => 'Apple iPhone 16 128GB Ultramarine',
+                'brand' => 'Apple',
+                'price' => 22990000,
+                'special_price' => null,
+                'qty' => 14,
+                'categories' => ['Apple', 'iPhone'],
+                'short_description' => 'Mainstream iPhone with strong cameras and smooth daily performance.',
+                'description' => '<p>iPhone 16 brings a balanced Apple mobile experience with excellent battery life and camera quality.</p>',
+            ],
+            [
+                'sku' => 'APL-IPAD-AIR13-M2-128',
+                'name' => 'Apple iPad Air 13 M2 128GB Wi-Fi',
+                'brand' => 'Apple',
+                'price' => 23990000,
+                'special_price' => null,
+                'qty' => 13,
+                'categories' => ['Apple', 'iPad'],
+                'short_description' => 'Large-screen iPad Air for note-taking, drawing, and mobile productivity.',
+                'description' => '<p>iPad Air 13 with M2 offers a spacious display and strong tablet performance for everyday Apple workflows.</p>',
+            ],
+            [
+                'sku' => 'APL-AIRPODS-4-ANC',
+                'name' => 'Apple AirPods 4 with Active Noise Cancellation',
+                'brand' => 'Apple',
+                'price' => 4990000,
+                'special_price' => null,
+                'qty' => 25,
+                'categories' => ['Apple', 'AirPods', 'Accessories'],
+                'short_description' => 'Compact Apple earbuds with everyday ANC and seamless pairing.',
+                'description' => '<p>AirPods 4 with ANC bring Apple ecosystem convenience and cleaner listening for work and commuting.</p>',
+            ],
+            [
+                'sku' => 'APL-WATCH-ULTRA2-BLACK',
+                'name' => 'Apple Watch Ultra 2 Black Titanium Ocean Band',
+                'brand' => 'Apple',
+                'price' => 20990000,
+                'special_price' => null,
+                'qty' => 10,
+                'categories' => ['Apple', 'Apple Watch'],
+                'short_description' => 'Rugged premium Apple wearable for training, travel, and daily use.',
+                'description' => '<p>Apple Watch Ultra 2 is designed for active users who want a larger display, stronger battery life, and durable titanium build.</p>',
             ],
         ];
     }

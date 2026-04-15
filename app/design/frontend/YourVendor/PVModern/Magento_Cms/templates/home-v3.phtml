@@ -7,12 +7,13 @@ $productCollectionFactory = $om->get(\Magento\Catalog\Model\ResourceModel\Produc
 $categoryCollectionFactory = $om->get(\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory::class);
 $visibility = $om->get(\Magento\Catalog\Model\Product\Visibility::class);
 $priceCurrency = $om->get(\Magento\Framework\Pricing\PriceCurrencyInterface::class);
-$imageHelper = $om->get(\Magento\Catalog\Helper\Image::class);
+$productVisualResolver = $om->get(\YourVendor\PVModern\Model\ProductVisualResolver::class);
 $cartHelper = $om->get(\Magento\Checkout\Helper\Cart::class);
 $urlEncoder = $om->get(\Magento\Framework\Url\EncoderInterface::class);
 $formKey = $om->get(\Magento\Framework\Data\Form\FormKey::class)->getFormKey();
 $stockRegistry = $om->get(\Magento\CatalogInventory\Api\StockRegistryInterface::class);
 $store = $storeManager->getStore();
+$pcBuilderUrl = $block->getUrl('pc-builder');
 
 $normalize = static function ($value) {
     $value = strtolower(trim((string) $value));
@@ -196,7 +197,7 @@ try {
         ->addUrlRewrite()
         ->addAttributeToFilter('status', 1)
         ->setVisibility($visibility->getVisibleInCatalogIds())
-        ->setPageSize(24)
+        ->setPageSize(96)
         ->setCurPage(1);
     $collection->getSelect()->order('e.entity_id DESC');
     $collection->load();
@@ -254,10 +255,7 @@ try {
         $priceMin = $priceMin === null ? $finalPrice : min($priceMin, $finalPrice);
         $priceMax = $priceMax === null ? $finalPrice : max($priceMax, $finalPrice);
 
-        $imageUrl = (string) $imageHelper->init($product, 'category_page_grid')->getUrl();
-        if (!$imageUrl) {
-            $imageUrl = $block->getViewFileUrl('YourVendor_PVModern::images/placeholder.jpg');
-        }
+        $imageUrl = $productVisualResolver->resolveProductImage($product, 'category_page_grid');
 
         $requiresOptions = false;
         try {
@@ -275,6 +273,10 @@ try {
             $isNew = true;
         } elseif ($createdAt && ($now - $createdAt) <= 30 * 24 * 60 * 60) {
             $isNew = true;
+        }
+
+        if ($regularPrice > 0 && $finalPrice > 0 && $finalPrice < $regularPrice) {
+            continue;
         }
 
         $products[] = [
@@ -369,7 +371,7 @@ $heroProducts = array_slice($heroProducts, 0, 4);
                         <span>Shop Collection</span>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </a>
-                    <a class="pv3-btn pv3-btn--secondary" href="<?= $block->escapeUrl($block->getUrl('pc-builder')) ?>">Build Custom PC</a>
+                    <a class="pv3-btn pv3-btn--secondary" href="<?= $block->escapeUrl($pcBuilderUrl) ?>">Build Custom PC</a>
                 </div>
 
                 <div class="pv3-trust-bar">
@@ -625,8 +627,8 @@ $heroProducts = array_slice($heroProducts, 0, 4);
                 <?php endforeach; ?>
             </div>
 
-            <div class="pv3-load-more-row">
-                <button type="button" class="pv3-load-more" data-load-more>Load More Products</button>
+            <div class="pv3-pagination-row">
+                <nav class="pv3-pagination" data-pagination aria-label="<?= $block->escapeHtmlAttr(__('Shop Collection pages')) ?>"></nav>
             </div>
         </div>
     </section>

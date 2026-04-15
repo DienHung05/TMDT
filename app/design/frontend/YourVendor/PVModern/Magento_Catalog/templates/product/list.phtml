@@ -208,7 +208,7 @@ if ($_productCollection->count()): ?>
 /* ── Fetch all needed IDs for brand + display ── */
 $om          = \Magento\Framework\App\ObjectManager::getInstance();
 $priceCurr   = $om->get(\Magento\Framework\Pricing\PriceCurrencyInterface::class);
-$imgHelper   = $om->get(\Magento\Catalog\Helper\Image::class);
+$visuals     = $om->get(\YourVendor\PVModern\Model\ProductVisualResolver::class);
 $addToCartHelper = $om->get(\Magento\Checkout\Helper\Cart::class);
 $formKey     = $om->get(\Magento\Framework\Data\Form\FormKey::class)->getFormKey();
 $urlEncoder  = $om->get(\Magento\Framework\Url\EncoderInterface::class);
@@ -223,7 +223,7 @@ $urlEncoder  = $om->get(\Magento\Framework\Url\EncoderInterface::class);
     $brand       = pvGetBrand($_product);
     $name        = (string) $_product->getName();
     $url         = (string) $_product->getProductUrl();
-    $imgUrl      = (string) $imgHelper->init($_product, 'category_page_grid')->getUrl();
+    $imgUrl      = $visuals->resolveProductImage($_product, 'category_page_grid');
     $price       = (float)  $_product->getFinalPrice();
     $regPrice    = (float)  $_product->getPrice();
     $saleable    = (bool)   $_product->isSaleable();
