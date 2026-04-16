@@ -12,35 +12,50 @@ use Magento\Framework\UrlInterface;
 class ProductVisualResolver
 {
     private const PLACEHOLDER_ASSET = 'YourVendor_PVModern::images/placeholder.jpg';
+    private const LOCAL_IMAGE_DIRS = [
+        'pvmodern/products',
+        'import/pvmodern-image-sync',
+    ];
 
     /**
      * Prefer real Magento media when present, otherwise fall back to curated product visuals.
      */
     private const EXACT_SKU_MAP = [
         'APL-WATCH-S10-46' => 'https://www.apple.com/newsroom/images/2024/09/introducing-apple-watch-series-10/article/Apple-Watch-Series-10-lineup-240909_big.jpg.large.jpg',
-        'APL-WATCH-ULTRA2-BLACK' => 'https://www.apple.com/newsroom/images/2024/09/apple-introduces-stunning-new-apple-watch-series-10-and-black-titanium-apple-watch-ultra-2/article/Apple-Watch-Ultra-2-black-titanium-ocean-band-240909_big.jpg.large.jpg',
+        'APL-WATCH-ULTRA2-BLACK' => 'https://www.apple.com/assets-www/en_WW/watch/og/watch_og_1ff2ee953.png',
         'APL-AIRPODS-PRO2-USBC' => 'https://www.apple.com/v/airpods-pro/r/images/meta/og__c0ceegchesom_overview.png?202603242312',
-        'APL-AIRPODS-4-ANC' => 'https://www.apple.com/newsroom/images/2024/09/apple-upgrades-airpods-max-introduces-airpods-4-and-brings-hearing-health-experience-to-airpods-pro-2/article/Apple-AirPods-4-lineup-240909_big.jpg.large.jpg',
+        'APL-AIRPODS-4-ANC' => 'https://www.apple.com/v/airpods-4/g/images/meta/airpods-4__gnjh1t3yjxm6_og.png?202603242312',
+        'APL-AIRPODSMAX-USBC' => 'https://www.apple.com/v/airpods-max/k/images/meta/airpods-max_overview__c2mz40a3bugm_og.png?202604101202',
         'APL-IPHONE-16PM-256' => 'https://www.apple.com/v/iphone/home/cj/images/meta/iphone__bh930eyjnj0i_og.png?202604011630',
-        'APL-IPHONE-16-128' => 'https://www.apple.com/newsroom/images/2024/09/apple-debuts-iphone-16-and-iphone-16-plus/article/Apple-iPhone-16-lineup-hero-240909_big.jpg.large.jpg',
+        'APL-IPHONE-16-128' => 'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-16-model-unselect-gallery-1-202409?wid=1200&hei=630&fmt=jpeg&qlt=95&.v=1723991997435',
         'APL-IPAD-PRO13-M4-256' => 'https://www.apple.com/v/ipad-pro/aw/images/meta/ipad-pro_overview__bu4cql27diaa_og.png?202604021101',
-        'APL-IPAD-AIR13-M2-128' => 'https://www.apple.com/newsroom/images/2024/05/apple-unveils-stunning-new-ipad-air/article/Apple-iPad-Air-hero-color-lineup-240507_big.jpg.large.jpg',
-        'DESK-APPLE-MAC-STUDIO-M3U' => 'https://www.apple.com/newsroom/images/2025/03/apple-unveils-new-mac-studio-the-most-powerful-mac-ever/article/Apple-Mac-Studio-hero-250305_big.jpg.large.jpg',
+        'APL-IPAD-AIR13-M2-128' => 'https://www.apple.com/v/ipad-air/ah/images/meta/ipad-air_overview__bc2fd15uec0y_og.png?202603101707',
+        'DESK-APPLE-MAC-STUDIO-M3U' => 'https://www.apple.com/v/mac-studio/l/images/meta/mac-studio_overview__eedzbosm1t26_og.png?202603261117',
         'DESK-APPLE-MAC-MINI-M4P' => 'https://www.apple.com/v/mac-mini/aa/images/meta/mac-mini__dvce2jrm11w2_og.jpg?202601201341',
         'LAP-APPLE-MBA15-M3' => 'https://www.apple.com/v/macbook-air/z/images/meta/macbook_air_mx__ez5y0k5yy7au_og.png?202603261117',
         'LAP-APPLE-MBA13-M3' => 'https://www.apple.com/v/macbook-air/z/images/meta/macbook_air_mx__ez5y0k5yy7au_og.png?202603261117',
         'LAP-APPLE-MBP14-M4PRO' => 'https://www.apple.com/v/macbook-pro/ax/images/meta/macbook-pro__difvbgz1plsi_og.png?202603261117',
         'LAP-DELL-XPS16-9640' => 'https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/16-9640/media-gallery/silver/touch/notebook-laptop-xps-16-9640-t-silver-gallery-2.psd?chrss=full&fmt=png-alpha&hei=402&pscan=auto&qlt=100%2C1&resMode=sharp2&scl=1&size=612%2C402&wid=612',
+        'CPU-AMD-RYZEN 9 9900X-AM5' => 'https://www.amd.com/content/dam/amd/en/images/products/processors/ryzen/2613900-ryzen-9-9950x-og.jpg',
+        'CPU-AMD-RYZEN 7 9800X3D-AM5' => 'https://www.amd.com/content/dam/amd/en/images/products/processors/ryzen/2900400-ryzen-7-9800x3d.jpg',
+        'CPU-AMD-RYZEN 7 9700X-AM5' => 'https://www.amd.com/content/dam/amd/en/images/products/processors/ryzen/2613900-ryzen-7-9700x-og.jpg',
+        'GPU-ASUS-TUF-RTX5080-OC' => 'https://dlcdnwebimgs.asus.com/gain/7bb494af-8636-46a3-93ee-3cff60d30624/',
+        'GPU-ASUS-PRIME-RTX5070TI-OC' => 'https://dlcdnwebimgs.asus.com/gain/11a24dd6-9a6b-415a-9131-afad0064b16c/',
+        'MB-ASUS-ROG-STRIX-X870E-E' => 'https://dlcdnwebimgs.asus.com/gain/C2A10896-76C0-4772-9A3A-69D7B0C00441',
+        'MB-GIGABYTE-X870E-AORUS-MASTER' => 'https://hacom.vn/media/product/86666_mainboard_gigabyte_x870e_aorus_master__3_.jpg',
+        'MB-GIGABYTE-B650E-AORUS-ELITE-AX' => 'https://hacom.vn/media/product/78727_mainboard_gigabyte_650m_aorus_elite_ax_ice.jpg',
+        'MB-MSI-MPG-X870E-CARBON' => 'https://hacom.vn/media/product/86502_mainboard_msi_mpg_x870e_carbon_wifi__1_.jpg',
+        'MON-APPLE-STUDIO-DISPLAY' => 'https://www.apple.com/v/studio-display/f/images/meta/studio-display_overview__cc7vair07fjm_og.png?202603261117',
         'MON-ASUS-PROART-PA32' => 'https://dlcdnwebimgs.asus.com/gain/65040add-7168-41db-8e16-dde55f47940b/w692',
         'MON-SAMSUNG-ODYSSEY-G8-OLED' => 'https://images.samsung.com/is/image/samsung/p6pim/us/ls32fg810snxza/gallery/us-odyssey-oled-g8-27g81sf-ls32fg810snxza-550914457?$product-details-jpg$',
     ];
 
     private const SKU_MAP = [
-        'CPU-' => '/5/8/5869_amd_ryzen_9_9950x3d_ha1.jpg',
-        'VGA-' => '/5/6/5629_astral_geforce_rtx_5090_ha8.jpg',
-        'GPU-' => '/5/6/5629_astral_geforce_rtx_5090_ha8.jpg',
-        'MAINBOARD-' => '/m/a/mainboard_gigabyte_z890.png',
-        'MB-' => '/m/a/mainboard_gigabyte_z890.png',
+        'CPU-' => 'https://www.amd.com/content/dam/amd/en/images/products/processors/ryzen/2613900-ryzen-7-9700x-og.jpg',
+        'VGA-' => 'https://dlcdnwebimgs.asus.com/gain/7bb494af-8636-46a3-93ee-3cff60d30624/',
+        'GPU-' => 'https://dlcdnwebimgs.asus.com/gain/7bb494af-8636-46a3-93ee-3cff60d30624/',
+        'MAINBOARD-' => 'https://hacom.vn/media/product/86666_mainboard_gigabyte_x870e_aorus_master__3_.jpg',
+        'MB-' => 'https://hacom.vn/media/product/86666_mainboard_gigabyte_x870e_aorus_master__3_.jpg',
         'RAM-' => 'https://assets.corsair.com/image/upload/c_scale%2Cq_auto%2Cw_960/products/Memory/Dominator%20Titanium/enhanced%20images/black/2UP/DOMINATOR_TITANIUM_RGB_DDR5_BLACK_2UP_Artboard01_AA.png',
         'SSD-' => 'https://www.seagate.com/content/dam/seagate/migrated-assets/www-content/product-content/firecuda-family/firecuda-530-ssd/en-us/images/firecuda-530-ssd-za2000gm1a013-front-angle-drive.png',
         'HDD-' => 'https://www.seagate.com/content/dam/seagate/assets/products/nas-drives/ironwolf-hard-drive/ironwolf-hdd-product-card-image.png',
@@ -94,6 +109,10 @@ class ProductVisualResolver
     {
         $sku = strtoupper(trim($sku));
 
+        if ($localImage = $this->resolveLocalSkuImage($sku)) {
+            return $localImage;
+        }
+
         if (!empty(self::EXACT_SKU_MAP[$sku])) {
             return $this->normalizeImageUrl(self::EXACT_SKU_MAP[$sku]);
         }
@@ -105,6 +124,28 @@ class ProductVisualResolver
         }
 
         return $this->assetRepository->getUrl(self::PLACEHOLDER_ASSET);
+    }
+
+    private function resolveLocalSkuImage(string $sku): ?string
+    {
+        $normalized = strtolower(preg_replace('/[^a-z0-9]+/', '-', strtolower($sku)) ?: strtolower($sku));
+
+        foreach (self::LOCAL_IMAGE_DIRS as $directory) {
+            $baseDir = BP . '/pub/media/' . $directory . '/';
+
+            foreach (['jpg', 'jpeg', 'png', 'webp'] as $extension) {
+                $absolutePath = $baseDir . $normalized . '.' . $extension;
+                if (!is_file($absolutePath)) {
+                    continue;
+                }
+
+                return $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA)
+                    . $directory . '/'
+                    . basename($absolutePath);
+            }
+        }
+
+        return null;
     }
 
     private function normalizeImageUrl(string $image): string

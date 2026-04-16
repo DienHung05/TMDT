@@ -1,0 +1,56 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+$om = \Magento\Framework\App\ObjectManager::getInstance();
+$registry = $om->get(\Magento\Framework\Registry::class);
+$product = $registry->registry('current_product');
+
+if (!$product) {
+    return;
+}
+
+$specs = [];
+$rawSpecs = trim((string) $product->getData('tech_specs'));
+if ($rawSpecs !== '') {
+    foreach (preg_split('/\r\n|\r|\n/', $rawSpecs) as $line) {
+        $line = trim((string) $line);
+        if ($line === '' || strpos($line, ':') === false) {
+            continue;
+        }
+        [$label, $value] = array_map('trim', explode(':', $line, 2));
+        if ($label !== '' && $value !== '') {
+            $specs[] = ['label' => $label, 'value' => $value];
+        }
+    }
+}
+
+if (empty($specs)) {
+    $fallback = [
+        'Brand' => (string) ($product->getData('brand') ?: $product->getAttributeText('brand') ?: $product->getAttributeText('manufacturer')),
+        'SKU' => (string) $product->getSku(),
+        'IMEI' => (string) $product->getData('imei'),
+    ];
+    foreach ($fallback as $label => $value) {
+        if ($value !== '') {
+            $specs[] = ['label' => $label, 'value' => $value];
+        }
+    }
+}
+
+if (empty($specs)) {
+    return;
+}
+?>
+<div class="pv3-product-specs">
+    <div class="pv3-product-specs__intro">
+        <h3><?= $block->escapeHtml(__('Product Specifications')) ?></h3>
+        <p><?= $block->escapeHtml(__('A clear spec sheet for this exact model so customers can compare, review, and purchase with confidence.')) ?></p>
+    </div>
+    <div class="pv3-product-specs__table">
+        <?php foreach ($specs as $row): ?>
+            <div class="pv3-product-specs__row">
+                <span class="pv3-product-specs__label"><?= $block->escapeHtml($row['label']) ?></span>
+                <strong class="pv3-product-specs__value"><?= $block->escapeHtml($row['value']) ?></strong>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
