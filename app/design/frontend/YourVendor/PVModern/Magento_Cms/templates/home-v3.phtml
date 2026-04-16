@@ -275,10 +275,6 @@ try {
             $isNew = true;
         }
 
-        if ($regularPrice > 0 && $finalPrice > 0 && $finalPrice < $regularPrice) {
-            continue;
-        }
-
         $products[] = [
             'id' => (int) $product->getId(),
             'sku' => (string) $product->getSku(),

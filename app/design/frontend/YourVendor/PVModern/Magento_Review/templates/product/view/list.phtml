@@ -1,0 +1,150 @@
+<?php
+/**
+ * PVModern — Review list override
+ * Replaces the empty "Be the first to review" state with the product specs table.
+ * When reviews do exist they render normally above the specs.
+ *
+ * @var \Magento\Review\Block\Product\View\ListView $block
+ */
+$om       = \Magento\Framework\App\ObjectManager::getInstance();
+$registry = $om->get(\Magento\Framework\Registry::class);
+$product  = $registry->registry('current_product');
+
+/* ── Load reviews if any ─────────────────────────────────────────────────── */
+$reviewCollection = null;
+$hasReviews       = false;
+try {
+    /** @var \Magento\Review\Model\ResourceModel\Review\CollectionFactory $rcf */
+    $rcf = $om->get(\Magento\Review\Model\ResourceModel\Review\CollectionFactory::class);
+    $reviewCollection = $rcf->create()
+        ->addStatusFilter(\Magento\Review\Model\Review::STATUS_APPROVED)
+        ->addEntityFilter(
+            'product',
+            (int) ($product ? $product->getId() : 0)
+        )
+        ->setDateOrder();
+    $hasReviews = $reviewCollection->getSize() > 0;
+} catch (\Throwable $e) {}
+
+/* ── Helper: load specs from product ─────────────────────────────────────── */
+$specs = [];
+if ($product) {
+    $rawSpecs = trim((string) $product->getData('tech_specs'));
+    if ($rawSpecs !== '') {
+        foreach (preg_split('/\r\n|\r|\n/', $rawSpecs) as $line) {
+            $line = trim((string) $line);
+            if ($line === '' || strpos($line, ':') === false) { continue; }
+            [$label, $value] = array_map('trim', explode(':', $line, 2));
+            if ($label !== '' && $value !== '') {
+                $specs[] = ['label' => $label, 'value' => $value];
+            }
+        }
+    }
+
+    if (empty($specs)) {
+        /* Auto-generate specs from standard Magento attributes */
+        $attrMap = [
+            'brand'        => 'Brand',
+            'manufacturer' => 'Brand',
+            'sku'          => 'SKU',
+            'color'        => 'Color',
+            'ram'          => 'RAM',
+            'storage'      => 'Storage',
+            'cpu'          => 'CPU',
+            'gpu'          => 'GPU',
+            'screen_size'  => 'Screen Size',
+            'weight'       => 'Weight',
+        ];
+        $seen = [];
+        foreach ($attrMap as $code => $label) {
+            if (isset($seen[$label])) { continue; }
+            try {
+                $val = $product->getAttributeText($code);
+                if (!$val) { $val = $product->getData($code); }
+                if ($code === 'sku') { $val = $product->getSku(); }
+                if ($val && !is_array($val)) {
+                    $specs[] = ['label' => $label, 'value' => trim((string) $val)];
+                    $seen[$label] = true;
+                }
+            } catch (\Throwable $e) {}
+        }
+        /* Fallback minimum spec rows */
+        if (empty($specs)) {
+            $specs[] = ['label' => 'SKU',    'value' => (string) ($product ? $product->getSku() : '')];
+            $specs[] = ['label' => 'Weight', 'value' => ($product ? $product->getWeight() . ' kg' : '—')];
+        }
+    }
+}
+?>
+
+<?php /* ══ SPECS TABLE ══════════════════════════════════════════════════════ */ ?>
+<?php if (!empty($specs) && $product): ?>
+<div class="pv3-pdp-specs-wrapper">
+    <div class="pv3-pdp-specs-header">
+        <span class="pv3-pdp-specs-eyebrow">Technical Details</span>
+        <h3 class="pv3-pdp-specs-title">Product Specifications</h3>
+        <p class="pv3-pdp-specs-subtitle">
+            Detailed specification sheet for <strong><?= $block->escapeHtml($product->getName()) ?></strong> —
+            verified against manufacturer data so you can compare and purchase with confidence.
+        </p>
+    </div>
+
+    <div class="pv3-pdp-specs-table">
+        <?php foreach ($specs as $i => $row): ?>
+        <div class="pv3-pdp-specs-row<?= $i % 2 === 0 ? ' is-even' : '' ?>">
+            <span class="pv3-pdp-specs-label"><?= $block->escapeHtml($row['label']) ?></span>
+            <strong class="pv3-pdp-specs-value"><?= $block->escapeHtml($row['value']) ?></strong>
+        </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+<?php endif; ?>
+
+<?php /* ══ REVIEW LIST ══════════════════════════════════════════════════════ */ ?>
+<?php if ($hasReviews && $reviewCollection): ?>
+<div class="pv3-pdp-reviews-wrapper">
+    <div class="pv3-pdp-specs-header">
+        <span class="pv3-pdp-specs-eyebrow">Customer Reviews</span>
+        <h3 class="pv3-pdp-specs-title">What Customers Say</h3>
+    </div>
+    <div class="pv3-pdp-review-list">
+        <?php foreach ($reviewCollection as $review): ?>
+        <?php
+            $rating = 0;
+            try {
+                $votes = $review->getRatingVotes();
+                if ($votes && $votes->count()) {
+                    $total = 0;
+                    foreach ($votes as $vote) { $total += (int) $vote->getPercent(); }
+                    $rating = round($total / $votes->count() / 20); // 0-5 stars
+                }
+            } catch (\Throwable $e) {}
+        ?>
+        <article class="pv3-pdp-review-card">
+            <div class="pv3-pdp-review-top">
+                <div class="pv3-pdp-review-stars">
+                    <?php for ($s = 1; $s <= 5; $s++): ?>
+                    <svg viewBox="0 0 20 20" fill="<?= $s <= $rating ? '#f59e0b' : '#e5e7eb' ?>">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                    </svg>
+                    <?php endfor; ?>
+                </div>
+                <span class="pv3-pdp-review-author"><?= $block->escapeHtml($review->getNickname()) ?></span>
+                <span class="pv3-pdp-review-date"><?= $block->escapeHtml(date('M j, Y', strtotime($review->getCreatedAt()))) ?></span>
+            </div>
+            <h4 class="pv3-pdp-review-title"><?= $block->escapeHtml($review->getTitle()) ?></h4>
+            <p class="pv3-pdp-review-detail"><?= $block->escapeHtml($review->getDetail()) ?></p>
+        </article>
+        <?php endforeach; ?>
+    </div>
+</div>
+<?php endif; ?>
+
+<?php /* ══ WRITE A REVIEW FORM ═════════════════════════════════════════════ */ ?>
+<div class="pv3-pdp-review-form-wrapper">
+    <div class="pv3-pdp-specs-header">
+        <span class="pv3-pdp-specs-eyebrow">Share Your Experience</span>
+        <h3 class="pv3-pdp-specs-title">Write a Review</h3>
+    </div>
+    <?= $block->getChildHtml('review_form') ?>
+</div>

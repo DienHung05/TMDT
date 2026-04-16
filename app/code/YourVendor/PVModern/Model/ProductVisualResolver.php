@@ -94,6 +94,10 @@ class ProductVisualResolver
 
     public function resolveProductImage(Product $product, string $imageId = 'category_page_grid'): string
     {
+        if ($localImage = $this->resolveLocalSkuImage((string) $product->getSku())) {
+            return $localImage;
+        }
+
         try {
             $resolved = (string) $this->imageHelper->init($product, $imageId)->getUrl();
             if (!$this->isPlaceholder($resolved)) {

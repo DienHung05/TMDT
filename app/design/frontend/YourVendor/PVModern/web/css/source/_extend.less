@@ -5776,3 +5776,704 @@ body.pvmodern-legal-page {
         background: rgba(255,255,255,.04) !important;
     }
 }
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   PVModern v5 — Comprehensive UI Polish
+   Covers: PDP tabs, 2-col product layout, specs-in-reviews, warranty,
+           hero 4-col grid, product card uniformity, pagination.
+   ══════════════════════════════════════════════════════════════════════════════ */
+& when (@media-common = true) {
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       1. PDP — Accordion / Tab button text visibility
+       Problem: buttons had `color: transparent` or inherited gradient fill.
+       Fix: explicit dark color on all Magento product detail data-toggle items.
+       ═══════════════════════════════════════════════════════════════════════ */
+    .product.info.detailed .data.item.title > .switch,
+    .product.info.detailed .data.item.title > a,
+    .product.data.items > .item.title > .switch,
+    .product.data.items > .item.title > a,
+    [data-role="content"] .data.item.title > .switch {
+        color: #374151 !important;
+        -webkit-text-fill-color: #374151 !important;
+        background: transparent !important;
+        font-weight: 600 !important;
+        font-size: 14px !important;
+        letter-spacing: 0 !important;
+        text-transform: none !important;
+    }
+    .product.info.detailed .data.item.title.active > .switch,
+    .product.info.detailed .data.item.title:hover > .switch,
+    .product.data.items > .item.title.active > .switch,
+    .product.data.items > .item.title:hover > .switch {
+        color: #6366f1 !important;
+        -webkit-text-fill-color: #6366f1 !important;
+        border-bottom-color: #6366f1 !important;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       2. PDP — 2-Column Layout  (product image LEFT | product info RIGHT)
+          Mirrors GearVN/PhongVu layout: image gets 44% left, info 56% right.
+       ═══════════════════════════════════════════════════════════════════════ */
+    .catalog-product-view .product-main-container,
+    .catalog-product-view .product.media + .product-info-main,
+    body.catalog-product-view .columns .column.main {
+        display: block;
+    }
+    @media (min-width: 768px) {
+        body.catalog-product-view .product-main-container {
+            display: grid !important;
+            grid-template-columns: minmax(0, 5fr) minmax(0, 6fr) !important;
+            gap: 48px !important;
+            align-items: start !important;
+        }
+        /* Luma-style: media block floats, info block clears */
+        body.catalog-product-view .product.media {
+            float: none !important;
+            width: auto !important;
+            margin-right: 0 !important;
+        }
+        body.catalog-product-view .product-info-main {
+            float: none !important;
+            width: auto !important;
+            margin-left: 0 !important;
+        }
+    }
+
+    /* ─── PDP general styles ─── */
+    body.catalog-product-view .page-title-wrapper h1 {
+        font-size: clamp(22px, 3vw, 34px);
+        font-weight: 800;
+        color: #0f172a;
+        letter-spacing: -.02em;
+        line-height: 1.2;
+    }
+    body.catalog-product-view .product-info-price .price {
+        font-size: 32px;
+        font-weight: 900;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    body.catalog-product-view .product-info-stock-sku .stock.available span {
+        color: #059669;
+        font-weight: 700;
+    }
+    body.catalog-product-view .action.primary.tocart {
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%) !important;
+        border: 0 !important;
+        border-radius: 14px !important;
+        height: 52px !important;
+        font-size: 15px !important;
+        font-weight: 800 !important;
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
+        box-shadow: 0 14px 32px rgba(99,102,241,.35) !important;
+        transition: transform .2s ease, box-shadow .2s ease !important;
+        letter-spacing: .01em;
+    }
+    body.catalog-product-view .action.primary.tocart:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 20px 40px rgba(99,102,241,.45) !important;
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       3. PDP Specs-in-Reviews Widget (our Magento_Review/ override)
+       ═══════════════════════════════════════════════════════════════════════ */
+    .pv3-pdp-specs-wrapper,
+    .pv3-pdp-reviews-wrapper,
+    .pv3-pdp-review-form-wrapper {
+        margin-bottom: 40px;
+    }
+
+    .pv3-pdp-specs-header {
+        margin-bottom: 24px;
+    }
+    .pv3-pdp-specs-eyebrow {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: #6366f1;
+        margin-bottom: 8px;
+    }
+    .pv3-pdp-specs-title {
+        margin: 0 0 8px;
+        font-size: 22px;
+        font-weight: 800;
+        color: #0f172a;
+        letter-spacing: -.02em;
+    }
+    .pv3-pdp-specs-subtitle {
+        margin: 0;
+        color: #64748b;
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .pv3-pdp-specs-table {
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid rgba(226,232,240,.9);
+        box-shadow: 0 8px 24px rgba(148,163,184,.10);
+    }
+    .pv3-pdp-specs-row {
+        display: grid;
+        grid-template-columns: minmax(160px, 220px) 1fr;
+        gap: 0;
+        align-items: center;
+        padding: 14px 20px;
+        background: #ffffff;
+        border-bottom: 1px solid rgba(226,232,240,.7);
+    }
+    .pv3-pdp-specs-row:last-child {
+        border-bottom: 0;
+    }
+    .pv3-pdp-specs-row.is-even {
+        background: #f8fafc;
+    }
+    .pv3-pdp-specs-label {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: .04em;
+        text-transform: uppercase;
+        color: #64748b;
+    }
+    .pv3-pdp-specs-value {
+        font-size: 14px;
+        font-weight: 600;
+        color: #1e293b;
+        line-height: 1.55;
+    }
+    @media (max-width: 640px) {
+        .pv3-pdp-specs-row {
+            grid-template-columns: 1fr;
+            gap: 4px;
+            padding: 12px 16px;
+        }
+    }
+
+    /* Review cards */
+    .pv3-pdp-review-list {
+        display: grid;
+        gap: 16px;
+    }
+    .pv3-pdp-review-card {
+        padding: 20px 24px;
+        background: #ffffff;
+        border: 1px solid rgba(226,232,240,.9);
+        border-radius: 16px;
+        box-shadow: 0 4px 14px rgba(148,163,184,.08);
+    }
+    .pv3-pdp-review-top {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+    }
+    .pv3-pdp-review-stars {
+        display: flex;
+        gap: 2px;
+    }
+    .pv3-pdp-review-stars svg {
+        width: 16px;
+        height: 16px;
+    }
+    .pv3-pdp-review-author {
+        font-size: 13px;
+        font-weight: 700;
+        color: #1e293b;
+    }
+    .pv3-pdp-review-date {
+        font-size: 12px;
+        color: #94a3b8;
+        margin-left: auto;
+    }
+    .pv3-pdp-review-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: #0f172a;
+        margin: 0 0 6px;
+    }
+    .pv3-pdp-review-detail {
+        font-size: 14px;
+        color: #475569;
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       4. Warranty — compact methods section (Methods move up visually)
+       ═══════════════════════════════════════════════════════════════════════ */
+    .pvw-methods--compact {
+        margin-top: 16px !important;
+        padding-top: 0 !important;
+    }
+    .pvw-methods--compact .pvw-panel {
+        padding: 32px !important;
+    }
+    /* Tighten hero bottom padding so forms appear higher */
+    .pvw-hero {
+        padding-bottom: 24px !important;
+    }
+    /* Alert message styling (if visible) */
+    .pvw-alert {
+        padding: 16px 20px;
+        border-radius: 12px;
+        background: rgba(99,102,241,.08);
+        border: 1px solid rgba(99,102,241,.2);
+        color: #4f46e5;
+        font-size: 14px;
+        font-weight: 600;
+        margin: 20px 0;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       5. Hero — always 4-column product grid on desktop
+       ═══════════════════════════════════════════════════════════════════════ */
+    .pv3-hero-visual-grid.is-products {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 12px !important;
+    }
+    @media (min-width: 1100px) {
+        .pv3-hero-visual-grid.is-products {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       6. Product grid — 4 columns on wide screens (was stuck at 3)
+       ═══════════════════════════════════════════════════════════════════════ */
+    @media (min-width: 1200px) {
+        .pv3-product-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        }
+    }
+    @media (min-width: 768px) and (max-width: 1199px) {
+        .pv3-product-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        }
+    }
+    @media (min-width: 480px) and (max-width: 767px) {
+        .pv3-product-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       7. Pagination — ensure it always renders between grid and newsletter
+       ═══════════════════════════════════════════════════════════════════════ */
+    .pv3-pagination-row {
+        margin-top: 40px !important;
+        margin-bottom: 8px !important;
+        padding: 0 !important;
+    }
+    .pv3-pagination {
+        display: inline-flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 8px !important;
+    }
+    /* Explicitly ensure the nav is not hidden when page count > 1 */
+    .pv3-pagination:not([hidden]) {
+        display: inline-flex !important;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       8. Filter bar — stats bar beneath filter row
+       ═══════════════════════════════════════════════════════════════════════ */
+    .pv3-stats-bar {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 14px;
+        font-size: 13px;
+        color: #64748b;
+        padding: 10px 0 0;
+        border-top: 1px solid rgba(226,232,240,.6);
+        margin-top: 12px;
+    }
+    .pv3-stats-bar strong { color: #1e293b; font-weight: 700; }
+    .pv3-stats-bar .dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 4px;
+        vertical-align: middle;
+    }
+    .pv3-stats-bar .dot.is-green  { background: #22c55e; }
+    .pv3-stats-bar .dot.is-amber  { background: #f59e0b; }
+    .pv3-price-hint { color: #94a3b8; font-size: 12px; }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       9. View toggle (Grid / List)
+       ═══════════════════════════════════════════════════════════════════════ */
+    .pv3-view-toggle {
+        display: flex;
+        gap: 4px;
+        padding: 3px;
+        background: #f1f5f9;
+        border-radius: 10px;
+    }
+    .pv3-view-toggle button {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        border: 0;
+        background: transparent;
+        color: #94a3b8;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background .18s, color .18s;
+    }
+    .pv3-view-toggle button.is-active {
+        background: #ffffff;
+        color: #6366f1;
+        box-shadow: 0 1px 4px rgba(15,23,42,.08);
+    }
+    .pv3-view-toggle button svg { width: 16px; height: 16px; }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       10. Filter shell card — premium enclosed look
+       ═══════════════════════════════════════════════════════════════════════ */
+    .pv3-filters-shell {
+        background: #ffffff;
+        border-radius: 18px;
+        border: 1px solid rgba(226,232,240,.9);
+        box-shadow: 0 4px 16px rgba(148,163,184,.08);
+        padding: 16px 20px !important;
+        margin-bottom: 24px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       11. Hardware Inventory Banner — home page section header
+       ═══════════════════════════════════════════════════════════════════════ */
+    .pvh-hw-banner {
+        position: relative;
+        overflow: hidden;
+        padding: 48px 0 40px;
+    }
+    .pvh-hw-banner__bg {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(99,102,241,.06) 0%, rgba(139,92,246,.04) 50%, rgba(236,72,153,.04) 100%);
+    }
+    .pvh-hw-banner__content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .pvh-hw-banner__badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 12px;
+        border-radius: 999px;
+        background: rgba(99,102,241,.1);
+        border: 1px solid rgba(99,102,241,.2);
+        color: #6366f1;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+    }
+    .pvh-hw-banner__title {
+        margin: 0;
+        font-size: clamp(26px, 4vw, 42px);
+        font-weight: 900;
+        color: #0f172a;
+        letter-spacing: -.03em;
+        line-height: 1.15;
+    }
+    .pvh-hw-banner__title em {
+        font-style: normal;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .pvh-hw-banner__desc {
+        max-width: 680px;
+        color: #64748b;
+        font-size: 15px;
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       12. Product card — shop-grade hover shine + stock ring
+       ═══════════════════════════════════════════════════════════════════════ */
+    .pv3-product-card {
+        border-radius: 20px !important;
+        transition: transform .26s ease, box-shadow .26s ease !important;
+    }
+    .pv3-product-card:hover {
+        transform: translateY(-6px) !important;
+        box-shadow: 0 24px 56px rgba(99,102,241,.18) !important;
+    }
+    .pv3-stock-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: .04em;
+        margin-bottom: 8px;
+    }
+    .pv3-stock-pill.is-in-stock  { background: rgba(5,150,105,.1);  color: #059669; }
+    .pv3-stock-pill.is-low-stock { background: rgba(245,158,11,.1); color: #d97706; }
+    .pv3-stock-pill.is-out-of-stock { background: rgba(239,68,68,.1); color: #dc2626; }
+    .pv3-stock-pill.is-pre-order { background: rgba(99,102,241,.1); color: #6366f1; }
+    .pv3-stock-pill .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: currentColor;
+        flex-shrink: 0;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       13. List view override (when user toggles list mode)
+       JS in v3-home.js toggles `.is-list` on the grid (line 248).
+       ═══════════════════════════════════════════════════════════════════════ */
+    .pv3-product-grid.is-list {
+        grid-template-columns: 1fr !important;
+    }
+    .pv3-product-grid.is-list .pv3-product-card {
+        flex-direction: row !important;
+        align-items: stretch !important;
+    }
+    .pv3-product-grid.is-list .pv3-product-image-shell {
+        flex: 0 0 200px !important;
+        min-height: 160px !important;
+    }
+    .pv3-product-grid.is-list .pv3-card-inner {
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    @media (max-width: 640px) {
+        .pv3-product-grid.is-list .pv3-product-card {
+            flex-direction: column !important;
+        }
+        .pv3-product-grid.is-list .pv3-product-image-shell {
+            flex: 0 0 auto !important;
+        }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       14. Category page (list.phtml) — 4-col grid + PhongVu-style brand chip
+       ═══════════════════════════════════════════════════════════════════════ */
+    @media (min-width: 1200px) {
+        .pvcat-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        }
+    }
+
+} /* end & when (@media-common = true) */
+
+& when (@media-common = true) {
+    .pv3-product-grid {
+        grid-auto-rows: 1fr;
+        align-items: stretch !important;
+    }
+
+    .pv3-product-card,
+    .pv3-card-inner,
+    .pv3-product-content {
+        height: 100%;
+    }
+
+    .pv3-card-inner,
+    .pv3-product-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .pv3-price-row {
+        margin-top: auto;
+        margin-bottom: 14px;
+    }
+
+    .pv3-price-current {
+        font-size: clamp(22px, 1.9vw, 28px);
+        line-height: 1.06;
+        letter-spacing: -.03em;
+        word-break: break-word;
+    }
+
+    .pv3-card-form,
+    .pv3-card-button {
+        margin-top: auto;
+    }
+
+    .pv3-pagination-row {
+        display: flex;
+        justify-content: center;
+        margin: 34px 0 6px !important;
+    }
+
+    .pv3-pagination-button {
+        min-width: 42px;
+        height: 42px;
+        border: 1px solid rgba(148, 163, 184, .18);
+        border-radius: 14px;
+        background: #ffffff;
+        color: @pv-slate-700;
+        font-size: 14px;
+        font-weight: 700;
+        transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, color .18s ease;
+    }
+
+    .pv3-pagination-button:hover,
+    .pv3-pagination-button.is-active {
+        transform: translateY(-1px);
+        border-color: rgba(99, 102, 241, .28);
+        color: @pv-primary;
+        box-shadow: 0 16px 30px rgba(99, 102, 241, .14);
+    }
+
+    .pvw-hero {
+        grid-template-columns: 1fr !important;
+        gap: 18px !important;
+        padding: 34px 40px 24px !important;
+    }
+
+    .pvw-hero__meta {
+        display: none !important;
+    }
+
+    .pvw-methods--compact {
+        margin-top: 10px !important;
+    }
+
+    .pvw-methods--compact .pvw-panel {
+        padding: 24px 28px 28px !important;
+    }
+
+    .pvw-panel__eyebrow {
+        margin-bottom: 12px;
+    }
+
+    .catalog-product-view .product-reviews-summary.short.empty {
+        display: none !important;
+    }
+
+    .catalog-product-view .product.info.detailed {
+        margin-top: 28px;
+    }
+
+    .product.info.detailed .data.item.title,
+    .product.data.items > .item.title {
+        margin-right: 8px;
+        margin-bottom: 10px;
+    }
+
+    .product.info.detailed .data.item.title > .switch,
+    .product.data.items > .item.title > .switch {
+        padding: 12px 18px !important;
+        border-radius: 14px !important;
+        border: 1px solid rgba(226, 232, 240, .95) !important;
+        background: #ffffff !important;
+        box-shadow: 0 8px 18px rgba(148, 163, 184, .08);
+    }
+
+    .product.info.detailed .data.item.title.active > .switch,
+    .product.data.items > .item.title.active > .switch,
+    .product.info.detailed .data.item.title:hover > .switch,
+    .product.data.items > .item.title:hover > .switch {
+        background: linear-gradient(135deg, rgba(99, 102, 241, .08), rgba(168, 85, 247, .1)) !important;
+        border-color: rgba(99, 102, 241, .22) !important;
+    }
+
+    .catalog-product-view .product-info-main .pv3-product-specs {
+        margin-top: 18px;
+        padding: 22px;
+        border-radius: 22px;
+        box-shadow: 0 18px 38px rgba(148, 163, 184, .12);
+    }
+
+    .catalog-product-view .product-info-main .pv3-product-specs__intro {
+        margin-bottom: 14px;
+    }
+
+    .catalog-product-view .product-info-main .pv3-product-specs__intro h3 {
+        font-size: 22px;
+        line-height: 1.12;
+    }
+
+    .catalog-product-view .product-info-main .pv3-product-specs__intro p {
+        font-size: 13px;
+        line-height: 1.65;
+        max-width: none;
+    }
+
+    .catalog-product-view .product-info-main .pv3-product-specs__table {
+        gap: 10px;
+    }
+
+    .catalog-product-view .product-info-main .pv3-product-specs__row {
+        grid-template-columns: minmax(108px, 150px) 1fr;
+        gap: 14px;
+        padding: 12px 14px;
+        border-radius: 14px;
+    }
+
+    .catalog-product-view .product-info-main .pv3-product-specs__label {
+        font-size: 11px;
+        letter-spacing: .06em;
+    }
+
+    .catalog-product-view .product-info-main .pv3-product-specs__value {
+        font-size: 13px;
+        line-height: 1.55;
+    }
+
+    .catalog-product-view .additional-attributes-wrapper,
+    .catalog-product-view .pv3-pdp-specs-table,
+    .catalog-product-view .pv3-pdp-review-card,
+    .catalog-product-view .review-form {
+        border-radius: 20px;
+        box-shadow: 0 12px 28px rgba(148, 163, 184, .1);
+    }
+
+    .catalog-product-view .additional-attributes th,
+    .catalog-product-view .additional-attributes td {
+        color: @pv-slate-700;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .catalog-product-view .review-form .legend,
+    .catalog-product-view .review-form .label span {
+        color: @pv-slate-800;
+    }
+
+    @media (max-width: 767px) {
+        .pvw-hero {
+            padding: 28px 20px 18px !important;
+        }
+
+        .catalog-product-view .product-info-main .pv3-product-specs {
+            padding: 18px;
+        }
+
+        .catalog-product-view .product-info-main .pv3-product-specs__row {
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+    }
+}

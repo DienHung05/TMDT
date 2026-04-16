@@ -1,0 +1,76 @@
+<?php
+/**
+ * Reviews tab shell with specs shown first, then reviews, then the review form.
+ *
+ * @var \Magento\Review\Block\Product\Review $block
+ */
+$om = \Magento\Framework\App\ObjectManager::getInstance();
+$registry = $om->get(\Magento\Framework\Registry::class);
+$product = $registry->registry('current_product');
+$specs = [];
+
+if ($product) {
+    $rawSpecs = trim((string) $product->getData('tech_specs'));
+    if ($rawSpecs !== '') {
+        foreach (preg_split('/\r\n|\r|\n/', $rawSpecs) as $line) {
+            $line = trim((string) $line);
+            if ($line === '' || strpos($line, ':') === false) {
+                continue;
+            }
+
+            [$label, $value] = array_map('trim', explode(':', $line, 2));
+            if ($label !== '' && $value !== '') {
+                $specs[] = ['label' => $label, 'value' => $value];
+            }
+        }
+    }
+
+    if (empty($specs)) {
+        $fallback = [
+            'Brand' => (string) ($product->getData('brand') ?: $product->getAttributeText('brand') ?: $product->getAttributeText('manufacturer')),
+            'SKU' => (string) $product->getSku(),
+            'IMEI' => (string) $product->getData('imei'),
+        ];
+
+        foreach ($fallback as $label => $value) {
+            if ($value !== '') {
+                $specs[] = ['label' => $label, 'value' => $value];
+            }
+        }
+    }
+}
+?>
+<?php if (!empty($specs) && $product): ?>
+    <div class="pv3-pdp-specs-wrapper">
+        <div class="pv3-pdp-specs-header">
+            <span class="pv3-pdp-specs-eyebrow"><?= $block->escapeHtml(__('Technical Details')) ?></span>
+            <h3 class="pv3-pdp-specs-title"><?= $block->escapeHtml(__('Product Specifications')) ?></h3>
+            <p class="pv3-pdp-specs-subtitle">
+                <?= $block->escapeHtml(__('A clean spec sheet for this exact model, shown before reviews so customers can compare quickly.')) ?>
+            </p>
+        </div>
+
+        <div class="pv3-pdp-specs-table">
+            <?php foreach ($specs as $index => $row): ?>
+                <div class="pv3-pdp-specs-row<?= $index % 2 === 0 ? ' is-even' : '' ?>">
+                    <span class="pv3-pdp-specs-label"><?= $block->escapeHtml($row['label']) ?></span>
+                    <strong class="pv3-pdp-specs-value"><?= $block->escapeHtml($row['value']) ?></strong>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+<?php endif; ?>
+
+<div id="product-review-container" data-role="product-review"></div>
+<?= $block->getChildHtml() ?>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Review/js/process-reviews": {
+                "productReviewUrl": "<?= $block->escapeJs($block->getProductReviewUrl()) ?>",
+                "reviewsTabSelector": "#tab-label-reviews"
+            }
+        }
+    }
+</script>

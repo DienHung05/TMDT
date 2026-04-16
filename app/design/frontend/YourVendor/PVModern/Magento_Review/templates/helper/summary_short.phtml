@@ -1,0 +1,33 @@
+<?php
+/**
+ * Hide the empty-review CTA in the product info column.
+ * When reviews exist, keep the real rating summary visible.
+ *
+ * @var \Magento\Review\Block\Product\ReviewRenderer $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+$url = $block->getReviewsUrl() . '#reviews';
+?>
+<?php if ($block->isReviewEnabled() && $block->getReviewsCount()): ?>
+    <?php $rating = $block->getRatingSummary(); ?>
+    <div class="product-reviews-summary short<?= !$rating ? ' no-rating' : '' ?>">
+        <?php if ($rating): ?>
+            <div class="rating-summary">
+                <span class="label"><span><?= $escaper->escapeHtml(__('Rating')) ?>:</span></span>
+                <div class="rating-result"
+                     id="rating-result_<?= /* @noEscape */ $block->getProduct()->getId() ?>"
+                     title="<?= $escaper->escapeHtmlAttr($rating) ?>%">
+                    <span style="width: <?= $escaper->escapeHtmlAttr($rating) ?>%;">
+                        <span><?= $escaper->escapeHtml($rating) ?>%</span>
+                    </span>
+                </div>
+            </div>
+        <?php endif; ?>
+        <div class="reviews-actions">
+            <a class="action view" href="<?= $escaper->escapeUrl($url) ?>">
+                <?= $escaper->escapeHtml($block->getReviewsCount()) ?>&nbsp;
+                <span><?= $block->getReviewsCount() == 1 ? $escaper->escapeHtml(__('Review')) : $escaper->escapeHtml(__('Reviews')) ?></span>
+            </a>
+        </div>
+    </div>
+<?php endif; ?>
