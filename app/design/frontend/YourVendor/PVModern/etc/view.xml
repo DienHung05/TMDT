@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/view.xsd">
+    <media>
+        <images module="Magento_Catalog">
+            <image id="category_page_grid" type="small_image">
+                <width>480</width>
+                <height>480</height>
+            </image>
+            <image id="product_base_image" type="image">
+                <width>700</width>
+                <height>700</height>
+            </image>
+            <image id="product_small_image" type="small_image">
+                <width>300</width>
+                <height>300</height>
+            </image>
+            <image id="product_thumbnail_image" type="thumbnail">
+                <width>150</width>
+                <height>150</height>
+            </image>
+        </images>
+    </media>
+</view>

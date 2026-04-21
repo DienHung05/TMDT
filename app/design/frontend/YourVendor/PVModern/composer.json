@@ -1,0 +1,9 @@
+{
+    "name": "yourvendor/pvmodern",
+    "description": "PVModern V4.1 integrated Magento storefront theme",
+    "type": "magento2-theme",
+    "version": "4.1.0",
+    "require": {
+        "php": ">=8.1"
+    }
+}

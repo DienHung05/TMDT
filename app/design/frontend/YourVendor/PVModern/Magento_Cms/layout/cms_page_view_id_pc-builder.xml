@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="pvmodern_v3_styles"/>
+    <body>
+        <!-- Apply dark builder body class (pvmodern-pcbuilder) -->
+        <attribute name="class" value="pvmodern-v3 pvmodern-pcbuilder pv3-app-mode"/>
+
+        <!-- Hide Magento default content and breadcrumbs -->
+        <referenceBlock name="breadcrumbs"      remove="true"/>
+        <referenceBlock name="page.main.title"  remove="true"/>
+        <referenceBlock name="cms_page"         remove="true"/>
+
+        <!-- Inject custom PC Builder block into content container -->
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="pvmodern.pcbuilder"
+                   template="Magento_Cms::pc-builder.phtml"
+                   cacheable="false"/>
+        </referenceContainer>
+    </body>
+</page>

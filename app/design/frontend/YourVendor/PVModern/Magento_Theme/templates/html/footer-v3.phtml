@@ -1,0 +1,53 @@
+<?php /** @var \Magento\Framework\View\Element\Template $block */ ?>
+<footer class="pv3-footer-shell">
+    <div class="pv3-container">
+        <div class="pv3-footer-grid">
+            <div>
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="#pv3-products">Featured products</a></li>
+                    <li><a href="<?= $block->escapeUrl($block->getUrl('catalogsearch/result', ['_query' => ['q' => 'monitor']])) ?>">Monitor</a></li>
+                    <li><a href="<?= $block->escapeUrl($block->getUrl('catalogsearch/result', ['_query' => ['q' => 'apple']])) ?>">Apple</a></li>
+                    <li><a href="<?= $block->escapeUrl($block->getUrl('catalogsearch/result', ['_query' => ['q' => 'laptop']])) ?>">Laptop</a></li>
+                    <li><a href="<?= $block->escapeUrl($block->getUrl('catalogsearch/result', ['_query' => ['q' => 'desktop']])) ?>">Desktop</a></li>
+                    <li><a href="<?= $block->escapeUrl($block->getUrl('deals')) ?>">Deals</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="<?= $block->escapeUrl($block->getUrl('contact')) ?>">Contact</a></li>
+                    <li><a href="<?= $block->escapeUrl($block->getUrl('sales/guest/form')) ?>">Track order</a></li>
+                    <li><a href="<?= $block->escapeUrl($block->getUrl('warranty')) ?>">Warranty Lookup</a></li>
+                    <li><a href="<?= $block->escapeUrl($block->getUrl('checkout/cart')) ?>">Cart</a></li>
+                    <li><a href="<?= $block->escapeUrl($block->getUrl('customer/account')) ?>">My account</a></li>
+                    <li><a href="<?= $block->escapeUrl($block->getUrl('pcbuilder')) ?>">Build Custom PC</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="<?= $block->escapeUrl($block->getUrl('terms')) ?>">Terms of Service</a></li>
+                    <li><a href="<?= $block->escapeUrl($block->getUrl('privacy')) ?>">Privacy Policy</a></li>
+                    <li><a href="<?= $block->escapeUrl($block->getUrl('cookies')) ?>">Cookie Policy</a></li>
+                    <li><a href="<?= $block->escapeUrl($block->getUrl('catalogsearch/result')) ?>">Search</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="pv3-footer-brand">
+                    <span class="pv3-footer-logo"><img src="<?= $block->escapeUrl($block->getViewFileUrl('YourVendor_PVModern::images/icon.svg')) ?>" alt="Techieworld" /></span>
+                    <strong>Techieworld</strong>
+                </div>
+                <p>Premium hardware for developers, creators, and power users. Techieworld reads live products from Magento admin and surfaces them in a cleaner, faster storefront experience.</p>
+            </div>
+        </div>
+        <div class="pv3-footer-bottom">
+            <span>&copy; <?= date('Y') ?> Techieworld. All rights reserved.</span>
+            <div>
+                <a href="<?= $block->escapeUrl($block->getUrl('terms')) ?>">Terms</a>
+                <a href="<?= $block->escapeUrl($block->getUrl('privacy')) ?>">Privacy</a>
+                <a href="<?= $block->escapeUrl($block->getUrl('cookies')) ?>">Cookies</a>
+            </div>
+        </div>
+    </div>
+</footer>
