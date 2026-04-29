@@ -8,12 +8,15 @@ $categoryCollectionFactory = $om->get(\Magento\Catalog\Model\ResourceModel\Categ
 $visibility = $om->get(\Magento\Catalog\Model\Product\Visibility::class);
 $priceCurrency = $om->get(\Magento\Framework\Pricing\PriceCurrencyInterface::class);
 $productVisualResolver = $om->get(\YourVendor\PVModern\Model\ProductVisualResolver::class);
+$categoryNavigation = $om->get(\YourVendor\PVModern\Model\CategoryNavigation::class);
+$heroBannerProvider = $om->get(\YourVendor\PVModern\Model\Banner\HeroBannerProvider::class);
 $cartHelper = $om->get(\Magento\Checkout\Helper\Cart::class);
 $urlEncoder = $om->get(\Magento\Framework\Url\EncoderInterface::class);
 $formKey = $om->get(\Magento\Framework\Data\Form\FormKey::class)->getFormKey();
 $stockRegistry = $om->get(\Magento\CatalogInventory\Api\StockRegistryInterface::class);
 $store = $storeManager->getStore();
 $pcBuilderUrl = $block->getUrl('pc-builder');
+$navMenus = $categoryNavigation->getMenuConfig();
 
 $normalize = static function ($value) {
     $value = strtolower(trim((string) $value));
@@ -176,13 +179,29 @@ $features = [
 ];
 
 $products = [];
-$baseCategoryFilters = [
-    ['slug' => 'all', 'label' => 'All'],
-    ['slug' => 'gpu', 'label' => 'GPU'],
-    ['slug' => 'cpu', 'label' => 'CPU'],
-    ['slug' => 'laptop', 'label' => 'Laptop'],
-    ['slug' => 'desktop', 'label' => 'Desktop'],
-];
+$baseCategoryFilters = [['slug' => 'all', 'label' => 'All']];
+$registeredFilters = ['all' => true];
+foreach ($navMenus as $menuKey => $menu) {
+    $topSlug = $normalize((string) ($menu['category'] ?? $menu['label'] ?? $menuKey));
+    if ($topSlug !== '' && !isset($registeredFilters[$topSlug])) {
+        $baseCategoryFilters[] = ['slug' => $topSlug, 'label' => (string) $menu['label']];
+        $registeredFilters[$topSlug] = true;
+    }
+
+    foreach ((array) ($menu['cols'] ?? []) as $column) {
+        foreach ((array) ($column['links'] ?? []) as $link) {
+            if (empty($link['category'])) {
+                continue;
+            }
+
+            $linkSlug = $normalize((string) $link['category']);
+            if ($linkSlug !== '' && !isset($registeredFilters[$linkSlug])) {
+                $baseCategoryFilters[] = ['slug' => $linkSlug, 'label' => (string) ($link['label'] ?? $link['category'])];
+                $registeredFilters[$linkSlug] = true;
+            }
+        }
+    }
+}
 $extraCategoryFilters = [];
 $priceMin = null;
 $priceMax = null;
@@ -244,7 +263,7 @@ try {
         $displayCategory = $inferCategory((string) $product->getName(), $categoryNames, (string) $product->getTypeId());
         $filterSlugs = $getFilterSlugs((string) $product->getName(), $categoryNames, $displayCategory, (string) $product->getTypeId());
         foreach ($filterSlugs as $filterSlug) {
-            if (!in_array($filterSlug, array_column($baseCategoryFilters, 'slug'), true) && !isset($extraCategoryFilters[$filterSlug]) && count($extraCategoryFilters) < 6) {
+            if (!isset($registeredFilters[$filterSlug]) && !isset($extraCategoryFilters[$filterSlug])) {
                 $extraCategoryFilters[$filterSlug] = ['slug' => $filterSlug, 'label' => ucwords(str_replace('-', ' ', $filterSlug))];
             }
         }
@@ -347,6 +366,77 @@ $recentProducts = array_slice($recentProducts, 0, 10);
 $heroProducts = $products;
 usort($heroProducts, static function ($a, $b) { return $b['price'] <=> $a['price']; });
 $heroProducts = array_slice($heroProducts, 0, 4);
+
+try {
+    $heroSlides = $heroBannerProvider->getSlides('homepage-hero');
+} catch (\Throwable $e) {
+    $heroSlides = [];
+}
+if (empty($heroSlides)) {
+    $heroSlides = array_values(array_map(static function (array $product, int $index): array {
+        return [
+            'id' => 'fallback_product_' . ($product['id'] ?? $index),
+            'title' => (string) ($product['name'] ?? 'Tech collection update'),
+            'subtitle' => 'Sản phẩm công nghệ mới cập nhật trên Techieworld, sẵn sàng để xem nhanh thông số và giá.',
+            'badge' => $index === 0 ? 'NEW ARRIVAL' : 'HOT DEAL',
+            'image' => (string) ($product['image'] ?? ''),
+            'mobileImage' => (string) ($product['image'] ?? ''),
+            'ctaLabel' => 'Xem sản phẩm',
+            'ctaLink' => (string) ($product['url'] ?? '#pv3-products'),
+            'targetType' => 'product',
+            'isActive' => true,
+            'order' => $index + 1,
+            'alt' => 'Banner ' . (string) ($product['name'] ?? 'Techieworld'),
+            'price' => (string) ($product['price_html'] ?? ''),
+            'theme' => ['violet', 'blue', 'slate', 'rose'][$index % 4],
+        ];
+    }, array_slice($heroProducts, 0, 4), array_keys(array_slice($heroProducts, 0, 4))));
+}
+
+$newsItems = [
+    [
+        'title' => 'TechRadar cập nhật nhóm GPU đáng chú ý năm 2026: RTX 5080, RTX 5070 Ti và Radeon RX 9070 XT.',
+        'tag' => 'TechRadar',
+        'date' => 'Cập nhật hôm nay',
+        'image' => $block->getViewFileUrl('YourVendor_PVModern::images/news/news-gpu-launch.svg'),
+        'url' => 'https://www.techradar.com/news/computing-components/graphics-cards/best-graphics-cards-1291458',
+    ],
+    [
+        'title' => 'GamesRadar theo dõi laptop gaming 2026 với OLED, RTX 50-series và nhiều lựa chọn theo ngân sách.',
+        'tag' => 'GamesRadar',
+        'date' => 'Mới nhất',
+        'image' => $block->getViewFileUrl('YourVendor_PVModern::images/news/news-laptop.svg'),
+        'url' => 'https://www.gamesradar.com/hardware/laptops/the-best-gaming-laptops-tested-by-experts/',
+    ],
+    [
+        'title' => 'Bản tin AI chip 24/04 ghi nhận Nvidia, TSMC, SK hynix và Intel tiếp tục đẩy mạnh hạ tầng bán dẫn.',
+        'tag' => 'AI Chips',
+        'date' => '24/04/2026',
+        'image' => $block->getViewFileUrl('YourVendor_PVModern::images/news/news-workstation.svg'),
+        'url' => 'https://www.distillintelligence.com/briefings/semiconductors-ai-chips-2026-04-24',
+    ],
+    [
+        'title' => 'Acer Swift 16 AI dùng Panther Lake và touchpad haptic lớn, nhắm đến laptop creator thế hệ mới.',
+        'tag' => 'Tom\'s Hardware',
+        'date' => '2026',
+        'image' => $block->getViewFileUrl('YourVendor_PVModern::images/news/news-monitor.svg'),
+        'url' => 'https://www.tomshardware.com/laptops/acer-refreshes-swift-laptops-with-panther-lake-claims-worlds-largest-haptic-touchpad-on-swift-16-ai',
+    ],
+    [
+        'title' => 'AI Day 2026 tại Việt Nam nhấn mạnh ứng dụng AI trong sản phẩm và năng lực chuyển đổi số.',
+        'tag' => 'VNA',
+        'date' => '06/04/2026',
+        'image' => $block->getViewFileUrl('YourVendor_PVModern::images/news/news-payment.svg'),
+        'url' => 'https://vnanet.vn/en/anh/vna-photos-1027/ai-day-2026-advancing-vietnam-with-ai-8682900.html',
+    ],
+];
+
+if (!empty($newsItems)) {
+    $newsOffset = ((int) gmdate('z')) % count($newsItems);
+    if ($newsOffset > 0) {
+        $newsItems = array_merge(array_slice($newsItems, $newsOffset), array_slice($newsItems, 0, $newsOffset));
+    }
+}
 ?>
 <div class="pv3-home" data-mage-init='{"pvmodernHome":{}}'>
     <section class="pv3-hero-section">
@@ -428,16 +518,88 @@ $heroProducts = array_slice($heroProducts, 0, 4);
         </div>
     </section>
 
-    <!-- ══ HARDWARE INVENTORY BANNER ════════════════════════════════════════ -->
-    <section class="pvh-hw-banner" aria-label="Hardware Inventory">
-        <div class="pvh-hw-banner__bg"></div>
-        <div class="pvh-hw-banner__content pv3-container">
-            <span class="pvh-hw-banner__badge">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                Premium Collection
-            </span>
-            <h2 class="pvh-hw-banner__title">Hardware <em>Inventory</em></h2>
-            <p class="pvh-hw-banner__desc">Live Magento admin products are shown here. Use the compact category dropdown, search, price range and availability filters, then add eligible items straight to cart.</p>
+    <!-- ══ HOMEPAGE HERO PROMO SLIDER ════════════════════════════════════════ -->
+    <section class="pvhero-carousel"
+             aria-label="<?= $block->escapeHtmlAttr(__('Techieworld homepage highlights')) ?>"
+             data-hero-carousel
+             data-banners-endpoint="<?= $block->escapeUrl($block->getUrl('api/banners', ['_query' => ['placement' => 'homepage-hero']])) ?>">
+        <div class="pv3-container">
+            <div class="pvhero-shell">
+                <div class="pvhero-loading" data-hero-loading hidden>
+                    <span></span><span></span><span></span>
+                </div>
+
+                <?php if (empty($heroSlides)): ?>
+                    <div class="pvhero-empty" data-hero-empty>
+                        <strong><?= $block->escapeHtml(__('Chưa có banner active')) ?></strong>
+                        <span><?= $block->escapeHtml(__('Bật CMS block hero_banner_slider trong admin hoặc thêm ảnh campaign để kích hoạt khu vực hero.')) ?></span>
+                    </div>
+
+                    <div class="pvhero-error" data-hero-error hidden>
+                        <span><?= $block->escapeHtml(__('Banner data could not be refreshed. Showing the latest local campaign set.')) ?></span>
+                        <button type="button" data-hero-retry><?= $block->escapeHtml(__('Try again')) ?></button>
+                    </div>
+                <?php endif; ?>
+
+                <div class="pvhero-viewport" data-hero-viewport>
+                    <div class="pvhero-track" data-hero-track>
+                        <?php foreach ($heroSlides as $index => $slide): ?>
+                            <?php
+                            $theme = preg_replace('/[^a-z0-9_-]+/i', '', (string) ($slide['theme'] ?? 'violet')) ?: 'violet';
+                            $image = (string) ($slide['image'] ?? '');
+                            $mobileImage = (string) ($slide['mobileImage'] ?? $image);
+                            ?>
+                            <article class="pvhero-slide <?= $index === 0 ? 'is-active' : '' ?> pvhero-slide--<?= $block->escapeHtmlAttr($theme) ?>"
+                                     data-hero-slide
+                                     aria-roledescription="slide"
+                                     aria-label="<?= $block->escapeHtmlAttr(($index + 1) . ' / ' . count($heroSlides)) ?>">
+                                <div class="pvhero-copy">
+                                    <span class="pvhero-badge"><?= $block->escapeHtml((string) ($slide['badge'] ?? 'NEW')) ?></span>
+                                    <h2><?= $block->escapeHtml((string) ($slide['title'] ?? 'Techieworld update')) ?></h2>
+                                    <?php if (!empty($slide['subtitle'])): ?>
+                                        <p><?= $block->escapeHtml((string) $slide['subtitle']) ?></p>
+                                    <?php endif; ?>
+                                    <div class="pvhero-actions">
+                                        <a class="pvhero-cta" href="<?= $block->escapeUrl((string) ($slide['ctaLink'] ?? '#pv3-products')) ?>">
+                                            <span><?= $block->escapeHtml((string) ($slide['ctaLabel'] ?? 'Xem ngay')) ?></span>
+                                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                                        </a>
+                                        <?php if (!empty($slide['price'])): ?>
+                                            <span class="pvhero-price"><?= $block->escapeHtml((string) $slide['price']) ?></span>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <a class="pvhero-media" href="<?= $block->escapeUrl((string) ($slide['ctaLink'] ?? '#pv3-products')) ?>" tabindex="-1">
+                                    <picture>
+                                        <source media="(max-width: 640px)" srcset="<?= $block->escapeUrl($mobileImage) ?>">
+                                        <img src="<?= $block->escapeUrl($image) ?>"
+                                             alt="<?= $block->escapeHtmlAttr((string) ($slide['alt'] ?? $slide['title'] ?? 'Techieworld banner')) ?>"
+                                             loading="<?= $index === 0 ? 'eager' : 'lazy' ?>"
+                                             <?= $index === 0 ? 'fetchpriority="high"' : '' ?> />
+                                    </picture>
+                                </a>
+                            </article>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+
+                <button class="pvhero-nav pvhero-nav--prev" type="button" data-hero-prev aria-label="<?= $block->escapeHtmlAttr(__('Previous banner')) ?>">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+                </button>
+                <button class="pvhero-nav pvhero-nav--next" type="button" data-hero-next aria-label="<?= $block->escapeHtmlAttr(__('Next banner')) ?>">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                </button>
+
+                <div class="pvhero-dots" data-hero-dots aria-label="<?= $block->escapeHtmlAttr(__('Banner pagination')) ?>">
+                    <?php foreach ($heroSlides as $index => $slide): ?>
+                        <button type="button"
+                                class="<?= $index === 0 ? 'is-active' : '' ?>"
+                                data-hero-dot="<?= $block->escapeHtmlAttr((string) $index) ?>"
+                                aria-label="<?= $block->escapeHtmlAttr(__('Go to banner %1', $index + 1)) ?>"
+                                aria-current="<?= $index === 0 ? 'true' : 'false' ?>"></button>
+                    <?php endforeach; ?>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -530,8 +692,9 @@ $heroProducts = array_slice($heroProducts, 0, 4);
             </div>
 
             <div class="pv3-product-grid" data-product-grid data-page-size="8">
-                <?php foreach ($products as $product): ?>
+                <?php foreach ($products as $index => $product): ?>
                     <article class="pv3-product-card card-shine"
+                        <?= $index >= 8 ? 'style="display:none"' : '' ?>
                         data-name="<?= $block->escapeHtmlAttr($product['name']) ?>"
                         data-brand="<?= $block->escapeHtmlAttr($product['brand']) ?>"
                         data-category="<?= $block->escapeHtmlAttr($product['category']) ?>"
@@ -704,4 +867,84 @@ $heroProducts = array_slice($heroProducts, 0, 4);
             </div>
         </div>
     </section>
+
+    <section class="pv3-news-section" id="pv3-news">
+        <div class="pv3-container">
+            <div class="pv3-news-shell">
+
+                <!-- ── Section header ────────────────────────────────── -->
+                <div class="pv3-news-header">
+                    <h2 class="pv3-news-title">TIN TỨC</h2>
+
+                    <!-- Xem tất cả + horizontal expanding reveal -->
+                    <div class="pv3-news-reveal-wrap"
+                         data-news-reveal
+                         role="group"
+                         aria-label="Tiện ích nhanh">
+                        <a href="<?= $block->escapeUrl($block->getUrl('news')) ?>"
+                           class="pv3-news-viewall"
+                           aria-expanded="false"
+                           aria-controls="pv3-news-panel">
+                            <span>Xem tất cả</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+                            </svg>
+                        </a>
+
+                        <div class="pv3-news-panel"
+                             id="pv3-news-panel"
+                             data-news-panel
+                             aria-hidden="true">
+                            <a href="<?= $block->escapeUrl($block->getUrl('weather')) ?>" class="pv3-news-panel-btn" data-utility="weather">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <path d="M12 2v2"/>
+                                    <path d="m4.93 4.93 1.41 1.41"/>
+                                    <path d="M2 12h2"/>
+                                    <path d="m4.93 19.07 1.41-1.41"/>
+                                    <path d="M12 20v2"/>
+                                    <path d="m19.07 19.07-1.41-1.41"/>
+                                    <path d="M22 12h-2"/>
+                                    <path d="m19.07 4.93-1.41 1.41"/>
+                                    <circle cx="12" cy="12" r="4"/>
+                                </svg>
+                                <span>Weather</span>
+                            </a>
+                            <a href="<?= $block->escapeUrl($block->getUrl('currency-rate')) ?>" class="pv3-news-panel-btn" data-utility="currency">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 6v12"/>
+                                    <path d="M15 9.5c0-1.38-1.34-2.5-3-2.5s-3 1.12-3 2.5 1.34 2.5 3 2.5 3 1.12 3 2.5-1.34 2.5-3 2.5"/>
+                                </svg>
+                                <span>Currency rate</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── News cards grid ───────────────────────────────── -->
+                <div class="pv3-news-grid">
+                    <?php foreach ($newsItems as $newsItem): ?>
+                        <article class="pv3-news-card">
+                            <a class="pv3-news-card-link" href="<?= $block->escapeUrl($newsItem['url']) ?>">
+                                <div class="pv3-news-thumb">
+                                    <img src="<?= $block->escapeUrl($newsItem['image']) ?>"
+                                         alt="<?= $block->escapeHtmlAttr($newsItem['title']) ?>"
+                                         loading="lazy"/>
+                                </div>
+                                <div class="pv3-news-body">
+                                    <span class="pv3-news-tag"><?= $block->escapeHtml($newsItem['tag']) ?></span>
+                                    <h3 class="pv3-news-headline">
+                                        <?= $block->escapeHtml($newsItem['title']) ?>
+                                    </h3>
+                                    <span class="pv3-news-date"><?= $block->escapeHtml($newsItem['date']) ?></span>
+                                </div>
+                            </a>
+                        </article>
+                    <?php endforeach; ?>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
 </div>

@@ -1,0 +1,31 @@
+<?php
+/**
+ * PVModern order detail buttons override: add tracking action.
+ *
+ * @var \Magento\Sales\Block\Order\Info\Buttons $block
+ */
+?>
+<div class="actions">
+    <?php $_order = $block->getOrder() ?>
+    <a href="<?= $block->escapeUrl($block->getUrl('order-tracking', ['_query' => ['order_id' => $_order->getRealOrderId(), 'provider' => 'spx']])) ?>"
+       class="action pv-order-track"
+       data-order-id="<?= $block->escapeHtmlAttr($_order->getRealOrderId()) ?>"
+       data-provider="spx">
+        <span><?= $block->escapeHtml(__('Theo dõi đơn hàng')) ?></span>
+    </a>
+    <?php if ($this->helper(\Magento\Sales\Helper\Reorder::class)->canReorder($_order->getEntityId())) : ?>
+        <a href="#" data-post='<?=
+        /* @noEscape */ $this->helper(\Magento\Framework\Data\Helper\PostHelper::class)
+            ->getPostData($block->getReorderUrl($_order))
+        ?>' class="action order">
+            <span><?= $block->escapeHtml(__('Reorder')) ?></span>
+        </a>
+    <?php endif ?>
+    <a href="<?= $block->escapeUrl($block->getPrintUrl($_order)) ?>"
+       class="action print"
+       target="_blank"
+       rel="noopener">
+        <span><?= $block->escapeHtml(__('Print Order')) ?></span>
+    </a>
+    <?= $block->getChildHtml() ?>
+</div>

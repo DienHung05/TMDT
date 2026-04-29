@@ -1,8 +1,33 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="css/pv-cart-checkout-final.css"/>
+    </head>
     <body>
-        <referenceContainer name="content">
-            <block class="Magento\Framework\View\Element\Template" name="pv.cart.grouping" template="Magento_Checkout::cart/grouping.phtml" after="-"/>
+        <move element="cart.summary" destination="checkout.cart.container" after="checkout.cart.form"/>
+
+        <referenceBlock name="checkout.cart.empty" template="Magento_Checkout::cart/noItems.phtml"/>
+        <referenceBlock name="checkout.cart.summary.title" remove="true"/>
+        <referenceBlock name="checkout.cart.shipping" remove="true"/>
+        <referenceContainer name="checkout.cart.totals.container" remove="true"/>
+        <referenceBlock name="checkout.cart.shortcut.buttons" remove="true"/>
+        <referenceBlock name="checkout.cart.methods.multishipping" remove="true"/>
+
+        <referenceBlock name="checkout.cart.methods.onepage.bottom">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magento_Checkout::cart/onepage-link.phtml</argument>
+            </action>
+        </referenceBlock>
+
+        <referenceContainer name="cart.summary">
+            <block class="Magento\Checkout\Block\Cart"
+                   name="pvcart.summary.card"
+                   as="summary_card"
+                   template="Magento_Checkout::cart/summary.phtml"
+                   before="-"/>
         </referenceContainer>
+
+        <move element="checkout.cart.coupon" destination="pvcart.summary.card" before="-"/>
+        <move element="checkout.cart.methods.bottom" destination="pvcart.summary.card" after="checkout.cart.coupon"/>
     </body>
 </page>

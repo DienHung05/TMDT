@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<page layout="1column"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="YourVendor_PVModern::css/pv-info-pages.css"/>
+        <script src="YourVendor_PVModern::js/pv-info-pages.js"/>
+    </head>
+    <body>
+        <referenceBlock name="breadcrumbs" remove="true"/>
+        <referenceBlock name="page.main.title" remove="true"/>
+        <referenceBlock name="sidebar.main" remove="true"/>
+        <referenceBlock name="sidebar.additional" remove="true"/>
+        <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+        <referenceBlock name="wishlist_sidebar" remove="true"/>
+        <referenceContainer name="sidebar.main" remove="true"/>
+        <referenceContainer name="sidebar.additional" remove="true"/>
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="pvmodern.order.tracking.page"
+                   template="YourVendor_PVModern::pages/order-tracking.phtml"
+                   cacheable="false"/>
+        </referenceContainer>
+    </body>
+</page>

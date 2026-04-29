@@ -162,6 +162,18 @@ define([
             refreshBadge(cartData());
         }());
 
+        (function initAuthAwareActions() {
+            var customer = customerData.get('customer');
+
+            function refreshAuth(data) {
+                var isLoggedIn = !!(data && (data.firstname || data.fullname || data.email));
+                $root.find('[data-auth-signout]').prop('hidden', !isLoggedIn);
+            }
+
+            customer.subscribe(refreshAuth);
+            refreshAuth(customer());
+        }());
+
         /* ═══════════════════════════════════════════════════════════════════
            SEARCH AUTOSUGGEST
            Uses the PVModern controller endpoint so live Magento products
@@ -378,6 +390,131 @@ define([
                 if (!$(event.target).closest('.pv3-search').length) {
                     hideDrop();
                 }
+            });
+        }());
+
+        (function initOrderTracking() {
+            var $modal = $root.find('[data-tracking-modal]');
+            var $open = $root.find('[data-tracking-open]');
+            var $close = $root.find('[data-tracking-close]');
+            var $form = $root.find('[data-tracking-form]');
+            var $result = $root.find('[data-tracking-result]');
+            var endpoint = String($modal.data('tracking-url') || '');
+            var pending = null;
+
+            if (!$modal.length || !$open.length || !$form.length || !endpoint) {
+                return;
+            }
+
+            function trackingEsc(value) {
+                return String(value || '')
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;');
+            }
+
+            function openModal() {
+                $modal.prop('hidden', false).addClass('is-open');
+                setTimeout(function () {
+                    $form.find('input[name="order_id"]').trigger('focus');
+                }, 40);
+            }
+
+            function closeModal() {
+                $modal.removeClass('is-open').prop('hidden', true);
+            }
+
+            function renderTracking(data) {
+                var timeline = $.map(data.timeline || [], function (row) {
+                    return (
+                        '<li>' +
+                            '<span class="pv3-tracking-dot"></span>' +
+                            '<div><strong>' + trackingEsc(row.label) + '</strong>' +
+                            '<small>' + trackingEsc(formatTrackingTime(row.time)) + '</small></div>' +
+                        '</li>'
+                    );
+                }).join('');
+
+                $result.html(
+                    '<div class="pv3-tracking-card">' +
+                        '<div class="pv3-tracking-status">' +
+                            '<span>' + trackingEsc(data.status || 'Đang cập nhật') + '</span>' +
+                            '<strong>' + trackingEsc(data.carrier_label || '') + '</strong>' +
+                        '</div>' +
+                        '<dl class="pv3-tracking-meta">' +
+                            '<div><dt>Mã vận đơn</dt><dd>' + trackingEsc(data.tracking_number || '-') + '</dd></div>' +
+                            '<div><dt>Cập nhật cuối</dt><dd>' + trackingEsc(formatTrackingTime(data.updated_at)) + '</dd></div>' +
+                            '<div><dt>Dự kiến giao</dt><dd>' + trackingEsc(data.eta || '-') + '</dd></div>' +
+                        '</dl>' +
+                        '<ol class="pv3-tracking-timeline">' + timeline + '</ol>' +
+                    '</div>'
+                ).prop('hidden', false);
+            }
+
+            function formatTrackingTime(value) {
+                var date = value ? new Date(value) : null;
+                if (!date || isNaN(date.getTime())) {
+                    return value || '-';
+                }
+                return date.toLocaleString('vi-VN', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            }
+
+            $open.on('click.pvTracking', openModal);
+            $close.on('click.pvTracking', closeModal);
+            $(document).on('click.pvTrackingOrderLink', '[data-order-track]', function (event) {
+                event.preventDefault();
+                openModal();
+                $form.find('[name="order_id"]').val($(this).data('order-id') || '');
+                $form.find('[name="provider"]').val($(this).data('provider') || 'spx');
+                $form.trigger('submit');
+            });
+
+            $(document).on('keydown.pvTracking', function (event) {
+                if (event.key === 'Escape' && !$modal.prop('hidden')) {
+                    closeModal();
+                }
+            });
+
+            $form.on('submit.pvTracking', function (event) {
+                event.preventDefault();
+                if (pending && pending.readyState !== 4) {
+                    pending.abort();
+                }
+
+                $form.addClass('is-loading');
+                $result.html('<div class="pv3-tracking-loading">Đang kiểm tra vận đơn...</div>').prop('hidden', false);
+
+                pending = $.ajax({
+                    url: endpoint,
+                    method: 'GET',
+                    dataType: 'json',
+                    data: {
+                        order_id: $.trim($form.find('[name="order_id"]').val()),
+                        provider: $form.find('[name="provider"]').val(),
+                        tracking_number: $.trim($form.find('[name="tracking_number"]').val())
+                    }
+                }).done(function (response) {
+                    if (!response || response.success === false) {
+                        $result.html('<div class="pv3-tracking-error">' + trackingEsc(response && response.message ? response.message : 'Không tìm thấy vận đơn.') + '</div>');
+                        return;
+                    }
+                    renderTracking(response);
+                }).fail(function (xhr) {
+                    if (xhr && xhr.statusText === 'abort') {
+                        return;
+                    }
+                    $result.html('<div class="pv3-tracking-error">Không thể kết nối hệ thống theo dõi. Vui lòng thử lại sau.</div>');
+                }).always(function () {
+                    $form.removeClass('is-loading');
+                });
             });
         }());
     };

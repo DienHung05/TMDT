@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="YourVendor\PVModern\Model\Shipping\ShippingManager">
+        <arguments>
+            <argument name="providers" xsi:type="array">
+                <item name="ghn" xsi:type="object">YourVendor\PVModern\Model\Shipping\Provider\GhnProvider</item>
+                <item name="ghtk" xsi:type="object">YourVendor\PVModern\Model\Shipping\Provider\GhtkProvider</item>
+                <item name="spx" xsi:type="object">YourVendor\PVModern\Model\Shipping\Provider\SpxProvider</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="YourVendor\PVModern\Model\Payment\PaymentManager">
+        <arguments>
+            <argument name="providers" xsi:type="array">
+                <item name="cod" xsi:type="object">YourVendor\PVModern\Model\Payment\Provider\CodPaymentProvider</item>
+                <item name="bank_transfer" xsi:type="object">YourVendor\PVModern\Model\Payment\Provider\BankTransferPaymentProvider</item>
+                <item name="online_gateway" xsi:type="object">YourVendor\PVModern\Model\Payment\Provider\OnlineGatewayPaymentProvider</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

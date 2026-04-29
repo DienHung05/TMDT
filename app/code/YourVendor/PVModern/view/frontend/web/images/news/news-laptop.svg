@@ -1,0 +1,23 @@
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="640" height="360" rx="32" fill="url(#bg)"/>
+<rect x="170" y="74" width="300" height="184" rx="20" fill="#0F172A"/>
+<rect x="188" y="92" width="264" height="148" rx="12" fill="url(#screen)"/>
+<path d="M126 272H514" stroke="#CBD5E1" stroke-width="18" stroke-linecap="round"/>
+<path d="M154 272H486" stroke="#F8FAFC" stroke-width="12" stroke-linecap="round"/>
+<circle cx="320" cy="264" r="8" fill="#94A3B8"/>
+<rect x="232" y="126" width="176" height="16" rx="8" fill="#F8FAFC" opacity=".92"/>
+<rect x="232" y="158" width="136" height="12" rx="6" fill="#E2E8F0" opacity=".88"/>
+<rect x="232" y="184" width="100" height="12" rx="6" fill="#C084FC" opacity=".94"/>
+<defs>
+<linearGradient id="bg" x1="54" y1="24" x2="596" y2="336" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0F172A"/>
+<stop offset=".52" stop-color="#312E81"/>
+<stop offset="1" stop-color="#2563EB"/>
+</linearGradient>
+<linearGradient id="screen" x1="206" y1="104" x2="438" y2="230" gradientUnits="userSpaceOnUse">
+<stop stop-color="#38BDF8"/>
+<stop offset=".52" stop-color="#818CF8"/>
+<stop offset="1" stop-color="#F472B6"/>
+</linearGradient>
+</defs>
+</svg>

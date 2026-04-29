@@ -1,0 +1,72 @@
+<?php
+/**
+ * Cart coupon form restyled to match the reference summary card.
+ * Supports reference promo hints client-side while preserving Magento coupon
+ * form wiring for real coupons.
+ *
+ * @var \Magento\Checkout\Block\Cart\Coupon $block
+ */
+
+$hasCouponCode = $block->getCouponCode() !== null && strlen($block->getCouponCode()) > 0;
+$couponCode = (string) $block->getCouponCode();
+?>
+<div class="pvcart-coupon"
+     data-promo-box
+     data-server-coupon="<?= $block->escapeHtmlAttr($couponCode) ?>">
+    <form id="discount-coupon-form"
+          action="<?= $block->escapeUrl($block->getUrl('checkout/cart/couponPost')) ?>"
+          method="post"
+          data-mage-init='{"discountCode":{"couponCodeSelector":"#coupon_code","removeCouponSelector":"#remove-coupon","applyButton":"button.action.apply","cancelButton":"button.action.cancel"}}'>
+        <input type="hidden" name="remove" id="remove-coupon" value="0"/>
+
+        <div class="pvcart-coupon-inline" <?= $hasCouponCode ? 'hidden="hidden"' : '' ?>>
+            <input type="text"
+                   class="pvcart-coupon-input"
+                   id="coupon_code"
+                   name="coupon_code"
+                   data-promo-input
+                   value="<?= $block->escapeHtmlAttr($couponCode) ?>"
+                   placeholder="<?= $block->escapeHtmlAttr(__('Nhập mã khuyến mãi')) ?>"/>
+            <button class="action apply pvcart-coupon-button"
+                    type="button"
+                    data-promo-apply>
+                <span><?= $block->escapeHtml(__('Dùng')) ?></span>
+            </button>
+        </div>
+
+        <div class="pvcart-coupon-applied"
+             data-promo-applied
+             <?= $hasCouponCode ? '' : 'hidden="hidden"' ?>>
+            <div class="pvcart-coupon-applied-copy">
+                <p class="pvcart-coupon-applied-code" data-promo-applied-code>
+                    <?php if ($hasCouponCode): ?>
+                        <?= $block->escapeHtml(__('Mã: %1', strtoupper($couponCode))) ?>
+                    <?php endif; ?>
+                </p>
+                <p class="pvcart-coupon-applied-note" data-promo-applied-note>
+                    <?php if ($hasCouponCode): ?>
+                        <?= $block->escapeHtml(__('Khuyến mãi đã được áp dụng cho đơn hàng của bạn')) ?>
+                    <?php endif; ?>
+                </p>
+                <p class="pvcart-coupon-hint pvcart-coupon-hint--inside">
+                    <?= $block->escapeHtml(__('Gợi ý: SAVE10, SAVE20, SAVE50K')) ?>
+                </p>
+            </div>
+            <button type="button"
+                    class="action cancel pvcart-coupon-remove pvcart-coupon-remove--card"
+                    data-promo-remove-card
+                    <?= $hasCouponCode ? '' : 'hidden="hidden"' ?>>
+                <span><?= $block->escapeHtml(__('Xóa')) ?></span>
+            </button>
+        </div>
+
+        <p class="pvcart-coupon-feedback<?= $hasCouponCode ? ' is-visible' : '' ?>"
+           data-promo-feedback
+           <?= $hasCouponCode ? '' : 'hidden="hidden"' ?>>
+            <?php if ($hasCouponCode): ?>
+                <?= $block->escapeHtml(__('Mã %1 đang được áp dụng.', strtoupper($couponCode))) ?>
+            <?php endif; ?>
+        </p>
+        <?= /* @noEscape */ $block->getChildHtml('captcha') ?>
+    </form>
+</div>

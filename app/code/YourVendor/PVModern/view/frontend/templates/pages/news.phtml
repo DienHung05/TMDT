@@ -1,0 +1,89 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+$tabs = [
+    ['label' => 'Xem tất cả', 'url' => $block->getUrl('news'), 'active' => true],
+    ['label' => 'Weather', 'url' => $block->getUrl('weather'), 'active' => false],
+    ['label' => 'Currency Rate', 'url' => $block->getUrl('currency-rate'), 'active' => false],
+];
+$apiUrl = $block->getUrl('pvmodern/api/news');
+?>
+<main class="pvinfo-page" data-pvinfo-news data-api-url="<?= $block->escapeUrl($apiUrl) ?>">
+    <div class="pvinfo-container">
+        <nav class="pvinfo-tabs" aria-label="Information pages">
+            <?php foreach ($tabs as $tab): ?>
+                <a class="pvinfo-tab<?= $tab['active'] ? ' is-active' : '' ?>" href="<?= $block->escapeUrl($tab['url']) ?>">
+                    <?= $block->escapeHtml($tab['label']) ?>
+                </a>
+            <?php endforeach; ?>
+        </nav>
+
+        <section class="pvinfo-hero-copy">
+            <span class="pvinfo-kicker">Tech briefing</span>
+            <h1>Tin tức công nghệ</h1>
+            <p>Cập nhật AI, startup, gadget, cybersecurity, software và các xu hướng công nghệ mới nhất.</p>
+        </section>
+
+        <nav class="pvnews-cats" data-news-categories aria-label="News categories">
+            <?php foreach (['all' => 'Tất cả', 'ai' => 'AI', 'startup' => 'Startup', 'mobile' => 'Mobile', 'gadgets' => 'Gadgets', 'cybersecurity' => 'Cybersecurity', 'software' => 'Software', 'gaming' => 'Gaming', 'fintech' => 'Fintech', 'science' => 'Science', 'business' => 'Business'] as $slug => $label): ?>
+                <button type="button" data-category="<?= $block->escapeHtmlAttr($slug) ?>"><?= $block->escapeHtml($label) ?></button>
+            <?php endforeach; ?>
+        </nav>
+
+        <div class="pvinfo-state pvinfo-loading" data-news-loading>
+            <span></span><span></span><span></span>
+        </div>
+        <div class="pvinfo-state pvinfo-error" data-news-error hidden>
+            <strong>Không tải được tin tức.</strong>
+            <button type="button" data-news-retry>Thử lại</button>
+        </div>
+
+        <div data-news-content hidden>
+            <section class="pvnews-breaking">
+                <strong>BREAKING</strong>
+                <div data-breaking-list></div>
+            </section>
+
+            <section class="pvnews-layout">
+                <div class="pvnews-main">
+                    <section class="pvnews-hero-grid">
+                        <article class="pvnews-lead" data-lead-story></article>
+                        <aside class="pvnews-top surface-card">
+                            <h2>Top stories</h2>
+                            <div data-top-stories></div>
+                        </aside>
+                    </section>
+
+                    <section class="pvnews-latest">
+                        <div class="pvinfo-section-head">
+                            <h2>Mới nhất</h2>
+                            <p data-news-count></p>
+                        </div>
+                        <div class="pvnews-grid" data-latest-news></div>
+                        <div class="pvinfo-empty surface-card" data-news-empty hidden>Không có bài viết phù hợp.</div>
+                        <div class="pvinfo-pagination" data-news-pagination></div>
+                    </section>
+                </div>
+
+                <aside class="pvnews-sidebar">
+                    <section class="surface-card">
+                        <h2>Đọc nhiều</h2>
+                        <div data-popular-news></div>
+                    </section>
+                    <section class="surface-card">
+                        <h2>Chủ đề nóng</h2>
+                        <div class="pvtopic-list" data-hot-topics></div>
+                    </section>
+                    <section class="surface-card pvnewsletter-mini">
+                        <h2>Newsletter</h2>
+                        <p>Nhận bản tin công nghệ ngắn gọn mỗi tuần.</p>
+                        <label>
+                            <span>Email</span>
+                            <input type="email" placeholder="you@example.com">
+                        </label>
+                        <button type="button">Subscribe</button>
+                    </section>
+                </aside>
+            </section>
+        </div>
+    </div>
+</main>

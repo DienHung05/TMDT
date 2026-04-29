@@ -1,0 +1,317 @@
+body.pvmodern-v3 .pv3-search {
+    max-width: 380px !important;
+    flex: 0 1 380px !important;
+}
+body.pvmodern-v3 .pv3-product-card.is-page-hidden {
+    display: none !important;
+}
+body.pvmodern-v3 .pv3-nav {
+    margin-left: 10px !important;
+    justify-content: flex-end !important;
+}
+body.pvmodern-v3 .pv3-tracking-button {
+    position: relative;
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(99, 102, 241, .18);
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, .10), rgba(6, 182, 212, .08));
+    color: #4f46e5;
+    box-shadow: 0 10px 22px rgba(79, 70, 229, .10);
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+body.pvmodern-v3 .pv3-tracking-button:hover {
+    transform: translateY(-1px);
+    border-color: rgba(99, 102, 241, .34);
+    box-shadow: 0 14px 28px rgba(79, 70, 229, .16);
+}
+body.pvmodern-v3 .pv3-tracking-button svg {
+    width: 20px;
+    height: 20px;
+}
+body.pvmodern-v3 .pv3-tracking-button > span:last-child {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}
+body.pvmodern-v3 .pv3-actions {
+    gap: 8px !important;
+    padding-right: 2px !important;
+}
+body.pvmodern-v3 .pv3-signout-button[hidden] {
+    display: none !important;
+}
+body.pvmodern-v3 .pv3-signout-button {
+    width: 46px !important;
+    height: 46px !important;
+    flex: 0 0 46px !important;
+    margin-left: 0 !important;
+    border-radius: 16px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+body.pvmodern-v3 .pv3-signout-button span {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+}
+body.pvmodern-v3 .pv3-tracking-modal[hidden] {
+    display: none !important;
+}
+body.pvmodern-v3 .pv3-tracking-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10020;
+    display: flex;
+    justify-content: flex-end;
+}
+body.pvmodern-v3 .pv3-tracking-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, .42);
+    backdrop-filter: blur(4px);
+}
+body.pvmodern-v3 .pv3-tracking-drawer {
+    position: relative;
+    width: min(480px, calc(100vw - 24px));
+    height: calc(100% - 24px);
+    margin: 12px;
+    padding: 24px;
+    overflow-y: auto;
+    border: 1px solid rgba(226, 232, 240, .9);
+    border-radius: 24px;
+    background: #fff;
+    box-shadow: -20px 0 44px rgba(15, 23, 42, .22);
+    transform: translateX(24px);
+    opacity: 0;
+    transition: transform .22s ease, opacity .22s ease;
+}
+body.pvmodern-v3 .pv3-tracking-modal.is-open .pv3-tracking-drawer {
+    transform: translateX(0);
+    opacity: 1;
+}
+body.pvmodern-v3 .pv3-tracking-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    align-items: flex-start;
+    margin-bottom: 22px;
+}
+body.pvmodern-v3 .pv3-tracking-kicker {
+    display: inline-flex;
+    margin-bottom: 8px;
+    color: #6366f1;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+body.pvmodern-v3 .pv3-tracking-head h2 {
+    margin: 0;
+    color: #111827;
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: -.03em;
+}
+body.pvmodern-v3 .pv3-tracking-close {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #f8fafc;
+    color: #111827;
+    cursor: pointer;
+}
+body.pvmodern-v3 .pv3-tracking-close svg {
+    width: 19px;
+    height: 19px;
+}
+body.pvmodern-v3 .pv3-tracking-form {
+    display: grid;
+    gap: 14px;
+}
+body.pvmodern-v3 .pv3-tracking-form label {
+    display: grid;
+    gap: 8px;
+    color: #334155;
+    font-size: 13px;
+    font-weight: 800;
+}
+body.pvmodern-v3 .pv3-tracking-form input,
+body.pvmodern-v3 .pv3-tracking-form select {
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 14px;
+    background: #fff;
+    color: #0f172a;
+    font-size: 14px;
+    outline: none;
+}
+body.pvmodern-v3 .pv3-tracking-form input:focus,
+body.pvmodern-v3 .pv3-tracking-form select:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, .12);
+}
+body.pvmodern-v3 .pv3-tracking-submit {
+    height: 50px;
+    border: 0;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #6366f1, #06b6d4);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 14px 26px rgba(99, 102, 241, .22);
+}
+body.pvmodern-v3 .pv3-tracking-form.is-loading .pv3-tracking-submit {
+    opacity: .72;
+    pointer-events: none;
+}
+body.pvmodern-v3 .pv3-tracking-result {
+    margin-top: 18px;
+}
+body.pvmodern-v3 .pv3-tracking-card,
+body.pvmodern-v3 .pv3-tracking-loading,
+body.pvmodern-v3 .pv3-tracking-error {
+    border-radius: 18px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    padding: 16px;
+}
+body.pvmodern-v3 .pv3-tracking-error {
+    border-color: #fecaca;
+    background: #fef2f2;
+    color: #991b1b;
+    font-weight: 800;
+}
+body.pvmodern-v3 .pv3-tracking-status,
+body.pvmodern-v3 .pv3-tracking-meta div {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+body.pvmodern-v3 .pv3-tracking-status {
+    align-items: center;
+    margin-bottom: 14px;
+}
+body.pvmodern-v3 .pv3-tracking-status span {
+    display: inline-flex;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: #dcfce7;
+    color: #166534;
+    font-size: 13px;
+    font-weight: 900;
+}
+body.pvmodern-v3 .pv3-tracking-status strong,
+body.pvmodern-v3 .pv3-tracking-meta dd {
+    color: #0f172a;
+    font-weight: 900;
+}
+body.pvmodern-v3 .pv3-tracking-meta {
+    display: grid;
+    gap: 10px;
+    margin: 0 0 16px;
+}
+body.pvmodern-v3 .pv3-tracking-meta div {
+    color: #64748b;
+    font-size: 13px;
+}
+body.pvmodern-v3 .pv3-tracking-meta dt,
+body.pvmodern-v3 .pv3-tracking-meta dd {
+    margin: 0;
+}
+body.pvmodern-v3 .pv3-tracking-meta dd {
+    text-align: right;
+}
+body.pvmodern-v3 .pv3-tracking-timeline {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+body.pvmodern-v3 .pv3-tracking-timeline li {
+    display: grid;
+    grid-template-columns: 18px minmax(0, 1fr);
+    gap: 10px;
+    align-items: start;
+}
+body.pvmodern-v3 .pv3-tracking-dot {
+    width: 12px;
+    height: 12px;
+    margin-top: 5px;
+    border-radius: 999px;
+    background: #6366f1;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, .12);
+}
+body.pvmodern-v3 .pv3-tracking-timeline strong {
+    display: block;
+    color: #111827;
+    font-size: 14px;
+    font-weight: 900;
+}
+body.pvmodern-v3 .pv3-tracking-timeline small {
+    display: block;
+    margin-top: 2px;
+    color: #64748b;
+    font-size: 12px;
+}
+body.pvmodern-v3 .pv-order-track {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 7px;
+    margin-left: 8px;
+    color: #4f46e5 !important;
+    font-weight: 800 !important;
+    text-decoration: none !important;
+}
+body.pvmodern-v3 .pv-order-track::before {
+    content: "";
+    width: 17px;
+    height: 17px;
+    display: inline-block;
+    background: currentColor;
+    mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 17h4V5H2v12h3a3 3 0 0 0 6 0Zm-2.5 1.5A1.5 1.5 0 1 1 7.5 15a1.5 1.5 0 0 1 0 3.5ZM14 8h4l4 4v5h-3a3 3 0 0 1-6 0V8Zm2.5 10.5A1.5 1.5 0 1 1 16.5 15a1.5 1.5 0 0 1 0 3.5Z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+@media (max-width: 1280px) {
+    body.pvmodern-v3 .pv3-search {
+        max-width: 320px !important;
+        flex-basis: 320px !important;
+    }
+}
+@media (max-width: 1023px) {
+    body.pvmodern-v3 .pv3-tracking-button {
+        display: none !important;
+    }
+    body.pvmodern-v3 .pv3-search {
+        max-width: none !important;
+        flex: 1 1 0 !important;
+    }
+}
+@media (max-width: 767px) {
+    body.pvmodern-v3 .pv3-tracking-drawer {
+        width: calc(100vw - 16px);
+        height: calc(100% - 16px);
+        margin: 8px;
+        padding: 18px;
+        border-radius: 20px;
+    }
+}

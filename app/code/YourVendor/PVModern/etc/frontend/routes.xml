@@ -30,9 +30,29 @@
         <route id="warranty" frontName="warranty">
             <module name="YourVendor_PVModern"/>
         </route>
+        <!-- /news -->
+        <route id="news" frontName="news">
+            <module name="YourVendor_PVModern"/>
+        </route>
+        <!-- /weather -->
+        <route id="weather" frontName="weather">
+            <module name="YourVendor_PVModern"/>
+        </route>
+        <!-- /currency-rate -->
+        <route id="currency_rate" frontName="currency-rate">
+            <module name="YourVendor_PVModern"/>
+        </route>
+        <!-- /order-tracking -->
+        <route id="order_tracking" frontName="order-tracking">
+            <module name="YourVendor_PVModern"/>
+        </route>
         <!-- /pvmodern — generic API-style routes (e.g. search/suggest) -->
         <route id="pvmodern" frontName="pvmodern">
             <module name="YourVendor_PVModern"/>
+        </route>
+        <!-- /api aliases for frontend dashboards; Magento Webapi remains fallback. -->
+        <route id="api" frontName="api">
+            <module name="YourVendor_PVModern" before="Magento_Webapi"/>
         </route>
     </router>
 </config>

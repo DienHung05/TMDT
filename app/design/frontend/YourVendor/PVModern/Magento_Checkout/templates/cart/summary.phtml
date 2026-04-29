@@ -1,0 +1,103 @@
+<?php
+/**
+ * Cart summary card – reference-faithful, matches CartSummary.tsx.
+ *
+ * @var \Magento\Checkout\Block\Cart $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+$priceHelper = $this->helper(Magento\Framework\Pricing\Helper\Data::class);
+$quote = $block->getQuote();
+$itemCount = (int) $block->getItemsSummaryQty();
+$subtotal = (float) $quote->getSubtotal();
+$address = $quote->isVirtual() ? $quote->getBillingAddress() : $quote->getShippingAddress();
+$shippingAmount = (float) $address->getShippingAmount();
+$discountAmount = abs((float) $address->getDiscountAmount());
+$grandTotal = (float) $quote->getGrandTotal();
+$couponHtml = $block->getChildHtml('coupon')
+    ?: $block->getChildHtml('checkout.cart.coupon');
+$methodsHtml = $block->getChildHtml('checkout.cart.methods.bottom')
+    ?: $block->getChildHtml('methods.bottom')
+    ?: $block->getChildHtml('methods');
+?>
+<div class="pvcart-summary-card"
+     data-pvcart-summary
+     data-subtotal="<?= $escaper->escapeHtmlAttr((string) $subtotal) ?>"
+     data-shipping="<?= $escaper->escapeHtmlAttr((string) $shippingAmount) ?>"
+     data-discount="<?= $escaper->escapeHtmlAttr((string) $discountAmount) ?>"
+     data-grand="<?= $escaper->escapeHtmlAttr((string) $grandTotal) ?>">
+
+    <!-- Header: title + item count badge -->
+    <div class="pvcart-summary-head">
+        <h2>
+            <span><?= $escaper->escapeHtml(__('Tóm tắt đơn hàng')) ?></span>
+            <span class="pvcart-summary-count"><?= $escaper->escapeHtml($itemCount) ?></span>
+        </h2>
+    </div>
+
+    <!-- Pricing breakdown -->
+    <div class="pvcart-summary-breakdown">
+        <div class="pvcart-summary-row">
+            <span><?= $escaper->escapeHtml(__('Tạm tính (%1 sản phẩm)', $itemCount)) ?></span>
+            <strong><?= /* @noEscape */ $priceHelper->currency($subtotal, true, false) ?></strong>
+        </div>
+        <div class="pvcart-summary-row">
+            <span><?= $escaper->escapeHtml(__('Phí vận chuyển')) ?></span>
+            <strong class="pvcart-ship-amount"><?= /* @noEscape */ $priceHelper->currency($shippingAmount, true, false) ?></strong>
+        </div>
+        <?php if ($discountAmount > 0): ?>
+            <div class="pvcart-summary-row pvcart-summary-row--discount"
+                 data-summary-discount-row>
+                <span><?= $escaper->escapeHtml(__('Giảm giá')) ?></span>
+                <strong data-summary-discount>-<?= /* @noEscape */ $priceHelper->currency($discountAmount, true, false) ?></strong>
+            </div>
+        <?php else: ?>
+            <div class="pvcart-summary-row pvcart-summary-row--discount"
+                 data-summary-discount-row
+                 hidden="hidden">
+                <span><?= $escaper->escapeHtml(__('Giảm giá')) ?></span>
+                <strong data-summary-discount></strong>
+            </div>
+        <?php endif ?>
+    </div>
+
+    <!-- Promo code input (reference: SAVE10, SAVE20, SAVE50K) -->
+    <div class="pvcart-summary-coupon">
+        <?php if ($couponHtml): ?>
+            <?= /* @noEscape */ $couponHtml ?>
+        <?php else: ?>
+            <div class="pvcart-coupon-inline" id="pvcart-coupon-box">
+                <input type="text"
+                       class="pvcart-coupon-input"
+                       id="pvcart-coupon-field"
+                       placeholder="<?= $escaper->escapeHtmlAttr(__('Nhập mã khuyến mãi')) ?>"
+                       maxlength="30"
+                       autocomplete="off"/>
+                <button type="button"
+                        class="pvcart-coupon-button"
+                        id="pvcart-coupon-apply">
+                    <?= $escaper->escapeHtml(__('Dùng')) ?>
+                </button>
+            </div>
+            <p class="pvcart-coupon-error" id="pvcart-coupon-error" hidden></p>
+        <?php endif ?>
+    </div>
+
+    <!-- Grand total box -->
+    <div class="pvcart-summary-total">
+        <div class="pvcart-summary-row pvcart-summary-row--total">
+            <span><?= $escaper->escapeHtml(__('Tổng cộng')) ?></span>
+            <strong data-summary-grand><?= /* @noEscape */ $priceHelper->currency(max(0, $grandTotal), true, false) ?></strong>
+        </div>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="pvcart-summary-actions">
+        <?= /* @noEscape */ $methodsHtml ?>
+        <a class="pvcart-secondary-btn"
+           href="<?= $escaper->escapeUrl($block->getContinueShoppingUrl()) ?>">
+            <?= $escaper->escapeHtml(__('Tiếp tục mua sắm')) ?>
+        </a>
+    </div>
+
+</div><!-- /.pvcart-summary-card -->

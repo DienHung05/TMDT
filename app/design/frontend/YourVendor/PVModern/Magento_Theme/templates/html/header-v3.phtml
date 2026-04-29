@@ -10,6 +10,12 @@
  */
 
 $_om = \Magento\Framework\App\ObjectManager::getInstance();
+$_customerSession = $_om->get(\Magento\Customer\Model\Session::class);
+$_isLoggedIn = false;
+try {
+    $_isLoggedIn = (bool) $_customerSession->isLoggedIn();
+} catch (\Throwable $e) {}
+$_logoutUrl = $block->escapeUrl($block->getUrl('customer/account/logout'));
 
 /* ── Server-side cart count (initial render) ───────── */
 $_cartQty = 0;
@@ -30,8 +36,37 @@ $_req       = $_om->get(\Magento\Framework\App\RequestInterface::class);
 $_action    = $_req->getFullActionName();
 $_isCatPage = ($_action === 'catalog_category_view');
 $_searchUrl = $block->getUrl('');
+$_menus = $_om->get(\YourVendor\PVModern\Model\CategoryNavigation::class)->getMenuConfig();
 
 $_activeCat = '';
+$_normalizeKey = static function (string $value): string {
+    $value = strtolower(trim($value));
+    $value = preg_replace('/[^a-z0-9]+/', '-', $value);
+    return trim((string) $value, '-');
+};
+
+$_categoryParam = $_normalizeKey((string) $_req->getParam('category', ''));
+$_isFilterPage = ($_action === 'cms_index_index' && $_categoryParam !== '');
+
+if ($_categoryParam !== '') {
+    foreach ($_menus as $_menuKey => $_menu) {
+        $_topSlug = $_normalizeKey((string) ($_menu['category'] ?? $_menu['label'] ?? $_menuKey));
+        if ($_categoryParam === $_topSlug || $_categoryParam === $_menuKey) {
+            $_activeCat = (string) $_menuKey;
+            break;
+        }
+
+        foreach ((array) ($_menu['cols'] ?? []) as $_col) {
+            foreach ((array) ($_col['links'] ?? []) as $_link) {
+                if (!empty($_link['category']) && $_normalizeKey((string) $_link['category']) === $_categoryParam) {
+                    $_activeCat = (string) $_menuKey;
+                    break 3;
+                }
+            }
+        }
+    }
+}
+
 if ($_isCatPage) {
     try {
         $_cat = $_om->get(\Magento\Framework\Registry::class)->registry('current_category');
@@ -55,189 +90,40 @@ if ($_isCatPage) {
     } catch (\Throwable $e) {}
 }
 
-$_normalizeKey = static function (string $value): string {
-    $value = strtolower(trim($value));
-    $value = preg_replace('/[^a-z0-9]+/', '-', $value);
-    return trim((string) $value, '-');
-};
-
-/* ── Build category map: ALL active categories keyed by normalised name ──────
- * Load every active category store-wide (not just root children) so every
- * nav link — top-level AND subcategory — resolves to its own category page.
- * ─────────────────────────────────────────────────────────────────────────── */
-$_categoryCollectionFactory = $_om->get(\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory::class);
-$_categoryMap = [];
-
-try {
-    $_allCats = $_categoryCollectionFactory->create();
-    $_allCats->addAttributeToSelect(['name', 'url_key', 'url_path', 'is_active', 'level'])
-             ->addAttributeToFilter('is_active', 1)
-             ->addAttributeToFilter('entity_id', ['nin' => [1, 2]]);
-
-    foreach ($_allCats as $_cat) {
-        $_key = $_normalizeKey((string) $_cat->getName());
-        if (!isset($_categoryMap[$_key])) {
-            $_categoryMap[$_key] = $_cat;
-        }
-    }
-} catch (\Throwable $e) {}
-
 $_buildSearchUrl = static function (string $query) use ($_searchUrl): string {
     return trim($query) === ''
         ? $_searchUrl . '#pv3-products'
         : $_searchUrl . '?q=' . rawurlencode($query) . '#pv3-products';
 };
 
-$_resolveMenuLink = static function (array $_link) use ($_categoryMap, $_normalizeKey, $block, $_buildSearchUrl): string {
+$_buildCategoryFilterUrl = static function (string $category) use ($_searchUrl, $_normalizeKey): string {
+    $_slug = $_normalizeKey($category);
+    return $_slug === ''
+        ? $_searchUrl . '#pv3-products'
+        : $_searchUrl . '?category=' . rawurlencode($_slug) . '#pv3-products';
+};
+
+$_resolveMenuLink = static function (array $_link) use ($_buildCategoryFilterUrl, $block, $_buildSearchUrl): string {
     // Explicit full URL
     if (!empty($_link['url'])) {
         return $block->getUrl($_link['url']);
     }
-    // Resolve by category name → real Magento category URL
+    // Route category links to the storefront filter state so the customer
+    // lands on a visibly filtered product grid instead of an unrelated page.
     if (!empty($_link['category'])) {
-        $_key = $_normalizeKey((string) $_link['category']);
-        if (!empty($_categoryMap[$_key])) {
-            try { return (string) $_categoryMap[$_key]->getUrl(); } catch (\Throwable $e) {}
-        }
-        // Fallback: search on home page
-        return $_buildSearchUrl((string) $_link['category']);
+        return $_buildCategoryFilterUrl((string) $_link['category']);
     }
     return $_buildSearchUrl((string) ($_link['q'] ?? ''));
 };
 
-/* ══════════════════════════════════════════════════════════════════════
-   MEGA-MENU DATA — every link resolves to its own Magento category page
-   Category IDs confirmed from DB:
-     Desktop=26  Laptop=22  Monitor=14  Apple=27
-     Gaming Laptop=35  Creator Laptop=36  Business Laptop=37  Ultrabook=38
-     Gaming Monitor=39  Creator Monitor=40  Ultrawide Monitor=41  4K Monitor=42
-     MacBook=29  Mac Desktop=30  iPhone=31  iPad=32  AirPods=33  Apple Watch=34
-     GPU=4  CPU=5  RAM=10  SSD=11  HDD=12  Mainboard=13  Heatsink=8  Fan=9  Case=6  PSU=23
-   ══════════════════════════════════════════════════════════════════════ */
-$_menus = [
-
-    /* ── DESKTOP ─────────────────────────────────────────────────────── */
-    'desktop' => [
-        'label'    => 'Desktop',
-        'category' => 'Desktop',          // ID 26 → /desktop.html
-        'cols'     => [
-            [
-                'title' => 'PC Components',
-                'links' => [
-                    ['label' => '🎮 GPU — Graphics Cards',   'category' => 'GPU'],
-                    ['label' => '⚡ CPU — Processors',       'category' => 'CPU'],
-                    ['label' => '💾 RAM — Memory',           'category' => 'RAM'],
-                    ['label' => '💿 SSD — Solid State',      'category' => 'SSD'],
-                    ['label' => '📀 HDD — Hard Drives',      'category' => 'HDD'],
-                    ['label' => '🔌 Mainboard',              'category' => 'Mainboard'],
-                    ['label' => '⚡ PSU — Power Supply',     'category' => 'PSU'],
-                ],
-            ],
-            [
-                'title' => 'Cooling & Cases',
-                'links' => [
-                    ['label' => '❄️ CPU Heatsink & AIO',    'category' => 'Heatsink'],
-                    ['label' => '🌀 Case Fans',              'category' => 'Fan'],
-                    ['label' => '🖥️ PC Cases',               'category' => 'Case'],
-                    ['label' => '🔧 PC Builder Tool',         'url'      => 'pc-builder'],
-                    ['label' => '🛡️ Warranty Lookup',        'url'      => 'warranty'],
-                    ['label' => '🏷️ Deals',                  'url'      => 'deals'],
-                ],
-            ],
-        ],
-    ],
-
-    /* ── LAPTOP ──────────────────────────────────────────────────────── */
-    'laptop'  => [
-        'label'    => 'Laptop',
-        'category' => 'Laptop',           // ID 22 → /laptop.html
-        'cols'     => [
-            [
-                'title' => 'By Use Case',
-                'links' => [
-                    ['label' => '🎮 Gaming Laptops',         'category' => 'Gaming Laptop'],
-                    ['label' => '🎨 Creator Laptops',        'category' => 'Creator Laptop'],
-                    ['label' => '💼 Business Laptops',       'category' => 'Business Laptop'],
-                    ['label' => '🪶 Ultrabooks',             'category' => 'Ultrabook'],
-                    ['label' => '📋 All Laptops',            'category' => 'Laptop'],
-                ],
-            ],
-            [
-                'title' => 'Shop Laptops',
-                'links' => [
-                    ['label' => '🍎 MacBook',               'category' => 'MacBook'],
-                    ['label' => '🎮 Gaming Laptop',         'category' => 'Gaming Laptop'],
-                    ['label' => '🎨 Creator Laptop',        'category' => 'Creator Laptop'],
-                    ['label' => '💼 Business Laptop',       'category' => 'Business Laptop'],
-                    ['label' => '🪶 Ultrabook',             'category' => 'Ultrabook'],
-                ],
-            ],
-        ],
-    ],
-
-    /* ── MONITOR ─────────────────────────────────────────────────────── */
-    'monitor' => [
-        'label'    => 'Monitor',
-        'category' => 'Monitor',          // ID 14 → /monitor.html
-        'cols'     => [
-            [
-                'title' => 'By Type',
-                'links' => [
-                    ['label' => '🎮 Gaming Monitors',        'category' => 'Gaming Monitor'],
-                    ['label' => '🎨 Creator Monitors',       'category' => 'Creator Monitor'],
-                    ['label' => '↔️ Ultrawide Monitors',     'category' => 'Ultrawide Monitor'],
-                    ['label' => '🔲 4K Monitors',            'category' => '4K Monitor'],
-                    ['label' => '📺 All Monitors',           'category' => 'Monitor'],
-                ],
-            ],
-            [
-                'title' => 'Shop Monitors',
-                'links' => [
-                    ['label' => '📺 All Monitors',          'category' => 'Monitor'],
-                    ['label' => '🎮 Gaming Monitor',        'category' => 'Gaming Monitor'],
-                    ['label' => '🎨 Creator Monitor',       'category' => 'Creator Monitor'],
-                    ['label' => '↔️ Ultrawide Monitor',     'category' => 'Ultrawide Monitor'],
-                    ['label' => '🔲 4K Monitor',            'category' => '4K Monitor'],
-                ],
-            ],
-        ],
-    ],
-
-    /* ── APPLE ───────────────────────────────────────────────────────── */
-    'apple'   => [
-        'label'    => 'Apple',
-        'category' => 'Apple',            // ID 27 → /apple.html
-        'cols'     => [
-            [
-                'title' => 'Mac',
-                'links' => [
-                    ['label' => '💻 MacBook',                'category' => 'MacBook'],
-                    ['label' => '🖥️ Mac Desktop',            'category' => 'Mac Desktop'],
-                    ['label' => '📱 iPhone 16 Series',       'category' => 'iPhone'],
-                    ['label' => '📲 iPad Series',             'category' => 'iPad'],
-                    ['label' => '🛍️ All Apple Products',     'category' => 'Apple'],
-                ],
-            ],
-            [
-                'title' => 'Accessories',
-                'links' => [
-                    ['label' => '🎧 AirPods Pro / Max',      'category' => 'AirPods'],
-                    ['label' => '⌚ Apple Watch',             'category' => 'Apple Watch'],
-                    ['label' => '🖥️ Mac Desktop',            'category' => 'Mac Desktop'],
-                    ['label' => '📱 iPhone',                 'category' => 'iPhone'],
-                    ['label' => '📲 iPad',                   'category' => 'iPad'],
-                ],
-            ],
-        ],
-    ],
-];
-
 $_searchUrl        = $block->escapeUrl($_searchUrl);
 
 $_searchSuggestUrl = $block->escapeUrl($block->getUrl('pvmodern/search/suggest'));
+$_trackingUrl      = $block->escapeUrl($block->getUrl('pvmodern/orders/tracking'));
+$_trackingPageUrl  = $block->escapeUrl($block->getUrl('order-tracking'));
 
 $_searchQuery      = trim((string) $_req->getParam('q', ''));
-$_isCatStr         = $_isCatPage ? 'true' : 'false';
+$_isCatStr         = ($_isCatPage || $_isFilterPage) ? 'true' : 'false';
 $_activeStr        = $block->escapeHtmlAttr($_activeCat);
 ?>
 <?php /* ── Google Fonts: Inter ── */ ?>
@@ -245,7 +131,7 @@ $_activeStr        = $block->escapeHtmlAttr($_activeCat);
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-<header class="pv3-header-shell" data-mage-init='{"pvmodernHeader":{}}'>
+<header class="pv3-header-shell" data-mage-init='{"pvmodernHeader":{},"pvmodernImageFallback":{}}'>
 
     <div class="pv3-header-line"></div>
 
@@ -379,6 +265,20 @@ $_activeStr        = $block->escapeHtmlAttr($_activeCat);
 
             </nav>
 
+            <a class="pv3-tracking-button"
+                    href="<?= $_trackingPageUrl ?>"
+                    aria-label="Theo dõi đơn hàng">
+                <span class="pv3-tracking-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10 17h4V5H2v12h3"/>
+                        <path d="M14 8h4l4 4v5h-3"/>
+                        <circle cx="7.5" cy="17.5" r="2.5"/>
+                        <circle cx="16.5" cy="17.5" r="2.5"/>
+                    </svg>
+                </span>
+                <span>Theo dõi đơn hàng</span>
+            </a>
+
             <!-- ACTIONS ────────────────────────────────────────────────────── -->
             <div class="pv3-actions">
 
@@ -420,6 +320,20 @@ $_activeStr        = $block->escapeHtmlAttr($_activeCat);
                     </em>
                 </a>
 
+                <a class="pv3-signout-button"
+                   data-auth-signout
+                   href="<?= $_logoutUrl ?>"
+                   aria-label="Sign out"
+                   title="Sign out"
+                   <?= $_isLoggedIn ? '' : 'hidden' ?>>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                        <path d="m16 17 5-5-5-5"/>
+                        <path d="M21 12H9"/>
+                    </svg>
+                    <span>Sign out</span>
+                </a>
+
                 <!-- Hamburger (visible on mobile via CSS) -->
                 <button class="pv3-menu-toggle"
                         type="button"
@@ -443,6 +357,52 @@ $_activeStr        = $block->escapeHtmlAttr($_activeCat);
 
         </div><!-- /.pv3-header-row -->
     </div><!-- /.pv3-header-main -->
+
+    <div class="pv3-tracking-modal"
+         id="pv3-tracking-panel"
+         data-tracking-modal
+         data-tracking-url="<?= $_trackingUrl ?>"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="pv3-tracking-title"
+         hidden>
+        <div class="pv3-tracking-backdrop" data-tracking-close></div>
+        <section class="pv3-tracking-drawer">
+            <div class="pv3-tracking-head">
+                <div>
+                    <span class="pv3-tracking-kicker">GHN / GHTK / Shopee Express</span>
+                    <h2 id="pv3-tracking-title">Theo dõi đơn hàng</h2>
+                </div>
+                <button class="pv3-tracking-close" type="button" data-tracking-close aria-label="Đóng">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <form class="pv3-tracking-form" data-tracking-form>
+                <label>
+                    <span>Mã đơn hàng</span>
+                    <input type="text" name="order_id" placeholder="VD: 000000123 hoặc #SHOP-..." required />
+                </label>
+                <label>
+                    <span>Đơn vị vận chuyển</span>
+                    <select name="provider">
+                        <option value="spx">Shopee Express / SPX</option>
+                        <option value="ghn">Giao Hàng Nhanh</option>
+                        <option value="ghtk">Giao Hàng Tiết Kiệm</option>
+                    </select>
+                </label>
+                <label>
+                    <span>Mã vận đơn nếu có</span>
+                    <input type="text" name="tracking_number" placeholder="Tự tạo mã demo nếu để trống" />
+                </label>
+                <button class="pv3-tracking-submit" type="submit">
+                    <span data-tracking-submit-label>Kiểm tra trạng thái</span>
+                </button>
+            </form>
+            <div class="pv3-tracking-result" data-tracking-result hidden></div>
+        </section>
+    </div>
 
     <!-- MOBILE MENU ─────────────────────────────────────────────────────────── -->
     <div class="pv3-mobile-menu"
@@ -472,6 +432,9 @@ $_activeStr        = $block->escapeHtmlAttr($_activeCat);
                 <a href="<?= $block->escapeUrl($block->getUrl('cookies')) ?>">Cookie Policy</a>
                 <a href="<?= $block->escapeUrl($block->getUrl('customer/account')) ?>">My Account</a>
                 <a href="<?= $block->escapeUrl($block->getUrl('wishlist')) ?>">Wishlist</a>
+                <?php if ($_isLoggedIn): ?>
+                <a data-auth-signout href="<?= $_logoutUrl ?>">Sign out</a>
+                <?php endif; ?>
             </nav>
         </div>
     </div>

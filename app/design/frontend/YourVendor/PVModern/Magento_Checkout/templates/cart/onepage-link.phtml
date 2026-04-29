@@ -1,0 +1,26 @@
+<?php
+/**
+ * Cart primary checkout CTA.
+ *
+ * @var \Magento\Checkout\Block\Onepage\Link $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+<?php if ($block->isPossibleOnepageCheckout()): ?>
+    <?php
+    $checkoutUrl = $block->getCheckoutUrl();
+    $checkoutUrl .= (str_contains($checkoutUrl, '?') ? '&' : '?') . 'step=1';
+    ?>
+    <button type="button"
+            data-role="proceed-to-checkout"
+            title="<?= $escaper->escapeHtmlAttr(__('Tiếp tục thanh toán')) ?>"
+            data-mage-init='{"Magento_Checkout/js/proceed-to-checkout":{"checkoutUrl":"<?= $escaper->escapeJs($checkoutUrl) ?>"}}'
+            class="pvcart-primary-btn<?= $block->isDisabled() ? ' disabled' : '' ?>"
+            <?php if ($block->isDisabled()): ?>disabled="disabled"<?php endif; ?>>
+        <span><?= $escaper->escapeHtml(__('Tiếp tục thanh toán')) ?></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 12h14"/>
+            <path d="m12 5 7 7-7 7"/>
+        </svg>
+    </button>
+<?php endif; ?>

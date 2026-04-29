@@ -1,0 +1,657 @@
+<?php
+/**
+ * PVModern — 4-Step Checkout (reference-faithful)
+ * ================================================
+ * Step 1: Giao hàng   (address form + shipping methods)
+ * Step 2: Thanh toán  (card / e-wallet / bank tabs)
+ * Step 3: Xác nhận    (order review)
+ * Step 4: Hoàn thành  (success screen)
+ *
+ * Matches the reference design in /reference/tmp exactly.
+ *
+ * @var \YourVendor\PVModern\Block\Checkout\Flow $block
+ */
+$bootstrapJson = $block->getSerializedBootstrap();
+$cartUrl       = $block->escapeUrl($block->getUrl('checkout/cart'));
+$homeUrl       = $block->escapeUrl($block->getUrl(''));
+$accountUrl    = $block->escapeUrl($block->getUrl('customer/account'));
+?>
+<div class="pvco2 pvco3"
+     data-mage-init='{"pvmodernCheckout":{}}'
+     data-bootstrap-selector="#pvco3-bootstrap">
+
+    <script type="application/json" id="pvco3-bootstrap"><?= /* @noEscape */ $bootstrapJson ?></script>
+
+    <div class="pv3-container pvco3-wrap">
+
+        <!-- ── STEP INDICATOR ─────────────────────────────────────────── -->
+        <div class="pvco3-steps" role="navigation" aria-label="Các bước thanh toán">
+            <div class="pvco3-steps-inner">
+
+                <!-- Step 1 -->
+                <div class="pvco3-step" data-step-indicator="1">
+                    <div class="pvco3-step-circle" data-circle="1">
+                        <span class="pvco3-step-num">1</span>
+                        <svg class="pvco3-step-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="18" height="18" hidden><path d="M20 6 9 17l-5-5"/></svg>
+                    </div>
+                    <div class="pvco3-step-label">
+                        <p class="pvco3-step-name">Giao hàng</p>
+                        <p class="pvco3-step-desc">Địa chỉ &amp; phương thức</p>
+                    </div>
+                </div>
+
+                <div class="pvco3-connector" data-connector="1-2"></div>
+
+                <!-- Step 2 -->
+                <div class="pvco3-step" data-step-indicator="2">
+                    <div class="pvco3-step-circle" data-circle="2">
+                        <span class="pvco3-step-num">2</span>
+                        <svg class="pvco3-step-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="18" height="18" hidden><path d="M20 6 9 17l-5-5"/></svg>
+                    </div>
+                    <div class="pvco3-step-label">
+                        <p class="pvco3-step-name">Thanh toán</p>
+                        <p class="pvco3-step-desc">Phương thức thanh toán</p>
+                    </div>
+                </div>
+
+                <div class="pvco3-connector" data-connector="2-3"></div>
+
+                <!-- Step 3 -->
+                <div class="pvco3-step" data-step-indicator="3">
+                    <div class="pvco3-step-circle" data-circle="3">
+                        <span class="pvco3-step-num">3</span>
+                        <svg class="pvco3-step-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="18" height="18" hidden><path d="M20 6 9 17l-5-5"/></svg>
+                    </div>
+                    <div class="pvco3-step-label">
+                        <p class="pvco3-step-name">Xác nhận</p>
+                        <p class="pvco3-step-desc">Kiểm tra đơn hàng</p>
+                    </div>
+                </div>
+
+                <div class="pvco3-connector" data-connector="3-4"></div>
+
+                <!-- Step 4 -->
+                <div class="pvco3-step" data-step-indicator="4">
+                    <div class="pvco3-step-circle" data-circle="4">
+                        <span class="pvco3-step-num">4</span>
+                        <svg class="pvco3-step-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="18" height="18" hidden><path d="M20 6 9 17l-5-5"/></svg>
+                    </div>
+                    <div class="pvco3-step-label">
+                        <p class="pvco3-step-name">Hoàn thành</p>
+                        <p class="pvco3-step-desc">Đơn hàng thành công</p>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Progress bar -->
+            <div class="pvco3-progress-bar">
+                <div class="pvco3-progress-fill" data-progress-fill style="width:0%"></div>
+            </div>
+        </div>
+
+        <!-- ── ALERT BANNER ───────────────────────────────────────────── -->
+        <div class="pvco3-alert" data-alert hidden role="alert" aria-live="polite"></div>
+
+        <!-- ════════════════════════════════════════════════════════════════
+             MAIN 2-COLUMN LAYOUT  (steps 1-3)
+        ════════════════════════════════════════════════════════════════ -->
+        <div class="pvco3-layout" data-checkout-layout>
+
+            <!-- LEFT — Forms -->
+            <div class="pvco3-form-col">
+
+                <!-- ══ STEP 1 PANEL: Thông tin giao hàng ════════════════ -->
+                <div class="pvco3-panel" data-panel="1">
+
+                    <!-- Shipping address form -->
+                    <div class="pvco3-card" id="pvco3-shipping-form">
+                        <div class="pvco3-card-header">
+                            <h2 class="pvco3-card-title">Thông tin giao hàng</h2>
+                        </div>
+                        <div class="pvco3-card-body">
+                            <div class="pvco3-grid pvco3-grid--2">
+
+                                <!-- Full name -->
+                                <div class="pvco3-field">
+                                    <label class="pvco3-label" for="pvco3-full-name">Họ và tên <em class="pvco3-req">*</em></label>
+                                    <input type="text" id="pvco3-full-name" name="full_name" data-field="fullName"
+                                           class="pvco3-input" autocomplete="name" placeholder="Nguyễn Văn A"/>
+                                    <small class="pvco3-error" data-error="fullName"></small>
+                                </div>
+
+                                <!-- Phone -->
+                                <div class="pvco3-field">
+                                    <label class="pvco3-label" for="pvco3-phone">Số điện thoại <em class="pvco3-req">*</em></label>
+                                    <input type="tel" id="pvco3-phone" name="phone" data-field="phone"
+                                           class="pvco3-input" autocomplete="tel" placeholder="0912345678"/>
+                                    <small class="pvco3-error" data-error="phone"></small>
+                                </div>
+
+                                <!-- Email -->
+                                <div class="pvco3-field pvco3-field--full">
+                                    <label class="pvco3-label" for="pvco3-email">Email <em class="pvco3-req">*</em></label>
+                                    <input type="email" id="pvco3-email" name="email" data-field="email"
+                                           class="pvco3-input" autocomplete="email" placeholder="user@example.com"/>
+                                    <small class="pvco3-error" data-error="email"></small>
+                                </div>
+
+                                <!-- Address line 1 -->
+                                <div class="pvco3-field pvco3-field--full">
+                                    <label class="pvco3-label" for="pvco3-address1">Địa chỉ <em class="pvco3-req">*</em></label>
+                                    <input type="text" id="pvco3-address1" name="address" data-field="addressLine1"
+                                           class="pvco3-input" autocomplete="street-address" placeholder="123 Đường Nguyễn Huệ"/>
+                                    <small class="pvco3-error" data-error="addressLine1"></small>
+                                </div>
+
+                                <!-- Address line 2 -->
+                                <div class="pvco3-field pvco3-field--full">
+                                    <label class="pvco3-label" for="pvco3-address2">Địa chỉ thêm (tùy chọn)</label>
+                                    <input type="text" id="pvco3-address2" name="address2" data-field="addressLine2"
+                                           class="pvco3-input" placeholder="Căn hộ, tầng, v.v..."/>
+                                </div>
+
+                                <!-- Province -->
+                                <div class="pvco3-field">
+                                    <label class="pvco3-label" for="pvco3-province">Tỉnh/Thành phố <em class="pvco3-req">*</em></label>
+                                    <select id="pvco3-province" name="province" data-field="province"
+                                            class="pvco3-input pvco3-select" data-province-select>
+                                        <option value="">Chọn tỉnh/thành phố</option>
+                                    </select>
+                                    <small class="pvco3-error" data-error="province"></small>
+                                </div>
+
+                                <!-- District -->
+                                <div class="pvco3-field">
+                                    <label class="pvco3-label" for="pvco3-district">Quận/Huyện <em class="pvco3-req">*</em></label>
+                                    <select id="pvco3-district" name="district" data-field="district"
+                                            class="pvco3-input pvco3-select" data-district-select disabled>
+                                        <option value="">Chọn tỉnh/thành phố trước</option>
+                                    </select>
+                                    <small class="pvco3-error" data-error="district"></small>
+                                </div>
+
+                                <!-- Ward -->
+                                <div class="pvco3-field">
+                                    <label class="pvco3-label" for="pvco3-ward">Phường/Xã <em class="pvco3-req">*</em></label>
+                                    <select id="pvco3-ward" name="ward" data-field="ward"
+                                            class="pvco3-input pvco3-select" data-ward-select disabled>
+                                        <option value="">Chọn quận/huyện trước</option>
+                                    </select>
+                                    <small class="pvco3-error" data-error="ward"></small>
+                                </div>
+
+                                <!-- Special instructions -->
+                                <div class="pvco3-field pvco3-field--full">
+                                    <label class="pvco3-label" for="pvco3-note">Ghi chú đặc biệt (tùy chọn)</label>
+                                    <textarea id="pvco3-note" name="note" data-field="specialInstructions"
+                                              class="pvco3-input pvco3-textarea" rows="3"
+                                              placeholder="Ví dụ: Để tại cửa, không cần ký nhận"></textarea>
+                                </div>
+
+                                <!-- Save default -->
+                                <div class="pvco3-field pvco3-field--full pvco3-checkbox-field">
+                                    <input type="checkbox" id="pvco3-save-default" data-field="saveDefault" class="pvco3-checkbox"/>
+                                    <label for="pvco3-save-default" class="pvco3-checkbox-label">Lưu làm địa chỉ mặc định</label>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shipping method selector -->
+                    <div class="pvco3-card" id="pvco3-shipping-methods">
+                        <div class="pvco3-card-header">
+                            <h2 class="pvco3-card-title">Chọn phương thức vận chuyển</h2>
+                        </div>
+                        <div class="pvco3-card-body">
+
+                            <!-- Loading state -->
+                            <div class="pvco3-ship-loading" data-ship-loading hidden>
+                                <span class="pvco3-spinner"></span>
+                                <span>Đang tải phương thức vận chuyển…</span>
+                            </div>
+
+                            <!-- Error state -->
+                            <div class="pvco3-ship-error" data-ship-error hidden></div>
+
+                            <!-- Methods list -->
+                            <div class="pvco3-ship-list" data-ship-list></div>
+
+                            <small class="pvco3-error" data-error="shippingMethod"></small>
+                        </div>
+                    </div>
+
+                    <!-- Step 1 nav buttons -->
+                    <div class="pvco3-nav-buttons">
+                        <a href="<?= $cartUrl ?>" class="pvco3-btn pvco3-btn--outline">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+                            Quay lại
+                        </a>
+                        <button type="button" class="pvco3-btn pvco3-btn--primary" data-next-step="2">
+                            Tiếp theo
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </button>
+                    </div>
+
+                </div><!-- /panel-1 -->
+
+
+                <!-- ══ STEP 2 PANEL: Thanh toán ══════════════════════════ -->
+                <div class="pvco3-panel" data-panel="2" hidden>
+
+                    <div class="pvco3-card">
+                        <div class="pvco3-card-header">
+                            <h2 class="pvco3-card-title">Chọn phương thức thanh toán</h2>
+                        </div>
+                        <div class="pvco3-card-body">
+
+                            <!-- Tab bar -->
+                            <div class="pvco3-tabs" role="tablist">
+                                <button type="button" class="pvco3-tab is-active" role="tab" data-tab="card" aria-selected="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18"/><path d="M7 15h4"/></svg>
+                                    Thẻ
+                                </button>
+                                <button type="button" class="pvco3-tab" role="tab" data-tab="ewallet" aria-selected="false">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+                                    Ví điện tử
+                                </button>
+                                <button type="button" class="pvco3-tab" role="tab" data-tab="bank" aria-selected="false">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="m4 9 8-4 8 4"/><path d="M5 10h14"/><path d="M7 10v7"/><path d="M12 10v7"/><path d="M17 10v7"/><path d="M4 19h16"/></svg>
+                                    Ngân hàng
+                                </button>
+                            </div>
+
+                            <!-- ── TAB: Thẻ ── -->
+                            <div class="pvco3-tab-panel" data-tab-panel="card">
+                                <p class="pvco3-saved-link" data-toggle-saved>Sử dụng thẻ đã lưu</p>
+
+                                <div class="pvco3-grid pvco3-grid--1" id="pvco3-card-form">
+                                    <div class="pvco3-field pvco3-field--full">
+                                        <label class="pvco3-label" for="pvco3-card-number">Số thẻ <em class="pvco3-req">*</em></label>
+                                        <input type="text" id="pvco3-card-number" data-pay-field="cardNumber"
+                                               class="pvco3-input" placeholder="1234 5678 9012 3456" maxlength="19"
+                                               inputmode="numeric"/>
+                                        <small class="pvco3-error" data-error="cardNumber"></small>
+                                    </div>
+                                    <div class="pvco3-field pvco3-field--full">
+                                        <label class="pvco3-label" for="pvco3-card-name">Tên chủ thẻ <em class="pvco3-req">*</em></label>
+                                        <input type="text" id="pvco3-card-name" data-pay-field="cardholderName"
+                                               class="pvco3-input" placeholder="NGUYEN VAN A" autocomplete="cc-name"/>
+                                        <small class="pvco3-error" data-error="cardholderName"></small>
+                                    </div>
+                                    <div class="pvco3-grid pvco3-grid--2">
+                                        <div class="pvco3-field">
+                                            <label class="pvco3-label" for="pvco3-card-expiry">Hết hạn MM/YY <em class="pvco3-req">*</em></label>
+                                            <input type="text" id="pvco3-card-expiry" data-pay-field="expiry"
+                                                   class="pvco3-input" placeholder="12/25" maxlength="5" autocomplete="cc-exp"/>
+                                            <small class="pvco3-error" data-error="expiry"></small>
+                                        </div>
+                                        <div class="pvco3-field">
+                                            <label class="pvco3-label" for="pvco3-card-cvv">CVV <em class="pvco3-req">*</em></label>
+                                            <input type="text" id="pvco3-card-cvv" data-pay-field="cvv"
+                                                   class="pvco3-input" placeholder="123" maxlength="4"
+                                                   inputmode="numeric" autocomplete="cc-csc"/>
+                                            <small class="pvco3-error" data-error="cvv"></small>
+                                        </div>
+                                    </div>
+                                    <div class="pvco3-checkbox-field">
+                                        <input type="checkbox" id="pvco3-save-card" class="pvco3-checkbox" data-pay-field="saveCard"/>
+                                        <label for="pvco3-save-card" class="pvco3-checkbox-label">Lưu thẻ này cho lần mua sau</label>
+                                    </div>
+                                    <div class="pvco3-ssl-badge">
+                                        <span>🔒</span>
+                                        <span>Thanh toán bảo mật với mã hóa SSL 256-bit</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ── TAB: Ví điện tử ── -->
+                            <div class="pvco3-tab-panel" data-tab-panel="ewallet" hidden>
+                                <div class="pvco3-ewallet-list">
+                                    <!-- MOMO -->
+                                    <button type="button" class="pvco3-ewallet-card" data-ewallet-card data-ewallet="momo">
+                                        <div class="pvco3-ewallet-icon pvco3-ewallet-icon--momo" aria-hidden="true">
+                                            <span class="pvco3-ewallet-mark">MoMo</span>
+                                        </div>
+                                        <div class="pvco3-ewallet-info">
+                                            <h3>MOMO</h3>
+                                            <p>Ví điện tử hàng đầu Việt Nam</p>
+                                            <div class="pvco3-ewallet-tags">
+                                                <span class="pvco3-tag pvco3-tag--green">Được xác minh</span>
+                                                <span class="pvco3-tag pvco3-tag--amber">Nhanh chóng</span>
+                                            </div>
+                                        </div>
+                                        <span class="pvco3-ewallet-arrow">→</span>
+                                    </button>
+                                    <!-- ZaloPay -->
+                                    <button type="button" class="pvco3-ewallet-card" data-ewallet-card data-ewallet="zalopay">
+                                        <div class="pvco3-ewallet-icon pvco3-ewallet-icon--zalopay" aria-hidden="true">
+                                            <span class="pvco3-ewallet-mark pvco3-ewallet-mark--zalo">ZaloPay</span>
+                                        </div>
+                                        <div class="pvco3-ewallet-info">
+                                            <h3>ZaloPay</h3>
+                                            <p>Thanh toán qua ứng dụng Zalo</p>
+                                            <div class="pvco3-ewallet-tags">
+                                                <span class="pvco3-tag pvco3-tag--green">Được xác minh</span>
+                                                <span class="pvco3-tag pvco3-tag--amber">Nhanh chóng</span>
+                                            </div>
+                                        </div>
+                                        <span class="pvco3-ewallet-arrow">→</span>
+                                    </button>
+                                </div>
+                                <div class="pvco3-info-box pvco3-info-box--blue">
+                                    <p><strong>Lưu ý:</strong> Bạn sẽ được chuyển hướng sang ứng dụng hoặc trang web của <strong>MOMO/ZaloPay</strong> để hoàn tất thanh toán.</p>
+                                </div>
+                                <button type="button" class="pvco3-btn pvco3-btn--primary pvco3-btn--full is-disabled" data-ewallet-continue disabled="disabled">
+                                    Tiếp tục với ví điện tử
+                                </button>
+                            </div>
+
+                            <!-- ── TAB: Ngân hàng ── -->
+                            <div class="pvco3-tab-panel" data-tab-panel="bank" hidden>
+                                <div class="pvco3-bank-section">
+                                    <p class="pvco3-label" style="margin-bottom:12px">Chọn ngân hàng</p>
+                                    <div class="pvco3-bank-grid" data-bank-grid>
+                                        <button type="button" class="pvco3-bank-card is-selected" data-bank="vietcombank">
+                                            <p class="pvco3-bank-name">Vietcombank</p>
+                                            <p class="pvco3-bank-code">Mã: 970</p>
+                                        </button>
+                                        <button type="button" class="pvco3-bank-card" data-bank="techcombank">
+                                            <p class="pvco3-bank-name">TechcomBank</p>
+                                            <p class="pvco3-bank-code">Mã: 980</p>
+                                        </button>
+                                        <button type="button" class="pvco3-bank-card" data-bank="acb">
+                                            <p class="pvco3-bank-name">ACB</p>
+                                            <p class="pvco3-bank-code">Mã: 963</p>
+                                        </button>
+                                        <button type="button" class="pvco3-bank-card" data-bank="vpbank">
+                                            <p class="pvco3-bank-name">VPBank</p>
+                                            <p class="pvco3-bank-code">Mã: 975</p>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="pvco3-transfer-box">
+                                    <h3 class="pvco3-transfer-title">Thông tin chuyển khoản</h3>
+
+                                    <div class="pvco3-transfer-row">
+                                        <p class="pvco3-transfer-label">Chủ tài khoản</p>
+                                        <div class="pvco3-transfer-value-wrap">
+                                            <span class="pvco3-transfer-value" id="pvco3-tf-holder">SHOP VIETNAM LTD</span>
+                                            <button type="button" class="pvco3-copy-btn" data-copy-target="pvco3-tf-holder" title="Sao chép">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="pvco3-transfer-row">
+                                        <p class="pvco3-transfer-label">Số tài khoản</p>
+                                        <div class="pvco3-transfer-value-wrap">
+                                            <span class="pvco3-transfer-value pvco3-mono" id="pvco3-tf-account">123456789012</span>
+                                            <button type="button" class="pvco3-copy-btn" data-copy-target="pvco3-tf-account" title="Sao chép">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="pvco3-transfer-row">
+                                        <p class="pvco3-transfer-label">Ngân hàng</p>
+                                        <div class="pvco3-transfer-value-wrap">
+                                            <span class="pvco3-transfer-value" id="pvco3-tf-bank">Vietcombank</span>
+                                            <button type="button" class="pvco3-copy-btn" data-copy-target="pvco3-tf-bank" title="Sao chép">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="pvco3-transfer-row">
+                                        <p class="pvco3-transfer-label">Mã tham chiếu (ghi vào nội dung chuyển)</p>
+                                        <div class="pvco3-transfer-value-wrap">
+                                            <span class="pvco3-transfer-value pvco3-mono" id="pvco3-tf-ref" data-transfer-ref>TRANSFER-<?= date('YmdHis') ?></span>
+                                            <button type="button" class="pvco3-copy-btn" data-copy-target="pvco3-tf-ref" title="Sao chép">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="pvco3-info-box pvco3-info-box--amber">
+                                    <h4>Hướng dẫn</h4>
+                                    <ol>
+                                        <li>Sao chép thông tin tài khoản ở trên</li>
+                                        <li>Đăng nhập vào ứng dụng ngân hàng</li>
+                                        <li>Chuyển khoản tới số tài khoản trên</li>
+                                        <li>Sao chép mã tham chiếu vào nội dung chuyển</li>
+                                        <li>Chúng tôi sẽ xác nhận trong vòng 5 phút</li>
+                                    </ol>
+                                </div>
+                            </div>
+
+                        </div><!-- /card-body -->
+                    </div><!-- /card -->
+
+                    <!-- Security trust badge (below payment card) -->
+                    <div class="pvco3-card pvco3-trust-card">
+                        <div class="pvco3-trust-inline">
+                            <span class="pvco3-trust-icon">🔒</span>
+                            <div>
+                                <h3>Thanh toán an toàn 100%</h3>
+                                <p>Thông tin của bạn được bảo vệ bằng mã hóa SSL 256-bit. Thanh toán được xác minh bởi các công ty hàng đầu.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 nav buttons -->
+                    <div class="pvco3-nav-buttons">
+                        <button type="button" class="pvco3-btn pvco3-btn--outline" data-prev-step="1">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+                            Quay lại
+                        </button>
+                        <button type="button" class="pvco3-btn pvco3-btn--primary is-disabled" data-next-step="3" data-payment-next disabled="disabled">
+                            Tiếp tục
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </button>
+                    </div>
+
+                </div><!-- /panel-2 -->
+
+
+                <!-- ══ STEP 3 PANEL: Xác nhận ════════════════════════════ -->
+                <div class="pvco3-panel" data-panel="3" hidden>
+
+                    <!-- Shipping/payment review card -->
+                    <div class="pvco3-card">
+                        <!-- Shipping address section -->
+                        <div class="pvco3-review-section" id="pvco3-review-address">
+                            <div class="pvco3-review-header">
+                                <h3>Địa chỉ giao hàng</h3>
+                                <button type="button" class="pvco3-edit-btn" data-goto-step="1" title="Sửa">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                                </button>
+                            </div>
+                            <div class="pvco3-review-body" data-review-address></div>
+                        </div>
+                        <!-- Shipping method section -->
+                        <div class="pvco3-review-section" id="pvco3-review-shipping">
+                            <div class="pvco3-review-header">
+                                <h3>Phương thức vận chuyển</h3>
+                            </div>
+                            <div class="pvco3-review-body" data-review-shipping></div>
+                        </div>
+                        <!-- Payment method section -->
+                        <div class="pvco3-review-section" style="border-bottom:none">
+                            <div class="pvco3-review-header">
+                                <h3>Phương thức thanh toán</h3>
+                                <button type="button" class="pvco3-edit-btn" data-goto-step="2" title="Sửa">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                                </button>
+                            </div>
+                            <div class="pvco3-review-body" data-review-payment></div>
+                        </div>
+                    </div>
+
+                    <!-- Order items card -->
+                    <div class="pvco3-card">
+                        <div class="pvco3-card-header">
+                            <h2 class="pvco3-card-title">Chi tiết đơn hàng</h2>
+                        </div>
+                        <div class="pvco3-card-body" data-review-items></div>
+
+                        <!-- Pricing summary inside this card -->
+                        <div class="pvco3-review-totals" data-review-totals></div>
+                    </div>
+
+                    <!-- Terms -->
+                    <div class="pvco3-card pvco3-terms-card">
+                        <div class="pvco3-checkbox-field">
+                            <input type="checkbox" id="pvco3-terms" class="pvco3-checkbox" checked/>
+                            <label for="pvco3-terms" class="pvco3-checkbox-label">
+                                Tôi đồng ý với <a href="<?= $block->escapeUrl($block->getUrl('privacy-policy-cookie-restriction-mode')) ?>" class="pvco3-link">Điều khoản dịch vụ</a> và <a href="<?= $block->escapeUrl($block->getUrl('privacy-policy-cookie-restriction-mode')) ?>" class="pvco3-link">Chính sách bảo mật</a>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 nav buttons -->
+                    <div class="pvco3-nav-buttons">
+                        <button type="button" class="pvco3-btn pvco3-btn--outline" data-prev-step="2">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+                            Quay lại
+                        </button>
+                        <button type="button" class="pvco3-btn pvco3-btn--primary" data-place-order aria-live="polite">
+                            <span class="pvco3-place-label">
+                                Xác nhận &amp; Thanh toán
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                            </span>
+                            <span class="pvco3-place-loading" hidden>
+                                <span class="pvco3-spinner pvco3-spinner--sm"></span>
+                                Đang xử lý…
+                            </span>
+                        </button>
+                    </div>
+
+                </div><!-- /panel-3 -->
+
+            </div><!-- /.pvco3-form-col -->
+
+
+            <!-- ══ RIGHT SIDEBAR (Steps 1–3) ═══════════════════════════════ -->
+            <aside class="pvco3-sidebar">
+                <div class="pvco3-card pvco3-sidebar-card">
+                    <div class="pvco3-card-header">
+                        <h2 class="pvco3-card-title">Đơn hàng của bạn</h2>
+                    </div>
+                    <div class="pvco3-card-body">
+
+                        <!-- Item list -->
+                        <div class="pvco3-sidebar-items" data-sidebar-items></div>
+
+                        <!-- Pricing breakdown -->
+                        <div class="pvco3-sidebar-totals">
+                            <div class="pvco3-sidebar-row">
+                                <span>Tạm tính</span>
+                                <strong data-sidebar-subtotal>—</strong>
+                            </div>
+                            <div class="pvco3-sidebar-row" data-sidebar-shipping-row hidden>
+                                <span>Vận chuyển</span>
+                                <strong data-sidebar-shipping>—</strong>
+                            </div>
+                            <div class="pvco3-sidebar-row pvco3-sidebar-row--discount" data-sidebar-discount-row hidden>
+                                <span>Giảm giá</span>
+                                <strong data-sidebar-discount>—</strong>
+                            </div>
+                        </div>
+
+                        <!-- Grand total box -->
+                        <div class="pvco3-sidebar-total-box">
+                            <div class="pvco3-sidebar-grand">
+                                <span>Tổng cộng</span>
+                                <strong data-sidebar-grand>—</strong>
+                            </div>
+                        </div>
+
+                        <!-- Meta info -->
+                        <div class="pvco3-sidebar-meta">
+                            <p><strong data-sidebar-count>0</strong> sản phẩm trong đơn</p>
+                            <p data-sidebar-carrier-row hidden>Vận chuyển: <strong data-sidebar-carrier></strong></p>
+                        </div>
+
+                    </div>
+                </div>
+            </aside>
+
+        </div><!-- /.pvco3-layout -->
+
+
+        <!-- ════════════════════════════════════════════════════════════════
+             STEP 4 — SUCCESS SCREEN
+        ════════════════════════════════════════════════════════════════ -->
+        <div class="pvco3-success" data-success-screen hidden>
+
+            <!-- Bounce checkmark -->
+            <div class="pvco3-success-anim">
+                <div class="pvco3-success-ring">
+                    <div class="pvco3-success-icon">✓</div>
+                </div>
+            </div>
+
+            <h1 class="pvco3-success-title">Thanh toán thành công!</h1>
+            <p class="pvco3-success-sub">Cảm ơn bạn đã mua sắm. Đơn hàng của bạn đã được xác nhận.</p>
+
+            <!-- Order number card -->
+            <div class="pvco3-success-order-box">
+                <p class="pvco3-success-order-label">Số đơn hàng</p>
+                <p class="pvco3-success-order-num" data-success-order-number></p>
+                <p class="pvco3-success-order-date" data-success-order-date></p>
+            </div>
+
+            <!-- Delivery + payment summary -->
+            <div class="pvco3-card">
+                <div class="pvco3-card-body" data-success-info></div>
+            </div>
+
+            <!-- Email notice -->
+            <div class="pvco3-info-box pvco3-info-box--blue" data-success-email-box hidden>
+                <p data-success-email-msg></p>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="pvco3-success-actions">
+                <a href="<?= $homeUrl ?>" class="pvco3-btn pvco3-btn--outline">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    Trang chủ
+                </a>
+                <button type="button" class="pvco3-btn pvco3-btn--primary" data-download-invoice>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Tải hóa đơn
+                </button>
+                <a href="<?= $accountUrl ?>" class="pvco3-btn pvco3-btn--outline">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Theo dõi đơn
+                </a>
+            </div>
+
+            <!-- Next steps -->
+            <div class="pvco3-card" style="margin-top:24px">
+                <div class="pvco3-card-header"><h2 class="pvco3-card-title">Bước tiếp theo</h2></div>
+                <div class="pvco3-card-body">
+                    <ol class="pvco3-next-steps">
+                        <li>Kiểm tra email xác nhận trong 5 phút tới</li>
+                        <li>Chuẩn bị địa điểm giao hàng vào ngày dự kiến</li>
+                        <li>Theo dõi đơn hàng qua ứng dụng hoặc website</li>
+                        <li>Kiểm tra sản phẩm khi nhận hàng</li>
+                    </ol>
+                </div>
+            </div>
+
+        </div><!-- /.pvco3-success -->
+
+
+        <!-- ════════════════════════════════════════════════════════════════
+             PROCESSING OVERLAY
+        ════════════════════════════════════════════════════════════════ -->
+        <div class="pvco3-processing" data-processing-overlay hidden>
+            <div class="pvco3-processing-inner">
+                <div class="pvco3-spinner pvco3-spinner--lg"></div>
+                <p>Đang xử lý thanh toán…</p>
+            </div>
+        </div>
+
+    </div><!-- /.pv3-container -->
+</div><!-- /.pvco3 -->

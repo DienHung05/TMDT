@@ -1,6 +1,11 @@
 <?php /** @var \Magento\Framework\View\Element\Template $block */ ?>
 <?php
 $_homeUrl = $block->getUrl('');
+$_normalizeKey = static function (string $value): string {
+    $value = strtolower(trim($value));
+    $value = preg_replace('/[^a-z0-9]+/', '-', $value);
+    return trim((string) $value, '-');
+};
 $_homeSearchUrl = static function (string $query = '') use ($_homeUrl): string {
     $query = trim($query);
 
@@ -10,6 +15,15 @@ $_homeSearchUrl = static function (string $query = '') use ($_homeUrl): string {
 
     return $_homeUrl . '?q=' . rawurlencode($query) . '#pv3-products';
 };
+$_homeFilterUrl = static function (string $category = '') use ($_homeUrl, $_normalizeKey): string {
+    $category = $_normalizeKey($category);
+
+    if ($category === '') {
+        return $_homeUrl . '#pv3-products';
+    }
+
+    return $_homeUrl . '?category=' . rawurlencode($category) . '#pv3-products';
+};
 ?>
 <footer class="pv3-footer-shell">
     <div class="pv3-container">
@@ -17,11 +31,11 @@ $_homeSearchUrl = static function (string $query = '') use ($_homeUrl): string {
             <div>
                 <h3>Shop</h3>
                 <ul>
-                    <li><a href="<?= $block->escapeUrl($_homeSearchUrl()) ?>">Featured products</a></li>
-                    <li><a href="<?= $block->escapeUrl($_homeSearchUrl('monitor')) ?>">Monitor</a></li>
-                    <li><a href="<?= $block->escapeUrl($_homeSearchUrl('apple')) ?>">Apple</a></li>
-                    <li><a href="<?= $block->escapeUrl($_homeSearchUrl('laptop')) ?>">Laptop</a></li>
-                    <li><a href="<?= $block->escapeUrl($_homeSearchUrl('desktop')) ?>">Desktop</a></li>
+                    <li><a href="<?= $block->escapeUrl($_homeFilterUrl()) ?>">Featured products</a></li>
+                    <li><a href="<?= $block->escapeUrl($_homeFilterUrl('monitor')) ?>">Monitor</a></li>
+                    <li><a href="<?= $block->escapeUrl($_homeFilterUrl('apple')) ?>">Apple</a></li>
+                    <li><a href="<?= $block->escapeUrl($_homeFilterUrl('laptop')) ?>">Laptop</a></li>
+                    <li><a href="<?= $block->escapeUrl($_homeFilterUrl('desktop')) ?>">Desktop</a></li>
                     <li><a href="<?= $block->escapeUrl($block->getUrl('deals')) ?>">Deals</a></li>
                 </ul>
             </div>
@@ -50,7 +64,52 @@ $_homeSearchUrl = static function (string $query = '') use ($_homeUrl): string {
                     <span class="pv3-footer-logo"><img src="<?= $block->escapeUrl($block->getViewFileUrl('YourVendor_PVModern::images/icon.svg')) ?>" alt="Techieworld" /></span>
                     <strong>Techieworld</strong>
                 </div>
-                <p>Premium hardware for developers, creators, and power users. Techieworld reads live products from Magento admin and surfaces them in a cleaner, faster storefront experience.</p>
+                <div class="pv3-footer-payment">
+                    <h3>Payment methods</h3>
+                    <div class="pv3-payment-grid" aria-label="Supported payment methods">
+                        <span class="pv3-payment-pill is-momo" aria-label="MoMo">
+                            <svg viewBox="0 0 48 48" aria-hidden="true">
+                                <rect x="4" y="4" width="40" height="40" rx="14" fill="currentColor"/>
+                                <path d="M14 31V17h5l5 7 5-7h5v14h-4V23l-6 8-6-8v8h-4Z" fill="#fff"/>
+                            </svg>
+                        </span>
+                        <span class="pv3-payment-pill is-vnpay" aria-label="VNPay">
+                            <svg viewBox="0 0 48 48" aria-hidden="true">
+                                <rect x="4" y="4" width="40" height="40" rx="14" fill="currentColor"/>
+                                <path d="M14 18h6l4 12 4-12h6l-7 14h-6l-7-14Zm22 0h4v14h-4V18Z" fill="#fff"/>
+                            </svg>
+                        </span>
+                        <span class="pv3-payment-pill is-bank" aria-label="Banks">
+                            <svg viewBox="0 0 48 48" aria-hidden="true">
+                                <path d="M24 10 10 16v3h28v-3L24 10Zm-9 12h4v11h-4V22Zm7 0h4v11h-4V22Zm7 0h4v11h-4V22Zm7 0h4v11h-4V22ZM9 36h30v3H9v-3Z" fill="currentColor"/>
+                            </svg>
+                        </span>
+                        <span class="pv3-payment-pill is-qr" aria-label="VietQR">
+                            <svg viewBox="0 0 48 48" aria-hidden="true">
+                                <rect x="8" y="8" width="12" height="12" rx="2" stroke="currentColor" stroke-width="4" fill="none"/>
+                                <rect x="28" y="8" width="12" height="12" rx="2" stroke="currentColor" stroke-width="4" fill="none"/>
+                                <rect x="8" y="28" width="12" height="12" rx="2" stroke="currentColor" stroke-width="4" fill="none"/>
+                                <path d="M29 29h4v4h-4zM35 29h4v4h-4zM29 35h10" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        <span class="pv3-payment-pill is-card" aria-label="Cards">
+                            <svg viewBox="0 0 48 48" aria-hidden="true">
+                                <rect x="8" y="13" width="32" height="22" rx="5" fill="currentColor"/>
+                                <path d="M8 20h32" stroke="#fff" stroke-width="4"/>
+                                <path d="M14 29h8" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        <span class="pv3-payment-pill is-cod" aria-label="Cash on delivery">
+                            <svg viewBox="0 0 48 48" aria-hidden="true">
+                                <circle cx="24" cy="24" r="16" fill="currentColor"/>
+                                <path d="M19 20c0-2.2 2.2-4 5-4 2.6 0 4.7 1.2 5 3.2" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
+                                <path d="M29 28c0 2.2-2.2 4-5 4-2.6 0-4.7-1.2-5-3.2" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
+                                <path d="M24 14v20" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                    </div>
+                    <p>Checkout is ready for COD, transfer, VietQR-style manual payment, and gateway slots that can be wired later without changing the storefront flow.</p>
+                </div>
             </div>
         </div>
         <div class="pv3-footer-bottom">

@@ -1,0 +1,63 @@
+<?php
+/**
+ * PVModern Cart – reference cart list.
+ * Matches: CartItemList.tsx from /reference/tmp
+ */
+
+// phpcs:disable Magento2.Templates.ThisInTemplate
+
+/** @var $block \Magento\Checkout\Block\Cart\Grid */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+<?= $block->getChildHtml('form_before') ?>
+<form action="<?= $escaper->escapeUrl($block->getUrl('checkout/cart/updatePost')) ?>"
+      method="post"
+      id="form-validate"
+      data-mage-init='{
+          "Magento_Checkout/js/action/update-shopping-cart":{
+              "validationURL":"<?= $escaper->escapeUrl($block->getUrl('checkout/cart/updateItemQty')) ?>",
+              "updateCartActionContainer":"#update_cart_action_container"
+          },
+          "Magento_Checkout/js/cart/ensure-subtotal-sync":{},
+          "pvmodernCart":{}
+      }'
+      class="form form-cart pvcart-form">
+    <?= $block->getBlockHtml('formkey') ?>
+
+    <div class="pvcart-list-card">
+        <table id="shopping-cart-table"
+               class="cart items data table"
+               data-mage-init='{"shoppingCart":{"emptyCartButton":".action.clear","updateCartActionContainer":"#update_cart_action_container"}}'>
+            <caption class="table-caption"><?= $escaper->escapeHtml(__('Shopping Cart Items')) ?></caption>
+            <?php foreach ($block->getItems() as $_item): ?>
+                <?= $block->getItemHtml($_item) ?>
+            <?php endforeach ?>
+        </table>
+    </div>
+
+    <!-- Hidden actions required by Magento JS -->
+    <div class="cart main actions pvcart-hidden-actions" style="display:none">
+        <?php if ($block->getViewModel()->isClearShoppingCartEnabled()): ?>
+            <button type="button"
+                    name="update_cart_action"
+                    data-cart-empty=""
+                    value="empty_cart"
+                    title="<?= $escaper->escapeHtmlAttr(__('Clear shopping cart')) ?>"
+                    class="action clear"
+                    id="empty_cart_button">
+                <span><?= $escaper->escapeHtml(__('Clear cart')) ?></span>
+            </button>
+        <?php endif ?>
+        <button type="submit"
+                name="update_cart_action"
+                data-cart-item-update=""
+                value="update_qty"
+                title="<?= $escaper->escapeHtmlAttr(__('Update shopping cart')) ?>"
+                class="action update">
+            <span><?= $escaper->escapeHtml(__('Update cart')) ?></span>
+        </button>
+        <input type="hidden" value="" id="update_cart_action_container" data-cart-item-update=""/>
+    </div>
+</form>
+
+<?= $block->getChildHtml('shopping.cart.table.after') ?>

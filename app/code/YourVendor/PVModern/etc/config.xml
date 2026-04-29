@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <catalog>
+            <frontend>
+                <grid_per_page>8</grid_per_page>
+                <grid_per_page_values>8,16,24</grid_per_page_values>
+                <list_per_page>8</list_per_page>
+                <list_per_page_values>8,16,24</list_per_page_values>
+            </frontend>
+        </catalog>
+        <carriers>
+            <pvmodernshipping>
+                <active>1</active>
+                <model>YourVendor\PVModern\Model\Carrier\PvmodernShipping</model>
+                <title>Techieworld Delivery</title>
+                <name>Dynamic carrier options</name>
+                <sort_order>35</sort_order>
+                <showmethod>1</showmethod>
+                <specificerrmsg>Shipping quotes are temporarily unavailable. Please retry or switch to store pickup.</specificerrmsg>
+            </pvmodernshipping>
+        </carriers>
+        <payment>
+            <pvmodern_cod>
+                <active>1</active>
+                <model>YourVendor\PVModern\Model\Payment\Method\Cod</model>
+                <order_status>pending</order_status>
+                <title>Cash on Delivery</title>
+                <allowspecific>0</allowspecific>
+                <group>offline</group>
+            </pvmodern_cod>
+            <pvmodern_banktransfer>
+                <active>1</active>
+                <model>YourVendor\PVModern\Model\Payment\Method\BankTransfer</model>
+                <order_status>pending</order_status>
+                <title>Bank Transfer / VietQR</title>
+                <allowspecific>0</allowspecific>
+                <group>offline</group>
+            </pvmodern_banktransfer>
+            <pvmodern_onlinegateway>
+                <active>1</active>
+                <model>YourVendor\PVModern\Model\Payment\Method\OnlineGateway</model>
+                <order_status>pending</order_status>
+                <title>Online Payment Gateway</title>
+                <allowspecific>0</allowspecific>
+                <group>offline</group>
+            </pvmodern_onlinegateway>
+        </payment>
+    </default>
+</config>

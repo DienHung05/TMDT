@@ -1,0 +1,68 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+$tabs = [
+    ['label' => 'Xem tất cả', 'url' => $block->getUrl('news'), 'active' => false],
+    ['label' => 'Weather', 'url' => $block->getUrl('weather'), 'active' => true],
+    ['label' => 'Currency Rate', 'url' => $block->getUrl('currency-rate'), 'active' => false],
+];
+?>
+<main class="pvinfo-page" data-pvinfo-weather data-api-url="<?= $block->escapeUrl($block->getUrl('pvmodern/api/weather')) ?>">
+    <div class="pvinfo-container">
+        <nav class="pvinfo-tabs" aria-label="Information pages">
+            <?php foreach ($tabs as $tab): ?>
+                <a class="pvinfo-tab<?= $tab['active'] ? ' is-active' : '' ?>" href="<?= $block->escapeUrl($tab['url']) ?>">
+                    <?= $block->escapeHtml($tab['label']) ?>
+                </a>
+            <?php endforeach; ?>
+        </nav>
+
+        <section class="pvinfo-hero-copy">
+            <span class="pvinfo-kicker">Forecast center</span>
+            <h1>Weather</h1>
+            <p>Cập nhật thời tiết hiện tại, dự báo, cảnh báo và tin tức thời tiết mới nhất.</p>
+        </section>
+
+        <form class="pvweather-search surface-card" data-weather-form>
+            <label>
+                <span>City</span>
+                <input type="text" name="city" value="Hanoi" placeholder="Hanoi, Ho Chi Minh City...">
+            </label>
+            <button type="submit">Search</button>
+            <button type="button" class="pvinfo-secondary" data-use-location>Use my location</button>
+            <p data-geo-message></p>
+        </form>
+
+        <div class="pvinfo-state pvinfo-loading" data-weather-loading>
+            <span></span><span></span><span></span>
+        </div>
+        <div class="pvinfo-state pvinfo-error" data-weather-error hidden>
+            <strong>Không tải được thời tiết.</strong>
+            <button type="button" data-weather-retry>Thử lại</button>
+        </div>
+
+        <div data-weather-content hidden>
+            <section class="pvweather-top">
+                <article class="pvweather-current" data-current-weather></article>
+                <article class="pvweather-alert surface-card" data-weather-alert></article>
+            </section>
+
+            <section class="surface-card">
+                <h2>Hourly forecast</h2>
+                <div class="pvweather-hourly" data-hourly-forecast></div>
+            </section>
+
+            <section class="surface-card">
+                <h2>Daily forecast 8 ngày</h2>
+                <div class="pvweather-daily" data-daily-forecast></div>
+            </section>
+
+            <section class="surface-card">
+                <div class="pvinfo-section-head">
+                    <h2>Weather news</h2>
+                    <p>Bão, mưa lớn, nắng nóng và khí hậu.</p>
+                </div>
+                <div class="pvweather-news" data-weather-news></div>
+            </section>
+        </div>
+    </div>
+</main>

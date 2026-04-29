@@ -121,12 +121,10 @@ class ProductVisualResolver
             return $this->normalizeImageUrl(self::EXACT_SKU_MAP[$sku]);
         }
 
-        foreach (self::SKU_MAP as $prefix => $image) {
-            if (str_starts_with($sku, $prefix)) {
-                return $this->normalizeImageUrl($image);
-            }
-        }
-
+        // Broad prefix-based remote fallbacks can easily produce the wrong
+        // model image. For unresolved SKUs we return the local placeholder and
+        // let the storefront image-fallback layer generate a product-name-aware
+        // visual instead of showing a mismatched external image.
         return $this->assetRepository->getUrl(self::PLACEHOLDER_ASSET);
     }
 

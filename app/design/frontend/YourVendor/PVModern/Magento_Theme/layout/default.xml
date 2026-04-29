@@ -1,8 +1,16 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="css/pv-header-tracking.css"/>
+    </head>
     <body>
         <attribute name="class" value="pvmodern-v3"/>
+        <referenceContainer name="header.container" remove="true"/>
+        <referenceBlock name="top.links" remove="true"/>
+        <referenceBlock name="header.links" remove="true"/>
+        <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+        <referenceBlock name="wishlist_sidebar" remove="true"/>
         <referenceContainer name="after.body.start">
             <block class="Magento\Framework\View\Element\Template"
                    name="pvmodern.v3.header"
