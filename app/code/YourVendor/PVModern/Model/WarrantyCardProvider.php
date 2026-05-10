@@ -8,6 +8,8 @@ use DateTimeImmutable;
 use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\Product\Visibility;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
+use Magento\Sales\Model\ResourceModel\Order\CollectionFactory as OrderCollectionFactory;
+use Magento\Sales\Model\ResourceModel\Order\Item\CollectionFactory as OrderItemCollectionFactory;
 use Magento\Store\Model\StoreManagerInterface;
 
 class WarrantyCardProvider
@@ -18,7 +20,9 @@ class WarrantyCardProvider
         private readonly CollectionFactory $collectionFactory,
         private readonly Visibility $visibility,
         private readonly StoreManagerInterface $storeManager,
-        private readonly ProductVisualResolver $productVisualResolver
+        private readonly ProductVisualResolver $productVisualResolver,
+        private readonly OrderCollectionFactory $orderCollectionFactory,
+        private readonly OrderItemCollectionFactory $orderItemCollectionFactory
     ) {
     }
 
@@ -59,6 +63,70 @@ class WarrantyCardProvider
         }
 
         return null;
+    }
+
+    public function findByOrderCode(string $orderCode): ?array
+    {
+        // Strip prefix: ORD000000037 → 000000037, also accept plain numeric
+        $code = strtoupper(trim($orderCode));
+        if (str_starts_with($code, 'ORD')) {
+            $code = substr($code, 3);
+        }
+        $incrementId = preg_replace('/[^0-9]/', '', $code);
+        if ($incrementId === '') {
+            return null;
+        }
+
+        // Find Magento order — check both zero-padded and plain numeric forms
+        $orders = $this->orderCollectionFactory->create()
+            ->addFieldToFilter('increment_id', ['in' => [$incrementId, str_pad($incrementId, 9, '0', STR_PAD_LEFT)]])
+            ->setPageSize(1);
+        $order = $orders->getFirstItem();
+        if (!$order || !$order->getId()) {
+            return null;
+        }
+
+        // Get first ordered product SKU to resolve warranty card
+        $items = $this->orderItemCollectionFactory->create()
+            ->addFieldToFilter('order_id', $order->getId())
+            ->addFieldToFilter('product_type', 'simple')
+            ->setPageSize(1);
+        $firstItem = $items->getFirstItem();
+        $sku = $firstItem && $firstItem->getId() ? (string)$firstItem->getSku() : '';
+
+        // Find the matching warranty card by SKU
+        $card = null;
+        if ($sku !== '') {
+            foreach ($this->loadCards() as $c) {
+                if ($c['sku'] === $sku) {
+                    $card = $c;
+                    break;
+                }
+            }
+        }
+        if (!$card) {
+            $card = $this->loadCards()[0] ?? null;
+        }
+        if (!$card) {
+            return null;
+        }
+
+        // Build the order-level purchase code (same algorithm as history.phtml)
+        $seed = implode('|', [
+            (string)$order->getIncrementId(),
+            (string)$order->getEntityId(),
+            (string)$order->getCustomerEmail(),
+            'techieworld-purchase',
+        ]);
+        $raw = strtoupper(substr(hash('sha256', $seed), 0, 10));
+        $purchaseCode = substr($raw, 0, 5) . '-' . substr($raw, 5);
+        $orderCode = 'ORD' . $order->getIncrementId();
+
+        return array_merge($card, [
+            'purchase_code' => $purchaseCode,
+            'purchase_code_raw' => str_replace('-', '', $purchaseCode),
+            'order_code' => $orderCode,
+        ]);
     }
 
     private function loadCards(): array

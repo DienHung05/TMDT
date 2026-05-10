@@ -1425,6 +1425,17 @@
         color: #ffffff;
     }
 
+    .pv3-footer-link-icon {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .pv3-footer-link-icon svg {
+        flex-shrink: 0;
+        opacity: .7;
+    }
+
     .pv3-footer-brand {
         display: flex;
         align-items: center;
@@ -1879,6 +1890,9 @@ body.pvmodern-v3 .pv3-signout-button[hidden] {
     }
 
     .pv3-pagination-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         min-width: 48px;
         min-height: 48px;
         padding: 0 16px;
@@ -1886,6 +1900,7 @@ body.pvmodern-v3 .pv3-signout-button[hidden] {
         border-radius: 14px;
         background: #ffffff;
         color: @pv-slate-700;
+        text-decoration: none;
         font-size: 15px;
         font-weight: 700;
         box-shadow: 0 14px 34px rgba(148, 163, 184, .14);
@@ -5831,6 +5846,12 @@ body.pvmodern-legal-page {
         display: block;
     }
     @media (min-width: 768px) {
+        body.catalog-product-view .columns .column.main {
+            display: grid !important;
+            grid-template-columns: minmax(0, 5fr) minmax(360px, 6fr) !important;
+            gap: 38px 48px !important;
+            align-items: start !important;
+        }
         body.catalog-product-view .product-main-container {
             display: grid !important;
             grid-template-columns: minmax(0, 5fr) minmax(0, 6fr) !important;
@@ -5844,9 +5865,29 @@ body.pvmodern-legal-page {
             margin-right: 0 !important;
         }
         body.catalog-product-view .product-info-main {
+            grid-column: 2 !important;
             float: none !important;
-            width: auto !important;
+            width: 100% !important;
             margin-left: 0 !important;
+            align-self: start !important;
+            padding: clamp(22px, 3vw, 34px) !important;
+            border: 1px solid rgba(226, 232, 240, .95) !important;
+            border-radius: 26px !important;
+            background:
+                radial-gradient(circle at 100% 0%, rgba(168, 85, 247, .12), transparent 30%),
+                linear-gradient(135deg, rgba(255, 255, 255, .96), rgba(248, 250, 252, .92)) !important;
+            box-shadow: 0 26px 64px rgba(15, 23, 42, .08) !important;
+        }
+        body.catalog-product-view .product.media {
+            grid-column: 1 !important;
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+        body.catalog-product-view .pv3-product-specs,
+        body.catalog-product-view .product.info.detailed,
+        body.catalog-product-view .block.related,
+        body.catalog-product-view .block.upsell {
+            grid-column: 1 / -1 !important;
         }
     }
 
@@ -8410,6 +8451,13 @@ body.pvmodern-legal-page {
             gap: 24px !important;
             min-width: 0;
         }
+        .pvco3-panel[hidden],
+        .pvco3-layout[hidden],
+        [data-qr-screen][hidden],
+        [data-success-screen][hidden],
+        [data-processing-overlay][hidden] {
+            display: none !important;
+        }
 
         .pvco3-card {
             overflow: hidden;
@@ -9254,6 +9302,20 @@ body.pvmodern-legal-page {
         white-space: nowrap;
     }
 
+    /* Warranty button — emerald green variant of tracking button */
+    body.pvmodern-v3 .pv3-warranty-button {
+        border-color: rgba(5, 150, 105, .22) !important;
+        background: linear-gradient(135deg, rgba(5, 150, 105, .10), rgba(16, 185, 129, .07)) !important;
+        color: #059669 !important;
+        box-shadow: 0 10px 22px rgba(5, 150, 105, .10) !important;
+    }
+
+    body.pvmodern-v3 .pv3-warranty-button:hover {
+        border-color: rgba(5, 150, 105, .38) !important;
+        box-shadow: 0 14px 28px rgba(5, 150, 105, .18) !important;
+        color: #047857 !important;
+    }
+
     body.pvmodern-v3 .pv3-tracking-modal[hidden] {
         display: none !important;
     }
@@ -9697,45 +9759,45 @@ body.pvmodern-legal-page {
         border-color: rgba(99, 102, 241, .22) !important;
     }
 
-    .catalog-product-view .product-info-main .pv3-product-specs {
-        margin-top: 18px;
+    .catalog-product-view .pv3-product-specs {
+        margin-top: 28px;
         padding: 22px;
         border-radius: 22px;
         box-shadow: 0 18px 38px rgba(148, 163, 184, .12);
     }
 
-    .catalog-product-view .product-info-main .pv3-product-specs__intro {
+    .catalog-product-view .pv3-product-specs__intro {
         margin-bottom: 14px;
     }
 
-    .catalog-product-view .product-info-main .pv3-product-specs__intro h3 {
+    .catalog-product-view .pv3-product-specs__intro h3 {
         font-size: 22px;
         line-height: 1.12;
     }
 
-    .catalog-product-view .product-info-main .pv3-product-specs__intro p {
+    .catalog-product-view .pv3-product-specs__intro p {
         font-size: 13px;
         line-height: 1.65;
         max-width: none;
     }
 
-    .catalog-product-view .product-info-main .pv3-product-specs__table {
+    .catalog-product-view .pv3-product-specs__table {
         gap: 10px;
     }
 
-    .catalog-product-view .product-info-main .pv3-product-specs__row {
+    .catalog-product-view .pv3-product-specs__row {
         grid-template-columns: minmax(108px, 150px) 1fr;
         gap: 14px;
         padding: 12px 14px;
         border-radius: 14px;
     }
 
-    .catalog-product-view .product-info-main .pv3-product-specs__label {
+    .catalog-product-view .pv3-product-specs__label {
         font-size: 11px;
         letter-spacing: .06em;
     }
 
-    .catalog-product-view .product-info-main .pv3-product-specs__value {
+    .catalog-product-view .pv3-product-specs__value {
         font-size: 13px;
         line-height: 1.55;
     }
@@ -9836,9 +9898,11 @@ body.pvmodern-legal-page {
         box-shadow: 0 18px 32px rgba(99, 102, 241, .22) !important;
     }
 
-    .pv3-pagination-button[disabled] {
+    .pv3-pagination-button[disabled],
+    .pv3-pagination-button[aria-disabled="true"] {
         cursor: not-allowed;
         opacity: .45;
+        pointer-events: none;
         transform: none !important;
         box-shadow: none !important;
         color: @pv-slate-400 !important;
@@ -14504,6 +14568,13 @@ body.pvmodern-legal-page {
             display: grid !important;
             gap: 24px !important;
             min-width: 0 !important;
+        }
+        .pvco3-panel[hidden],
+        .pvco3-layout[hidden],
+        [data-qr-screen][hidden],
+        [data-success-screen][hidden],
+        [data-processing-overlay][hidden] {
+            display: none !important;
         }
 
         .pvco3-card {

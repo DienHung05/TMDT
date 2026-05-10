@@ -6,7 +6,10 @@ namespace YourVendor\PVModern\Controller\Checkout;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Controller\Result\RedirectFactory;
+use Magento\Sales\Api\OrderRepositoryInterface;
+use Magento\Sales\Model\ResourceModel\Order\CollectionFactory as OrderCollectionFactory;
 use Psr\Log\LoggerInterface;
+use YourVendor\PVModern\Model\Checkout\OrderPaymentStatus;
 use YourVendor\PVModern\Model\IntegrationConfig;
 
 class VnpayReturn implements HttpGetActionInterface
@@ -15,6 +18,8 @@ class VnpayReturn implements HttpGetActionInterface
         private readonly RequestInterface $request,
         private readonly RedirectFactory $redirectFactory,
         private readonly IntegrationConfig $integrationConfig,
+        private readonly OrderCollectionFactory $orderCollectionFactory,
+        private readonly OrderRepositoryInterface $orderRepository,
         private readonly LoggerInterface $logger
     ) {
     }
@@ -24,6 +29,9 @@ class VnpayReturn implements HttpGetActionInterface
         $params = $this->request->getParams();
         $isValid = $this->verifySignature($params);
         $isPaid = $isValid && (($params['vnp_ResponseCode'] ?? '') === '00');
+        if ($isValid) {
+            $this->updateOrderPayment($params, $isPaid);
+        }
 
         $this->logger->info('[PVModern][VNPay] return received', [
             'valid' => $isValid,
@@ -63,5 +71,34 @@ class VnpayReturn implements HttpGetActionInterface
 
         $expected = hash_hmac('sha512', implode('&', $pairs), $secret);
         return hash_equals(strtolower($expected), strtolower($secureHash));
+    }
+
+    /**
+     * @param array<string, mixed> $payload
+     */
+    private function updateOrderPayment(array $payload, bool $isPaid): void
+    {
+        $incrementId = preg_replace('/[^A-Za-z0-9_-]/', '', (string) ($payload['vnp_TxnRef'] ?? '')) ?: '';
+        if ($incrementId === '') {
+            return;
+        }
+
+        $collection = $this->orderCollectionFactory->create();
+        $collection->addFieldToFilter('increment_id', $incrementId);
+        $collection->setPageSize(1);
+        $order = $collection->getFirstItem();
+        if (!$order || !$order->getId() || !$order->getPayment()) {
+            return;
+        }
+
+        $status = $isPaid ? OrderPaymentStatus::PAID : OrderPaymentStatus::FAILED;
+        $payment = $order->getPayment();
+        $payment->setAdditionalInformation('pvmodern_payment_status', $status);
+        $payment->setAdditionalInformation('pvmodern_payment_gateway', 'vnpay');
+        $payment->setAdditionalInformation('pvmodern_payment_transaction_id', (string) ($payload['vnp_TransactionNo'] ?? ''));
+        $order->addCommentToStatusHistory(
+            sprintf('VNPay return verified. Payment status: %s. Transaction: %s', $status, (string) ($payload['vnp_TransactionNo'] ?? ''))
+        );
+        $this->orderRepository->save($order);
     }
 }

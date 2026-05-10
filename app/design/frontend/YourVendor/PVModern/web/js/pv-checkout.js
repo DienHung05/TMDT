@@ -137,13 +137,15 @@ define(['jquery'], function ($) {
             selectedShipping: null,
             /* Step 2 */
             paymentTab: 'card',
-            paymentType: '',   // 'card' | 'momo' | 'zalopay' | 'bank'
+            paymentType: '',   // 'card' | 'momo' | 'zalopay' | 'bank' | 'cod'
             paymentLabel: '',
             cardNumber: '', cardholderName: '', expiry: '', cvv: '',
             selectedBank: 'vietcombank',
             /* Step 3+ */
             discountCode: '', discountAmount: 0,
-            order: null
+            order: null,
+            /* QR data from step 4 */
+            qrData: null
         };
 
         /* ── Bootstrap cart data ────────────────────────────────── */
@@ -282,36 +284,61 @@ define(['jquery'], function ($) {
             showAlert('');
         }
 
-        /* ── Step management ────────────────────────────────────── */
+        /* ── Step management (5-step flow) ────────────────────────
+         *  Step 1: Shipping address + method
+         *  Step 2: Payment method selection
+         *  Step 3: Order review & confirm
+         *  Step 4: QR/payment screen  (skipped for COD)
+         *  Step 5: Success screen
+         * ──────────────────────────────────────────────────────── */
+        function isCodPayment() {
+            return state.paymentTab === 'cod' ||
+                   state.paymentType === 'cod' ||
+                   /cash.on.delivery|thanh.to.n.khi.nh.n/i.test(state.paymentLabel || '');
+        }
+
         function goToStep(step) {
             state.currentStep = step;
             persist();
             updateStepIndicator(step);
             $root.find('[data-panel]').attr('hidden', 'hidden');
-            var $p = $root.find('[data-panel="' + step + '"]');
-            $p.removeAttr('hidden');
-            // Show/hide layout vs success
-            if (step === 4) {
+            // Step 4 = QR panel, Step 5 = success screen
+            if (step === 5) {
                 $root.find('[data-checkout-layout]').attr('hidden', 'hidden');
+                $root.find('[data-qr-screen]').attr('hidden', 'hidden');
                 $root.find('[data-success-screen]').removeAttr('hidden');
                 renderSuccessScreen();
                 launchConfetti();
+            } else if (step === 4) {
+                $root.find('[data-checkout-layout]').attr('hidden', 'hidden');
+                $root.find('[data-success-screen]').attr('hidden', 'hidden');
+                $root.find('[data-qr-screen]').removeAttr('hidden');
+                renderQrScreen();
             } else {
                 $root.find('[data-checkout-layout]').removeAttr('hidden');
+                $root.find('[data-qr-screen]').attr('hidden', 'hidden');
                 $root.find('[data-success-screen]').attr('hidden', 'hidden');
+                var $p = $root.find('[data-panel="' + step + '"]');
+                $p.removeAttr('hidden');
             }
-            // Scroll top
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            // Render step-specific content
             if (step === 3) { renderReview(); }
         }
 
         function updateStepIndicator(step) {
-            for (var i = 1; i <= 4; i++) {
+            var totalSteps = isCodPayment() ? 4 : 5;
+            // COD only has 4 real steps (no QR step), so map step 5→4 for COD
+            var displayStep = (isCodPayment() && step === 5) ? 4 : step;
+            for (var i = 1; i <= 5; i++) {
                 var $circle = $root.find('[data-circle="' + i + '"]');
                 var $num    = $circle.find('.pvco3-step-num');
                 var $check  = $circle.find('.pvco3-step-check');
                 var $label  = $root.find('[data-step-indicator="' + i + '"] .pvco3-step-name');
+
+                // Hide step 4 indicator for COD
+                $root.find('[data-step-indicator="4"]').toggle(!isCodPayment());
+                $root.find('[data-connector="3-4"]').toggle(!isCodPayment());
+                $root.find('[data-connector="4-5"]').toggle(!isCodPayment());
 
                 $circle.removeClass('is-active is-done');
 
@@ -727,7 +754,7 @@ define(['jquery'], function ($) {
                 note: state.specialInstructions
             };
 
-            function onSuccess(orderNumber) {
+            function onSuccess(orderNumber, paymentData) {
                 window.sessionStorage.removeItem(storageKey);
                 state.order = {
                     orderNumber: orderNumber || generateOrderNumber(),
@@ -743,12 +770,19 @@ define(['jquery'], function ($) {
                     shippingAddress: { fullName: state.fullName, phone: state.phone, email: state.email, addressLine1: state.addressLine1 },
                     paymentMethod: { name: state.paymentLabel }
                 };
+                // Store QR/payment data from backend
+                state.qrData = paymentData || null;
                 persist();
                 $root.find('[data-processing-overlay]').attr('hidden','hidden');
                 $btn.prop('disabled', false);
                 $btn.find('.pvco3-place-label').removeAttr('hidden');
                 $btn.find('.pvco3-place-loading').attr('hidden','hidden');
-                goToStep(4);
+                // COD: skip QR step, go directly to success
+                if (isCodPayment()) {
+                    goToStep(5);
+                } else {
+                    goToStep(4);
+                }
             }
 
             function onFail(msg) {
@@ -762,13 +796,160 @@ define(['jquery'], function ($) {
             if (endpoints.place_order) {
                 $.ajax({ url: endpoints.place_order, method: 'POST', contentType: 'application/json', data: JSON.stringify(payload) })
                     .done(function (res) {
-                        if (res.success) { onSuccess(res.increment_id); }
+                        if (res.success) { onSuccess(res.increment_id, res.payment || null); }
                         else { onFail(res.message); }
                     })
                     .fail(function (xhr) { onFail((xhr.responseJSON || {}).message); });
             } else {
                 // Simulate network delay (demo)
-                setTimeout(function () { onSuccess(generateOrderNumber()); }, 1800);
+                setTimeout(function () { onSuccess(generateOrderNumber(), null); }, 1800);
+            }
+        }
+
+        /* ── Step 4: QR Payment Screen ───────────────────────────── */
+        function renderQrScreen() {
+            var o      = state.order;
+            var qd     = state.qrData;        // from placeOrder backend response
+            if (!o) { return; }
+
+            /* Determine wallet info */
+            var walletCode = 'bank';
+            var walletName = 'Chuyển khoản ngân hàng';
+            var qrGradient = 'linear-gradient(135deg,#1a3c6b,#2563eb)';
+
+            if (state.paymentTab === 'ewallet') {
+                var lbl = String(state.paymentLabel || '').toLowerCase();
+                if (lbl.indexOf('zalo') !== -1) {
+                    walletCode = 'zalopay';
+                    walletName = 'ZaloPay';
+                    qrGradient = 'linear-gradient(135deg,#005ae0,#0068ff)';
+                } else {
+                    walletCode = 'momo';
+                    walletName = 'MoMo';
+                    qrGradient = 'linear-gradient(135deg,#ae2d68,#d83b7c)';
+                }
+            } else if (state.paymentTab === 'card') {
+                walletCode = 'card';
+                walletName = 'Thẻ ngân hàng (VNPay)';
+                qrGradient = 'linear-gradient(135deg,#0f5c8e,#0ea5e9)';
+            }
+
+            /* Populate static fields */
+            $root.find('[data-qr-wallet-name]').text(walletName);
+            $root.find('[data-qr-order-num]').text(o.orderNumber);
+            $root.find('[data-qr-amount]').text(fmtVND(o.total));
+            $root.find('[data-qr-header]').css('background', qrGradient);
+
+            /* Countdown 15 min */
+            var expiresAt = Date.now() + 15 * 60 * 1000;
+            if (window._qrCountdownTimer) { clearInterval(window._qrCountdownTimer); }
+            window._qrCountdownTimer = setInterval(function () {
+                var rem = Math.max(0, Math.round((expiresAt - Date.now()) / 1000));
+                var mm  = Math.floor(rem / 60);
+                var ss  = rem % 60;
+                $root.find('[data-qr-countdown]').text(
+                    (mm < 10 ? '0' : '') + mm + ':' + (ss < 10 ? '0' : '') + ss
+                );
+                if (rem === 0) { clearInterval(window._qrCountdownTimer); }
+            }, 1000);
+
+            /* Show loading state */
+            $root.find('[data-qr-img-wrap]').hide();
+            $root.find('[data-qr-loading-wrap]').show();
+            $root.find('[data-qr-mock-note]').hide();
+            $root.find('[data-qr-redirect-btn]').hide();
+
+            function showQrImg(qrCodeUrl, qrPayload, paymentRef, redirectUrl, isMock) {
+                $root.find('[data-qr-ref]').text(paymentRef || o.orderNumber);
+
+                var imgSrc = qrCodeUrl;
+                if (!imgSrc && qrPayload) {
+                    imgSrc = 'https://api.qrserver.com/v1/create-qr-code/?size=260x260&ecc=M&data=' +
+                        encodeURIComponent(qrPayload);
+                }
+
+                if (imgSrc) {
+                    var tmp = new window.Image();
+                    tmp.onload = function () {
+                        $root.find('[data-qr-img]').attr('src', imgSrc);
+                        $root.find('[data-qr-loading-wrap]').hide();
+                        $root.find('[data-qr-img-wrap]').show();
+                    };
+                    tmp.onerror = function () {
+                        $root.find('[data-qr-loading-wrap]').html(
+                            '<p style="color:#ef4444;font-size:13px">Không thể tải mã QR.<br>Dùng nút bên dưới.</p>'
+                        );
+                    };
+                    tmp.src = imgSrc;
+                } else {
+                    $root.find('[data-qr-loading-wrap]').html(
+                        '<p style="color:#64748b;font-size:13px">Không có mã QR.<br>Dùng nút chuyển hướng.</p>'
+                    );
+                }
+
+                if (redirectUrl) {
+                    $root.find('[data-qr-redirect-btn]').attr('href', redirectUrl).show();
+                }
+                if (isMock) {
+                    $root.find('[data-qr-mock-note]').show();
+                }
+            }
+
+            /* Use data from placeOrder if available */
+            if (qd && (qd.redirect_url || qd.qr_code_url || qd.qr_payload || qd.reference)) {
+                showQrImg(
+                    qd.qr_code_url || qd.qrCodeUrl || '',
+                    qd.qr_payload  || qd.qrPayload  || (o.orderNumber + '|TECHIEWORLD|' + walletCode.toUpperCase()),
+                    qd.reference   || qd.paymentId  || o.orderNumber,
+                    qd.redirect_url || qd.paymentUrl || '',
+                    !!(qd.mock)
+                );
+                return;
+            }
+
+            /* Fallback: call payment_create endpoint */
+            var endpoints = bootstrap.endpoints || {};
+            var payUrl    = endpoints.payment_create || endpoints.create_payment || '';
+
+            if (payUrl && walletCode !== 'bank') {
+                $.ajax({
+                    url: payUrl, method: 'POST', contentType: 'application/json',
+                    data: JSON.stringify({
+                        method: 'wallet',
+                        wallet: walletCode,
+                        gateway_channel: walletCode,
+                        orderId: o.orderNumber,
+                        amount: o.total,
+                        currency: 'VND',
+                        form_key: bootstrap.form_key || ''
+                    })
+                }).done(function (res) {
+                    showQrImg(
+                        res.qrCodeUrl || '', res.qrPayload || '',
+                        res.paymentId || o.orderNumber,
+                        res.paymentUrl || '', !!(res.mock)
+                    );
+                }).fail(function () {
+                    showQrImg('', o.orderNumber + '|TECHIEWORLD|' + walletCode.toUpperCase(), o.orderNumber, '', true);
+                });
+            } else if (walletCode === 'bank') {
+                /* Bank transfer: use VietQR format */
+                var bankDetails = (bootstrap.payment_methods || []).find(function (m) {
+                    return m.code === 'bank_transfer';
+                }) || {};
+                var acct   = bankDetails.account_number || '123456789012';
+                var bankId = bankDetails.bank_name || 'TECHBANK';
+                var ref    = bankDetails.note_prefix ? bankDetails.note_prefix + '-' + o.orderNumber : 'PAY-' + o.orderNumber;
+                var vietqr = 'https://img.vietqr.io/image/' + encodeURIComponent(bankId) +
+                    '-' + encodeURIComponent(acct) +
+                    '-compact.jpg?amount=' + Math.round(o.total) +
+                    '&addInfo=' + encodeURIComponent(ref) +
+                    '&accountName=' + encodeURIComponent(bankDetails.account_name || 'TECHIEWORLD');
+                showQrImg(vietqr, '', ref, '', false);
+                $root.find('[data-qr-ref]').text(ref);
+            } else {
+                /* Last resort mock */
+                showQrImg('', o.orderNumber + '|TECHIEWORLD|' + walletCode.toUpperCase() + '|MOCK', o.orderNumber, '', true);
             }
         }
 
@@ -807,6 +988,108 @@ define(['jquery'], function ($) {
                     '<strong>Thư xác nhận</strong> đã được gửi tới ' + esc(o.shippingAddress.email)
                 );
                 $root.find('[data-success-email-box]').removeAttr('hidden');
+            }
+
+            /* ── Wallet QR (MoMo / ZaloPay / VNPay) ────────────── */
+            if (state.paymentTab === 'ewallet' && state.paymentType === 'online_gateway') {
+                renderWalletQr(o);
+            }
+        }
+
+        /* ── Wallet QR panel ─────────────────────────────────── */
+        function renderWalletQr(order) {
+            var $box    = $root.find('[data-wallet-qr-box]');
+            var $img    = $root.find('[data-qr-img]');
+            var $load   = $root.find('[data-qr-loading]');
+            var $badge  = $root.find('[data-wallet-badge]');
+            var $wname  = $root.find('[data-wallet-name]');
+            var $wamt   = $root.find('[data-qr-amount]');
+            var $wref   = $root.find('[data-qr-ref]');
+            var $wredir = $root.find('[data-wallet-redirect]');
+            var $wmock  = $root.find('[data-wallet-mock-note]');
+
+            var walletCode = String(state.paymentLabel || '').toLowerCase().indexOf('zalo') !== -1 ? 'zalopay' : 'momo';
+            var walletName = walletCode === 'momo' ? 'MoMo' : 'ZaloPay';
+
+            $badge.text(walletName);
+            $wname.text(walletName);
+            $wamt.text(fmtVND(order.total));
+
+            $box.removeAttr('hidden');
+            $img.attr('hidden', 'hidden');
+            $load.removeAttr('hidden');
+
+            var endpoints = bootstrap.endpoints || {};
+            var payUrl    = endpoints.payment_create || endpoints.create_payment || '';
+            var orderNum  = String((order && order.orderNumber) ? order.orderNumber : 'PENDING');
+
+            function showQr(qrCodeUrl, qrPayload, paymentRef, redirectUrl, isMock) {
+                $wref.text(paymentRef || orderNum);
+
+                var imgSrc = qrCodeUrl;
+                if (!imgSrc && qrPayload) {
+                    /* Generate using free public QR API (no auth needed) */
+                    imgSrc = 'https://api.qrserver.com/v1/create-qr-code/?size=240x240&ecc=M&data=' +
+                        encodeURIComponent(qrPayload);
+                }
+
+                if (imgSrc) {
+                    var tmpImg = new window.Image();
+                    tmpImg.onload = function () {
+                        $img.attr('src', imgSrc).removeAttr('hidden');
+                        $load.attr('hidden', 'hidden');
+                    };
+                    tmpImg.onerror = function () {
+                        $load.html('<span>Không thể tải QR. Dùng nút bên dưới để mở ứng dụng.</span>');
+                    };
+                    tmpImg.src = imgSrc;
+                } else {
+                    $load.html('<span>Không có mã QR. Dùng nút bên dưới để thanh toán.</span>');
+                }
+
+                if (redirectUrl) {
+                    $wredir.attr('href', redirectUrl).removeAttr('hidden');
+                }
+
+                if (isMock) {
+                    $wmock.removeAttr('hidden');
+                }
+            }
+
+            if (payUrl) {
+                $.ajax({
+                    url: payUrl,
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        method: 'wallet',
+                        wallet: walletCode,
+                        gateway_channel: walletCode,
+                        orderId: orderNum,
+                        amount: order.total,
+                        currency: 'VND',
+                        form_key: bootstrap.form_key || ''
+                    })
+                }).done(function (res) {
+                    if (res.success) {
+                        showQr(
+                            res.qrCodeUrl || '',
+                            res.qrPayload || '',
+                            res.paymentId || orderNum,
+                            res.paymentUrl || '',
+                            !!(res.mock)
+                        );
+                    } else {
+                        /* Fallback mock QR from order number */
+                        showQr('', orderNum + '|TECHIEWORLD|' + walletCode.toUpperCase(), orderNum, '', true);
+                    }
+                }).fail(function () {
+                    /* Network error — still show a basic QR so UX isn't broken */
+                    showQr('', orderNum + '|TECHIEWORLD|' + walletCode.toUpperCase(), orderNum, '', true);
+                });
+            } else {
+                /* No payment endpoint configured — use simple mock payload */
+                showQr('', orderNum + '|TECHIEWORLD|' + walletCode.toUpperCase() + '|MOCK', orderNum, '', true);
             }
         }
 

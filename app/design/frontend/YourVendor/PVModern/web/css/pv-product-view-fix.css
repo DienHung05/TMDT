@@ -1,0 +1,253 @@
+body.catalog-product-view .columns .column.main {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+    gap: 28px;
+    align-items: start;
+}
+
+body.catalog-product-view .product.media {
+    grid-column: 1;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+}
+
+body.catalog-product-view .product-info-main {
+    grid-column: 2;
+    width: 100%;
+    max-width: none;
+    padding: 30px;
+    border: 1px solid rgba(124, 92, 255, 0.18);
+    border-radius: 28px;
+    background:
+        radial-gradient(circle at 12% 0%, rgba(124, 92, 255, 0.14), transparent 32%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.9));
+    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.12);
+}
+
+body.catalog-product-view .product-info-main .page-title-wrapper,
+body.catalog-product-view .product-info-main .stock,
+body.catalog-product-view .product-info-main .product-info-price,
+body.catalog-product-view .product-info-main .box-tocart,
+body.catalog-product-view .product-info-main .product-addto-links,
+body.catalog-product-view .product-info-main .product-social-links,
+body.catalog-product-view .product-info-main .product.attribute.overview {
+    max-width: 100%;
+}
+
+body.catalog-product-view .product-info-main .page-title,
+body.catalog-product-view .product-info-main .page-title .base {
+    color: #0f172a;
+    font-size: clamp(30px, 3.8vw, 54px);
+    line-height: 1.02;
+    letter-spacing: -0.055em;
+    font-weight: 950;
+}
+
+body.catalog-product-view .product-info-main .stock {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 18px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(16, 185, 129, 0.12);
+    color: #059669;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+body.catalog-product-view .product-info-main .price-box {
+    margin: 22px 0;
+}
+
+body.catalog-product-view .product-info-main .price,
+body.catalog-product-view .product-info-main .special-price .price {
+    color: #6d5dfc;
+    font-size: clamp(34px, 4vw, 48px);
+    line-height: 1;
+    font-weight: 950;
+}
+
+body.catalog-product-view .product-info-main .old-price .price {
+    color: #64748b;
+    font-size: 24px;
+    text-decoration-thickness: 2px;
+}
+
+body.catalog-product-view .box-tocart .fieldset {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 18px 22px;
+}
+
+body.catalog-product-view .box-tocart .field.qty {
+    margin: 0;
+}
+
+body.catalog-product-view .box-tocart .input-text.qty {
+    width: 96px;
+    height: 64px;
+    border: 1px solid #cbd5e1;
+    border-radius: 0;
+    background: #ffffff;
+    color: #0f172a;
+    font-size: 24px;
+    font-weight: 800;
+    text-align: center;
+}
+
+body.catalog-product-view .box-tocart .action.tocart {
+    min-width: 220px;
+    height: 64px;
+    border: 0;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #685cff, #a855f7);
+    box-shadow: 0 18px 36px rgba(104, 92, 255, 0.28);
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 950;
+}
+
+body.catalog-product-view .product-addto-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+body.catalog-product-view .product-addto-links .action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0 18px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #5f5bf8;
+    font-weight: 850;
+    line-height: 1;
+    text-decoration: none;
+}
+
+body.catalog-product-view .product.attribute.overview {
+    margin-top: 26px;
+    color: #0f172a;
+    font-size: 18px;
+    line-height: 1.65;
+}
+
+body.catalog-product-view .pv3-product-specs,
+body.catalog-product-view .product.info.detailed,
+body.catalog-product-view .block.related,
+body.catalog-product-view .block.upsell {
+    grid-column: 1 / -1;
+}
+
+body.catalog-product-view .pv3-product-specs {
+    margin-top: 8px;
+}
+
+body.catalog-product-view .fotorama__stage,
+body.catalog-product-view .gallery-placeholder,
+body.catalog-product-view .product.media img {
+    border-radius: 24px;
+}
+
+@media (max-width: 1024px) {
+    body.catalog-product-view .columns .column.main {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    body.catalog-product-view .product.media,
+    body.catalog-product-view .product-info-main,
+    body.catalog-product-view .pv3-product-specs,
+    body.catalog-product-view .product.info.detailed,
+    body.catalog-product-view .block.related,
+    body.catalog-product-view .block.upsell {
+        grid-column: 1;
+    }
+}
+
+@media (max-width: 640px) {
+    body.catalog-product-view .product-info-main {
+        padding: 22px;
+        border-radius: 22px;
+    }
+
+    body.catalog-product-view .box-tocart .fieldset,
+    body.catalog-product-view .box-tocart .actions,
+    body.catalog-product-view .box-tocart .action.tocart {
+        width: 100%;
+    }
+
+    body.catalog-product-view .box-tocart .action.tocart {
+        min-width: 0;
+    }
+}
+
+/* ── Product detail tabs ── */
+body.catalog-product-view .product.info.detailed {
+    margin-top: 40px;
+}
+
+/* Tab nav wrapper — all title pills sit on one row, flush against content */
+body.catalog-product-view .product.data.items {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Each tab button: inline pill that sits in the nav row */
+body.catalog-product-view .product.info.detailed .data.item.title {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    margin: 0 4px 0 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    float: left;
+    clear: none;
+}
+
+body.catalog-product-view .product.info.detailed .data.item.title a,
+body.catalog-product-view .product.info.detailed .data.item.title strong {
+    display: inline-flex;
+    align-items: center;
+    height: 44px;
+    padding: 0 22px;
+    border: 1.5px solid rgba(124, 92, 255, 0.22);
+    border-bottom: none;
+    border-radius: 12px 12px 0 0;
+    background: rgba(248, 250, 252, 0.9);
+    color: #475569;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+body.catalog-product-view .product.info.detailed .data.item.title.active a,
+body.catalog-product-view .product.info.detailed .data.item.title.active strong {
+    background: #ffffff;
+    color: #6d5dfc;
+    border-color: rgba(124, 92, 255, 0.35);
+}
+
+/* Tab content panel — full width, clearly separated from buttons above */
+body.catalog-product-view .product.info.detailed .data.item.content {
+    clear: both;
+    width: 100%;
+    padding: 28px;
+    margin: 0;
+    border: 1.5px solid rgba(124, 92, 255, 0.22);
+    border-radius: 0 12px 12px 12px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}

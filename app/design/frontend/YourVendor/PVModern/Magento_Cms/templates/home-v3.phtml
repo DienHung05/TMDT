@@ -337,6 +337,58 @@ if (empty($products)) {
 $extraCategoryFilters = array_values($extraCategoryFilters);
 $filters = array_merge($baseCategoryFilters, $extraCategoryFilters);
 $visibleCount = count($products);
+$productsPageSize = 8;
+$productsTotalPages = max(1, (int) ceil($visibleCount / $productsPageSize));
+$requestedProductsPage = max(1, (int) $block->getRequest()->getParam('page', 1));
+$requestedProductsPage = min($requestedProductsPage, $productsTotalPages);
+$buildProductsPageUrl = static function ($page) use ($block) {
+    $params = $block->getRequest()->getParams();
+    $params['page'] = max(1, (int) $page);
+    $params = array_filter($params, static function ($value) {
+        return $value !== null && $value !== '';
+    });
+
+    return $block->getUrl('', [
+        '_query' => $params,
+        '_fragment' => 'pv3-products',
+    ]);
+};
+$buildProductsPaginationModel = static function ($currentPage, $totalPages) {
+    $pages = [];
+    if ($totalPages <= 7) {
+        for ($page = 1; $page <= $totalPages; $page++) {
+            $pages[] = $page;
+        }
+        return $pages;
+    }
+
+    $pages[] = 1;
+    if ($currentPage <= 4) {
+        $start = 2;
+        $end = 5;
+    } elseif ($currentPage >= $totalPages - 3) {
+        $start = $totalPages - 4;
+        $end = $totalPages - 1;
+    } else {
+        $start = $currentPage - 1;
+        $end = $currentPage + 1;
+    }
+
+    if ($start > 2) {
+        $pages[] = 'ellipsis-left';
+    }
+    for ($page = $start; $page <= $end; $page++) {
+        if ($page > 1 && $page < $totalPages) {
+            $pages[] = $page;
+        }
+    }
+    if ($end < $totalPages - 1) {
+        $pages[] = 'ellipsis-right';
+    }
+
+    $pages[] = $totalPages;
+    return $pages;
+};
 $inStockCount = count(array_filter($products, static function ($item) {
     return $item['stock']['code'] === 'in_stock';
 }));
@@ -398,35 +450,35 @@ $newsItems = [
         'title' => 'TechRadar cập nhật nhóm GPU đáng chú ý năm 2026: RTX 5080, RTX 5070 Ti và Radeon RX 9070 XT.',
         'tag' => 'TechRadar',
         'date' => 'Cập nhật hôm nay',
-        'image' => $block->getViewFileUrl('YourVendor_PVModern::images/news/news-gpu-launch.svg'),
+        'image' => $block->getViewFileUrl('images/news/news-gpu-launch.jpg'),
         'url' => 'https://www.techradar.com/news/computing-components/graphics-cards/best-graphics-cards-1291458',
     ],
     [
         'title' => 'GamesRadar theo dõi laptop gaming 2026 với OLED, RTX 50-series và nhiều lựa chọn theo ngân sách.',
         'tag' => 'GamesRadar',
         'date' => 'Mới nhất',
-        'image' => $block->getViewFileUrl('YourVendor_PVModern::images/news/news-laptop.svg'),
+        'image' => $block->getViewFileUrl('images/news/news-laptop.jpg'),
         'url' => 'https://www.gamesradar.com/hardware/laptops/the-best-gaming-laptops-tested-by-experts/',
     ],
     [
         'title' => 'Bản tin AI chip 24/04 ghi nhận Nvidia, TSMC, SK hynix và Intel tiếp tục đẩy mạnh hạ tầng bán dẫn.',
         'tag' => 'AI Chips',
         'date' => '24/04/2026',
-        'image' => $block->getViewFileUrl('YourVendor_PVModern::images/news/news-workstation.svg'),
+        'image' => $block->getViewFileUrl('images/news/news-workstation.jpg'),
         'url' => 'https://www.distillintelligence.com/briefings/semiconductors-ai-chips-2026-04-24',
     ],
     [
         'title' => 'Acer Swift 16 AI dùng Panther Lake và touchpad haptic lớn, nhắm đến laptop creator thế hệ mới.',
         'tag' => 'Tom\'s Hardware',
         'date' => '2026',
-        'image' => $block->getViewFileUrl('YourVendor_PVModern::images/news/news-monitor.svg'),
+        'image' => $block->getViewFileUrl('images/news/news-monitor.jpg'),
         'url' => 'https://www.tomshardware.com/laptops/acer-refreshes-swift-laptops-with-panther-lake-claims-worlds-largest-haptic-touchpad-on-swift-16-ai',
     ],
     [
         'title' => 'AI Day 2026 tại Việt Nam nhấn mạnh ứng dụng AI trong sản phẩm và năng lực chuyển đổi số.',
         'tag' => 'VNA',
         'date' => '06/04/2026',
-        'image' => $block->getViewFileUrl('YourVendor_PVModern::images/news/news-payment.svg'),
+        'image' => $block->getViewFileUrl('images/news/news-payment.jpg'),
         'url' => 'https://vnanet.vn/en/anh/vna-photos-1027/ai-day-2026-advancing-vietnam-with-ai-8682900.html',
     ],
 ];
@@ -691,10 +743,10 @@ if (!empty($newsItems)) {
                 </div>
             </div>
 
-            <div class="pv3-product-grid" data-product-grid data-page-size="8">
+            <div class="pv3-product-grid" data-product-grid data-page-size="<?= $block->escapeHtmlAttr((string) $productsPageSize) ?>">
                 <?php foreach ($products as $index => $product): ?>
-                    <article class="pv3-product-card card-shine"
-                        <?= $index >= 8 ? 'style="display:none"' : '' ?>
+                    <?php $productPage = (int) floor($index / $productsPageSize) + 1; ?>
+                    <article class="pv3-product-card card-shine<?= $productPage !== $requestedProductsPage ? ' is-page-hidden' : '' ?>"
                         data-name="<?= $block->escapeHtmlAttr($product['name']) ?>"
                         data-brand="<?= $block->escapeHtmlAttr($product['brand']) ?>"
                         data-category="<?= $block->escapeHtmlAttr($product['category']) ?>"
@@ -787,7 +839,36 @@ if (!empty($newsItems)) {
             </div>
 
             <div class="pv3-pagination-row">
-                <nav class="pv3-pagination" data-pagination aria-label="<?= $block->escapeHtmlAttr(__('Shop Collection pages')) ?>"></nav>
+                <nav class="pv3-pagination" data-pagination aria-label="<?= $block->escapeHtmlAttr(__('Shop Collection pages')) ?>"<?= $productsTotalPages <= 1 ? ' hidden' : '' ?>>
+                    <?php if ($productsTotalPages > 1): ?>
+                        <a class="pv3-pagination-button is-nav is-prev"
+                           href="<?= $block->escapeUrl($buildProductsPageUrl(max(1, $requestedProductsPage - 1))) ?>"
+                           data-page="<?= $block->escapeHtmlAttr((string) max(1, $requestedProductsPage - 1)) ?>"
+                           <?= $requestedProductsPage <= 1 ? 'aria-disabled="true"' : '' ?>>
+                            <?= $block->escapeHtml(__('Prev')) ?>
+                        </a>
+
+                        <?php foreach ($buildProductsPaginationModel($requestedProductsPage, $productsTotalPages) as $pageToken): ?>
+                            <?php if (is_int($pageToken)): ?>
+                                <a class="pv3-pagination-button<?= $pageToken === $requestedProductsPage ? ' is-active' : '' ?>"
+                                   href="<?= $block->escapeUrl($buildProductsPageUrl($pageToken)) ?>"
+                                   data-page="<?= $block->escapeHtmlAttr((string) $pageToken) ?>"
+                                   <?= $pageToken === $requestedProductsPage ? 'aria-current="page"' : '' ?>>
+                                    <?= $block->escapeHtml((string) $pageToken) ?>
+                                </a>
+                            <?php else: ?>
+                                <span class="pv3-pagination-gap" aria-hidden="true">...</span>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+
+                        <a class="pv3-pagination-button is-nav is-next"
+                           href="<?= $block->escapeUrl($buildProductsPageUrl(min($productsTotalPages, $requestedProductsPage + 1))) ?>"
+                           data-page="<?= $block->escapeHtmlAttr((string) min($productsTotalPages, $requestedProductsPage + 1)) ?>"
+                           <?= $requestedProductsPage >= $productsTotalPages ? 'aria-disabled="true"' : '' ?>>
+                            <?= $block->escapeHtml(__('Next')) ?>
+                        </a>
+                    <?php endif; ?>
+                </nav>
             </div>
         </div>
     </section>

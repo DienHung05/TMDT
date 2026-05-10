@@ -1,10 +1,50 @@
 <?php
 /**
- * PVModern order history override: add storefront tracking action.
+ * PVModern order history: order code + purchase/warranty code columns.
  *
  * @var \Magento\Sales\Block\Order\History $block
  */
+
+$getPurchaseCode = static function ($order): string {
+    $seed = implode('|', [
+        (string) $order->getIncrementId(),
+        (string) $order->getEntityId(),
+        (string) $order->getCustomerEmail(),
+        'techieworld-purchase',
+    ]);
+    $raw = strtoupper(substr(hash('sha256', $seed), 0, 10));
+    return substr($raw, 0, 5) . '-' . substr($raw, 5);
+};
 ?>
+<style>
+.pv-order-code-badge {
+    display: inline-block;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    background: #f0f4ff;
+    color: #2563eb;
+    border: 1px solid #bfdbfe;
+    border-radius: 5px;
+    padding: 3px 8px;
+    white-space: nowrap;
+}
+.pv-pc-badge {
+    display: inline-block;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    background: #f0fdf4;
+    color: #16a34a;
+    border: 1px solid #bbf7d0;
+    border-radius: 5px;
+    padding: 3px 8px;
+    white-space: nowrap;
+}
+.col.pv-order-code, .col.pv-purchase-code { white-space: nowrap; }
+</style>
 <?php $_orders = $block->getOrders(); ?>
 <?= $block->getChildHtml('info') ?>
 <?php if ($_orders && count($_orders)) : ?>
@@ -18,11 +58,15 @@
                     <?= $block->getChildHtml('extra.column.header') ?>
                     <th scope="col" class="col total"><?= $block->escapeHtml(__('Order Total')) ?></th>
                     <th scope="col" class="col status"><?= $block->escapeHtml(__('Status')) ?></th>
+                    <th scope="col" class="col pv-order-code">Mã đơn hàng</th>
+                    <th scope="col" class="col pv-purchase-code">Mã bảo hành</th>
                     <th scope="col" class="col actions"><?= $block->escapeHtml(__('Action')) ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($_orders as $_order) : ?>
+                    <?php $purchaseCode = $getPurchaseCode($_order); ?>
+                    <?php $orderCode = 'ORD' . $_order->getRealOrderId(); ?>
                     <tr>
                         <td data-th="<?= $block->escapeHtml(__('Order #')) ?>" class="col id"><?= $block->escapeHtml($_order->getRealOrderId()) ?></td>
                         <td data-th="<?= $block->escapeHtml(__('Date')) ?>" class="col date"><?= /* @noEscape */ $block->formatDate($_order->getCreatedAt()) ?></td>
@@ -33,6 +77,12 @@
                         <?php endif; ?>
                         <td data-th="<?= $block->escapeHtml(__('Order Total')) ?>" class="col total"><?= /* @noEscape */ $_order->formatPrice($_order->getGrandTotal()) ?></td>
                         <td data-th="<?= $block->escapeHtml(__('Status')) ?>" class="col status"><?= $block->escapeHtml($_order->getStatusLabel()) ?></td>
+                        <td data-th="Mã đơn hàng" class="col pv-order-code">
+                            <span class="pv-order-code-badge"><?= $block->escapeHtml($orderCode) ?></span>
+                        </td>
+                        <td data-th="Mã bảo hành" class="col pv-purchase-code">
+                            <span class="pv-pc-badge"><?= $block->escapeHtml($purchaseCode) ?></span>
+                        </td>
                         <td data-th="<?= $block->escapeHtml(__('Actions')) ?>" class="col actions">
                             <a href="<?= $block->escapeUrl($block->getViewUrl($_order)) ?>" class="action view">
                                 <span><?= $block->escapeHtml(__('View Order')) ?></span>

@@ -10,7 +10,7 @@
         <referenceContainer name="content">
             <block class="YourVendor\PVModern\Block\Checkout\Flow"
                    name="pvmodern.checkout.flow"
-                   template="Magento_Checkout::onepage/pv-checkout-v4.phtml"
+                   template="Magento_Checkout::onepage/pv-checkout.phtml"
                    cacheable="false"/>
         </referenceContainer>
     </body>

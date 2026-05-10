@@ -121,6 +121,7 @@ $_searchUrl        = $block->escapeUrl($_searchUrl);
 $_searchSuggestUrl = $block->escapeUrl($block->getUrl('pvmodern/search/suggest'));
 $_trackingUrl      = $block->escapeUrl($block->getUrl('pvmodern/orders/tracking'));
 $_trackingPageUrl  = $block->escapeUrl($block->getUrl('order-tracking'));
+$_warrantyUrl      = $block->escapeUrl($block->getUrl('warranty'));
 
 $_searchQuery      = trim((string) $_req->getParam('q', ''));
 $_isCatStr         = ($_isCatPage || $_isFilterPage) ? 'true' : 'false';
@@ -277,6 +278,18 @@ $_activeStr        = $block->escapeHtmlAttr($_activeCat);
                     </svg>
                 </span>
                 <span>Theo dõi đơn hàng</span>
+            </a>
+
+            <a class="pv3-tracking-button pv3-warranty-button"
+                    href="<?= $_warrantyUrl ?>"
+                    aria-label="Tra cứu bảo hành">
+                <span class="pv3-tracking-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <path d="m9 12 2 2 4-4"/>
+                    </svg>
+                </span>
+                <span>Bảo hành</span>
             </a>
 
             <!-- ACTIONS ────────────────────────────────────────────────────── -->

@@ -15,6 +15,7 @@ use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Psr\Log\LoggerInterface;
 use YourVendor\PVModern\Model\Payment\PaymentManager;
+use YourVendor\PVModern\Model\PurchaseCodeGenerator;
 use YourVendor\PVModern\Model\Shipping\PickupLocationProvider;
 use YourVendor\PVModern\Model\Shipping\ShippingManager;
 
@@ -30,6 +31,7 @@ class CheckoutService
         private readonly CartManagementInterface $cartManagement,
         private readonly OrderRepositoryInterface $orderRepository,
         private readonly PaymentManager $paymentManager,
+        private readonly PurchaseCodeGenerator $purchaseCodeGenerator,
         private readonly ShippingManager $shippingManager,
         private readonly PickupLocationProvider $pickupLocationProvider,
         private readonly PriceCurrencyInterface $priceCurrency,
@@ -277,11 +279,14 @@ class CheckoutService
                 'wallet_id' => $normalized['wallet_id'],
                 'card_last4' => $normalized['card_last4'],
             ]);
+            $paymentInit = $this->normalizePaymentResponse($paymentInit);
 
             $orderPayment = $order->getPayment();
             if ($orderPayment) {
                 $orderPayment->setAdditionalInformation('pvmodern_payment_status', $paymentInit['status'] ?? OrderPaymentStatus::PENDING);
                 $orderPayment->setAdditionalInformation('pvmodern_payment_context', $this->json->serialize($paymentInit));
+                $orderPayment->setAdditionalInformation('gateway_channel', $normalized['gateway_channel']);
+                $orderPayment->setAdditionalInformation('wallet_id', $normalized['wallet_id']);
             }
 
             if (!empty($normalized['note'])) {
@@ -324,10 +329,13 @@ class CheckoutService
             $this->checkoutSession->setLastRealOrderId((string) $order->getIncrementId());
             $this->checkoutSession->setLastOrderStatus((string) $order->getStatus());
 
+            $purchaseCode = $this->purchaseCodeGenerator->generateFromOrder($order);
+
             return [
                 'success' => true,
                 'order_id' => (int) $order->getEntityId(),
                 'increment_id' => (string) $order->getIncrementId(),
+                'purchase_code' => $purchaseCode,
                 'payment' => $paymentInit,
                 'shipping' => $selectedShipping,
                 'shipment' => $shipment,
@@ -490,6 +498,44 @@ class CheckoutService
     private function formatPrice(float $amount): string
     {
         return (string) $this->priceCurrency->format($amount, false);
+    }
+
+    /**
+     * @param array<string, mixed> $payment
+     * @return array<string, mixed>
+     */
+    private function normalizePaymentResponse(array $payment): array
+    {
+        $paymentUrl = (string) ($payment['paymentUrl'] ?? $payment['payment_url'] ?? $payment['redirect_url'] ?? '');
+        $qrCodeUrl = (string) ($payment['qrCodeUrl'] ?? $payment['qr_code_url'] ?? '');
+        $qrPayload = (string) ($payment['qrPayload'] ?? $payment['qr_payload'] ?? $paymentUrl);
+
+        if ($qrCodeUrl === '' && ($qrPayload !== '' || $paymentUrl !== '')) {
+            $qrCodeUrl = $this->buildQrCodeUrl($qrPayload !== '' ? $qrPayload : $paymentUrl);
+        }
+
+        if ($paymentUrl !== '') {
+            $payment['paymentUrl'] = $paymentUrl;
+            $payment['payment_url'] = $paymentUrl;
+            $payment['redirect_url'] = $paymentUrl;
+        }
+
+        if ($qrPayload !== '') {
+            $payment['qrPayload'] = $qrPayload;
+            $payment['qr_payload'] = $qrPayload;
+        }
+
+        if ($qrCodeUrl !== '') {
+            $payment['qrCodeUrl'] = $qrCodeUrl;
+            $payment['qr_code_url'] = $qrCodeUrl;
+        }
+
+        return $payment;
+    }
+
+    private function buildQrCodeUrl(string $payload): string
+    {
+        return 'https://api.qrserver.com/v1/create-qr-code/?size=260x260&margin=10&data=' . rawurlencode($payload);
     }
 
     private function normalizeString(mixed $value): string

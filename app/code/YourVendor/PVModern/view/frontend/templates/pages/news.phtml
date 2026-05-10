@@ -1,4 +1,9 @@
 <?php
+$pageType = 'news';
+include __DIR__ . '/realtime-dashboard.phtml';
+return;
+?>
+<?php
 /** @var \Magento\Framework\View\Element\Template $block */
 $tabs = [
     ['label' => 'Xem tất cả', 'url' => $block->getUrl('news'), 'active' => true],
@@ -9,19 +14,50 @@ $apiUrl = $block->getUrl('pvmodern/api/news');
 ?>
 <main class="pvinfo-page" data-pvinfo-news data-api-url="<?= $block->escapeUrl($apiUrl) ?>">
     <div class="pvinfo-container">
-        <nav class="pvinfo-tabs" aria-label="Information pages">
-            <?php foreach ($tabs as $tab): ?>
-                <a class="pvinfo-tab<?= $tab['active'] ? ' is-active' : '' ?>" href="<?= $block->escapeUrl($tab['url']) ?>">
-                    <?= $block->escapeHtml($tab['label']) ?>
-                </a>
-            <?php endforeach; ?>
-        </nav>
+        <div class="pvinfo-toolbar">
+            <nav class="pvinfo-tabs" aria-label="Information pages">
+                <?php foreach ($tabs as $tab): ?>
+                    <a class="pvinfo-tab<?= $tab['active'] ? ' is-active' : '' ?>" href="<?= $block->escapeUrl($tab['url']) ?>">
+                        <?= $block->escapeHtml($tab['label']) ?>
+                    </a>
+                <?php endforeach; ?>
+            </nav>
+            <button class="pvinfo-theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode">◐ Theme</button>
+        </div>
 
         <section class="pvinfo-hero-copy">
             <span class="pvinfo-kicker">Tech briefing</span>
             <h1>Tin tức công nghệ</h1>
             <p>Cập nhật AI, startup, gadget, cybersecurity, software và các xu hướng công nghệ mới nhất.</p>
         </section>
+
+        <form class="pvinfo-searchbar surface-card" data-news-search-form role="search">
+            <label>
+                <span>Search news</span>
+                <input type="search" name="q" placeholder="Search AI, startup, mobile..." autocomplete="off">
+            </label>
+            <label>
+                <span>Region</span>
+                <select name="region" aria-label="News region">
+                    <option value="global">Global</option>
+                    <option value="vn">Vietnam</option>
+                    <option value="us">United States</option>
+                    <option value="gb">United Kingdom</option>
+                    <option value="jp">Japan</option>
+                    <option value="kr">South Korea</option>
+                    <option value="sg">Singapore</option>
+                </select>
+            </label>
+            <label>
+                <span>Sort</span>
+                <select name="sort" aria-label="Sort news">
+                    <option value="latest">Mới nhất</option>
+                    <option value="popular">Phổ biến</option>
+                    <option value="relevant">Liên quan nhất</option>
+                </select>
+            </label>
+            <button type="button" data-news-clear>Clear</button>
+        </form>
 
         <nav class="pvnews-cats" data-news-categories aria-label="News categories">
             <?php foreach (['all' => 'Tất cả', 'ai' => 'AI', 'startup' => 'Startup', 'mobile' => 'Mobile', 'gadgets' => 'Gadgets', 'cybersecurity' => 'Cybersecurity', 'software' => 'Software', 'gaming' => 'Gaming', 'fintech' => 'Fintech', 'science' => 'Science', 'business' => 'Business'] as $slug => $label): ?>
@@ -48,7 +84,10 @@ $apiUrl = $block->getUrl('pvmodern/api/news');
                     <section class="pvnews-hero-grid">
                         <article class="pvnews-lead" data-lead-story></article>
                         <aside class="pvnews-top surface-card">
-                            <h2>Top stories</h2>
+                <div class="pvinfo-section-head">
+                    <h2>Top stories</h2>
+                    <span data-news-updated></span>
+                </div>
                             <div data-top-stories></div>
                         </aside>
                     </section>
@@ -57,9 +96,14 @@ $apiUrl = $block->getUrl('pvmodern/api/news');
                         <div class="pvinfo-section-head">
                             <h2>Mới nhất</h2>
                             <p data-news-count></p>
+                            <button class="pvinfo-refresh" type="button" data-news-refresh>Refresh</button>
                         </div>
                         <div class="pvnews-grid" data-latest-news></div>
-                        <div class="pvinfo-empty surface-card" data-news-empty hidden>Không có bài viết phù hợp.</div>
+                        <div class="pvinfo-empty surface-card" data-news-empty hidden>
+                            <strong>Không có bài viết phù hợp.</strong>
+                            <p>Thử đổi keyword, category hoặc khu vực.</p>
+                            <button type="button" data-news-reset>Reset filter</button>
+                        </div>
                         <div class="pvinfo-pagination" data-news-pagination></div>
                     </section>
                 </div>
@@ -80,7 +124,8 @@ $apiUrl = $block->getUrl('pvmodern/api/news');
                             <span>Email</span>
                             <input type="email" placeholder="you@example.com">
                         </label>
-                        <button type="button">Subscribe</button>
+                        <button type="button" data-newsletter-submit>Subscribe</button>
+                        <small data-newsletter-message></small>
                     </section>
                 </aside>
             </section>

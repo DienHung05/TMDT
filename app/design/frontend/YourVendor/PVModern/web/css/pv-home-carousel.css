@@ -1,3 +1,4 @@
+/* ── PVHero Carousel ────────────────────────────────────────────────── */
 .pvhero-carousel {
     padding: 42px 0 34px;
     background:
@@ -6,20 +7,22 @@
         linear-gradient(180deg, rgba(248, 250, 252, .94), rgba(255, 255, 255, .82));
 }
 
+/* Shell: the outer boundary — clips EVERYTHING inside */
 .pvhero-shell {
     position: relative;
-    min-height: 390px;
-    overflow: hidden;
+    overflow: hidden;           /* <-- THE clip that stops all overflow */
     border-radius: 28px;
     border: 1px solid rgba(226, 232, 240, .9);
-    background: #fff;
+    background: #0f172a;
     box-shadow: 0 28px 70px rgba(15, 23, 42, .10);
+    /* height driven by slide content */
 }
 
 .pvhero-carousel [hidden] {
     display: none !important;
 }
 
+/* Viewport: scrollable window inside shell */
 .pvhero-viewport {
     overflow: hidden;
     width: 100%;
@@ -29,29 +32,37 @@
     display: flex;
     transition: transform .56s cubic-bezier(.22, 1, .36, 1);
     will-change: transform;
+    gap: 0;
+    min-width: 100%;
 }
 
+/* Each slide: a 2-column grid, overflow:hidden so nothing escapes */
 .pvhero-slide {
     position: relative;
     flex: 0 0 100%;
+    width: 100%;                /* prevent shrinking past 100% */
     min-height: 390px;
     display: grid;
-    grid-template-columns: minmax(0, .92fr) minmax(360px, 1.08fr);
-    align-items: center;
-    gap: 28px;
-    padding: 52px 76px 58px 64px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: stretch;       /* make both columns equal height */
+    overflow: hidden;           /* belt-and-suspenders clip */
     background:
         linear-gradient(135deg, rgba(15, 23, 42, .96), rgba(30, 41, 59, .86)),
         #0f172a;
     isolation: isolate;
+    min-width: 100%;
+}
+.pvhero-slide > * {
+    min-width: 0;
 }
 
+/* Decorative glow orbs (z-index: -1 stays inside slide) */
 .pvhero-slide::before,
 .pvhero-slide::after {
     content: "";
     position: absolute;
     pointer-events: none;
-    z-index: -1;
+    z-index: 0;
 }
 
 .pvhero-slide::before {
@@ -71,17 +82,21 @@
     filter: blur(6px);
 }
 
+/* Theme color variants */
 .pvhero-slide--violet { background: linear-gradient(135deg, #111827 0%, #312e81 58%, #7c3aed 100%); }
-.pvhero-slide--blue { background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 58%, #06b6d4 100%); }
-.pvhero-slide--slate { background: linear-gradient(135deg, #020617 0%, #334155 62%, #64748b 100%); }
-.pvhero-slide--rose { background: linear-gradient(135deg, #111827 0%, #9f1239 56%, #fb7185 100%); }
-.pvhero-slide--cyan { background: linear-gradient(135deg, #082f49 0%, #155e75 58%, #22d3ee 100%); }
-.pvhero-slide--amber { background: linear-gradient(135deg, #111827 0%, #92400e 58%, #f59e0b 100%); }
+.pvhero-slide--blue   { background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 58%, #06b6d4 100%); }
+.pvhero-slide--slate  { background: linear-gradient(135deg, #020617 0%, #334155 62%, #64748b 100%); }
+.pvhero-slide--rose   { background: linear-gradient(135deg, #111827 0%, #9f1239 56%, #fb7185 100%); }
+.pvhero-slide--cyan   { background: linear-gradient(135deg, #082f49 0%, #155e75 58%, #22d3ee 100%); }
+.pvhero-slide--amber  { background: linear-gradient(135deg, #111827 0%, #92400e 58%, #f59e0b 100%); }
 
+/* Left column: text copy */
 .pvhero-copy {
     position: relative;
     z-index: 2;
     max-width: 560px;
+    padding: 52px 28px 58px 64px;
+    align-self: center;
 }
 
 .pvhero-badge {
@@ -177,41 +192,62 @@
     border: 1px solid rgba(255, 255, 255, .22);
 }
 
+/* ── RIGHT COLUMN: product/campaign image ──────────────────────────
+   KEY FIX: The media area is a flex container that fills its grid
+   cell. The <picture> and <img> inside fill it completely.
+   overflow:hidden on BOTH the slide AND media ensures the image
+   can NEVER escape — no matter how large the original is.
+   ──────────────────────────────────────────────────────────────── */
 .pvhero-media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Fill the full grid cell height — critical */
+    align-self: stretch;
+    overflow: hidden;           /* clips the image to this cell */
     position: relative;
-    display: block;
-    min-height: 286px;
-    border-radius: 24px;
-    overflow: hidden;
+    min-width: 0;
+    max-width: calc(100% - 20px);
+    /* Glassmorphism card look */
+    margin: 20px 20px 20px 0;
+    border-radius: 20px;
     background:
-        linear-gradient(135deg, rgba(255,255,255,.22), rgba(255,255,255,.08)),
-        rgba(255,255,255,.12);
-    border: 1px solid rgba(255,255,255,.22);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 26px 60px rgba(15, 23, 42, .18);
+        linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.06)),
+        rgba(255,255,255,.10);
+    border: 1px solid rgba(255,255,255,.18);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 24px 56px rgba(15, 23, 42, .20);
 }
 
-.pvhero-media picture,
+/* picture: fill the flex parent */
+.pvhero-media picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    overflow: hidden;   /* extra safety */
+}
+
+/* img: fill picture, object-fit:contain keeps aspect ratio */
 .pvhero-media img {
     display: block;
     width: 100%;
     height: 100%;
-}
-
-.pvhero-media img {
-    position: absolute;
-    inset: 0;
-    padding: 24px;
+    max-width: 100%;            /* MUST NOT exceed picture width */
+    max-height: 100%;           /* MUST NOT exceed picture height */
     object-fit: contain;
     object-position: center;
-    filter: drop-shadow(0 28px 34px rgba(2, 6, 23, .32));
-    transform: scale(1.01);
+    padding: 20px;
+    box-sizing: border-box;
+    filter: drop-shadow(0 20px 28px rgba(2, 6, 23, .30));
+    transform: none;
     transition: transform .56s cubic-bezier(.22, 1, .36, 1);
 }
 
 .pvhero-slide.is-active .pvhero-media img {
-    transform: scale(1.055);
+    transform: none;
 }
 
+/* ── Navigation arrows ─────────────────────────────────────────── */
 .pvhero-nav {
     position: absolute;
     top: 50%;
@@ -252,6 +288,7 @@
 .pvhero-nav--prev { left: 18px; }
 .pvhero-nav--next { right: 18px; }
 
+/* ── Dot indicators ────────────────────────────────────────────── */
 .pvhero-dots {
     position: absolute;
     left: 50%;
@@ -290,6 +327,7 @@
     background: #fff;
 }
 
+/* ── Loading / empty / error states ────────────────────────────── */
 .pvhero-loading,
 .pvhero-empty,
 .pvhero-error {
@@ -359,19 +397,23 @@
 }
 
 @keyframes pvheroSkeleton {
-    0% { background-position: 120% 0; }
+    0%   { background-position: 120% 0; }
     100% { background-position: -120% 0; }
 }
 
+/* ── Responsive: tablet ─────────────────────────────────────────── */
 @media (max-width: 1024px) {
     .pvhero-shell {
-        min-height: 360px;
+        border-radius: 22px;
     }
 
     .pvhero-slide {
-        min-height: 360px;
-        grid-template-columns: minmax(0, 1fr) minmax(280px, .9fr);
-        padding: 42px 62px 52px;
+        min-height: 340px;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+    }
+
+    .pvhero-copy {
+        padding: 40px 20px 50px 48px;
     }
 
     .pvhero-copy h2 {
@@ -379,28 +421,29 @@
     }
 
     .pvhero-media {
-        min-height: 248px;
+        margin: 16px 16px 16px 0;
     }
 }
 
+/* ── Responsive: mobile ─────────────────────────────────────────── */
 @media (max-width: 768px) {
     .pvhero-carousel {
-        padding: 28px 0 26px;
+        padding: 20px 0 20px;
     }
 
     .pvhero-shell {
-        min-height: auto;
-        border-radius: 24px;
+        border-radius: 20px;
     }
 
     .pvhero-slide {
         min-height: auto;
+        /* Stack vertically on mobile */
         grid-template-columns: 1fr;
-        gap: 24px;
-        padding: 32px 22px 64px;
+        grid-template-rows: auto auto;
     }
 
     .pvhero-copy {
+        padding: 30px 22px 20px;
         max-width: none;
     }
 
@@ -419,13 +462,15 @@
         margin-top: 20px;
     }
 
+    /* Media below text on mobile */
     .pvhero-media {
-        min-height: 220px;
-        border-radius: 20px;
+        margin: 0 16px 16px;
+        min-height: 200px;
+        border-radius: 16px;
     }
 
     .pvhero-media img {
-        padding: 18px;
+        padding: 14px;
     }
 
     .pvhero-nav {
@@ -448,11 +493,15 @@
     .pvhero-dots {
         bottom: 19px;
     }
+
+    .pvhero-loading {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 520px) {
-    .pvhero-slide {
-        padding: 26px 16px 66px;
+    .pvhero-copy {
+        padding: 24px 16px 18px;
     }
 
     .pvhero-badge {
@@ -474,10 +523,6 @@
     }
 
     .pvhero-media {
-        min-height: 184px;
-    }
-
-    .pvhero-loading {
-        grid-template-columns: 1fr;
+        min-height: 170px;
     }
 }

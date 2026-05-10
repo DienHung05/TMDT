@@ -70,10 +70,24 @@ $accountUrl    = $block->escapeUrl($block->getUrl('customer/account'));
 
                 <div class="pvco3-connector" data-connector="3-4"></div>
 
-                <!-- Step 4 -->
+                <!-- Step 4: QR Payment -->
                 <div class="pvco3-step" data-step-indicator="4">
                     <div class="pvco3-step-circle" data-circle="4">
                         <span class="pvco3-step-num">4</span>
+                        <svg class="pvco3-step-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="18" height="18" hidden><path d="M20 6 9 17l-5-5"/></svg>
+                    </div>
+                    <div class="pvco3-step-label">
+                        <p class="pvco3-step-name">Thanh toán</p>
+                        <p class="pvco3-step-desc">Quét mã QR</p>
+                    </div>
+                </div>
+
+                <div class="pvco3-connector" data-connector="4-5"></div>
+
+                <!-- Step 5: Hoàn thành -->
+                <div class="pvco3-step" data-step-indicator="5">
+                    <div class="pvco3-step-circle" data-circle="5">
+                        <span class="pvco3-step-num">5</span>
                         <svg class="pvco3-step-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="18" height="18" hidden><path d="M20 6 9 17l-5-5"/></svg>
                     </div>
                     <div class="pvco3-step-label">
@@ -242,198 +256,126 @@ $accountUrl    = $block->escapeUrl($block->getUrl('customer/account'));
                     <div class="pvco3-card">
                         <div class="pvco3-card-header">
                             <h2 class="pvco3-card-title">Chọn phương thức thanh toán</h2>
+                            <p style="margin:4px 0 0;font-size:13px;color:#64748b">Tất cả giao dịch được bảo mật bằng mã hoá SSL 256-bit</p>
                         </div>
                         <div class="pvco3-card-body">
 
-                            <!-- Tab bar -->
-                            <div class="pvco3-tabs" role="tablist">
-                                <button type="button" class="pvco3-tab is-active" role="tab" data-tab="card" aria-selected="true">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18"/><path d="M7 15h4"/></svg>
-                                    Thẻ
+                            <!-- Payment method card grid -->
+                            <div class="pvco3-pm-grid" data-pm-grid>
+
+                                <!-- 1. QR Ngân hàng -->
+                                <button type="button" class="pvco3-pm-card" data-pm-card data-pm="bank_qr">
+                                    <div class="pvco3-pm-icon pvco3-pm-icon--bank" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="26" height="26"><path d="m3 9 9-6 9 6v1H3z"/><rect x="5" y="10" width="14" height="8"/><path d="M7 10v8M10 10v8M14 10v8M17 10v8"/><path d="M3 18h18"/></svg>
+                                    </div>
+                                    <div class="pvco3-pm-info">
+                                        <h3 class="pvco3-pm-name">QR Ngân hàng</h3>
+                                        <p class="pvco3-pm-desc">Quét VietQR — chuyển khoản liên ngân hàng miễn phí</p>
+                                        <div class="pvco3-pm-tags">
+                                            <span class="pvco3-pm-tag pvco3-pm-tag--teal">VietQR</span>
+                                            <span class="pvco3-pm-tag pvco3-pm-tag--green">Miễn phí</span>
+                                            <span class="pvco3-pm-tag pvco3-pm-tag--gray">30+ ngân hàng</span>
+                                        </div>
+                                    </div>
+                                    <span class="pvco3-pm-check" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="14" height="14"><path d="M20 6 9 17l-5-5"/></svg>
+                                    </span>
                                 </button>
-                                <button type="button" class="pvco3-tab" role="tab" data-tab="ewallet" aria-selected="false">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
-                                    Ví điện tử
+
+                                <!-- 2. MoMo -->
+                                <button type="button" class="pvco3-pm-card" data-pm-card data-pm="momo">
+                                    <div class="pvco3-pm-icon pvco3-pm-icon--momo" aria-hidden="true">
+                                        <span class="pvco3-pm-mark pvco3-pm-mark--momo">M</span>
+                                    </div>
+                                    <div class="pvco3-pm-info">
+                                        <h3 class="pvco3-pm-name">Ví MoMo</h3>
+                                        <p class="pvco3-pm-desc">Quét mã QR hoặc mở ứng dụng MoMo để thanh toán</p>
+                                        <div class="pvco3-pm-tags">
+                                            <span class="pvco3-pm-tag pvco3-pm-tag--pink">MoMo</span>
+                                            <span class="pvco3-pm-tag pvco3-pm-tag--green">Được xác minh</span>
+                                            <span class="pvco3-pm-tag pvco3-pm-tag--amber">Nhanh chóng</span>
+                                        </div>
+                                    </div>
+                                    <span class="pvco3-pm-check" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="14" height="14"><path d="M20 6 9 17l-5-5"/></svg>
+                                    </span>
                                 </button>
-                                <button type="button" class="pvco3-tab" role="tab" data-tab="bank" aria-selected="false">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="m4 9 8-4 8 4"/><path d="M5 10h14"/><path d="M7 10v7"/><path d="M12 10v7"/><path d="M17 10v7"/><path d="M4 19h16"/></svg>
-                                    Ngân hàng
+
+                                <!-- 3. VNPay -->
+                                <button type="button" class="pvco3-pm-card" data-pm-card data-pm="vnpay">
+                                    <div class="pvco3-pm-icon pvco3-pm-icon--vnpay" aria-hidden="true">
+                                        <span class="pvco3-pm-mark pvco3-pm-mark--vnpay">VN</span>
+                                    </div>
+                                    <div class="pvco3-pm-info">
+                                        <h3 class="pvco3-pm-name">VNPay QR</h3>
+                                        <p class="pvco3-pm-desc">Quét mã VNPay, hỗ trợ 35+ ngân hàng và ví điện tử</p>
+                                        <div class="pvco3-pm-tags">
+                                            <span class="pvco3-pm-tag pvco3-pm-tag--blue">VNPay</span>
+                                            <span class="pvco3-pm-tag pvco3-pm-tag--green">Được xác minh</span>
+                                            <span class="pvco3-pm-tag pvco3-pm-tag--amber">Nhanh chóng</span>
+                                        </div>
+                                    </div>
+                                    <span class="pvco3-pm-check" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="14" height="14"><path d="M20 6 9 17l-5-5"/></svg>
+                                    </span>
                                 </button>
-                            </div>
 
-                            <!-- ── TAB: Thẻ ── -->
-                            <div class="pvco3-tab-panel" data-tab-panel="card">
-                                <p class="pvco3-saved-link" data-toggle-saved>Sử dụng thẻ đã lưu</p>
-
-                                <div class="pvco3-grid pvco3-grid--1" id="pvco3-card-form">
-                                    <div class="pvco3-field pvco3-field--full">
-                                        <label class="pvco3-label" for="pvco3-card-number">Số thẻ <em class="pvco3-req">*</em></label>
-                                        <input type="text" id="pvco3-card-number" data-pay-field="cardNumber"
-                                               class="pvco3-input" placeholder="1234 5678 9012 3456" maxlength="19"
-                                               inputmode="numeric"/>
-                                        <small class="pvco3-error" data-error="cardNumber"></small>
+                                <!-- 4. Visa / Mastercard -->
+                                <button type="button" class="pvco3-pm-card" data-pm-card data-pm="card">
+                                    <div class="pvco3-pm-icon pvco3-pm-icon--card" aria-hidden="true">
+                                        <svg viewBox="0 0 42 28" width="42" height="28">
+                                            <rect width="42" height="28" rx="5" fill="#1a1f71"/>
+                                            <ellipse cx="16" cy="14" rx="7" ry="7" fill="#eb001b" opacity=".95"/>
+                                            <ellipse cx="26" cy="14" rx="7" ry="7" fill="#f79e1b" opacity=".95"/>
+                                            <ellipse cx="21" cy="14" rx="3.5" ry="7" fill="#ff5f00"/>
+                                        </svg>
                                     </div>
-                                    <div class="pvco3-field pvco3-field--full">
-                                        <label class="pvco3-label" for="pvco3-card-name">Tên chủ thẻ <em class="pvco3-req">*</em></label>
-                                        <input type="text" id="pvco3-card-name" data-pay-field="cardholderName"
-                                               class="pvco3-input" placeholder="NGUYEN VAN A" autocomplete="cc-name"/>
-                                        <small class="pvco3-error" data-error="cardholderName"></small>
-                                    </div>
-                                    <div class="pvco3-grid pvco3-grid--2">
-                                        <div class="pvco3-field">
-                                            <label class="pvco3-label" for="pvco3-card-expiry">Hết hạn MM/YY <em class="pvco3-req">*</em></label>
-                                            <input type="text" id="pvco3-card-expiry" data-pay-field="expiry"
-                                                   class="pvco3-input" placeholder="12/25" maxlength="5" autocomplete="cc-exp"/>
-                                            <small class="pvco3-error" data-error="expiry"></small>
-                                        </div>
-                                        <div class="pvco3-field">
-                                            <label class="pvco3-label" for="pvco3-card-cvv">CVV <em class="pvco3-req">*</em></label>
-                                            <input type="text" id="pvco3-card-cvv" data-pay-field="cvv"
-                                                   class="pvco3-input" placeholder="123" maxlength="4"
-                                                   inputmode="numeric" autocomplete="cc-csc"/>
-                                            <small class="pvco3-error" data-error="cvv"></small>
+                                    <div class="pvco3-pm-info">
+                                        <h3 class="pvco3-pm-name">Thẻ Visa / Mastercard</h3>
+                                        <p class="pvco3-pm-desc">Thanh toán thẻ quốc tế qua cổng bảo mật 3D Secure</p>
+                                        <div class="pvco3-pm-tags">
+                                            <span class="pvco3-pm-tag pvco3-pm-tag--blue">Visa</span>
+                                            <span class="pvco3-pm-tag pvco3-pm-tag--red">Mastercard</span>
+                                            <span class="pvco3-pm-tag pvco3-pm-tag--amber">PayPal</span>
                                         </div>
                                     </div>
-                                    <div class="pvco3-checkbox-field">
-                                        <input type="checkbox" id="pvco3-save-card" class="pvco3-checkbox" data-pay-field="saveCard"/>
-                                        <label for="pvco3-save-card" class="pvco3-checkbox-label">Lưu thẻ này cho lần mua sau</label>
-                                    </div>
-                                    <div class="pvco3-ssl-badge">
-                                        <span>🔒</span>
-                                        <span>Thanh toán bảo mật với mã hóa SSL 256-bit</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- ── TAB: Ví điện tử ── -->
-                            <div class="pvco3-tab-panel" data-tab-panel="ewallet" hidden>
-                                <div class="pvco3-ewallet-list">
-                                    <!-- MOMO -->
-                                    <button type="button" class="pvco3-ewallet-card" data-ewallet-card data-ewallet="momo">
-                                        <div class="pvco3-ewallet-icon pvco3-ewallet-icon--momo" aria-hidden="true">
-                                            <span class="pvco3-ewallet-mark">MoMo</span>
-                                        </div>
-                                        <div class="pvco3-ewallet-info">
-                                            <h3>MOMO</h3>
-                                            <p>Ví điện tử hàng đầu Việt Nam</p>
-                                            <div class="pvco3-ewallet-tags">
-                                                <span class="pvco3-tag pvco3-tag--green">Được xác minh</span>
-                                                <span class="pvco3-tag pvco3-tag--amber">Nhanh chóng</span>
-                                            </div>
-                                        </div>
-                                        <span class="pvco3-ewallet-arrow">→</span>
-                                    </button>
-                                    <!-- ZaloPay -->
-                                    <button type="button" class="pvco3-ewallet-card" data-ewallet-card data-ewallet="zalopay">
-                                        <div class="pvco3-ewallet-icon pvco3-ewallet-icon--zalopay" aria-hidden="true">
-                                            <span class="pvco3-ewallet-mark pvco3-ewallet-mark--zalo">ZaloPay</span>
-                                        </div>
-                                        <div class="pvco3-ewallet-info">
-                                            <h3>ZaloPay</h3>
-                                            <p>Thanh toán qua ứng dụng Zalo</p>
-                                            <div class="pvco3-ewallet-tags">
-                                                <span class="pvco3-tag pvco3-tag--green">Được xác minh</span>
-                                                <span class="pvco3-tag pvco3-tag--amber">Nhanh chóng</span>
-                                            </div>
-                                        </div>
-                                        <span class="pvco3-ewallet-arrow">→</span>
-                                    </button>
-                                </div>
-                                <div class="pvco3-info-box pvco3-info-box--blue">
-                                    <p><strong>Lưu ý:</strong> Bạn sẽ được chuyển hướng sang ứng dụng hoặc trang web của <strong>MOMO/ZaloPay</strong> để hoàn tất thanh toán.</p>
-                                </div>
-                                <button type="button" class="pvco3-btn pvco3-btn--primary pvco3-btn--full is-disabled" data-ewallet-continue disabled="disabled">
-                                    Tiếp tục với ví điện tử
+                                    <span class="pvco3-pm-check" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="14" height="14"><path d="M20 6 9 17l-5-5"/></svg>
+                                    </span>
                                 </button>
-                            </div>
 
-                            <!-- ── TAB: Ngân hàng ── -->
-                            <div class="pvco3-tab-panel" data-tab-panel="bank" hidden>
-                                <div class="pvco3-bank-section">
-                                    <p class="pvco3-label" style="margin-bottom:12px">Chọn ngân hàng</p>
-                                    <div class="pvco3-bank-grid" data-bank-grid>
-                                        <button type="button" class="pvco3-bank-card is-selected" data-bank="vietcombank">
-                                            <p class="pvco3-bank-name">Vietcombank</p>
-                                            <p class="pvco3-bank-code">Mã: 970</p>
-                                        </button>
-                                        <button type="button" class="pvco3-bank-card" data-bank="techcombank">
-                                            <p class="pvco3-bank-name">TechcomBank</p>
-                                            <p class="pvco3-bank-code">Mã: 980</p>
-                                        </button>
-                                        <button type="button" class="pvco3-bank-card" data-bank="acb">
-                                            <p class="pvco3-bank-name">ACB</p>
-                                            <p class="pvco3-bank-code">Mã: 963</p>
-                                        </button>
-                                        <button type="button" class="pvco3-bank-card" data-bank="vpbank">
-                                            <p class="pvco3-bank-name">VPBank</p>
-                                            <p class="pvco3-bank-code">Mã: 975</p>
-                                        </button>
+                                <!-- 5. COD -->
+                                <button type="button" class="pvco3-pm-card pvco3-pm-card--cod" data-pm-card data-pm="cod">
+                                    <div class="pvco3-pm-icon pvco3-pm-icon--cod" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="26" height="26"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M8 11h8M8 15h5"/></svg>
                                     </div>
-                                </div>
-
-                                <div class="pvco3-transfer-box">
-                                    <h3 class="pvco3-transfer-title">Thông tin chuyển khoản</h3>
-
-                                    <div class="pvco3-transfer-row">
-                                        <p class="pvco3-transfer-label">Chủ tài khoản</p>
-                                        <div class="pvco3-transfer-value-wrap">
-                                            <span class="pvco3-transfer-value" id="pvco3-tf-holder">SHOP VIETNAM LTD</span>
-                                            <button type="button" class="pvco3-copy-btn" data-copy-target="pvco3-tf-holder" title="Sao chép">
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                                            </button>
+                                    <div class="pvco3-pm-info">
+                                        <h3 class="pvco3-pm-name">Thanh toán khi nhận hàng</h3>
+                                        <p class="pvco3-pm-desc">Trả tiền mặt trực tiếp cho nhân viên giao hàng (COD)</p>
+                                        <div class="pvco3-pm-tags">
+                                            <span class="pvco3-pm-tag pvco3-pm-tag--gray">Tiền mặt</span>
+                                            <span class="pvco3-pm-tag pvco3-pm-tag--gray">COD</span>
                                         </div>
                                     </div>
-                                    <div class="pvco3-transfer-row">
-                                        <p class="pvco3-transfer-label">Số tài khoản</p>
-                                        <div class="pvco3-transfer-value-wrap">
-                                            <span class="pvco3-transfer-value pvco3-mono" id="pvco3-tf-account">123456789012</span>
-                                            <button type="button" class="pvco3-copy-btn" data-copy-target="pvco3-tf-account" title="Sao chép">
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="pvco3-transfer-row">
-                                        <p class="pvco3-transfer-label">Ngân hàng</p>
-                                        <div class="pvco3-transfer-value-wrap">
-                                            <span class="pvco3-transfer-value" id="pvco3-tf-bank">Vietcombank</span>
-                                            <button type="button" class="pvco3-copy-btn" data-copy-target="pvco3-tf-bank" title="Sao chép">
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="pvco3-transfer-row">
-                                        <p class="pvco3-transfer-label">Mã tham chiếu (ghi vào nội dung chuyển)</p>
-                                        <div class="pvco3-transfer-value-wrap">
-                                            <span class="pvco3-transfer-value pvco3-mono" id="pvco3-tf-ref" data-transfer-ref>TRANSFER-<?= date('YmdHis') ?></span>
-                                            <button type="button" class="pvco3-copy-btn" data-copy-target="pvco3-tf-ref" title="Sao chép">
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <span class="pvco3-pm-check" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="14" height="14"><path d="M20 6 9 17l-5-5"/></svg>
+                                    </span>
+                                </button>
 
-                                <div class="pvco3-info-box pvco3-info-box--amber">
-                                    <h4>Hướng dẫn</h4>
-                                    <ol>
-                                        <li>Sao chép thông tin tài khoản ở trên</li>
-                                        <li>Đăng nhập vào ứng dụng ngân hàng</li>
-                                        <li>Chuyển khoản tới số tài khoản trên</li>
-                                        <li>Sao chép mã tham chiếu vào nội dung chuyển</li>
-                                        <li>Chúng tôi sẽ xác nhận trong vòng 5 phút</li>
-                                    </ol>
-                                </div>
-                            </div>
+                            </div><!-- /.pvco3-pm-grid -->
+
+                            <small class="pvco3-error" data-error="paymentMethod" style="display:block;margin-top:8px"></small>
 
                         </div><!-- /card-body -->
                     </div><!-- /card -->
 
-                    <!-- Security trust badge (below payment card) -->
+                    <!-- Security trust badge -->
                     <div class="pvco3-card pvco3-trust-card">
                         <div class="pvco3-trust-inline">
                             <span class="pvco3-trust-icon">🔒</span>
                             <div>
                                 <h3>Thanh toán an toàn 100%</h3>
-                                <p>Thông tin của bạn được bảo vệ bằng mã hóa SSL 256-bit. Thanh toán được xác minh bởi các công ty hàng đầu.</p>
+                                <p>Dữ liệu được mã hóa SSL 256-bit. Thông tin thẻ và ví không bao giờ được lưu trên server của chúng tôi.</p>
                             </div>
                         </div>
                     </div>
@@ -580,7 +522,356 @@ $accountUrl    = $block->escapeUrl($block->getUrl('customer/account'));
 
 
         <!-- ════════════════════════════════════════════════════════════════
-             STEP 4 — SUCCESS SCREEN
+             STEP 4 — PAYMENT CONFIRMATION SCREEN
+             Shown for QR Bank / MoMo / VNPay / Card.
+             COD skips directly to step 5 (success).
+        ════════════════════════════════════════════════════════════════ -->
+        <div class="pvco3-qr-screen" data-qr-screen hidden>
+            <div class="pvco3-pay-confirm-wrap">
+
+                <!-- ── Coloured header bar (provider + status + amount) ── -->
+                <div class="pvco3-pch-bar pvco3-pch-bar--bank_qr" data-pch-bar>
+                    <div class="pvco3-pch-icon" data-pch-icon>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h.01M14 17h.01M17 14h.01M17 17h3v3h-3z"/></svg>
+                    </div>
+                    <div class="pvco3-pch-meta">
+                        <span class="pvco3-pch-provider" data-pch-provider>Thanh toán</span>
+                        <span class="pvco3-pch-status">
+                            <span class="pvco3-pch-dot" data-pch-dot></span>
+                            <span data-pch-status-text>Đang chờ thanh toán</span>
+                        </span>
+                    </div>
+                    <div class="pvco3-pch-amount" data-pch-amount>—</div>
+                </div>
+
+                <!-- ── PANEL: QR Ngân hàng ── -->
+                <div class="pvco3-pcp" data-pcp="bank_qr">
+                    <div class="pvco3-pcp-grid">
+
+                        <div class="pvco3-pcp-left">
+                            <div class="pvco3-pcp-qr-wrap pvco3-pcp-qr-wrap--tcb">
+                                <div class="pvco3-pcp-qr-loading" data-pcp-qr-loading style="display:none"></div>
+                                <img class="pvco3-pcp-qr-img pvco3-pcp-qr-static"
+                                     src="<?= $block->escapeUrl($block->getViewFileUrl('images/qr/techcombank-qr.png')) ?>"
+                                     alt="Techcombank VietQR"
+                                     data-pcp-qr-img
+                                     data-no-fallback="1"/>
+                            </div>
+                            <div class="pvco3-pcp-countdown-wrap">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                <span>Hết hạn sau:</span>
+                                <strong class="pvco3-countdown" data-countdown>15:00</strong>
+                            </div>
+                            <p class="pvco3-pcp-qr-hint">Mở app ngân hàng → Quét QR → Xác nhận</p>
+                        </div>
+
+                        <div class="pvco3-pcp-right">
+                            <h3 class="pvco3-pcp-section-title">Thông tin chuyển khoản</h3>
+
+                            <div class="pvco3-pcp-field">
+                                <span class="pvco3-pcp-label">Ngân hàng</span>
+                                <div class="pvco3-pcp-value-row">
+                                    <span class="pvco3-pcp-value" data-pcp-bank-name>—</span>
+                                    <button type="button" class="pvco3-pcp-copy" data-pcp-copy="bank_name" title="Sao chép">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="pvco3-pcp-field">
+                                <span class="pvco3-pcp-label">Chủ tài khoản</span>
+                                <div class="pvco3-pcp-value-row">
+                                    <span class="pvco3-pcp-value" data-pcp-holder>—</span>
+                                    <button type="button" class="pvco3-pcp-copy" data-pcp-copy="holder" title="Sao chép">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="pvco3-pcp-field">
+                                <span class="pvco3-pcp-label">Số tài khoản</span>
+                                <div class="pvco3-pcp-value-row">
+                                    <span class="pvco3-pcp-value pvco3-mono" data-pcp-account>—</span>
+                                    <button type="button" class="pvco3-pcp-copy" data-pcp-copy="account" title="Sao chép">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="pvco3-pcp-field pvco3-pcp-field--amount">
+                                <span class="pvco3-pcp-label">Số tiền</span>
+                                <div class="pvco3-pcp-value-row">
+                                    <span class="pvco3-pcp-value pvco3-pcp-value--amount" data-pch-amount-2>—</span>
+                                    <button type="button" class="pvco3-pcp-copy" data-pcp-copy="amount" title="Sao chép">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="pvco3-pcp-field pvco3-pcp-field--ref">
+                                <span class="pvco3-pcp-label">Nội dung chuyển khoản</span>
+                                <div class="pvco3-pcp-value-row">
+                                    <span class="pvco3-pcp-value pvco3-mono" data-pcp-ref>—</span>
+                                    <button type="button" class="pvco3-pcp-copy" data-pcp-copy="ref" title="Sao chép">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Screenshot upload for bank_qr -->
+                            <div class="pvco3-upload-proof" data-upload-section="bank_qr">
+                                <div data-upload-form>
+                                    <p style="font-size:13px;color:#94a3b8;margin-bottom:8px">Sau khi chuyển khoản, vui lòng tải ảnh xác nhận để admin duyệt:</p>
+                                    <label class="pvco3-upload-label">
+                                        <input type="file" accept="image/jpeg,image/png,image/webp" data-proof-file="bank_qr" style="display:none">
+                                        <span class="pvco3-btn pvco3-btn--outline pvco3-btn--sm" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                            Chọn ảnh xác nhận
+                                        </span>
+                                    </label>
+                                    <div data-proof-preview style="display:none"></div>
+                                    <button type="button" class="pvco3-btn pvco3-btn--primary pvco3-btn--full" data-upload-proof-btn="bank_qr" style="margin-top:8px;display:none">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                        Gửi xác nhận chuyển khoản
+                                    </button>
+                                </div>
+                                <div data-upload-status style="display:none"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div><!-- /pcp bank_qr -->
+
+                <!-- ── PANEL: MoMo ── -->
+                <div class="pvco3-pcp" data-pcp="momo" hidden>
+                    <div class="pvco3-pcp-grid pvco3-pcp-grid--wallet">
+
+                        <div class="pvco3-pcp-left">
+                            <div class="pvco3-pcp-qr-wrap pvco3-pcp-qr-wrap--momo">
+                                <img class="pvco3-pcp-qr-img pvco3-pcp-qr-static"
+                                     src="<?= $block->escapeUrl($block->getViewFileUrl('images/qr/momo-qr.png')) ?>"
+                                     alt="MoMo QR nhận tiền"
+                                     data-pcp-qr-img-momo
+                                     data-no-fallback="1"/>
+                            </div>
+                            <div class="pvco3-pcp-countdown-wrap">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                <span>Hết hạn sau:</span>
+                                <strong class="pvco3-countdown" data-countdown>15:00</strong>
+                            </div>
+                        </div>
+
+                        <div class="pvco3-pcp-right">
+                            <div class="pvco3-pcp-wallet-brand pvco3-pcp-wallet-brand--momo">
+                                <svg width="22" height="22" viewBox="0 0 40 40" fill="none" style="vertical-align:middle;margin-right:6px"><circle cx="20" cy="20" r="20" fill="#ae2d68"/><text x="20" y="26" text-anchor="middle" fill="#fff" font-size="16" font-weight="700" font-family="sans-serif">M</text></svg>
+                                MoMo
+                            </div>
+                            <div class="pvco3-pcp-info-row">
+                                <span class="pvco3-pcp-label">Số điện thoại</span>
+                                <div class="pvco3-pcp-value-row">
+                                    <span class="pvco3-pcp-value pvco3-mono">0963 316 273</span>
+                                    <button type="button" class="pvco3-pcp-copy" onclick="navigator.clipboard&&navigator.clipboard.writeText('0963316273')" title="Sao chép">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="pvco3-pcp-info-row">
+                                <span class="pvco3-pcp-label">Chủ tài khoản</span>
+                                <span class="pvco3-pcp-value">ĐIỀN MẠNH HÙNG</span>
+                            </div>
+                            <p class="pvco3-pcp-wallet-desc" style="margin-top:12px">Quét mã QR bằng ứng dụng <strong>MoMo</strong> hoặc bất kỳ app ngân hàng hỗ trợ VietQR.</p>
+                            <a href="https://nhantien.momo.vn/0963316273" class="pvco3-btn pvco3-btn--momo pvco3-btn--full" target="_blank" rel="noopener">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                Mở ứng dụng MoMo
+                            </a>
+                            <div class="pvco3-pcp-poll" data-pcp-poll-momo>
+                                <span class="pvco3-spinner pvco3-spinner--xs"></span>
+                                <span>Đang chờ xác nhận từ MoMo…</span>
+                            </div>
+                            <div class="pvco3-pcp-steps">
+                                <h4>Hướng dẫn</h4>
+                                <ol>
+                                    <li>Mở ứng dụng <strong>MoMo</strong></li>
+                                    <li>Chọn <strong>Quét mã QR</strong></li>
+                                    <li>Hướng camera vào mã bên trái</li>
+                                    <li>Xác nhận thanh toán trong app</li>
+                                </ol>
+                            </div>
+                            <!-- Screenshot upload for MoMo -->
+                            <div class="pvco3-upload-proof" data-upload-section="momo">
+                                <div data-upload-form>
+                                    <p style="font-size:13px;color:#94a3b8;margin-bottom:8px">Sau khi thanh toán, vui lòng tải ảnh xác nhận:</p>
+                                    <label class="pvco3-upload-label">
+                                        <input type="file" accept="image/jpeg,image/png,image/webp" data-proof-file="momo" style="display:none">
+                                        <span class="pvco3-btn pvco3-btn--outline pvco3-btn--sm" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                            Chọn ảnh xác nhận
+                                        </span>
+                                    </label>
+                                    <div data-proof-preview style="display:none"></div>
+                                    <button type="button" class="pvco3-btn pvco3-btn--primary pvco3-btn--full" data-upload-proof-btn="momo" style="margin-top:8px;display:none">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                        Gửi xác nhận thanh toán
+                                    </button>
+                                </div>
+                                <div data-upload-status style="display:none"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div><!-- /pcp momo -->
+
+                <!-- ── PANEL: VNPay ── -->
+                <div class="pvco3-pcp" data-pcp="vnpay" hidden>
+                    <div class="pvco3-pcp-grid pvco3-pcp-grid--wallet">
+
+                        <div class="pvco3-pcp-left">
+                            <div class="pvco3-pcp-qr-wrap pvco3-pcp-qr-wrap--vnpay">
+                                <img class="pvco3-pcp-qr-img pvco3-pcp-qr-static"
+                                     src="<?= $block->escapeUrl($block->getViewFileUrl('images/qr/vnpay-qr.png')) ?>"
+                                     alt="VNPay QR nhận tiền"
+                                     data-pcp-qr-img-vnpay
+                                     data-no-fallback="1"/>
+                            </div>
+                            <div class="pvco3-pcp-countdown-wrap">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                <span>Hết hạn sau:</span>
+                                <strong class="pvco3-countdown" data-countdown>15:00</strong>
+                            </div>
+                        </div>
+
+                        <div class="pvco3-pcp-right">
+                            <div class="pvco3-pcp-wallet-brand pvco3-pcp-wallet-brand--vnpay">
+                                <svg width="22" height="22" viewBox="0 0 40 40" fill="none" style="vertical-align:middle;margin-right:6px"><circle cx="20" cy="20" r="20" fill="#005BAA"/><text x="20" y="26" text-anchor="middle" fill="#fff" font-size="11" font-weight="700" font-family="sans-serif">VN</text></svg>
+                                VNPay
+                            </div>
+                            <div class="pvco3-pcp-info-row">
+                                <span class="pvco3-pcp-label">Ứng dụng</span>
+                                <span class="pvco3-pcp-value">VNPay</span>
+                            </div>
+                            <div class="pvco3-pcp-info-row">
+                                <span class="pvco3-pcp-label">Chủ tài khoản</span>
+                                <span class="pvco3-pcp-value">ĐIỀN MẠNH HÙNG</span>
+                            </div>
+                            <div class="pvco3-pcp-info-row">
+                                <span class="pvco3-pcp-label">Số điện thoại</span>
+                                <div class="pvco3-pcp-value-row">
+                                    <span class="pvco3-pcp-value pvco3-mono">0963 316 273</span>
+                                    <button type="button" class="pvco3-pcp-copy" onclick="navigator.clipboard&&navigator.clipboard.writeText('0963316273');this.textContent='✓'" title="Sao chép">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="pvco3-pcp-wallet-desc" style="margin-top:12px">Mở app <strong>VNPay</strong> → Quét mã QR → Xác nhận thanh toán.</p>
+                            <div class="pvco3-pcp-poll" data-pcp-poll-vnpay>
+                                <span class="pvco3-spinner pvco3-spinner--xs"></span>
+                                <span>Đang chờ xác nhận từ VNPay…</span>
+                            </div>
+                            <div class="pvco3-pcp-steps">
+                                <h4>Hướng dẫn</h4>
+                                <ol>
+                                    <li>Mở ứng dụng <strong>ngân hàng hoặc VNPay</strong></li>
+                                    <li>Chọn <strong>Quét mã QR</strong></li>
+                                    <li>Hướng camera vào mã bên trái</li>
+                                    <li>Xác nhận thanh toán trong app</li>
+                                </ol>
+                            </div>
+                            <!-- Screenshot upload for VNPay -->
+                            <div class="pvco3-upload-proof" data-upload-section="vnpay">
+                                <div data-upload-form>
+                                    <p style="font-size:13px;color:#94a3b8;margin-bottom:8px">Sau khi thanh toán, vui lòng tải ảnh xác nhận:</p>
+                                    <label class="pvco3-upload-label">
+                                        <input type="file" accept="image/jpeg,image/png,image/webp" data-proof-file="vnpay" style="display:none">
+                                        <span class="pvco3-btn pvco3-btn--outline pvco3-btn--sm" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                            Chọn ảnh xác nhận
+                                        </span>
+                                    </label>
+                                    <div data-proof-preview style="display:none"></div>
+                                    <button type="button" class="pvco3-btn pvco3-btn--primary pvco3-btn--full" data-upload-proof-btn="vnpay" style="margin-top:8px;display:none">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                        Gửi xác nhận thanh toán
+                                    </button>
+                                </div>
+                                <div data-upload-status style="display:none"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div><!-- /pcp vnpay -->
+
+                <!-- ── PANEL: Thẻ / Chuyển khoản Techcombank ── -->
+                <div class="pvco3-pcp" data-pcp="card" hidden>
+                    <div class="pvco3-pcp-grid pvco3-pcp-grid--wallet">
+
+                        <div class="pvco3-pcp-left">
+                            <div class="pvco3-pcp-qr-wrap pvco3-pcp-qr-wrap--tcb">
+                                <img class="pvco3-pcp-qr-img pvco3-pcp-qr-static"
+                                     src="<?= $block->escapeUrl($block->getViewFileUrl('images/qr/techcombank-qr.png')) ?>"
+                                     alt="Techcombank VietQR"
+                                     data-no-fallback="1"/>
+                            </div>
+                            <div class="pvco3-pcp-countdown-wrap">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                <span>Hết hạn sau:</span>
+                                <strong class="pvco3-countdown" data-countdown>15:00</strong>
+                            </div>
+                        </div>
+
+                        <div class="pvco3-pcp-right">
+                            <div class="pvco3-pcp-wallet-brand pvco3-pcp-wallet-brand--tcb">
+                                <svg width="22" height="22" viewBox="0 0 40 40" fill="none" style="vertical-align:middle;margin-right:6px"><circle cx="20" cy="20" r="20" fill="#cf2127"/><text x="20" y="26" text-anchor="middle" fill="#fff" font-size="8" font-weight="700" font-family="sans-serif">TCB</text></svg>
+                                Techcombank
+                            </div>
+                            <div class="pvco3-pcp-info-row">
+                                <span class="pvco3-pcp-label">Ngân hàng</span>
+                                <span class="pvco3-pcp-value">Techcombank</span>
+                            </div>
+                            <div class="pvco3-pcp-info-row">
+                                <span class="pvco3-pcp-label">Chủ tài khoản</span>
+                                <span class="pvco3-pcp-value">ĐIỀN MẠNH HÙNG</span>
+                            </div>
+                            <p class="pvco3-pcp-wallet-desc" style="margin-top:12px">Mở app <strong>ngân hàng bất kỳ</strong> → Quét mã VietQR → Xác nhận thanh toán.</p>
+                            <!-- Screenshot upload for card/Visa -->
+                            <div class="pvco3-upload-proof" data-upload-section="card">
+                                <div data-upload-form>
+                                    <p style="font-size:13px;color:#94a3b8;margin-bottom:8px">Sau khi thanh toán, vui lòng tải ảnh xác nhận để admin duyệt:</p>
+                                    <label class="pvco3-upload-label">
+                                        <input type="file" accept="image/jpeg,image/png,image/webp" data-proof-file="card" style="display:none">
+                                        <span class="pvco3-btn pvco3-btn--outline pvco3-btn--sm" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                            Chọn ảnh xác nhận
+                                        </span>
+                                    </label>
+                                    <div data-proof-preview style="display:none"></div>
+                                    <button type="button" class="pvco3-btn pvco3-btn--primary pvco3-btn--full" data-upload-proof-btn="card" style="margin-top:8px;display:none">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                        Gửi xác nhận thanh toán
+                                    </button>
+                                </div>
+                                <div data-upload-status style="display:none"></div>
+                            </div>
+                            <div class="pvco3-pcp-card-badges" style="margin-top:12px">
+                                <span>🔒 SSL 256-bit</span>
+                                <span>VietQR</span>
+                                <span>Napas 247</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div><!-- /pcp card -->
+
+                <!-- ── Status overlay (paid / failed / expired) ── -->
+                <div class="pvco3-pcp-overlay" data-pcp-overlay hidden>
+                    <div class="pvco3-pcp-overlay-inner" data-pcp-overlay-inner></div>
+                </div>
+
+            </div><!-- /.pvco3-pay-confirm-wrap -->
+        </div><!-- /.pvco3-qr-screen -->
+
+
+        <!-- ════════════════════════════════════════════════════════════════
+             STEP 5 — SUCCESS SCREEN
         ════════════════════════════════════════════════════════════════ -->
         <div class="pvco3-success" data-success-screen hidden>
 
@@ -591,14 +882,33 @@ $accountUrl    = $block->escapeUrl($block->getUrl('customer/account'));
                 </div>
             </div>
 
-            <h1 class="pvco3-success-title">Thanh toán thành công!</h1>
-            <p class="pvco3-success-sub">Cảm ơn bạn đã mua sắm. Đơn hàng của bạn đã được xác nhận.</p>
+            <h1 class="pvco3-success-title">Đơn hàng đã được xác nhận!</h1>
+            <p class="pvco3-success-sub">Cảm ơn bạn đã mua sắm. Chúng tôi sẽ liên lạc khi đơn hàng được gửi đi.</p>
 
             <!-- Order number card -->
             <div class="pvco3-success-order-box">
                 <p class="pvco3-success-order-label">Số đơn hàng</p>
                 <p class="pvco3-success-order-num" data-success-order-number></p>
                 <p class="pvco3-success-order-date" data-success-order-date></p>
+            </div>
+
+            <!-- Purchase / warranty code -->
+            <div class="pvco3-purchase-code-box" data-success-purchase-code hidden>
+                <div class="pvco3-purchase-code-inner">
+                    <div class="pvco3-purchase-code-left">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        <div>
+                            <p class="pvco3-purchase-code-label">Mã bảo hành</p>
+                            <p class="pvco3-purchase-code-sub">Dùng để tra cứu bảo hành tại cửa hàng</p>
+                        </div>
+                    </div>
+                    <div class="pvco3-purchase-code-value">
+                        <strong data-pc-value class="pvco3-purchase-code-num"></strong>
+                        <button type="button" class="pvco3-pcp-copy pvco3-purchase-code-copy" data-copy-pc title="Sao chép mã">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <!-- Delivery + payment summary -->
@@ -649,7 +959,7 @@ $accountUrl    = $block->escapeUrl($block->getUrl('customer/account'));
         <div class="pvco3-processing" data-processing-overlay hidden>
             <div class="pvco3-processing-inner">
                 <div class="pvco3-spinner pvco3-spinner--lg"></div>
-                <p>Đang xử lý thanh toán…</p>
+                <p>Đang xử lý đơn hàng…</p>
             </div>
         </div>
 

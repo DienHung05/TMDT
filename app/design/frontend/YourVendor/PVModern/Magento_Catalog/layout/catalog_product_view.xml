@@ -1,21 +1,29 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="css/pv-product-view-fix.css"/>
+    </head>
     <body>
+        <!-- Remove star-rating review summary shown under product title -->
         <referenceBlock name="product.info.review" remove="true" />
 
-        <referenceContainer name="product.info.main">
-            <block class="Magento\Framework\View\Element\Template"
-                   name="pvmodern.product.specifications.summary"
-                   template="Magento_Catalog::product/view/specifications.phtml"
-                   after="product.info.review" />
-        </referenceContainer>
+        <!-- Remove SKU code shown next to "In stock" label -->
+        <referenceBlock name="product.info.sku" remove="true" />
 
-        <!--
-            Remove the "Specifications" tab from the product detail accordion.
-            The specs now render as a right-column card and at the top of the
-            Reviews tab, instead of as a separate tab button.
-        -->
-        <referenceBlock name="pvmodern.product.specifications" remove="true" />
+        <!-- Add a dedicated Specifications tab (shows specs once, not in Reviews) -->
+        <referenceBlock name="product.info.details">
+            <block class="Magento\Catalog\Block\Product\View"
+                   name="pvmodern.product.specifications"
+                   as="specifications"
+                   template="Magento_Catalog::product/view/specifications.phtml"
+                   group="detailed_info"
+                   before="-">
+                <arguments>
+                    <argument name="title" xsi:type="string" translate="true">Thông số kỹ thuật</argument>
+                    <argument name="sort_order" xsi:type="string">5</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
     </body>
 </page>

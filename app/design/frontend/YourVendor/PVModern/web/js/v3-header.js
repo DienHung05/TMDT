@@ -8,7 +8,8 @@
  */
 define([
     'jquery',
-    'Magento_Customer/js/customer-data'
+    'Magento_Customer/js/customer-data',
+    'mage/cookies'
 ], function ($, customerData) {
     'use strict';
 
@@ -25,6 +26,66 @@ define([
         var $activeLink    = activeCat
             ? $nav.find('a[data-cat="' + activeCat + '"]')
             : $();
+
+        function getCookie(name) {
+            var value = '; ' + document.cookie,
+                parts = value.split('; ' + name + '=');
+
+            if (parts.length === 2) {
+                return decodeURIComponent(parts.pop().split(';').shift() || '');
+            }
+
+            return '';
+        }
+
+        function setCookie(name, value) {
+            var date = new Date(),
+                cookiesConfig = window.cookiesConfig || {},
+                secure = cookiesConfig.secure ? '; secure' : '',
+                sameSite = '; samesite=' + (cookiesConfig.samesite || 'lax');
+
+            date.setTime(date.getTime() + 86400000);
+            document.cookie = name + '=' + encodeURIComponent(value || '') + '; expires=' + date.toUTCString() + secure + '; path=/' + sameSite;
+        }
+
+        function generateFormKey() {
+            var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+                key = '',
+                i;
+
+            for (i = 0; i < 16; i += 1) {
+                key += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+
+            return key;
+        }
+
+        function currentFormKey() {
+            var key = '';
+
+            if ($.mage && $.mage.cookies && typeof $.mage.cookies.get === 'function') {
+                key = $.mage.cookies.get('form_key') || '';
+            }
+            key = key || getCookie('form_key');
+            if (!key) {
+                key = generateFormKey();
+                setCookie('form_key', key);
+            }
+
+            return key;
+        }
+
+        function syncCartFormKey(form) {
+            var key = currentFormKey();
+            if (!key) {
+                return;
+            }
+            $(form).find('input[name="form_key"]').val(key).attr('value', key);
+        }
+
+        $(document).on('submit.pvGlobalCartFormKey', 'form[action*="/checkout/cart/add"]', function () {
+            syncCartFormKey(this);
+        });
 
         /* ═══════════════════════════════════════════════════════════════════
            CARET ROTATION — mirrors CSS :hover (visual feedback only)
@@ -150,16 +211,29 @@ define([
            REAL-TIME CART BADGE (Magento customerData KO observable)
         ═══════════════════════════════════════════════════════════════════ */
         (function initCartBadge() {
-            var $badge   = $root.find('[data-cart-badge]');
+            var $badge = $root.find('[data-cart-badge]');
             if (!$badge.length) return;
-            var cartData = customerData.get('cart');
-            function refreshBadge(data) {
-                var count = parseInt((data && data.summary_count) || 0, 10);
+
+            function applyCount(count) {
+                count = parseInt(count, 10) || 0;
                 if (count > 0) { $badge.text(count).css('display', ''); }
                 else           { $badge.text('').css('display', 'none'); }
             }
+
+            var cartData = customerData.get('cart');
+            function refreshBadge(data) {
+                var count = (data && data.summary_count !== undefined)
+                    ? data.summary_count
+                    : ((data && data.qty_count !== undefined)
+                        ? data.qty_count
+                        : (data && data.items ? data.items.reduce(function (s, i) { return s + (parseInt(i.qty, 10) || 1); }, 0) : 0));
+                applyCount(count);
+            }
             cartData.subscribe(refreshBadge);
             refreshBadge(cartData());
+
+            /* Immediate update from checkout widget after order is placed */
+            $(window).on('pvCartCountChanged', function (e, count) { applyCount(count); });
         }());
 
         (function initAuthAwareActions() {

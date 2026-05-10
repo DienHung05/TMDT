@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="YourVendor_PVModern::payments"
+             title="Xác nhận thanh toán"
+             translate="title"
+             module="YourVendor_PVModern"
+             sortOrder="200"
+             parent="Magento_Sales::sales_operation"
+             action="pvmodern_payments/payments/index"
+             resource="YourVendor_PVModern::payments"/>
+    </menu>
+</config>

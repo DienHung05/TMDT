@@ -77,29 +77,6 @@ if ($product) {
 }
 ?>
 
-<?php /* ══ SPECS TABLE ══════════════════════════════════════════════════════ */ ?>
-<?php if (!empty($specs) && $product): ?>
-<div class="pv3-pdp-specs-wrapper">
-    <div class="pv3-pdp-specs-header">
-        <span class="pv3-pdp-specs-eyebrow">Technical Details</span>
-        <h3 class="pv3-pdp-specs-title">Product Specifications</h3>
-        <p class="pv3-pdp-specs-subtitle">
-            Detailed specification sheet for <strong><?= $block->escapeHtml($product->getName()) ?></strong> —
-            verified against manufacturer data so you can compare and purchase with confidence.
-        </p>
-    </div>
-
-    <div class="pv3-pdp-specs-table">
-        <?php foreach ($specs as $i => $row): ?>
-        <div class="pv3-pdp-specs-row<?= $i % 2 === 0 ? ' is-even' : '' ?>">
-            <span class="pv3-pdp-specs-label"><?= $block->escapeHtml($row['label']) ?></span>
-            <strong class="pv3-pdp-specs-value"><?= $block->escapeHtml($row['value']) ?></strong>
-        </div>
-        <?php endforeach; ?>
-    </div>
-</div>
-<?php endif; ?>
-
 <?php /* ══ REVIEW LIST ══════════════════════════════════════════════════════ */ ?>
 <?php if ($hasReviews && $reviewCollection): ?>
 <div class="pv3-pdp-reviews-wrapper">

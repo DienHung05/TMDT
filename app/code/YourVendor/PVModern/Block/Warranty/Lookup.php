@@ -41,6 +41,10 @@ class Lookup extends Template
                 (string) $this->getRequest()->getParam('phone'),
                 (string) $this->getRequest()->getParam('purchase_code')
             );
+        } elseif ($mode === 'order_code') {
+            $this->lookupResult = $this->warrantyCardProvider->findByOrderCode(
+                (string) $this->getRequest()->getParam('order_code')
+            );
         }
 
         return $this->lookupResult;
@@ -57,6 +61,9 @@ class Lookup extends Template
         if ($mode === '') {
             if (trim((string) $this->getRequest()->getParam('imei', '')) !== '') {
                 return 'imei';
+            }
+            if (trim((string) $this->getRequest()->getParam('order_code', '')) !== '') {
+                return 'order_code';
             }
             if (
                 trim((string) $this->getRequest()->getParam('phone', '')) !== '' ||
@@ -86,6 +93,10 @@ class Lookup extends Template
 
         if ($this->getLookupMode() === 'imei') {
             return 'No warranty card matched that IMEI. Check the digits and try again.';
+        }
+
+        if ($this->getLookupMode() === 'order_code') {
+            return 'No warranty record found for that order code. Make sure to enter the full code (e.g. ORD000000037).';
         }
 
         return 'No warranty card matched that phone number and purchase code combination.';

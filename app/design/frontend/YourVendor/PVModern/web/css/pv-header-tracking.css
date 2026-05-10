@@ -5,6 +5,19 @@ body.pvmodern-v3 .pv3-search {
 body.pvmodern-v3 .pv3-product-card.is-page-hidden {
     display: none !important;
 }
+body.pvmodern-v3 .pv3-pagination-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none !important;
+}
+body.pvmodern-v3 .pv3-pagination-button[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: .45;
+    pointer-events: none;
+    transform: none !important;
+    box-shadow: none !important;
+}
 body.pvmodern-v3 .pv3-nav {
     margin-left: 10px !important;
     justify-content: flex-end !important;
@@ -314,4 +327,22 @@ body.pvmodern-v3 .pv-order-track::before {
         padding: 18px;
         border-radius: 20px;
     }
+}
+
+/* ─── My Orders — purchase / warranty code badge ─────────────────────── */
+.sales-order-history .col.pv-purchase-code,
+.account .col.pv-purchase-code {
+    white-space: nowrap;
+}
+.pv-pc-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    color: #1e40af;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
 }

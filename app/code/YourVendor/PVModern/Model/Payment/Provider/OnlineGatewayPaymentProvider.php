@@ -69,11 +69,13 @@ class OnlineGatewayPaymentProvider extends AbstractPaymentProvider
         $reference = 'VNPAY-' . $increment;
 
         if ($isMock || !$hasCredentials) {
+            $mockPayload = sprintf('TECHIEWORLD|VNPAY|MOCK_PENDING|AMOUNT=%d|REF=%s', $amount, $reference);
             return [
                 'status' => $this->getInitialStatus(),
                 'label' => 'VNPay',
                 'provider' => 'vnpay',
                 'redirect_url' => '',
+                'qr_payload' => $mockPayload,
                 'reference' => $reference,
                 'message' => 'VNPay is in mock mode. Set VNPAY_TMN_CODE, VNPAY_HASH_SECRET, VNPAY_PAYMENT_URL, VNPAY_RETURN_URL for live payment URLs.',
                 'mock' => true,
@@ -112,6 +114,7 @@ class OnlineGatewayPaymentProvider extends AbstractPaymentProvider
             'label' => 'VNPay',
             'provider' => 'vnpay',
             'redirect_url' => $redirectUrl,
+            'qr_payload' => $redirectUrl,
             'reference' => $reference,
             'message' => 'VNPay payment URL created.',
             'mock' => false,
@@ -125,11 +128,13 @@ class OnlineGatewayPaymentProvider extends AbstractPaymentProvider
         $reference = 'MOMO-' . $increment;
 
         if ($isMock || !$hasCredentials) {
+            $mockPayload = sprintf('TECHIEWORLD|MOMO|MOCK_PENDING|AMOUNT=%d|REF=%s', $amount, $reference);
             return [
                 'status' => $this->getInitialStatus(),
                 'label' => 'MoMo',
                 'provider' => 'momo',
                 'redirect_url' => '',
+                'qr_payload' => $mockPayload,
                 'reference' => $reference,
                 'message' => 'MoMo is in mock mode. Set MOMO_PARTNER_CODE, MOMO_ACCESS_KEY, MOMO_SECRET_KEY, MOMO_ENDPOINT, MOMO_REDIRECT_URL, MOMO_IPN_URL for live payUrl creation.',
                 'mock' => true,
@@ -170,12 +175,15 @@ class OnlineGatewayPaymentProvider extends AbstractPaymentProvider
 
         $response = $this->postJson((string) $config['endpoint'], $payload);
         $payUrl = (string) ($response['payUrl'] ?? $response['shortLink'] ?? '');
+        $qrCodeUrl = (string) ($response['qrCodeUrl'] ?? '');
 
         return [
             'status' => $this->getInitialStatus(),
             'label' => 'MoMo',
             'provider' => 'momo',
             'redirect_url' => $payUrl,
+            'qr_payload' => $payUrl,
+            'qr_code_url' => $qrCodeUrl,
             'reference' => $reference,
             'message' => $payUrl !== '' ? 'MoMo payUrl created.' : 'MoMo did not return a payUrl.',
             'mock' => false,

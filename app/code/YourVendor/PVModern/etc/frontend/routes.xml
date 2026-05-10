@@ -42,6 +42,10 @@
         <route id="currency_rate" frontName="currency-rate">
             <module name="YourVendor_PVModern"/>
         </route>
+        <!-- /currency -->
+        <route id="currency" frontName="currency">
+            <module name="YourVendor_PVModern"/>
+        </route>
         <!-- /order-tracking -->
         <route id="order_tracking" frontName="order-tracking">
             <module name="YourVendor_PVModern"/>
@@ -53,6 +57,10 @@
         <!-- /api aliases for frontend dashboards; Magento Webapi remains fallback. -->
         <route id="api" frontName="api">
             <module name="YourVendor_PVModern" before="Magento_Webapi"/>
+        </route>
+        <!-- /pvadmin — Payment admin dashboard -->
+        <route id="pvadmin" frontName="pvadmin">
+            <module name="YourVendor_PVModern"/>
         </route>
     </router>
 </config>

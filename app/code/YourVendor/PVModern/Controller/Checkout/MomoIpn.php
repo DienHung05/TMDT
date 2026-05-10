@@ -9,7 +9,10 @@ use Magento\Framework\App\Request\InvalidRequestException;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Serialize\Serializer\Json;
+use Magento\Sales\Api\OrderRepositoryInterface;
+use Magento\Sales\Model\ResourceModel\Order\CollectionFactory as OrderCollectionFactory;
 use Psr\Log\LoggerInterface;
+use YourVendor\PVModern\Model\Checkout\OrderPaymentStatus;
 use YourVendor\PVModern\Model\IntegrationConfig;
 
 class MomoIpn implements HttpPostActionInterface, CsrfAwareActionInterface
@@ -19,6 +22,8 @@ class MomoIpn implements HttpPostActionInterface, CsrfAwareActionInterface
         private readonly JsonFactory $resultJsonFactory,
         private readonly Json $json,
         private readonly IntegrationConfig $integrationConfig,
+        private readonly OrderCollectionFactory $orderCollectionFactory,
+        private readonly OrderRepositoryInterface $orderRepository,
         private readonly LoggerInterface $logger
     ) {
     }
@@ -28,6 +33,9 @@ class MomoIpn implements HttpPostActionInterface, CsrfAwareActionInterface
         $result = $this->resultJsonFactory->create();
         $payload = $this->readPayload();
         $isValid = $this->verifySignature($payload);
+        if ($isValid) {
+            $this->updateOrderPayment($payload);
+        }
 
         $this->logger->info('[PVModern][MoMo] IPN received', [
             'valid' => $isValid,
@@ -90,6 +98,45 @@ class MomoIpn implements HttpPostActionInterface, CsrfAwareActionInterface
             '&transId=' . (string) ($payload['transId'] ?? '');
 
         return hash_equals(hash_hmac('sha256', $raw, $secret), $signature);
+    }
+
+    /**
+     * @param array<string, mixed> $payload
+     */
+    private function updateOrderPayment(array $payload): void
+    {
+        $incrementId = $this->extractIncrementId((string) ($payload['orderId'] ?? ''));
+        if ($incrementId === '') {
+            return;
+        }
+
+        $collection = $this->orderCollectionFactory->create();
+        $collection->addFieldToFilter('increment_id', $incrementId);
+        $collection->setPageSize(1);
+        $order = $collection->getFirstItem();
+        if (!$order || !$order->getId() || !$order->getPayment()) {
+            return;
+        }
+
+        $isPaid = ((string) ($payload['resultCode'] ?? '')) === '0';
+        $status = $isPaid ? OrderPaymentStatus::PAID : OrderPaymentStatus::FAILED;
+        $payment = $order->getPayment();
+        $payment->setAdditionalInformation('pvmodern_payment_status', $status);
+        $payment->setAdditionalInformation('pvmodern_payment_gateway', 'momo');
+        $payment->setAdditionalInformation('pvmodern_payment_transaction_id', (string) ($payload['transId'] ?? ''));
+        $order->addCommentToStatusHistory(
+            sprintf('MoMo IPN verified. Payment status: %s. Transaction: %s', $status, (string) ($payload['transId'] ?? ''))
+        );
+        $this->orderRepository->save($order);
+    }
+
+    private function extractIncrementId(string $gatewayOrderId): string
+    {
+        if (str_starts_with($gatewayOrderId, 'MOMO-')) {
+            return substr($gatewayOrderId, 5);
+        }
+
+        return preg_replace('/[^A-Za-z0-9_-]/', '', $gatewayOrderId) ?: '';
     }
 
     public function createCsrfValidationException(RequestInterface $request): ?InvalidRequestException

@@ -1,4 +1,4 @@
-define(['jquery'], function ($) {
+define(['jquery', 'mage/cookies', 'Magento_Customer/js/customer-data'], function ($, cookies, customerData) {
     'use strict';
 
     var CITIES = [
@@ -94,10 +94,11 @@ define(['jquery'], function ($) {
     ];
 
     var PAYMENT_METHODS = [
-        {id: 'cod', providerCode: 'cod', title: 'Thanh toán khi nhận hàng', description: 'Trả tiền khi đơn hàng được giao', icon: 'cod'},
-        {id: 'bank_transfer', providerCode: 'bank_transfer', title: 'Chuyển khoản ngân hàng', description: 'Nhận thông tin chuyển khoản sau khi đặt hàng', icon: 'bank'},
-        {id: 'card', providerCode: 'online_gateway', title: 'Thẻ tín dụng / ghi nợ', description: 'Điền thông tin thẻ qua cổng thanh toán an toàn', icon: 'card'},
-        {id: 'wallet', providerCode: 'online_gateway', title: 'Ví điện tử', description: 'Quét mã hoặc mở app MoMo/VNPay khi gateway được cấu hình', icon: 'wallet'}
+        {id: 'bank_qr',  providerCode: 'bank_transfer', title: 'QR Ngân hàng',           gateway: 'bank_qr'},
+        {id: 'momo',     providerCode: 'online_gateway', title: 'Ví MoMo',               gateway: 'momo'},
+        {id: 'vnpay',    providerCode: 'online_gateway', title: 'VNPay QR',              gateway: 'vnpay'},
+        {id: 'card',     providerCode: 'online_gateway', title: 'Visa / Mastercard',     gateway: 'vnpay'},
+        {id: 'cod',      providerCode: 'cod',            title: 'Thanh toán khi nhận hàng', gateway: ''}
     ];
 
     var BANKS = [
@@ -107,15 +108,16 @@ define(['jquery'], function ($) {
         {id: 'vpb', name: 'VPBank', code: '970432'}
     ];
 
-    var WALLETS = [
-        {id: 'momo', name: 'MoMo', tone: 'pink', payUrl: ''},
-        {id: 'vnpay', name: 'VNPay', tone: 'blue', payUrl: ''}
-    ];
+    var _countdownTimer  = null;
+    var _pollTimer       = null;
+    var _countdownSecs   = 0;
+    var _copyValues      = {};
 
     return function (config, element) {
         var $root = $(element);
         var bootstrap = readBootstrap();
         var storageKey = 'pvmodern_checkout_customer_flow';
+        var STATE_VERSION = 'v4';
         var isSubmitting = false;
         var state = $.extend(true, {
             step: 1,
@@ -123,13 +125,13 @@ define(['jquery'], function ($) {
             fullName: '',
             phone: '',
             email: '',
-            address: '',
-            address2: '',
-            city: '',
+            addressLine1: '',
+            addressLine2: '',
+            province: '',
             district: '',
             ward: '',
-            note: '',
-            saveAsDefault: false,
+            specialInstructions: '',
+            saveDefault: false,
             shippingMethodId: '',
             paymentMethodId: '',
             bankId: 'vcb',
@@ -151,9 +153,18 @@ define(['jquery'], function ($) {
             }
         }
 
+        function checkoutFormKey() {
+            if ($.mage && $.mage.cookies && $.mage.cookies.get('form_key')) {
+                return $.mage.cookies.get('form_key');
+            }
+            return bootstrap.form_key || '';
+        }
+
         function loadState() {
             try {
-                return JSON.parse(window.sessionStorage.getItem(storageKey) || '{}') || {};
+                var saved = JSON.parse(window.sessionStorage.getItem(storageKey) || '{}') || {};
+                if (saved._v !== STATE_VERSION) { return {}; }
+                return saved;
             } catch (e) {
                 return {};
             }
@@ -161,7 +172,7 @@ define(['jquery'], function ($) {
 
         function saveState() {
             try {
-                window.sessionStorage.setItem(storageKey, JSON.stringify(state));
+                window.sessionStorage.setItem(storageKey, JSON.stringify($.extend({_v: STATE_VERSION}, state)));
             } catch (e) {}
         }
 
@@ -225,6 +236,14 @@ define(['jquery'], function ($) {
             return icons[type] || icons.card;
         }
 
+        function qrImageUrl(data) {
+            data = String(data || '');
+            if (!data) {
+                return '';
+            }
+            return 'https://api.qrserver.com/v1/create-qr-code/?size=260x260&margin=10&data=' + encodeURIComponent(data);
+        }
+
         function cartItems() {
             return ((bootstrap.cart || {}).items || []);
         }
@@ -266,16 +285,16 @@ define(['jquery'], function ($) {
         }
 
         function shippingDistanceSurcharge() {
-            if (!state.city) {
+            if (!state.province) {
                 return 0;
             }
-            if (state.city === 'Thành phố Hồ Chí Minh') {
+            if (state.province === 'Thành phố Hồ Chí Minh') {
                 return 0;
             }
-            if (state.city === 'Thành phố Hà Nội') {
+            if (state.province === 'Thành phố Hà Nội') {
                 return 14000;
             }
-            if (state.city === 'Thành phố Đà Nẵng' || state.city === 'Thành phố Cần Thơ') {
+            if (state.province === 'Thành phố Đà Nẵng' || state.province === 'Thành phố Cần Thơ') {
                 return 9000;
             }
             return 17000;
@@ -311,7 +330,7 @@ define(['jquery'], function ($) {
         }
 
         function showAlert(message) {
-            var $alert = $root.find('[data-checkout-alert]');
+            var $alert = $root.find('[data-alert]');
             if (!message) {
                 $alert.attr('hidden', 'hidden').text('');
                 return;
@@ -346,12 +365,12 @@ define(['jquery'], function ($) {
             ADDRESS_DATA.forEach(function (city) {
                 html += '<option value="' + esc(city.name) + '">' + esc(city.name) + '</option>';
             });
-            $root.find('[data-city-select]').html(html).val(state.city);
+            $root.find('[data-province-select]').html(html).val(state.province);
             populateDistricts();
         }
 
         function populateDistricts() {
-            var city = ADDRESS_DATA.find(function (row) { return row.name === state.city; });
+            var city = ADDRESS_DATA.find(function (row) { return row.name === state.province; });
             var $district = $root.find('[data-district-select]');
             var $ward = $root.find('[data-ward-select]');
             if (!city) {
@@ -378,7 +397,7 @@ define(['jquery'], function ($) {
                 return;
             }
             var html = '<option value="">Chọn phường/xã</option>';
-            getWardOptions(state.city, state.district).forEach(function (ward) {
+            getWardOptions(state.province, state.district).forEach(function (ward) {
                 html += '<option value="' + esc(ward) + '">' + esc(ward) + '</option>';
             });
             $ward.html(html).prop('disabled', false).val(state.ward);
@@ -409,7 +428,7 @@ define(['jquery'], function ($) {
             if (!state.fullName && customer.full_name) { state.fullName = customer.full_name; }
             if (!state.email && customer.email) { state.email = customer.email; }
             if (!state.phone && customer.phone) { state.phone = customer.phone; }
-            if (!state.address && address.street) { state.address = address.street; }
+            if (!state.addressLine1 && address.street) { state.addressLine1 = address.street; }
         }
 
         function syncFields() {
@@ -433,74 +452,32 @@ define(['jquery'], function ($) {
             SHIPPING_METHODS.forEach(function (method) {
                 var selected = method.id === state.shippingMethodId;
                 var price = quoteShippingPrice(method);
-                var distanceNote = shippingDistanceSurcharge() > 0 ? 'Đã tính phụ phí theo vị trí giao hàng' : 'Giá nội thành/gần shop';
-                html += '<button type="button" class="shipping-method-card' + (selected ? ' is-selected' : '') + '" data-shipping-method="' + esc(method.id) + '">' +
-                    '<span class="shipping-radio"></span>' +
-                    '<span>' +
-                    '<span class="shipping-method-name">' + esc(method.name) + '</span>' +
-                    '<span class="shipping-method-description">' + esc(method.description) + '</span>' +
-                    '<span class="shipping-method-eta">Dự kiến: ' + esc(method.eta) + '</span>' +
-                    '<span class="shipping-method-note">' + esc(distanceNote) + '</span>' +
+                var surchargeNote = shippingDistanceSurcharge() > 0 ? ' (+phụ phí khoảng cách)' : '';
+                html += '<button type="button" class="pvco3-ship-card' + (selected ? ' is-selected' : '') + '" data-shipping-method="' + esc(method.id) + '">' +
+                    '<span class="pvco3-ship-radio"></span>' +
+                    '<span class="pvco3-ship-info">' +
+                    '<span class="pvco3-ship-name">' + esc(method.name) + esc(surchargeNote) + '</span>' +
+                    '<span class="pvco3-ship-desc">' + esc(method.description) + '</span>' +
+                    '<span class="pvco3-ship-eta">Dự kiến: ' + esc(method.eta) + '</span>' +
                     '</span>' +
-                    '<span class="shipping-method-price">' + formatVND(price) + '</span>' +
+                    '<span class="pvco3-ship-price">' + formatVND(price) + '</span>' +
                     '</button>';
             });
-            $root.find('[data-shipping-method-list]').html(html);
+            $root.find('[data-ship-list]').html(html);
         }
 
         function renderPaymentMethods() {
-            var html = '';
-            PAYMENT_METHODS.forEach(function (method) {
-                var selected = method.id === state.paymentMethodId;
-                html += '<button type="button" class="payment-method-card' + (selected ? ' is-selected' : '') + '" data-payment-method="' + esc(method.id) + '">' +
-                    '<span class="payment-radio"></span>' +
-                    '<span class="payment-icon" aria-hidden="true">' + paymentIcon(method.icon) + '</span>' +
-                    '<span>' +
-                    '<span class="payment-title">' + esc(method.title) + '</span>' +
-                    '<span class="payment-description">' + esc(method.description) + '</span>' +
-                    '</span>' +
-                    '</button>';
+            var selected = state.paymentMethodId;
+            $root.find('[data-pm-card]').each(function () {
+                var pm = $(this).data('pm');
+                $(this).toggleClass('is-selected', pm === selected);
             });
-            $root.find('[data-payment-method-list]').html(html);
-            togglePanel($root.find('[data-card-payment-form]'), state.paymentMethodId === 'card');
-            togglePanel($root.find('[data-bank-payment-panel]'), state.paymentMethodId === 'bank_transfer');
-            togglePanel($root.find('[data-wallet-payment-panel]'), state.paymentMethodId === 'wallet');
-            renderBanks();
-            renderWallets();
-            renderTransferReference();
-        }
-
-        function renderBanks() {
-            var html = '';
-            BANKS.forEach(function (bank) {
-                html += '<button type="button" class="bank-card' + (bank.id === state.bankId ? ' is-selected' : '') + '" data-bank-id="' + esc(bank.id) + '">' +
-                    '<strong>' + esc(bank.name) + '</strong>' +
-                    '<span>Mã: ' + esc(bank.code) + '</span>' +
-                    '</button>';
-            });
-            $root.find('[data-bank-grid]').html(html);
-            var selected = BANKS.find(function (bank) { return bank.id === state.bankId; }) || BANKS[0];
-            $root.find('[data-selected-bank-label]').text(selected.name);
-        }
-
-        function renderWallets() {
-            var html = '';
-            WALLETS.forEach(function (wallet) {
-                html += '<button type="button" class="wallet-card wallet-card--' + esc(wallet.tone) + (wallet.id === state.walletId ? ' is-selected' : '') + '" data-wallet-id="' + esc(wallet.id) + '">' +
-                    '<span class="wallet-mark">' + esc(wallet.name.slice(0, 2).toUpperCase()) + '</span>' +
-                    '<strong>' + esc(wallet.name) + '</strong>' +
-                    '<small>Backend payment URL ready</small>' +
-                    '</button>';
-            });
-            $root.find('[data-wallet-grid]').html(html);
-            var selected = WALLETS.find(function (wallet) { return wallet.id === state.walletId; }) || WALLETS[0];
-            $root.find('[data-wallet-title]').text(selected.name);
-        }
-
-        function renderTransferReference() {
-            var reference = 'TECHIE-' + (bootstrap.quote_id || 'ORDER') + '-' + itemCount();
-            $root.find('[data-transfer-reference]').text(reference);
-            $root.find('[data-transfer-reference]').attr('data-copy-value', reference);
+            var $next = $root.find('[data-payment-next]');
+            if (selected) {
+                $next.removeClass('is-disabled').prop('disabled', false);
+            } else {
+                $next.addClass('is-disabled').prop('disabled', true);
+            }
         }
 
         function renderSummary() {
@@ -508,29 +485,30 @@ define(['jquery'], function ($) {
             cartItems().forEach(function (item) {
                 var rowTotal = parseFloat(item.row_total || ((item.price || 0) * (item.qty || 1)) || 0);
                 var image = item.image_url || placeholder(item.name);
-                html += '<div class="checkout-summary-item">' +
-                    '<img class="checkout-summary-item-image" src="' + esc(image) + '" alt="' + esc(item.name) + '" loading="lazy"/>' +
-                    '<div class="checkout-summary-item-body">' +
-                    '<p class="checkout-summary-item-name">' + esc(item.name) + '</p>' +
-                    '<div class="checkout-summary-item-meta">' +
-                    '<span class="checkout-summary-item-qty">x ' + esc(item.qty || 1) + '</span>' +
-                    '<strong class="checkout-summary-item-price">' + formatVND(rowTotal) + '</strong>' +
+                html += '<div class="pvco3-sidebar-item">' +
+                    '<img class="pvco3-sidebar-item-img" src="' + esc(image) + '" alt="' + esc(item.name) + '" loading="lazy"/>' +
+                    '<div class="pvco3-sidebar-item-body">' +
+                    '<p class="pvco3-sidebar-item-name">' + esc(item.name) + '</p>' +
+                    '<div class="pvco3-sidebar-item-meta">' +
+                    '<span>x ' + esc(item.qty || 1) + '</span>' +
+                    '<strong>' + formatVND(rowTotal) + '</strong>' +
                     '</div></div></div>';
             });
-            $root.find('[data-summary-items]').html(html || '<p class="checkout-empty-note">Giỏ hàng trống.</p>');
-            bindImageFallback($root.find('[data-summary-items]'));
+            $root.find('[data-sidebar-items]').html(html || '<p style="color:#94a3b8;font-size:14px">Giỏ hàng trống.</p>');
+            bindImageFallback($root.find('[data-sidebar-items]'));
 
             var shipping = selectedShipping();
-            $root.find('[data-summary-subtotal]').text(formatVND(subtotal()));
-            $root.find('[data-summary-count]').text(itemCount());
-            $root.find('[data-summary-total]').text(formatVND(total()));
+            $root.find('[data-sidebar-subtotal]').text(formatVND(subtotal()));
+            $root.find('[data-sidebar-count]').text(itemCount());
+            $root.find('[data-sidebar-grand]').text(formatVND(total()));
             if (shipping) {
-                $root.find('[data-summary-shipping]').text(formatVND(shipping.price));
-                $root.find('[data-summary-shipping-row]').removeAttr('hidden');
-                $root.find('[data-summary-carrier]').text(shipping.name);
-                $root.find('[data-summary-carrier-row]').removeAttr('hidden');
+                $root.find('[data-sidebar-shipping]').text(formatVND(shipping.price));
+                $root.find('[data-sidebar-shipping-row]').removeAttr('hidden');
+                $root.find('[data-sidebar-carrier]').text(shipping.name);
+                $root.find('[data-sidebar-carrier-row]').removeAttr('hidden');
             } else {
-                $root.find('[data-summary-shipping-row], [data-summary-carrier-row]').attr('hidden', 'hidden');
+                $root.find('[data-sidebar-shipping-row]').attr('hidden', 'hidden');
+                $root.find('[data-sidebar-carrier-row]').attr('hidden', 'hidden');
             }
         }
 
@@ -549,55 +527,68 @@ define(['jquery'], function ($) {
             state.step = step;
             state.maxUnlockedStep = Math.max(state.maxUnlockedStep, step);
             saveState();
-            $root.find('[data-checkout-panel]').attr('hidden', 'hidden');
-            if (step < 5) {
-                $root.find('[data-checkout-layout]').removeAttr('hidden');
-                $root.find('[data-checkout-complete]').attr('hidden', 'hidden');
-                $root.find('[data-checkout-panel="' + step + '"]').removeAttr('hidden');
+
+            var $layout  = $root.find('[data-checkout-layout]');
+            var $qr      = $root.find('[data-qr-screen]');
+            var $success = $root.find('[data-success-screen]');
+            var $panels  = $root.find('[data-panel]');
+
+            $layout.attr('hidden', 'hidden');
+            $qr.attr('hidden', 'hidden');
+            $success.attr('hidden', 'hidden');
+            $panels.attr('hidden', 'hidden');
+
+            if (step <= 3) {
+                $layout.removeAttr('hidden');
+                $root.find('[data-panel="' + step + '"]').removeAttr('hidden');
+            } else if (step === 4) {
+                $qr.removeAttr('hidden');
+                renderPaymentConfirmation();
             } else {
-                $root.find('[data-checkout-layout]').attr('hidden', 'hidden');
-                $root.find('[data-checkout-complete]').removeAttr('hidden');
+                $success.removeAttr('hidden');
                 renderComplete();
             }
+
             renderStepper();
             renderSummary();
             if (step === 3) { renderReview(); }
-            if (step === 4) { renderPaymentConfirmation(); }
             element.scrollIntoView({behavior: 'smooth', block: 'start'});
         }
 
         function renderStepper() {
-            $root.find('[data-step-target]').each(function () {
+            $root.find('[data-step-indicator]').each(function () {
                 var $item = $(this);
-                var step = parseInt($item.data('step-target'), 10);
+                var step = parseInt($item.data('step-indicator'), 10);
+                var $circle = $item.find('[data-circle]');
                 $item.removeClass('is-active is-completed is-disabled');
                 if (step < state.step) {
                     $item.addClass('is-completed');
-                    $item.find('[data-step-circle]').text('✓');
+                    $circle.html('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="16" height="16"><path d="M20 6 9 17l-5-5"/></svg>');
                 } else if (step === state.step) {
                     $item.addClass('is-active');
-                    $item.find('[data-step-circle]').text(step);
+                    $circle.text(step);
                 } else {
                     $item.addClass(step <= state.maxUnlockedStep ? '' : 'is-disabled');
-                    $item.find('[data-step-circle]').text(step);
+                    $circle.text(step);
                 }
             });
-            var meta = stepMeta(state.step);
-            $root.find('[data-mobile-step-count]').text('Bước ' + state.step + '/5');
-            $root.find('[data-mobile-step-title]').text(meta[0]);
-            $root.find('[data-mobile-step-subtitle]').text(meta[1]);
-            $root.find('[data-mobile-step-progress]').css('width', ((state.step / 5) * 100) + '%');
-            $root.find('[data-stepper-progress]').css('width', ((state.step / 5) * 100) + '%');
+            $root.find('[data-connector]').each(function () {
+                var $c = $(this);
+                var parts = ($c.data('connector') + '').split('-');
+                var fromStep = parseInt(parts[0], 10);
+                $c.toggleClass('is-done', fromStep < state.step);
+            });
+            $root.find('[data-progress-fill]').css('width', ((state.step / 5) * 100) + '%');
         }
 
         function validateInformation() {
             var ok = true;
             clearErrors();
-            if (state.fullName.trim().length < 2) { setError('fullName', 'Vui lòng nhập họ và tên'); ok = false; }
-            if (!/^[0-9]{9,11}$/.test(state.phone.trim())) { setError('phone', 'Số điện thoại không hợp lệ'); ok = false; }
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email.trim())) { setError('email', 'Email không hợp lệ'); ok = false; }
-            if (state.address.trim().length < 5) { setError('address', 'Vui lòng nhập địa chỉ'); ok = false; }
-            if (!state.city) { setError('city', 'Vui lòng chọn tỉnh/thành phố'); ok = false; }
+            if ((state.fullName || '').trim().length < 2) { setError('fullName', 'Vui lòng nhập họ và tên'); ok = false; }
+            if (!/^[0-9]{9,11}$/.test((state.phone || '').trim())) { setError('phone', 'Số điện thoại không hợp lệ'); ok = false; }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((state.email || '').trim())) { setError('email', 'Email không hợp lệ'); ok = false; }
+            if ((state.addressLine1 || '').trim().length < 5) { setError('addressLine1', 'Vui lòng nhập địa chỉ'); ok = false; }
+            if (!state.province) { setError('province', 'Vui lòng chọn tỉnh/thành phố'); ok = false; }
             if (!state.district) { setError('district', 'Vui lòng chọn quận/huyện'); ok = false; }
             if (!state.ward) { setError('ward', 'Vui lòng chọn phường/xã'); ok = false; }
             focusFirstError();
@@ -616,148 +607,388 @@ define(['jquery'], function ($) {
         }
 
         function validatePayment() {
-            var ok = true;
             clearErrors();
             if (!state.paymentMethodId) {
                 setError('paymentMethod', 'Vui lòng chọn phương thức thanh toán');
-                ok = false;
+                focusFirstError();
+                return false;
             }
-            if (state.paymentMethodId === 'card') {
-                if (!state.card.holderName.trim()) { setError('cardHolder', 'Vui lòng nhập tên chủ thẻ'); ok = false; }
-                if (state.card.number.replace(/\s/g, '').length < 12) { setError('cardNumber', 'Số thẻ không hợp lệ'); ok = false; }
-                if (!/^\d{2}\/\d{2}$/.test(state.card.expiry.trim())) { setError('cardExpiry', 'Định dạng MM/YY'); ok = false; }
-                if (!/^\d{3,4}$/.test(state.card.cvv.trim())) { setError('cardCvv', 'CVV không hợp lệ'); ok = false; }
-            }
-            if (state.paymentMethodId === 'bank_transfer' && !state.bankId) {
-                setError('paymentMethod', 'Vui lòng chọn ngân hàng nhận chuyển khoản');
-                ok = false;
-            }
-            if (state.paymentMethodId === 'wallet' && !state.walletId) {
-                setError('paymentMethod', 'Vui lòng chọn ví điện tử');
-                ok = false;
-            }
-            focusFirstError();
-            return ok;
+            return true;
         }
 
         function focusFirstError() {
-            var $first = $root.find('.form-error').filter(function () { return !!$(this).text(); }).first();
+            var $first = $root.find('[data-error]').filter(function () { return !!$(this).text(); }).first();
             if ($first.length) {
                 $first[0].scrollIntoView({behavior: 'smooth', block: 'center'});
-                $first.closest('.form-field').find('input,select,textarea').first().trigger('focus');
+                $first.closest('[class*="field"], [class*="pvco3-field"]').find('input,select,textarea').first().trigger('focus');
             }
         }
 
         function renderReview() {
             var shipping = selectedShipping();
             var payment = selectedPayment();
+            var addressParts = [state.addressLine1, state.addressLine2, state.ward, state.district, state.province].filter(Boolean);
+
+            $root.find('[data-review-address]').html(
+                '<p><strong>' + esc(state.fullName) + '</strong></p>' +
+                '<p>' + esc(state.phone) + ' &nbsp;·&nbsp; ' + esc(state.email) + '</p>' +
+                '<p>' + esc(addressParts.join(', ')) + '</p>'
+            );
+
+            $root.find('[data-review-shipping]').html(
+                shipping
+                    ? '<p><strong>' + esc(shipping.name) + '</strong> &nbsp;·&nbsp; ' + formatVND(shipping.price) + '</p>' +
+                      '<p style="color:#64748b;font-size:13px">' + esc(shipping.description) + '</p>' +
+                      '<p style="color:#64748b;font-size:13px">Dự kiến: ' + esc(shipping.eta) + '</p>'
+                    : '<p style="color:#94a3b8">Chưa chọn bên vận chuyển.</p>'
+            );
+
+            $root.find('[data-review-payment]').html(
+                payment
+                    ? '<p><strong>' + esc(payment.title) + '</strong></p>' + renderPaymentReviewDetail()
+                    : '<p style="color:#94a3b8">Chưa chọn phương thức thanh toán.</p>'
+            );
+
             var productRows = '';
             cartItems().forEach(function (item) {
                 var rowTotal = parseFloat(item.row_total || ((item.price || 0) * (item.qty || 1)) || 0);
-                productRows += '<div class="review-product-row">' +
-                    '<img class="review-product-image" src="' + esc(item.image_url || placeholder(item.name)) + '" alt="' + esc(item.name) + '"/>' +
-                    '<div><p class="review-product-name">' + esc(item.name) + '</p><p class="review-product-meta">x ' + esc(item.qty || 1) + '</p></div>' +
-                    '<strong class="review-product-price">' + formatVND(rowTotal) + '</strong></div>';
+                productRows += '<div class="pvco3-review-item">' +
+                    '<img class="pvco3-review-item-img" src="' + esc(item.image_url || placeholder(item.name)) + '" alt="' + esc(item.name) + '"/>' +
+                    '<div class="pvco3-review-item-body"><p class="pvco3-review-item-name">' + esc(item.name) + '</p>' +
+                    '<p style="color:#64748b;font-size:13px">x ' + esc(item.qty || 1) + '</p></div>' +
+                    '<strong>' + formatVND(rowTotal) + '</strong></div>';
             });
-            var html = '<div class="review-box"><div class="review-box-header"><h3 class="review-box-title">Thông tin giao hàng</h3><button type="button" class="review-edit-button" data-edit-step="1">Sửa</button></div>' +
-                '<div class="review-text"><strong>' + esc(state.fullName) + '</strong><br>' + esc(state.phone) + '<br>' + esc(state.email) + '<br>' + esc([state.address, state.address2, state.ward, state.district, state.city].filter(Boolean).join(', ')) + '</div></div>' +
-                '<div class="review-box"><div class="review-box-header"><h3 class="review-box-title">Bên vận chuyển</h3><button type="button" class="review-edit-button" data-edit-step="1" data-scroll-shipping="1">Sửa</button></div>' +
-                '<div class="review-text"><strong>' + esc(shipping ? shipping.name : '') + '</strong><br>' + esc(shipping ? shipping.description : '') + '<br>Dự kiến: ' + esc(shipping ? shipping.eta : '') + '<br>' + formatVND(shipping ? shipping.price : 0) + '</div></div>' +
-                '<div class="review-box"><div class="review-box-header"><h3 class="review-box-title">Phương thức thanh toán</h3><button type="button" class="review-edit-button" data-edit-step="2">Sửa</button></div>' +
-                '<div class="review-text"><strong>' + esc(payment ? payment.title : '') + '</strong>' + renderPaymentReviewDetail() + '</div></div>' +
-                '<div class="review-box"><div class="review-box-header"><h3 class="review-box-title">Sản phẩm trong đơn</h3></div><div class="review-product-list">' + productRows + '</div></div>' +
-                '<div class="review-box"><div class="checkout-summary-row"><span>Tạm tính</span><strong>' + formatVND(subtotal()) + '</strong></div><div class="checkout-summary-row"><span>Phí vận chuyển</span><strong>' + formatVND(shipping ? shipping.price : 0) + '</strong></div><div class="checkout-summary-row is-total"><span>Tổng cộng</span><strong>' + formatVND(total()) + '</strong></div></div>';
-            $root.find('[data-review-list]').html(html);
-            bindImageFallback($root.find('[data-review-list]'));
+            $root.find('[data-review-items]').html(productRows || '<p style="color:#94a3b8;font-size:14px">Giỏ hàng trống.</p>');
+            bindImageFallback($root.find('[data-review-items]'));
+
+            $root.find('[data-review-totals]').html(
+                '<div class="pvco3-review-total-row"><span>Tạm tính</span><strong>' + formatVND(subtotal()) + '</strong></div>' +
+                '<div class="pvco3-review-total-row"><span>Phí vận chuyển</span><strong>' + formatVND(shipping ? shipping.price : 0) + '</strong></div>' +
+                '<div class="pvco3-review-total-row pvco3-review-total-row--grand"><span>Tổng cộng</span><strong>' + formatVND(total()) + '</strong></div>'
+            );
         }
 
         function renderPaymentReviewDetail() {
-            var bank = BANKS.find(function (row) { return row.id === state.bankId; }) || BANKS[0];
-            var wallet = WALLETS.find(function (row) { return row.id === state.walletId; }) || WALLETS[0];
-            if (state.paymentMethodId === 'bank_transfer') {
-                return '<br>Ngân hàng: ' + esc(bank.name) + '<br>Nội dung: ' + esc($root.find('[data-transfer-reference]').text() || 'TECHIE-ORDER');
+            var pm = state.paymentMethodId;
+            if (pm === 'bank_qr') {
+                var bank = BANKS.find(function (row) { return row.id === state.bankId; }) || BANKS[0];
+                return '<p style="color:#64748b;font-size:13px">Ngân hàng: ' + esc(bank.name) + '<br>Quét QR sau khi xác nhận đơn</p>';
             }
-            if (state.paymentMethodId === 'wallet') {
-                return '<br>Ví: ' + esc(wallet.name) + '<br>Thanh toán qua QR/app sau khi xác nhận đơn';
+            if (pm === 'momo') {
+                return '<p style="color:#64748b;font-size:13px">Ví MoMo — Thanh toán qua QR/app sau khi xác nhận đơn</p>';
             }
-            if (state.paymentMethodId === 'card') {
-                var number = state.card.number.replace(/\s/g, '');
-                return '<br>Thẻ: **** **** **** ' + esc(number.slice(-4) || '----');
+            if (pm === 'vnpay') {
+                return '<p style="color:#64748b;font-size:13px">VNPay QR — Quét mã sau khi xác nhận đơn</p>';
+            }
+            if (pm === 'card') {
+                return '<p style="color:#64748b;font-size:13px">Visa / Mastercard — Nhập thông tin thẻ sau khi xác nhận</p>';
+            }
+            if (pm === 'cod') {
+                return '<p style="color:#64748b;font-size:13px">Thanh toán khi nhận hàng</p>';
             }
             return '';
         }
 
         function renderPaymentConfirmation() {
-            var payment = selectedPayment();
-            var shipping = selectedShipping();
-            var bank = BANKS.find(function (row) { return row.id === state.bankId; }) || BANKS[0];
-            var wallet = WALLETS.find(function (row) { return row.id === state.walletId; }) || WALLETS[0];
-            var orderRef = state.order && state.order.orderId ? state.order.orderId.replace(/^#/, '') : 'TECHIE-' + (bootstrap.quote_id || Date.now());
-            var title = payment ? payment.title : 'Thanh toán';
-            var qrLabel = state.paymentMethodId === 'wallet' ? wallet.name : (state.paymentMethodId === 'bank_transfer' ? bank.name : (state.paymentMethodId === 'card' ? 'VNPay/Card Gateway' : 'COD'));
-            var message = 'Kiểm tra lại thông tin. Khi bấm Đặt hàng, backend sẽ tạo order và khởi tạo payment URL thật nếu MoMo/VNPay/VNPay card đã được cấu hình.';
-            var paymentUrl = state.order && state.order.payment ? (state.order.payment.redirect_url || state.order.payment.paymentUrl || '') : '';
-            var paymentStatus = state.paymentStatus || (state.order && state.order.payment ? (state.order.payment.status || 'pending') : 'idle');
-            var statusLabel = {
-                idle: 'Chưa tạo thanh toán',
-                pending: 'Đang chờ thanh toán',
-                awaiting_payment: 'Đang chờ thanh toán',
-                paid: 'Đã thanh toán',
-                failed: 'Thanh toán thất bại',
-                expired: 'Đã hết hạn',
-                cancelled: 'Đã hủy'
-            }[paymentStatus] || 'Đang chờ thanh toán';
+            var pm     = state.paymentMethodId;
+            var order  = state.order || {};
+            var pay    = order.payment || {};
+            var amount = total();
 
-            if (state.paymentMethodId === 'cod') {
-                message = 'Đơn COD sẽ được tạo ngay. Bạn thanh toán khi nhận hàng từ ' + (shipping ? shipping.name : 'bên vận chuyển') + '.';
-            }
-            if (state.paymentMethodId === 'bank_transfer') {
-                message = 'Quét mã hoặc chuyển khoản theo nội dung bên dưới. Hệ thống giữ đơn ở trạng thái chờ đối soát.';
-            }
-            if (state.paymentMethodId === 'wallet') {
-                message = 'MoMo/VNPay sẽ được backend tạo payment URL thật sau khi đặt hàng nếu đã cấu hình credential.';
-            }
-            if (state.paymentMethodId === 'card') {
-                message = 'Thanh toán thẻ đi qua gateway backend. Secret và merchant credential không nằm ở frontend.';
-            }
+            var providerLabels = {
+                bank_qr: 'QR Ngân hàng', momo: 'Ví MoMo', vnpay: 'VNPay QR',
+                card: 'Visa / Mastercard', cod: 'COD'
+            };
+            var barClasses = {
+                bank_qr: 'pvco3-pch-bar--bank_qr', momo: 'pvco3-pch-bar--momo',
+                vnpay: 'pvco3-pch-bar--vnpay', card: 'pvco3-pch-bar--card', cod: 'pvco3-pch-bar--cod'
+            };
+            var iconHtml = {
+                bank_qr: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="m3 9 9-6 9 6v1H3z"/><rect x="5" y="10" width="14" height="8"/><path d="M3 18h18"/></svg>',
+                momo:    '<span style="font-size:18px;font-weight:900">M</span>',
+                vnpay:   '<span style="font-size:14px;font-weight:900">VN</span>',
+                card:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18"/></svg>',
+                cod:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M8 11h8M8 15h5"/></svg>'
+            };
 
-            $root.find('[data-payment-confirmation]').html(
-                '<div class="payment-confirm-grid">' +
-                '<div class="payment-qr-card">' +
-                '<div class="payment-qr-title"><span>' + esc(qrLabel) + '</span><strong>' + formatVND(total()) + '</strong></div>' +
-                '<div class="payment-qr" aria-label="QR placeholder"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>' +
-                '<div class="payment-status-pill payment-status-pill--' + esc(paymentStatus) + '">' + esc(statusLabel) + '</div>' +
-                '<p>' + esc(message) + '</p>' +
-                (paymentUrl ? '<a class="btn btn-primary payment-url-button" href="' + esc(paymentUrl) + '" target="_blank" rel="noopener">Mở trang thanh toán</a>' : '') +
-                '</div>' +
-                '<div class="payment-confirm-detail">' +
-                '<h3>' + esc(title) + '</h3>' +
-                '<dl>' +
-                '<div><dt>Mã tham chiếu</dt><dd>' + esc(orderRef) + '</dd></div>' +
-                '<div><dt>Tổng thanh toán</dt><dd>' + formatVND(total()) + '</dd></div>' +
-                '<div><dt>Bên vận chuyển</dt><dd>' + esc(shipping ? shipping.name : '') + '</dd></div>' +
-                '<div><dt>Payment channel</dt><dd>' + esc(state.paymentMethodId === 'wallet' ? wallet.name : (state.paymentMethodId === 'bank_transfer' ? bank.name : title)) + '</dd></div>' +
-                '</dl>' +
-                '<div class="payment-confirm-note">Live payment URL cần env MOMO_*/VNPAY_* và <code>PVMODERN_PAYMENT_MOCK=0</code>. Nếu thiếu credential, hệ thống dùng mock an toàn.</div>' +
-                '</div>' +
-                '</div>'
-            );
-            $root.find('[data-check-payment-status]').prop('hidden', !state.order || state.paymentMethodId === 'cod');
-            $root.find('[data-place-order]').prop('hidden', !!state.order && state.paymentMethodId !== 'cod');
+            var $bar = $root.find('[data-pch-bar]');
+            $bar.attr('class', 'pvco3-pch-bar ' + (barClasses[pm] || ''));
+            $root.find('[data-pch-icon]').html(iconHtml[pm] || '');
+            $root.find('[data-pch-provider]').text(providerLabels[pm] || 'Thanh toán');
+            $root.find('[data-pch-amount]').text(formatVND(amount));
+            $root.find('[data-pch-amount-2]').text(formatVND(amount));
+
+            _copyValues['amount'] = String(Math.round(amount));
+
+            $root.find('[data-pcp]').attr('hidden', 'hidden');
+            $root.find('[data-pcp="' + pm + '"]').removeAttr('hidden');
+
+            if (pm === 'bank_qr') { fillBankQrPanel(pay, order); }
+            if (pm === 'momo')    { fillWalletPanel('momo', pay); }
+            if (pm === 'vnpay')   { fillWalletPanel('vnpay', pay); }
+            if (pm === 'card')    { fillCardPanel(pay); }
+
+            $root.find('[data-pcp-overlay]').attr('hidden', 'hidden');
+
+            if (pm !== 'cod') {
+                startCountdown(30 * 60);
+                fetchPvPaymentData();
+                startPaymentPolling();
+            }
+        }
+
+        function fillBankQrPanel(pay, order) {
+            var instructions = pay.instructions || {};
+            var bankName  = instructions.bank_name     || 'Techcombank';
+            var holder    = instructions.account_name  || 'ĐIỀN MẠNH HÙNG';
+            var account   = instructions.account_number || '19038984536017';
+            var ref       = instructions.transfer_reference || ('ORDER-' + (order.orderId || '').replace(/^#/, '') || 'ORDER-' + Date.now());
+
+            $root.find('[data-pcp-bank-name]').text(bankName);
+            $root.find('[data-pcp-holder]').text(holder);
+            $root.find('[data-pcp-account]').text(account);
+            $root.find('[data-pcp-ref]').text(ref);
+
+            _copyValues['bank_name'] = bankName;
+            _copyValues['holder']    = holder;
+            _copyValues['account']   = account;
+            _copyValues['ref']       = ref;
+
+            // Always show the static Techcombank QR — hide the loading spinner
+            $root.find('[data-pcp-qr-loading]').hide();
+            $root.find('[data-pcp-qr-img]').show();
+        }
+
+        function buildVietQrUrl(bankName, account, amount, ref) {
+            var bankBins = {
+                'vietcombank': '970436', 'vcb': '970436',
+                'techcombank': '970407', 'tcb': '970407',
+                'acb': '970416',
+                'vpbank': '970432', 'vpb': '970432',
+                'mb': '970422', 'mbbank': '970422',
+                'tpbank': '970423', 'bidv': '970418',
+                'agribank': '970405', 'vib': '970441',
+                'ocb': '970448', 'shb': '970443'
+            };
+            var bankKey = (bankName || '').toLowerCase().replace(/\s+/g, '');
+            var bin = bankBins[bankKey] || bankBins['vietcombank'];
+            return 'https://img.vietqr.io/image/' + bin + '-' + account +
+                '-compact2.png?amount=' + amount +
+                '&addInfo=' + encodeURIComponent(ref) +
+                '&accountName=' + encodeURIComponent('TECHIEWORLD SHOP');
+        }
+
+        function fillWalletPanel(wallet, pay) {
+            var appUrl = pay.redirect_url || pay.paymentUrl || '';
+            var suffix = wallet === 'momo' ? '-momo' : '-vnpay';
+            var $appBtn = $root.find('[data-pcp-open-app="' + wallet + '"]');
+
+            // Static QR images are already in the HTML — just ensure they're visible
+            $root.find('[data-pcp-qr-loading' + suffix + ']').hide();
+            $root.find('[data-pcp-qr-img' + suffix + ']').show();
+
+            if (appUrl) { $appBtn.attr('href', appUrl).show(); }
+        }
+
+        function fillCardPanel(pay) {
+            var url = pay.redirect_url || pay.paymentUrl || '';
+            var $btn = $root.find('[data-pcp-open-app="card"]');
+            if (url) { $btn.attr('href', url); }
+        }
+
+        function startCountdown(seconds) {
+            stopCountdown();
+            _countdownSecs = seconds;
+            function tick() {
+                var m = Math.floor(_countdownSecs / 60);
+                var s = _countdownSecs % 60;
+                var txt = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+                $root.find('[data-countdown]').text(txt)
+                    .toggleClass('is-warning', _countdownSecs <= 120 && _countdownSecs > 0)
+                    .toggleClass('is-ok', _countdownSecs > 120);
+                if (_countdownSecs <= 0) {
+                    stopCountdown();
+                    stopPaymentPolling();
+                    showStatusOverlay('expired');
+                    return;
+                }
+                _countdownSecs--;
+                _countdownTimer = window.setTimeout(tick, 1000);
+            }
+            tick();
+        }
+
+        function stopCountdown() {
+            if (_countdownTimer) { window.clearTimeout(_countdownTimer); _countdownTimer = null; }
+        }
+
+        function startPaymentPolling() {
+            stopPaymentPolling();
+            if (!state.order || !state.order.orderId) { return; }
+            var endpoint = '/api/payments/pvstatus';
+            function poll() {
+                $.ajax({
+                    url: endpoint,
+                    method: 'GET',
+                    dataType: 'json',
+                    data: {orderId: state.order.orderId.replace(/^#/, '')}
+                }).done(function (res) {
+                    var status = (res.status || '').toLowerCase();
+                    state.paymentStatus = status;
+                    if (res.pv_order_id) { state.order.pvOrderId = res.pv_order_id; }
+                    saveState();
+                    if (status === 'paid') {
+                        stopCountdown(); stopPaymentPolling();
+                        showStatusOverlay('paid');
+                        window.setTimeout(function () { goToStep(5); }, 1800);
+                    } else if (status === 'failed' || status === 'cancelled') {
+                        stopCountdown(); stopPaymentPolling();
+                        showStatusOverlay('failed');
+                    } else if (status === 'expired') {
+                        stopCountdown(); stopPaymentPolling();
+                        showStatusOverlay('expired');
+                    } else if (status === 'pending_review') {
+                        updateUploadStatus('pending_review');
+                        _pollTimer = window.setTimeout(poll, 6000);
+                    } else {
+                        _pollTimer = window.setTimeout(poll, 5000);
+                    }
+                }).fail(function () {
+                    _pollTimer = window.setTimeout(poll, 10000);
+                });
+            }
+            _pollTimer = window.setTimeout(poll, 3000);
+        }
+
+        function stopPaymentPolling() {
+            if (_pollTimer) { window.clearTimeout(_pollTimer); _pollTimer = null; }
+        }
+
+        function fetchPvPaymentData() {
+            if (!state.order || !state.order.orderId) { return; }
+            $.ajax({
+                url: '/api/payments/pvstatus',
+                method: 'GET',
+                dataType: 'json',
+                data: {orderId: state.order.orderId.replace(/^#/, '')}
+            }).done(function (res) {
+                if (!res.success) { return; }
+                if (res.pv_order_id) { state.order.pvOrderId = res.pv_order_id; saveState(); }
+                if (res.transfer_code) {
+                    $root.find('[data-pcp-ref]').text(res.transfer_code);
+                    _copyValues['ref'] = res.transfer_code;
+                }
+                if (res.expires_at) {
+                    var secsLeft = Math.max(0, Math.floor((new Date(res.expires_at.replace(' ','T')).getTime() - Date.now()) / 1000));
+                    if (secsLeft > 0) { stopCountdown(); startCountdown(secsLeft); }
+                }
+            });
+        }
+
+        function updateUploadStatus(status) {
+            var pm = state.paymentMethodId;
+            if (!pm || pm === 'cod') { return; }
+            var $uploadSection = $root.find('[data-upload-section="' + pm + '"]');
+            var $statusEl = $uploadSection.find('[data-upload-status]');
+            if (status === 'pending_review') {
+                $uploadSection.find('[data-upload-form]').hide();
+                $statusEl.html('<div style="display:flex;align-items:center;gap:8px;background:#422006;border:1px solid #f59e0b;border-radius:8px;padding:10px 14px;color:#fde68a;font-size:13px">' +
+                    '<span style="font-size:16px">⏳</span>' +
+                    '<div><strong>Ảnh đã gửi!</strong><br>Vui lòng chờ admin xét duyệt...</div>' +
+                    '</div>').show();
+            }
+        }
+
+        function handleProofUpload(pm) {
+            var pvOrderId = state.order && state.order.pvOrderId;
+            if (!pvOrderId) {
+                showAlert('Vui lòng chờ hệ thống khởi tạo đơn hàng...');
+                return;
+            }
+            var $section = $root.find('[data-upload-section="' + pm + '"]');
+            var fileInput = $section.find('[data-proof-file]')[0];
+            if (!fileInput || !fileInput.files.length) {
+                showAlert('Vui lòng chọn ảnh trước khi gửi.');
+                return;
+            }
+            var file = fileInput.files[0];
+            if (file.size > 5 * 1024 * 1024) { showAlert('Ảnh không được vượt quá 5MB'); return; }
+
+            var fd = new FormData();
+            fd.append('file', file);
+            fd.append('pv_order_id', pvOrderId);
+
+            var $btn = $section.find('[data-upload-proof-btn]');
+            $btn.prop('disabled', true).text('Đang gửi...');
+
+            $.ajax({
+                url: '/api/payments/upload',
+                method: 'POST',
+                data: fd,
+                processData: false,
+                contentType: false
+            }).done(function (res) {
+                if (res.success) {
+                    updateUploadStatus('pending_review');
+                    state.paymentStatus = 'pending_review';
+                    saveState();
+                } else {
+                    showAlert(res.message || 'Gửi ảnh thất bại.');
+                    $btn.prop('disabled', false).text('Gửi xác nhận thanh toán');
+                }
+            }).fail(function () {
+                showAlert('Lỗi kết nối. Vui lòng thử lại.');
+                $btn.prop('disabled', false).text('Gửi xác nhận thanh toán');
+            });
+        }
+
+        function showStatusOverlay(status) {
+            var html = '';
+            if (status === 'paid') {
+                html = '<div class="pvco3-pcp-overlay-icon" style="color:#16a34a">' +
+                    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="64" height="64"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>' +
+                    '</div><h3 style="margin:12px 0 6px;color:#15803d">Thanh toán thành công!</h3>' +
+                    '<p style="color:#64748b;font-size:14px">Đang chuyển hướng về trang hoàn thành…</p>';
+            } else if (status === 'failed') {
+                html = '<div class="pvco3-pcp-overlay-icon" style="color:#dc2626">' +
+                    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="64" height="64"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></svg>' +
+                    '</div><h3 style="margin:12px 0 6px;color:#dc2626">Thanh toán thất bại</h3>' +
+                    '<p style="color:#64748b;font-size:14px;margin-bottom:16px">Giao dịch không thành công. Vui lòng thử lại.</p>' +
+                    '<button type="button" class="pvco3-btn pvco3-btn--primary" data-goto-step="2">Chọn lại phương thức</button>';
+            } else {
+                html = '<div class="pvco3-pcp-overlay-icon" style="color:#b45309">' +
+                    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="64" height="64"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>' +
+                    '</div><h3 style="margin:12px 0 6px;color:#b45309">Giao dịch hết hạn</h3>' +
+                    '<p style="color:#64748b;font-size:14px;margin-bottom:16px">Mã QR đã hết hạn. Vui lòng đặt lại đơn hàng.</p>' +
+                    '<button type="button" class="pvco3-btn pvco3-btn--outline" data-goto-step="1">Đặt lại</button>';
+            }
+            $root.find('[data-pcp-overlay-inner]').html(html);
+            $root.find('[data-pcp-overlay]').removeAttr('hidden');
         }
 
         function renderComplete() {
             var shipping = selectedShipping();
             var payment = selectedPayment();
-            var orderId = state.order && state.order.orderId ? state.order.orderId : '#SHOP-' + new Date().getFullYear() + '0425-0001';
-            $root.find('[data-complete-order-id]').text(orderId);
-            $root.find('[data-complete-summary]').html(
-                '<h3 class="complete-summary-title">Tóm tắt đơn hàng</h3>' +
-                '<div class="complete-summary-row"><span>Sản phẩm</span><strong>' + itemCount() + ' sản phẩm</strong></div>' +
-                '<div class="complete-summary-row"><span>Tổng tiền</span><strong>' + formatVND(total()) + '</strong></div>' +
-                '<div class="complete-summary-row"><span>Thanh toán</span><strong>' + esc(payment ? payment.title : '') + '</strong></div>' +
-                '<div class="complete-summary-row"><span>Bên vận chuyển</span><strong>' + esc(shipping ? shipping.name : '') + '</strong></div>' +
-                '<div class="complete-summary-row"><span>Dự kiến</span><strong>' + esc(shipping ? shipping.eta.replace(/ \(.+\)/, '') : '') + '</strong></div>'
+            var orderId = state.order && state.order.orderId ? state.order.orderId : '#SHOP-' + new Date().getFullYear() + '-0001';
+            var purchaseCode = (state.order && state.order.purchaseCode) ? state.order.purchaseCode : '';
+            $root.find('[data-success-order-number]').text(orderId);
+            $root.find('[data-success-order-date]').text('Ngày đặt: ' + new Date().toLocaleDateString('vi-VN'));
+            /* Purchase code box */
+            var $pcBox = $root.find('[data-success-purchase-code]');
+            if ($pcBox.length) {
+                if (purchaseCode) {
+                    $pcBox.find('[data-pc-value]').text(purchaseCode);
+                    $pcBox.removeAttr('hidden');
+                } else {
+                    $pcBox.attr('hidden', 'hidden');
+                }
+            }
+            $root.find('[data-success-info]').html(
+                '<div class="pvco3-review-total-row"><span>Sản phẩm</span><strong>' + itemCount() + ' sản phẩm</strong></div>' +
+                '<div class="pvco3-review-total-row"><span>Tổng tiền</span><strong>' + formatVND(total()) + '</strong></div>' +
+                '<div class="pvco3-review-total-row"><span>Thanh toán</span><strong>' + esc(payment ? payment.title : '') + '</strong></div>' +
+                '<div class="pvco3-review-total-row"><span>Vận chuyển</span><strong>' + esc(shipping ? shipping.name : '') + '</strong></div>' +
+                '<div class="pvco3-review-total-row"><span>Dự kiến</span><strong>' + esc(shipping ? shipping.eta.replace(/ \(.+\)/, '') : '') + '</strong></div>'
             );
         }
 
@@ -765,30 +996,34 @@ define(['jquery'], function ($) {
             if (isSubmitting) { return; }
             clearErrors();
             isSubmitting = true;
-            $root.find('[data-place-order]').addClass('is-loading').prop('disabled', true);
-            $root.find('[data-place-order-label]').text('Đang xử lý...');
-            $root.find('[data-place-order-spinner]').removeAttr('hidden');
+            var $btn = $root.find('[data-place-order]');
+            $btn.addClass('is-loading').prop('disabled', true);
+            $btn.find('.pvco3-place-label').attr('hidden', 'hidden');
+            $btn.find('.pvco3-place-loading').removeAttr('hidden');
             var payment = selectedPayment();
             var shipping = selectedShipping();
+            var pm = state.paymentMethodId;
+            var gatewayChannel = {
+                bank_qr: 'bank_qr', momo: 'momo', vnpay: 'vnpay', card: 'vnpay', cod: ''
+            }[pm] || '';
             var payload = {
-                form_key: bootstrap.form_key || '',
+                form_key: checkoutFormKey(),
                 full_name: state.fullName,
                 email: state.email,
                 phone: state.phone,
-                address: [state.address, state.address2].filter(Boolean).join(', '),
-                street: [state.address, state.address2].filter(Boolean).join(', '),
-                city: state.city,
+                address: [state.addressLine1, state.addressLine2].filter(Boolean).join(', '),
+                street: [state.addressLine1, state.addressLine2].filter(Boolean).join(', '),
+                city: state.province,
                 region: state.district,
                 postcode: '700000',
                 country_id: 'VN',
                 receiving_method: 'delivery',
                 payment_method: payment ? payment.providerCode : '',
                 shipping_method: shipping ? shipping.id : '',
-                note: state.note,
+                note: state.specialInstructions,
                 bank_id: state.bankId,
-                wallet_id: state.walletId,
-                gateway_channel: state.paymentMethodId === 'wallet' ? state.walletId : (state.paymentMethodId === 'card' ? 'vnpay' : ''),
-                card_last4: state.card.number.replace(/\s/g, '').slice(-4),
+                wallet_id: pm,
+                gateway_channel: gatewayChannel,
                 shipping_quote_amount: shipping ? shipping.price : 0
             };
             $.ajax({
@@ -799,58 +1034,36 @@ define(['jquery'], function ($) {
             }).done(function (response) {
                 state.order = {
                     orderId: '#' + (response.increment_id || ('SHOP-' + Date.now())),
+                    purchaseCode: response.purchase_code || '',
                     payment: response.payment || {},
                     shipping: response.shipping || {}
                 };
                 state.paymentStatus = (response.payment && response.payment.status) ? response.payment.status : 'pending';
                 saveState();
+                /* Immediately zero the cart badge, then confirm via server reload */
+                $(window).trigger('pvCartCountChanged', [0]);
+                customerData.invalidate(['cart']);
+                customerData.reload(['cart'], true);
                 if (state.paymentMethodId === 'cod') {
                     goToStep(5);
                     return;
                 }
-                renderPaymentConfirmation();
-                if (response.payment && response.payment.redirect_url) {
-                    showAlert('Payment URL đã được tạo. Mở trang thanh toán để hoàn tất, sau đó quay lại kiểm tra trạng thái.');
-                    return;
-                }
-                showAlert('Đơn đã được tạo ở trạng thái chờ thanh toán. Cấu hình payment credential thật để tạo QR/payment URL live.');
+                goToStep(4);
             }).fail(function (xhr) {
                 var response = xhr.responseJSON || {};
                 showAlert(response.message || 'Đặt hàng thất bại. Vui lòng kiểm tra lại thông tin.');
             }).always(function () {
                 isSubmitting = false;
-                $root.find('[data-place-order]').removeClass('is-loading').prop('disabled', false);
-                $root.find('[data-place-order-label]').text('Tạo thanh toán');
-                $root.find('[data-place-order-spinner]').attr('hidden', 'hidden');
+                var $b = $root.find('[data-place-order]');
+                $b.removeClass('is-loading').prop('disabled', false);
+                $b.find('.pvco3-place-label').removeAttr('hidden');
+                $b.find('.pvco3-place-loading').attr('hidden', 'hidden');
             });
         }
 
         function checkPaymentStatus() {
-            if (!state.order || !state.order.orderId) {
-                showAlert('Chưa có đơn hàng để kiểm tra trạng thái thanh toán.');
-                return;
-            }
-            var endpoint = (bootstrap.endpoints || {}).payment_status || '/api/payments/status';
-            $.ajax({
-                url: endpoint,
-                method: 'GET',
-                dataType: 'json',
-                data: {
-                    orderId: state.order.orderId.replace(/^#/, ''),
-                    paymentId: state.order.payment ? (state.order.payment.reference || '') : ''
-                }
-            }).done(function (response) {
-                state.paymentStatus = response.status || 'pending';
-                saveState();
-                renderPaymentConfirmation();
-                if (state.paymentStatus === 'paid') {
-                    goToStep(5);
-                    return;
-                }
-                showAlert(response.message || 'Thanh toán vẫn đang chờ xác nhận.');
-            }).fail(function () {
-                showAlert('Không kiểm tra được trạng thái thanh toán. Vui lòng thử lại.');
-            });
+            if (!state.order || !state.order.orderId) { return; }
+            startPaymentPolling();
         }
 
         function bindEvents() {
@@ -858,7 +1071,7 @@ define(['jquery'], function ($) {
                 var $field = $(this);
                 var key = $field.data('field');
                 state[key] = $field.attr('type') === 'checkbox' ? $field.is(':checked') : $field.val();
-                if (key === 'city') { state.district = ''; state.ward = ''; populateDistricts(); }
+                if (key === 'province') { state.district = ''; state.ward = ''; populateDistricts(); }
                 if (key === 'district') { state.ward = ''; populateWards(); renderShippingMethods(); renderSummary(); }
                 saveState();
             });
@@ -872,60 +1085,68 @@ define(['jquery'], function ($) {
                 renderShippingMethods();
                 renderSummary();
             });
-            $root.on('click', '[data-payment-method]', function () {
-                state.paymentMethodId = $(this).data('payment-method');
+            $root.on('click', '[data-pm-card]', function () {
+                state.paymentMethodId = $(this).data('pm');
                 saveState();
                 renderPaymentMethods();
             });
-            $root.on('click', '[data-bank-id]', function () {
-                state.bankId = $(this).data('bank-id');
-                saveState();
-                renderBanks();
+            $root.on('click', '[data-pcp-copy]', function () {
+                var $btn = $(this);
+                var key  = $btn.data('pcp-copy');
+                var val  = _copyValues[key] || $root.find('[data-pcp-' + key.replace(/_/g, '-') + ']').text() || '';
+                if (!val) { return; }
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(val).catch(function () {});
+                }
+                $btn.addClass('is-copied').attr('title', 'Đã sao chép!');
+                window.setTimeout(function () { $btn.removeClass('is-copied').attr('title', 'Sao chép'); }, 1400);
             });
-            $root.on('click', '[data-wallet-id]', function () {
-                state.walletId = $(this).data('wallet-id');
-                saveState();
-                renderWallets();
+            $root.on('click', '[data-copy-pc]', function () {
+                var $btn = $(this);
+                var val = $root.find('[data-pc-value]').text().trim();
+                if (!val) { return; }
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(val).catch(function () {});
+                }
+                $btn.addClass('is-copied').attr('title', 'Đã sao chép!');
+                window.setTimeout(function () { $btn.removeClass('is-copied').attr('title', 'Sao chép'); }, 1400);
             });
             $root.on('click', '[data-copy-button]', function () {
                 var $button = $(this);
-                var source = $button.data('copy-source');
-                var value = source ? $root.find(source).text() : ($button.data('copy-value') || '');
-                if (!value) { return; }
-                if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard.writeText(value);
-                }
+                var val = $button.data('copy-value') || $root.find($button.data('copy-source') || '').text() || '';
+                if (!val) { return; }
+                if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(val).catch(function () {}); }
                 $button.text('Copied');
                 window.setTimeout(function () { $button.text('Copy'); }, 1200);
-            });
-            $root.on('click', '[data-wallet-launch]', function () {
-                var wallet = WALLETS.find(function (row) { return row.id === state.walletId; }) || WALLETS[0];
-                if (wallet.payUrl) {
-                    window.location.href = wallet.payUrl;
-                    return;
-                }
-                showAlert('Cổng ' + wallet.name + ' đang ở mock mode. Cần cấu hình API backend để tạo payment URL thật.');
             });
             $root.on('click', '[data-next-step]', function () {
                 var next = parseInt($(this).data('next-step'), 10);
                 if (next === 2 && (!validateInformation() || !validateCarrier())) { return; }
                 if (next === 3 && !validatePayment()) { return; }
+                stopCountdown(); stopPaymentPolling();
                 goToStep(next);
             });
             $root.on('click', '[data-prev-step]', function () {
+                stopCountdown(); stopPaymentPolling();
                 goToStep(parseInt($(this).data('prev-step'), 10));
             });
-            $root.on('click', '[data-step-target]', function () {
-                var step = parseInt($(this).data('step-target'), 10);
-                if (step <= state.maxUnlockedStep) { goToStep(step); }
+            $root.on('click', '[data-goto-step]', function () {
+                stopCountdown(); stopPaymentPolling();
+                goToStep(parseInt($(this).data('goto-step'), 10));
+            });
+            $root.on('click', '[data-step-indicator]', function () {
+                var step = parseInt($(this).data('step-indicator'), 10);
+                if (step <= state.maxUnlockedStep) { stopCountdown(); stopPaymentPolling(); goToStep(step); }
             });
             $root.on('click', '[data-edit-step]', function () {
                 var step = parseInt($(this).data('edit-step'), 10);
                 var shouldScrollShipping = !!$(this).data('scroll-shipping');
+                stopCountdown(); stopPaymentPolling();
                 goToStep(step);
                 if (shouldScrollShipping) {
                     window.setTimeout(function () {
-                        document.getElementById('pv-shipping-method-section').scrollIntoView({behavior: 'smooth', block: 'start'});
+                        var el = document.getElementById('pv-shipping-method-section');
+                        if (el) { el.scrollIntoView({behavior: 'smooth', block: 'start'}); }
                     }, 120);
                 }
             });
@@ -937,6 +1158,24 @@ define(['jquery'], function ($) {
             });
             $root.on('click', '[data-place-order]', placeOrder);
             $root.on('click', '[data-check-payment-status]', checkPaymentStatus);
+            $root.on('change', '[data-proof-file]', function () {
+                var pm = $(this).data('proof-file');
+                var file = this.files[0];
+                if (!file) return;
+                var $section = $root.find('[data-upload-section="' + pm + '"]');
+                var $preview = $section.find('[data-proof-preview]');
+                var $btn = $section.find('[data-upload-proof-btn]');
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $preview.html('<img src="' + e.target.result + '" style="max-width:100%;max-height:180px;border-radius:8px;border:1px solid #334155;margin-top:8px">').show();
+                };
+                reader.readAsDataURL(file);
+                $btn.removeAttr('hidden').show();
+            });
+            $root.on('click', '[data-upload-proof-btn]', function () {
+                var pm = $(this).data('upload-proof-btn');
+                handleProofUpload(pm);
+            });
         }
 
         function init() {

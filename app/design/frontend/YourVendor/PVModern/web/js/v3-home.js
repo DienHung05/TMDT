@@ -1,4 +1,4 @@
-define(['jquery'], function ($) {
+define(['jquery', 'mage/cookies'], function ($) {
     'use strict';
 
     var PRODUCTS_PAGE_SIZE = 8;
@@ -54,6 +54,64 @@ define(['jquery'], function ($) {
 
         function getCards() {
             return $grid.children('.pv3-product-card');
+        }
+
+        function getCookie(name) {
+            var value = '; ' + document.cookie,
+                parts = value.split('; ' + name + '=');
+
+            if (parts.length === 2) {
+                return decodeURIComponent(parts.pop().split(';').shift() || '');
+            }
+
+            return '';
+        }
+
+        function setCookie(name, value) {
+            var date = new Date(),
+                cookiesConfig = window.cookiesConfig || {},
+                secure = cookiesConfig.secure ? '; secure' : '',
+                sameSite = '; samesite=' + (cookiesConfig.samesite || 'lax');
+
+            date.setTime(date.getTime() + 86400000);
+            document.cookie = name + '=' + encodeURIComponent(value || '') + '; expires=' + date.toUTCString() + secure + '; path=/' + sameSite;
+        }
+
+        function generateFormKey() {
+            var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+                key = '',
+                i;
+
+            for (i = 0; i < 16; i += 1) {
+                key += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+
+            return key;
+        }
+
+        function currentFormKey() {
+            var key = '';
+
+            if ($.mage && $.mage.cookies && typeof $.mage.cookies.get === 'function') {
+                key = $.mage.cookies.get('form_key') || '';
+            }
+            key = key || getCookie('form_key');
+            if (!key) {
+                key = generateFormKey();
+                setCookie('form_key', key);
+            }
+
+            return key;
+        }
+
+        function syncFormKey($scope) {
+            var key = currentFormKey();
+
+            if (!key) {
+                return;
+            }
+
+            ($scope || $root).find('input[name="form_key"]').val(key).attr('value', key);
         }
 
         function getUrlState() {
@@ -277,7 +335,9 @@ define(['jquery'], function ($) {
                 currentPage = totalPages;
             }
 
-            getCards().addClass('is-page-hidden');
+            getCards().each(function () {
+                this.style.display = '';
+            }).addClass('is-page-hidden');
             startIndex = (currentPage - 1) * pageSize;
             $matched.slice(startIndex, startIndex + pageSize).removeClass('is-page-hidden');
             getCards().filter('.is-filtered-out').addClass('is-page-hidden');
@@ -733,7 +793,13 @@ define(['jquery'], function ($) {
             $grid.toggleClass('is-list', view === 'list');
         });
 
-        $pagination.on('click', '[data-page]', function () {
+        $root.on('submit', '.pv3-card-form, .pv3-recent-form, form[action*="/checkout/cart/add"]', function () {
+            syncFormKey($(this));
+        });
+
+        $pagination.on('click', '[data-page]', function (event) {
+            event.preventDefault();
+
             if ($(this).prop('disabled')) {
                 return;
             }
@@ -767,6 +833,7 @@ define(['jquery'], function ($) {
         });
 
         initHeroCarousel();
+        syncFormKey($root);
         syncControlsFromUrl();
         sortCards();
         applyFilters(false);

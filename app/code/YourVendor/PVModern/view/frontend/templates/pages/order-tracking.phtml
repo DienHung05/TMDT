@@ -3,39 +3,16 @@
 ?>
 <main class="pvinfo-page" data-pvinfo-tracking data-api-url="<?= $block->escapeUrl($block->getUrl('pvmodern/orders/tracking')) ?>">
     <div class="pvinfo-container">
-        <section class="pvinfo-hero-copy">
-            <span class="pvinfo-kicker">GHN / GHTK / Shopee Express</span>
-            <h1>Theo dõi đơn hàng</h1>
-            <p>Kiểm tra trạng thái, vận chuyển và lịch sử xử lý đơn hàng của bạn.</p>
+        <section class="pvw-hero">
+            <div class="pvw-hero__copy">
+                <span class="pvw-hero__badge">GHN / GHTK / Shopee Express</span>
+                <h1>Theo dõi <span>đơn hàng</span></h1>
+                <p>Kiểm tra trạng thái, vận chuyển và lịch sử xử lý đơn hàng của bạn.</p>
+            </div>
         </section>
 
         <section class="pvtracking-dashboard" data-tracking-dashboard>
-            <div class="pvtracking-auth surface-card">
-                <strong>Đăng nhập để đồng bộ toàn bộ đơn hàng.</strong>
-                <span>Nếu chưa đăng nhập, bạn vẫn có thể tra cứu bằng mã đơn hàng và mã vận đơn bên dưới.</span>
-            </div>
-
-            <div class="pvtracking-controls surface-card">
-                <label>
-                    <span>Tìm kiếm mã đơn hàng</span>
-                    <input type="search" data-order-search placeholder="Ví dụ: TW-20260427-1001">
-                </label>
-                <label>
-                    <span>Trạng thái</span>
-                    <select data-order-status>
-                        <option value="all">Tất cả</option>
-                        <option value="pending">Chờ xác nhận</option>
-                        <option value="processing">Đang xử lý</option>
-                        <option value="shipping">Đang giao</option>
-                        <option value="complete">Hoàn thành</option>
-                        <option value="cancelled">Đã hủy</option>
-                    </select>
-                </label>
-            </div>
-
             <div class="pvtracking-stats" data-tracking-stats></div>
-            <div class="pvtracking-order-list" data-tracking-order-list></div>
-            <div class="pvinfo-empty" data-tracking-empty hidden>Chưa có đơn phù hợp. Hãy thử mã đơn hàng khác hoặc quay lại mua sắm.</div>
         </section>
 
         <section class="pvtracking-layout">
@@ -58,7 +35,6 @@
                     <input type="text" name="tracking_number" placeholder="Có thể để trống để dùng mã demo">
                 </label>
                 <button type="submit">Theo dõi đơn hàng</button>
-                <p>Frontend chỉ gọi backend website. Token GHN/GHTK/SPX được giữ server-side.</p>
             </form>
 
             <section class="pvtracking-result surface-card" data-tracking-page-result>

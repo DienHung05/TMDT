@@ -45,6 +45,20 @@ $message = $block->getLookupMessage();
                     <button type="submit">Find by IMEI</button>
                 </form>
             </article>
+
+            <article class="pvw-panel">
+                <span class="pvw-panel__eyebrow">Method 03</span>
+                <h2>Order code lookup</h2>
+                <p>Enter the order code shown in your "My Orders" history (e.g. <strong>ORD000000037</strong>) to retrieve your warranty details.</p>
+                <form class="pvw-form" action="<?= $block->escapeUrl($block->getUrl('warranty')) ?>" method="get">
+                    <input type="hidden" name="lookup" value="order_code" />
+                    <label>
+                        <span>Order code</span>
+                        <input type="text" name="order_code" value="<?= $block->escapeHtmlAttr($block->getFieldValue('order_code')) ?>" placeholder="ORD000000037" />
+                    </label>
+                    <button type="submit">Find by order code</button>
+                </form>
+            </article>
         </section>
 
         <?php if ($message !== ''): ?>
@@ -72,6 +86,9 @@ $message = $block->getLookupMessage();
                         </span>
                     </div>
                     <div class="pvw-card__grid">
+                        <?php if (!empty($result['order_code'])): ?>
+                            <div><span>Order code</span><strong><?= $block->escapeHtml($result['order_code']) ?></strong></div>
+                        <?php endif; ?>
                         <div><span>Phone number</span><strong><?= $block->escapeHtml($result['phone']) ?></strong></div>
                         <div><span>Purchase code</span><strong><?= $block->escapeHtml($result['purchase_code']) ?></strong></div>
                         <div><span>IMEI</span><strong><?= $block->escapeHtml($result['imei']) ?></strong></div>

@@ -108,7 +108,7 @@ define([], function () {
     }
 
     function applyFallback(target) {
-        if (!target || target.tagName !== 'IMG' || target.dataset.pvFallbackApplied === '1') {
+        if (!target || target.tagName !== 'IMG' || target.dataset.pvFallbackApplied === '1' || target.dataset.noFallback === '1') {
             return;
         }
 

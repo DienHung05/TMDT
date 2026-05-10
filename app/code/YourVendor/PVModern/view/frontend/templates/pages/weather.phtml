@@ -1,4 +1,9 @@
 <?php
+$pageType = 'weather';
+include __DIR__ . '/realtime-dashboard.phtml';
+return;
+?>
+<?php
 /** @var \Magento\Framework\View\Element\Template $block */
 $tabs = [
     ['label' => 'Xem tất cả', 'url' => $block->getUrl('news'), 'active' => false],
@@ -8,13 +13,16 @@ $tabs = [
 ?>
 <main class="pvinfo-page" data-pvinfo-weather data-api-url="<?= $block->escapeUrl($block->getUrl('pvmodern/api/weather')) ?>">
     <div class="pvinfo-container">
-        <nav class="pvinfo-tabs" aria-label="Information pages">
-            <?php foreach ($tabs as $tab): ?>
-                <a class="pvinfo-tab<?= $tab['active'] ? ' is-active' : '' ?>" href="<?= $block->escapeUrl($tab['url']) ?>">
-                    <?= $block->escapeHtml($tab['label']) ?>
-                </a>
-            <?php endforeach; ?>
-        </nav>
+        <div class="pvinfo-toolbar">
+            <nav class="pvinfo-tabs" aria-label="Information pages">
+                <?php foreach ($tabs as $tab): ?>
+                    <a class="pvinfo-tab<?= $tab['active'] ? ' is-active' : '' ?>" href="<?= $block->escapeUrl($tab['url']) ?>">
+                        <?= $block->escapeHtml($tab['label']) ?>
+                    </a>
+                <?php endforeach; ?>
+            </nav>
+            <button class="pvinfo-theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode">◐ Theme</button>
+        </div>
 
         <section class="pvinfo-hero-copy">
             <span class="pvinfo-kicker">Forecast center</span>
@@ -26,6 +34,13 @@ $tabs = [
             <label>
                 <span>City</span>
                 <input type="text" name="city" value="Hanoi" placeholder="Hanoi, Ho Chi Minh City...">
+            </label>
+            <label>
+                <span>Unit</span>
+                <select name="unit" aria-label="Temperature unit">
+                    <option value="metric">°C / km/h</option>
+                    <option value="imperial">°F / mph</option>
+                </select>
             </label>
             <button type="submit">Search</button>
             <button type="button" class="pvinfo-secondary" data-use-location>Use my location</button>
@@ -54,6 +69,14 @@ $tabs = [
             <section class="surface-card">
                 <h2>Daily forecast 8 ngày</h2>
                 <div class="pvweather-daily" data-daily-forecast></div>
+            </section>
+
+            <section class="surface-card">
+                <div class="pvinfo-section-head">
+                    <h2>Weather chart</h2>
+                    <p>Nhiệt độ và xác suất mưa theo giờ</p>
+                </div>
+                <div class="pvweather-chart" data-weather-chart></div>
             </section>
 
             <section class="surface-card">

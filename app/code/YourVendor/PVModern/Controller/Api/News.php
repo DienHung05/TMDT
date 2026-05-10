@@ -9,7 +9,11 @@ use Magento\Framework\Controller\Result\JsonFactory;
 
 class News implements HttpGetActionInterface
 {
-    private const CATEGORIES = ['all', 'ai', 'startup', 'mobile', 'gadgets', 'cybersecurity', 'software', 'gaming', 'fintech', 'science', 'business'];
+    private const CATEGORIES = [
+        'all', 'general', 'business', 'technology', 'science', 'health', 'sports', 'entertainment',
+        'politics', 'world', 'finance', 'ai', 'local', 'startup', 'mobile', 'gadgets',
+        'cybersecurity', 'software', 'gaming', 'fintech'
+    ];
 
     public function __construct(
         private readonly RequestInterface $request,
@@ -23,9 +27,11 @@ class News implements HttpGetActionInterface
         $category = in_array($category, self::CATEGORIES, true) ? $category : 'all';
         $page = max(1, (int) $this->request->getParam('page', 1));
         $query = strtolower(trim((string) $this->request->getParam('q', '')));
-        $perPage = 9;
+        $region = strtolower(trim((string) $this->request->getParam('region', 'global')));
+        $sort = strtolower(trim((string) $this->request->getParam('sort', 'latest')));
+        $perPage = 12;
 
-        $articles = $this->buildArticles();
+        $articles = $this->fetchExternalArticles($category, $query, $region, $sort) ?: $this->buildArticles();
         $filtered = array_values(array_filter($articles, static function (array $article) use ($category, $query): bool {
             $matchesCategory = $category === 'all' || strtolower((string) $article['category_slug']) === $category;
             $haystack = strtolower((string) $article['title'] . ' ' . $article['summary'] . ' ' . $article['source']);
@@ -50,8 +56,135 @@ class News implements HttpGetActionInterface
             'items' => $items,
             'popular' => array_slice($articles, 2, 5),
             'topics' => ['AI PC', 'RTX 50-series', 'Cybersecurity', 'Startup Việt', 'Fintech', 'Cloud Gaming'],
+            'filters' => [
+                'regions' => ['global', 'vn', 'us', 'gb', 'jp', 'kr', 'sg'],
+                'sorts' => ['latest', 'popular', 'relevant'],
+            ],
+            'updated_at' => gmdate('d/m/Y H:i'),
             'mock' => getenv('NEWSAPI_KEY') ? false : true,
         ]);
+    }
+
+    /**
+     * @return array<int, array<string, string>>
+     */
+    private function fetchExternalArticles(string $category, string $query, string $region, string $sort): array
+    {
+        $apiKey = $this->env('NEWS_API_KEY');
+        if ($apiKey === '') {
+            return [];
+        }
+
+        $countryMap = ['vn' => 'vn', 'us' => 'us', 'gb' => 'gb', 'jp' => 'jp', 'kr' => 'kr', 'sg' => 'sg'];
+        $newsCategoryMap = [
+            'business' => 'business',
+            'general' => 'general',
+            'science' => 'science',
+            'health' => 'health',
+            'sports' => 'sports',
+            'entertainment' => 'entertainment',
+            'politics' => 'general',
+            'world' => 'general',
+            'finance' => 'business',
+            'local' => 'general',
+            'technology' => 'technology',
+            'gaming' => 'technology',
+            'mobile' => 'technology',
+            'gadgets' => 'technology',
+            'cybersecurity' => 'technology',
+            'software' => 'technology',
+            'startup' => 'business',
+            'fintech' => 'business',
+            'ai' => 'technology',
+            'all' => 'technology',
+        ];
+        $sortMap = ['popular' => 'popularity', 'relevant' => 'relevancy', 'latest' => 'publishedAt'];
+        $base = rtrim($this->env('NEWS_API_BASE_URL') ?: 'https://newsapi.org/v2', '/');
+        $endpoint = $query !== '' || $region === 'global' ? '/everything' : '/top-headlines';
+        $params = [
+            'apiKey' => $apiKey,
+            'pageSize' => '24',
+            'language' => $region === 'vn' ? 'vi' : 'en',
+        ];
+
+        if ($endpoint === '/top-headlines') {
+            $params['country'] = $countryMap[$region] ?? 'us';
+            $params['category'] = $newsCategoryMap[$category] ?? 'technology';
+            if ($query !== '') {
+                $params['q'] = $query;
+            }
+        } else {
+            $keyword = $query !== '' ? $query : ($category === 'all' ? 'technology OR AI OR gadget' : $category . ' technology');
+            $params['q'] = $keyword;
+            $params['sortBy'] = $sortMap[$sort] ?? 'publishedAt';
+        }
+
+        $data = $this->httpGetJson($base . $endpoint . '?' . http_build_query($params));
+        $rows = is_array($data['articles'] ?? null) ? $data['articles'] : [];
+        $normalized = [];
+        foreach ($rows as $index => $row) {
+            if (!is_array($row)) {
+                continue;
+            }
+            $title = trim((string) ($row['title'] ?? ''));
+            if ($title === '' || stripos($title, '[removed]') !== false) {
+                continue;
+            }
+            $source = is_array($row['source'] ?? null) ? (string) ($row['source']['name'] ?? 'News source') : 'News source';
+            $normalized[] = [
+                'category_slug' => $category === 'all' ? 'technology' : $category,
+                'category' => $category === 'all' ? 'Technology' : strtoupper(substr($category, 0, 1)) . substr($category, 1),
+                'time' => $this->formatTime((string) ($row['publishedAt'] ?? '')),
+                'title' => $title,
+                'summary' => trim((string) ($row['description'] ?? '')) ?: 'Bài viết đang được cập nhật mô tả.',
+                'source' => $source,
+                'author' => (string) ($row['author'] ?? 'Unknown author'),
+                'image' => (string) ($row['urlToImage'] ?? ''),
+                'url' => (string) ($row['url'] ?? '#'),
+                'id' => 'news-' . md5($title . $index),
+            ];
+        }
+
+        return $normalized;
+    }
+
+    private function env(string $key): string
+    {
+        $value = $_ENV[$key] ?? $_SERVER[$key] ?? getenv($key);
+        return is_string($value) ? trim($value) : '';
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function httpGetJson(string $url): array
+    {
+        if (!function_exists('curl_init')) {
+            return [];
+        }
+        $ch = curl_init($url);
+        if (!$ch) {
+            return [];
+        }
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => 8,
+            CURLOPT_HTTPHEADER => ['User-Agent: Techieworld/1.0'],
+        ]);
+        $body = curl_exec($ch);
+        $code = (int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+        curl_close($ch);
+        if ($code < 200 || $code >= 300 || !is_string($body)) {
+            return [];
+        }
+        $decoded = json_decode($body, true);
+        return is_array($decoded) ? $decoded : [];
+    }
+
+    private function formatTime(string $iso): string
+    {
+        $time = strtotime($iso);
+        return $time ? gmdate('d/m/Y H:i', $time) : gmdate('d/m/Y');
     }
 
     /**
@@ -70,11 +203,21 @@ class News implements HttpGetActionInterface
             'fintech' => 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1400&q=82',
             'science' => 'https://images.unsplash.com/photo-1581093458791-9d42e7abbd35?auto=format&fit=crop&w=1400&q=82',
             'business' => 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1400&q=82',
+            'technology' => 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1400&q=82',
+            'general' => 'https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=1400&q=82',
+            'health' => 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=1400&q=82',
+            'sports' => 'https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1400&q=82',
+            'entertainment' => 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1400&q=82',
+            'politics' => 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1400&q=82',
+            'world' => 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1400&q=82',
+            'finance' => 'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1400&q=82',
+            'local' => 'https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1400&q=82',
         ];
         $today = gmdate('d/m/Y');
 
         return [
-            ['category_slug' => 'ai', 'category' => 'AI', 'time' => $today, 'title' => 'AI PC bước vào giai đoạn phổ cập với NPU mạnh hơn và phần mềm tối ưu hơn', 'summary' => 'Các hãng chip đang đẩy mạnh xử lý AI cục bộ, giúp laptop và desktop tăng tốc tác vụ sáng tạo, bảo mật và tự động hóa.', 'source' => 'Techieworld Brief', 'image' => $img['ai'], 'url' => 'https://www.theverge.com/ai-artificial-intelligence'],
+            ['category_slug' => 'technology', 'category' => 'Technology', 'time' => $today, 'title' => 'Real-time dashboards trở thành trung tâm điều hành cho người dùng công nghệ', 'summary' => 'Tin tức, thời tiết và tỷ giá được gom trong một trải nghiệm nhanh, cá nhân hóa và dễ theo dõi trên mọi thiết bị.', 'source' => 'GlobalPulse Desk', 'image' => $img['technology'], 'url' => 'https://www.theverge.com/tech'],
+            ['category_slug' => 'ai', 'category' => 'AI & Innovation', 'time' => $today, 'title' => 'AI PC bước vào giai đoạn phổ cập với NPU mạnh hơn và phần mềm tối ưu hơn', 'summary' => 'Các hãng chip đang đẩy mạnh xử lý AI cục bộ, giúp laptop và desktop tăng tốc tác vụ sáng tạo, bảo mật và tự động hóa.', 'source' => 'Techieworld Brief', 'image' => $img['ai'], 'url' => 'https://www.theverge.com/ai-artificial-intelligence'],
             ['category_slug' => 'gadgets', 'category' => 'Gadgets', 'time' => $today, 'title' => 'Màn hình OLED tần số quét cao trở thành lựa chọn chủ đạo cho gaming và creator', 'summary' => 'OLED thế hệ mới tập trung giảm burn-in, tăng độ sáng và tối ưu độ trễ cho người dùng chơi game lẫn làm việc màu sắc.', 'source' => 'Hardware Desk', 'image' => $img['gadgets'], 'url' => 'https://www.tomshardware.com/monitors'],
             ['category_slug' => 'cybersecurity', 'category' => 'Cybersecurity', 'time' => $today, 'title' => 'Bảo mật endpoint cho cửa hàng online cần ưu tiên MFA, backup và kiểm soát plugin', 'summary' => 'Các website thương mại điện tử nhỏ dễ bị tấn công qua tài khoản admin yếu, extension lỗi thời và cấu hình backup kém.', 'source' => 'Security Note', 'image' => $img['cybersecurity'], 'url' => 'https://www.bleepingcomputer.com/'],
             ['category_slug' => 'mobile', 'category' => 'Mobile', 'time' => $today, 'title' => 'Laptop mỏng nhẹ dùng chip mới tăng thời lượng pin nhưng vẫn giữ hiệu năng AI', 'summary' => 'Các mẫu ultrabook 2026 tập trung cân bằng hiệu năng, màn hình đẹp, webcam tốt và khả năng chạy mô hình AI nhỏ offline.', 'source' => 'Mobile Lab', 'image' => $img['mobile'], 'url' => 'https://www.notebookcheck.net/'],
@@ -84,6 +227,14 @@ class News implements HttpGetActionInterface
             ['category_slug' => 'fintech', 'category' => 'Fintech', 'time' => $today, 'title' => 'Thanh toán QR tiếp tục tăng trong bán lẻ nhờ trải nghiệm checkout nhanh', 'summary' => 'Ví điện tử và ngân hàng số đang đẩy mạnh QR, deeplink và xác thực giao dịch ngay trên ứng dụng.', 'source' => 'Fintech Watch', 'image' => $img['fintech'], 'url' => 'https://fintechnews.sg/'],
             ['category_slug' => 'science', 'category' => 'Science', 'time' => $today, 'title' => 'Vật liệu bán dẫn và đóng gói chip tiên tiến định hình thế hệ phần cứng mới', 'summary' => 'Nhu cầu AI làm tăng đầu tư vào bộ nhớ băng thông cao, chiplet và hệ thống tản nhiệt hiệu quả hơn.', 'source' => 'Science Hardware', 'image' => $img['science'], 'url' => 'https://spectrum.ieee.org/semiconductors'],
             ['category_slug' => 'business', 'category' => 'Business', 'time' => $today, 'title' => 'Doanh nghiệp bán lẻ công nghệ tập trung hậu mãi, bảo hành và tracking đơn hàng', 'summary' => 'Trải nghiệm sau mua hàng đang trở thành điểm cạnh tranh quan trọng bên cạnh giá và danh mục sản phẩm.', 'source' => 'Commerce Brief', 'image' => $img['business'], 'url' => 'https://www.retaildive.com/'],
+            ['category_slug' => 'general', 'category' => 'General', 'time' => $today, 'title' => 'Các nền tảng thông tin cá nhân hóa tăng tốc nhờ dữ liệu theo thời gian thực', 'summary' => 'Người dùng kỳ vọng dashboard cập nhật nhanh, có lưu yêu thích, cảnh báo và tìm kiếm toàn cục.', 'source' => 'Global Newsroom', 'image' => $img['general'], 'url' => 'https://www.bbc.com/news/technology'],
+            ['category_slug' => 'health', 'category' => 'Health', 'time' => $today, 'title' => 'Thiết bị đeo sức khỏe mới tập trung cảnh báo sớm và theo dõi chất lượng giấc ngủ', 'summary' => 'Cảm biến tốt hơn giúp người dùng hiểu rõ nhịp tim, stress và mức vận động mỗi ngày.', 'source' => 'Health Tech', 'image' => $img['health'], 'url' => 'https://www.wired.com/tag/health/'],
+            ['category_slug' => 'sports', 'category' => 'Sports', 'time' => $today, 'title' => 'Phân tích dữ liệu thời gian thực thay đổi cách đội thể thao tối ưu hiệu suất', 'summary' => 'Wearable, camera và mô hình dự báo đang được dùng để giảm chấn thương và cải thiện chiến thuật.', 'source' => 'Sports Data', 'image' => $img['sports'], 'url' => 'https://www.espn.com/'],
+            ['category_slug' => 'entertainment', 'category' => 'Entertainment', 'time' => $today, 'title' => 'Streaming và gaming cloud tiếp tục cạnh tranh bằng nội dung độc quyền', 'summary' => 'Hạ tầng mạng tốt hơn giúp dịch vụ giải trí cá nhân hóa và hoạt động mượt trên thiết bị di động.', 'source' => 'Media Pulse', 'image' => $img['entertainment'], 'url' => 'https://www.theverge.com/entertainment'],
+            ['category_slug' => 'politics', 'category' => 'Politics', 'time' => $today, 'title' => 'Chính sách dữ liệu và AI trở thành ưu tiên trong chương trình nghị sự công nghệ', 'summary' => 'Các quốc gia tăng cường quy định về quyền riêng tư, an toàn AI và trách nhiệm nền tảng số.', 'source' => 'Policy Watch', 'image' => $img['politics'], 'url' => 'https://www.politico.com/technology'],
+            ['category_slug' => 'world', 'category' => 'World', 'time' => $today, 'title' => 'Chuỗi cung ứng toàn cầu dịch chuyển theo nhu cầu chip, pin và thiết bị AI', 'summary' => 'Các trung tâm sản xuất mới đang được đầu tư để giảm rủi ro logistics và đáp ứng nhu cầu phần cứng.', 'source' => 'World Tech', 'image' => $img['world'], 'url' => 'https://www.reuters.com/technology/'],
+            ['category_slug' => 'finance', 'category' => 'Finance', 'time' => $today, 'title' => 'Tỷ giá và lãi suất tiếp tục ảnh hưởng giá nhập khẩu thiết bị công nghệ', 'summary' => 'Doanh nghiệp theo dõi ngoại hối để điều chỉnh giá bán, tồn kho và chương trình khuyến mãi.', 'source' => 'Finance Wire', 'image' => $img['finance'], 'url' => 'https://www.bloomberg.com/technology'],
+            ['category_slug' => 'local', 'category' => 'Local News', 'time' => $today, 'title' => 'Tin địa phương ưu tiên giao thông, thời tiết và dịch vụ tiêu dùng quanh vị trí người dùng', 'summary' => 'Dashboard theo vị trí giúp người dùng nắm các cảnh báo gần mình nhanh hơn.', 'source' => 'Local Pulse', 'image' => $img['local'], 'url' => 'https://vnexpress.net/so-hoa'],
         ];
     }
 }

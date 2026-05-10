@@ -62,6 +62,16 @@ class Create implements HttpPostActionInterface, CsrfAwareActionInterface
         ]);
 
         $reference = (string) ($payment['reference'] ?? ('PAY-' . time()));
+        $qrPayload = $this->buildQrPayload($method, $payment, $amount, $reference);
+        $paymentUrl = (string) ($payment['redirect_url'] ?? '');
+        $qrCodeUrl = (string) ($payment['qr_code_url'] ?? '');
+        if ($qrCodeUrl === '') {
+            $qrData = $qrPayload !== '' ? $qrPayload : $paymentUrl;
+            if ($qrData !== '') {
+                $qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=260x260&margin=10&data=' . rawurlencode($qrData);
+            }
+        }
+
         return $result->setData([
             'success' => true,
             'paymentId' => $reference,
@@ -70,9 +80,12 @@ class Create implements HttpPostActionInterface, CsrfAwareActionInterface
             'method' => $method,
             'amount' => $amount,
             'currency' => 'VND',
-            'paymentUrl' => (string) ($payment['redirect_url'] ?? ''),
-            'qrCodeUrl' => (string) ($payment['qr_code_url'] ?? ''),
-            'qrPayload' => $this->buildQrPayload($method, $payment, $amount, $reference),
+            'paymentUrl' => $paymentUrl,
+            'redirect_url' => $paymentUrl,
+            'qrCodeUrl' => $qrCodeUrl,
+            'qr_code_url' => $qrCodeUrl,
+            'qrPayload' => $qrPayload,
+            'qr_payload' => $qrPayload,
             'expiresAt' => gmdate('c', time() + 15 * 60),
             'mock' => (bool) ($payment['mock'] ?? !$order),
             'message' => $payment['message'] ?? ($order ? 'Payment session created.' : 'Demo payment session created; no order was marked paid.'),

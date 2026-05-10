@@ -1,0 +1,268 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+$pageType = $pageType ?? 'news';
+$tabs = [
+    ['key' => 'news', 'label' => 'News', 'url' => $block->getUrl('news')],
+    ['key' => 'currency', 'label' => 'Currency', 'url' => $block->getUrl('currency')],
+    ['key' => 'weather', 'label' => 'Weather', 'url' => $block->getUrl('weather')],
+];
+$pageConfig = [
+    'news' => [
+        'title' => 'Latest News',
+        'subtitle' => 'Real-time headlines by country, category, source, trend and keyword.',
+        'kicker' => 'Realtime intelligence',
+        'api' => $block->getUrl('pvmodern/api/news'),
+        'icon' => '📰',
+    ],
+    'currency' => [
+        'title' => 'Currency Converter',
+        'subtitle' => 'Live exchange rates, charts, favorite pairs, alerts and conversion history.',
+        'kicker' => 'FX control room',
+        'api' => $block->getUrl('pvmodern/api/currency'),
+        'icon' => '💱',
+    ],
+    'weather' => [
+        'title' => 'Weather Forecast',
+        'subtitle' => 'Current weather, hourly forecast, multi-day outlook, AQI and local alerts.',
+        'kicker' => 'Location-aware forecast',
+        'api' => $block->getUrl('pvmodern/api/weather'),
+        'icon' => '⛅',
+    ],
+];
+$config = $pageConfig[$pageType] ?? $pageConfig['news'];
+$presets = [
+    'ocean' => 'Ocean Blue',
+    'sunrise' => 'Sunrise Orange',
+    'mint' => 'Mint Fresh',
+    'purple' => 'Purple Neon',
+    'minimal' => 'Minimal White',
+    'darktech' => 'Dark Tech',
+];
+?>
+<main class="gp-page gp-page--<?= $block->escapeHtmlAttr($pageType) ?>"
+      data-gp-root
+      data-gp-module="<?= $block->escapeHtmlAttr($pageType) ?>"
+      data-api-url="<?= $block->escapeUrl($config['api']) ?>">
+    <div class="gp-container">
+        <header class="gp-appbar gp-surface">
+            <a class="gp-brand" href="<?= $block->escapeUrl($block->getUrl('')) ?>" aria-label="Go to dashboard">
+                <span>G</span>
+                <strong>GlobalPulse</strong>
+            </a>
+            <nav class="gp-tabs" aria-label="Realtime modules">
+                <?php foreach ($tabs as $tab): ?>
+                    <a class="gp-tab<?= $tab['key'] === $pageType ? ' is-active' : '' ?>"
+                       href="<?= $block->escapeUrl($tab['url']) ?>">
+                        <?= $block->escapeHtml($tab['label']) ?>
+                    </a>
+                <?php endforeach; ?>
+            </nav>
+            <div class="gp-actions">
+                <button class="gp-icon-button" type="button" data-command-open aria-label="Open command palette">⌘K</button>
+                <button class="gp-icon-button" type="button" data-theme-toggle aria-label="Toggle dark mode">◐</button>
+                <button class="gp-avatar" type="button" aria-label="Demo profile">GP</button>
+            </div>
+        </header>
+
+        <section class="gp-hero gp-surface">
+            <div>
+                <span class="gp-kicker"><?= $block->escapeHtml($config['kicker']) ?></span>
+                <h1><?= $block->escapeHtml($config['title']) ?></h1>
+                <p><?= $block->escapeHtml($config['subtitle']) ?></p>
+                <div class="gp-hero-actions">
+                    <button type="button" class="gp-button gp-button--primary" data-refresh-module>Refresh data</button>
+                    <button type="button" class="gp-button gp-button--ghost" data-theme-panel-toggle>Customize theme</button>
+                </div>
+            </div>
+            <div class="gp-hero-orb" aria-hidden="true">
+                <span><?= $block->escapeHtml($config['icon']) ?></span>
+            </div>
+        </section>
+
+        <section class="gp-theme-panel gp-surface" data-theme-panel hidden>
+            <div class="gp-section-head">
+                <div>
+                    <span class="gp-eyebrow">Personalization</span>
+                    <h2>Customize Theme</h2>
+                    <p>Choose a preset, switch light/dark mode, preview accent color and save locally.</p>
+                </div>
+                <button type="button" class="gp-button gp-button--ghost" data-theme-reset>Reset</button>
+            </div>
+            <div class="gp-preset-grid">
+                <?php foreach ($presets as $key => $label): ?>
+                    <button type="button" data-theme-preset="<?= $block->escapeHtmlAttr($key) ?>">
+                        <span></span><?= $block->escapeHtml($label) ?>
+                    </button>
+                <?php endforeach; ?>
+            </div>
+        </section>
+
+        <div class="gp-offline" data-offline-banner hidden>You are offline. Showing the last available cached view.</div>
+        <div class="gp-toast-stack" data-toast-stack aria-live="polite"></div>
+
+        <?php if ($pageType === 'news'): ?>
+            <section class="gp-control gp-surface">
+                <form data-news-form class="gp-control-grid" role="search">
+                    <label><span>Keyword</span><input type="search" name="q" placeholder="AI, finance, mobile, Vietnam..." autocomplete="off"></label>
+                    <label><span>Country</span><select name="region"><option value="global">Global</option><option value="vn">Vietnam</option><option value="us">United States</option><option value="gb">United Kingdom</option><option value="jp">Japan</option><option value="kr">South Korea</option><option value="sg">Singapore</option></select></label>
+                    <label><span>Category</span><select name="category"><option value="all">General</option><option value="business">Business</option><option value="technology">Technology</option><option value="science">Science</option><option value="health">Health</option><option value="sports">Sports</option><option value="entertainment">Entertainment</option><option value="politics">Politics</option><option value="world">World</option><option value="finance">Finance</option><option value="ai">AI & Innovation</option><option value="local">Local News</option></select></label>
+                    <label><span>Source</span><select name="source"><option value="all">All sources</option><option value="tech">Tech sources</option><option value="business">Business sources</option><option value="local">Local sources</option></select></label>
+                    <label><span>Time</span><select name="time"><option value="today">Today</option><option value="24h">Last 24 hours</option><option value="week">This week</option><option value="month">This month</option></select></label>
+                    <label><span>Sort</span><select name="sort"><option value="latest">Newest</option><option value="popular">Popular</option><option value="relevant">Most relevant</option></select></label>
+                    <button class="gp-button gp-button--primary" type="submit">Search</button>
+                    <button class="gp-button gp-button--ghost" type="button" data-save-news-filter>Save filter</button>
+                </form>
+                <nav class="gp-chip-row" data-news-categories aria-label="News categories">
+                    <?php foreach (['all' => 'General', 'business' => 'Business', 'technology' => 'Technology', 'science' => 'Science', 'health' => 'Health', 'sports' => 'Sports', 'entertainment' => 'Entertainment', 'politics' => 'Politics', 'world' => 'World', 'finance' => 'Finance', 'ai' => 'AI & Innovation', 'local' => 'Local News'] as $slug => $label): ?>
+                        <button type="button" data-news-category="<?= $block->escapeHtmlAttr($slug) ?>"><?= $block->escapeHtml($label) ?></button>
+                    <?php endforeach; ?>
+                </nav>
+            </section>
+
+            <section class="gp-state gp-loading" data-loading><span></span><span></span><span></span></section>
+            <section class="gp-state gp-error" data-error hidden><strong>News API failed.</strong><p>Check provider credentials, rate limit or network.</p><button type="button" data-retry>Try again</button></section>
+
+            <div data-news-content hidden>
+                <section class="gp-breaking gp-surface"><strong>BREAKING</strong><div data-breaking-list></div></section>
+                <section class="gp-news-layout">
+                    <div class="gp-news-main">
+                        <section class="gp-news-hero">
+                            <article class="gp-lead-card gp-surface" data-lead-story></article>
+                            <aside class="gp-top-stories gp-surface"><div class="gp-section-head"><div><span class="gp-eyebrow">Top stories</span><h2>Trending now</h2></div><small data-news-updated></small></div><div data-top-stories></div></aside>
+                        </section>
+                        <section class="gp-surface">
+                            <div class="gp-section-head"><div><span class="gp-eyebrow">For You</span><h2>Latest feed</h2><p data-news-count></p></div><div><button class="gp-button gp-button--ghost" type="button" data-focus-mode>Focus mode</button><button class="gp-button gp-button--ghost" type="button" data-load-more>Load more</button></div></div>
+                            <div class="gp-news-grid" data-latest-news></div>
+                            <div class="gp-empty" data-empty hidden><strong>No articles found.</strong><p>Reset filters or try another keyword.</p><button type="button" data-reset-news>Reset filters</button></div>
+                            <div class="gp-pagination" data-news-pagination></div>
+                        </section>
+                    </div>
+                    <aside class="gp-sidebar">
+                        <section class="gp-surface"><h2>Trending topics</h2><div class="gp-tag-cloud" data-hot-topics></div></section>
+                        <section class="gp-surface"><h2>Saved articles</h2><div data-saved-news></div></section>
+                        <section class="gp-surface"><h2>Popular sources</h2><div data-popular-sources></div></section>
+                        <section class="gp-surface"><h2>Reading status</h2><div data-read-status></div></section>
+                    </aside>
+                </section>
+            </div>
+        <?php elseif ($pageType === 'currency'): ?>
+            <section class="gp-state gp-loading" data-loading><span></span><span></span><span></span></section>
+            <section class="gp-state gp-error" data-error hidden><strong>Currency API failed.</strong><p>Check FX provider or use reference fallback.</p><button type="button" data-retry>Try again</button></section>
+
+            <div data-currency-content hidden>
+                <section class="gp-currency-top">
+                    <form class="gp-converter gp-surface" data-currency-form>
+                        <div class="gp-section-head"><div><span class="gp-eyebrow">Live converter</span><h2>Convert instantly</h2></div><button type="button" class="gp-icon-button" data-currency-fav aria-label="Save currency pair">☆</button></div>
+                        <label><span>Amount</span><input type="number" min="0" step="0.01" name="amount" value="100"></label>
+                        <div class="gp-currency-pair">
+                            <label><span>From</span><select name="from" data-currency-select></select></label>
+                            <button type="button" class="gp-swap" data-currency-swap aria-label="Swap currencies">⇄</button>
+                            <label><span>To</span><select name="to" data-currency-select></select></label>
+                        </div>
+                        <div class="gp-convert-result" data-convert-result>Loading...</div>
+                        <p data-convert-meta></p>
+                        <div class="gp-converter-actions">
+                            <button type="button" class="gp-button gp-button--ghost" data-copy-conversion>Copy result</button>
+                            <button type="button" class="gp-button gp-button--ghost" data-share-conversion>Share</button>
+                            <button type="button" class="gp-button gp-button--ghost" data-compact-toggle>Compact mode</button>
+                        </div>
+                        <div class="gp-multi-currency" data-currency-multi></div>
+                    </form>
+                    <aside class="gp-market gp-surface">
+                        <div class="gp-section-head"><div><span class="gp-eyebrow">Market</span><h2>Summary</h2><p data-currency-updated></p></div><button class="gp-button gp-button--ghost" type="button" data-currency-refresh>Refresh</button></div>
+                        <p class="gp-note" data-currency-note></p>
+                        <div data-currency-watchlist></div>
+                    </aside>
+                </section>
+                <section class="gp-surface">
+                    <div class="gp-section-head"><div><span class="gp-eyebrow">Chart</span><h2 data-chart-title>USD/VND movement</h2></div><div class="gp-range-tabs" data-chart-ranges><?php foreach (['1D', '7D', '1M', '3M', '6M', '1Y', '5Y'] as $range): ?><button type="button" data-range="<?= $block->escapeHtmlAttr($range) ?>"><?= $block->escapeHtml($range) ?></button><?php endforeach; ?></div></div>
+                    <div class="gp-chart-meta" data-chart-meta></div>
+                    <div class="gp-chart" data-currency-chart></div>
+                </section>
+                <section class="gp-currency-grid">
+                    <article class="gp-surface"><h2>Favorite pairs</h2><div data-currency-favorites></div></article>
+                    <article class="gp-surface"><h2>Conversion history</h2><div data-conversion-history></div></article>
+                    <article class="gp-surface"><h2>Rate alerts</h2><div data-rate-alerts></div><button type="button" class="gp-button gp-button--primary" data-add-rate-alert>Add alert</button></article>
+                </section>
+                <section class="gp-surface"><div class="gp-section-head"><div><span class="gp-eyebrow">Global table</span><h2>Exchange rates</h2></div></div><div class="gp-table-wrap"><table class="gp-rates-table"><thead><tr><th>Currency</th><th>Country</th><th>Rate vs VND</th><th>Change</th><th>Updated</th><th>Favorite</th></tr></thead><tbody data-rates-table></tbody></table></div></section>
+                <section class="gp-surface"><h2>Currency news</h2><div class="gp-news-mini-grid" data-currency-news></div></section>
+            </div>
+        <?php else: ?>
+            <section class="gp-control gp-surface">
+                <form data-weather-form class="gp-control-grid">
+                    <label>
+                        <span>City / Province</span>
+                        <select name="city" aria-label="Chọn tỉnh hoặc thành phố Việt Nam">
+                            <option value="Hanoi, Vietnam">Hà Nội</option>
+                            <option value="Hue, Vietnam">Huế</option>
+                            <option value="Quang Ninh, Vietnam">Quảng Ninh</option>
+                            <option value="Cao Bang, Vietnam">Cao Bằng</option>
+                            <option value="Lang Son, Vietnam">Lạng Sơn</option>
+                            <option value="Lai Chau, Vietnam">Lai Châu</option>
+                            <option value="Dien Bien, Vietnam">Điện Biên</option>
+                            <option value="Son La, Vietnam">Sơn La</option>
+                            <option value="Tuyen Quang, Vietnam">Tuyên Quang</option>
+                            <option value="Lao Cai, Vietnam">Lào Cai</option>
+                            <option value="Thai Nguyen, Vietnam">Thái Nguyên</option>
+                            <option value="Phu Tho, Vietnam">Phú Thọ</option>
+                            <option value="Bac Ninh, Vietnam">Bắc Ninh</option>
+                            <option value="Hung Yen, Vietnam">Hưng Yên</option>
+                            <option value="Hai Phong, Vietnam">Hải Phòng</option>
+                            <option value="Ninh Binh, Vietnam">Ninh Bình</option>
+                            <option value="Thanh Hoa, Vietnam">Thanh Hóa</option>
+                            <option value="Nghe An, Vietnam">Nghệ An</option>
+                            <option value="Ha Tinh, Vietnam">Hà Tĩnh</option>
+                            <option value="Quang Tri, Vietnam">Quảng Trị</option>
+                            <option value="Da Nang, Vietnam">Đà Nẵng</option>
+                            <option value="Quang Ngai, Vietnam">Quảng Ngãi</option>
+                            <option value="Gia Lai, Vietnam">Gia Lai</option>
+                            <option value="Khanh Hoa, Vietnam">Khánh Hòa</option>
+                            <option value="Lam Dong, Vietnam">Lâm Đồng</option>
+                            <option value="Dak Lak, Vietnam">Đắk Lắk</option>
+                            <option value="Ho Chi Minh City, Vietnam">TP. Hồ Chí Minh</option>
+                            <option value="Dong Nai, Vietnam">Đồng Nai</option>
+                            <option value="Tay Ninh, Vietnam">Tây Ninh</option>
+                            <option value="Can Tho, Vietnam">Cần Thơ</option>
+                            <option value="Vinh Long, Vietnam">Vĩnh Long</option>
+                            <option value="Dong Thap, Vietnam">Đồng Tháp</option>
+                            <option value="An Giang, Vietnam">An Giang</option>
+                            <option value="Ca Mau, Vietnam">Cà Mau</option>
+                        </select>
+                    </label>
+                    <label><span>Temperature</span><select name="unit"><option value="metric">Celsius</option><option value="imperial">Fahrenheit</option></select></label>
+                    <label><span>Wind</span><select name="wind_unit"><option value="kmh">km/h</option><option value="ms">m/s</option><option value="mph">mph</option></select></label>
+                    <button class="gp-button gp-button--primary" type="submit">Search city</button>
+                    <button class="gp-button gp-button--ghost" type="button" data-use-location>Use my location</button>
+                    <button class="gp-button gp-button--ghost" type="button" data-save-city>Save city</button>
+                </form>
+                <p class="gp-note" data-geo-message></p>
+                <div class="gp-chip-row" data-recent-cities></div>
+            </section>
+            <section class="gp-state gp-loading" data-loading><span></span><span></span><span></span></section>
+            <section class="gp-state gp-error" data-error hidden><strong>Weather API failed.</strong><p>Try another city or grant location permission.</p><button type="button" data-retry>Try again</button></section>
+            <div data-weather-content hidden>
+                <section class="gp-weather-grid">
+                    <article class="gp-current-weather gp-surface" data-current-weather></article>
+                    <aside class="gp-weather-side">
+                        <article class="gp-surface" data-weather-alert></article>
+                        <article class="gp-surface" data-air-quality></article>
+                    </aside>
+                </section>
+                <section class="gp-surface"><div class="gp-section-head"><div><span class="gp-eyebrow">24-hour forecast</span><h2>Hourly</h2></div></div><div class="gp-hourly" data-hourly-forecast></div></section>
+                <section class="gp-surface"><div class="gp-section-head"><div><span class="gp-eyebrow">7–10 day outlook</span><h2>Daily forecast</h2></div></div><div class="gp-daily" data-daily-forecast></div></section>
+                <section class="gp-weather-map-grid">
+                    <article class="gp-surface"><h2>Weather map</h2><div class="gp-map" data-weather-map><span>Map layer</span></div><div class="gp-map-controls"><button>Rain</button><button>Clouds</button><button>Wind</button><button>Pressure</button></div></article>
+                    <article class="gp-surface"><h2>Recommendations</h2><div data-weather-recommendations></div><h2>Favorite cities</h2><div data-favorite-cities></div></article>
+                </section>
+                <section class="gp-surface"><h2>Weather news</h2><div class="gp-news-mini-grid" data-weather-news></div></section>
+            </div>
+        <?php endif; ?>
+
+        <div class="gp-command" data-command-palette hidden>
+            <div class="gp-command-box">
+                <input type="search" placeholder="Search news, city or currency..." data-command-input aria-label="Global command search">
+                <div data-command-results></div>
+            </div>
+        </div>
+    </div>
+</main>
