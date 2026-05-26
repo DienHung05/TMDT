@@ -9,6 +9,16 @@
 
 <h1 align="center">Magento Open Source</h1>
 
+## PVModern realtime APIs and Docker
+
+PVModern exposes the customer-facing realtime pages through Magento controllers:
+
+- `GET /pvmodern/api/news` reads VnExpress Kinh doanh RSS: `https://vnexpress.net/rss/kinh-doanh.rss`
+- `GET /pvmodern/api/currency` reads Vietcombank XML rates: `https://portal.vietcombank.com.vn/Usercontrols/TVPortal.TyGia/pXML.aspx?b=68`
+- `GET /pvmodern/api/weather` reads OpenWeatherMap and requires `OPENWEATHER_API_KEY`
+
+Docker packaging is provided by `docker-compose.yml` and `docker/php-fpm/Dockerfile`. Copy `.env.docker.example` to `.env`, set `MAGENTO_DOMAIN`, database/admin secrets, and `OPENWEATHER_API_KEY`, then run `make build && make up`.
+
 Welcome to the Magento Open Source project! [Magento Open Source](https://magento.com/products/magento-open-source) software delivers basic eCommerce capabilities to build a unique online store from the ground up.
 
 However, for those who need a full-featured eCommerce solution, we recommend [Adobe Commerce](https://magento.com/products/magento-commerce), which includes our optimized cloud architecture and hosting as well as AI-powered merchandising and analytics.
@@ -82,3 +92,4 @@ If you are a new Community member, check out the following channels:
 - [general](https://magentocommeng.slack.com/archives/C4YS78WE6) is an open chat for introductions and Magento 2 questions
 - [github](https://magentocommeng.slack.com/archives/C7KB93M32) is a support channel for GitHub issues, pull requests, and processes
 - [public-backlog](https://magentocommeng.slack.com/archives/CCV3J3RV5) for discussions of the backlog
+# Techieworld
